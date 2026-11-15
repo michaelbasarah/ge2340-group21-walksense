@@ -24,3 +24,7 @@ gh repo create OWNER/ge2340-group21-walksense --private --source=. --remote=orig
 On GitHub, open repository Settings → Collaborators and teams / Manage access. Invite each teammate's verified GitHub username with **write** access so they can upload label CSVs or use branches and pull requests. They must accept invitations. Organization policy may require an owner to manage access. Share the repository URL and direct them to `labeling/README.md`; raw HTML must be downloaded to run locally.
 
 No teammate usernames or invitations have been guessed. Preparing or committing this workspace did not create a remote, publish a site, upload data or invite people. Keep the raw private chat and original identity/signature submission documents outside Git.
+
+## Portable ZIP fallback
+
+`ge2340-team-ready-2026-11-15.zip` is exported from the local commit, without `.git` or caches. Extract it first. Upload the **extracted contents**, not just the ZIP, so teammates can browse/download the labeling CSVs. Create a private repository using GitHub's website, then drag folders/files into Add file → Upload files in batches if needed (GitHub web uploads allow at most 100 files at a time). Invite teammates afterward. The largest included file is about 16.6 MB, below the web single-file limit. This fallback has no Git history; for CLI use after extracting, run `git init -b main`, `git add .`, and `git commit -m "Prepare GE2340 team workspace"` before the `gh repo create` command above.

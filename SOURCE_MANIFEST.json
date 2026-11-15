@@ -958,5 +958,15 @@
     "scripts/validate_team.py"
   ],
   "scope_note": "Project tree only. Phase1_Submission_Group21 source/Phase1_Proposal.tex is byte-identical to original project/phase1-work/Phase1_Proposal_v2.tex before identity withholding. Duplicate submission PDFs/contribution documents contain identity fields and stay in the owner private course folder.",
-  "private_repo_reason": "Original Wi-Fi SSID/BSSID and acquisition GPS metadata retained as necessary analysis data. Not public-release anonymized."
+  "private_repo_reason": "Original Wi-Fi SSID/BSSID and acquisition GPS metadata retained as necessary analysis data. Not public-release anonymized.",
+  "additional_engineering_file_sha256": {
+    ".gitignore": "5360c090ffd846c9bee26af502e2bc07bbc43588c05284ae90e03177c5762e12",
+    "README.md": "fc50f9409e8ba69882436781cb13f6418742c982d2fb6dd5ac981d67cb240670",
+    "docs/GITHUB_HANDOFF.md": "573bc754cc8e2eeef7f2e79e2db372c5ee149786cd54318e11f745486fbe5de9",
+    "labeling/README.md": "8b541074aed4c6402df60ad077e698e972558924943517659fa7f7fff9736732",
+    "labeling/assignments.csv": "fcfdd25c48357b67676810daa56a1ea877134335ddfb71a20bb0b9428a9e69dd",
+    "labeling/submissions/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/validate_labels.py": "edc111c9935abb43b940be01b1c677a491069276181ebcd23303b323f45c1a1e",
+    "scripts/validate_team.py": "7c1e02a0aa303b31d7a323ca0f562729dd63bccd0c1b256fa05782867f2d1c42"
+  }
 }
