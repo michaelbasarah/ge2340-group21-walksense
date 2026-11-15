@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "check_count": 20,
+  "checks": [
+    {
+      "check": "26_unique_actual_stop_feature_rows",
+      "passed": true
+    },
+    {
+      "check": "stop_sample_counts_account_for_all_accepted_baro_and_mag",
+      "passed": true
+    },
+    {
+      "check": "barometer_statistics_recomputed_from_clean_samples",
+      "passed": true
+    },
+    {
+      "check": "magnetometer_statistics_recomputed_from_clean_samples",
+      "passed": true
+    },
+    {
+      "check": "wifi_group_observation_counts_sum_to664",
+      "passed": true
+    },
+    {
+      "check": "wifi_only_actual_observed_stop_bssid_pairs",
+      "passed": true
+    },
+    {
+      "check": "wifi_group_stats_and_source_ids_recomputed",
+      "passed": true
+    },
+    {
+      "check": "no_imputed_wifi_rows_at_zero_coverage_stops",
+      "passed": true
+    },
+    {
+      "check": "24_unique_movement_rows_23_measured1proxy",
+      "passed": true
+    },
+    {
+      "check": "movement_measured_sample_counts_sum19935",
+      "passed": true
+    },
+    {
+      "check": "movement_magnitude_mean_and_deviation_rms_recomputed",
+      "passed": true
+    },
+    {
+      "check": "proxy_features_exactly_equal_parent",
+      "passed": true
+    },
+    {
+      "check": "proxy_group_parent_provenance_preserved",
+      "passed": true
+    },
+    {
+      "check": "proxy_target_times_blank_source_times_retained",
+      "passed": true
+    },
+    {
+      "check": "no_distance_steps_or_calibration_claims",
+      "passed": true
+    },
+    {
+      "check": "all_26_recordings_in_review_with_matching_source_identity",
+      "passed": true
+    },
+    {
+      "check": "isolated_review_fixture_preserves_user_entries",
+      "passed": true
+    },
+    {
+      "check": "review_merge_rejects_changed_source_identity",
+      "passed": true
+    },
+    {
+      "check": "no_nan_or_infinity_feature_cells",
+      "passed": true
+    },
+    {
+      "check": "all_feature_location_links_remain_unresolved",
+      "passed": true
+    }
+  ]
+}

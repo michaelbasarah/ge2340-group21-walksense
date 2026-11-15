@@ -1,0 +1,121 @@
+% ======================= COMPILATION NOTICE =======================
+% Before compiling, place ge2340_project.sty and all three template
+% files (phase1_template.tex, phase2_template.tex, and
+% contribution_template.tex) in the same directory.
+% Keep the style file named ge2340_project.sty so that the templates
+% can load it correctly.
+% ==================================================================
+
+\documentclass{article}
+
+% ======================= REQUIRED STYLE =======================
+\PassOptionsToPackage{numbers}{natbib}
+\usepackage[preprint]{ge2340_project}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{array}
+
+% ======================== ASSIGNMENT CONSTRAINTS ========================
+% Phase 1 is GROUP WORK. Each group has 3--4 students.
+% The proposal must be in English and submitted as a PDF.
+% The complete PDF must not exceed 2 pages, including figures and references.
+% Do NOT rename, remove, or reorder the required section titles below.
+% Replace only the bracketed placeholders and remove instructional text before submission.
+% =======================================================================
+
+\title{Phase 1: AI Project Proposal\\
+\large StudySpot Navigator: Camera-Free Indoor Guidance to Free Study Spots}
+
+% Group 21. Fill in the missing student IDs and emails.
+\author{
+  Emmanuelle Sebastian Sanjaya (Student ID withheld)\\
+  \texttt{[email]@my.cityu.edu.hk}
+  \And
+  Chris Amadeus Putra Simatupang (Student ID: [SID])\\
+  \texttt{[email]@my.cityu.edu.hk}
+  \AND
+  Benedicta Amabel Riyadi (Student ID: [SID])\\
+  \texttt{[email]@my.cityu.edu.hk}
+  \And
+  Michael Terence Basarah (Student ID: [SID])\\
+  \texttt{[email]@my.cityu.edu.hk}
+}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Project topic:} Students lose time between classes searching CityU's academic buildings for a free, quiet place to study, and new students often struggle to find rooms at all.\\
+\textbf{Target users/stakeholders:} New and exchange students; students looking for a study seat between classes; Campus Development Office.
+
+% ======================= Required sections (do NOT rename) =======================
+
+\section{Problem Definition \& Scope}
+CityU's academic buildings (AC1, AC2, AC3 and the Yeung Kin Man building) are linked through many wings, floors and lifts. New and exchange students often get lost looking for a room, and between classes many students walk from floor to floor hoping to find a free, quiet seat. The CityUHK Mobile app only gives directions to a building \cite{cityumobile}, a 2013 student prototype offered Wi-Fi room-level positioning on Android only \cite{cityu2013}, and LibCompass works only inside the Library using installed beacons \cite{libcompass}. Our scope is 2--3 floors of AC1 and AC2 with 15--20 study spots, excluding the Library, cameras and outdoor routes.
+
+\section{AI Task Formulation}
+We formulate two linked AI tasks. In \emph{destination choice}, the inputs for each spot are the time, weekday, week of semester and class timetable, and the output is the predicted share of occupied seats and the noise level; spots are ranked by free-seat probability, quietness and walking time. In \emph{route following}, the user types a start point, A* plans a route, and the phone streams step counts, compass heading, Wi-Fi signal strengths (RSSI), magnetometer and barometer readings. The output is the current checkpoint and floor on the route, with an alert when the user goes off route. The group collects all data: a corridor graph with walking times, fingerprints at each checkpoint and four weeks of seat counts. We measure seat-prediction accuracy, position error in metres, checkpoints and floors identified correctly, and the distance walked before a wrong turn is detected. Only counts and signal readings are stored, never images or audio.
+
+\section{Proposed AI Approaches}
+For tracking we test four methods. (A) Pedestrian dead reckoning counts steps and uses the compass to move the user along the route. (B) Wi-Fi RSSI fingerprinting compares the current scan with scans recorded at each checkpoint using $k$-nearest neighbours \cite{bahl2000}. (C) Magnetic fingerprinting matches the distortions that the building's steel creates in the magnetic field \cite{haverinen2009}. (D) A hidden Markov model fuses A--C with the barometer, which detects floor changes, and keeps the estimate on the planned route \cite{rabiner1989}. For the destination we compare a timetable rule with a model trained on our own observations, and for routing we compare A* search \cite{hart1968} with LLM directions from a text map.
+
+\section{Comparative Analysis}
+\begin{table}[h]
+  \centering
+  \caption{Candidate approaches for each part of the system.}
+  \label{tab:approach-comparison}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{llll}
+    \toprule
+    Approach & Needs / phone support & Main strength & Main limitation \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Tracking the user along the route}} \\
+    A: Steps + compass & Motion sensors; any phone & No survey needed & Drifts over distance \\
+    B: Wi-Fi RSSI fingerprint & Existing APs; Android only & Usually finds the floor & Scan limits; crowds \\
+    C: Magnetic fingerprint & Magnetometer; any phone & Works on iPhone & Needs a few steps \\
+    D: HMM fusion + barometer & All of the above & Fixes drift; floor changes & Hardest to tune \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Choosing the destination}} \\
+    Timetable rule & Public class schedule & No training data & Misses current users \\
+    ML on own observations & $\sim$4 weeks of seat counts & Predicts ahead & Collection effort \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Planning the route}} \\
+    A* on corridor graph & Hand-built graph & Shortest, explainable & Map built by hand \\
+    LLM directions & Text map description & No graph coding & May invent routes \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+From Table~\ref{tab:approach-comparison}, we prefer fusion (D) for tracking: it still works on iPhones, which block Wi-Fi scanning, and it corrects step-counting drift. Combining the timetable rule with the learned model means rooms about to host a class are never suggested. A* is preferred for routing because its paths are always valid and explainable, while an LLM may describe corridors that do not exist.
+
+\section{Expected Impact \& Project Feasibility}
+The tool would save students time between classes, ease the first weeks for new and exchange students, and spread students across under-used study spots. Unlike earlier CityU work, it needs no cameras or new hardware, follows the user along a whole route rather than estimating a room, and chooses the destination from predicted density. The six-week plan is: (1) build the map graph; (2) record fingerprints and start seat counts; (3) record test walks with lift rides and deliberate wrong turns; (4) run methods A--D in Python and train the density model; (5) test with first-year students; (6) write the report and video. We already have Android and iOS phones, the free phyphox app and Python. The main risks, look-alike corridors and iPhone Wi-Fi limits, are reduced by sensor fusion.
+
+% ======================= References (included in page limit) =======================
+\begin{thebibliography}{9}
+\footnotesize
+\bibitem{cityumobile}
+City University of Hong Kong, ``CityUHK Mobile App,'' CityU ITS, 2026.
+\bibitem{cityu2013}
+City University of Hong Kong, ``CityU exhibition showcases innovative solutions to everyday problems,'' press release, 6 June 2013.
+\bibitem{libcompass}
+City University of Hong Kong Library, ``LibCompass wayfinding app: experience sharing from the Library of City University of Hong Kong,'' \emph{IFLA WLIC}, 2018.
+\bibitem{bahl2000}
+P.~Bahl and V.~N.~Padmanabhan, ``RADAR: An in-building RF-based user location and tracking system,'' \emph{Proc. IEEE INFOCOM}, 2000.
+\bibitem{haverinen2009}
+J.~Haverinen and A.~Kemppainen, ``Global indoor self-localization based on the ambient magnetic field,'' \emph{Robotics and Autonomous Systems}, 57(10):1028--1035, 2009.
+\bibitem{rabiner1989}
+L.~R.~Rabiner, ``A tutorial on hidden Markov models and selected applications in speech recognition,'' \emph{Proc. IEEE}, 77(2):257--286, 1989.
+\bibitem{hart1968}
+P.~E.~Hart, N.~J.~Nilsson, and B.~Raphael, ``A formal basis for the heuristic determination of minimum cost paths,'' \emph{IEEE Trans. Systems Science and Cybernetics}, 4(2):100--107, 1968.
+\end{thebibliography}
+
+\end{document}

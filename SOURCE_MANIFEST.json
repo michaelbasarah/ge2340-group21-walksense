@@ -1,0 +1,962 @@
+{
+  "included": [
+    {
+      "source": "Phase2_Template.tex",
+      "destination": "Phase2_Template.tex",
+      "source_sha256": "e4049d5adb9a34f1e24fb36ea815409b6e748a9d4a89af10aea7ce6c73e9a447",
+      "distributable_sha256": "e4049d5adb9a34f1e24fb36ea815409b6e748a9d4a89af10aea7ce6c73e9a447",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "Contribution_Template.tex",
+      "destination": "Contribution_Template.tex",
+      "source_sha256": "7140e2f160d6f203df3b06997b68357a192ced1bac7ce3e59ede9ab168bb7a60",
+      "distributable_sha256": "7140e2f160d6f203df3b06997b68357a192ced1bac7ce3e59ede9ab168bb7a60",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "Project-Description.pdf",
+      "destination": "Project-Description.pdf",
+      "source_sha256": "355f9e09056ecbca1da0b677466b90304322fa7c7cfb9f6e25b239c423a80ce8",
+      "distributable_sha256": "355f9e09056ecbca1da0b677466b90304322fa7c7cfb9f6e25b239c423a80ce8",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "ge2340_project.sty",
+      "destination": "ge2340_project.sty",
+      "source_sha256": "31f36ae4dbafb4f79726fe0cea8cff88b4080415ab4481f1ca13c59b7c8b1e41",
+      "distributable_sha256": "31f36ae4dbafb4f79726fe0cea8cff88b4080415ab4481f1ca13c59b7c8b1e41",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "Phase1_Template.tex",
+      "destination": "Phase1_Template.tex",
+      "source_sha256": "dd7e0416e24785caadd27337d923d2acfe124d82ffc10c721769260b6d468281",
+      "distributable_sha256": "dd7e0416e24785caadd27337d923d2acfe124d82ffc10c721769260b6d468281",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/GROUP-PLAN.md",
+      "destination": "phase2/GROUP-PLAN.md",
+      "source_sha256": "c21fdb50f5871dee1034281461f574a909482294822e15a5b435ed358c5d754e",
+      "distributable_sha256": "c21fdb50f5871dee1034281461f574a909482294822e15a5b435ed358c5d754e",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/group-plan.html",
+      "destination": "phase2/group-plan.html",
+      "source_sha256": "78b6c269a2c4e27bbaada28884eddf460bd36ff09a6cebe2faea52ff93b07eae",
+      "distributable_sha256": "78b6c269a2c4e27bbaada28884eddf460bd36ff09a6cebe2faea52ff93b07eae",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase1-work/Phase1_Proposal.tex",
+      "destination": "phase1-work/Phase1_Proposal.tex",
+      "source_sha256": "e6e96b191b98ca36cd2a161ea1bd4860f84604ab4e4de6ebd065c2e325bae033",
+      "distributable_sha256": "3097c9e2bff13bbe17b35136c3034ee27ebaee56b5cacf345cbb07edb136691e",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase1-work/Phase1_Proposal_v2.tex",
+      "destination": "phase1-work/Phase1_Proposal_v2.tex",
+      "source_sha256": "c46f6da67c9242a79c4693ac158a148998484d20be2e2f37a0218ebe82d4e2b6",
+      "distributable_sha256": "6b47705b50ae3c9ad9f0268e9268eda6ba9f92e90efe308756d5169be83e90bd",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase1-work/GROUP21_README.txt",
+      "destination": "phase1-work/GROUP21_README.txt",
+      "source_sha256": "d69498a5f49e680a28aa885b2a841bc0ba4ace9b13889b6b89e0e42b9296e367",
+      "distributable_sha256": "7868cdc61b707f3c9bcf54319ac5b20baccc176a5c0e16b8333274061b2692d4",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase1-work/Phase1_Contribution.tex",
+      "destination": "phase1-work/Phase1_Contribution.tex",
+      "source_sha256": "aaa03fba764d63b14874758051175192f486c5ec32657c05a85759d5b3d27f5c",
+      "distributable_sha256": "d26b2babad05e9f70c7b9f60a9fb811bb1a2be9ed9217022760e85ae06d72ddd",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase1-work/ge2340_project.sty",
+      "destination": "phase1-work/ge2340_project.sty",
+      "source_sha256": "31f36ae4dbafb4f79726fe0cea8cff88b4080415ab4481f1ca13c59b7c8b1e41",
+      "distributable_sha256": "31f36ae4dbafb4f79726fe0cea8cff88b4080415ab4481f1ca13c59b7c8b1e41",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/ROUTING.md",
+      "destination": "phase2/map-ui/ROUTING.md",
+      "source_sha256": "718d6a7bb25ea9bca9d136906601fb22d95ba39ce7984a5707725ce11c22f19b",
+      "distributable_sha256": "718d6a7bb25ea9bca9d136906601fb22d95ba39ce7984a5707725ce11c22f19b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/server.mjs",
+      "destination": "phase2/map-ui/server.mjs",
+      "source_sha256": "5219d83365e7fba13979574bdc861d0d406639e7178fdc812f2fc8c92bd08d44",
+      "distributable_sha256": "5219d83365e7fba13979574bdc861d0d406639e7178fdc812f2fc8c92bd08d44",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/package.json",
+      "destination": "phase2/map-ui/package.json",
+      "source_sha256": "69a70a188981d856570f31ba4558f27b9f8534c053fdec57e019a904ae2c7cf2",
+      "distributable_sha256": "69a70a188981d856570f31ba4558f27b9f8534c053fdec57e019a904ae2c7cf2",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/build.mjs",
+      "destination": "phase2/map-ui/build.mjs",
+      "source_sha256": "e32c20b2875b359ece6d3b4f1b30a89c53ec84918ba386a54f37824d8f06e2e5",
+      "distributable_sha256": "e32c20b2875b359ece6d3b4f1b30a89c53ec84918ba386a54f37824d8f06e2e5",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/package.py",
+      "destination": "phase2/map-ui/package.py",
+      "source_sha256": "c91b844e395a795c908f6d642025492aba75328ec0ec29ece2fa75f9528d8712",
+      "distributable_sha256": "c91b844e395a795c908f6d642025492aba75328ec0ec29ece2fa75f9528d8712",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/BUILD_LOG.md",
+      "destination": "phase2/map-ui/BUILD_LOG.md",
+      "source_sha256": "63eb0a5f9e6ae29a181c2a33741daad3c01ebc1692f5e71bfb6b64925a1f898d",
+      "distributable_sha256": "63eb0a5f9e6ae29a181c2a33741daad3c01ebc1692f5e71bfb6b64925a1f898d",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/README.md",
+      "destination": "phase2/map-ui/README.md",
+      "source_sha256": "dc8638d079b576e1b38600c8051d1c7304745ef687dbadedd49dca71ea59150e",
+      "distributable_sha256": "dc8638d079b576e1b38600c8051d1c7304745ef687dbadedd49dca71ea59150e",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/dist/styles.css",
+      "destination": "phase2/map-ui/dist/styles.css",
+      "source_sha256": "a39f9c0e0be1e2230d70f0af52ef0c773e00d3009e98fe436c97a7edc407782b",
+      "distributable_sha256": "a39f9c0e0be1e2230d70f0af52ef0c773e00d3009e98fe436c97a7edc407782b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/dist/index.html",
+      "destination": "phase2/map-ui/dist/index.html",
+      "source_sha256": "4664379375b392682d72161163d3f25972c251e14af3ac2284a1b83bf6aac215",
+      "distributable_sha256": "4664379375b392682d72161163d3f25972c251e14af3ac2284a1b83bf6aac215",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/dist/route-engine.mjs",
+      "destination": "phase2/map-ui/dist/route-engine.mjs",
+      "source_sha256": "55bfe08c4a11205c451291550dcdc891ca82be0cdfbd943c7e9ec8c3c5e18ac0",
+      "distributable_sha256": "55bfe08c4a11205c451291550dcdc891ca82be0cdfbd943c7e9ec8c3c5e18ac0",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/dist/app.mjs",
+      "destination": "phase2/map-ui/dist/app.mjs",
+      "source_sha256": "2a71911df5b8eda59e5d0ece0a051e61ccc06d726eb35287b5d2eabdf1a6bb13",
+      "distributable_sha256": "2a71911df5b8eda59e5d0ece0a051e61ccc06d726eb35287b5d2eabdf1a6bb13",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/dist/Wayfind.html",
+      "destination": "phase2/map-ui/dist/Wayfind.html",
+      "source_sha256": "91d237a872bb979070f448624ec905e2ec186c69318044f1274218a9c857788a",
+      "distributable_sha256": "91d237a872bb979070f448624ec905e2ec186c69318044f1274218a9c857788a",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/dist/map-data.mjs",
+      "destination": "phase2/map-ui/dist/map-data.mjs",
+      "source_sha256": "d8034f3172ec5d69cb785c6da06e75003757f476eece14d59fdcc43b4037c7c9",
+      "distributable_sha256": "d8034f3172ec5d69cb785c6da06e75003757f476eece14d59fdcc43b4037c7c9",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/tests/routing.test.mjs",
+      "destination": "phase2/map-ui/tests/routing.test.mjs",
+      "source_sha256": "739524fa2eaac389dd0814e43ae89ef136caa4ff84a72037eb6e2629254f15aa",
+      "distributable_sha256": "739524fa2eaac389dd0814e43ae89ef136caa4ff84a72037eb6e2629254f15aa",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/tests/dom-qa.mjs",
+      "destination": "phase2/map-ui/tests/dom-qa.mjs",
+      "source_sha256": "0fb8f1af080e01a5b6b4fbcc624afb220c20dcadfaaf480dd6975bbcd3c68ca4",
+      "distributable_sha256": "0fb8f1af080e01a5b6b4fbcc624afb220c20dcadfaaf480dd6975bbcd3c68ca4",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/qa/QA.md",
+      "destination": "phase2/map-ui/qa/QA.md",
+      "source_sha256": "c246f665ca08f73ab3b08b846a000742afa1545b084b3b58a1f90ffc291c2e42",
+      "distributable_sha256": "c246f665ca08f73ab3b08b846a000742afa1545b084b3b58a1f90ffc291c2e42",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/map-ui/qa/dom-report.json",
+      "destination": "phase2/map-ui/qa/dom-report.json",
+      "source_sha256": "f27de13006d2c3cfce4039a17574aaa6364e4a06a6f542229a1a4a80c49ca909",
+      "distributable_sha256": "f27de13006d2c3cfce4039a17574aaa6364e4a06a6f542229a1a4a80c49ca909",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi_timestamp_audit.json",
+      "destination": "phase2/clean-data/2026-11-14/wifi_timestamp_audit.json",
+      "source_sha256": "09a6eb3633ee1ee72e6dc4affbe22a8f03fe03e1f62e27afba99c4836efdd99c",
+      "distributable_sha256": "8cc99fa877c2162aa1ef4e736d335d6c8bd182305db987cfa3e9cec39e7f61a6",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/PROCESSING_LOG.md",
+      "destination": "phase2/clean-data/2026-11-14/PROCESSING_LOG.md",
+      "source_sha256": "e5f15a9ecba9d59fd793ea265e895918f7212cbd6bd08885f78f77a3ba37e6ca",
+      "distributable_sha256": "e5f15a9ecba9d59fd793ea265e895918f7212cbd6bd08885f78f77a3ba37e6ca",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/sessions.csv",
+      "destination": "phase2/clean-data/2026-11-14/sessions.csv",
+      "source_sha256": "25bab63afa4410902d3e62f79a2ab737e59d6293ab6c6b96a339714a8cbba68d",
+      "distributable_sha256": "25bab63afa4410902d3e62f79a2ab737e59d6293ab6c6b96a339714a8cbba68d",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/relabel_template_validation.json",
+      "destination": "phase2/clean-data/2026-11-14/relabel_template_validation.json",
+      "source_sha256": "e1eb4bbfba2571adce9f4a0f12200c0d3ec543d0e81ecb43eee4d1e16bea66c3",
+      "distributable_sha256": "e1eb4bbfba2571adce9f4a0f12200c0d3ec543d0e81ecb43eee4d1e16bea66c3",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/sensor_quality.csv",
+      "destination": "phase2/clean-data/2026-11-14/sensor_quality.csv",
+      "source_sha256": "0051b61dc91365ffb0274bbe8ded4c384916286d4b10694dccc32e1d72ed4bca",
+      "distributable_sha256": "0051b61dc91365ffb0274bbe8ded4c384916286d4b10694dccc32e1d72ed4bca",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/RELABEL_README.md",
+      "destination": "phase2/clean-data/2026-11-14/RELABEL_README.md",
+      "source_sha256": "a715e844331757ae02cf4362d2cec1ca3573a0967250a86494efa3c35b845925",
+      "distributable_sha256": "32131388ba5926dea6c2950c2f82dc4bbf30ea12828a5bfc93bb59350a619762",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/recording_review.csv",
+      "destination": "phase2/clean-data/2026-11-14/recording_review.csv",
+      "source_sha256": "d9f186119d1e1372f5836e6fd41b751f22b8468308ef7bf15d30a7f09913f923",
+      "distributable_sha256": "d9f186119d1e1372f5836e6fd41b751f22b8468308ef7bf15d30a7f09913f923",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/RELABEL_TEMPLATE.csv",
+      "destination": "phase2/clean-data/2026-11-14/RELABEL_TEMPLATE.csv",
+      "source_sha256": "be0a2aa43eb47454c2cb8bc8cf103456159b421d1a6296a3cda628e17a30ec7d",
+      "distributable_sha256": "ae2e602d2b4fc356d91379feaa1895a339227ee3f44a6029587a29610884369b",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/feature_extraction.py",
+      "destination": "phase2/clean-data/2026-11-14/feature_extraction.py",
+      "source_sha256": "6bf7dbda769d9663a90cd36e8a7dd2abff0ccfa90d1b275cea8015812171f8d0",
+      "distributable_sha256": "6bf7dbda769d9663a90cd36e8a7dd2abff0ccfa90d1b275cea8015812171f8d0",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/make_relabel_template.py",
+      "destination": "phase2/clean-data/2026-11-14/make_relabel_template.py",
+      "source_sha256": "ed70e8bdaf0d3253e1c7c21f9a6de2863ae6212fac6473249b95b56b9541290d",
+      "distributable_sha256": "e3ab3d944cb1e9196189ec81b9835988f13b194adbf626dbca4d22d9ee77b936",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/clean.py",
+      "destination": "phase2/clean-data/2026-11-14/clean.py",
+      "source_sha256": "e84fda12bd5f52666d66b90dd716f1112c6bfa299726d985275b02342340f4e6",
+      "distributable_sha256": "60d92ad88fb1dc7b494399c82c23a9bdc7442252efab31ee3ea06d339df3ea93",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/diagnostic_timeline.svg",
+      "destination": "phase2/clean-data/2026-11-14/diagnostic_timeline.svg",
+      "source_sha256": "9caa7f6198f17227d06e78e2092580860f50c0f1b6a180c943274f7c39fe2495",
+      "distributable_sha256": "9caa7f6198f17227d06e78e2092580860f50c0f1b6a180c943274f7c39fe2495",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/source_files.csv",
+      "destination": "phase2/clean-data/2026-11-14/source_files.csv",
+      "source_sha256": "dd1056edc3333a9c11eb5b32ef66a9038342337e47df22d7554134425fa4603e",
+      "distributable_sha256": "dd1056edc3333a9c11eb5b32ef66a9038342337e47df22d7554134425fa4603e",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/recording_intervals.csv",
+      "destination": "phase2/clean-data/2026-11-14/recording_intervals.csv",
+      "source_sha256": "2fad7efd22bf7551e71a3a42570fb4dac47a3dbb23a2e92dd0e605be1288c03c",
+      "distributable_sha256": "2fad7efd22bf7551e71a3a42570fb4dac47a3dbb23a2e92dd0e605be1288c03c",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/missing_movements.csv",
+      "destination": "phase2/clean-data/2026-11-14/missing_movements.csv",
+      "source_sha256": "b66ebfb62ca252ca9aa81226cbfce1ccb15a2725d861f997af79511f08ada15a",
+      "distributable_sha256": "b66ebfb62ca252ca9aa81226cbfce1ccb15a2725d861f997af79511f08ada15a",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/summary.json",
+      "destination": "phase2/clean-data/2026-11-14/summary.json",
+      "source_sha256": "d73bec65c301708c602d315510a93c6625b1afd1242a4463ee0b6992623cf66a",
+      "distributable_sha256": "7e7b7fe3e562bd1bac1e7eddc782f59bb5493398095f0a20350bba9c0ae3f9e2",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/accelerometer_edges.csv",
+      "destination": "phase2/clean-data/2026-11-14/accelerometer_edges.csv",
+      "source_sha256": "32d1ce23760d03c415c4d691f43a7db0cb846b8e71646ac67dbd91f50ed6f4db",
+      "distributable_sha256": "32d1ce23760d03c415c4d691f43a7db0cb846b8e71646ac67dbd91f50ed6f4db",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/WORKER-NOTES.md",
+      "destination": "phase2/clean-data/2026-11-14/WORKER-NOTES.md",
+      "source_sha256": "8a706c7b1301695b58b7e3e6a3e70343040f56dd5b45a3efac46f2f5159b9845",
+      "distributable_sha256": "8a706c7b1301695b58b7e3e6a3e70343040f56dd5b45a3efac46f2f5159b9845",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/package.py",
+      "destination": "phase2/clean-data/2026-11-14/package.py",
+      "source_sha256": "6e1b638f3ba4afb730de2824f47a616d73a2243d4e94b884e19ec3855e01917e",
+      "distributable_sha256": "6e1b638f3ba4afb730de2824f47a616d73a2243d4e94b884e19ec3855e01917e",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/corrected_location_list.csv",
+      "destination": "phase2/clean-data/2026-11-14/corrected_location_list.csv",
+      "source_sha256": "80d2f7817a7b89540ee7e4b4fd7d77c12bfc8cb3554251dfc59ebdac37a151fa",
+      "distributable_sha256": "80d2f7817a7b89540ee7e4b4fd7d77c12bfc8cb3554251dfc59ebdac37a151fa",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/excluded_sensor_rows.csv",
+      "destination": "phase2/clean-data/2026-11-14/excluded_sensor_rows.csv",
+      "source_sha256": "3e64e89e7868a3d17c891574fe642a572da1231a8ce9b5923b335596ffc6acb8",
+      "distributable_sha256": "3e64e89e7868a3d17c891574fe642a572da1231a8ce9b5923b335596ffc6acb8",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/validation.json",
+      "destination": "phase2/clean-data/2026-11-14/validation.json",
+      "source_sha256": "ac2897cca5d858890573f8419ca3ede34d155288416588db8ca9c8107058fad3",
+      "distributable_sha256": "ac2897cca5d858890573f8419ca3ede34d155288416588db8ca9c8107058fad3",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/locations_provisional.csv",
+      "destination": "phase2/clean-data/2026-11-14/locations_provisional.csv",
+      "source_sha256": "18c2c6079bce69257d52be9a30a4a84b8e2230ba93cbf6173f243fcc9865c62b",
+      "distributable_sha256": "18c2c6079bce69257d52be9a30a4a84b8e2230ba93cbf6173f243fcc9865c62b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/README.md",
+      "destination": "phase2/clean-data/2026-11-14/README.md",
+      "source_sha256": "81c07a66b550aa8f9dbfa14603b8c9ddfa487b6eaf9a77716a791883673595ae",
+      "distributable_sha256": "38526daf46e1268ab97d9d87b4d9b756c3617db3e43af11b37eb432bd55885a2",
+      "modified_for_team_copy": true
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/sensor_samples.csv",
+      "destination": "phase2/clean-data/2026-11-14/sensor_samples.csv",
+      "source_sha256": "12f160cd539cb9c8a947e57cdfcd1a1045b1c8e3afd2f713e339c5a2256369f3",
+      "distributable_sha256": "12f160cd539cb9c8a947e57cdfcd1a1045b1c8e3afd2f713e339c5a2256369f3",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/augmentation/derived_accelerometer_samples.csv",
+      "destination": "phase2/clean-data/2026-11-14/augmentation/derived_accelerometer_samples.csv",
+      "source_sha256": "2100a7acdb9a50b030b29c59fc6fc17d9947ad03e65b22a906546b0eb85fc4fd",
+      "distributable_sha256": "2100a7acdb9a50b030b29c59fc6fc17d9947ad03e65b22a906546b0eb85fc4fd",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/augmentation/user_requested_override.json",
+      "destination": "phase2/clean-data/2026-11-14/augmentation/user_requested_override.json",
+      "source_sha256": "50ed52fca3048f6818b6a48e6b0a146e46abd8d1428c7933e76839cd7e686662",
+      "distributable_sha256": "50ed52fca3048f6818b6a48e6b0a146e46abd8d1428c7933e76839cd7e686662",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/augmentation/augmented_accelerometer_edges.csv",
+      "destination": "phase2/clean-data/2026-11-14/augmentation/augmented_accelerometer_edges.csv",
+      "source_sha256": "e85a95c5603d869851128b5ecae76ffccc0ec3c481f61c4cf1b687b729eaa473",
+      "distributable_sha256": "e85a95c5603d869851128b5ecae76ffccc0ec3c481f61c4cf1b687b729eaa473",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/source.sha256",
+      "destination": "phase2/clean-data/2026-11-14/raw/source.sha256",
+      "source_sha256": "dc8ba9ce4f07c535ba1369067c4c1ef367ee4bd0bdbc3c16e86869b204d1e066",
+      "distributable_sha256": "dc8ba9ce4f07c535ba1369067c4c1ef367ee4bd0bdbc3c16e86869b204d1e066",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/wifi_decompressed.csv",
+      "destination": "phase2/clean-data/2026-11-14/raw/wifi_decompressed.csv",
+      "source_sha256": "3190214304dc03c38cad51e789c70a95d4c480d1390fc3bac097b77db85501cf",
+      "distributable_sha256": "3190214304dc03c38cad51e789c70a95d4c480d1390fc3bac097b77db85501cf",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/sensors/magnetometer.csv",
+      "destination": "phase2/clean-data/2026-11-14/sensors/magnetometer.csv",
+      "source_sha256": "e99984604087d25dd1a13cf5b0c64e1f60b20b8f7f1d2c7febeda2c18f3ca281",
+      "distributable_sha256": "e99984604087d25dd1a13cf5b0c64e1f60b20b8f7f1d2c7febeda2c18f3ca281",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/sensors/barometer.csv",
+      "destination": "phase2/clean-data/2026-11-14/sensors/barometer.csv",
+      "source_sha256": "486d4a9fd80ab2231f69fa1b69ed3727f6367b47a83255fafecee0770bafe676",
+      "distributable_sha256": "486d4a9fd80ab2231f69fa1b69ed3727f6367b47a83255fafecee0770bafe676",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/sensors/accelerometer.csv",
+      "destination": "phase2/clean-data/2026-11-14/sensors/accelerometer.csv",
+      "source_sha256": "d4e5ecd5d7e59e17c39f5b753e44e99a2dac349d77de5705159ed8f32efaac3b",
+      "distributable_sha256": "d4e5ecd5d7e59e17c39f5b753e44e99a2dac349d77de5705159ed8f32efaac3b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/features/feature_manifest.json",
+      "destination": "phase2/clean-data/2026-11-14/features/feature_manifest.json",
+      "source_sha256": "f0c42492a62219406637e632aca6fc855657e0dc8e210442ccb26ac7e6a4a9a6",
+      "distributable_sha256": "f0c42492a62219406637e632aca6fc855657e0dc8e210442ccb26ac7e6a4a9a6",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/features/stop_features.csv",
+      "destination": "phase2/clean-data/2026-11-14/features/stop_features.csv",
+      "source_sha256": "89fa7b707249e05281288cd9e047b2328e02b13933160430f5584bb4a3837733",
+      "distributable_sha256": "89fa7b707249e05281288cd9e047b2328e02b13933160430f5584bb4a3837733",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/features/wifi_by_stop_bssid.csv",
+      "destination": "phase2/clean-data/2026-11-14/features/wifi_by_stop_bssid.csv",
+      "source_sha256": "ccaa1cb3950c9f4fedb3a238846a704ea826ec04967729967887d6436d007848",
+      "distributable_sha256": "ccaa1cb3950c9f4fedb3a238846a704ea826ec04967729967887d6436d007848",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/features/feature_validation.json",
+      "destination": "phase2/clean-data/2026-11-14/features/feature_validation.json",
+      "source_sha256": "fb2e8ccc848ecbfaac520ed78202b230b6a1f8b4cadffa88cd4b736cd8f2d64f",
+      "distributable_sha256": "fb2e8ccc848ecbfaac520ed78202b230b6a1f8b4cadffa88cd4b736cd8f2d64f",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/features/FEATURES_EXPLAINED.md",
+      "destination": "phase2/clean-data/2026-11-14/features/FEATURES_EXPLAINED.md",
+      "source_sha256": "269597c2560a4ee3eaf66e160f46ecd36745cf900917ab75e807e49b6a7205b5",
+      "distributable_sha256": "269597c2560a4ee3eaf66e160f46ecd36745cf900917ab75e807e49b6a7205b5",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/features/movement_features.csv",
+      "destination": "phase2/clean-data/2026-11-14/features/movement_features.csv",
+      "source_sha256": "99418a8a31850c59410da42936ac0f864bd77ec07349f399bbb63ae512cc7011",
+      "distributable_sha256": "99418a8a31850c59410da42936ac0f864bd77ec07349f399bbb63ae512cc7011",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/stop_associations_provisional.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/stop_associations_provisional.csv",
+      "source_sha256": "3ed84d80a93c704455ffb5da40bd31e13499e2462dc3a64db9d9f202c90f552e",
+      "distributable_sha256": "3ed84d80a93c704455ffb5da40bd31e13499e2462dc3a64db9d9f202c90f552e",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/non_wifi_rows.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/non_wifi_rows.csv",
+      "source_sha256": "cf461c2a7e6b23bad119901c87e41f5bc3f8f39f8dae1b8a7ba10c34ebae2fa3",
+      "distributable_sha256": "cf461c2a7e6b23bad119901c87e41f5bc3f8f39f8dae1b8a7ba10c34ebae2fa3",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/export_metadata.txt",
+      "destination": "phase2/clean-data/2026-11-14/wifi/export_metadata.txt",
+      "source_sha256": "a945d08c2d69b275adaf57a77cd2ab079f25a9a3360916ca8542fd4c5c215dae",
+      "distributable_sha256": "a945d08c2d69b275adaf57a77cd2ab079f25a9a3360916ca8542fd4c5c215dae",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/observations.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/observations.csv",
+      "source_sha256": "b1e640624feb58a3aa2b991bacc07ec0c7a7fca7269b170d6eb41ab1afc9259c",
+      "distributable_sha256": "b1e640624feb58a3aa2b991bacc07ec0c7a7fca7269b170d6eb41ab1afc9259c",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/unassigned_observations.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/unassigned_observations.csv",
+      "source_sha256": "8aae86aac6a94f43e5f601970adcee578283e055b73ac88c06be2e45ea8f9125",
+      "distributable_sha256": "8aae86aac6a94f43e5f601970adcee578283e055b73ac88c06be2e45ea8f9125",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/AUDIT.md",
+      "destination": "phase2/clean-data/2026-11-14/wifi/AUDIT.md",
+      "source_sha256": "1bfafe6e4171a19f4ce1f47a2cc21aa2e7285bc9edbe7b3edf9806b50117f4a5",
+      "distributable_sha256": "1bfafe6e4171a19f4ce1f47a2cc21aa2e7285bc9edbe7b3edf9806b50117f4a5",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/stop_coverage_provisional.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/stop_coverage_provisional.csv",
+      "source_sha256": "bd16a62793fb365632e0937ed452ebe582e7649224ec973a3c4eb76718c067f2",
+      "distributable_sha256": "bd16a62793fb365632e0937ed452ebe582e7649224ec973a3c4eb76718c067f2",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/audit_per_stop_coverage.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/audit_per_stop_coverage.csv",
+      "source_sha256": "20bd6b60f68d8122225ad0098325a5bb40c02730a89d242866bacca011dd6cf1",
+      "distributable_sha256": "20bd6b60f68d8122225ad0098325a5bb40c02730a89d242866bacca011dd6cf1",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/wifi/excluded_rows.csv",
+      "destination": "phase2/clean-data/2026-11-14/wifi/excluded_rows.csv",
+      "source_sha256": "3b3dc68404d3830bda030d35d0972f4eb388f9ec771012d79dbc33cede287dca",
+      "distributable_sha256": "3b3dc68404d3830bda030d35d0972f4eb388f9ec771012d79dbc33cede287dca",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-32-15.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-32-15.zip",
+      "source_sha256": "403a6db71a986492ba49dc2ad221956a55b73b7e8c6d7d2c29cdc3a1e22f54c1",
+      "distributable_sha256": "403a6db71a986492ba49dc2ad221956a55b73b7e8c6d7d2c29cdc3a1e22f54c1",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P13 2026-11-14 21-20-16.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P13 2026-11-14 21-20-16.zip",
+      "source_sha256": "31505fe459ceb7ded60d0fdbcc9e012a9bc79ec82d7ae7c7ff1af31ebe17c9b9",
+      "distributable_sha256": "31505fe459ceb7ded60d0fdbcc9e012a9bc79ec82d7ae7c7ff1af31ebe17c9b9",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P4 2026-11-14 21-12-56.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P4 2026-11-14 21-12-56.zip",
+      "source_sha256": "3f6bdbaed6b5aafc57ce4cefc49c3345c000c9ba1203d1fa0d887c7a56e04841",
+      "distributable_sha256": "3f6bdbaed6b5aafc57ce4cefc49c3345c000c9ba1203d1fa0d887c7a56e04841",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P23 2026-11-14 21-32-38.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P23 2026-11-14 21-32-38.zip",
+      "source_sha256": "42b0576c96013a5050ed209d14cbad5afe639fa4bab449384302d0cd8d2a6dff",
+      "distributable_sha256": "42b0576c96013a5050ed209d14cbad5afe639fa4bab449384302d0cd8d2a6dff",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P11 2026-11-14 21-17-50.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P11 2026-11-14 21-17-50.zip",
+      "source_sha256": "e0bf867a061ef4d2e88b55dccfd6dfc0f104a8d76caef59b1621c9aeb8dbc90f",
+      "distributable_sha256": "e0bf867a061ef4d2e88b55dccfd6dfc0f104a8d76caef59b1621c9aeb8dbc90f",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-33-34.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-33-34.zip",
+      "source_sha256": "f668264f0e20f9683a2ac768cef9f0173e59bc5baec5cfc96e7466dd17ef3a54",
+      "distributable_sha256": "f668264f0e20f9683a2ac768cef9f0173e59bc5baec5cfc96e7466dd17ef3a54",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P20 2026-11-14 21-30-16.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P20 2026-11-14 21-30-16.zip",
+      "source_sha256": "5a467d31d66e09254a12a789eccf80e0969c9335d2961b00a166a190af697f2c",
+      "distributable_sha256": "5a467d31d66e09254a12a789eccf80e0969c9335d2961b00a166a190af697f2c",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-23-13.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-23-13.zip",
+      "source_sha256": "9abca376e9fb904367d3551475543c71812caf7df9aba7c291b5fcbd56586593",
+      "distributable_sha256": "9abca376e9fb904367d3551475543c71812caf7df9aba7c291b5fcbd56586593",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P19 2026-11-14 21-29-26.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P19 2026-11-14 21-29-26.zip",
+      "source_sha256": "30c824a5f3f2183fe9c0b1c94fd3d21d4981b60edad699fb8cae1d36901c27a1",
+      "distributable_sha256": "30c824a5f3f2183fe9c0b1c94fd3d21d4981b60edad699fb8cae1d36901c27a1",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-31-12.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-31-12.zip",
+      "source_sha256": "ea40e7a920150fff60bd376ed72bec24e9bb6d96d25dac7d71f7d293b4a11350",
+      "distributable_sha256": "ea40e7a920150fff60bd376ed72bec24e9bb6d96d25dac7d71f7d293b4a11350",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P8 2026-11-14 21-15-51.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P8 2026-11-14 21-15-51.zip",
+      "source_sha256": "c880193518620e35a356a2aa608408578d7ea291da404f5f173c518ba75d1247",
+      "distributable_sha256": "c880193518620e35a356a2aa608408578d7ea291da404f5f173c518ba75d1247",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P2 2026-11-14 21-11-06.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P2 2026-11-14 21-11-06.zip",
+      "source_sha256": "567ef9263870bd743609b84512f4538bc29d411be9ad4f4cb4ebc0a26c4df357",
+      "distributable_sha256": "567ef9263870bd743609b84512f4538bc29d411be9ad4f4cb4ebc0a26c4df357",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P21 2026-11-14 21-31-13.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P21 2026-11-14 21-31-13.zip",
+      "source_sha256": "166fd594cc8852d09f2d093077b506a3042c3ddfdb4e61154d2df02bf038c0b1",
+      "distributable_sha256": "166fd594cc8852d09f2d093077b506a3042c3ddfdb4e61154d2df02bf038c0b1",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-19-01.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-19-01.zip",
+      "source_sha256": "0f1158ac6a046ac7d9a4d482a31aa30b370f642b8e75e1e169cd63c95052f8ce",
+      "distributable_sha256": "0f1158ac6a046ac7d9a4d482a31aa30b370f642b8e75e1e169cd63c95052f8ce",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-16-48.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-16-48.zip",
+      "source_sha256": "fc0238a2c2ea94d21db17f8e8c4f22216c104215026e679a154f3f36456814ee",
+      "distributable_sha256": "fc0238a2c2ea94d21db17f8e8c4f22216c104215026e679a154f3f36456814ee",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-15-25.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-15-25.zip",
+      "source_sha256": "e07b5f7eb3d104bf8bb21ee920ca5cf7d1d93e4b1796ea42f8662d8a2a43d819",
+      "distributable_sha256": "e07b5f7eb3d104bf8bb21ee920ca5cf7d1d93e4b1796ea42f8662d8a2a43d819",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P22 2026-11-14 21-31-51.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P22 2026-11-14 21-31-51.zip",
+      "source_sha256": "cc1f5c938ff968bd3a7a447318affa2843310a35fe510f9795050e7e67578dcf",
+      "distributable_sha256": "cc1f5c938ff968bd3a7a447318affa2843310a35fe510f9795050e7e67578dcf",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-14-22.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-14-22.zip",
+      "source_sha256": "4bde6dc9998d702b9f45ec8c459e4092d6becebacb0bad9fe7332e8852058fd1",
+      "distributable_sha256": "4bde6dc9998d702b9f45ec8c459e4092d6becebacb0bad9fe7332e8852058fd1",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P25 2026-11-14 21-34-05.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P25 2026-11-14 21-34-05.zip",
+      "source_sha256": "0b8b2576777d615e6296cabdc9c55c466fafa38f629e89339f15553791882971",
+      "distributable_sha256": "0b8b2576777d615e6296cabdc9c55c466fafa38f629e89339f15553791882971",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-24-47.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-24-47.zip",
+      "source_sha256": "e991a89652ff9af6fc0ec4d35580877b8a77ad2f2256b7263d12d177c104c343",
+      "distributable_sha256": "e991a89652ff9af6fc0ec4d35580877b8a77ad2f2256b7263d12d177c104c343",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P3 2026-11-14 21-11-47.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P3 2026-11-14 21-11-47.zip",
+      "source_sha256": "882a8bd242018c3ad7c76f02b0110db353cb83ad15b8365ab019c0a155699331",
+      "distributable_sha256": "882a8bd242018c3ad7c76f02b0110db353cb83ad15b8365ab019c0a155699331",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P14 2026-11-14 21-21-00.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P14 2026-11-14 21-21-00.zip",
+      "source_sha256": "beb7e5ca3d268911a434f1700db5fdc6f19f844c4f5410220546ae13754bebbc",
+      "distributable_sha256": "beb7e5ca3d268911a434f1700db5fdc6f19f844c4f5410220546ae13754bebbc",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P6 2026-11-14 21-14-41.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P6 2026-11-14 21-14-41.zip",
+      "source_sha256": "d9e76ae843847b03094d3e7a2a838e14f72aa664f360334fdc4c585629471cf5",
+      "distributable_sha256": "d9e76ae843847b03094d3e7a2a838e14f72aa664f360334fdc4c585629471cf5",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P16-18 (esca bawah) 2026-11-14 21-27-51.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P16-18 (esca bawah) 2026-11-14 21-27-51.zip",
+      "source_sha256": "15af20a51ab29ab34046311e801873338528fc0798c774ce4852c407fb4db091",
+      "distributable_sha256": "15af20a51ab29ab34046311e801873338528fc0798c774ce4852c407fb4db091",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/DOC-20261114-WA0049.gz",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/DOC-20261114-WA0049.gz",
+      "source_sha256": "211a918bc0b8b82643e61d74e4cf16beede6c163a10df36b105a8157be9aa8b5",
+      "distributable_sha256": "211a918bc0b8b82643e61d74e4cf16beede6c163a10df36b105a8157be9aa8b5",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-14-54.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-14-54.zip",
+      "source_sha256": "2db9855c22161a3f8e1ecf44712639f04936d497f2ab764d63700a16aa18efa5",
+      "distributable_sha256": "2db9855c22161a3f8e1ecf44712639f04936d497f2ab764d63700a16aa18efa5",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-17-20.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-17-20.zip",
+      "source_sha256": "62f45dfe4b40b2ab2929b563087e8b3a1a8be728805826f3d6986661af53d5af",
+      "distributable_sha256": "62f45dfe4b40b2ab2929b563087e8b3a1a8be728805826f3d6986661af53d5af",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P9 2026-11-14 21-16-31.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P9 2026-11-14 21-16-31.zip",
+      "source_sha256": "20f5910af7ea5c14b8e72519404a229dd0b00ba72c3815fa3cf4836327301e42",
+      "distributable_sha256": "20f5910af7ea5c14b8e72519404a229dd0b00ba72c3815fa3cf4836327301e42",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-30-33.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-30-33.zip",
+      "source_sha256": "5a195ae0d3ca5feb47d110ae24b152a3cc52a2f50e628669bc2b81112f72ff5c",
+      "distributable_sha256": "5a195ae0d3ca5feb47d110ae24b152a3cc52a2f50e628669bc2b81112f72ff5c",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-29-50.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-29-50.zip",
+      "source_sha256": "dee328f7736259196bed1e14df418bb42a0debeb963f159cabd165d03eed327b",
+      "distributable_sha256": "dee328f7736259196bed1e14df418bb42a0debeb963f159cabd165d03eed327b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P1 2026-11-14 21-10-15.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P1 2026-11-14 21-10-15.zip",
+      "source_sha256": "1050d908fa1d8c89831db98bd0418b49cd706a780886b3e2829847babedbaba2",
+      "distributable_sha256": "1050d908fa1d8c89831db98bd0418b49cd706a780886b3e2829847babedbaba2",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-32-58.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-32-58.zip",
+      "source_sha256": "e6b28ec9f456615f96b0e3565dd0ec588f731fb662e6202f50909f3f998634e0",
+      "distributable_sha256": "e6b28ec9f456615f96b0e3565dd0ec588f731fb662e6202f50909f3f998634e0",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-16-05.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-16-05.zip",
+      "source_sha256": "dca74073ae82ccee83558e808030671d3b0da1fab7adefc559c2277c369b9f42",
+      "distributable_sha256": "dca74073ae82ccee83558e808030671d3b0da1fab7adefc559c2277c369b9f42",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-13-08.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-13-08.zip",
+      "source_sha256": "507ce8956dc8aaea85e0b633ec30e7d59d4b1c3c125a2f4b6ceb2e4c4480b91b",
+      "distributable_sha256": "507ce8956dc8aaea85e0b633ec30e7d59d4b1c3c125a2f4b6ceb2e4c4480b91b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P18 (start esca bawah naik) 2026-11-14 21-28-44.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P18 (start esca bawah naik) 2026-11-14 21-28-44.zip",
+      "source_sha256": "8db4fbb4cf080944e4b1d2734be1bd224d2f6823e9a8c51a7bf69b0fd40c9952",
+      "distributable_sha256": "8db4fbb4cf080944e4b1d2734be1bd224d2f6823e9a8c51a7bf69b0fd40c9952",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P24 2026-11-14 21-33-21.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P24 2026-11-14 21-33-21.zip",
+      "source_sha256": "f11301c7aa1f5515de7d23890b730b91d4219a12d055e4350970aadf8a969671",
+      "distributable_sha256": "f11301c7aa1f5515de7d23890b730b91d4219a12d055e4350970aadf8a969671",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-29-01.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-29-01.zip",
+      "source_sha256": "860d2dff0fc80b4557c7322af22b15aa7ad983559b2e8826007d2693013aa366",
+      "distributable_sha256": "860d2dff0fc80b4557c7322af22b15aa7ad983559b2e8826007d2693013aa366",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-11-20.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-11-20.zip",
+      "source_sha256": "2e614567b6235f028b954cb89e808ef4ac39d23c4b7155c1ed409f322696ddd3",
+      "distributable_sha256": "2e614567b6235f028b954cb89e808ef4ac39d23c4b7155c1ed409f322696ddd3",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-10-09.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-10-09.zip",
+      "source_sha256": "1baae03756bd0a93f7bca85cc1ac0232f444ac01f457b2c56ca793a5ca858c16",
+      "distributable_sha256": "1baae03756bd0a93f7bca85cc1ac0232f444ac01f457b2c56ca793a5ca858c16",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P12 2026-11-14 21-18-48.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P12 2026-11-14 21-18-48.zip",
+      "source_sha256": "8624ac2129f25b38462c7587fc11224ac81c58ecfb082752dde7f3b358f53c88",
+      "distributable_sha256": "8624ac2129f25b38462c7587fc11224ac81c58ecfb082752dde7f3b358f53c88",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-10-38.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-10-38.zip",
+      "source_sha256": "3c4536a9cacfbd1343b2f0990a6c287c9271069fdddf792dfaf81df3ce03b60b",
+      "distributable_sha256": "3c4536a9cacfbd1343b2f0990a6c287c9271069fdddf792dfaf81df3ce03b60b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-24-06.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-24-06.zip",
+      "source_sha256": "dde61cb9f25e29e4f2ae77f348b5dbdaefaff6c80e818f2926be38b7e5c3b200",
+      "distributable_sha256": "dde61cb9f25e29e4f2ae77f348b5dbdaefaff6c80e818f2926be38b7e5c3b200",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-34-21.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-34-21.zip",
+      "source_sha256": "d769210cb37330cf6623afb0103d37a875b4d85e1fa456cea07ab7039fb80a29",
+      "distributable_sha256": "d769210cb37330cf6623afb0103d37a875b4d85e1fa456cea07ab7039fb80a29",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-20-30.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-20-30.zip",
+      "source_sha256": "7dac1ddbbc85f37646dcaa854e5e33cf9430cc0585735ed253332b78053bf660",
+      "distributable_sha256": "7dac1ddbbc85f37646dcaa854e5e33cf9430cc0585735ed253332b78053bf660",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P10 2026-11-14 21-17-06.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P10 2026-11-14 21-17-06.zip",
+      "source_sha256": "a9c02723d337096e4353f17da373eb107588b72cb3ac5be7aa01768dee9a1e18",
+      "distributable_sha256": "a9c02723d337096e4353f17da373eb107588b72cb3ac5be7aa01768dee9a1e18",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P7 2026-11-14 21-15-12.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P7 2026-11-14 21-15-12.zip",
+      "source_sha256": "dc76d0ac7ad381b1d71d260a509839cb630d4a0ca1d275c238851eb0bf990178",
+      "distributable_sha256": "dc76d0ac7ad381b1d71d260a509839cb630d4a0ca1d275c238851eb0bf990178",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/P5 2026-11-14 21-14-04.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/P5 2026-11-14 21-14-04.zip",
+      "source_sha256": "5183f00c98c299b3c86cdc80298866c26974fe1ede7d35714aa2ba518ad31662",
+      "distributable_sha256": "5183f00c98c299b3c86cdc80298866c26974fe1ede7d35714aa2ba518ad31662",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-18-06.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-18-06.zip",
+      "source_sha256": "fe443add85cbc8169b6b3399d4a922971fe59e4cfdd8e35f993894dfe811977b",
+      "distributable_sha256": "fe443add85cbc8169b6b3399d4a922971fe59e4cfdd8e35f993894dfe811977b",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-12-08.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-12-08.zip",
+      "source_sha256": "5ddd107bd674f6f8a7d238dc6f228b08741c4381b8c39983797dec8876779800",
+      "distributable_sha256": "5ddd107bd674f6f8a7d238dc6f228b08741c4381b8c39983797dec8876779800",
+      "modified_for_team_copy": false
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-21-14.zip",
+      "destination": "phase2/clean-data/2026-11-14/raw/attachments/point 2026-11-14 21-21-14.zip",
+      "source_sha256": "8de73b441cfee5f8e2271a90bd7bb67476dbb80a77039bcb793e83cfbbcfdc3a",
+      "distributable_sha256": "8de73b441cfee5f8e2271a90bd7bb67476dbb80a77039bcb793e83cfbbcfdc3a",
+      "modified_for_team_copy": false
+    }
+  ],
+  "excluded": [
+    {
+      "source": "GE2340_Project_Templates.zip",
+      "reason": "duplicate generated archive or template archive; expanded current source retained"
+    },
+    {
+      "source": "Groups-26A.xlsx",
+      "reason": "private class roster"
+    },
+    {
+      "source": "phase2/wayfind-prototype.zip",
+      "reason": "duplicate generated archive or template archive; expanded current source retained"
+    },
+    {
+      "source": "phase1-work/Phase1_Contribution.pdf",
+      "reason": "original identity-bearing Phase 1 PDF; sanitized editable source retained"
+    },
+    {
+      "source": "phase1-work/Phase1_Proposal_navigation.pdf",
+      "reason": "original identity-bearing Phase 1 PDF; sanitized editable source retained"
+    },
+    {
+      "source": "phase1-work/Phase1_Proposal_v2.pdf",
+      "reason": "original identity-bearing Phase 1 PDF; sanitized editable source retained"
+    },
+    {
+      "source": "phase2/clean-data/ge2340-cleaned-2026-11-14-v3.zip",
+      "reason": "duplicate generated archive or template archive; expanded current source retained"
+    },
+    {
+      "source": "phase2/clean-data/ge2340-cleaned-2026-11-14-v2.zip",
+      "reason": "duplicate generated archive or template archive; expanded current source retained"
+    },
+    {
+      "source": "phase2/clean-data/ge2340-cleaned-2026-11-14.zip",
+      "reason": "duplicate generated archive or template archive; expanded current source retained"
+    },
+    {
+      "source": "phase2/clean-data/ge2340-cleaned-2026-11-14-v4.zip",
+      "reason": "duplicate generated archive or template archive; expanded current source retained"
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/relevant_chat.txt",
+      "reason": "private chat, contacts and unrelated messages"
+    },
+    {
+      "source": "phase2/clean-data/2026-11-14/raw/WhatsApp Chat with GE2340.zip",
+      "reason": "private chat, contacts and unrelated messages"
+    }
+  ],
+  "copy_modifications": [
+    "Phase1 student IDs/emails withheld; original PDF contribution/signature forms not copied",
+    "RELABEL_TEMPLATE sender identity withheld; generator now uses source ID/filename and metadata without chat",
+    "Absolute private-source account path replaced with relative path in distributable text",
+    "Engineering README, labeling workflow and validator added; no measurements or labels fabricated"
+  ],
+  "original_files_changed": false,
+  "additional_engineering_files": [
+    ".gitignore",
+    "README.md",
+    "docs/GITHUB_HANDOFF.md",
+    "labeling/README.md",
+    "labeling/assignments.csv",
+    "labeling/submissions/.gitkeep",
+    "scripts/validate_labels.py",
+    "scripts/validate_team.py"
+  ],
+  "scope_note": "Project tree only. Phase1_Submission_Group21 source/Phase1_Proposal.tex is byte-identical to original project/phase1-work/Phase1_Proposal_v2.tex before identity withholding. Duplicate submission PDFs/contribution documents contain identity fields and stay in the owner private course folder.",
+  "private_repo_reason": "Original Wi-Fi SSID/BSSID and acquisition GPS metadata retained as necessary analysis data. Not public-release anonymized."
+}

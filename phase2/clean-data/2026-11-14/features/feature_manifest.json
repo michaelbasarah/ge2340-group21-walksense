@@ -1,0 +1,40 @@
+{
+  "dataset_version": "v4_first_pass_descriptive_features",
+  "stop_feature_rows": 26,
+  "movement_feature_rows": 24,
+  "measured_movement_feature_rows": 23,
+  "copied_movement_feature_rows": 1,
+  "wifi_stop_bssid_groups": 663,
+  "wifi_candidate_observations_summarized": 664,
+  "wifi_groups_with_one_observation": 662,
+  "wifi_groups_with_multiple_observations": 1,
+  "source_table_sha256": {
+    "sensor_samples.csv": "12f160cd539cb9c8a947e57cdfcd1a1045b1c8e3afd2f713e339c5a2256369f3",
+    "sensors/barometer.csv": "486d4a9fd80ab2231f69fa1b69ed3727f6367b47a83255fafecee0770bafe676",
+    "sensors/magnetometer.csv": "e99984604087d25dd1a13cf5b0c64e1f60b20b8f7f1d2c7febeda2c18f3ca281",
+    "sensors/accelerometer.csv": "d4e5ecd5d7e59e17c39f5b753e44e99a2dac349d77de5705159ed8f32efaac3b",
+    "sessions.csv": "25bab63afa4410902d3e62f79a2ab737e59d6293ab6c6b96a339714a8cbba68d",
+    "sensor_quality.csv": "0051b61dc91365ffb0274bbe8ded4c384916286d4b10694dccc32e1d72ed4bca",
+    "recording_intervals.csv": "2fad7efd22bf7551e71a3a42570fb4dac47a3dbb23a2e92dd0e605be1288c03c",
+    "locations_provisional.csv": "18c2c6079bce69257d52be9a30a4a84b8e2230ba93cbf6173f243fcc9865c62b",
+    "corrected_location_list.csv": "80d2f7817a7b89540ee7e4b4fd7d77c12bfc8cb3554251dfc59ebdac37a151fa",
+    "accelerometer_edges.csv": "32d1ce23760d03c415c4d691f43a7db0cb846b8e71646ac67dbd91f50ed6f4db",
+    "augmentation/augmented_accelerometer_edges.csv": "e85a95c5603d869851128b5ecae76ffccc0ec3c481f61c4cf1b687b729eaa473",
+    "augmentation/derived_accelerometer_samples.csv": "2100a7acdb9a50b030b29c59fc6fc17d9947ad03e65b22a906546b0eb85fc4fd",
+    "wifi/observations.csv": "b1e640624feb58a3aa2b991bacc07ec0c7a7fca7269b170d6eb41ab1afc9259c",
+    "wifi/stop_associations_provisional.csv": "3ed84d80a93c704455ffb5da40bd31e13499e2462dc3a64db9d9f202c90f552e",
+    "excluded_sensor_rows.csv": "3e64e89e7868a3d17c891574fe642a572da1231a8ce9b5923b335596ffc6acb8"
+  },
+  "source_tables_unchanged": true,
+  "scope": "whole_recording_descriptive_statistics_no_slicing_interpolation_training_distance_or_steps",
+  "labels_status": "pending_alignment_of_26_recordings_to_25_corrected_locations",
+  "feature_validation_checks": 20,
+  "recording_count_proof": {
+    "barometer_magnetometer_recordings": 26,
+    "unique_source_zip_names": 26,
+    "unique_source_zip_sha256": 26,
+    "unique_recording_start_times": 26,
+    "corrected_ordered_description_entries": 25,
+    "description_entries_include_revisits": true
+  }
+}

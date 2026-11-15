@@ -1,0 +1,17 @@
+# Private source material must never be added.
+**/raw/WhatsApp Chat with GE2340.zip
+**/raw/relevant_chat.txt
+**/WhatsApp Chat with GE2340.txt
+**/Groups-26A.xlsx
+.env
+.env.*
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+*.aux
+*.log
+*.out
+# Expanded current deliverables are versioned; avoid generated duplicate archives.
+phase2/*.zip
+phase2/clean-data/*.zip

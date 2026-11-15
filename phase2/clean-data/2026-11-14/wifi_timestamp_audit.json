@@ -1,0 +1,125 @@
+{
+  "source": "raw/WhatsApp Chat with GE2340.zip",
+  "source_sha256": "7f7e42c00513de2abf974d98b58bd2a56fe24d18c29542ae56b6da6fdc356a34",
+  "wifi_member": "DOC-20261114-WA0049.gz",
+  "metadata_line": "WigleWifi-1.6,appRelease=2.111,model=SM-S9280,release=16,device=e3q,display=BP4A.251205.006.S9280ZHS6DZH3,board=pineapple,brand=samsung,star=Sol,body=3,subBody=0",
+  "total_rows": 6211,
+  "type_counts": {
+    "LTE": 15,
+    "WIFI": 6196
+  },
+  "wifi_rows": 6196,
+  "unique_bssids": 2760,
+  "distinct_timestamp_seconds": 357,
+  "utc_start": "2026-11-14 12:24:56",
+  "utc_end": "2026-11-14 13:34:40",
+  "exact_duplicate_wifi_rows": 0,
+  "repeat_bssid_transitions_in_file_order": 3436,
+  "repeat_bssid_rssi_increase_ge_5_db": 3375,
+  "repeat_bssid_rssi_increase_ge_5_fraction": 0.9822467986030268,
+  "repeat_bssid_delta_rssi_histogram": {
+    "-47": 1,
+    "-46": 1,
+    "-45": 1,
+    "-44": 1,
+    "-35": 1,
+    "-28": 1,
+    "-26": 1,
+    "-21": 1,
+    "-20": 1,
+    "-16": 4,
+    "-15": 3,
+    "-14": 4,
+    "-13": 1,
+    "-12": 9,
+    "-11": 5,
+    "-10": 4,
+    "-9": 6,
+    "-8": 4,
+    "-7": 2,
+    "-5": 1,
+    "-4": 1,
+    "-3": 2,
+    "-2": 1,
+    "-1": 1,
+    "1": 2,
+    "3": 2,
+    "5": 1080,
+    "6": 730,
+    "7": 438,
+    "8": 294,
+    "9": 234,
+    "10": 160,
+    "11": 121,
+    "12": 64,
+    "13": 43,
+    "14": 46,
+    "15": 28,
+    "16": 32,
+    "17": 23,
+    "18": 22,
+    "19": 16,
+    "20": 12,
+    "21": 5,
+    "22": 4,
+    "23": 8,
+    "24": 4,
+    "25": 9,
+    "29": 1,
+    "31": 1
+  },
+  "rows_per_bssid_histogram": {
+    "1": 1036,
+    "2": 703,
+    "3": 525,
+    "4": 334,
+    "5": 131,
+    "6": 29,
+    "7": 2
+  },
+  "distinct_lat_lon_pairs": 357,
+  "position_accuracy_m_min_median_max": [
+    3.7900924682617188,
+    12.706171035766602,
+    400.0
+  ],
+  "sensor_devices": {
+    "barometer_magnetometer": [
+      [
+        "iPhone17,4",
+        "Apple",
+        "27.0"
+      ]
+    ],
+    "accelerometer": [
+      [
+        "iPhone19,2",
+        "Apple",
+        "27.2.1"
+      ]
+    ]
+  },
+  "wifi_device": "Samsung SM-S9280",
+  "wifi_rows_during_sensor_span_stored_second": 2908,
+  "wifi_rows_inside_stop_intervals_stored_second": 664,
+  "wifi_rows_between_stop_intervals_stored_second": 2244,
+  "wifi_rows_outside_sensor_span_stored_second": 3288,
+  "stops_with_zero_exact_stored_second_rows": [
+    "BM01",
+    "BM12",
+    "BM14",
+    "BM22"
+  ],
+  "timestamp_timezone": "UTC_verified_by_official_format_and_upstream_exporter",
+  "timestamp_semantics": "upstream_exporter_uses_persisted_location_observation_time_not_radio_acquisition_time",
+  "source_version_limitation": "Current upstream source inspected; exact 2.111 release source/binary not matched.",
+  "clock_alignment_status": "unverified_three_distinct_devices_no_offset_estimated",
+  "complete_scan_snapshots": false,
+  "no_row_means_no_wifi_signal": false,
+  "sources": [
+    "https://api.wigle.net/csvFormat-1_6.html",
+    "https://github.com/wiglenet/wigle-wifi-wardriving/blob/main/wiglewifiwardriving/src/main/java/net/wigle/wigleandroid/background/ObservationUploader.java",
+    "https://github.com/wiglenet/wigle-wifi-wardriving/blob/main/wiglewifiwardriving/src/main/java/net/wigle/wigleandroid/db/DatabaseHelper.java",
+    "https://github.com/wiglenet/wigle-wifi-wardriving/blob/main/wiglewifiwardriving/src/main/java/net/wigle/wigleandroid/listener/WifiReceiver.java"
+  ]
+}

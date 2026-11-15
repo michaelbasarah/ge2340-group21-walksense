@@ -1,0 +1,3 @@
+from_stop_id,to_stop_id,status,notes
+BM15,BM16,no_accelerometer_attachment_for_P15,Vending 2 to 4F down escalator landing; do not fabricate a transition.
+BM13,BM17,not_measured_derived_copy_available,"User-requested copied proxy SYN_ACC_5F_CONNECTOR is in augmentation/. Assumed physical map connector, not a historical recorded visit."

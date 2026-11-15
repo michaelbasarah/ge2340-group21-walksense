@@ -1,0 +1,85 @@
+% ======================= COMPILATION NOTICE =======================
+% Before compiling, place ge2340_project.sty and all three template
+% files (phase1_template.tex, phase2_template.tex, and
+% contribution_template.tex) in the same directory.
+% Keep the style file named ge2340_project.sty so that the templates
+% can load it correctly.
+% ==================================================================
+
+\documentclass{article}
+
+% ======================= REQUIRED STYLE =======================
+\usepackage[preprint]{ge2340_project}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+
+% ======================== COMPLETION REQUIREMENTS ========================
+% Submit one completed statement with the Phase 1 package and another with
+% the Phase 2 package. All group members must sign the statement.
+% State both the contribution percentage and the specific tasks completed
+% by every member. All percentages must sum to 100%.
+% Do not change the headings or declaration text.
+% =======================================================================
+
+\title{GE2340 Course Project\\
+\large Contribution Statement}
+\author{2026/2027 Semester A}
+
+\newcommand{\blankline}[1]{\rule{#1}{0.4pt}}
+\newcommand{\memberblock}[5]{%
+  \subsection*{Member #1}
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+    Name: & #2 \\
+    Student ID: & #3 \\
+    Contribution percentage: & #4\% \\
+  \end{tabularx}
+  \vspace{0.4em}
+
+  \noindent\textbf{Specific tasks completed and deliverables produced:}\\[0.4em]
+  #5
+  \vspace{0.7em}
+}
+
+\begin{document}
+\maketitle
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+  Phase: & $\boxtimes$ Phase 1 \hspace{2em} $\square$ Phase 2 \\
+  Group number: & 21 \\
+  Project title: & WalkSense: Camera-Free Campus Navigator at CityU \\
+\end{tabularx}
+
+\vspace{0.8em}
+\noindent\textit{Complete all applicable member blocks. If the group has three members, write ``N/A'' in the Member 4 block. Describe concrete work rather than general statements such as ``helped with the project.''}
+
+\memberblock{1}{Emmanuelle Sebastian Sanjaya}{ID-withheld}{25}{Co-wrote Section 2 (AI Task Formulation) and Section 4 (Comparative Analysis, including Table 1) with Michael. Set up the LaTeX template and wrote the group's first draft and project notes.}
+\memberblock{2}{Chris Amadeus Putra Simatupang}{ID-withheld}{25}{Co-wrote Section 1 (Problem Definition \& Scope), Section 3 (Proposed AI Approaches) and Section 5 (Expected Impact \& Project Feasibility) with Benedicta. Proofread the final proposal and checked all references.}
+\memberblock{3}{Benedicta Amabel Riyadi}{ID-withheld}{25}{Co-wrote Section 1 (Problem Definition \& Scope), Section 3 (Proposed AI Approaches) and Section 5 (Expected Impact \& Project Feasibility) with Chris. Prepared the final submission package (zip) and submitted it on Canvas.}
+\memberblock{4}{Michael Terence Basarah}{ID-withheld}{25}{Co-wrote Section 2 (AI Task Formulation) and Section 4 (Comparative Analysis, including Table 1) with Emmanuelle. Revised the scope to campus-wide navigation and edited the proposal to the two-page limit.}
+
+\section*{Contribution Summary}
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+  Total contribution percentage: & 100\% \quad (must equal 100\%) \\
+  Remarks (if any): & \blankline{10cm} \\
+                    & \blankline{10cm} \\
+\end{tabularx}
+
+\section*{Declaration and Signatures}
+We confirm that the information above is accurate, that the listed percentages reflect our relative contributions to this phase of the project, and that the specific tasks were completed as stated. We understand that this statement may be used to adjust individual scores.
+
+\vspace{1em}
+\begin{tabularx}{\textwidth}{@{}c X c X@{}}
+  \textbf{Member 1 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\[2.2em]
+  \textbf{Member 2 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\[2.2em]
+  \textbf{Member 3 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\[2.2em]
+  \textbf{Member 4 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\
+\end{tabularx}
+
+\end{document}

@@ -1,0 +1,813 @@
+<title>WalkSense Phase 2 Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column like a site handbook; a sticky section index on wide screens; checkpoint-ID chips and signage-style headings as the wayfinding vernacular. */
+:root {
+  --bg: #f5f7f6;
+  --surface: #ffffff;
+  --ink: #16201c;
+  --muted: #55635d;
+  --line: #d3dcd8;
+  --accent: #0a7347;
+  --accent-soft: #e2f0e8;
+  --warn: #a8401a;
+  --warn-soft: #fbe9e1;
+  --font-display: "Barlow Semi Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1513; --surface: #161e1b; --ink: #e3ebe7; --muted: #9aa8a2; --line: #2b3632;
+    --accent: #48c48b; --accent-soft: #17291f; --warn: #ee8d66; --warn-soft: #33201a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1513; --surface: #161e1b; --ink: #e3ebe7; --muted: #9aa8a2; --line: #2b3632;
+  --accent: #48c48b; --accent-soft: #17291f; --warn: #ee8d66; --warn-soft: #33201a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 48px;
+}
+nav.index {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 24px);
+  align-self: start;
+  font-size: 14px;
+}
+nav.index p {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+nav.index ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+nav.index a {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 3px 0;
+}
+nav.index a span { font-family: var(--font-mono); font-size: 12px; padding-top: 2px; }
+nav.index a:hover, nav.index a:focus-visible { color: var(--accent); }
+main { min-width: 0; max-width: 760px; }
+
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+header.top { display: grid; gap: 12px; margin-bottom: 28px; }
+.eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 50px);
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+.members { margin: 0; color: var(--muted); font-size: 15px; }
+.meta { margin: 0; font-size: 15px; }
+
+.hero-map { margin: 8px 0 0; }
+.hero-map svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.hero-map figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.svg-line { stroke: var(--ink); stroke-width: 2; fill: none; }
+.svg-dot { fill: var(--accent); }
+.svg-lift { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.svg-text { fill: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+.svg-label { fill: var(--ink); font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: 0.04em; }
+.svg-accent-text { fill: var(--accent); font-family: var(--font-mono); font-size: 11px; }
+.svg-dim { stroke: var(--muted); stroke-width: 1; fill: none; }
+
+.warning {
+  background: var(--warn-soft);
+  border: 1px solid var(--warn);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 0 0 8px;
+}
+.warning strong { color: var(--warn); }
+.warning p { margin: 0; }
+
+section { padding-top: 36px; scroll-margin-top: 16px; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 0 0 14px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  text-wrap: balance;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+h2 .n { font-family: var(--font-mono); font-size: 15px; font-weight: 500; color: var(--accent); }
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 24px 0 8px;
+  text-wrap: balance;
+}
+p { margin: 0 0 12px; max-width: 68ch; }
+ul, ol.steps { margin: 0 0 14px; padding-left: 22px; max-width: 68ch; }
+li { margin-bottom: 4px; }
+code, .id {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--accent-soft);
+  color: var(--ink);
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.proposal-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--warn);
+  border: 1px solid var(--warn);
+  border-radius: 999px;
+  padding: 0 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.table-wrap { overflow-x: auto; margin: 0 0 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg);
+}
+td.k { font-weight: 600; white-space: nowrap; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.yes { color: var(--accent); font-weight: 700; }
+.no { color: var(--warn); font-weight: 700; }
+
+blockquote {
+  margin: 0 0 14px;
+  padding: 10px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  max-width: 68ch;
+  font-style: italic;
+}
+blockquote p { margin: 0; }
+
+.score-calc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: end;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 0 0 16px;
+}
+.score-calc label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.score-calc input {
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  width: 96px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.score-out { font-family: var(--font-mono); font-size: 15px; }
+.score-out b { font-size: 20px; color: var(--accent); }
+
+/* pipeline */
+.pipeline { display: grid; gap: 10px; margin: 0 0 16px; }
+.lane {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: 12px 14px;
+}
+.lane h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: var(--accent);
+}
+.lane ol { margin: 0; padding-left: 20px; font-size: 15px; }
+.lane .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 8px;
+  background: var(--bg);
+}
+.chip b { font-weight: 600; }
+.arrow { text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 13px; }
+.drive { text-align: center; font-family: var(--font-mono); font-size: 14px; }
+
+/* timeline */
+.timeline { list-style: none; padding: 0; margin: 0 0 16px; border-left: 2px solid var(--line); }
+.timeline li {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 16px;
+  padding: 8px 0 8px 16px;
+  position: relative;
+  margin: 0;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+}
+.timeline .when { font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.timeline .key::before { background: var(--accent); }
+.timeline .key .when, .timeline .key .what { color: var(--ink); font-weight: 600; }
+.timeline .deadline::before { border-color: var(--warn); background: var(--warn); }
+.timeline .deadline .when { color: var(--warn); }
+
+/* checklists */
+.checks { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 6px; max-width: 68ch; }
+.checks li { margin: 0; }
+.checks label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; cursor: pointer; }
+.checks input { margin: 4px 0 0; width: 16px; height: 16px; accent-color: var(--accent); }
+.checks input:checked + span { color: var(--muted); text-decoration: line-through; }
+.check-group { font-family: var(--font-display); font-weight: 600; font-size: 17px; margin: 16px 0 6px; }
+.note { font-size: 14px; color: var(--muted); }
+
+footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  nav.index { display: none; }
+}
+@media (max-width: 520px) {
+  body { font-size: 15px; padding-block: 20px 48px; }
+  h2 { font-size: 24px; }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  th, td { padding: 8px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<div class="shell">
+  <nav class="index" aria-label="Sections">
+    <p>Sections</p>
+    <ol>
+      <li><a href="#where"><span>1</span>Where we are</a></li>
+      <li><a href="#scope"><span>2</span>Proposed scope</a></li>
+      <li><a href="#handin"><span>3</span>What we hand in</a></li>
+      <li><a href="#grading"><span>4</span>How we are graded</a></li>
+      <li><a href="#ai-rules"><span>5</span>The AI rules</a></li>
+      <li><a href="#promised"><span>6</span>What we promised</a></li>
+      <li><a href="#tech"><span>7</span>How the tech works</a></li>
+      <li><a href="#trained"><span>8</span>Trained or not</a></li>
+      <li><a href="#data"><span>9</span>Collecting the data</a></li>
+      <li><a href="#who"><span>10</span>People and AI</a></li>
+      <li><a href="#timeline"><span>11</span>Timeline</a></li>
+      <li><a href="#risks"><span>12</span>Risks</a></li>
+      <li><a href="#decisions"><span>13</span>Decisions</a></li>
+      <li><a href="#checklist"><span>14</span>Final checklist</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="top">
+      <p class="eyebrow">GE2340 Group 21 &middot; CityU Sem A 2026/27</p>
+      <h1>WalkSense Phase 2: how the project works</h1>
+      <p class="members">Emmanuelle Sebastian Sanjaya, Chris Amadeus Putra Simatupang, Benedicta Amabel Riyadi, Michael Terence Basarah</p>
+      <p class="meta">Written Fri 6 Nov 2026. This is the overall plan. It does not hand out tasks to people. We split the work together on the first call.</p>
+
+      <figure class="hero-map">
+        <svg viewBox="0 0 720 170" role="img" aria-label="Sketch: two floors of AC1, each a corridor with a checkpoint every 4 metres, joined by a lift where air pressure changes about 0.5 hPa">
+          <text class="svg-label" x="0" y="34">UPPER FLOOR</text>
+          <text class="svg-label" x="0" y="124">LOWER FLOOR</text>
+          <line class="svg-line" x1="120" y1="30" x2="720" y2="30"/>
+          <line class="svg-line" x1="120" y1="120" x2="720" y2="120"/>
+          <g id="dots-top"></g>
+          <g id="dots-bot"></g>
+          <rect class="svg-lift" x="404" y="44" width="40" height="62" rx="3"/>
+          <text class="svg-text" x="424" y="79" text-anchor="middle">LIFT</text>
+          <line class="svg-dim" x1="424" y1="30" x2="424" y2="44"/>
+          <line class="svg-dim" x1="424" y1="106" x2="424" y2="120"/>
+          <text class="svg-accent-text" x="452" y="70">about 0.5 hPa</text>
+          <text class="svg-accent-text" x="452" y="84">per floor</text>
+          <text class="svg-text" x="120" y="54">AC1-xF-C01</text>
+          <line class="svg-dim" x1="144" y1="148" x2="168" y2="148"/>
+          <line class="svg-dim" x1="144" y1="143" x2="144" y2="153"/>
+          <line class="svg-dim" x1="168" y1="143" x2="168" y2="153"/>
+          <text class="svg-text" x="176" y="152">about 4 m between checkpoints</text>
+        </svg>
+        <figcaption>Proposed scope sketch, not to scale with the real building: two floors of AC1, about 40 checkpoints each, joined by a lift and stairs.</figcaption>
+      </figure>
+    </header>
+
+    <div class="warning" role="note">
+      <p><strong>Do not copy this plan into the report, slides or video script.</strong> The course does not allow AI-generated text in what we submit, and parts of this plan were drafted with AI help. Use it as a checklist. Write the submitted text yourself, in your own words.</p>
+    </div>
+
+    <section id="where">
+      <h2><span class="n">1</span>Where we are</h2>
+      <ul>
+        <li>Phase 1 got <strong>93/100</strong>: Problem 19.5/20, Feasibility 26.5/30, Background 19/20, Impact + Writing 28/30.</li>
+        <li>The TA's one warning: <em>"The six-week integration and testing schedule remains ambitious and needs careful planning."</em></li>
+        <li>Phase 2 is due <strong>Mon 30 Nov, 23:59</strong>. No late work is accepted. A late package scores 0.</li>
+        <li><strong>We aim to submit on Sun 29 Nov</strong>, one day early.</li>
+        <li>We have about 3.5 weeks. That is less than the six weeks the proposal planned for.</li>
+      </ul>
+    </section>
+
+    <section id="scope">
+      <h2><span class="n">2</span>Proposed scope <span class="proposal-tag">for the group to agree</span></h2>
+      <p>The TA said the schedule is tight, so this plan proposes a smaller area than the proposal. This is a proposal, not a decision.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Proposal (Phase 1)</th><th>Proposed for Phase 2</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Area</td><td>2-3 floors of AC1 and AC2, plus the AC1-BOC-AC2 link</td><td><strong>2 floors of AC1</strong>, joined by a lift and stairs</td></tr>
+            <tr><td class="k">Checkpoints</td><td>about 80</td><td><strong>about 40 per floor, about 80 in total</strong></td></tr>
+            <tr><td class="k">Outdoor link</td><td>included</td><td><strong>only if time allows</strong></td></tr>
+            <tr><td class="k">Destinations</td><td>about 30</td><td>about 30 (matching is text only, so it does not depend on the mapped area)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Why this still fits what we promised:</p>
+      <ul>
+        <li>The proposal's own fallback was <strong>one floor</strong>. Two floors is still above that.</li>
+        <li>Two floors joined by a lift still tests the barometer and floor detection.</li>
+        <li>We keep the same number of checkpoints, just packed into a smaller area.</li>
+        <li>In the report we say clearly that we scoped down and why. That answers the TA's comment directly.</li>
+      </ul>
+    </section>
+
+    <section id="handin">
+      <h2><span class="n">3</span>What we must hand in</h2>
+      <p>One person submits <strong>one package</strong> for the whole group. If several people submit, only the latest one is graded. Check the Canvas page for the upload format (Phase 1 needed a single .zip).</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Rules from the handout</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Report (PDF)</td><td>4 to 6 pages <strong>including references</strong>. Must use the LaTeX template. Keep the 6 section headings exactly as they are. Tables and figures for results. No big blocks of code; link a public GitHub repo instead.</td></tr>
+            <tr><td class="k">Video</td><td>12 to 15 minutes. Recorded on Zoom (or similar) with slides and demo on screen. The start must show <strong>the topic and all 4 full names</strong>. <strong>Everyone shows their face and speaks.</strong> Upload to Google Drive and submit the link. Test the link in an incognito window.</td></tr>
+            <tr><td class="k">Slides (PDF)</td><td>The exact slides used in the video. Not too much text. Visuals that show our workflow.</td></tr>
+            <tr><td class="k">Contribution statement</td><td>The mandatory template only. Signed by all four. Percentages add up to 100. Specific tasks per person, not "helped with the project".</td></tr>
+            <tr><td class="k">Extras (optional)</td><td>Code, small data, links, images. Under 10 MB in total. Not an overflow appendix.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The 6 report sections (headings must not change):</p>
+      <ol class="steps">
+        <li>Introduction &amp; Problem Recap</li>
+        <li>Data Collection &amp; Methodology</li>
+        <li>Implementation Details</li>
+        <li>Results &amp; Evaluation</li>
+        <li>Discussion</li>
+        <li>Conclusion</li>
+      </ol>
+    </section>
+
+    <section id="grading">
+      <h2><span class="n">4</span>How we are graded</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Part</th><th>Points</th><th>What they look for</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Execution &amp; Findings</td><td class="num">30</td><td>Data collection and AI actually done. <strong>Unique discoveries</strong> of our own (paraphrasing the internet loses points). Correct use of the methods. Teamwork.</td></tr>
+            <tr><td class="k">Report</td><td class="num">30</td><td>All sections, template followed, clear and concise, good tables and figures, correct citations.</td></tr>
+            <tr><td class="k">Video</td><td class="num">20</td><td>Shows the working solution. Clear speech. Stays within 12-15 min.</td></tr>
+            <tr><td class="k">Slides</td><td class="num">20</td><td>Looks good, flows well, readable, consistent style, balanced detail.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li>Failing the plagiarism check caps the score at <strong>40</strong>.</li>
+        <li>Breaking format rules costs extra points.</li>
+        <li><strong>Individual score = 60 + (group score - 60) x your % x 4.</strong> If the group score is below 60, everyone gets the group score.</li>
+      </ul>
+      <div class="score-calc">
+        <label for="g-score">Group score<input id="g-score" type="number" min="0" max="100" step="0.5" value="90"></label>
+        <label for="g-pct">Your share (%)<input id="g-pct" type="number" min="0" max="100" step="1" value="25"></label>
+        <p class="score-out" id="score-out" aria-live="polite" style="margin:0">Individual score <b>90</b></p>
+      </div>
+      <p class="note">Example values only. Try 20% to see why the split matters.</p>
+    </section>
+
+    <section id="ai-rules">
+      <h2><span class="n">5</span>The AI rules</h2>
+      <p>Exact words from page 4 of the handout:</p>
+      <blockquote><p>"You are allowed to use Large Language Models (such as ChatGPT, DeepSeek, Gemini) to refine and polish your writing. You are NOT allowed to use these tools to generate text from scratch. In exceptional cases (e.g., if you are studying LLMs and need to demonstrate their output in your report), the outputs of these models must be explicitly quoted and cited."</p></blockquote>
+      <blockquote><p>"Since we have no requirement for coding in this course, vibe coding is allowed in your implementation."</p></blockquote>
+      <p>How we read it:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Thing</th><th>AI allowed?</th></tr></thead>
+          <tbody>
+            <tr><td>Code (Python, the demo, the "I'm here" page)</td><td><span class="yes">Yes.</span> Vibe coding is allowed.</td></tr>
+            <tr><td>Charts and tables made by code from our real numbers</td><td><span class="yes">Yes.</span></td></tr>
+            <tr><td>The data</td><td><span class="no">No.</span> Every number must come from our own real recordings.</td></tr>
+            <tr><td>Report text, slide text, figure captions, video script</td><td><strong>Written by us.</strong> AI may only polish what we already wrote.</td></tr>
+            <tr><td>LLM answers we test (request matching, LLM directions)</td><td>Shown in the report <strong>in quotes, with a citation</strong>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Habits that protect us:</p>
+      <ul>
+        <li>Write all drafts in <strong>Google Docs</strong>. The version history shows we wrote them.</li>
+        <li>Do not paste this plan's wording into anything we submit.</li>
+        <li>If you ask an AI to polish a paragraph, keep your original draft in the doc history.</li>
+      </ul>
+    </section>
+
+    <section id="promised">
+      <h2><span class="n">6</span>What we promised to build</h2>
+      <p>Everything below comes from our submitted proposal. Phase 2 is about doing it and measuring it.</p>
+
+      <h3>Understanding the request (text matching)</h3>
+      <p>A student types something like "AC2 canteen" or "a quiet place to study near LT-5". We match it to one place on our list of about 30 destinations. Three ways, compared on the same test set:</p>
+      <ul>
+        <li><strong>Keyword rules.</strong> Simple and predictable. Misses vague requests.</li>
+        <li><strong>Sentence embeddings.</strong> A small pre-trained model that compares meaning. Handles vague requests.</li>
+        <li><strong>An LLM that may only answer with a real place ID</strong> from our list. Handles any phrasing. Needs internet.</li>
+      </ul>
+
+      <h3>Planning the route (search)</h3>
+      <ul>
+        <li><strong>A*</strong> search on our hand-built map graph. Nodes are checkpoints, lifts, stairs and doors. Edges carry walking time.</li>
+        <li>Compared with <strong>an LLM given a text description of the floor plan</strong> and asked for directions. We check whether its routes are real paths on our graph.</li>
+      </ul>
+
+      <h3>Knowing where the user is (positioning)</h3>
+      <p>Four methods, all scored on the same test walks:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Method</th><th>Uses</th><th>Expected strength</th><th>Expected weakness</th></tr></thead>
+          <tbody>
+            <tr><td class="k">A</td><td>Dead reckoning</td><td>Step count + compass</td><td>No survey needed</td><td>Drifts over distance</td></tr>
+            <tr><td class="k">B</td><td>Wi-Fi fingerprint (kNN or random forest)</td><td>Router signal strengths</td><td>No new hardware</td><td>Android only; crowds change signals</td></tr>
+            <tr><td class="k">C</td><td>Magnetic fingerprint (kNN or random forest)</td><td>Magnetometer</td><td>Works on iPhone</td><td>Corridors that look alike magnetically</td></tr>
+            <tr><td class="k">D</td><td>HMM fusion + barometer</td><td>A, B and C plus air pressure</td><td>Fixes drift, finds the floor</td><td>Most tuning</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What we measure</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Metric</th><th>Plain meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Matching accuracy</td><td>% of typed requests matched to the right place</td></tr>
+            <tr><td class="k">Checkpoint accuracy</td><td>% of moments the system names the right checkpoint</td></tr>
+            <tr><td class="k">Floor accuracy</td><td>% of moments it names the right floor</td></tr>
+            <tr><td class="k">Position error (m)</td><td>How far, in metres, the guess is from where the person really was</td></tr>
+            <tr><td class="k">Wrong-turn detection</td><td>How many metres a person walks off the route before the system notices</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The demo and user tests</h3>
+      <ul>
+        <li>A <strong>Streamlit</strong> web page: type a request, see the route drawn on the floor plan, then watch a recorded walk replayed as if it were live tracking.</li>
+        <li><strong>User tests</strong> with 3 to 5 first-year students. They try the demo and we note what works and what confuses them.</li>
+      </ul>
+    </section>
+
+    <section id="tech">
+      <h2><span class="n">7</span>How the technology works, in plain words</h2>
+      <p>Your phone already has four sensors that can tell where it is indoors. No camera is needed.</p>
+      <ul>
+        <li><strong>Wi-Fi signal strength.</strong> Every Wi-Fi router sends out an ID. The phone hears many of them, some strong and some weak. The pattern of strengths is different at each spot in the building, like a fingerprint. The phone does not need to connect to any network.</li>
+        <li><strong>Magnetic field.</strong> The steel in walls and floors bends the Earth's magnetic field. Each spot has its own slightly different reading. It stays stable over days and <strong>works on iPhone</strong>, which blocks Wi-Fi scanning.</li>
+        <li><strong>Barometer.</strong> Air pressure drops about <strong>0.5 hPa per floor</strong> you go up. That tells us the floor, even inside a lift.</li>
+        <li><strong>Accelerometer.</strong> Each step makes a small bounce. Counting bounces gives the number of steps.</li>
+      </ul>
+      <p><strong>We are not building a phone app.</strong> The phones only record, using free apps. All the AI runs afterwards in Python on a laptop.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tool</th><th>What it does</th><th>Phones</th></tr></thead>
+          <tbody>
+            <tr><td class="k">phyphox</td><td>Records magnetometer, barometer, accelerometer</td><td>Android and iPhone</td></tr>
+            <tr><td class="k">WiGLE</td><td>Records Wi-Fi scans</td><td>Android only</td></tr>
+            <tr><td class="k">"I'm here" page</td><td>A web page in the phone browser. Tap it at each checkpoint during a test walk. It saves the time.</td><td>Any</td></tr>
+            <tr><td class="k">Python</td><td>pandas, scikit-learn, networkx, streamlit: cleaning, training, routing, demo</td><td>Laptop</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The pipeline</h3>
+      <div class="pipeline" aria-label="Pipeline from phone recordings to the demo">
+        <div class="lane">
+          <h4>On the phone (recording only)</h4>
+          <div class="chips">
+            <span class="chip"><b>phyphox</b>: magnetic field, air pressure, steps</span>
+            <span class="chip"><b>WiGLE</b>: router IDs and signal strengths</span>
+            <span class="chip"><b>"I'm here" page</b>: time at each checkpoint on test walks</span>
+          </div>
+        </div>
+        <div class="arrow">&darr; upload the same day</div>
+        <div class="drive"><code>GE2340-Phase2/raw-data/</code> on Google Drive</div>
+        <div class="arrow">&darr;</div>
+        <div class="lane">
+          <h4>On the laptop (all the AI, in Python)</h4>
+          <ol>
+            <li>Clean the files and cut each 30 s recording into 2 s slices.</li>
+            <li>Train the position classifier on days 1-2, test on day 3.</li>
+            <li>The HMM tracker combines the classifier, steps and barometer.</li>
+            <li>Score against the test-walk ground truth.</li>
+          </ol>
+        </div>
+        <div class="lane">
+          <h4>Request and route</h4>
+          <p style="margin:0">Typed request &rarr; matcher &rarr; place ID &rarr; A* route on our map</p>
+        </div>
+        <div class="arrow">&darr;</div>
+        <div class="lane">
+          <h4>Streamlit demo</h4>
+          <p style="margin:0">Route drawn on the floor plan, plus a recorded walk replayed as live tracking.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="trained">
+      <h2><span class="n">8</span>What is trained and what is not</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Part</th><th>Trained?</th><th>How</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Position classifier (kNN / random forest)</td><td><span class="yes">Yes, on our recordings</span></td><td>Each 30 s recording is cut into 2 s slices. Inputs: signal strength per router (a router we did not hear counts as "very weak"), magnetic strength and its x/y/z parts, and air pressure. The answer it learns: the checkpoint ID.</td></tr>
+            <tr><td class="k">HMM tracker</td><td>Mostly set by hand, lightly tuned</td><td>Each step the person either stays at a checkpoint or moves to a neighbouring one. It cannot jump through walls.</td></tr>
+            <tr><td class="k">A* routing</td><td>No</td><td>It is a search algorithm. It just needs the map graph.</td></tr>
+            <tr><td class="k">Request matching</td><td>No</td><td>Uses keyword rules, an existing embedding model, or an existing LLM.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Two rules for training:</p>
+      <ul>
+        <li><strong>Train on days 1 and 2, test on day 3. Never mix days.</strong> If the same day is in both, the scores look better than they really are.</li>
+        <li>Training takes seconds on a laptop. <strong>No GPU, no deep learning.</strong></li>
+      </ul>
+    </section>
+
+    <section id="data">
+      <h2><span class="n">9</span>How we collect the data</h2>
+
+      <h3>Map the floors</h3>
+      <ul>
+        <li>Photograph the fire-exit floor plans on each floor.</li>
+        <li>Put a checkpoint about every 4 m, at a landmark you can find again (a door, a pillar, a sign).</li>
+        <li>Name each checkpoint like <span class="id">AC1-3F-C12</span> (building, floor, checkpoint number).</li>
+        <li>Keep one shared sheet with: ID, floor, x and y position in metres, and its neighbours.</li>
+      </ul>
+
+      <h3>Prepare the phones</h3>
+      <ul>
+        <li>Install phyphox (all phones) and WiGLE (Android).</li>
+        <li><strong>Android: turn OFF Wi-Fi scan throttling.</strong> Settings, Developer options, "Wi-Fi scan throttling". If it stays on, the phone only scans about 4 times every 2 minutes, which is far too few.</li>
+        <li>Charge the phone and clear space for files.</li>
+      </ul>
+
+      <h3>Pilot first (5 checkpoints)</h3>
+      <p>Before the big sessions, record just 5 checkpoints and check the files. The main question: <strong>does WiGLE's export keep EVERY scan, or only the best reading per router?</strong> We need every scan.</p>
+      <ul>
+        <li>If WiGLE fails, the backup is <strong>Termux + Termux:API</strong> on Android, running <code>termux-wifi-scaninfo</code> every few seconds.</li>
+        <li>The pilot also tells us how often Wi-Fi scans really arrive. If it is slower than every 2 s, some slices will share a scan.</li>
+      </ul>
+
+      <h3>Record the fingerprints</h3>
+      <p>At each checkpoint:</p>
+      <ul>
+        <li>Hold the phone <strong>flat</strong>, always <strong>pointing the same direction</strong> (we agree the direction for each corridor in the sheet). The magnetic x/y/z readings change when the phone turns.</li>
+        <li>Record for <strong>30 seconds</strong>.</li>
+        <li>Name the file with the checkpoint ID, or write the start time in the sheet.</li>
+        <li>Upload to <code>GE2340-Phase2/raw-data/</code> on Drive <strong>the same day</strong>.</li>
+      </ul>
+      <p>Sessions:</p>
+      <ul>
+        <li><strong>At least 3 sessions on different days</strong>, at different times (a busy time like lunch and a quiet time).</li>
+        <li>Use <strong>different phones and different people</strong> across sessions.</li>
+        <li>A full session of about 80 checkpoints takes about <strong>1.5 hours</strong>, so pairs split the floors.</li>
+        <li>After each session, a <strong>quick data check</strong>: every checkpoint has a file, files open, names are right, Wi-Fi scans are there.</li>
+      </ul>
+
+      <h3>Test walks (the ground truth)</h3>
+      <ul>
+        <li>On a <strong>new day</strong>, after the fingerprint sessions.</li>
+        <li><strong>4 to 6 real routes</strong>, including <strong>lift rides</strong> and <strong>deliberate wrong turns</strong>.</li>
+        <li>Record continuously the whole way.</li>
+        <li>Tap the <strong>"I'm here"</strong> button at each checkpoint you pass. Those timestamps are the true answer we score against.</li>
+      </ul>
+
+      <h3>Privacy</h3>
+      <p>We record only router IDs, signal strengths and motion sensors. <strong>No cameras, photos, audio or personal data.</strong></p>
+    </section>
+
+    <section id="who">
+      <h2><span class="n">10</span>Who does what: people and the AI coding assistant</h2>
+      <h3>People (all four of us)</h3>
+      <ul>
+        <li>Mapping the floors and building the checkpoint sheet</li>
+        <li>All recording sessions and test walks</li>
+        <li>User tests with first-years</li>
+        <li>The report text, slide text, captions and video script</li>
+        <li><strong>Explaining WHY results happen.</strong> This is where the "unique discoveries" points are. Possible examples, which we only claim if our data shows them: Wi-Fi is worse at lunch because of crowds; two corridors get confused because their steel layout is similar; one phone model reads pressure differently.</li>
+      </ul>
+      <h3>The AI coding assistant (Claude Code, run by Michael)</h3>
+      <p>It writes code in waves. Fake data is used <strong>only to test that code runs</strong>. It never appears in any result.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wave</th><th>What it builds</th></tr></thead>
+          <tbody>
+            <tr><td class="k">1</td><td>Code repo, file readers for phyphox and WiGLE, the checkpoint sheet template, a phone setup guide, the "I'm here" button page</td></tr>
+            <tr><td class="k">2a</td><td>Map graph from our sheet, A* routing, drawing the route on the floor plan</td></tr>
+            <tr><td class="k">2b</td><td>Request matching (all three methods) and the test set format</td></tr>
+            <tr><td class="k">3</td><td>Positioning pipeline (A to D) and scoring, then an independent check for data leakage and bugs</td></tr>
+            <tr><td class="k">Later</td><td>Streamlit demo, results charts and tables from our real numbers, and a format check of the report (page count, headings)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <h2><span class="n">11</span>Timeline</h2>
+      <p>Today is Fri 6 Nov. Deadline Mon 30 Nov 23:59.</p>
+      <ol class="timeline">
+        <li><span class="when">Fri 6 - Sun 8 Nov</span><span class="what">Team call: agree scope, destinations, Drive folder. Pilot recording (5 checkpoints). Wave 1 code.</span></li>
+        <li><span class="when">Sun 8 - Tue 10 Nov</span><span class="what">Map both floors, fill the checkpoint sheet. A* running on the real map.</span></li>
+        <li><span class="when">Tue 10 - Sun 15 Nov</span><span class="what">3 recording sessions, data check after each. Avoid Tue 10 Nov morning (Michael has another presentation).</span></li>
+        <li><span class="when">Mon 16 - Tue 17 Nov</span><span class="what">Test walks.</span></li>
+        <li><span class="when">Mon 16 - Fri 20 Nov</span><span class="what">Train and compare A to D. Request matching tests. LLM directions test. Group review of results.</span></li>
+        <li><span class="when">Fri 20 - Mon 23 Nov</span><span class="what">Demo finished. User tests with 3 to 5 first-years.</span></li>
+        <li class="key"><span class="when">Mon 23 - Fri 27 Nov</span><span class="what">Results frozen. Each person writes their sections by hand. The writing lead merges and edits. Slides made.</span></li>
+        <li><span class="when">Fri 27 - Sat 28 Nov</span><span class="what">Rehearse and record the video.</span></li>
+        <li class="key"><span class="when">Sun 29 Nov</span><span class="what">Final checks and submit.</span></li>
+        <li class="deadline"><span class="when">Mon 30 Nov 23:59</span><span class="what">Hard deadline (backup day only).</span></li>
+      </ol>
+      <p>The recording sessions are the bottleneck. If one is missed, everything after it gets squeezed.</p>
+    </section>
+
+    <section id="risks">
+      <h2><span class="n">12</span>Risks and what we do about them</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Risk</th><th>What we do</th></tr></thead>
+          <tbody>
+            <tr><td>WiGLE's export does not keep every scan</td><td>Find out in the pilot. Switch to Termux + Termux:API.</td></tr>
+            <tr><td>People miss recording sessions</td><td>Book the session dates on the first call. Pairs cover floors, so one missing person does not stop a session.</td></tr>
+            <tr><td>iPhones cannot scan Wi-Fi</td><td>Magnetic and barometer still work on iPhone. That is part of the comparison.</td></tr>
+            <tr><td>Corridors that look alike</td><td>Fusion (D) uses the route so far to tell them apart. We report the confusions honestly.</td></tr>
+            <tr><td>Outdoor link has no fingerprints</td><td>Dead reckoning only. The link is optional anyway.</td></tr>
+            <tr><td>Report over 6 pages</td><td>Format check before submitting. Cut text before cutting figures.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <h2><span class="n">13</span>Decisions we need as a group</h2>
+      <ul class="checks">
+        <li><label for="d1"><input type="checkbox" id="d1"><span><strong>Scope:</strong> 2 floors of AC1 joined by lift and stairs, link only if time allows? Which two floors?</span></label></li>
+        <li><label for="d2"><input type="checkbox" id="d2"><span><strong>Destinations:</strong> the list of about 30 places, with tags like "quiet" or "food".</span></label></li>
+        <li><label for="d3"><input type="checkbox" id="d3"><span><strong>Session dates:</strong> 3 fingerprint sessions (mix of busy and quiet times) and 1 test-walk day.</span></label></li>
+        <li><label for="d4"><input type="checkbox" id="d4"><span><strong>Phones:</strong> which Android and iPhone models we use, and who can bring them.</span></label></li>
+        <li><label for="d5"><input type="checkbox" id="d5"><span><strong>Drive folder:</strong> create <code>GE2340-Phase2/</code> with <code>raw-data/</code> and share it with all four.</span></label></li>
+        <li><label for="d6"><input type="checkbox" id="d6"><span><strong>GitHub repo:</strong> public or not? The handout says to link a public repo if there is a lot of code.</span></label></li>
+      </ul>
+    </section>
+
+    <section id="checklist">
+      <h2><span class="n">14</span>Final submission checklist</h2>
+      <p class="note">Ticks are saved only in your own browser.</p>
+      <p class="check-group">Report</p>
+      <ul class="checks">
+        <li><label for="c1"><input type="checkbox" id="c1"><span>LaTeX template, 6 headings unchanged</span></label></li>
+        <li><label for="c2"><input type="checkbox" id="c2"><span>4 to 6 pages including references</span></label></li>
+        <li><label for="c3"><input type="checkbox" id="c3"><span>All numbers come from our real recordings</span></label></li>
+        <li><label for="c4"><input type="checkbox" id="c4"><span>Tables and figures have captions written by us</span></label></li>
+        <li><label for="c5"><input type="checkbox" id="c5"><span>LLM outputs we show are quoted and cited</span></label></li>
+        <li><label for="c6"><input type="checkbox" id="c6"><span>References cited in the text</span></label></li>
+        <li><label for="c7"><input type="checkbox" id="c7"><span>GitHub link (and demo link if any) at the top</span></label></li>
+      </ul>
+      <p class="check-group">Video</p>
+      <ul class="checks">
+        <li><label for="c8"><input type="checkbox" id="c8"><span>12 to 15 minutes</span></label></li>
+        <li><label for="c9"><input type="checkbox" id="c9"><span>Opens with the topic and all 4 full names</span></label></li>
+        <li><label for="c10"><input type="checkbox" id="c10"><span>All four show their face and speak</span></label></li>
+        <li><label for="c11"><input type="checkbox" id="c11"><span>Shows the working demo</span></label></li>
+        <li><label for="c12"><input type="checkbox" id="c12"><span>Uploaded to Google Drive, link opens in an incognito window without logging in</span></label></li>
+      </ul>
+      <p class="check-group">Slides</p>
+      <ul class="checks">
+        <li><label for="c13"><input type="checkbox" id="c13"><span>PDF of the exact slides used in the video</span></label></li>
+      </ul>
+      <p class="check-group">Contribution statement</p>
+      <ul class="checks">
+        <li><label for="c14"><input type="checkbox" id="c14"><span>Mandatory template</span></label></li>
+        <li><label for="c15"><input type="checkbox" id="c15"><span>Percentages add up to 100</span></label></li>
+        <li><label for="c16"><input type="checkbox" id="c16"><span>Specific tasks for each person</span></label></li>
+        <li><label for="c17"><input type="checkbox" id="c17"><span>Signed by all four</span></label></li>
+      </ul>
+      <p class="check-group">Package</p>
+      <ul class="checks">
+        <li><label for="c18"><input type="checkbox" id="c18"><span>Optional extras under 10 MB</span></label></li>
+        <li><label for="c19"><input type="checkbox" id="c19"><span>One person submits, on Sun 29 Nov</span></label></li>
+        <li><label for="c20"><input type="checkbox" id="c20"><span>Everyone checks the submitted files open</span></label></li>
+      </ul>
+    </section>
+
+    <footer>GE2340 Group 21 &middot; WalkSense: Camera-Free Campus Navigator at CityU &middot; Plan dated Fri 6 Nov 2026. Reminder: write the submitted text yourselves.</footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  // Checkpoint dots: one every 24px (about 4 m in the sketch), skipping the lift gap.
+  var ns = "http://www.w3.org/2000/svg";
+  ["dots-top", "dots-bot"].forEach(function (id, i) {
+    var g = document.getElementById(id);
+    var y = i === 0 ? 30 : 120;
+    for (var x = 132; x <= 708; x += 24) {
+      if (x > 400 && x < 448) continue;
+      var c = document.createElementNS(ns, "circle");
+      c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 4);
+      c.setAttribute("class", "svg-dot");
+      g.appendChild(c);
+    }
+  });
+
+  // Individual score calculator (formula from the handout).
+  var gs = document.getElementById("g-score"), gp = document.getElementById("g-pct"), out = document.getElementById("score-out");
+  function calc() {
+    var g = parseFloat(gs.value), p = parseFloat(gp.value);
+    if (isNaN(g) || isNaN(p)) { out.innerHTML = "Enter both numbers"; return; }
+    var s = g < 60 ? g : 60 + (g - 60) * (p / 100) * 4;
+    s = Math.round(s * 10) / 10;
+    out.innerHTML = "Individual score <b>" + s + "</b>" + (g < 60 ? " (group below 60)" : "");
+  }
+  gs.addEventListener("input", calc); gp.addEventListener("input", calc); calc();
+
+  // Remember ticks in this browser only.
+  var KEY = "walksense-plan-checks";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
+  document.querySelectorAll(".checks input[type=checkbox]").forEach(function (box) {
+    if (saved[box.id]) box.checked = true;
+    box.addEventListener("change", function () {
+      saved[box.id] = box.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+})();
+</script>

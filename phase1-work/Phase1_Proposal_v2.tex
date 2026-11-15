@@ -1,0 +1,119 @@
+% ======================= COMPILATION NOTICE =======================
+% Before compiling, place ge2340_project.sty and all three template
+% files (phase1_template.tex, phase2_template.tex, and
+% contribution_template.tex) in the same directory.
+% Keep the style file named ge2340_project.sty so that the templates
+% can load it correctly.
+% ==================================================================
+
+\documentclass{article}
+
+% ======================= REQUIRED STYLE =======================
+\PassOptionsToPackage{numbers}{natbib}
+\usepackage[preprint]{ge2340_project}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{array}
+
+\title{Phase 1: AI Project Proposal\\
+\large WalkSense: Camera-Free Campus Navigator at CityU}
+
+% Group 21. Fill in the missing student IDs and emails.
+\author{
+  \textbf{Emmanuelle Sebastian Sanjaya (Student ID withheld)}\\
+  \texttt{email-withheld}
+  \And
+  Chris Amadeus Putra Simatupang (Student ID withheld)\\
+  \texttt{email-withheld}
+  \AND
+  Benedicta Amabel Riyadi (Student ID withheld)\\
+  \texttt{email-withheld}
+  \And
+  Michael Terence Basarah (Student ID withheld)\\
+  \texttt{email-withheld}
+}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Project topic:} Students get lost finding rooms, canteens and study areas inside CityU's buildings.\\
+\textbf{Target users/stakeholders:} New and exchange students; any student in an unfamiliar building.
+
+% ======================= Required sections (do NOT rename) =======================
+
+\section{Problem Definition \& Scope}
+CityU's academic buildings (AC1, AC2, AC3) connect through many wings, floors, lifts and outdoor links. New and exchange students regularly get lost on the way to a classroom, a canteen or a place to study; GPS does not work indoors or tell floors apart. The CityUHK Mobile app gives directions only to the building \cite{cityumobile}, a 2013 student prototype located users to room level with Wi-Fi on Android only \cite{cityu2013}, and LibCompass works only inside the Library with installed beacons \cite{libcompass}. WalkSense guides a student from where they are to any \emph{place} inside the buildings: lecture rooms, canteens, study areas, toilets, printers and lifts. \textbf{Input:} a typed request (``AC2 canteen'', ``a quiet place to study near LT-5'') and the phone's built-in sensors. \textbf{Output:} a step-by-step route, the user's live position on it, and a warning after a wrong turn. \textbf{Scope:} two to three floors of AC1 and AC2 plus the AC1--BOC--AC2 link, which crosses a short campus road, with about 30 destinations. No Library, cameras or audio.
+
+\section{AI Task Formulation}
+The product uses AI in three places.
+\textbf{(1) Understanding the request (text classification).} The typed request is matched to one destination in our place list, tagged with words such as ``quiet'' or ``food''.
+\textbf{(2) Planning the route (search).} The building is a graph: nodes are corridor checkpoints, lifts, stairs and doors; edges carry walking time. A* search finds the fastest route to the chosen place.
+\textbf{(3) Knowing where the user is (supervised classification + tracking).} While the user walks, the app reads four sensors standard in modern smartphones: \emph{Wi-Fi} signal strength (RSSI) of nearby routers, which needs Wi-Fi switched on but not connected, so users on mobile data are covered; the \emph{accelerometer}, which counts steps; the \emph{magnetometer} (the compass sensor), whose reading is bent differently at each spot by the steel in the walls; and the \emph{barometer}, whose air pressure drops about 0.5\,hPa per floor climbed. A classifier trained on our labelled recordings outputs the nearest checkpoint, the barometer gives the floor, on the short outdoor link step counting bridges the gap, and a tracker smooths these guesses and flags when the user leaves the route.
+All training data is our own: at about 80 checkpoints, 3--5\,m apart, we record every sensor for 30 seconds on different days and phones and label each recording with its checkpoint ID. Test walks on a separate day give the ground truth. We report matching accuracy, checkpoint and floor accuracy, and position error.
+
+\section{Proposed AI Approaches}
+\textbf{Request matching:} keyword rules, sentence embeddings, or an LLM choosing a place ID from our list. \textbf{Routing:} A* \cite{hart1968} on our graph versus an LLM given a text floor plan. \textbf{Positioning:} (A) dead reckoning from steps and compass; (B) Wi-Fi fingerprinting, where $k$-nearest neighbours or a random forest classifies a scan against labelled scans \cite{bahl2000}; (C) the same classifier on magnetic-field distortions \cite{haverinen2009}; (D) a hidden Markov model (HMM) fusing A--C and the barometer \cite{rabiner1989}.
+
+\section{Comparative Analysis}
+\begin{table}[h]
+  \centering
+  \caption{Candidate approaches for each AI component.}
+  \label{tab:approach-comparison}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{llll}
+    \toprule
+    Approach & Needs / phone support & Main strength & Main limitation \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Request matching (text classification)}} \\
+    Keyword rules & Place list only & Simple, predictable & Misses vague requests \\
+    Sentence embeddings & Small pre-trained model & Handles vague requests & Needs good place tags \\
+    LLM picks place ID & Online API & Any phrasing; easy & Needs internet \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Route planning (search)}} \\
+    A* on corridor graph & Hand-built graph & Valid, explainable & Map built by hand \\
+    LLM directions & Text map description & No graph coding & May invent corridors \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Positioning (classification + tracking)}} \\
+    A: Steps + compass & Motion sensors; any phone & No survey needed & Drifts over distance \\
+    B: Wi-Fi fingerprint & Existing APs; Android only & No new hardware & Scan limits; crowds \\
+    C: Magnetic fingerprint & Magnetometer; any phone & Works on iPhone & Look-alike spots \\
+    D: HMM fusion + barometer & All of the above & Fixes drift; finds floor & Most tuning effort \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+We prefer the LLM for matching: it understands any phrasing, takes little code, and may only answer with a real place ID from our list; keywords are the offline fallback. A* wins routing as its paths always exist and are explainable. For positioning we expect fusion (D) to win: it corrects drift, detects floors and still works on iPhones, which block Wi-Fi scanning.
+
+\section{Expected Impact \& Project Feasibility}
+Students could find any classroom, canteen or study area unaided. Unlike earlier CityU work, WalkSense needs no cameras or new hardware, covers every kind of destination, tracks the whole route and works on Android and iPhone. The Phase~2 prototype is deliberately small: a Python (Streamlit) web app that takes a request, draws the route on a floor plan and replays recorded walks as live tracking. Six-week plan: (1) graph and place list, (2) fingerprints, (3) test walks with lift rides and wrong turns, (4) train and compare in Python, (5) user tests, (6) report and video. We already have Android and iOS phones, the free phyphox and WiGLE apps, and Python. Fallback: one floor.
+
+% ======================= References (included in page limit) =======================
+\setlength{\bibsep}{0pt}
+\begin{thebibliography}{9}
+\footnotesize
+\bibitem{cityumobile}
+City University of Hong Kong, ``CityUHK Mobile App,'' CityU ITS, 2026.
+\bibitem{cityu2013}
+CityU, ``CityU exhibition showcases innovative solutions to everyday problems,'' 2013.
+\bibitem{libcompass}
+CityU Library, ``LibCompass wayfinding app: experience sharing,'' \emph{IFLA WLIC}, 2018.
+\bibitem{hart1968}
+P.~E.~Hart, N.~J.~Nilsson, and B.~Raphael, ``A formal basis for the heuristic determination of minimum cost paths,'' \emph{IEEE Trans. SSC}, 1968.
+\bibitem{bahl2000}
+P.~Bahl and V.~N.~Padmanabhan, ``RADAR: An in-building RF-based user location and tracking system,'' \emph{INFOCOM}, 2000.
+\bibitem{haverinen2009}
+J.~Haverinen and A.~Kemppainen, ``Global indoor self-localization based on the ambient magnetic field,'' \emph{Robot. Auton. Syst.}, 2009.
+\bibitem{rabiner1989}
+L.~R.~Rabiner, ``A tutorial on hidden Markov models and selected applications in speech recognition,'' \emph{Proc. IEEE}, 1989.
+\end{thebibliography}
+
+\end{document}

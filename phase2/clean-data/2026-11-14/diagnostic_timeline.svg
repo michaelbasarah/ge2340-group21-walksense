@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#18212b} .small{font-size:11px}.axis{stroke:#bac2cc;stroke-width:1}</style>
+<text x="40" y="30" font-size="22">GE2340 — measured stops and movement recordings</text>
+<text x="40" y="52" font-size="13">14 Nov 2026, Hong Kong time. Point labels are provisional; device clocks were not independently synchronized.</text>
+<text x="40" y="93" font-size="14">Pressure median per stop (hPa); separate dots, no invented readings between stops</text>
+<line x1="80" y1="265.0" x2="1160" y2="265.0" class="axis"/><text x="5" y="269.0" class="small">1010.31</text>
+<line x1="80" y1="211.66666666666669" x2="1160" y2="211.66666666666669" class="axis"/><text x="5" y="215.66666666666669" class="small">1010.60</text>
+<line x1="80" y1="158.33333333333334" x2="1160" y2="158.33333333333334" class="axis"/><text x="5" y="162.33333333333334" class="small">1010.89</text>
+<line x1="80" y1="105.0" x2="1160" y2="105.0" class="axis"/><text x="5" y="109.0" class="small">1011.19</text>
+<circle cx="80.00" cy="248.37" r="4" fill="#126782"><title>BM01: 1010.39711; Exit 5</title></circle>
+<text x="80.00" y="240.37" class="small" text-anchor="middle">01</text>
+<circle cx="109.66" cy="248.37" r="4" fill="#126782"><title>BM02: 1010.39711; Men&#x27;s toilet</title></circle>
+<text x="109.66" y="240.37" class="small" text-anchor="middle">02</text>
+<circle cx="140.45" cy="247.71" r="4" fill="#126782"><title>BM03: 1010.40073; Y5 302</title></circle>
+<text x="140.45" y="239.71" class="small" text-anchor="middle">03</text>
+<circle cx="172.83" cy="249.83" r="4" fill="#126782"><title>BM04: 1010.38910; </title></circle>
+<text x="172.83" y="241.83" class="small" text-anchor="middle">04</text>
+<circle cx="220.58" cy="251.67" r="4" fill="#126782"><title>BM05: 1010.37899; Study room 11</title></circle>
+<text x="220.58" y="243.67" class="small" text-anchor="middle">05</text>
+<circle cx="275.13" cy="249.79" r="4" fill="#126782"><title>BM06: 1010.38933; Study room 10</title></circle>
+<text x="275.13" y="241.79" class="small" text-anchor="middle">06</text>
+<circle cx="298.64" cy="248.80" r="4" fill="#126782"><title>BM07: 1010.39474; Study room 9</title></circle>
+<text x="298.64" y="240.80" class="small" text-anchor="middle">07</text>
+<circle cx="320.66" cy="248.04" r="4" fill="#126782"><title>BM08: 1010.39894; Study room 8</title></circle>
+<text x="320.66" y="240.04" class="small" text-anchor="middle">08</text>
+<circle cx="349.67" cy="244.76" r="4" fill="#126782"><title>BM09: 1010.41695; Y5 302 (revisit)</title></circle>
+<text x="349.67" y="236.76" class="small" text-anchor="middle">09</text>
+<circle cx="381.31" cy="242.41" r="4" fill="#126782"><title>BM10: 1010.42988; Women&#x27;s toilet</title></circle>
+<text x="381.31" y="234.41" class="small" text-anchor="middle">10</text>
+<circle cx="404.12" cy="241.82" r="4" fill="#126782"><title>BM11: 1010.43312; Exit 10</title></circle>
+<text x="404.12" y="233.82" class="small" text-anchor="middle">11</text>
+<circle cx="437.15" cy="238.60" r="4" fill="#126782"><title>BM12: 1010.45082; Canteen</title></circle>
+<text x="437.15" y="230.60" class="small" text-anchor="middle">12</text>
+<circle cx="479.26" cy="236.23" r="4" fill="#126782"><title>BM13: 1010.46387; Down escalator, 5F landing</title></circle>
+<text x="479.26" y="228.23" class="small" text-anchor="middle">13</text>
+<circle cx="544.46" cy="236.66" r="4" fill="#126782"><title>BM14: 1010.46150; Vending machine 1</title></circle>
+<text x="544.46" y="228.66" class="small" text-anchor="middle">14</text>
+<circle cx="575.45" cy="236.03" r="4" fill="#126782"><title>BM15: 1010.46494; Vending machine 2</title></circle>
+<text x="575.45" y="228.03" class="small" text-anchor="middle">15</text>
+<circle cx="657.54" cy="130.17" r="4" fill="#126782"><title>BM16: 1011.04687; Down escalator, 4F landing</title></circle>
+<text x="657.54" y="122.17" class="small" text-anchor="middle">16</text>
+<circle cx="702.41" cy="233.38" r="4" fill="#126782"><title>BM17: 1010.47951; Up escalator, 5F landing</title></circle>
+<text x="702.41" y="225.38" class="small" text-anchor="middle">17</text>
+<circle cx="732.71" cy="126.79" r="4" fill="#126782"><title>BM18: 1011.06548; Up escalator, 4F landing</title></circle>
+<text x="732.71" y="118.79" class="small" text-anchor="middle">18</text>
+<circle cx="917.68" cy="125.50" r="4" fill="#126782"><title>BM19: 1011.07254; Y4052</title></circle>
+<text x="917.68" y="117.50" class="small" text-anchor="middle">19</text>
+<circle cx="948.79" cy="125.66" r="4" fill="#126782"><title>BM20: 1011.07166; Lecture theatre 1 B</title></circle>
+<text x="948.79" y="117.66" class="small" text-anchor="middle">20</text>
+<circle cx="985.68" cy="125.15" r="4" fill="#126782"><title>BM21: 1011.07445; Lecture theatre 1 A</title></circle>
+<text x="985.68" y="117.15" class="small" text-anchor="middle">21</text>
+<circle cx="1014.18" cy="122.94" r="4" fill="#126782"><title>BM22: 1011.08662; Exit 10, 4F</title></circle>
+<text x="1014.18" y="114.94" class="small" text-anchor="middle">22</text>
+<circle cx="1058.12" cy="121.28" r="4" fill="#126782"><title>BM23: 1011.09573; Exit / entrance</title></circle>
+<text x="1058.12" y="113.28" class="small" text-anchor="middle">23</text>
+<circle cx="1091.21" cy="119.71" r="4" fill="#126782"><title>BM24: 1011.10435; Exit 5, 4F</title></circle>
+<text x="1091.21" y="111.71" class="small" text-anchor="middle">24</text>
+<circle cx="1118.31" cy="118.59" r="4" fill="#126782"><title>BM25: 1011.11053; Lecture theatre 2 B</title></circle>
+<text x="1118.31" y="110.59" class="small" text-anchor="middle">25</text>
+<circle cx="1152.67" cy="118.33" r="4" fill="#126782"><title>BM26: 1011.11195; Lecture theatre 2 A</title></circle>
+<text x="1152.67" y="110.33" class="small" text-anchor="middle">26</text>
+<text x="40" y="318" font-size="14">Magnetic field magnitude median per stop (µT)</text>
+<line x1="80" y1="465.0" x2="1160" y2="465.0" class="axis"/><text x="5" y="469.0" class="small">24.20</text>
+<line x1="80" y1="420.0" x2="1160" y2="420.0" class="axis"/><text x="5" y="424.0" class="small">34.40</text>
+<line x1="80" y1="375.0" x2="1160" y2="375.0" class="axis"/><text x="5" y="379.0" class="small">44.61</text>
+<line x1="80" y1="330.0" x2="1160" y2="330.0" class="axis"/><text x="5" y="334.0" class="small">54.82</text>
+<circle cx="80.00" cy="377.82" r="4" fill="#7654a3"><title>BM01: 43.97287; Exit 5</title></circle>
+<text x="80.00" y="369.82" class="small" text-anchor="middle">01</text>
+<circle cx="109.66" cy="366.93" r="4" fill="#7654a3"><title>BM02: 46.44169; Men&#x27;s toilet</title></circle>
+<text x="109.66" y="358.93" class="small" text-anchor="middle">02</text>
+<circle cx="140.45" cy="395.17" r="4" fill="#7654a3"><title>BM03: 40.03687; Y5 302</title></circle>
+<text x="140.45" y="387.17" class="small" text-anchor="middle">03</text>
+<circle cx="172.83" cy="403.67" r="4" fill="#7654a3"><title>BM04: 38.10869; </title></circle>
+<text x="172.83" y="395.67" class="small" text-anchor="middle">04</text>
+<circle cx="220.58" cy="413.19" r="4" fill="#7654a3"><title>BM05: 35.94870; Study room 11</title></circle>
+<text x="220.58" y="405.19" class="small" text-anchor="middle">05</text>
+<circle cx="275.13" cy="453.75" r="4" fill="#7654a3"><title>BM06: 26.74919; Study room 10</title></circle>
+<text x="275.13" y="445.75" class="small" text-anchor="middle">06</text>
+<circle cx="298.64" cy="413.70" r="4" fill="#7654a3"><title>BM07: 35.83321; Study room 9</title></circle>
+<text x="298.64" y="405.70" class="small" text-anchor="middle">07</text>
+<circle cx="320.66" cy="389.32" r="4" fill="#7654a3"><title>BM08: 41.36236; Study room 8</title></circle>
+<text x="320.66" y="381.32" class="small" text-anchor="middle">08</text>
+<circle cx="349.67" cy="385.25" r="4" fill="#7654a3"><title>BM09: 42.28609; Y5 302 (revisit)</title></circle>
+<text x="349.67" y="377.25" class="small" text-anchor="middle">09</text>
+<circle cx="381.31" cy="401.31" r="4" fill="#7654a3"><title>BM10: 38.64279; Women&#x27;s toilet</title></circle>
+<text x="381.31" y="393.31" class="small" text-anchor="middle">10</text>
+<circle cx="404.12" cy="415.55" r="4" fill="#7654a3"><title>BM11: 35.41310; Exit 10</title></circle>
+<text x="404.12" y="407.55" class="small" text-anchor="middle">11</text>
+<circle cx="437.15" cy="391.15" r="4" fill="#7654a3"><title>BM12: 40.94890; Canteen</title></circle>
+<text x="437.15" y="383.15" class="small" text-anchor="middle">12</text>
+<circle cx="479.26" cy="418.94" r="4" fill="#7654a3"><title>BM13: 34.64430; Down escalator, 5F landing</title></circle>
+<text x="479.26" y="410.94" class="small" text-anchor="middle">13</text>
+<circle cx="544.46" cy="344.75" r="4" fill="#7654a3"><title>BM14: 51.47326; Vending machine 1</title></circle>
+<text x="544.46" y="336.75" class="small" text-anchor="middle">14</text>
+<circle cx="575.45" cy="341.39" r="4" fill="#7654a3"><title>BM15: 52.23493; Vending machine 2</title></circle>
+<text x="575.45" y="333.39" class="small" text-anchor="middle">15</text>
+<circle cx="657.54" cy="403.22" r="4" fill="#7654a3"><title>BM16: 38.20961; Down escalator, 4F landing</title></circle>
+<text x="657.54" y="395.22" class="small" text-anchor="middle">16</text>
+<circle cx="702.41" cy="405.02" r="4" fill="#7654a3"><title>BM17: 37.80253; Up escalator, 5F landing</title></circle>
+<text x="702.41" y="397.02" class="small" text-anchor="middle">17</text>
+<circle cx="732.71" cy="406.39" r="4" fill="#7654a3"><title>BM18: 37.49080; Up escalator, 4F landing</title></circle>
+<text x="732.71" y="398.39" class="small" text-anchor="middle">18</text>
+<circle cx="917.68" cy="341.25" r="4" fill="#7654a3"><title>BM19: 52.26673; Y4052</title></circle>
+<text x="917.68" y="333.25" class="small" text-anchor="middle">19</text>
+<circle cx="948.79" cy="381.79" r="4" fill="#7654a3"><title>BM20: 43.07076; Lecture theatre 1 B</title></circle>
+<text x="948.79" y="373.79" class="small" text-anchor="middle">20</text>
+<circle cx="985.68" cy="419.39" r="4" fill="#7654a3"><title>BM21: 34.54303; Lecture theatre 1 A</title></circle>
+<text x="985.68" y="411.39" class="small" text-anchor="middle">21</text>
+<circle cx="1014.18" cy="381.72" r="4" fill="#7654a3"><title>BM22: 43.08727; Exit 10, 4F</title></circle>
+<text x="1014.18" y="373.72" class="small" text-anchor="middle">22</text>
+<circle cx="1058.12" cy="407.16" r="4" fill="#7654a3"><title>BM23: 37.31654; Exit / entrance</title></circle>
+<text x="1058.12" y="399.16" class="small" text-anchor="middle">23</text>
+<circle cx="1091.21" cy="349.16" r="4" fill="#7654a3"><title>BM24: 50.47185; Exit 5, 4F</title></circle>
+<text x="1091.21" y="341.16" class="small" text-anchor="middle">24</text>
+<circle cx="1118.31" cy="375.92" r="4" fill="#7654a3"><title>BM25: 44.40181; Lecture theatre 2 B</title></circle>
+<text x="1118.31" y="367.92" class="small" text-anchor="middle">25</text>
+<circle cx="1152.67" cy="366.65" r="4" fill="#7654a3"><title>BM26: 46.50541; Lecture theatre 2 A</title></circle>
+<text x="1152.67" y="358.65" class="small" text-anchor="middle">26</text>
+<text x="40" y="505" font-size="14">Recorded intervals: teal = stationary barometer/magnetometer; orange = accelerometer movement</text>
+<rect x="80.00" y="530" width="7.33" height="12" fill="#126782"><title>BM01 Exit 5</title></rect>
+<text x="80.00" y="526" class="small">01</text>
+<rect x="88.57" y="570" width="5.80" height="12" fill="#d97915"><title>ACC01 P1</title></rect>
+<text x="88.57" y="566" class="small">P1</text>
+<rect x="109.66" y="530" width="7.33" height="12" fill="#126782"><title>BM02 Men&#x27;s toilet</title></rect>
+<text x="109.66" y="526" class="small">02</text>
+<rect x="131.21" y="570" width="4.81" height="12" fill="#d97915"><title>ACC02 P2</title></rect>
+<text x="131.21" y="566" class="small">P2</text>
+<rect x="140.45" y="530" width="7.33" height="12" fill="#126782"><title>BM03 Y5 302</title></rect>
+<text x="140.45" y="526" class="small">03</text>
+<rect x="163.05" y="570" width="4.55" height="12" fill="#d97915"><title>ACC03 P3</title></rect>
+<text x="163.05" y="566" class="small">P3</text>
+<rect x="172.83" y="530" width="7.33" height="12" fill="#126782"><title>BM04 </title></rect>
+<text x="172.83" y="526" class="small">04</text>
+<rect x="210.73" y="570" width="6.64" height="12" fill="#d97915"><title>ACC04 P4</title></rect>
+<text x="210.73" y="566" class="small">P4</text>
+<rect x="220.58" y="530" width="7.33" height="12" fill="#126782"><title>BM05 Study room 11</title></rect>
+<text x="220.58" y="526" class="small">05</text>
+<rect x="264.82" y="570" width="3.28" height="12" fill="#d97915"><title>ACC05 P5</title></rect>
+<text x="264.82" y="566" class="small">P5</text>
+<rect x="275.13" y="530" width="7.33" height="12" fill="#126782"><title>BM06 Study room 10</title></rect>
+<text x="275.13" y="526" class="small">06</text>
+<rect x="292.98" y="570" width="2.89" height="12" fill="#d97915"><title>ACC06 P6</title></rect>
+<text x="292.98" y="566" class="small">P6</text>
+<rect x="298.64" y="530" width="7.33" height="12" fill="#126782"><title>BM07 Study room 9</title></rect>
+<text x="298.64" y="526" class="small">07</text>
+<rect x="315.03" y="570" width="3.17" height="12" fill="#d97915"><title>ACC07 P7</title></rect>
+<text x="315.03" y="566" class="small">P7</text>
+<rect x="320.66" y="530" width="7.33" height="12" fill="#126782"><title>BM08 Study room 8</title></rect>
+<text x="320.66" y="526" class="small">08</text>
+<rect x="340.35" y="570" width="6.19" height="12" fill="#d97915"><title>ACC08 P8</title></rect>
+<text x="340.35" y="566" class="small">P8</text>
+<rect x="349.67" y="530" width="7.33" height="12" fill="#126782"><title>BM09 Y5 302 (revisit)</title></rect>
+<text x="349.67" y="526" class="small">09</text>
+<rect x="370.08" y="570" width="6.13" height="12" fill="#d97915"><title>ACC09 P9</title></rect>
+<text x="370.08" y="566" class="small">P9</text>
+<rect x="381.31" y="530" width="7.33" height="12" fill="#126782"><title>BM10 Women&#x27;s toilet</title></rect>
+<text x="381.31" y="526" class="small">10</text>
+<rect x="397.36" y="570" width="4.24" height="12" fill="#d97915"><title>ACC10 P10</title></rect>
+<text x="397.36" y="566" class="small">P10</text>
+<rect x="404.12" y="530" width="7.33" height="12" fill="#126782"><title>BM11 Exit 10</title></rect>
+<text x="404.12" y="526" class="small">11</text>
+<rect x="424.60" y="570" width="9.33" height="12" fill="#d97915"><title>ACC11 P11</title></rect>
+<text x="424.60" y="566" class="small">P11</text>
+<rect x="437.15" y="530" width="7.33" height="12" fill="#126782"><title>BM12 Canteen</title></rect>
+<text x="437.15" y="526" class="small">12</text>
+<rect x="470.50" y="570" width="5.80" height="12" fill="#d97915"><title>ACC12 P12</title></rect>
+<text x="470.50" y="566" class="small">P12</text>
+<rect x="479.26" y="530" width="7.33" height="12" fill="#126782"><title>BM13 Down escalator, 5F landing</title></rect>
+<text x="479.26" y="526" class="small">13</text>
+<rect x="535.35" y="570" width="5.96" height="12" fill="#d97915"><title>ACC13 P13</title></rect>
+<text x="535.35" y="566" class="small">P13</text>
+<rect x="544.46" y="530" width="7.33" height="12" fill="#126782"><title>BM14 Vending machine 1</title></rect>
+<text x="544.46" y="526" class="small">14</text>
+<rect x="561.02" y="570" width="11.47" height="12" fill="#d97915"><title>ACC14 P14</title></rect>
+<text x="561.02" y="566" class="small">P14</text>
+<rect x="575.45" y="530" width="7.33" height="12" fill="#126782"><title>BM15 Vending machine 2</title></rect>
+<text x="575.45" y="526" class="small">15</text>
+<rect x="657.54" y="530" width="7.33" height="12" fill="#126782"><title>BM16 Down escalator, 4F landing</title></rect>
+<text x="657.54" y="526" class="small">16</text>
+<rect x="702.41" y="530" width="7.33" height="12" fill="#126782"><title>BM17 Up escalator, 5F landing</title></rect>
+<text x="702.41" y="526" class="small">17</text>
+<rect x="732.71" y="530" width="7.33" height="12" fill="#126782"><title>BM18 Up escalator, 4F landing</title></rect>
+<text x="732.71" y="526" class="small">18</text>
+<rect x="868.77" y="570" width="4.89" height="12" fill="#d97915"><title>ACC15 P16-18 (esca bawah)</title></rect>
+<text x="868.77" y="566" class="small">P16-18</text>
+<rect x="907.88" y="570" width="5.19" height="12" fill="#d97915"><title>ACC16 P18 (start esca bawah naik)</title></rect>
+<text x="907.88" y="566" class="small">P18</text>
+<rect x="917.68" y="530" width="7.33" height="12" fill="#126782"><title>BM19 Y4052</title></rect>
+<text x="917.68" y="526" class="small">19</text>
+<rect x="937.06" y="570" width="6.57" height="12" fill="#d97915"><title>ACC17 P19</title></rect>
+<text x="937.06" y="566" class="small">P19</text>
+<rect x="948.79" y="530" width="7.33" height="12" fill="#126782"><title>BM20 Lecture theatre 1 B</title></rect>
+<text x="948.79" y="526" class="small">20</text>
+<rect x="968.72" y="570" width="11.69" height="12" fill="#d97915"><title>ACC18 P20</title></rect>
+<text x="968.72" y="566" class="small">P20</text>
+<rect x="985.68" y="530" width="7.33" height="12" fill="#126782"><title>BM21 Lecture theatre 1 A</title></rect>
+<text x="985.68" y="526" class="small">21</text>
+<rect x="1007.64" y="570" width="4.12" height="12" fill="#d97915"><title>ACC19 P21</title></rect>
+<text x="1007.64" y="566" class="small">P21</text>
+<rect x="1014.18" y="530" width="7.33" height="12" fill="#126782"><title>BM22 Exit 10, 4F</title></rect>
+<text x="1014.18" y="526" class="small">22</text>
+<rect x="1042.58" y="570" width="7.87" height="12" fill="#d97915"><title>ACC20 P22</title></rect>
+<text x="1042.58" y="566" class="small">P22</text>
+<rect x="1058.12" y="530" width="7.33" height="12" fill="#126782"><title>BM23 Exit / entrance</title></rect>
+<text x="1058.12" y="526" class="small">23</text>
+<rect x="1075.02" y="570" width="9.31" height="12" fill="#d97915"><title>ACC21 P23</title></rect>
+<text x="1075.02" y="566" class="small">P23</text>
+<rect x="1091.21" y="530" width="7.33" height="12" fill="#126782"><title>BM24 Exit 5, 4F</title></rect>
+<text x="1091.21" y="526" class="small">24</text>
+<rect x="1111.72" y="570" width="4.15" height="12" fill="#d97915"><title>ACC22 P24</title></rect>
+<text x="1111.72" y="566" class="small">P24</text>
+<rect x="1118.31" y="530" width="7.33" height="12" fill="#126782"><title>BM25 Lecture theatre 2 B</title></rect>
+<text x="1118.31" y="526" class="small">25</text>
+<rect x="1135.39" y="570" width="12.75" height="12" fill="#d97915"><title>ACC23 P25</title></rect>
+<text x="1135.39" y="566" class="small">P25</text>
+<rect x="1152.67" y="530" width="7.33" height="12" fill="#126782"><title>BM26 Lecture theatre 2 A</title></rect>
+<text x="1152.67" y="526" class="small">26</text>
+<line x1="80.0" y1="595" x2="80.0" y2="601" class="axis"/><text x="80.0" y="617" class="small" text-anchor="middle">21:09:41</text>
+<line x1="214.9999999563579" y1="595" x2="214.9999999563579" y2="601" class="axis"/><text x="214.9999999563579" y="617" class="small" text-anchor="middle">21:12:46</text>
+<line x1="350.0000000872842" y1="595" x2="350.0000000872842" y2="601" class="axis"/><text x="350.0000000872842" y="617" class="small" text-anchor="middle">21:15:50</text>
+<line x1="485.0000000436421" y1="595" x2="485.0000000436421" y2="601" class="axis"/><text x="485.0000000436421" y="617" class="small" text-anchor="middle">21:18:55</text>
+<line x1="620.0" y1="595" x2="620.0" y2="601" class="axis"/><text x="620.0" y="617" class="small" text-anchor="middle">21:21:59</text>
+<line x1="754.9999999563579" y1="595" x2="754.9999999563579" y2="601" class="axis"/><text x="754.9999999563579" y="617" class="small" text-anchor="middle">21:25:03</text>
+<line x1="889.9999999127158" y1="595" x2="889.9999999127158" y2="601" class="axis"/><text x="889.9999999127158" y="617" class="small" text-anchor="middle">21:28:08</text>
+<line x1="1025.000000043642" y1="595" x2="1025.000000043642" y2="601" class="axis"/><text x="1025.000000043642" y="617" class="small" text-anchor="middle">21:31:12</text>
+<line x1="1160.0" y1="595" x2="1160.0" y2="601" class="axis"/><text x="1160.0" y="617" class="small" text-anchor="middle">21:34:16</text>
+<text x="40" y="650" font-size="13">BM16 (4F) → BM17 (5F) → BM18 (4F): pressure supports the extra upstairs visit.</text>
+<text x="40" y="673" font-size="13">ACC P16–18 is a later visit; its user-requested 5F copy is separate augmentation with no timeline acquisition time.</text>
+</svg>

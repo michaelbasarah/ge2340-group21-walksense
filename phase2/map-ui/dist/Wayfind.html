@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#147d77">
+  <meta name="description" content="Explore campus rooms and preview indoor directions across floors.">
+  <title>Wayfind — Campus navigator</title>
+  <style>
+:root{--ink:#183332;--muted:#778582;--teal:#137f76;--teal-dark:#09645d;--teal-soft:#e6f2ee;--border:#e8ece8;--white:#fff;--canvas:#f3f5f0;--sand:#f7f4ed;--radius:18px;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#f5f6f2;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button,input,a{-webkit-tap-highlight-color:transparent}button{color:inherit}button:disabled{cursor:default;opacity:.55}button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #75c7b4;outline-offset:3px}button{border:0;background:none}button svg,a svg,span[data-icon] svg{display:block;width:20px;height:20px;flex:none}input{min-width:0}input::placeholder{color:#9aa4a0}input:focus{outline:none}button[hidden],[hidden]{display:none!important}.app-shell{height:100vh;height:100dvh;overflow:hidden}.app-header{height:82px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 30px;gap:40px;position:relative;z-index:5}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);min-width:275px}.brand-symbol{width:42px;height:42px;background:var(--teal);color:#fff;border-radius:14px;font-size:37px;line-height:43px;text-align:center;transform:rotate(-4deg);font-family:Arial,sans-serif;box-shadow:0 4px 12px #137f761b}.brand strong{font-size:28px;font-weight:750;letter-spacing:-1.5px;line-height:1}.brand-dot{color:var(--teal)}.brand small{display:block;font-size:8px;font-weight:650;letter-spacing:2.1px;color:#80908a;margin-top:6px}.header-context{display:flex;align-items:center;gap:10px;font-size:12px;color:#546863;white-space:nowrap}.context-dot{width:6px;height:6px;border-radius:50%;background:#77a894}.context-divider{margin:0 5px;color:#c5cec7}.header-actions{margin-left:auto;display:flex;align-items:center;gap:14px}.prototype-label{font-size:11px;color:#87958f;margin-right:6px}.header-button{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:600;background:white}.header-button:hover{background:#f7f9f6}.header-button svg{width:17px;height:17px}.icon-button{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#fff}.icon-button:hover{background:#eef4ee}.help-button{color:#7b8d85}.main-layout{height:calc(100% - 82px);display:flex}.sidebar{width:340px;flex:none;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0;z-index:3}.sidebar-heading{padding:30px 25px 23px}.eyebrow{font-size:9px;letter-spacing:1.7px;font-weight:700;color:var(--teal)}h1{font-weight:650;font-size:29px;letter-spacing:-1.1px;margin:10px 0 9px;line-height:1.15}.sidebar-heading p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}.panel-tabs{display:flex;margin:0 24px 23px;padding:4px;background:#f3f6f2;border-radius:11px;gap:3px;flex:none}.panel-tab{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;flex:1;font-size:12px;color:#809087;border-radius:8px;font-weight:600}.panel-tab svg{width:16px;height:16px}.panel-tab.active{color:var(--teal-dark);background:white;box-shadow:0 2px 6px #1833320d}.panel{padding:0 24px;display:flex;flex-direction:column;min-height:0;flex:1}.search-box{height:46px;border:1px solid #e2e8e1;background:#fff;display:flex;align-items:center;gap:10px;padding:0 12px;border-radius:11px;flex:none}.search-box>span{color:#8b9c92}.search-box svg{width:17px;height:17px}.search-box input{border:0;background:none;flex:1;width:100%;font-size:12px;color:var(--ink)}kbd{font:11px inherit;color:#a4b0a8;background:#f5f7f3;border:1px solid #e5e9e1;border-radius:4px;width:20px;height:22px;display:grid;place-items:center}.category-chips{display:flex;gap:6px;flex:none;padding:15px 0 23px}.category-chip{padding:7px 11px;border-radius:20px;font-size:10px;border:1px solid #e8ede5;color:#6e8176;font-weight:550;white-space:nowrap}.category-chip:hover{background:#f6f8f3}.category-chip.active{background:var(--teal-soft);color:var(--teal-dark);border-color:transparent}.list-heading{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;flex:none}.list-heading h2{font-size:11px;font-weight:650;margin:0;color:#5f7469}.list-heading>span{font-size:10px;color:#9caaa1}.place-list{overflow:auto;min-height:0;margin:0 -8px;padding:0 8px;scrollbar-width:thin;scrollbar-color:#dfe6dc transparent}.place-row{display:flex;align-items:center;width:100%;text-align:left;gap:11px;padding:13px 9px;border-radius:11px;transition:background .15s}.place-row:hover{background:#f5f8f2}.place-row.active{background:#edf5ef}.place-type-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#f1f4f1;color:#7b9184;flex:none}.place-type-icon svg{width:17px;height:17px}.place-type-icon.room,.place-type-icon.study{background:#ecf0f8;color:#7d8caa}.place-type-icon.food{background:#f7efe2;color:#b0996b}.place-type-icon.vending{background:#f4eae4;color:#af8975}.place-type-icon.exit,.place-type-icon.entrance{background:#e6f1e7;color:#7c9e7d}.place-type-icon.restroom{background:#eeeaf4;color:#9482a8}.place-row-text{flex:1;min-width:0}.place-row-text strong{display:block;font-size:12px;font-weight:550;line-height:1.4}.place-row-text small{display:block;font-size:10px;color:#94a096;margin-top:3px}.place-row .floor-pill{font-size:9px;background:#f4f6f1;border:1px solid #e6ebe2;border-radius:5px;padding:4px 5px;color:#87978a;flex:none}.place-row.active .floor-pill{background:white}.sidebar-note{display:flex;align-items:center;gap:11px;padding:21px 6px 20px;flex:none;color:#a5b1a7}.sidebar-note svg{width:23px;height:23px}.sidebar-note p{font-size:10px;line-height:1.55;color:#97a397;margin:0}.sidebar-footer{display:flex;gap:7px;align-items:center;padding:18px 24px;border-top:1px solid #f0f2ec;font-size:9px;color:#93a18f;flex:none}.status-dot{width:5px;height:5px;border-radius:50%;background:#79a585}.footer-separator{color:#c4cec0;margin:0 2px}.map-workspace{position:relative;flex:1;min-width:0;overflow:hidden;background:#f4f5ef;background-image:radial-gradient(#c5d0bc65 .65px,transparent .65px);background-size:18px 18px}.map-topline{position:absolute;top:25px;left:29px;right:28px;display:flex;align-items:center;gap:18px;z-index:2;pointer-events:none}.map-floor-label{display:flex;align-items:center;gap:11px}.map-floor-label>span{background:#ffffffb8;border:1px solid #e2e7db;color:#789383;padding:10px;border-radius:12px}.map-floor-label svg{width:20px;height:20px}.map-floor-label strong{display:block;font-size:13px;line-height:1.6}.map-floor-label div>span{font-size:10px;color:#929e8b}.demo-badge{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:10px;color:#899783;background:#ffffffca;padding:7px 10px;border:1px solid #e5e9de;border-radius:20px}.demo-badge>span{width:5px;height:5px;background:#c6b983;border-radius:50%}.map-canvas{height:100%;width:100%;touch-action:none;cursor:grab}.map-canvas.dragging{cursor:grabbing}.map-canvas svg{display:block;width:100%;height:100%;user-select:none;overflow:visible}.map-room{cursor:pointer;outline:none;transition:filter .15s}.map-room:hover{filter:brightness(.97)}.map-room polygon{stroke:#d4ddd1;stroke-width:1.25;transition:fill .2s,stroke .2s}.map-room.selected polygon{fill:#d6eee3!important;stroke:var(--teal);stroke-width:2.4}.map-room text{font-family:Inter,"Segoe UI",Arial,sans-serif;fill:#687b6e;font-size:13px;font-weight:500;pointer-events:none}.map-room.selected text{fill:#1a7360}.map-room .map-room-small{font-size:9px;fill:#9ba89a;letter-spacing:.4px}.map-poi{cursor:pointer;outline:none}.map-poi .poi-base{fill:#fff;stroke:#cbd8cc;stroke-width:1.3;filter:drop-shadow(0 2px 2px #465d4612)}.map-poi .poi-icon{color:#7b9582;pointer-events:none}.map-poi.selected .poi-base{fill:var(--teal);stroke:#fff;stroke-width:2.5}.map-poi.selected .poi-icon{color:#fff}.map-poi.selected .poi-ring{fill:#137f7610;stroke:#137f7620;stroke-width:8}.map-origin{fill:#436aaa;stroke:white;stroke-width:3}.map-destination{fill:var(--teal);stroke:white;stroke-width:3}.route-halo{fill:none;stroke:white;stroke-width:11;stroke-linejoin:round;stroke-linecap:round;opacity:.95}.route-line{fill:none;stroke:#13877a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0;filter:drop-shadow(0 2px 3px #0f77652a)}.map-hall-label{font-family:Inter,"Segoe UI",Arial,sans-serif;fill:#aab3a3;font-size:9px;letter-spacing:3px;pointer-events:none}.map-tools{position:absolute;right:26px;top:107px;display:flex;flex-direction:column;align-items:center;gap:16px;z-index:2}.floor-switch{display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 6px 6px;background:#ffffffed;border:1px solid #e0e7d9;border-radius:13px;box-shadow:0 3px 10px #40523a06}.tool-label{font-size:7px;letter-spacing:1px;color:#a0ab98;font-weight:650;margin:0 4px 4px}.floor-switch button{width:36px;height:35px;border-radius:8px;font-size:13px;color:#83927c}.floor-switch button.active{background:var(--teal);color:#fff;box-shadow:0 2px 5px #167b6e25}.floor-switch button:hover:not(.active){background:#f2f5ed}.zoom-controls{padding:4px;background:#fff;border:1px solid #e0e7d9;border-radius:12px;box-shadow:0 3px 10px #40523a06}.zoom-controls .icon-button{width:36px;height:34px;border-radius:7px;color:#7d8c76}.zoom-controls .icon-button+button{border-top:1px solid #f0f3e9}.zoom-controls svg{width:17px;height:17px}.north-arrow{display:flex;flex-direction:column;align-items:center;color:#8c9983;gap:1px}.north-arrow strong{font-size:9px}.north-arrow>span{font-size:29px;line-height:1;color:#6e8369}.map-bottomline{position:absolute;bottom:20px;left:29px;right:27px;display:flex;gap:15px;align-items:center;justify-content:space-between;pointer-events:none;z-index:2}.map-legend{display:flex;gap:15px;background:#f7f8f1db;padding:7px 9px;border-radius:6px}.map-legend>span{display:flex;align-items:center;gap:5px;font-size:9px;color:#87957e;white-space:nowrap}.legend-dot{width:7px;height:7px;border-radius:2px}.room-dot{background:#d5dfea}.amenity-dot{background:#e2d8bd}.legend-line{width:14px;height:3px;border-radius:3px;background:var(--teal)}.map-disclaimer{font-size:9px;color:#9ca690;text-align:right}.selected-card{position:absolute;bottom:72px;left:28px;width:292px;background:white;border:1px solid #e1e8db;box-shadow:0 12px 36px #384c3620;border-radius:17px;z-index:3;overflow:hidden;animation:card-in .2s ease-out}.selected-photo{height:119px;background:#eef2e9;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.selected-photo img{width:100%;height:100%;object-fit:cover}.photo-empty-art{position:absolute;inset:0;background:radial-gradient(ellipse at 10% 90%,#d8e4d2,transparent 65%),linear-gradient(120deg,#eff3e9,#e4eade)}.photo-empty-art:before{content:"";position:absolute;left:40px;top:29px;width:100px;height:125px;border:1px solid #c9d6be;border-radius:13px 13px 0 0;background:#dbe6d1;transform:rotate(-15deg)}.photo-empty-art:after{content:"";position:absolute;left:147px;top:55px;width:87px;height:100px;border:1px solid #c9d6be;border-radius:10px 10px 0 0;background:#e4ecdd;transform:rotate(13deg)}.photo-empty-content{position:relative;z-index:1;display:flex;align-items:center;gap:7px;color:#82987b;background:#ffffffb5;border:1px solid #e0e7d8;padding:7px 10px;border-radius:20px;font-size:9px}.photo-empty-content svg{width:13px;height:13px}.selected-card-close{position:absolute;right:9px;top:9px;width:27px;height:27px;background:#ffffffdc;border:1px solid #e2e8db;z-index:2}.selected-card-close svg{width:14px;height:14px}.photo-edit-button{position:absolute;right:9px;bottom:8px;font-size:8px;padding:5px 7px;border-radius:5px;background:#ffffffdf;display:flex;gap:4px;align-items:center}.photo-edit-button svg{width:11px;height:11px}.selected-content{padding:16px}.selected-category{font-size:8px;letter-spacing:1.5px;color:#8f9e87;font-weight:650;text-transform:uppercase}.selected-title-row{display:flex;align-items:center;gap:9px;margin:6px 0}.selected-content h2{margin:0;flex:1;font-size:18px;letter-spacing:-.4px;font-weight:650}.selected-floor{font-size:9px;padding:4px 6px;border-radius:5px;background:#edf3e8;color:#7f9574}.selected-content p{font-size:10px;line-height:1.6;color:#8b9b81;margin:6px 0 14px}.selected-actions{display:flex;gap:8px}.primary-button{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);border:1px solid var(--teal);color:#fff;min-height:42px;padding:10px 15px;font-size:11px;font-weight:600;border-radius:10px;transition:background .15s;width:100%}.primary-button:hover{background:var(--teal-dark)}.primary-button svg{width:16px;height:16px}.primary-button>span:last-child:not(:first-child){margin-left:auto}.selected-actions .primary-button{flex:1;min-height:38px}.secondary-button{display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid #e0e7db;background:white;border-radius:10px;padding:10px 13px;min-height:40px;font-size:11px;color:#6c8165;font-weight:550}.secondary-button:hover{background:#f5f8f0}.secondary-button svg{width:16px;height:16px}.secondary-button.compact{padding:8px 10px;font-size:10px;min-height:34px}.text-button{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--teal);font-size:11px;padding:9px 0;font-weight:550}.text-button svg{width:14px;height:14px}.text-button:hover{text-decoration:underline}.route-fields{position:relative;border:1px solid #e1e8dc;border-radius:12px;padding:4px 36px 4px 15px}.route-field-line{display:flex;align-items:center;gap:13px;position:relative;z-index:1}.route-field-line label{display:flex;flex-direction:column;flex:1;min-width:0;padding:13px 0}.route-field-line+.route-field-line{border-top:1px solid #eef1e8}.field-label{font-size:7px;letter-spacing:1.1px;color:#98a48e;font-weight:650;margin-bottom:7px}.route-field-line input{font-size:11px;border:0;background:transparent;width:100%;color:#45613e;padding:0}.endpoint-dot{width:8px;height:8px;border-radius:50%;flex:none}.origin-dot{background:#547bab;box-shadow:0 0 0 3px #547bab14}.destination-dot{background:var(--teal);box-shadow:0 0 0 3px #137f7612}.field-connector{height:40px;position:absolute;left:18px;top:44px;border-left:2px dotted #d7dfd0}.swap-button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:29px;height:29px;display:grid;place-items:center;border-radius:7px;color:#819579;background:#f7f9f1}.swap-button:hover{background:#eaf2e4}.swap-button svg{width:16px;height:16px}.locate-button{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:550;color:var(--teal);padding:13px 1px 17px;width:100%}.locate-button svg{width:14px;height:14px}.small-tag{margin-left:auto;font-size:7px;letter-spacing:.4px;font-weight:500;background:#f3f5ee;color:#9aaa90;padding:4px 5px;border-radius:4px}.route-submit{margin-bottom:20px}.route-submit>span:first-child{margin-right:2px}.route-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:25px 0 35px;min-height:180px}.route-empty-icon{width:58px;height:58px;border-radius:19px;background:#f0f5eb;color:#a2b296;display:grid;place-items:center}.route-empty-icon svg{width:25px;height:25px}.route-empty h2{font-size:13px;font-weight:600;color:#73876a;margin:18px 0 9px}.route-empty p{font-size:10px;color:#9aa88f;line-height:1.8;margin:0 0 12px}.form-error{font-size:10px;line-height:1.5;color:#ad5e4f;background:#fbf1ec;padding:10px;border-radius:8px;margin:0 0 12px}.route-result{overflow:auto;min-height:0;flex:1;scrollbar-width:thin}.route-summary{border-top:1px solid #edf1e7;padding:17px 0 15px}.route-summary h2{font-size:17px;font-weight:650;letter-spacing:-.4px;margin:0 0 7px}.route-summary p{font-size:10px;color:#8d9e83;line-height:1.6;margin:0}.route-summary-badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.route-summary-badges span{font-size:9px;background:#f1f5ec;color:#8a9c7d;padding:5px 7px;border-radius:5px}.route-summary-badges .floor-change-badge{background:#e9f3ed;color:var(--teal)}.route-steps{list-style:none;margin:0 0 20px;padding:0}.route-step{position:relative;display:flex;align-items:flex-start;gap:12px;padding:12px 0;cursor:pointer}.route-step:not(:last-child):before{content:"";position:absolute;left:12px;top:40px;bottom:-1px;border-left:1px solid #e2e9da}.route-step-icon{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#f1f5ec;color:#90a282;flex:none;position:relative;z-index:1}.route-step-icon svg{width:14px;height:14px}.route-step.active .route-step-icon{background:var(--teal);color:#fff}.route-step-text{flex:1}.route-step-text strong{font-size:10px;line-height:1.65;font-weight:550;display:block;color:#6c8060}.route-step-text small{font-size:8px;color:#a0ad96;display:block;margin-top:4px}.route-step.active .route-step-text strong{color:var(--teal-dark)}.route-preview-controls{display:flex;gap:8px;padding:5px 0 20px}.route-preview-controls .secondary-button{flex:1;font-size:10px}.preview-status{font-size:9px;color:#8c9c81;margin-top:10px}.position-note{font-size:9px;background:#eff5eb;color:#7c966b;padding:8px;border-radius:6px;margin:-5px 0 12px}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);max-width:calc(100% - 30px);background:#233e32;color:#fff;font-size:11px;line-height:1.5;padding:12px 18px;border-radius:12px;box-shadow:0 5px 24px #162d252c;z-index:20;animation:toast-in .2s ease}.app-dialog{border:1px solid #e2e9d9;border-radius:22px;box-shadow:0 22px 100px #182c2233;padding:33px;width:410px;max-width:calc(100% - 30px);color:var(--ink)}.app-dialog::backdrop{background:#18382b38;backdrop-filter:blur(4px)}.dialog-close{position:absolute;right:13px;top:13px;color:#a0ac95}.dialog-close svg{width:17px;height:17px}.dialog-feature-icon{display:grid;place-items:center;width:51px;height:51px;border-radius:16px;background:var(--teal-soft);color:var(--teal);margin-bottom:22px}.dialog-feature-icon svg{width:24px;height:24px}.app-dialog h2{font-size:25px;font-weight:650;letter-spacing:-.8px;line-height:1.2;margin:12px 0}.app-dialog p{font-size:12px;color:#889a7b;line-height:1.8;margin:0 0 18px}.app-dialog>.secondary-button{width:100%;margin-top:9px}.callout{display:flex;gap:9px;padding:13px;background:#f5f7ef;border:1px solid #e8ecde;border-radius:10px;font-size:10px;color:#91a180;line-height:1.7;margin:18px 0}.callout>span:first-child{flex:none;margin-top:2px}.callout svg{width:15px;height:15px}.setup-dialog{width:450px}.setup-floor{display:flex;align-items:center;gap:11px;border:1px solid #e3eadb;border-radius:12px;padding:13px;margin-top:20px}.setup-floor-icon{display:grid;place-items:center;width:37px;height:37px;border-radius:10px;background:#eff4e9;color:#8ea57b}.setup-floor-icon svg{width:20px;height:20px}.setup-floor>div{flex:1}.setup-floor strong{display:block;font-size:12px}.setup-floor div>span{font-size:10px;color:#98a78b;display:block;margin-top:4px}.danger{color:#a47d62;font-size:9px}.setup-tip{display:flex;gap:12px;margin:25px 0 17px}.setup-tip>span{color:#9caf8c;margin-top:1px}.setup-tip>span svg{width:22px;height:22px}.setup-tip strong{font-size:12px;font-weight:550}.setup-tip p{font-size:10px;margin:5px 0 0;line-height:1.75}.storage-note{font-size:9px;color:#a5b198;border-top:1px solid #edf1e6;padding-top:15px}.help-steps{display:flex;flex-direction:column;gap:14px;margin:24px 0}.help-steps>div{display:flex;gap:12px;align-items:center;font-size:11px;color:#7f936f}.help-steps b{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#edf4e5;color:#8ca276;font-size:10px}.empty-list{text-align:center;padding:35px 10px;color:#9aaa8d;font-size:11px;line-height:1.8}.empty-list strong{display:block;color:#7d926e;font-size:13px;margin-bottom:4px}.map-transition-label{font-size:11px;font-weight:600;fill:var(--teal);paint-order:stroke;stroke:white;stroke-width:5px}.map-current-label{font-size:10px;font-weight:650;fill:#4c70a5;paint-order:stroke;stroke:white;stroke-width:4px}@keyframes card-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@keyframes toast-in{from{opacity:0;transform:translate(-50%,5px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(min-width:1600px){.sidebar{width:370px}.sidebar-heading{padding:36px 30px 28px}.panel-tabs{margin-left:29px;margin-right:29px}.panel{padding:0 29px}.place-row{padding-top:15px;padding-bottom:15px}.selected-card{width:310px;bottom:80px;left:37px}.selected-photo{height:137px}}
+@media(max-width:1100px){.header-context{display:none}.app-header{padding:0 22px}.brand{min-width:250px}.sidebar{width:315px}.sidebar-heading{padding-left:22px;padding-right:22px}.panel-tabs{margin-left:21px;margin-right:21px}.panel{padding-left:21px;padding-right:21px}.prototype-label{display:none}.selected-card{width:260px;left:20px}.selected-photo{height:95px}.map-topline{left:22px}.map-tools{right:18px}.map-bottomline{left:20px;right:18px}.map-disclaimer{max-width:155px;line-height:1.5}}
+@media(max-width:700px){.app-header{height:64px;padding:0 16px;gap:12px}.brand{min-width:0;gap:9px}.brand-symbol{width:33px;height:33px;font-size:29px;line-height:34px;border-radius:11px}.brand strong{font-size:24px}.brand small{font-size:6px;letter-spacing:1.6px;margin-top:4px}.header-actions{gap:4px}.header-button{padding:8px;border:0}.header-button svg{width:20px;height:20px}.button-label{display:none}.help-button{width:33px;height:33px}.main-layout{height:calc(100% - 64px);flex-direction:column}.map-workspace{flex:none;order:0;width:100%;height:45%;min-height:235px;border-bottom:1px solid #dfe6d6}.sidebar{order:1;width:100%;height:55%;min-height:0;flex:1;border-right:0;border-radius:20px 20px 0 0;margin-top:-1px}.sidebar-heading{padding:18px 20px 11px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.sidebar-heading .eyebrow{display:none}.sidebar-heading h1{font-size:22px;margin:0}.sidebar-heading p{font-size:10px;margin-left:auto}.panel-tabs{margin:0 19px 12px;flex:none;padding:3px}.panel-tab{padding:8px;font-size:11px}.panel{padding:0 19px}.search-box{height:40px}.search-box input{font-size:12px}.category-chips{padding:10px 0 12px}.category-chip{font-size:9px;padding:6px 10px}.list-heading{padding-bottom:5px}.list-heading h2{font-size:10px}.place-list{display:grid;grid-template-columns:1fr 1fr;gap:1px 8px}.place-row{padding:9px 4px;gap:8px;min-width:0}.place-type-icon{width:29px;height:29px;border-radius:9px}.place-type-icon svg{width:15px;height:15px}.place-row-text strong{font-size:10px}.place-row-text small{font-size:8px}.place-row .floor-pill{display:none}.sidebar-note{display:none}.sidebar-footer{padding:10px 20px;font-size:8px}.map-topline{top:13px;left:15px;right:15px;gap:10px}.map-floor-label{gap:8px}.map-floor-label>span{padding:8px;border-radius:10px}.map-floor-label svg{width:16px;height:16px}.map-floor-label strong{font-size:11px}.map-floor-label div>span{font-size:8px}.demo-badge{font-size:8px;padding:5px 7px;gap:5px}.map-tools{top:73px;right:13px;gap:9px}.floor-switch{padding:7px 4px 4px;border-radius:10px}.tool-label{font-size:6px;margin-bottom:1px}.floor-switch button{width:29px;height:26px;font-size:11px;border-radius:6px}.zoom-controls{padding:3px;border-radius:9px}.zoom-controls .icon-button{width:29px;height:26px}.zoom-controls svg{width:14px;height:14px}.north-arrow{display:none}.map-bottomline{left:12px;right:12px;bottom:9px}.map-legend{gap:8px;padding:4px 6px}.map-legend>span{font-size:7px;gap:4px}.legend-dot{width:5px;height:5px}.legend-line{width:10px;height:2px}.map-disclaimer{font-size:7px;max-width:130px;line-height:1.4}.selected-card{left:12px;bottom:34px;width:230px;border-radius:12px}.selected-photo{display:none}.selected-content{padding:12px}.selected-category{font-size:7px}.selected-content h2{font-size:15px}.selected-content p{display:none}.selected-title-row{margin:5px 0 10px}.selected-floor{font-size:8px}.selected-actions .primary-button{min-height:32px;font-size:10px;border-radius:7px;padding:7px 10px}.selected-actions .secondary-button{min-height:32px;padding:7px 9px;border-radius:7px}.selected-actions svg{width:14px;height:14px}.selected-card-close{top:6px;right:6px;width:23px;height:23px}.selected-card:has(.selected-photo img) .selected-photo{display:block;height:90px}.selected-card:has(.selected-photo img) .selected-content{padding:9px 12px}.selected-card:has(.selected-photo img) .selected-category{display:none}.route-fields{padding-top:0;padding-bottom:0}.route-field-line label{padding:10px 0}.field-label{font-size:6px;margin-bottom:4px}.route-field-line input{font-size:11px}.field-connector{height:32px;top:36px}.locate-button{padding:9px 0 10px;font-size:9px}.route-submit{min-height:36px;font-size:10px;margin-bottom:10px}.route-empty{padding:10px 0 20px;min-height:115px}.route-empty-icon{display:none}.route-empty h2{font-size:11px;margin:8px 0}.route-empty p{font-size:9px;margin-bottom:4px}.route-empty .text-button{font-size:10px;padding:5px 0}.route-summary{padding:11px 0 8px}.route-summary h2{font-size:14px}.route-summary p{font-size:9px}.route-summary-badges{margin-top:7px}.route-step{padding:8px 0}.route-step-text strong{font-size:10px}.directions-panel{overflow:auto;flex-shrink:1}.directions-panel>form{flex:none}.route-result{overflow:visible;flex:none}.app-dialog{padding:28px 23px;border-radius:18px}.app-dialog h2{font-size:23px}.app-dialog p{font-size:11px}.toast{bottom:14px;font-size:10px}.position-note{font-size:8px;margin:0 0 7px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Touch targets and text stay usable while the map remains pannable. */
+@media(max-width:700px){
+ .help-button,.header-button{width:40px;height:40px}
+ .floor-switch button{width:39px;height:38px;font-size:14px}
+ .zoom-controls .icon-button{width:39px;height:38px}
+ .floor-switch{padding:6px 4px 4px}.tool-label{font-size:7px}
+ .map-tools{right:10px;gap:8px}.map-topline{right:12px}
+ .category-chip{min-height:34px;font-size:10px}.panel-tab{min-height:36px;font-size:12px}
+ .place-row{min-height:51px}.place-row-text strong{font-size:12px}.place-row-text small{font-size:9px}
+ .selected-actions .primary-button,.selected-actions .secondary-button{min-height:40px;font-size:11px}
+ .selected-card-close{width:30px;height:30px}.selected-title-row{padding-right:18px}
+ .route-field-line input{font-size:12px}.locate-button{min-height:35px;font-size:11px}
+ .route-submit{min-height:41px;font-size:12px}.route-step-text strong{font-size:12px}
+ .sidebar-heading p{font-size:10px}.sidebar-footer{font-size:9px}
+ .map-disclaimer{max-width:135px}.map-legend{gap:6px}
+}
+
+</style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="Wayfind home"><span class="brand-symbol" aria-hidden="true">↗</span><span><strong>wayfind<span class="brand-dot">.</span></strong><small>CAMPUS NAVIGATOR</small></span></a>
+      <div class="header-context"><span class="context-dot"></span>Academic building<span class="context-divider">/</span><span id="header-floor">Floor 5</span></div>
+      <div class="header-actions"><span class="prototype-label">Interactive preview</span><button class="header-button" id="setup-button" type="button"><span data-icon="layers"></span><span class="button-label">Map setup</span></button><button class="icon-button help-button" id="help-button" type="button" aria-label="About this preview"><span data-icon="info"></span></button></div>
+    </header>
+    <main class="main-layout">
+      <aside class="sidebar" aria-label="Find places and directions">
+        <div class="sidebar-heading"><div class="eyebrow">A LITTLE LESS LOST</div><h1>Find your way.</h1><p>Rooms, landmarks, and the route between.</p></div>
+        <div class="panel-tabs" role="tablist" aria-label="Navigation mode"><button class="panel-tab active" id="explore-tab" role="tab" aria-selected="true" aria-controls="explore-panel" type="button"><span data-icon="search"></span>Explore</button><button class="panel-tab" id="directions-tab" role="tab" aria-selected="false" aria-controls="directions-panel" type="button"><span data-icon="route"></span>Directions</button></div>
+        <section class="panel explore-panel" id="explore-panel" role="tabpanel" aria-labelledby="explore-tab">
+          <label class="search-box"><span data-icon="search"></span><input id="explore-search" type="search" placeholder="Search a room or place" autocomplete="off" aria-label="Search rooms and places"><kbd>/</kbd></label>
+          <div class="category-chips" aria-label="Filter places"><button class="category-chip active" data-category="all" type="button" aria-pressed="true">All places</button><button class="category-chip" data-category="rooms" type="button" aria-pressed="false">Rooms</button><button class="category-chip" data-category="essentials" type="button" aria-pressed="false">Essentials</button></div>
+          <div class="list-heading"><h2 id="place-list-title">On this floor</h2><span id="place-count"></span></div>
+          <div id="place-list" class="place-list"></div>
+          <div class="sidebar-note"><span data-icon="hand"></span><p>You can also tap any room<br>or marker on the map.</p></div>
+        </section>
+        <section class="panel directions-panel" id="directions-panel" role="tabpanel" aria-labelledby="directions-tab" hidden>
+          <form id="route-form" novalidate>
+            <div class="route-fields"><div class="route-field-line"><span class="endpoint-dot origin-dot"></span><label><span class="field-label">STARTING POINT</span><input id="origin-input" list="place-options" placeholder="Type a room or landmark" autocomplete="off" required></label></div><div class="field-connector"></div><div class="route-field-line"><span class="endpoint-dot destination-dot"></span><label><span class="field-label">DESTINATION</span><input id="destination-input" list="place-options" placeholder="Where are you going?" autocomplete="off" required></label></div><button id="swap-button" class="swap-button" type="button" aria-label="Swap starting point and destination"><span data-icon="swap"></span></button></div>
+            <datalist id="place-options"></datalist>
+            <button class="locate-button" id="locate-button" type="button"><span data-icon="locate"></span>Use current location<span class="small-tag">Preview</span></button>
+            <div id="position-note" class="position-note" hidden></div>
+            <button class="primary-button route-submit" id="find-route" type="submit"><span data-icon="route"></span>Find a route<span data-icon="arrow-right"></span></button>
+            <p class="form-error" id="route-error" role="alert" hidden></p>
+          </form>
+          <div id="route-empty" class="route-empty"><span class="route-empty-icon" data-icon="route"></span><h2>Every route starts somewhere.</h2><p>Choose your starting point and destination.<br>We’ll connect the dots.</p><button class="text-button" id="example-route" type="button">Try Exit 5 → Y4052<span data-icon="arrow-right"></span></button></div>
+          <div id="route-result" class="route-result" hidden></div>
+        </section>
+        <footer class="sidebar-footer"><span class="status-dot"></span>Floors 4 & 5<span class="footer-separator">·</span><span>GE2340 project</span></footer>
+      </aside>
+      <section class="map-workspace" aria-label="Interactive indoor map">
+        <div class="map-topline"><div class="map-floor-label"><span data-icon="building"></span><div><strong id="map-floor-title">Floor 5</strong><span>Academic building</span></div></div><span class="demo-badge"><span></span>Demo layout</span></div>
+        <div class="map-canvas" id="map-canvas"><svg id="map-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="group" aria-labelledby="map-title map-description"><title id="map-title">Floor 5 indoor map</title><desc id="map-description">Illustrative indoor layout. Tap a room or landmark to see details and directions.</desc></svg></div>
+        <div class="map-tools"><div class="floor-switch" aria-label="Choose a floor"><span class="tool-label">FLOOR</span><button id="floor-5" data-floor="5" class="active" type="button" aria-pressed="true">5</button><button id="floor-4" data-floor="4" type="button" aria-pressed="false">4</button></div><div class="zoom-controls"><button class="icon-button" id="zoom-in" type="button" aria-label="Zoom in"><span data-icon="plus"></span></button><button class="icon-button" id="zoom-out" type="button" aria-label="Zoom out"><span data-icon="minus"></span></button><button class="icon-button" id="fit-map" type="button" aria-label="Fit map"><span data-icon="expand"></span></button></div><div class="north-arrow" title="North orientation is illustrative"><strong>N</strong><span>↑</span></div></div>
+        <div id="selected-card" class="selected-card" hidden></div>
+        <div class="map-bottomline"><div class="map-legend"><span><i class="legend-dot room-dot"></i>Rooms</span><span><i class="legend-dot amenity-dot"></i>Amenities</span><span><i class="legend-line"></i>Route</span></div><span class="map-disclaimer">Illustrative map · positions awaiting floor plan</span></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <input id="photo-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+  <input id="floor-image-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+  <dialog id="location-dialog" class="app-dialog"><button class="dialog-close icon-button" data-close-dialog="location-dialog" type="button" aria-label="Close"><span data-icon="close"></span></button><span class="dialog-feature-icon" data-icon="locate"></span><div class="eyebrow">YOUR STARTING POINT</div><h2>Indoor location, coming next.</h2><p>The sensor model will estimate your room or landmark here. For now, you can type a starting point or try a clearly marked demo position.</p><div class="callout"><span data-icon="info"></span><span>This preview does not detect your physical location.</span></div><button class="primary-button" id="try-demo-location" type="button">Try demo location<span data-icon="arrow-right"></span></button><button class="secondary-button" data-close-dialog="location-dialog" type="button">I’ll type my starting point</button></dialog>
+  <dialog id="setup-dialog" class="app-dialog setup-dialog"><button class="dialog-close icon-button" data-close-dialog="setup-dialog" type="button" aria-label="Close map setup"><span data-icon="close"></span></button><div class="eyebrow">MAKE IT FAMILIAR</div><h2>Your maps. Your landmarks.</h2><p>Add a floor image now, then align the room positions when the final layout is ready. Your images stay in this browser.</p><div class="setup-floor"><span class="setup-floor-icon" data-icon="layers"></span><div><strong id="setup-floor-name">Floor 5</strong><span id="floor-image-status">Illustrative floor plan</span></div><button id="choose-floor-image" class="secondary-button compact" type="button">Add image</button></div><button id="remove-floor-image" class="text-button danger" type="button" hidden>Remove this floor image</button><div class="callout"><span data-icon="info"></span><span>Adding an image changes the background only. Room positions, corridors and route distances still need calibration.</span></div><div class="setup-tip"><span data-icon="camera"></span><div><strong>A photo at every major spot</strong><p>Select a place on the map and choose “Add photo.” It’s a visual cue to help someone recognise where they are.</p></div></div><div class="storage-note" id="storage-note">Images are saved locally when browser storage is available.</div></dialog>
+  <dialog id="help-dialog" class="app-dialog"><button class="dialog-close icon-button" data-close-dialog="help-dialog" type="button" aria-label="Close help"><span data-icon="close"></span></button><span class="dialog-feature-icon" data-icon="route"></span><div class="eyebrow">WELCOME TO WAYFIND</div><h2>A clearer way around.</h2><p>Search or tap a place, choose Directions, and enter a starting point. Routes use the up and down escalators to connect floors 4 and 5.</p><div class="help-steps"><div><b>1</b><span>Find a room or landmark</span></div><div><b>2</b><span>Choose where you’re starting</span></div><div><b>3</b><span>Follow the route preview</span></div></div><div class="callout"><span data-icon="info"></span><span>This is a demo layout. Real maps, measured distances and live indoor positioning will be connected after verification.</span></div><button class="primary-button" data-close-dialog="help-dialog" type="button">Let’s explore<span data-icon="arrow-right"></span></button></dialog>
+  <script type="module">
+// Illustrative geometry only. Replace with a calibrated floor plan and verified POIs.
+const MAP_DATA = (() => {
+  const places = [];
+  const nodes = [];
+  const edges = [];
+  const palette = {
+    room: '#e5edf1', study: '#f2ebdc', restroom: '#eae5f1',
+    exit: '#e1eee6', food: '#f3e3dc', vending: '#f3e8c9',
+    escalator: '#e0eaf0', entrance: '#e1eee6',
+  };
+  const rectangle = (x1, y1, x2, y2) => [[x1, y1], [x2, y1], [x2, y2], [x1, y2]];
+  const floorSpecs = [
+    {
+      id: '5', label: '5F', level: 5,
+      rooms: [
+        ['exit-5', 'Exit 5', 'exit', 130, 185, 'top', [70, 115, 190, 255]],
+        ['men-toilet', "Men’s toilet", 'restroom', 260, 185, 'top', [205, 115, 315, 255]],
+        ['y5302', 'Y5 302', 'room', 410, 185, 'top', [330, 115, 490, 255]],
+        ['study-11', 'Study room 11', 'study', 570, 185, 'top', [505, 115, 635, 255]],
+        ['study-10', 'Study room 10', 'study', 710, 185, 'top', [650, 115, 765, 255]],
+        ['study-9', 'Study room 9', 'study', 850, 185, 'top', [780, 115, 930, 255]],
+        ['study-8', 'Study room 8', 'study', 180, 525, 'bottom', [80, 465, 280, 600]],
+        ['women-toilet', "Women’s toilet", 'restroom', 345, 525, 'bottom', [295, 465, 395, 600]],
+        ['exit-10', 'Exit 10', 'exit', 470, 525, 'bottom', [410, 465, 530, 600]],
+        ['canteen', 'Canteen', 'food', 650, 525, 'bottom', [545, 465, 745, 600]],
+        ['vending-1', 'Vending machine 1', 'vending', 595, 360, 'top', [570, 335, 620, 385]],
+        ['vending-2', 'Vending machine 2', 'vending', 670, 360, 'top', [645, 335, 695, 385]],
+        ['down-escalator', 'Down escalator', 'escalator', 805, 525, 'bottom', [760, 465, 850, 600]],
+        ['up-escalator', 'Up escalator', 'escalator', 900, 525, 'bottom', [865, 465, 940, 600]],
+      ],
+    },
+    {
+      id: '4', label: '4F', level: 4,
+      rooms: [
+        ['exit-5', 'Exit 5', 'exit', 130, 185, 'top', [70, 115, 190, 255]],
+        ['lt2a', 'LT 2A', 'room', 300, 185, 'top', [205, 115, 395, 255]],
+        ['lt2b', 'LT 2B', 'room', 490, 185, 'top', [410, 115, 580, 255]],
+        ['lt1a', 'LT 1A', 'room', 680, 185, 'top', [595, 115, 765, 255]],
+        ['lt1b', 'LT 1B', 'room', 850, 185, 'top', [780, 115, 930, 255]],
+        ['main-entrance', 'Main entrance', 'entrance', 180, 525, 'bottom', [80, 465, 280, 600]],
+        ['exit-10', 'Exit 10', 'exit', 380, 525, 'bottom', [295, 465, 455, 600]],
+        ['y4052', 'Y4052', 'room', 630, 525, 'bottom', [470, 465, 745, 600]],
+        ['down-escalator', 'Down escalator', 'escalator', 805, 525, 'bottom', [760, 465, 850, 600]],
+        ['up-escalator', 'Up escalator', 'escalator', 900, 525, 'bottom', [865, 465, 940, 600]],
+      ],
+    },
+  ];
+  const addEdge = (from, to, type = 'walk', bidirectional = true, extras = {}) => {
+    const a = nodes.find(node => node.id === from);
+    const b = nodes.find(node => node.id === to);
+    edges.push({ from, to, type, bidirectional,
+      cost: Math.hypot(a.x - b.x, a.y - b.y), distanceMeters: null, ...extras });
+  };
+  const floors = floorSpecs.map(spec => {
+    const xs = [...new Set([120, 500, 900, ...spec.rooms.map(room => room[3])])].sort((a, b) => a - b);
+    for (const [side, y] of [['top', 295], ['bottom', 425]]) {
+      for (const x of xs) nodes.push({ id: `${spec.id}:${side}:${x}`, floorId: spec.id, x, y, type: 'corridor' });
+      for (let i = 1; i < xs.length; i++) addEdge(`${spec.id}:${side}:${xs[i - 1]}`, `${spec.id}:${side}:${xs[i]}`);
+    }
+    for (const x of [120, 500, 900]) addEdge(`${spec.id}:top:${x}`, `${spec.id}:bottom:${x}`);
+    const rooms = spec.rooms.map(([suffix, name, category, x, y, anchor, bounds]) => {
+      const id = `f${spec.id}-${suffix}`;
+      const nodeId = `node:${id}`;
+      const floorDescription = category === 'escalator'
+        ? `${suffix.startsWith('down') ? 'Downward' : 'Upward'} escalator landing · Floor ${spec.id}`
+        : `${name} · Floor ${spec.id}`;
+      nodes.push({ id: nodeId, floorId: spec.id, x, y, type: 'place', placeId: id });
+      places.push({ id, name, floorId: spec.id, category, x, y, nodeId,
+        description: floorDescription, photo: null, layoutStatus: 'illustrative' });
+      addEdge(nodeId, `${spec.id}:${anchor}:${x}`);
+      return { placeId: id, polygon: rectangle(...bounds), labelX: x, labelY: y,
+        category, color: palette[category] };
+    });
+    return { id: spec.id, label: spec.label, level: spec.level,
+      name: `Floor ${spec.id}`, rooms,
+      bounds: { x: 65, y: 95, width: 885, height: 520 },
+      corridors: [rectangle(100, 275, 920, 315), rectangle(100, 405, 920, 445),
+        rectangle(100, 275, 140, 445), rectangle(880, 275, 920, 445), rectangle(480, 275, 520, 445)],
+      annotations: [{ x: 300, y: 365, text: 'ACADEMIC BUILDING' }],
+    };
+  });
+  addEdge('node:f5-down-escalator', 'node:f4-down-escalator', 'escalator', false,
+    { direction: 'down', cost: 180 });
+  addEdge('node:f4-up-escalator', 'node:f5-up-escalator', 'escalator', false,
+    { direction: 'up', cost: 180 });
+  return {
+    id: 'ge2340-illustrative-map', title: 'Campus navigator', isDemo: true,
+    viewBox: [0, 0, 1000, 700], north: 0, calibrated: false,
+    distanceUnit: 'layout units',
+    description: 'Illustrative floor layouts. Room positions, corridor geometry and routing weights await verified plans.',
+    floors, places, nodes, edges,
+  };
+})();
+
+
+// Pure routing functions. Costs are graph weights, not automatically metres.
+function routeEmpty(status, extras = {}) {
+  return { status, nodeIds: [], edges: [], totalCost: 0, distanceMeters: null,
+    floorChanges: 0, floorSegments: [], steps: [], ...extras };
+}
+
+function validateMapData(data) {
+  const errors = [];
+  if (!data || !Array.isArray(data.nodes) || !Array.isArray(data.places) || !Array.isArray(data.edges)) {
+    return { valid: false, errors: ['Map must contain nodes, places and edges arrays.'] };
+  }
+  const nodes = new Map();
+  for (const node of data.nodes) {
+    if (!node.id || nodes.has(node.id)) errors.push(`Missing or duplicate node ID: ${node.id}`);
+    if (![node.x, node.y].every(Number.isFinite) || typeof node.floorId !== 'string') errors.push(`Invalid coordinates or floor for ${node.id}`);
+    nodes.set(node.id, node);
+  }
+  const placeIds = new Set();
+  for (const place of data.places) {
+    if (!place.id || placeIds.has(place.id)) errors.push(`Missing or duplicate place ID: ${place.id}`);
+    placeIds.add(place.id);
+    const node = nodes.get(place.nodeId);
+    if (!node || node.floorId !== place.floorId) errors.push(`Missing or mismatched place node for ${place.id}`);
+  }
+  for (const edge of data.edges) {
+    if (!nodes.has(edge.from) || !nodes.has(edge.to)) errors.push(`Unknown edge endpoint: ${edge.from} → ${edge.to}`);
+    if (!Number.isFinite(edge.cost) || edge.cost < 0) errors.push(`Invalid nonnegative cost for ${edge.from} → ${edge.to}`);
+    if (edge.distanceMeters != null && (!Number.isFinite(edge.distanceMeters) || edge.distanceMeters < 0)) errors.push(`Invalid distance for ${edge.from} → ${edge.to}`);
+  }
+  return { valid: errors.length === 0, errors };
+}
+
+function routeSegments(nodeIds, nodeMap) {
+  const segments = [];
+  for (const id of nodeIds) {
+    const node = nodeMap.get(id);
+    let segment = segments.at(-1);
+    if (!segment || segment.floorId !== node.floorId) {
+      segment = { floorId: node.floorId, nodeIds: [], points: [] };
+      segments.push(segment);
+    }
+    segment.nodeIds.push(id);
+    segment.points.push([node.x, node.y]);
+  }
+  return segments;
+}
+
+function findRoute(data, startPlaceId, endPlaceId) {
+  const validation = validateMapData(data);
+  if (!validation.valid) return routeEmpty('invalid', { errors: validation.errors });
+  const start = data.places.find(place => place.id === startPlaceId);
+  const destination = data.places.find(place => place.id === endPlaceId);
+  if (!start || !destination) return routeEmpty('invalid', { errors: ['Choose a valid starting point and destination.'] });
+  const nodeMap = new Map(data.nodes.map(node => [node.id, node]));
+  if (start.nodeId === destination.nodeId) {
+    const route = routeEmpty('same', { startPlaceId, endPlaceId, nodeIds: [start.nodeId],
+      distanceMeters: 0, floorSegments: routeSegments([start.nodeId], nodeMap) });
+    route.steps = buildInstructions(data, route);
+    return route;
+  }
+  const adjacency = new Map(data.nodes.map(node => [node.id, []]));
+  data.edges.forEach((edge, index) => {
+    adjacency.get(edge.from).push({ ...edge, edgeIndex: index, reversed: false });
+    if (edge.bidirectional) adjacency.get(edge.to).push({ ...edge, from: edge.to, to: edge.from, edgeIndex: index, reversed: true });
+  });
+  const distances = new Map([[start.nodeId, 0]]);
+  const previous = new Map();
+  const settled = new Set();
+  while (true) {
+    let current = null;
+    let best = Infinity;
+    for (const [id, distance] of distances) {
+      if (!settled.has(id) && distance < best) { current = id; best = distance; }
+    }
+    if (current === null || current === destination.nodeId) break;
+    settled.add(current);
+    for (const edge of adjacency.get(current)) {
+      const distance = best + edge.cost;
+      if (distance < (distances.get(edge.to) ?? Infinity)) {
+        distances.set(edge.to, distance);
+        previous.set(edge.to, edge);
+      }
+    }
+  }
+  if (!distances.has(destination.nodeId)) return routeEmpty('unreachable', { startPlaceId, endPlaceId });
+  const edges = [];
+  let cursor = destination.nodeId;
+  while (cursor !== start.nodeId) {
+    const edge = previous.get(cursor);
+    if (!edge) return routeEmpty('unreachable', { startPlaceId, endPlaceId });
+    edges.unshift(edge); cursor = edge.from;
+  }
+  const nodeIds = [start.nodeId, ...edges.map(edge => edge.to)];
+  const route = {
+    status: 'ok', startPlaceId, endPlaceId, nodeIds, edges,
+    totalCost: distances.get(destination.nodeId),
+    distanceMeters: edges.every(edge => Number.isFinite(edge.distanceMeters))
+      ? edges.reduce((sum, edge) => sum + edge.distanceMeters, 0) : null,
+    floorChanges: edges.filter(edge => nodeMap.get(edge.from).floorId !== nodeMap.get(edge.to).floorId).length,
+    floorSegments: routeSegments(nodeIds, nodeMap), steps: [],
+  };
+  route.steps = buildInstructions(data, route);
+  return route;
+}
+
+function routeTurnText(previous, current) {
+  if (!previous) return 'Follow the corridor';
+  const cross = previous[0] * current[1] - previous[1] * current[0];
+  const dot = previous[0] * current[0] + previous[1] * current[1];
+  const angle = Math.atan2(cross, dot) * 180 / Math.PI;
+  if (Math.abs(angle) < 35) return 'Continue straight';
+  if (Math.abs(angle) > 145) return 'Turn around';
+  return angle > 0 ? 'Turn right' : 'Turn left';
+}
+
+function buildInstructions(data, route) {
+  if (!route || !['ok', 'same'].includes(route.status) || !route.nodeIds.length) return [];
+  const nodes = new Map(data.nodes.map(node => [node.id, node]));
+  const placesByNode = new Map(data.places.map(place => [place.nodeId, place]));
+  const start = data.places.find(place => place.id === route.startPlaceId) ?? placesByNode.get(route.nodeIds[0]);
+  const destination = data.places.find(place => place.id === route.endPlaceId) ?? placesByNode.get(route.nodeIds.at(-1));
+  const steps = [];
+  const push = (type, text, floorId, nodeIds, extras = {}) => {
+    steps.push({ id: `step-${steps.length + 1}`, type, text, floorId, nodeIds, ...extras });
+  };
+  if (route.status === 'same') {
+    push('arrive', `You are already at ${destination.name}.`, destination.floorId, [destination.nodeId], { placeId: destination.id });
+    return steps;
+  }
+  push('start', `Start at ${start.name} on Floor ${start.floorId}.`, start.floorId, [start.nodeId], { placeId: start.id });
+  let previousDirection = null;
+  let index = 0;
+  while (index < route.edges.length) {
+    const edge = route.edges[index];
+    const a = nodes.get(edge.from); const b = nodes.get(edge.to);
+    if (a.floorId !== b.floorId) {
+      const direction = edge.direction ?? (Number(b.floorId) > Number(a.floorId) ? 'up' : 'down');
+      push('floor-change', `Take the ${direction} escalator to Floor ${b.floorId}.`, a.floorId,
+        [a.id, b.id], { nextFloorId: b.floorId, direction, connectorType: edge.type });
+      previousDirection = null; index++; continue;
+    }
+    const direction = [b.x - a.x, b.y - a.y];
+    const groupedNodes = [a.id, b.id];
+    let finish = b;
+    let nextIndex = index + 1;
+    while (nextIndex < route.edges.length) {
+      const next = route.edges[nextIndex];
+      const c = nodes.get(next.to);
+      if (c.floorId !== a.floorId) break;
+      const nextDirection = [c.x - finish.x, c.y - finish.y];
+      const cross = direction[0] * nextDirection[1] - direction[1] * nextDirection[0];
+      const dot = direction[0] * nextDirection[0] + direction[1] * nextDirection[1];
+      if (Math.abs(cross) > 0.001 || dot <= 0) break;
+      groupedNodes.push(c.id); finish = c; nextIndex++;
+    }
+    const place = placesByNode.get(finish.id);
+    const action = routeTurnText(previousDirection, direction);
+    const context = place ? ` towards ${place.name}` : ' along the corridor';
+    push('walk', `${action}${action === 'Follow the corridor' && !place ? '' : context}.`, a.floorId, groupedNodes,
+      place ? { placeId: place.id } : {});
+    previousDirection = direction;
+    index = nextIndex;
+  }
+  push('arrive', `Arrive at ${destination.name} on Floor ${destination.floorId}.`, destination.floorId,
+    [destination.nodeId], { placeId: destination.id });
+  return steps;
+}
+
+
+
+
+const WF_ICONS = {
+  search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+  route:'<circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 5h8a4 4 0 0 1 0 8H9a4 4 0 0 0 0 8h8"/>',
+  'arrow-right':'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+  'arrow-left':'<path d="M20 12H4m6-6-6 6 6 6"/>',
+  layers:'<path d="m12 3 10 5-10 5L2 8l10-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>',
+  building:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1m-4 6v-3h2v3"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/>',
+  close:'<path d="m6 6 12 12M6 18 18 6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',
+  expand:'<path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/>',
+  locate:'<circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>',
+  swap:'<path d="M8 3v17m-4-4 4 4 4-4m4 5V4m-4 4 4-4 4 4"/>',
+  room:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 21V7h6v14m-3-7h.1"/>',
+  study:'<path d="M3 4h7a3 3 0 0 1 2 2 3 3 0 0 1 2-2h7v15h-7a3 3 0 0 0-2 2 3 3 0 0 0-2-2H3V4Zm9 2v15"/>',
+  restroom:'<circle cx="8" cy="5" r="2"/><circle cx="17" cy="5" r="2"/><path d="M5 11h6m-5-2v7h4V9M8 16v5m6-10h6m-3-2-3 8h6l-3-8m0 8v4"/>',
+  exit:'<path d="M10 4H4v16h6m4-12 4 4-4 4m-6-4h13"/>',
+  food:'<path d="M4 3v6a3 3 0 0 0 6 0V3M7 3v18M19 3c-4 2-4 9 0 10v8m0-18v10"/>',
+  vending:'<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 5h8v8H8V5Zm5 12h3m-8 2h8m-8-2h.1"/>',
+  escalator:'<path d="M3 17h5l8-10h5v5h-3l-8 10H3v-5Z"/><circle cx="8" cy="5" r="2"/><path d="M8 9v4"/>',
+  entrance:'<path d="M3 21h18M5 21V4h14v17m-10 0V9h6v12m-6-6h.1"/>',
+  camera:'<path d="M4 7h4l2-3h4l2 3h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="14" r="4"/>',
+  hand:'<path d="M8 13V6a2 2 0 0 1 4 0v6m0-4a2 2 0 0 1 4 0v5m0-3a2 2 0 0 1 4 0v7a5 5 0 0 1-5 5h-3a5 5 0 0 1-4-2l-5-6a2 2 0 0 1 3-2l2 2"/>',
+  check:'<path d="m4 12 5 5L20 6"/>',
+  flag:'<path d="M5 22V3m0 1c4-4 9 4 14 0v10c-5 4-10-4-14 0"/>',
+  'turn-left':'<path d="M18 21v-9a5 5 0 0 0-5-5H4m5-5L4 7l5 5"/>',
+  'turn-right':'<path d="M6 21v-9a5 5 0 0 1 5-5h9m-5-5 5 5-5 5"/>',
+};
+const wfIcon=(name,extra='')=>`<svg ${extra} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${WF_ICONS[name]||WF_ICONS.room}</svg>`;
+const wfEscape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wf$=selector=>document.querySelector(selector);
+const wfNormalize=value=>String(value).toLocaleLowerCase().replace(/[\s·’']/g,'');
+const wfDefaultView=()=>window.innerWidth<=700?[100,80,700,490]:[0,0,1000,700];
+const wfPlaces=new Map(MAP_DATA.places.map(p=>[p.id,p]));
+const wfNodes=new Map(MAP_DATA.nodes.map(n=>[n.id,n]));
+const wfMedia=new Map();
+const wfState={floor:'5',selected:'f5-y5302',category:'all',search:'',panel:'explore',origin:null,destination:null,route:null,position:null,activeStep:-1,view:wfDefaultView()};
+let wfToastTimer, wfDb=null, wfPhotoTarget=null, wfImageFloor=null, wfDrag=null, wfDragged=false;
+
+function wfHydrateIcons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>{el.innerHTML=wfIcon(el.dataset.icon);});}
+function wfPlaceLabel(p){return `${p.name} · ${p.floorId}F`;}
+function wfCategoryName(p){return ({room:'Room',study:'Study room',restroom:'Restroom',exit:'Exit',food:'Food & drink',vending:'Vending',escalator:'Escalator',entrance:'Entrance'})[p.category]||'Place';}
+function wfToast(message){const el=wf$('#toast');el.textContent=message;el.hidden=false;clearTimeout(wfToastTimer);wfToastTimer=setTimeout(()=>{el.hidden=true;},4000);}
+function wfOpenDialog(id){const d=document.getElementById(id);if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');}
+function wfCloseDialog(id){const d=document.getElementById(id);if(typeof d.close==='function')d.close();else d.removeAttribute('open');}
+function wfSetPanel(panel){wfState.panel=panel;for(const name of ['explore','directions']){const active=name===panel;wf$(`#${name}-panel`).hidden=!active;wf$(`#${name}-tab`).classList.toggle('active',active);wf$(`#${name}-tab`).setAttribute('aria-selected',String(active));}}
+function wfSetFloor(floor,{fit=true}={}){if(!MAP_DATA.floors.some(f=>f.id===String(floor)))return;wfState.floor=String(floor);if(fit)wfState.view=wfDefaultView();if(wfPlaces.get(wfState.selected)?.floorId!==wfState.floor)wfState.selected=null;wfRenderSelected();wfRenderFloorControls();wfRenderPlaces();wfRenderMap();if(wf$('#setup-dialog').open)wfRenderSetup();}
+function wfRenderFloorControls(){wf$('#header-floor').textContent=`Floor ${wfState.floor}`;wf$('#map-floor-title').textContent=`Floor ${wfState.floor}`;document.querySelectorAll('[data-floor]').forEach(b=>{const active=b.dataset.floor===wfState.floor;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});}
+function wfSelectPlace(id,{moveFloor=true}={}){if(!wfPlaces.has(id))return;wfState.selected=id;if(moveFloor&&wfPlaces.get(id).floorId!==wfState.floor)wfSetFloor(wfPlaces.get(id).floorId);if(window.innerWidth<=700){const p=wfPlaces.get(id);wfState.view=[p.x-230,p.y-161,460,322];}wfRenderPlaces();wfRenderMap();wfRenderSelected();}
+function wfRenderPlaces(){
+  const query=wfNormalize(wfState.search.trim());
+  const items=MAP_DATA.places.filter(p=>query?wfNormalize(p.name+' '+p.floorId+'f '+wfCategoryName(p)).includes(query):p.floorId===wfState.floor).filter(p=>wfState.category==='all'||(wfState.category==='rooms'?['room','study'].includes(p.category):!['room','study'].includes(p.category)));
+  wf$('#place-list-title').textContent=query?'Search results':'On this floor';wf$('#place-count').textContent=`${items.length} places`;
+  wf$('#place-list').innerHTML=items.length?items.map(p=>`<button class="place-row ${wfState.selected===p.id?'active':''}" data-select-place="${p.id}" type="button"><span class="place-type-icon ${p.category}">${wfIcon(p.category)}</span><span class="place-row-text"><strong>${wfEscape(p.name)}</strong><small>${wfCategoryName(p)} · Floor ${p.floorId}</small></span><span class="floor-pill">${p.floorId}F</span></button>`).join(''):'<div class="empty-list"><strong>No places found</strong>Try a room number or another category.</div>';
+}
+function wfRoomLines(p){
+  if(p.category==='vending')return ['Vending',p.name.match(/\d+/)?.[0]||''];
+  if(p.category==='escalator')return [p.name.startsWith('Down')?'Down':'Up','escalator'];
+  if(p.name.includes('toilet'))return [p.name.split(' ')[0],'toilet'];
+  if(p.name.startsWith('Study room'))return ['Study room',p.name.match(/\d+/)?.[0]||''];
+  return p.name.length>16?p.name.split(/\s+(?=\S+$)/):[p.name];
+}
+function wfRenderMap(){
+  const floor=MAP_DATA.floors.find(f=>f.id===wfState.floor),svg=wf$('#map-svg');
+  const background=wfMedia.get(`floor:${wfState.floor}`);
+  let markup=`<title id="map-title">Floor ${wfState.floor} indoor map</title><desc id="map-description">Illustrative indoor layout with clickable rooms and landmarks. ${background?'An imported background is shown; pin positions await calibration.':''}</desc><defs><filter id="floor-shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="12" flood-color="#536c47" flood-opacity=".08"/></filter></defs>`;
+  markup+='<rect x="52" y="85" width="910" height="540" rx="19" fill="#fff" stroke="#e1e7d9" stroke-width="1.5" filter="url(#floor-shadow)"/>';
+  if(background){markup+=`<image href="${background}" x="65" y="95" width="885" height="520" preserveAspectRatio="xMidYMid meet"/>`;}
+  else{
+    for(const polygon of floor.corridors||[])markup+=`<polygon points="${polygon.map(x=>x.join(',')).join(' ')}" fill="#f7f8f2" stroke="#e6ebdf" stroke-width="1"/>`;
+    markup+='<text class="map-hall-label" x="300" y="299" text-anchor="middle">NORTH CORRIDOR</text><text class="map-hall-label" x="330" y="429" text-anchor="middle">SOUTH CORRIDOR</text>';
+    for(const a of floor.annotations||[])markup+=`<text x="${a.x}" y="${a.y}" text-anchor="middle" class="map-hall-label" style="font-size:12px;letter-spacing:4px;fill:#bbc4b4">${wfEscape(a.text)}</text>`;
+  }
+  for(const room of floor.rooms){
+    const p=wfPlaces.get(room.placeId),selected=wfState.selected===p.id;
+    markup+=`<g class="map-room ${selected?'selected':''}" data-place="${p.id}" tabindex="0" role="button" aria-label="${wfEscape(wfPlaceLabel(p))}"><polygon points="${room.polygon.map(x=>x.join(',')).join(' ')}" fill="${background?'#ffffff45':room.color}"/>`;
+    const lines=wfRoomLines(p),small=p.category==='vending';
+    markup+=`<text x="${room.labelX}" y="${room.labelY+(small?12:23)}" text-anchor="middle" style="font-size:${small?9:12}px">${lines.map((line,i)=>`<tspan x="${room.labelX}" dy="${i?15:0}">${wfEscape(line)}</tspan>`).join('')}</text></g>`;
+  }
+  const segments=(wfState.route?.floorSegments||[]).filter(s=>s.floorId===wfState.floor);
+  for(const segment of segments){const points=segment.points.map(x=>x.join(',')).join(' ');markup+=`<polyline class="route-halo" points="${points}"/><polyline class="route-line" points="${points}"/>`;}
+  for(const p of MAP_DATA.places.filter(p=>p.floorId===wfState.floor)){
+    const selected=wfState.selected===p.id,size=p.category==='vending'?10:13;
+    markup+=`<g class="map-poi ${selected?'selected':''}" transform="translate(${p.x},${p.y-10})" data-place="${p.id}" tabindex="0" role="button" aria-label="${wfEscape(wfPlaceLabel(p))}">${selected?'<circle class="poi-ring" r="19"/>':''}<circle class="poi-base" r="${size}"/><g class="poi-icon">${wfIcon(p.category,`x="${-size+4}" y="${-size+4}" width="${size*2-8}" height="${size*2-8}"`)}</g></g>`;
+  }
+  if(wfState.route){
+    const start=wfPlaces.get(wfState.route.startPlaceId),end=wfPlaces.get(wfState.route.endPlaceId);
+    if(start?.floorId===wfState.floor)markup+=`<circle cx="${start.x}" cy="${start.y}" r="7" class="map-origin"/>`;
+    if(end?.floorId===wfState.floor)markup+=`<circle cx="${end.x}" cy="${end.y}" r="7" class="map-destination"/>`;
+    const change=wfState.route.edges.find(e=>e.type==='escalator'&&wfNodes.get(e.from).floorId===wfState.floor);
+    if(change){const n=wfNodes.get(change.from),to=wfNodes.get(change.to);markup+=`<text class="map-transition-label" x="${n.x-13}" y="${n.y+57}" text-anchor="end">Continue on ${to.floorId}F →</text>`;}
+  }
+  if(wfState.position){const p=wfPlaces.get(wfState.position.placeId);if(p.floorId===wfState.floor)markup+=`<circle cx="${p.x}" cy="${p.y}" r="25" fill="#4e7ca31c"/><circle cx="${p.x}" cy="${p.y}" r="6" fill="#527caa" stroke="#fff" stroke-width="3"/><text x="${p.x}" y="${p.y-30}" text-anchor="middle" class="map-current-label">${wfState.position.source==='demo'?'Demo position':'Estimated position'}</text>`;}
+  svg.innerHTML=markup;svg.setAttribute('viewBox',wfState.view.join(' '));
+}
+function wfRenderSelected(){
+  const card=wf$('#selected-card'),p=wfPlaces.get(wfState.selected);if(!p){card.hidden=true;return;}
+  const photo=wfMedia.get(`photo:${p.id}`);card.hidden=false;
+  card.innerHTML=`<div class="selected-photo">${photo?`<img src="${photo}" alt="Locally added photo of ${wfEscape(p.name)}">`:'<div class="photo-empty-art"></div><span class="photo-empty-content">'+wfIcon('camera')+'Your landmark photo here</span>'}<button class="icon-button selected-card-close" id="close-selected" type="button" aria-label="Close place details">${wfIcon('close')}</button>${photo?`<button class="photo-edit-button" id="remove-photo" type="button">${wfIcon('close')}Remove photo</button>`:''}</div><div class="selected-content"><div class="selected-category">${wfCategoryName(p)}</div><div class="selected-title-row"><h2>${wfEscape(p.name)}</h2><span class="selected-floor">${p.floorId}F</span></div><p>${wfEscape(p.description||`Find ${p.name} on Floor ${p.floorId}.`)}</p><div class="selected-actions"><button class="primary-button" id="selected-directions" type="button">${wfIcon('route')}Directions${wfIcon('arrow-right')}</button><button class="secondary-button" id="add-photo" type="button" aria-label="${photo?'Change':'Add'} photo for ${wfEscape(p.name)}" title="${photo?'Change':'Add'} photo">${wfIcon('camera')}</button></div></div>`;
+  // Keep close reachable when the mobile layout hides the empty photo area.
+  if(!photo&&matchMedia('(max-width:700px)').matches){const close=card.querySelector('#close-selected');card.append(close);}
+}
+function wfResolvePlace(value){
+  const normalized=wfNormalize(value.trim());
+  if(!normalized)return null;
+  const exact=MAP_DATA.places.find(p=>wfNormalize(p.id)===normalized||wfNormalize(wfPlaceLabel(p))===normalized);if(exact)return exact;
+  const byName=MAP_DATA.places.filter(p=>wfNormalize(p.name)===normalized);return byName.length===1?byName[0]:null;
+}
+function wfRouteError(text){wf$('#route-error').textContent=text;wf$('#route-error').hidden=!text;}
+function wfRunRoute(){
+  const origin=wfResolvePlace(wf$('#origin-input').value),destination=wfResolvePlace(wf$('#destination-input').value);
+  if(!origin||!destination){wfRouteError('Choose a starting point and destination from the suggestions. Include the floor for places with the same name.');return false;}
+  const route=findRoute(MAP_DATA,origin.id,destination.id);
+  if(!['ok','same'].includes(route.status)){wfRouteError(route.status==='unreachable'?'These places are not connected by the current map.':'We couldn’t calculate this route. Please check both places.');return false;}
+  wfRouteError('');wfState.origin=origin.id;wfState.destination=destination.id;wfState.route=route;wfState.activeStep=-1;
+  wf$('#origin-input').value=wfPlaceLabel(origin);wf$('#destination-input').value=wfPlaceLabel(destination);wfSetFloor(origin.floorId);wfState.selected=null;wfRenderSelected();wfRenderRoute();wfRenderMap();return true;
+}
+function wfRenderRoute(){
+  const route=wfState.route;wf$('#route-empty').hidden=Boolean(route);wf$('#route-result').hidden=!route;if(!route)return;
+  const end=wfPlaces.get(route.endPlaceId),same=route.status==='same';
+  wf$('#route-result').innerHTML=`<div class="route-summary"><div class="eyebrow">${same?'YOU’RE ALREADY THERE':'YOUR ROUTE PREVIEW'}</div><h2>${same?wfEscape(end.name):`To ${wfEscape(end.name)}`}</h2><p>${same?'Your starting point and destination are the same.':'Follow the highlighted corridor. Tap a step to view its floor.'}</p><div class="route-summary-badges"><span class="floor-change-badge">${route.floorChanges?`${route.floorChanges} floor change${route.floorChanges===1?'':'s'}`:'Same floor'}</span><span>${route.distanceMeters===null?'Distance awaiting map scale':`${Math.round(route.distanceMeters)} m`}</span></div></div><ol class="route-steps">${route.steps.map((step,i)=>{const symbol=step.type==='floor-change'?'escalator':step.type==='arrive'?'flag':step.type==='start'?'locate':step.text.toLowerCase().includes('left')?'turn-left':step.text.toLowerCase().includes('right')?'turn-right':'arrow-right';return `<li class="route-step ${wfState.activeStep===i?'active':''}" data-route-step="${i}" tabindex="0" role="button" aria-label="Step ${i+1}: ${wfEscape(step.text)}"><span class="route-step-icon">${wfIcon(symbol)}</span><span class="route-step-text"><strong>${wfEscape(step.text)}</strong><small>Floor ${step.floorId}</small></span></li>`;}).join('')}</ol><div class="route-preview-controls">${same?'':`<button class="secondary-button" id="preview-route" type="button">${wfIcon('route')}${wfState.activeStep<0?'Preview steps':'Next step'}</button>`}<button class="secondary-button" id="clear-route" type="button">Clear route</button></div>${same?'':'<p class="preview-status">Step preview · not live navigation</p>'}`;
+}
+function wfShowStep(index){if(!wfState.route)return;const step=wfState.route.steps[index];if(!step)return;wfState.activeStep=index;wfSetFloor(step.floorId);wfRenderRoute();if(index===wfState.route.steps.length-1)wfToast(`Preview complete: ${wfPlaces.get(wfState.route.endPlaceId).name}`);}
+function wfClearRoute(){wfState.route=null;wfState.activeStep=-1;wfRenderRoute();wfRenderMap();wfRouteError('');}
+function wfStartDirections(id){const p=wfPlaces.get(id);wfState.destination=id;wf$('#destination-input').value=wfPlaceLabel(p);wfSetPanel('directions');wfState.selected=null;wfRenderSelected();if(wfResolvePlace(wf$('#origin-input').value))wfRunRoute();else wf$('#origin-input').focus();}
+function wfSetPosition({placeId,source='sensor-model',confidence}={}){
+  if(!wfPlaces.has(placeId))throw new TypeError('Position must reference a known map placeId.');
+  if(source==='demo')confidence=undefined;
+  wfState.position={placeId,source,...(Number.isFinite(confidence)?{confidence}:{} )};wfState.origin=placeId;
+  wf$('#origin-input').value=wfPlaceLabel(wfPlaces.get(placeId));
+  const note=wf$('#position-note');note.hidden=false;note.textContent=source==='demo'?'Demo starting point · not your detected location':'Starting point supplied by the indoor positioning adapter';
+  wfSetPanel('directions');wfSetFloor(wfPlaces.get(placeId).floorId);wfRenderMap();if(wfResolvePlace(wf$('#destination-input').value))wfRunRoute();
+}
+function wfZoom(factor){const v=wfState.view,w=Math.min(1700,Math.max(360,v[2]*factor)),h=w*.7;wfState.view=[v[0]+(v[2]-w)/2,v[1]+(v[3]-h)/2,w,h];wfRenderMap();}
+function wfRenderSetup(){const has=wfMedia.has(`floor:${wfState.floor}`);wf$('#setup-floor-name').textContent=`Floor ${wfState.floor}`;wf$('#floor-image-status').textContent=has?'Your background image · positions uncalibrated':'Illustrative floor plan';wf$('#choose-floor-image').textContent=has?'Replace image':'Add image';wf$('#remove-floor-image').hidden=!has;}
+async function wfOpenStorage(){
+  if(!('indexedDB' in window)){wf$('#storage-note').textContent='Browser storage is unavailable. Images last for this session only.';return;}
+  try{wfDb=await new Promise((resolve,reject)=>{const req=indexedDB.open('wayfind-local-media',1);req.onupgradeneeded=()=>{req.result.createObjectStore('media');};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+    await new Promise((resolve,reject)=>{const tx=wfDb.transaction('media','readonly'),s=tx.objectStore('media'),req=s.openCursor();req.onsuccess=()=>{const cursor=req.result;if(cursor){if(typeof cursor.value==='string'&&cursor.value.startsWith('data:image/'))wfMedia.set(cursor.key,cursor.value);cursor.continue();}};tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});
+  }catch{wfDb=null;wf$('#storage-note').textContent='Browser storage is unavailable. Images last for this session only.';}
+}
+async function wfSaveMedia(key,data){wfMedia.set(key,data);if(!wfDb){wfToast('Image added for this session. Browser storage is unavailable.');return;}
+  try{await new Promise((resolve,reject)=>{const tx=wfDb.transaction('media','readwrite');tx.objectStore('media').put(data,key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});wfToast('Image saved in this browser.');}catch{wfToast('Image added for this session. Browser storage is full or unavailable.');}}
+async function wfRemoveMedia(key){wfMedia.delete(key);if(wfDb)try{await new Promise((resolve,reject)=>{const tx=wfDb.transaction('media','readwrite');tx.objectStore('media').delete(key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}catch{wfToast('Image removed for this session; the saved copy could not be cleared.');}}
+async function wfImageData(file){
+  if(!file||!['image/png','image/jpeg','image/webp'].includes(file.type))throw new Error('Choose a PNG, JPEG or WebP image.');
+  if(file.size>25*1024*1024)throw new Error('Choose an image smaller than 25 MB.');
+  const url=URL.createObjectURL(file);
+  try{const image=await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error('This image could not be opened.'));im.src=url;});const scale=Math.min(1,1600/Math.max(image.width,image.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Image conversion is unavailable in this browser.');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0,canvas.width,canvas.height);return canvas.toDataURL('image/jpeg',.86);}finally{URL.revokeObjectURL(url);}
+}
+function wfBindEvents(){
+  document.addEventListener('click',event=>{
+    const t=event.target.closest('button,[data-route-step]');if(!t)return;
+    if(t.dataset.selectPlace){wfSelectPlace(t.dataset.selectPlace);return;}
+    if(t.dataset.category){wfState.category=t.dataset.category;document.querySelectorAll('[data-category]').forEach(b=>{b.classList.toggle('active',b===t);b.setAttribute('aria-pressed',String(b===t));});wfRenderPlaces();return;}
+    if(t.dataset.floor){wfSetFloor(t.dataset.floor);return;}
+    if(t.dataset.closeDialog){wfCloseDialog(t.dataset.closeDialog);return;}
+    if(t.dataset.routeStep!==undefined){wfShowStep(Number(t.dataset.routeStep));return;}
+    switch(t.id){
+      case'explore-tab':wfSetPanel('explore');break;case'directions-tab':wfSetPanel('directions');break;
+      case'close-selected':wfState.selected=null;wfRenderSelected();wfRenderMap();wfRenderPlaces();break;
+      case'selected-directions':wfStartDirections(wfState.selected);break;
+      case'add-photo':wfPhotoTarget=wfState.selected;wf$('#photo-input').click();break;
+      case'remove-photo':wfRemoveMedia(`photo:${wfState.selected}`).then(wfRenderSelected);break;
+      case'zoom-in':wfZoom(.8);break;case'zoom-out':wfZoom(1.25);break;
+      case'fit-map':wfState.view=[0,0,1000,700];wfRenderMap();break;
+      case'locate-button':wfOpenDialog('location-dialog');break;
+      case'try-demo-location':wfCloseDialog('location-dialog');wfSetPosition({placeId:'f5-exit-5',source:'demo'});wfToast('Demo location set to Exit 5 on Floor 5.');break;
+      case'setup-button':wfRenderSetup();wfOpenDialog('setup-dialog');break;
+      case'help-button':wfOpenDialog('help-dialog');break;
+      case'choose-floor-image':wfImageFloor=wfState.floor;wf$('#floor-image-input').click();break;
+      case'remove-floor-image':wfRemoveMedia(`floor:${wfState.floor}`).then(()=>{wfRenderMap();wfRenderSetup();});break;
+      case'example-route':wf$('#origin-input').value=wfPlaceLabel(wfPlaces.get('f5-exit-5'));wf$('#destination-input').value=wfPlaceLabel(wfPlaces.get('f4-y4052'));wfRunRoute();break;
+      case'swap-button':{const a=wf$('#origin-input').value;wf$('#origin-input').value=wf$('#destination-input').value;wf$('#destination-input').value=a;wfState.position=null;wf$('#position-note').hidden=true;if(wfState.route)wfRunRoute();break;}
+      case'clear-route':wfClearRoute();break;
+      case'preview-route':wfShowStep((wfState.activeStep+1)%wfState.route.steps.length);break;
+    }
+  });
+  wf$('#explore-search').addEventListener('input',event=>{wfState.search=event.target.value;wfRenderPlaces();});
+  wf$('#origin-input').addEventListener('input',()=>{wfState.position=null;wf$('#position-note').hidden=true;wfClearRoute();});
+  wf$('#destination-input').addEventListener('input',()=>wfClearRoute());
+  wf$('#route-form').addEventListener('submit',event=>{event.preventDefault();wfRunRoute();});
+  wf$('#map-svg').addEventListener('click',event=>{if(wfDragged){wfDragged=false;return;}const p=event.target.closest('[data-place]');if(p)wfSelectPlace(p.dataset.place,{moveFloor:false});});
+  wf$('#map-svg').addEventListener('keydown',event=>{if(['Enter',' '].includes(event.key)){const p=event.target.closest('[data-place]');if(p){event.preventDefault();wfSelectPlace(p.dataset.place,{moveFloor:false});}}});
+  document.addEventListener('keydown',event=>{if(event.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){event.preventDefault();wfSetPanel('explore');wf$('#explore-search').focus();}if(['Enter',' '].includes(event.key)&&event.target.dataset.routeStep!==undefined){event.preventDefault();wfShowStep(Number(event.target.dataset.routeStep));}});
+  const canvas=wf$('#map-canvas');canvas.addEventListener('pointerdown',event=>{if(event.target.closest('[data-place]'))return;wfDrag={x:event.clientX,y:event.clientY,view:[...wfState.view]};wfDragged=false;canvas.setPointerCapture?.(event.pointerId);canvas.classList.add('dragging');});
+  canvas.addEventListener('pointermove',event=>{if(!wfDrag)return;const rect=canvas.getBoundingClientRect(),dx=event.clientX-wfDrag.x,dy=event.clientY-wfDrag.y;if(Math.abs(dx)+Math.abs(dy)>5)wfDragged=true;wfState.view=[wfDrag.view[0]-dx/rect.width*wfDrag.view[2],wfDrag.view[1]-dy/rect.height*wfDrag.view[3],wfDrag.view[2],wfDrag.view[3]];wf$('#map-svg').setAttribute('viewBox',wfState.view.join(' '));});
+  for(const name of ['pointerup','pointercancel'])canvas.addEventListener(name,()=>{wfDrag=null;canvas.classList.remove('dragging');});
+  canvas.addEventListener('wheel',event=>{if(event.ctrlKey||event.metaKey){event.preventDefault();wfZoom(event.deltaY>0?1.12:.89);}},{passive:false});
+  wf$('#photo-input').addEventListener('change',async event=>{const file=event.target.files?.[0],id=wfPhotoTarget;event.target.value='';if(!file||!id)return;try{await wfSaveMedia(`photo:${id}`,await wfImageData(file));if(wfState.selected===id)wfRenderSelected();}catch(error){wfToast(error.message);}});
+  wf$('#floor-image-input').addEventListener('change',async event=>{const file=event.target.files?.[0],floor=wfImageFloor;event.target.value='';if(!file||!floor)return;try{await wfSaveMedia(`floor:${floor}`,await wfImageData(file));wfRenderMap();wfRenderSetup();}catch(error){wfToast(error.message);}});
+  window.addEventListener('resize',()=>wfRenderSelected());
+}
+async function wfInit(){
+  wfHydrateIcons();wf$('#place-options').innerHTML=MAP_DATA.places.map(p=>`<option value="${wfEscape(wfPlaceLabel(p))}"></option>`).join('');
+  wfBindEvents();wfRenderFloorControls();wfRenderPlaces();wfRenderMap();wfRenderSelected();await wfOpenStorage();wfRenderMap();wfRenderSelected();
+}
+window.Wayfind=Object.freeze({
+  setPosition:wfSetPosition,
+  clearPosition(){wfState.position=null;wf$('#position-note').hidden=true;wfRenderMap();},
+  setDestination(placeId){if(!wfPlaces.has(placeId))throw new TypeError('Unknown destination placeId.');wfStartDirections(placeId);},
+  route(startPlaceId,endPlaceId){if(!wfPlaces.has(startPlaceId)||!wfPlaces.has(endPlaceId))throw new TypeError('Unknown route placeId.');wf$('#origin-input').value=wfPlaceLabel(wfPlaces.get(startPlaceId));wf$('#destination-input').value=wfPlaceLabel(wfPlaces.get(endPlaceId));wfSetPanel('directions');return wfRunRoute();},
+  getState(){return {floor:wfState.floor,selected:wfState.selected,origin:wfState.origin,destination:wfState.destination,position:wfState.position?{...wfState.position}:null,route:wfState.route?{status:wfState.route.status,nodeIds:[...wfState.route.nodeIds],floorChanges:wfState.route.floorChanges}:null};},
+});
+wfInit();
+
+</script>
+</body>
+</html>

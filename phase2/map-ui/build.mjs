@@ -1,0 +1,12 @@
+import { readFile,writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const root=path.dirname(fileURLToPath(import.meta.url)),dist=path.join(root,'dist');
+const read=name=>readFile(path.join(dist,name),'utf8');
+const [html,css,data,engine,app]=await Promise.all(['index.html','styles.css','map-data.mjs','route-engine.mjs','app.mjs'].map(read));
+const stripExports=text=>text.replace(/^export\s+(?=(?:const|let|var|function|class)\b)/gm,'');
+const code=[stripExports(data),stripExports(engine),app.replace(/^import\s+.*?;\s*$/gm,'')].join('\n\n');
+if(/^\s*(?:import|export)\s/m.test(code))throw new Error('Standalone bundle contains an unresolved module declaration.');
+const output=html.replace('<link rel="stylesheet" href="./styles.css">',`<style>\n${css.replaceAll('</style','<\\/style')}\n</style>`).replace('<script type="module" src="./app.mjs"></script>',`<script type="module">\n${code.replaceAll('</script','<\\/script')}\n</script>`);
+await writeFile(path.join(dist,'Wayfind.html'),output);
+console.log(`Built standalone dist/Wayfind.html (${Buffer.byteLength(output).toLocaleString()} bytes). Open directly in a browser.`);

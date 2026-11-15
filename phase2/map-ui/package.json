@@ -1,0 +1,13 @@
+{
+  "name": "wayfind-campus-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local, map-first indoor navigation prototype for GE2340.",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "build": "node build.mjs",
+    "test": "node --test tests/routing.test.mjs"
+  }
+}

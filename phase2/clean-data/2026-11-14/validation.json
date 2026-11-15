@@ -1,0 +1,318 @@
+{
+  "passed": true,
+  "check_count": 78,
+  "checks": [
+    {
+      "check": "preserved_export_sha256",
+      "passed": true
+    },
+    {
+      "check": "all_selected_attachment_sha256",
+      "passed": true
+    },
+    {
+      "check": "49_real_sensor_sessions",
+      "passed": true
+    },
+    {
+      "check": "sensor_reading_row_accounting",
+      "passed": true
+    },
+    {
+      "check": "all_75_sensor_csvs_accounted",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM01",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC01",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM02",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC02",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM03",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC03",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM04",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC04",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM05",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC05",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM06",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC06",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM07",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC07",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM08",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC08",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM09",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC09",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM10",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC10",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM11",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC11",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM12",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC12",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM13",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC13",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM14",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC14",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM15",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM16",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM17",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM18",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC15",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC16",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM19",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC17",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM20",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC18",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM21",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC19",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM22",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC20",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM23",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC21",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM24",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC22",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM25",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_ACC23",
+      "passed": true
+    },
+    {
+      "check": "zip_integrity_BM26",
+      "passed": true
+    },
+    {
+      "check": "every_original_sensor_row_exactly_once",
+      "passed": true
+    },
+    {
+      "check": "accepted_samples_finite_in_interval_and_exact_epoch_mapping",
+      "passed": true
+    },
+    {
+      "check": "per_sensor_partitions",
+      "passed": true
+    },
+    {
+      "check": "all_nonnegative_sensor_times",
+      "passed": true
+    },
+    {
+      "check": "corrected_list_complete_unique_1_to_25",
+      "passed": true
+    },
+    {
+      "check": "corrected_source_numbers_preserved",
+      "passed": true
+    },
+    {
+      "check": "corrected_Dat4_is_study_room11",
+      "passed": true
+    },
+    {
+      "check": "BM04_unmatched_not_missing_location4",
+      "passed": true
+    },
+    {
+      "check": "raw_BM_ids_not_renumbered",
+      "passed": true
+    },
+    {
+      "check": "all_location_links_explicitly_unresolved",
+      "passed": true
+    },
+    {
+      "check": "only_23_real_accelerometer_segments_no_synthetic",
+      "passed": true
+    },
+    {
+      "check": "measured_lower_floor_connector_not_relabelled_upstairs",
+      "passed": true
+    },
+    {
+      "check": "proxy_exact_copy_of_all_664_accepted_ACC15_samples",
+      "passed": true
+    },
+    {
+      "check": "proxy_unique_sample_ids",
+      "passed": true
+    },
+    {
+      "check": "proxy_target_times_blank_source_times_preserved",
+      "passed": true
+    },
+    {
+      "check": "proxy_authorized_derived_target_parent",
+      "passed": true
+    },
+    {
+      "check": "proxy_corrected_display_numbers_separate_from_raw_ids",
+      "passed": true
+    },
+    {
+      "check": "augmented_23_measured_plus_1_proxy_unique_edges",
+      "passed": true
+    },
+    {
+      "check": "proxy_edge_no_target_acquisition_times",
+      "passed": true
+    },
+    {
+      "check": "measured_readings_unchanged_by_augmentation",
+      "passed": true
+    },
+    {
+      "check": "wifi_input_row_accounting",
+      "passed": true
+    },
+    {
+      "check": "wifi_association_exact_interval_containment",
+      "passed": true
+    },
+    {
+      "check": "wifi_every_observation_matched_or_unassigned",
+      "passed": true
+    },
+    {
+      "check": "wifi_all_associations_explicitly_provisional",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#147d77">
+  <meta name="description" content="Explore campus rooms and preview indoor directions across floors.">
+  <title>Wayfind — Campus navigator</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="Wayfind home"><span class="brand-symbol" aria-hidden="true">↗</span><span><strong>wayfind<span class="brand-dot">.</span></strong><small>CAMPUS NAVIGATOR</small></span></a>
+      <div class="header-context"><span class="context-dot"></span>Academic building<span class="context-divider">/</span><span id="header-floor">Floor 5</span></div>
+      <div class="header-actions"><span class="prototype-label">Interactive preview</span><button class="header-button" id="setup-button" type="button"><span data-icon="layers"></span><span class="button-label">Map setup</span></button><button class="icon-button help-button" id="help-button" type="button" aria-label="About this preview"><span data-icon="info"></span></button></div>
+    </header>
+    <main class="main-layout">
+      <aside class="sidebar" aria-label="Find places and directions">
+        <div class="sidebar-heading"><div class="eyebrow">A LITTLE LESS LOST</div><h1>Find your way.</h1><p>Rooms, landmarks, and the route between.</p></div>
+        <div class="panel-tabs" role="tablist" aria-label="Navigation mode"><button class="panel-tab active" id="explore-tab" role="tab" aria-selected="true" aria-controls="explore-panel" type="button"><span data-icon="search"></span>Explore</button><button class="panel-tab" id="directions-tab" role="tab" aria-selected="false" aria-controls="directions-panel" type="button"><span data-icon="route"></span>Directions</button></div>
+        <section class="panel explore-panel" id="explore-panel" role="tabpanel" aria-labelledby="explore-tab">
+          <label class="search-box"><span data-icon="search"></span><input id="explore-search" type="search" placeholder="Search a room or place" autocomplete="off" aria-label="Search rooms and places"><kbd>/</kbd></label>
+          <div class="category-chips" aria-label="Filter places"><button class="category-chip active" data-category="all" type="button" aria-pressed="true">All places</button><button class="category-chip" data-category="rooms" type="button" aria-pressed="false">Rooms</button><button class="category-chip" data-category="essentials" type="button" aria-pressed="false">Essentials</button></div>
+          <div class="list-heading"><h2 id="place-list-title">On this floor</h2><span id="place-count"></span></div>
+          <div id="place-list" class="place-list"></div>
+          <div class="sidebar-note"><span data-icon="hand"></span><p>You can also tap any room<br>or marker on the map.</p></div>
+        </section>
+        <section class="panel directions-panel" id="directions-panel" role="tabpanel" aria-labelledby="directions-tab" hidden>
+          <form id="route-form" novalidate>
+            <div class="route-fields"><div class="route-field-line"><span class="endpoint-dot origin-dot"></span><label><span class="field-label">STARTING POINT</span><input id="origin-input" list="place-options" placeholder="Type a room or landmark" autocomplete="off" required></label></div><div class="field-connector"></div><div class="route-field-line"><span class="endpoint-dot destination-dot"></span><label><span class="field-label">DESTINATION</span><input id="destination-input" list="place-options" placeholder="Where are you going?" autocomplete="off" required></label></div><button id="swap-button" class="swap-button" type="button" aria-label="Swap starting point and destination"><span data-icon="swap"></span></button></div>
+            <datalist id="place-options"></datalist>
+            <button class="locate-button" id="locate-button" type="button"><span data-icon="locate"></span>Use current location<span class="small-tag">Preview</span></button>
+            <div id="position-note" class="position-note" hidden></div>
+            <button class="primary-button route-submit" id="find-route" type="submit"><span data-icon="route"></span>Find a route<span data-icon="arrow-right"></span></button>
+            <p class="form-error" id="route-error" role="alert" hidden></p>
+          </form>
+          <div id="route-empty" class="route-empty"><span class="route-empty-icon" data-icon="route"></span><h2>Every route starts somewhere.</h2><p>Choose your starting point and destination.<br>We’ll connect the dots.</p><button class="text-button" id="example-route" type="button">Try Exit 5 → Y4052<span data-icon="arrow-right"></span></button></div>
+          <div id="route-result" class="route-result" hidden></div>
+        </section>
+        <footer class="sidebar-footer"><span class="status-dot"></span>Floors 4 & 5<span class="footer-separator">·</span><span>GE2340 project</span></footer>
+      </aside>
+      <section class="map-workspace" aria-label="Interactive indoor map">
+        <div class="map-topline"><div class="map-floor-label"><span data-icon="building"></span><div><strong id="map-floor-title">Floor 5</strong><span>Academic building</span></div></div><span class="demo-badge"><span></span>Demo layout</span></div>
+        <div class="map-canvas" id="map-canvas"><svg id="map-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="group" aria-labelledby="map-title map-description"><title id="map-title">Floor 5 indoor map</title><desc id="map-description">Illustrative indoor layout. Tap a room or landmark to see details and directions.</desc></svg></div>
+        <div class="map-tools"><div class="floor-switch" aria-label="Choose a floor"><span class="tool-label">FLOOR</span><button id="floor-5" data-floor="5" class="active" type="button" aria-pressed="true">5</button><button id="floor-4" data-floor="4" type="button" aria-pressed="false">4</button></div><div class="zoom-controls"><button class="icon-button" id="zoom-in" type="button" aria-label="Zoom in"><span data-icon="plus"></span></button><button class="icon-button" id="zoom-out" type="button" aria-label="Zoom out"><span data-icon="minus"></span></button><button class="icon-button" id="fit-map" type="button" aria-label="Fit map"><span data-icon="expand"></span></button></div><div class="north-arrow" title="North orientation is illustrative"><strong>N</strong><span>↑</span></div></div>
+        <div id="selected-card" class="selected-card" hidden></div>
+        <div class="map-bottomline"><div class="map-legend"><span><i class="legend-dot room-dot"></i>Rooms</span><span><i class="legend-dot amenity-dot"></i>Amenities</span><span><i class="legend-line"></i>Route</span></div><span class="map-disclaimer">Illustrative map · positions awaiting floor plan</span></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <input id="photo-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+  <input id="floor-image-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+  <dialog id="location-dialog" class="app-dialog"><button class="dialog-close icon-button" data-close-dialog="location-dialog" type="button" aria-label="Close"><span data-icon="close"></span></button><span class="dialog-feature-icon" data-icon="locate"></span><div class="eyebrow">YOUR STARTING POINT</div><h2>Indoor location, coming next.</h2><p>The sensor model will estimate your room or landmark here. For now, you can type a starting point or try a clearly marked demo position.</p><div class="callout"><span data-icon="info"></span><span>This preview does not detect your physical location.</span></div><button class="primary-button" id="try-demo-location" type="button">Try demo location<span data-icon="arrow-right"></span></button><button class="secondary-button" data-close-dialog="location-dialog" type="button">I’ll type my starting point</button></dialog>
+  <dialog id="setup-dialog" class="app-dialog setup-dialog"><button class="dialog-close icon-button" data-close-dialog="setup-dialog" type="button" aria-label="Close map setup"><span data-icon="close"></span></button><div class="eyebrow">MAKE IT FAMILIAR</div><h2>Your maps. Your landmarks.</h2><p>Add a floor image now, then align the room positions when the final layout is ready. Your images stay in this browser.</p><div class="setup-floor"><span class="setup-floor-icon" data-icon="layers"></span><div><strong id="setup-floor-name">Floor 5</strong><span id="floor-image-status">Illustrative floor plan</span></div><button id="choose-floor-image" class="secondary-button compact" type="button">Add image</button></div><button id="remove-floor-image" class="text-button danger" type="button" hidden>Remove this floor image</button><div class="callout"><span data-icon="info"></span><span>Adding an image changes the background only. Room positions, corridors and route distances still need calibration.</span></div><div class="setup-tip"><span data-icon="camera"></span><div><strong>A photo at every major spot</strong><p>Select a place on the map and choose “Add photo.” It’s a visual cue to help someone recognise where they are.</p></div></div><div class="storage-note" id="storage-note">Images are saved locally when browser storage is available.</div></dialog>
+  <dialog id="help-dialog" class="app-dialog"><button class="dialog-close icon-button" data-close-dialog="help-dialog" type="button" aria-label="Close help"><span data-icon="close"></span></button><span class="dialog-feature-icon" data-icon="route"></span><div class="eyebrow">WELCOME TO WAYFIND</div><h2>A clearer way around.</h2><p>Search or tap a place, choose Directions, and enter a starting point. Routes use the up and down escalators to connect floors 4 and 5.</p><div class="help-steps"><div><b>1</b><span>Find a room or landmark</span></div><div><b>2</b><span>Choose where you’re starting</span></div><div><b>3</b><span>Follow the route preview</span></div></div><div class="callout"><span data-icon="info"></span><span>This is a demo layout. Real maps, measured distances and live indoor positioning will be connected after verification.</span></div><button class="primary-button" data-close-dialog="help-dialog" type="button">Let’s explore<span data-icon="arrow-right"></span></button></dialog>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

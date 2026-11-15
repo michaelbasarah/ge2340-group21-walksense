@@ -1,0 +1,567 @@
+{
+  "kind": "jsdom_behavior_not_rendered_browser",
+  "browserLayoutVerified": false,
+  "emulatedBrowserApi": [
+    "matchMedia width branch; jsdom does not render CSS"
+  ],
+  "unverified": [
+    "desktop/mobile rendered layout",
+    "touch/pan geometry",
+    "valid image decoding/canvas conversion",
+    "IndexedDB persistence",
+    "real browser file:// security behavior"
+  ],
+  "checks": [
+    {
+      "scenario": "modules-1440",
+      "check": "app_bootstraps_actual_modules_and_24_destination_options",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "demo_disclosure_and_storage_fallback_visible",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "cross_floor_search_returns_matching_place",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "selecting_search_result_updates_floor_and_place_card",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "place_directions_sets_destination_and_opens_panel",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "typed_start_routes_down_from_5F_to_4F",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "floor_switch_draws_destination_floor_route",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "swapped_route_uses_up_escalator",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "step_preview_is_explicit_and_marks_active_step",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "clear_route_removes_overlay_and_restores_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "same_start_and_destination_has_arrival_state",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "same_place_arrival_can_be_cleared",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "ambiguous_bare_name_requires_floor",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "invalid_start_produces_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "location_dialog_discloses_detection_is_unconnected",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "only_explicit_demo_action_sets_demo_position",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "position_adapter_rejects_unknown_place_and_removes_demo_confidence",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "zoom_button_changes_map_view",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "fit_restores_full_view",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "map_setup_discloses_background_only_and_calibration_pending",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "normalized_room_number_search_matches_spaced_name",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "no_search_matches_has_clear_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "keyboard_room_selection_and_photo_control_available",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "switching_floor_hides_stale_other_floor_card",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "add_photo_requests_picker",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "unsupported_photo_type_has_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "modules-1440",
+      "check": "no_uncaught_dom_errors",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "app_bootstraps_actual_modules_and_24_destination_options",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "demo_disclosure_and_storage_fallback_visible",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "cross_floor_search_returns_matching_place",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "selecting_search_result_updates_floor_and_place_card",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "place_directions_sets_destination_and_opens_panel",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "typed_start_routes_down_from_5F_to_4F",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "floor_switch_draws_destination_floor_route",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "swapped_route_uses_up_escalator",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "step_preview_is_explicit_and_marks_active_step",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "clear_route_removes_overlay_and_restores_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "same_start_and_destination_has_arrival_state",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "same_place_arrival_can_be_cleared",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "ambiguous_bare_name_requires_floor",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "invalid_start_produces_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "location_dialog_discloses_detection_is_unconnected",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "only_explicit_demo_action_sets_demo_position",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "position_adapter_rejects_unknown_place_and_removes_demo_confidence",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "zoom_button_changes_map_view",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "fit_restores_full_view",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "map_setup_discloses_background_only_and_calibration_pending",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "normalized_room_number_search_matches_spaced_name",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "no_search_matches_has_clear_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "keyboard_room_selection_and_photo_control_available",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "switching_floor_hides_stale_other_floor_card",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "add_photo_requests_picker",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "unsupported_photo_type_has_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "modules-390",
+      "check": "no_uncaught_dom_errors",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "app_bootstraps_actual_modules_and_24_destination_options",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "demo_disclosure_and_storage_fallback_visible",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "cross_floor_search_returns_matching_place",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "selecting_search_result_updates_floor_and_place_card",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "place_directions_sets_destination_and_opens_panel",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "typed_start_routes_down_from_5F_to_4F",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "floor_switch_draws_destination_floor_route",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "swapped_route_uses_up_escalator",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "step_preview_is_explicit_and_marks_active_step",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "clear_route_removes_overlay_and_restores_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "same_start_and_destination_has_arrival_state",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "same_place_arrival_can_be_cleared",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "ambiguous_bare_name_requires_floor",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "invalid_start_produces_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "location_dialog_discloses_detection_is_unconnected",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "only_explicit_demo_action_sets_demo_position",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "position_adapter_rejects_unknown_place_and_removes_demo_confidence",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "zoom_button_changes_map_view",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "fit_restores_full_view",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "map_setup_discloses_background_only_and_calibration_pending",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "normalized_room_number_search_matches_spaced_name",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "no_search_matches_has_clear_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "keyboard_room_selection_and_photo_control_available",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "switching_floor_hides_stale_other_floor_card",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "add_photo_requests_picker",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "unsupported_photo_type_has_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-1440",
+      "check": "no_uncaught_dom_errors",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "app_bootstraps_actual_modules_and_24_destination_options",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "demo_disclosure_and_storage_fallback_visible",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "cross_floor_search_returns_matching_place",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "selecting_search_result_updates_floor_and_place_card",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "place_directions_sets_destination_and_opens_panel",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "typed_start_routes_down_from_5F_to_4F",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "floor_switch_draws_destination_floor_route",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "swapped_route_uses_up_escalator",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "step_preview_is_explicit_and_marks_active_step",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "clear_route_removes_overlay_and_restores_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "same_start_and_destination_has_arrival_state",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "same_place_arrival_can_be_cleared",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "ambiguous_bare_name_requires_floor",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "invalid_start_produces_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "location_dialog_discloses_detection_is_unconnected",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "only_explicit_demo_action_sets_demo_position",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "position_adapter_rejects_unknown_place_and_removes_demo_confidence",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "zoom_button_changes_map_view",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "fit_restores_full_view",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "map_setup_discloses_background_only_and_calibration_pending",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "normalized_room_number_search_matches_spaced_name",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "no_search_matches_has_clear_empty_state",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "keyboard_room_selection_and_photo_control_available",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "switching_floor_hides_stale_other_floor_card",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "add_photo_requests_picker",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "unsupported_photo_type_has_user_facing_error",
+      "passed": true
+    },
+    {
+      "scenario": "standalone-390",
+      "check": "no_uncaught_dom_errors",
+      "passed": true
+    }
+  ],
+  "sourceSha256": {
+    "index.html": "4664379375b392682d72161163d3f25972c251e14af3ac2284a1b83bf6aac215",
+    "styles.css": "a39f9c0e0be1e2230d70f0af52ef0c773e00d3009e98fe436c97a7edc407782b",
+    "app.mjs": "2a71911df5b8eda59e5d0ece0a051e61ccc06d726eb35287b5d2eabdf1a6bb13",
+    "map-data.mjs": "d8034f3172ec5d69cb785c6da06e75003757f476eece14d59fdcc43b4037c7c9",
+    "route-engine.mjs": "55bfe08c4a11205c451291550dcdc891ca82be0cdfbd943c7e9ec8c3c5e18ac0",
+    "Wayfind.html": "91d237a872bb979070f448624ec905e2ec186c69318044f1274218a9c857788a"
+  },
+  "sourceUnchangedDuringChecks": true,
+  "passed": true,
+  "checkCount": 108
+}

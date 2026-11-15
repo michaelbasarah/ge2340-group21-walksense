@@ -1,0 +1,87 @@
+% ======================= COMPILATION NOTICE =======================
+% Before compiling, place ge2340_project.sty and all three template
+% files (phase1_template.tex, phase2_template.tex, and
+% contribution_template.tex) in the same directory.
+% Keep the style file named ge2340_project.sty so that the templates
+% can load it correctly.
+% ==================================================================
+
+\documentclass{article}
+
+% ======================= REQUIRED STYLE =======================
+\usepackage[preprint]{ge2340_project}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+
+% ======================== COMPLETION REQUIREMENTS ========================
+% Submit one completed statement with the Phase 1 package and another with
+% the Phase 2 package. All group members must sign the statement.
+% State both the contribution percentage and the specific tasks completed
+% by every member. All percentages must sum to 100%.
+% Do not change the headings or declaration text.
+% =======================================================================
+
+\title{GE2340 Course Project\\
+\large Contribution Statement}
+\author{2026/2027 Semester A}
+
+\newcommand{\blankline}[1]{\rule{#1}{0.4pt}}
+\newcommand{\memberblock}[1]{%
+  \subsection*{Member #1}
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+    Name: & \blankline{8.5cm} \\
+    Student ID: & \blankline{4.0cm} \\
+    Contribution percentage: & \blankline{2.0cm}\% \\
+  \end{tabularx}
+  \vspace{0.4em}
+
+  \noindent\textbf{Specific tasks completed and deliverables produced:}\\[0.4em]
+  \blankline{\textwidth}\\[0.8em]
+  \blankline{\textwidth}\\[0.8em]
+  \blankline{\textwidth}
+  \vspace{0.7em}
+}
+
+\begin{document}
+\maketitle
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+  Phase: & $\square$ Phase 1 \hspace{2em} $\square$ Phase 2 \\
+  Group number: & \blankline{4cm} \\
+  Project title: & \blankline{10cm} \\
+\end{tabularx}
+
+\vspace{0.8em}
+\noindent\textit{Complete all applicable member blocks. If the group has three members, write ``N/A'' in the Member 4 block. Describe concrete work rather than general statements such as ``helped with the project.''}
+
+\memberblock{1}
+\memberblock{2}
+\memberblock{3}
+\memberblock{4}
+
+\section*{Contribution Summary}
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+  Total contribution percentage: & \blankline{2.0cm}\% \quad (must equal 100\%) \\
+  Remarks (if any): & \blankline{10cm} \\
+                    & \blankline{10cm} \\
+\end{tabularx}
+
+\section*{Declaration and Signatures}
+We confirm that the information above is accurate, that the listed percentages reflect our relative contributions to this phase of the project, and that the specific tasks were completed as stated. We understand that this statement may be used to adjust individual scores.
+
+\vspace{1em}
+\begin{tabularx}{\textwidth}{@{}c X c X@{}}
+  \textbf{Member 1 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\[2.2em]
+  \textbf{Member 2 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\[2.2em]
+  \textbf{Member 3 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\[2.2em]
+  \textbf{Member 4 signature} & \blankline{3.2cm} & \textbf{Date} & \blankline{2.2cm} \\
+\end{tabularx}
+
+\end{document}

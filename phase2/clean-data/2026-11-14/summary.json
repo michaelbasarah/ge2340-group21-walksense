@@ -1,0 +1,145 @@
+{
+  "dataset_version": "v4_first_pass_features_alignment_pending",
+  "augmentation": {
+    "derived_segment_id": "SYN_ACC_5F_CONNECTOR",
+    "parent_acc_session_id": "ACC15",
+    "derived_accelerometer_segments": 1,
+    "derived_accelerometer_samples": 664,
+    "augmented_edge_count": 24,
+    "observed_sample_tables_unchanged": true,
+    "target_acquisition_times": "unknown_left_blank",
+    "intended_use": "assumed_map_connector_or_simulation",
+    "historical_visit": false
+  },
+  "source": "raw/WhatsApp Chat with GE2340.zip",
+  "source_sha256": "7f7e42c00513de2abf974d98b58bd2a56fe24d18c29542ae56b6da6fdc356a34",
+  "source_bytes": 4579057,
+  "chat_cutoff_hk": "2026-11-14T21:10:00+08:00",
+  "all_referenced_attachments_after_cutoff": 52,
+  "referenced_attachments_present": 52,
+  "sensor_zip_count": 49,
+  "barometer_magnetometer_stops": 26,
+  "accelerometer_segments": 23,
+  "location_labels_present": 25,
+  "numbering_correction": "source1..3 unchanged; source5..26 -> corrected4..25",
+  "corrected_location_count": 25,
+  "recording_alignment_status": "unresolved_26_recordings_25_corrected_locations",
+  "currently_unmatched_recording_ids": [
+    "BM04"
+  ],
+  "extra_repeat_recording_identified": false,
+  "devices": [
+    [
+      "accelerometer_movement",
+      "iPhone19,2"
+    ],
+    [
+      "barometer_magnetometer_stop",
+      "iPhone17,4"
+    ]
+  ],
+  "sensor_rows_source": 46171,
+  "sensor_rows_clean": 46124,
+  "sensor_rows_excluded": 47,
+  "sensor_counts": {
+    "magnetometer": 25981,
+    "barometer": 208,
+    "accelerometer": 19935
+  },
+  "exclusion_reason_counts": {
+    "negative_experiment_time": 47,
+    "outside_recorded_interval": 47
+  },
+  "edge_timing_status_counts": {
+    "between_endpoint_stop_windows": 22,
+    "recorded_after_both_endpoint_stops": 1
+  },
+  "wifi": {
+    "source_log": "DOC-20261114-WA0049.gz",
+    "source_data_rows": 6211,
+    "wifi_rows_clean": 6196,
+    "wifi_rows_excluded": 0,
+    "non_wifi_rows_separated": 15,
+    "wifi_exclusion_reasons": {},
+    "unique_bssids": 2760,
+    "provisionally_associated_rows": 664,
+    "stops_with_candidate_rows": 22,
+    "unassigned_rows": 5532,
+    "unassigned_reason_counts": {
+      "outside_stop_session_time_span": 3288,
+      "between_stop_recording_windows": 2244
+    },
+    "zero_row_stops": [
+      "BM01",
+      "BM12",
+      "BM14",
+      "BM22"
+    ],
+    "timestamp_audit_file": "wifi_timestamp_audit.json",
+    "first_seen_min": "2026-11-14 12:24:56",
+    "first_seen_max": "2026-11-14 13:34:40"
+  },
+  "pressure_clean_medians_hpa": {
+    "BM01": 1010.39711,
+    "BM02": 1010.39711,
+    "BM03": 1010.400734,
+    "BM04": 1010.389099,
+    "BM05": 1010.37899,
+    "BM06": 1010.389328,
+    "BM07": 1010.394745,
+    "BM08": 1010.398941,
+    "BM09": 1010.416946,
+    "BM10": 1010.429878,
+    "BM11": 1010.433121,
+    "BM12": 1010.450821,
+    "BM13": 1010.4638669999999,
+    "BM14": 1010.461502,
+    "BM15": 1010.4649355,
+    "BM16": 1011.0468675,
+    "BM17": 1010.479507,
+    "BM18": 1011.0654835,
+    "BM19": 1011.07254,
+    "BM20": 1011.0716625,
+    "BM21": 1011.074448,
+    "BM22": 1011.0866165,
+    "BM23": 1011.095734,
+    "BM24": 1011.1043549999999,
+    "BM25": 1011.1105345,
+    "BM26": 1011.111946
+  },
+  "uncertainties": [
+    "Numbering typo corrected; 26 actual stop recordings versus 25 corrected named locations still require extra/repeat/test alignment",
+    "BM04 currently unmatched in retained candidate mapping; not identified as the actual extra recording",
+    "All file-to-location matches remain provisional; corrected list number is not raw BM ordinal",
+    "Device clocks were not independently synchronized",
+    "ACC16-18 measured after both BM endpoint visits; route-supported revisit, not simultaneous data",
+    "WiFi UTC format verified; stored location time is not radio acquisition time; selective persistence prevents complete fingerprints",
+    "Exact installed WiGLE 2.111 source/binary not matched to inspected upstream source",
+    "No numeric distances or map coordinates inferred",
+    "Upper-floor connector proxy copied from ACC15 at user request; target times unknown; same-distance/same-walker assumption unmeasured"
+  ],
+  "core_cleaning_version": "v3_corrected_list_numbering_alignment_pending",
+  "features": {
+    "dataset_version": "v4_first_pass_descriptive_features",
+    "stop_feature_rows": 26,
+    "movement_feature_rows": 24,
+    "measured_movement_feature_rows": 23,
+    "copied_movement_feature_rows": 1,
+    "wifi_stop_bssid_groups": 663,
+    "wifi_candidate_observations_summarized": 664,
+    "wifi_groups_with_one_observation": 662,
+    "wifi_groups_with_multiple_observations": 1,
+    "source_tables_unchanged": true,
+    "scope": "whole_recording_descriptive_statistics_no_slicing_interpolation_training_distance_or_steps",
+    "labels_status": "pending_alignment_of_26_recordings_to_25_corrected_locations",
+    "feature_validation_checks": 20,
+    "recording_count_proof": {
+      "barometer_magnetometer_recordings": 26,
+      "unique_source_zip_names": 26,
+      "unique_source_zip_sha256": 26,
+      "unique_recording_start_times": 26,
+      "corrected_ordered_description_entries": 25,
+      "description_entries_include_revisits": true
+    }
+  }
+}
