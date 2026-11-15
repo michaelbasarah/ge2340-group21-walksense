@@ -18,7 +18,7 @@ The latest acquisition is **2026-11-14 v4**, expanded under `phase2/clean-data/2
 
 The explicitly synthetic 664-sample connector copies ACC15, shares its acquisition group, and is not an independent observation. Wi-Fi observations are selective exports, not complete scans; cross-device clocks are unverified and GPS is not indoor ground truth. No distance, compass calibration, indoor localization model or training result is supplied. The map app uses an illustrative floor plan and manual demo location, not measured physical tracking. Fresh labels do not automatically update the map graph or measurement tables.
 
-This workspace includes raw sensor attachments and Wi-Fi BSSID/SSID/GPS metadata for team analysis. **Keep the GitHub repository private.** Full WhatsApp exports/messages/contact identities, class rosters, student IDs and original signed/identity-bearing PDFs are excluded. Original local files were preserved. See [SOURCE_MANIFEST.json](SOURCE_MANIFEST.json) for included files, exclusions, original hashes and distributable hashes.
+This workspace includes raw sensor attachments and Wi-Fi BSSID/SSID/GPS metadata for team analysis. **The owner selected public publication at `michaelbasarah/ge2340-group21-walksense`.** Full WhatsApp exports/messages/contact identities, class rosters, student IDs and original signed/identity-bearing PDFs are excluded. Original local files were preserved. See [SOURCE_MANIFEST.json](SOURCE_MANIFEST.json) for included files, exclusions, original hashes and distributable hashes.
 
 ## Run and check
 
