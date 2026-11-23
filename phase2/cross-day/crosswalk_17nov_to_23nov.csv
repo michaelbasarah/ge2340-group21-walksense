@@ -1,0 +1,27 @@
+stop_id_17nov,label_17nov,place_23nov,floor_17nov,confidence,basis,note_for_team
+BM01,Exit 5,exit lift 5,5,medium,route,Route Exit->Toilet->Y5->SR11 matches 23-Nov exit lift 5->male toilet->y5302->sr11 and map edge Exit 5-Male toilet. Could instead be 'exit 5 stairs'; confirm.
+BM02,Toilet,male toilet,5,medium,route,Outbound-leg toilet between Exit 5 and Y5 = male toilet on the floor-5 map; confirm.
+BM03,Y5,y5302,5,medium,route,Outbound-leg Y5 next to SR11 = Y5-302 on the floor-5 map; confirm.
+BM04,Study room 11,sr11,5,high,label+route,
+BM05,Study room 10,sr10,5,high,label+route,
+BM06,Study room 9,sr9,5,high,label+route,
+BM07,Study room 8,sr8,5,high,label+route,
+BM08,Y5 (revisit),y5202,5,medium,route,"17-Nov label calls this a revisit of BM03, but after SR8 the map neighbour is Y5-202 and the 23-Nov walk went sr8->y5202. Probably Y5-202, not Y5-302; confirm."
+BM09,Toilet (revisit),female toilet,5,medium,route,Return-leg toilet after Y5-202 = female toilet (23-Nov y5202->female toilet). 17-Nov label says revisit of the male toilet; confirm.
+BM10,Exit 5 (revisit),exit lift 10,5,medium,route,Return-leg exit after the female toilet = 'Exit by bathroom' = 23-Nov 'exit lift 10'. 17-Nov label says Exit 5; confirm.
+BM11,Canteen,canteen,5,high,label+route,
+BM12,"Escalator, upper landing (going down)",esca turun atas,5,high,label+route,File 'Kantin esca atas turun' = 23-Nov 'esca turun atas'.
+BM13,"Escalator, lower landing (going down)",esca turun bawah,4,high,label+route,File 'Esca bawah turun y4' = 23-Nov 'esca turun bawah'.
+BM14,Y4,y4502,4,high,label+route,Only Y4 room on either route; next to the escalator bottom and LT1B on both days.
+BM15,Lecture theatre 1 B,lt1 b,4,high,label+route,
+BM16,Lecture theatre 1 A,lt1 a,4,high,label+route,
+BM17,Exit 5 (revisit),exit lift 10 bawah,4,low,route,"LABEL WRONG: barometer and route put this on floor 4, so it is not Exit 5 on floor 5. Route LT1A->Exit->pintu keluar matches 23-Nov lt1 a->exit lift 10 bawah->pintu keluar; confirm which exit."
+BM18,Exit gate (pintu keluar),pintu keluar,4,high,label+route,
+BM19,Exit 5 (revisit),,4,none,ambiguous,"LABEL WRONG: floor 4, not Exit 5. Walk pintu keluar->Exit->LT2A: either exit lift 10 bawah (same as BM17) or exit lift 5 bawah (next to lt2 a on 23-Nov). Not used."
+BM20,Lecture theatre 2 A,lt2 a,4,high,label+route,
+BM21,Lecture theatre 2 B,lt2 b,4,high,label+route,
+BM22,Y4 (revisit),y4502,4,high,label+route,
+BM23,"Escalator, lower landing (going up)",esca naik bawah,4,high,label+route,File 'Y4 esca bawah naik' = 23-Nov 'esca naik bawah'.
+BM24,"Escalator, upper landing (going up)",esca naik atas,5,high,label+route,File 'Esca naik atas kantin' = 23-Nov 'esca naik atas'.
+BM25,Canteen (revisit),canteen,5,high,label+route,
+BM26,Exit 5 (final),,5,none,ambiguous,Walk 'Kantin exit': both floor-5 exits (exit lift 5 and exit lift 10) border the canteen. Not used.

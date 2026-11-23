@@ -1,0 +1,43 @@
+stop_id,label,floor,confirmed,note
+BM01,Canteen,5,no,Magnetically unlike BM16 (also canteen): maybe a different spot in the canteen; confirm where the phone was.
+BM02,exit lift 5,5,no,Revisited later as BM20 (and maybe BM19).
+BM03,male toilet,5,no,
+BM04,y5302,5,no,First y5302 stop (between male toilet and sr11).
+BM05,sr11,5,no,
+BM06,sr10,5,no,
+BM07,sr9,5,no,
+BM08,sr8,5,no,
+BM09,y5202,5,no,
+BM10,female toilet,5,no,
+BM11,exit lift 10,5,no,'exit lift 10' read as the map's 'Exit by bathroom' (next to the female toilet). Revisited as BM15 (and maybe BM14).
+BM12,esca naik,5,no,Floor 5. 'esca naik' vs 'esca naik atas' (BM18): same landing or a different escalator? Used as its own place name for now.
+BM13,esca turun atas,5,no,
+BM14,exit lift 10,5,no,"No walk recorded before BM15, so the label was copied from BM15. Magnetometer spread is 23 uT (phone moving or disturbed). Excluded until confirmed=yes (set the right label)."
+BM15,exit lift 10,5,no,
+BM16,canteen,5,no,Second canteen visit (first = BM01).
+BM17,esca naik atas,5,no,"No walk recorded before BM18, so the label was copied from BM18. BM17 is wherever the 'From canteen' walk ended. Excluded until confirmed=yes (set the right label)."
+BM18,esca naik atas,5,no,
+BM19,exit lift 5,5,no,Label copied from BM20 across a 32-minute break. BM19 follows the 'From esca naik atas' walk. Excluded until confirmed=yes (set the right label).
+BM20,exit lift 5,5,no,After a ~32-minute break following BM19.
+BM21,disabled toilet,5,no,23-Nov only.
+BM22,lift 5,5,no,23-Nov only.
+BM23,exit 5 stairs,5,no,23-Nov only. Possibly what 17-Nov called 'Exit 5'; confirm. Revisited as BM26. No Wi-Fi was logged at this stop.
+BM24,y5401,5,no,23-Nov only.
+BM25,y5302,5,no,"Second y5302 stop (own 'From y5302' walk file), reached from y5401 and followed by exit 5 stairs; BM04 sat between male toilet and sr11. Possibly a different door of Y5302; confirm."
+BM26,exit 5 stairs,5,no,23-Nov only.
+BM27,exit 5 stairs bawah,4,no,23-Nov only.
+BM28,lift 5 bawah,4,no,23-Nov only.
+BM29,disabled toilet bawah,4,no,23-Nov only.
+BM30,exit lift 5 bawah,4,no,23-Nov only (maybe 17-Nov BM19).
+BM31,lt2 a,4,no,
+BM32,lt2 b,4,no,
+BM33,esca turun bawah,4,no,Revisited as BM41 (and maybe BM40).
+BM34,y4502,4,no,
+BM35,esca naik bawah,4,no,
+BM36,lt1 b,4,no,
+BM37,lt1 a,4,no,
+BM38,exit lift 10 bawah,4,no,
+BM39,pintu keluar,4,no,
+BM40,esca turun bawah,4,no,"No walk recorded before BM41, so the label was copied from BM41. BM40 is wherever the 'From pintu keluar' walk ended. Excluded until confirmed=yes (set the right label)."
+BM41,esca turun bawah,4,no,Confirmed by its own 'From esca turun bawah' walk file.
+BM42,(final stop - confirm),4,no,"Final stop, no following walk to name it. WHATS-LEFT-TO-COLLECT suggests Exit 5 (4F); confirm. Excluded until a label is filled in and confirmed=yes."
