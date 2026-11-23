@@ -1,0 +1,27 @@
+stop_id,stop_number,original_file_label,location_label,label_confidence,label_source,floor_candidate,floor_status,x_m,y_m,notes
+BM01,1,poin,Exit 5,route_inferred_single_sided_start,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,First stop; only the following movement (to the toilet) constrains it.
+BM02,2,poin,Toilet,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM03,3,poin,Y5,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM04,4,poin,Study room 11,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM05,5,poin,Study room 10,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM06,6,poin,Study room 9,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM07,7,poin,Study room 8,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM08,8,poin,Y5 (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,Second visit to Y5 on the return leg.
+BM09,9,poin,Toilet (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,Second visit to the toilet.
+BM10,10,poin,Exit 5 (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,Second visit to the exit before heading to the canteen.
+BM11,11,poin,Canteen,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM12,12,poin,"Escalator, upper landing (going down)",route_inferred_escalator_landing,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,"Between the canteen->escalator and escalator->Y4 movements; floor change, exact landing provisional."
+BM13,13,poin,"Escalator, lower landing (going down)",route_inferred_escalator_landing,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,No movement recording separates this landing from the one above it.
+BM14,14,poin,Y4,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM15,15,poin,Lecture theatre 1 B,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,"English expansion of ""lt 1b""; floor digit not independently confirmed."
+BM16,16,poin,Lecture theatre 1 A,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,"English expansion of ""lt 1a""."
+BM17,17,poin,Exit 5 (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM18,18,poin,Exit gate (pintu keluar),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,"""Pintu keluar"" = exit gate/door."
+BM19,19,poin,Exit 5 (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,Return to the exit before the LT2 corridor.
+BM20,20,poin,Lecture theatre 2 A,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,"Preceding file label ""Exig lt 2a"" reads as Exit->LT 2A."
+BM21,21,poin,Lecture theatre 2 B,route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM22,22,poin,Y4 (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM23,23,poin,"Escalator, lower landing (going up)",route_inferred_escalator_landing,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,Between Y4->escalator and escalator->canteen movements on the way back up.
+BM24,24,poin,"Escalator, upper landing (going up)",route_inferred_escalator_landing,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,No movement recording separates this landing from the one below it.
+BM25,25,poin,Canteen (revisit),route_confirmed_both_sides,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,
+BM26,26,poin,Exit 5 (final),route_inferred_single_sided_end,route_context_from_adjacent_movement_filenames,,not_determined_pending_indoor_map,,,Final stop; only the preceding movement (from the canteen) constrains it.

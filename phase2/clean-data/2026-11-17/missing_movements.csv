@@ -1,0 +1,3 @@
+from_stop_id,to_stop_id,from_location,to_location,status,notes
+BM12,BM13,"Escalator, upper landing (going down)","Escalator, lower landing (going down)",no_accelerometer_recording_between_consecutive_stops,Two escalator landings recorded back-to-back without a walk recording between them; do not fabricate a transition.
+BM23,BM24,"Escalator, lower landing (going up)","Escalator, upper landing (going up)",no_accelerometer_recording_between_consecutive_stops,Two escalator landings recorded back-to-back without a walk recording between them; do not fabricate a transition.

@@ -1,0 +1,16 @@
+place_id,name,floor,tags,aliases
+GATE,Exit gate (leave building),lower,exit,leave the building;leave;way out;get out;exit the building;exit door;exit gate;pintu keluar;go home;go outside;main exit;main entrance;turnstile;exit building
+EXIT5,Emergency exit,upper,emergency,emergency exit;emergency;emergency case;fire exit;fire;evacuate;alarm;emergency stairs;exit 5
+TOILET,Toilet,upper,toilet,toilet;bathroom;washroom;restroom;wc;lavatory;mens;womens;loo;pee;poo
+Y5,Y5 studio,upper,room,y5;year 5;studio 5;y5 302;y5 202
+SR8,Study room 8 (book first),upper,bookable,study room 8;sr8;room 8
+SR9,Study room 9 (book first),upper,bookable,study room 9;sr9;room 9
+SR10,Study room 10 (book first),upper,bookable,study room 10;sr10;room 10
+SR11,Study room 11 (book first),upper,bookable,study room 11;sr11;room 11
+CANTEEN,Canteen,upper,food,canteen;cafeteria;food;eat;hungry;lunch;dinner;breakfast;meal;rice;noodles;siu mei;roast meat;char siu;dim sum;drink;coffee;snack;city express
+Y4,Y4 studio,lower,room,y4;year 4;studio 4;y4052
+LT1A,Lecture theatre 1A,lower,lecture,lt1a;lt 1a;lecture theatre 1a;lecture 1a;theatre 1a;class;lesson
+LT1B,Lecture theatre 1B,lower,lecture,lt1b;lt 1b;lecture theatre 1b;lecture 1b;theatre 1b;class;lesson
+LT2A,Lecture theatre 2A,lower,lecture,lt2a;lt 2a;lecture theatre 2a;lecture 2a;theatre 2a;class;lesson
+LT2B,Lecture theatre 2B,lower,lecture,lt2b;lt 2b;lecture theatre 2b;lecture 2b;theatre 2b;class;lesson
+ESCALATOR,Escalator,both,transit,escalator;escalators;lift;elevator;stairs;go up;go down;upstairs;downstairs;change floor

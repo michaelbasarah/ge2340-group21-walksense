@@ -1,0 +1,12 @@
+from,to,distance_m
+Exit 5 (emergency exit),Canteen (entrance),11.1
+Exit 5 (emergency exit),Male toilet,3.6
+Exit by bathroom (emergency),Canteen (entrance),11.6
+Exit by bathroom (emergency),Female toilet,4.4
+Male toilet,Y5-302,11.6
+Female toilet,Y5-202,10.7
+Y5-202,Study Room 8 (Y5-511),7.1
+Y5-302,Study Room 11 (Y5-514),8.0
+Study Room 8 (Y5-511),Study Room 9 (Y5-512),3.5
+Study Room 9 (Y5-512),Study Room 10 (Y5-513),3.0
+Study Room 10 (Y5-513),Study Room 11 (Y5-514),2.9

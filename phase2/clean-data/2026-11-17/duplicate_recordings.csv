@@ -1,0 +1,2 @@
+session_id,source_zip,interval_id,duplicate_of_session_id,duplicate_of_source_zip,rows_quarantined,note
+BM20,poin 2026-11-17 21-37-27.zip,1,BM19,poin 2026-11-17 21-36-20.zip,3025,phyphox resume re-export: this interval repeats the canonical standalone recording; its readings are quarantined to avoid double-counting one physical stop.

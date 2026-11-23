@@ -1,0 +1,63 @@
+{
+  "session": "2026-11-17",
+  "slices_total": 390,
+  "slices_train": 234,
+  "slices_test": 156,
+  "stops": 26,
+  "window_seconds": 2.0,
+  "DISCLAIMER": "Single-session OPTIMISTIC upper bound (train/test from same visit). Not a day-3 result.",
+  "knn_magnetic": {
+    "stop_accuracy": 0.942,
+    "stop_accuracy_within_1_stop": 0.942,
+    "floor_accuracy": 0.974
+  },
+  "randomforest_magnetic": {
+    "stop_accuracy": 0.923,
+    "stop_accuracy_within_1_stop": 0.923,
+    "floor_accuracy": 0.974
+  },
+  "nearest_centroid_magnetic": {
+    "stop_accuracy": 0.891,
+    "stop_accuracy_within_1_stop": 0.891,
+    "floor_accuracy": 0.968
+  },
+  "magnetic_separability": {
+    "silhouette_by_stop_26_classes": 0.439,
+    "silhouette_by_floor_2_classes": 0.131,
+    "note": "Silhouette ~>0.5 strong, ~0.25-0.5 some structure, <0.25 weak/overlapping."
+  },
+  "barometer_floor_split": {
+    "upper_floor_stops": [
+      "BM01",
+      "BM02",
+      "BM03",
+      "BM04",
+      "BM05",
+      "BM06",
+      "BM07",
+      "BM08",
+      "BM09",
+      "BM10",
+      "BM11",
+      "BM12",
+      "BM24",
+      "BM25",
+      "BM26"
+    ],
+    "lower_floor_stops": [
+      "BM13",
+      "BM14",
+      "BM15",
+      "BM16",
+      "BM17",
+      "BM18",
+      "BM19",
+      "BM20",
+      "BM21",
+      "BM22",
+      "BM23"
+    ],
+    "upper_median_hpa": 1014.418,
+    "lower_median_hpa": 1015.056
+  }
+}

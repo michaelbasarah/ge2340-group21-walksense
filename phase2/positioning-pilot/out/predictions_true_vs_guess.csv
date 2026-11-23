@@ -1,0 +1,157 @@
+true_stop,true_place,window_2s,knn_guess,guess_place,correct
+BM01,Exit 5,9,BM25,Canteen (revisit),False
+BM01,Exit 5,10,BM08,Y5 (revisit),False
+BM01,Exit 5,11,BM17,Exit 5 (revisit),False
+BM01,Exit 5,12,BM17,Exit 5 (revisit),False
+BM01,Exit 5,13,BM17,Exit 5 (revisit),False
+BM01,Exit 5,14,BM17,Exit 5 (revisit),False
+BM02,Toilet,9,BM02,Toilet,True
+BM02,Toilet,10,BM02,Toilet,True
+BM02,Toilet,11,BM02,Toilet,True
+BM02,Toilet,12,BM02,Toilet,True
+BM02,Toilet,13,BM02,Toilet,True
+BM02,Toilet,14,BM02,Toilet,True
+BM03,Y5,9,BM03,Y5,True
+BM03,Y5,10,BM03,Y5,True
+BM03,Y5,11,BM03,Y5,True
+BM03,Y5,12,BM03,Y5,True
+BM03,Y5,13,BM03,Y5,True
+BM03,Y5,14,BM03,Y5,True
+BM04,Study room 11,9,BM04,Study room 11,True
+BM04,Study room 11,10,BM04,Study room 11,True
+BM04,Study room 11,11,BM04,Study room 11,True
+BM04,Study room 11,12,BM04,Study room 11,True
+BM04,Study room 11,13,BM04,Study room 11,True
+BM04,Study room 11,14,BM04,Study room 11,True
+BM05,Study room 10,9,BM05,Study room 10,True
+BM05,Study room 10,10,BM05,Study room 10,True
+BM05,Study room 10,11,BM05,Study room 10,True
+BM05,Study room 10,12,BM05,Study room 10,True
+BM05,Study room 10,13,BM05,Study room 10,True
+BM05,Study room 10,14,BM05,Study room 10,True
+BM06,Study room 9,9,BM06,Study room 9,True
+BM06,Study room 9,10,BM06,Study room 9,True
+BM06,Study room 9,11,BM06,Study room 9,True
+BM06,Study room 9,12,BM06,Study room 9,True
+BM06,Study room 9,13,BM06,Study room 9,True
+BM06,Study room 9,14,BM06,Study room 9,True
+BM07,Study room 8,9,BM07,Study room 8,True
+BM07,Study room 8,10,BM07,Study room 8,True
+BM07,Study room 8,11,BM07,Study room 8,True
+BM07,Study room 8,12,BM07,Study room 8,True
+BM07,Study room 8,13,BM07,Study room 8,True
+BM07,Study room 8,14,BM07,Study room 8,True
+BM08,Y5 (revisit),9,BM08,Y5 (revisit),True
+BM08,Y5 (revisit),10,BM08,Y5 (revisit),True
+BM08,Y5 (revisit),11,BM08,Y5 (revisit),True
+BM08,Y5 (revisit),12,BM08,Y5 (revisit),True
+BM08,Y5 (revisit),13,BM08,Y5 (revisit),True
+BM08,Y5 (revisit),14,BM08,Y5 (revisit),True
+BM09,Toilet (revisit),9,BM09,Toilet (revisit),True
+BM09,Toilet (revisit),10,BM09,Toilet (revisit),True
+BM09,Toilet (revisit),11,BM09,Toilet (revisit),True
+BM09,Toilet (revisit),12,BM09,Toilet (revisit),True
+BM09,Toilet (revisit),13,BM09,Toilet (revisit),True
+BM09,Toilet (revisit),14,BM09,Toilet (revisit),True
+BM10,Exit 5 (revisit),9,BM10,Exit 5 (revisit),True
+BM10,Exit 5 (revisit),10,BM10,Exit 5 (revisit),True
+BM10,Exit 5 (revisit),11,BM10,Exit 5 (revisit),True
+BM10,Exit 5 (revisit),12,BM10,Exit 5 (revisit),True
+BM10,Exit 5 (revisit),13,BM10,Exit 5 (revisit),True
+BM10,Exit 5 (revisit),14,BM10,Exit 5 (revisit),True
+BM11,Canteen,9,BM11,Canteen,True
+BM11,Canteen,10,BM11,Canteen,True
+BM11,Canteen,11,BM11,Canteen,True
+BM11,Canteen,12,BM11,Canteen,True
+BM11,Canteen,13,BM11,Canteen,True
+BM11,Canteen,14,BM11,Canteen,True
+BM12,"Escalator, upper landing (going down)",9,BM12,"Escalator, upper landing (going down)",True
+BM12,"Escalator, upper landing (going down)",10,BM12,"Escalator, upper landing (going down)",True
+BM12,"Escalator, upper landing (going down)",11,BM12,"Escalator, upper landing (going down)",True
+BM12,"Escalator, upper landing (going down)",12,BM12,"Escalator, upper landing (going down)",True
+BM12,"Escalator, upper landing (going down)",13,BM12,"Escalator, upper landing (going down)",True
+BM12,"Escalator, upper landing (going down)",14,BM12,"Escalator, upper landing (going down)",True
+BM13,"Escalator, lower landing (going down)",9,BM13,"Escalator, lower landing (going down)",True
+BM13,"Escalator, lower landing (going down)",10,BM13,"Escalator, lower landing (going down)",True
+BM13,"Escalator, lower landing (going down)",11,BM13,"Escalator, lower landing (going down)",True
+BM13,"Escalator, lower landing (going down)",12,BM13,"Escalator, lower landing (going down)",True
+BM13,"Escalator, lower landing (going down)",13,BM13,"Escalator, lower landing (going down)",True
+BM13,"Escalator, lower landing (going down)",14,BM13,"Escalator, lower landing (going down)",True
+BM14,Y4,9,BM22,Y4 (revisit),False
+BM14,Y4,10,BM14,Y4,True
+BM14,Y4,11,BM14,Y4,True
+BM14,Y4,12,BM14,Y4,True
+BM14,Y4,13,BM22,Y4 (revisit),False
+BM14,Y4,14,BM22,Y4 (revisit),False
+BM15,Lecture theatre 1 B,9,BM15,Lecture theatre 1 B,True
+BM15,Lecture theatre 1 B,10,BM15,Lecture theatre 1 B,True
+BM15,Lecture theatre 1 B,11,BM15,Lecture theatre 1 B,True
+BM15,Lecture theatre 1 B,12,BM15,Lecture theatre 1 B,True
+BM15,Lecture theatre 1 B,13,BM15,Lecture theatre 1 B,True
+BM15,Lecture theatre 1 B,14,BM15,Lecture theatre 1 B,True
+BM16,Lecture theatre 1 A,9,BM16,Lecture theatre 1 A,True
+BM16,Lecture theatre 1 A,10,BM16,Lecture theatre 1 A,True
+BM16,Lecture theatre 1 A,11,BM16,Lecture theatre 1 A,True
+BM16,Lecture theatre 1 A,12,BM16,Lecture theatre 1 A,True
+BM16,Lecture theatre 1 A,13,BM16,Lecture theatre 1 A,True
+BM16,Lecture theatre 1 A,14,BM16,Lecture theatre 1 A,True
+BM17,Exit 5 (revisit),9,BM17,Exit 5 (revisit),True
+BM17,Exit 5 (revisit),10,BM17,Exit 5 (revisit),True
+BM17,Exit 5 (revisit),11,BM17,Exit 5 (revisit),True
+BM17,Exit 5 (revisit),12,BM17,Exit 5 (revisit),True
+BM17,Exit 5 (revisit),13,BM17,Exit 5 (revisit),True
+BM17,Exit 5 (revisit),14,BM17,Exit 5 (revisit),True
+BM18,Exit gate (pintu keluar),9,BM18,Exit gate (pintu keluar),True
+BM18,Exit gate (pintu keluar),10,BM18,Exit gate (pintu keluar),True
+BM18,Exit gate (pintu keluar),11,BM18,Exit gate (pintu keluar),True
+BM18,Exit gate (pintu keluar),12,BM18,Exit gate (pintu keluar),True
+BM18,Exit gate (pintu keluar),13,BM18,Exit gate (pintu keluar),True
+BM18,Exit gate (pintu keluar),14,BM18,Exit gate (pintu keluar),True
+BM19,Exit 5 (revisit),9,BM19,Exit 5 (revisit),True
+BM19,Exit 5 (revisit),10,BM19,Exit 5 (revisit),True
+BM19,Exit 5 (revisit),11,BM19,Exit 5 (revisit),True
+BM19,Exit 5 (revisit),12,BM19,Exit 5 (revisit),True
+BM19,Exit 5 (revisit),13,BM19,Exit 5 (revisit),True
+BM19,Exit 5 (revisit),14,BM19,Exit 5 (revisit),True
+BM20,Lecture theatre 2 A,24,BM20,Lecture theatre 2 A,True
+BM20,Lecture theatre 2 A,25,BM20,Lecture theatre 2 A,True
+BM20,Lecture theatre 2 A,26,BM20,Lecture theatre 2 A,True
+BM20,Lecture theatre 2 A,27,BM20,Lecture theatre 2 A,True
+BM20,Lecture theatre 2 A,28,BM20,Lecture theatre 2 A,True
+BM20,Lecture theatre 2 A,29,BM20,Lecture theatre 2 A,True
+BM21,Lecture theatre 2 B,9,BM21,Lecture theatre 2 B,True
+BM21,Lecture theatre 2 B,10,BM21,Lecture theatre 2 B,True
+BM21,Lecture theatre 2 B,11,BM21,Lecture theatre 2 B,True
+BM21,Lecture theatre 2 B,12,BM21,Lecture theatre 2 B,True
+BM21,Lecture theatre 2 B,13,BM21,Lecture theatre 2 B,True
+BM21,Lecture theatre 2 B,14,BM21,Lecture theatre 2 B,True
+BM22,Y4 (revisit),9,BM22,Y4 (revisit),True
+BM22,Y4 (revisit),10,BM22,Y4 (revisit),True
+BM22,Y4 (revisit),11,BM22,Y4 (revisit),True
+BM22,Y4 (revisit),12,BM22,Y4 (revisit),True
+BM22,Y4 (revisit),13,BM22,Y4 (revisit),True
+BM22,Y4 (revisit),14,BM22,Y4 (revisit),True
+BM23,"Escalator, lower landing (going up)",9,BM23,"Escalator, lower landing (going up)",True
+BM23,"Escalator, lower landing (going up)",10,BM23,"Escalator, lower landing (going up)",True
+BM23,"Escalator, lower landing (going up)",11,BM23,"Escalator, lower landing (going up)",True
+BM23,"Escalator, lower landing (going up)",12,BM23,"Escalator, lower landing (going up)",True
+BM23,"Escalator, lower landing (going up)",13,BM23,"Escalator, lower landing (going up)",True
+BM23,"Escalator, lower landing (going up)",14,BM23,"Escalator, lower landing (going up)",True
+BM24,"Escalator, upper landing (going up)",9,BM24,"Escalator, upper landing (going up)",True
+BM24,"Escalator, upper landing (going up)",10,BM24,"Escalator, upper landing (going up)",True
+BM24,"Escalator, upper landing (going up)",11,BM24,"Escalator, upper landing (going up)",True
+BM24,"Escalator, upper landing (going up)",12,BM24,"Escalator, upper landing (going up)",True
+BM24,"Escalator, upper landing (going up)",13,BM24,"Escalator, upper landing (going up)",True
+BM24,"Escalator, upper landing (going up)",14,BM24,"Escalator, upper landing (going up)",True
+BM25,Canteen (revisit),9,BM25,Canteen (revisit),True
+BM25,Canteen (revisit),10,BM25,Canteen (revisit),True
+BM25,Canteen (revisit),11,BM25,Canteen (revisit),True
+BM25,Canteen (revisit),12,BM25,Canteen (revisit),True
+BM25,Canteen (revisit),13,BM25,Canteen (revisit),True
+BM25,Canteen (revisit),14,BM25,Canteen (revisit),True
+BM26,Exit 5 (final),9,BM26,Exit 5 (final),True
+BM26,Exit 5 (final),10,BM26,Exit 5 (final),True
+BM26,Exit 5 (final),11,BM26,Exit 5 (final),True
+BM26,Exit 5 (final),12,BM26,Exit 5 (final),True
+BM26,Exit 5 (final),13,BM26,Exit 5 (final),True
+BM26,Exit 5 (final),14,BM26,Exit 5 (final),True

@@ -1,0 +1,30 @@
+{
+  "dataset_version": "v1_first_pass_descriptive_features",
+  "acquisition_date_hk": "2026-11-17",
+  "stop_feature_rows": 26,
+  "movement_feature_rows": 23,
+  "synthetic_rows": 0,
+  "wifi_stop_bssid_groups": 927,
+  "wifi_candidate_observations_summarized": 961,
+  "wifi_groups_with_one_observation": 893,
+  "wifi_groups_with_multiple_observations": 34,
+  "source_table_sha256": {
+    "sensor_samples.csv": "f988d2bdc20e4168b85c963c6e77cbc0c197ad3c18db6cfeb14842162dbbccdc",
+    "sensors/barometer.csv": "7a4e810651734318eebc54ad1e8eaf8a1065b77771ec46fe2a6e47644c931ae9",
+    "sensors/magnetometer.csv": "b67bb22a18910f1b8a212708bb9fe3673c0c697eccc9853a68b2f2be7fc5d76b",
+    "sensors/accelerometer.csv": "2e9857651da484544eff17f27c60de4b46a1a3b5303e2910d6b35e78108be010",
+    "sessions.csv": "38bf24d6a2449dc0d0e24401354b004645117f8d0c2d2248dab8348166b0d206",
+    "sensor_quality.csv": "f75b2c6a6c7dbd5d6d4254440e91c96782ed3e806b7983e967ade91eb79e3cd4",
+    "recording_intervals.csv": "c08ada8dc20eb5a1a23735ef28fc4b3c88b4df6649063ef6f9193b3e3a6e57ac",
+    "locations_provisional.csv": "1865ab57eb1c0f851caab8d6b92c00d62828de8794d34d577eb6ef704781cdc6",
+    "corrected_location_list.csv": "262810acc193ea625a6772ed6ae14072af599394235021df3b39df7663a6b526",
+    "accelerometer_edges.csv": "6c1e8347c64f60e8981c101509f0c22790fa7e288f9bbab85e1ed80b2742d42c",
+    "wifi/observations.csv": "929e5ccec44ab6e3ba52b012447fe3fa0dcfedabc69c0921b12e6448523c54cf",
+    "wifi/stop_associations_provisional.csv": "1c6864a6c966bc6d1ca488ed76aedfa932f1eef3b86212d1c6b8c7812604af97",
+    "excluded_sensor_rows.csv": "3793cf08a54a4652a95b4d761e7ed02eba961a2cd95074a3673c37e272bfcd77"
+  },
+  "source_tables_unchanged": true,
+  "scope": "whole_recording_descriptive_statistics_no_slicing_interpolation_training_distance_or_steps",
+  "labels_status": "provisional_route_inferred_pending_map_confirmation",
+  "feature_validation_checks": 15
+}

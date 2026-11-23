@@ -1,0 +1,27 @@
+location_number,stop_id,location_label,label_confidence,is_revisit,label_source,notes
+1,BM01,Exit 5,route_inferred_single_sided_start,False,route_context_from_adjacent_movement_filenames,First stop; only the following movement (to the toilet) constrains it.
+2,BM02,Toilet,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+3,BM03,Y5,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+4,BM04,Study room 11,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+5,BM05,Study room 10,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+6,BM06,Study room 9,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+7,BM07,Study room 8,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+8,BM08,Y5 (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,Second visit to Y5 on the return leg.
+9,BM09,Toilet (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,Second visit to the toilet.
+10,BM10,Exit 5 (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,Second visit to the exit before heading to the canteen.
+11,BM11,Canteen,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+12,BM12,"Escalator, upper landing (going down)",route_inferred_escalator_landing,False,route_context_from_adjacent_movement_filenames,"Between the canteen->escalator and escalator->Y4 movements; floor change, exact landing provisional."
+13,BM13,"Escalator, lower landing (going down)",route_inferred_escalator_landing,False,route_context_from_adjacent_movement_filenames,No movement recording separates this landing from the one above it.
+14,BM14,Y4,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+15,BM15,Lecture theatre 1 B,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,"English expansion of ""lt 1b""; floor digit not independently confirmed."
+16,BM16,Lecture theatre 1 A,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,"English expansion of ""lt 1a""."
+17,BM17,Exit 5 (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,
+18,BM18,Exit gate (pintu keluar),route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,"""Pintu keluar"" = exit gate/door."
+19,BM19,Exit 5 (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,Return to the exit before the LT2 corridor.
+20,BM20,Lecture theatre 2 A,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,"Preceding file label ""Exig lt 2a"" reads as Exit->LT 2A."
+21,BM21,Lecture theatre 2 B,route_confirmed_both_sides,False,route_context_from_adjacent_movement_filenames,
+22,BM22,Y4 (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,
+23,BM23,"Escalator, lower landing (going up)",route_inferred_escalator_landing,False,route_context_from_adjacent_movement_filenames,Between Y4->escalator and escalator->canteen movements on the way back up.
+24,BM24,"Escalator, upper landing (going up)",route_inferred_escalator_landing,False,route_context_from_adjacent_movement_filenames,No movement recording separates this landing from the one below it.
+25,BM25,Canteen (revisit),route_confirmed_both_sides,True,route_context_from_adjacent_movement_filenames,
+26,BM26,Exit 5 (final),route_inferred_single_sided_end,False,route_context_from_adjacent_movement_filenames,Final stop; only the preceding movement (from the canteen) constrains it.

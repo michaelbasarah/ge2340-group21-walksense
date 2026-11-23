@@ -1,0 +1,142 @@
+{
+  "dataset_version": "v1_first_pass_features_route_labelled_provisional",
+  "acquisition_date_hk": "2026-11-17",
+  "source": "C:\\Users\\Admin\\School\\Year 3 Sem A\\GE2340\\Project\\Data (17-11)",
+  "sensor_zip_count": 49,
+  "barometer_magnetometer_stops": 26,
+  "accelerometer_movements": 23,
+  "wifi_logs": 1,
+  "devices": [
+    [
+      "accelerometer_movement",
+      "iPhone19,2"
+    ],
+    [
+      "barometer_magnetometer_stop",
+      "iPhone17,4"
+    ]
+  ],
+  "sensor_rows_source": 104504,
+  "sensor_rows_clean": 101436,
+  "sensor_rows_excluded": 3068,
+  "sensor_counts": {
+    "magnetometer": 77930,
+    "barometer": 700,
+    "accelerometer": 22806
+  },
+  "exclusion_reason_counts": {
+    "negative_experiment_time": 43,
+    "outside_recorded_interval": 43,
+    "duplicate_reexport_interval_superseded_by_BM19": 3025
+  },
+  "edge_timing_status_counts": {
+    "between_endpoint_stop_windows": 23
+  },
+  "measured_movement_recordings": 23,
+  "unrecorded_consecutive_stop_gaps": 2,
+  "duplicate_reexport_intervals": 1,
+  "duplicate_reexport_detail": [
+    {
+      "session_id": "BM20",
+      "source_zip": "poin 2026-11-17 21-37-27.zip",
+      "interval_id": 1,
+      "duplicate_of_session_id": "BM19",
+      "duplicate_of_source_zip": "poin 2026-11-17 21-36-20.zip",
+      "rows_quarantined": 3025,
+      "note": "phyphox resume re-export: this interval repeats the canonical standalone recording; its readings are quarantined to avoid double-counting one physical stop."
+    }
+  ],
+  "wifi": {
+    "source_log": "WigleWifi_20261117214707.csv.gz",
+    "source_data_rows": 3087,
+    "wifi_rows_clean": 3085,
+    "wifi_rows_excluded": 0,
+    "non_wifi_rows_separated": 2,
+    "wifi_exclusion_reasons": {},
+    "unique_bssids": 1294,
+    "provisionally_associated_rows": 961,
+    "stops_with_candidate_rows": 15,
+    "unassigned_rows": 2124,
+    "unassigned_reason_counts": {
+      "outside_stop_session_time_span": 674,
+      "between_stop_recording_windows": 1450
+    },
+    "zero_row_stops": [
+      "BM08",
+      "BM14",
+      "BM15",
+      "BM16",
+      "BM17",
+      "BM18",
+      "BM19",
+      "BM21",
+      "BM22",
+      "BM24",
+      "BM25",
+      "BM26"
+    ],
+    "timestamp_audit_file": "wifi_timestamp_audit.json",
+    "first_seen_min": "2026-11-17 13:10:16",
+    "first_seen_max": "2026-11-17 13:46:51"
+  },
+  "pressure_clean_medians_hpa": {
+    "BM01": 1014.386139,
+    "BM02": 1014.384079,
+    "BM03": 1014.399796,
+    "BM04": 1014.405365,
+    "BM05": 1014.405518,
+    "BM06": 1014.4130325,
+    "BM07": 1014.408188,
+    "BM08": 1014.4182585,
+    "BM09": 1014.432678,
+    "BM10": 1014.441528,
+    "BM11": 1014.449768,
+    "BM12": 1014.466095,
+    "BM13": 1015.035019,
+    "BM14": 1015.036697,
+    "BM15": 1015.048599,
+    "BM16": 1015.053864,
+    "BM17": 1015.06424,
+    "BM18": 1015.061646,
+    "BM19": 1015.055847,
+    "BM20": 1015.055771,
+    "BM21": 1015.062943,
+    "BM22": 1015.065002,
+    "BM23": 1015.06218,
+    "BM24": 1014.476929,
+    "BM25": 1014.493179,
+    "BM26": 1014.505081
+  },
+  "stop_label_confidence_counts": {
+    "route_inferred_single_sided_start": 1,
+    "route_confirmed_both_sides": 20,
+    "route_inferred_escalator_landing": 4,
+    "route_inferred_single_sided_end": 1
+  },
+  "uncertainties": [
+    "One stop was exported twice: poin 21-36-20 is an exact prefix of the resumed recording poin 21-37-27. The duplicated first interval of 21-37-27 is quarantined so the physical stop is counted once; 26 distinct stops remain.",
+    "Stop location labels are provisional, inferred only from adjacent movement filenames; they are not independently confirmed against an indoor map.",
+    "The four escalator-landing stops (BM12, BM13, BM23, BM24) sit between two escalator movements; their exact landing/floor is provisional.",
+    "Floor numbers are not assigned; no marked indoor plan or map coordinates are available yet.",
+    "Device clocks of the two iPhones and the Samsung were not independently synchronized.",
+    "WiFi UTC format is verified; the stored FirstSeen time is a persisted observation time, not radio acquisition time; selective persistence prevents complete fingerprints.",
+    "Exact installed WiGLE 2.111 source/binary was not matched to the inspected upstream source.",
+    "No smoothing, resampling, numeric distance, step counts, calibration or model training were performed."
+  ],
+  "core_cleaning_version": "v1_cleaned_route_labelled_provisional",
+  "features": {
+    "dataset_version": "v1_first_pass_descriptive_features",
+    "acquisition_date_hk": "2026-11-17",
+    "stop_feature_rows": 26,
+    "movement_feature_rows": 23,
+    "synthetic_rows": 0,
+    "wifi_stop_bssid_groups": 927,
+    "wifi_candidate_observations_summarized": 961,
+    "wifi_groups_with_one_observation": 893,
+    "wifi_groups_with_multiple_observations": 34,
+    "source_tables_unchanged": true,
+    "scope": "whole_recording_descriptive_statistics_no_slicing_interpolation_training_distance_or_steps",
+    "labels_status": "provisional_route_inferred_pending_map_confirmation",
+    "feature_validation_checks": 15
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "timestamp_timezone": "UTC_verified_by_official_WiGLE_CSV_v1.6_format",
+  "timestamp_semantics": "persisted_observation_location_time_not_radio_acquisition_time",
+  "source_version_limitation": "Upstream behavior audited separately; exact installed 2.111 source/binary not matched.",
+  "clock_alignment_status": "unverified_three_distinct_devices_no_offset_estimated",
+  "complete_scan_snapshots": false,
+  "sources": [
+    "https://api.wigle.net/csvFormat-1_6.html"
+  ]
+}

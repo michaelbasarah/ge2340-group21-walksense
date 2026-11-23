@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "check_count": 15,
+  "checks": [
+    {
+      "check": "26_unique_actual_stop_feature_rows",
+      "passed": true
+    },
+    {
+      "check": "stop_sample_counts_account_for_all_accepted_baro_and_mag",
+      "passed": true
+    },
+    {
+      "check": "barometer_statistics_recomputed_from_clean_samples",
+      "passed": true
+    },
+    {
+      "check": "magnetometer_statistics_recomputed_from_clean_samples",
+      "passed": true
+    },
+    {
+      "check": "wifi_group_observation_counts_sum_to_associations",
+      "passed": true
+    },
+    {
+      "check": "wifi_only_actual_observed_stop_bssid_pairs",
+      "passed": true
+    },
+    {
+      "check": "wifi_group_stats_and_source_ids_recomputed",
+      "passed": true
+    },
+    {
+      "check": "23_unique_movement_rows_no_synthetic",
+      "passed": true
+    },
+    {
+      "check": "movement_sample_counts_sum_to_accepted_accelerometer",
+      "passed": true
+    },
+    {
+      "check": "movement_magnitude_mean_and_deviation_rms_recomputed",
+      "passed": true
+    },
+    {
+      "check": "no_distance_steps_or_calibration_claims",
+      "passed": true
+    },
+    {
+      "check": "all_26_recordings_in_review_with_matching_source_identity",
+      "passed": true
+    },
+    {
+      "check": "isolated_review_fixture_preserves_user_entries",
+      "passed": true
+    },
+    {
+      "check": "review_merge_rejects_changed_source_identity",
+      "passed": true
+    },
+    {
+      "check": "no_nan_or_infinity_feature_cells",
+      "passed": true
+    }
+  ]
+}
