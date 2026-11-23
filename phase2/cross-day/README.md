@@ -84,6 +84,41 @@ One floor step is 0.58 hPa (17 Nov) and 0.68 hPa (23 Nov). On 23 Nov the weather
 - Cross-day place accuracy is about 3 times chance; it is worse than same-day revisits, so day-to-day change (and how the phone is held) matters more than time within a day.
 - The floor is solved by step tracking.
 
+## Orientation correction (tilt), 23-Nov walks only
+
+Run `python phase2/cross-day/tilt.py` after `crossday.py`. It writes `out/tilt_results.json`, `out/tilt_endpoints.csv` and `out/fig_tilt.png`. The baseline results above are unchanged.
+
+**Why only walks.** Stop recordings (BM*) logged only the barometer and magnetometer on both days, so the phone's tilt at a stop is unknown and stops can't be corrected. The 23-Nov walk recordings (ACC*) logged accelerometer, gyroscope and magnetometer in one file on one clock (starts agree within 0.11 s, all ~100 Hz). The 17-Nov walks logged only the accelerometer, so they can't be used.
+
+**What it does.**
+- For each walk it estimates gravity in the phone frame. It does this two ways: the mean accelerometer over the window ("low-pass"), and a gyro-aided complementary filter.
+- It splits the magnetic field into a vertical part along gravity (B_vertical) and a horizontal part (B_horizontal). Both stay the same however the phone is tilted or turned.
+- The first and last 2 s of each walk become fingerprints of its start and end place, using the labels of the stop before and after. That gives 66 endpoints over 31 places. Walks shorter than 5 s are skipped because their two ends would overlap; this drops BM20's walk, among others.
+- The phone was 8–21° from flat at the endpoints (median 13°).
+
+**Results** (same samples for every feature set; 1-nearest-neighbour; 31 places, chance 3%):
+
+| Features | Silhouette (25 places with 2+ endpoints) | Other-pass accuracy, leave one pass out (28 test endpoints) | Latest pass only (10 endpoints) |
+|---|---|---|---|
+| \|B\| only | -0.49 | 0% | 0% |
+| raw x/y/z | -0.43 | 0% | 0% |
+| B_vertical + B_horizontal, low-pass gravity | **-0.16** | **39%** (11/28) | 40% |
+| B_vertical + B_horizontal, gyro-aided gravity | -0.19 | 29% | 30% |
+
+A "pass" is one stop and the walk ends next to it. The test pass's endpoints are never in training.
+
+**What worked.**
+- Splitting the field along gravity clearly helps on walk endpoints: 0% → 39%.
+- Raw x/y/z fails here because the phone points in the walking direction, which differs between passes.
+- |B| alone is one number and isn't enough to tell 31 places apart.
+- Gyro-aided gravity did not beat the plain average. The endpoints are near-standing, so averaging the accelerometer is enough. The filter's sign convention was checked: its gravity tracks the smoothed accelerometer within about 2°.
+
+**What didn't.**
+- Silhouettes are still negative. Walk endpoints are noisy (people are starting or stopping), so these are weak fingerprints.
+- Walk endpoints can't simply be added to the stop fingerprints: walks used a different phone (iPhone19,2) from stops (iPhone17,4), and the two phones' |B| at the same places correlate only r = 0.20 (median difference 4 µT).
+
+**For day 3:** log the accelerometer (and gyroscope) at stops too, with the same phone as the walks. Then every stop gets B_vertical/B_horizontal, which on this evidence are the orientation-proof features worth having. Cross-day is exactly where phone orientation changes.
+
 ## Figures (`out/`)
 
 - `fig_accuracy_overview.png`: same visit vs revisit vs other day for each method, with chance marked.

@@ -1,0 +1,709 @@
+{
+ "what": "Tilt-correction test on 23-Nov walk endpoints (first/last 2 s of each walk). Computed by tilt.py.",
+ "walk_device": [
+  "iPhone19,2"
+ ],
+ "stop_device": [
+  "iPhone17,4"
+ ],
+ "max_start_offset_accel_vs_mag_s": 0.11,
+ "n_endpoints": 66,
+ "n_places": 31,
+ "walks_skipped_shorter_than_s": 5.0,
+ "phone_tilt_from_flat_deg_median": 13.0,
+ "phone_tilt_from_flat_deg_range": [
+  7.8,
+  20.7
+ ],
+ "accel_magnitude_sd_median_ms2": 0.59,
+ "silhouette_places_with_2plus_endpoints": {
+  "n_samples": 60,
+  "n_places": 25,
+  "|B| only": -0.488,
+  "raw x/y/z": -0.427,
+  "tilt-corrected (low-pass gravity)": -0.158,
+  "tilt-corrected (gyro-aided gravity)": -0.191
+ },
+ "revisited_places": {
+  "canteen": [
+   "BM01",
+   "BM16",
+   "BM19"
+  ],
+  "escalator_down": [
+   "BM13",
+   "BM17"
+  ],
+  "escalator_down_4F": [
+   "BM33",
+   "BM41"
+  ],
+  "escalator_up": [
+   "BM12",
+   "BM18"
+  ],
+  "escalator_up_4F": [
+   "BM35",
+   "BM42"
+  ],
+  "exit_10": [
+   "BM11",
+   "BM15"
+  ],
+  "exit_5": [
+   "BM02",
+   "BM14"
+  ],
+  "exit_5_4F": [
+   "BM30",
+   "BM40"
+  ],
+  "exit_5_stairs": [
+   "BM23",
+   "BM26"
+  ]
+ },
+ "revisit_tests": {
+  "leave_one_pass_out": {
+   "|B| only": {
+    "endpoint_accuracy": 0.0,
+    "n_test_endpoints": 28,
+    "pass_accuracy": 0.0,
+    "n_test_passes": 19,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM01",
+      "true": "canteen",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM16",
+      "true": "canteen",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM13",
+      "true": "escalator_down",
+      "pred": "lt2a"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "lt2a"
+     },
+     {
+      "pass_stop": "BM33",
+      "true": "escalator_down_4F",
+      "pred": "lt1a"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "male_toilet"
+     },
+     {
+      "pass_stop": "BM12",
+      "true": "escalator_up",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "y4502"
+     },
+     {
+      "pass_stop": "BM35",
+      "true": "escalator_up_4F",
+      "pred": "y5302_back"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM11",
+      "true": "exit_10",
+      "pred": "sr8"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM02",
+      "true": "exit_5",
+      "pred": "lift_5"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM30",
+      "true": "exit_5_4F",
+      "pred": "sr11"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM23",
+      "true": "exit_5_stairs",
+      "pred": "sr9"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "sr8"
+     }
+    ]
+   },
+   "raw x/y/z": {
+    "endpoint_accuracy": 0.0,
+    "n_test_endpoints": 28,
+    "pass_accuracy": 0.0,
+    "n_test_passes": 19,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM01",
+      "true": "canteen",
+      "pred": "exit_5_stairs"
+     },
+     {
+      "pass_stop": "BM16",
+      "true": "canteen",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM13",
+      "true": "escalator_down",
+      "pred": "exit_10_4F"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM33",
+      "true": "escalator_down_4F",
+      "pred": "lt1a"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "sr11"
+     },
+     {
+      "pass_stop": "BM12",
+      "true": "escalator_up",
+      "pred": "male_toilet"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM35",
+      "true": "escalator_up_4F",
+      "pred": "female_toilet"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "exit_10_4F"
+     },
+     {
+      "pass_stop": "BM11",
+      "true": "exit_10",
+      "pred": "female_toilet"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM02",
+      "true": "exit_5",
+      "pred": "canteen"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM30",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "exit_10_4F"
+     },
+     {
+      "pass_stop": "BM23",
+      "true": "exit_5_stairs",
+      "pred": "y5401"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "escalator_down"
+     }
+    ]
+   },
+   "tilt-corrected (low-pass gravity)": {
+    "endpoint_accuracy": 0.393,
+    "n_test_endpoints": 28,
+    "pass_accuracy": 0.421,
+    "n_test_passes": 19,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM01",
+      "true": "canteen",
+      "pred": "exit_5_stairs"
+     },
+     {
+      "pass_stop": "BM16",
+      "true": "canteen",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM13",
+      "true": "escalator_down",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM33",
+      "true": "escalator_down_4F",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM12",
+      "true": "escalator_up",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM35",
+      "true": "escalator_up_4F",
+      "pred": "lt1a"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "female_toilet"
+     },
+     {
+      "pass_stop": "BM11",
+      "true": "exit_10",
+      "pred": "sr8"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "y5302"
+     },
+     {
+      "pass_stop": "BM02",
+      "true": "exit_5",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM30",
+      "true": "exit_5_4F",
+      "pred": "lift_5_4F"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM23",
+      "true": "exit_5_stairs",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "exit_10"
+     }
+    ]
+   },
+   "tilt-corrected (gyro-aided gravity)": {
+    "endpoint_accuracy": 0.286,
+    "n_test_endpoints": 28,
+    "pass_accuracy": 0.316,
+    "n_test_passes": 19,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM01",
+      "true": "canteen",
+      "pred": "exit_5_stairs"
+     },
+     {
+      "pass_stop": "BM16",
+      "true": "canteen",
+      "pred": "exit_10"
+     },
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM13",
+      "true": "escalator_down",
+      "pred": "lt2b"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM33",
+      "true": "escalator_down_4F",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM12",
+      "true": "escalator_up",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM35",
+      "true": "escalator_up_4F",
+      "pred": "lt1a"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "female_toilet"
+     },
+     {
+      "pass_stop": "BM11",
+      "true": "exit_10",
+      "pred": "sr8"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "escalator_up_4F"
+     },
+     {
+      "pass_stop": "BM02",
+      "true": "exit_5",
+      "pred": "canteen"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM30",
+      "true": "exit_5_4F",
+      "pred": "exit_10_4F"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM23",
+      "true": "exit_5_stairs",
+      "pred": "exit_5_stairs"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "y5401"
+     }
+    ]
+   }
+  },
+  "latest_pass": {
+   "|B| only": {
+    "endpoint_accuracy": 0.0,
+    "n_test_endpoints": 10,
+    "pass_accuracy": 0.0,
+    "n_test_passes": 9,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "lt2a"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "male_toilet"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "y4502"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "sr8"
+     }
+    ]
+   },
+   "raw x/y/z": {
+    "endpoint_accuracy": 0.0,
+    "n_test_endpoints": 10,
+    "pass_accuracy": 0.0,
+    "n_test_passes": 9,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "sr11"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "exit_10_4F"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "entrance_exit"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "exit_10_4F"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "escalator_down"
+     }
+    ]
+   },
+   "tilt-corrected (low-pass gravity)": {
+    "endpoint_accuracy": 0.4,
+    "n_test_endpoints": 10,
+    "pass_accuracy": 0.444,
+    "n_test_passes": 9,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "female_toilet"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "y5302"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "exit_10"
+     }
+    ]
+   },
+   "tilt-corrected (gyro-aided gravity)": {
+    "endpoint_accuracy": 0.3,
+    "n_test_endpoints": 10,
+    "pass_accuracy": 0.333,
+    "n_test_passes": 9,
+    "chance": 0.032,
+    "predictions": [
+     {
+      "pass_stop": "BM19",
+      "true": "canteen",
+      "pred": "escalator_down"
+     },
+     {
+      "pass_stop": "BM17",
+      "true": "escalator_down",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM41",
+      "true": "escalator_down_4F",
+      "pred": "escalator_down_4F"
+     },
+     {
+      "pass_stop": "BM18",
+      "true": "escalator_up",
+      "pred": "escalator_up"
+     },
+     {
+      "pass_stop": "BM42",
+      "true": "escalator_up_4F",
+      "pred": "female_toilet"
+     },
+     {
+      "pass_stop": "BM15",
+      "true": "exit_10",
+      "pred": "escalator_up_4F"
+     },
+     {
+      "pass_stop": "BM14",
+      "true": "exit_5",
+      "pred": "exit_5"
+     },
+     {
+      "pass_stop": "BM40",
+      "true": "exit_5_4F",
+      "pred": "disabled_toilet_4F"
+     },
+     {
+      "pass_stop": "BM26",
+      "true": "exit_5_stairs",
+      "pred": "y5401"
+     }
+    ]
+   }
+  }
+ },
+ "device_check_walk_vs_stop_mean_B": {
+  "n_places": 31,
+  "correlation": 0.197,
+  "median_abs_difference_uT": 3.96
+ }
+}
