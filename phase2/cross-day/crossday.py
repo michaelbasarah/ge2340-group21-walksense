@@ -125,7 +125,7 @@ def walk_files_23(sessions):
 
 def load_labels(walks):
     lab = pd.read_csv(HERE / 'labels_23nov_confirmed.csv', dtype=str).fillna('')
-    lab['place'] = lab['label'].str.strip().str.lower()
+    lab['place'] = lab['label'].str.strip()
     lab['floor'] = lab['floor'].astype(int)
     lab['confirmed'] = lab['confirmed'].str.strip().str.lower().isin(['yes', 'y', 'true', '1'])
     lab['own_walk_file'] = lab['stop_id'].map(lambda s: walks[s]['own_walk_file'])
@@ -303,8 +303,8 @@ def floors(press, true_floor, sessions):
 
 
 # ============================================================================ adjacency
-MAP_NAMES = {'Exit 5 (emergency exit)': 'exit lift 5', 'Exit by bathroom (emergency)': 'exit lift 10',
-             'Canteen (entrance)': 'canteen', 'Male toilet': 'male toilet', 'Female toilet': 'female toilet',
+MAP_NAMES = {'Exit 5 (emergency exit)': 'exit_5', 'Exit by bathroom (emergency)': 'exit_10',
+             'Canteen (entrance)': 'canteen', 'Male toilet': 'male_toilet', 'Female toilet': 'female_toilet',
              'Y5-302': 'y5302', 'Y5-202': 'y5202', 'Study Room 8 (Y5-511)': 'sr8', 'Study Room 9 (Y5-512)': 'sr9',
              'Study Room 10 (Y5-513)': 'sr10', 'Study Room 11 (Y5-514)': 'sr11'}
 
@@ -440,7 +440,7 @@ def main():
     place_of = {f'{D_23}:{s}': p for s, p in zip(use23['stop_id'], use23['place'])}
     place_floor = dict(zip(use23['place'], use23['floor']))
     places23 = set(use23['place'])
-    cw['place'] = cw['place_23nov'].str.strip().str.lower()
+    cw['place'] = cw['place_23nov'].str.strip()
     cw_ok = cw[(cw['rank'] >= 2) & cw['place'].isin(places23)]
     for s, p in zip(cw_ok['stop_id_17nov'], cw_ok['place']):
         place_of[f'{D_17}:{s}'] = p
@@ -479,9 +479,30 @@ def main():
                              'minutes_after_first_visit': round((walks[s]['start'] - first) / 60, 1),
                              'median_hpa': round(hpa23[s], 2), 'walk_file_before': walks[s]['walk_before'],
                              'own_walk_file_after': walks[s]['own_walk_file'],
-                             'verdict': 'real revisit (own walk file)' if r['own_walk_file'] else
-                                        ('confirmed by team' if r['confirmed'] else 'label copied from next stop - uncertain, excluded'),
+                             'confirmed': bool(r['confirmed']),
+                             'verdict': ('used: confirmed' if r['confirmed'] else 'used: own walk file') if r['usable'] else
+                                        'excluded: no own walk file and not confirmed',
                              'used': bool(r['usable'])})
+    prov = pd.read_csv(D23 / 'locations_provisional.csv', dtype=str).set_index('stop_id')
+    srt = np.sort(press[D_23]['hpa'].to_numpy()); gi = int(np.argmax(np.diff(srt)))
+    baro_floor = {s: (4 if h > (srt[gi] + srt[gi + 1]) / 2 else 5) for s, h in hpa23.items()}
+    norm = lambda t: ''.join(ch for ch in t.lower() if ch.isalnum())
+    same = {('canteen', 'canteen'), ('exitlift5', 'exit5'), ('exitlift10', 'exit10'), ('escanaik', 'escalatorup'),
+            ('escanaikatas', 'escalatorup'), ('escaturunatas', 'escalatordown'), ('maletoilet', 'maletoilet'),
+            ('femaletoilet', 'femaletoilet'), ('disabledtoilet', 'disabledtoilet'), ('lift5', 'lift5'),
+            ('exit5stairs', 'exit5stairs'), ('exit5stairsbawah', 'exit5stairs4f'), ('lift5bawah', 'lift54f'),
+            ('disabledtoiletbawah', 'disabledtoilet4f'), ('exitlift5bawah', 'exit54f'), ('escaturunbawah', 'escalatordown4f'),
+            ('escanaikbawah', 'escalatorup4f'), ('exitlift10bawah', 'exit104f'), ('pintukeluar', 'entranceexit'),
+            }
+    cmp_rows = []
+    for _, r in lab.iterrows():
+        old = prov.loc[r['stop_id'], 'location_label']
+        agree = norm(old) == norm(r['label']) or (norm(old), norm(r['label'])) in same
+        cmp_rows.append({'stop_id': r['stop_id'], 'provisional_label_dicta': old, 'label_now': r['label'],
+                         'labels_agree': agree, 'floor_now': r['floor'], 'floor_dicta': prov.loc[r['stop_id'], 'floor'],
+                         'floor_from_barometer_gap': baro_floor[r['stop_id']], 'floor_agrees_with_barometer': baro_floor[r['stop_id']] == r['floor'],
+                         'confirmed': bool(r['confirmed']), 'used': bool(r['usable'])})
+    pd.DataFrame(cmp_rows).to_csv(OUT / 'label_changes_vs_provisional.csv', index=False)
     revisit_check = pd.DataFrame(rev_rows)
     revisit_check.to_csv(OUT / 'revisit_check_23nov.csv', index=False)
 

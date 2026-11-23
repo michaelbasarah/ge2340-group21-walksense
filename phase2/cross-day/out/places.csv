@@ -1,32 +1,32 @@
 place_23nov,floor,tier,stops_23nov,stops_17nov
-canteen,5,core,BM01 BM16,BM11 BM25
-disabled toilet,5,23 Nov only,BM21,
-esca naik,5,23 Nov only,BM12,
-esca naik atas,5,core,BM18,BM24
-esca turun atas,5,core,BM13,BM12
-exit 5 stairs,5,23 Nov only,BM23 BM26,
-exit lift 10,5,extended,BM11 BM15,BM10
-exit lift 5,5,extended,BM02 BM20,BM01
-female toilet,5,extended,BM10,BM09
-lift 5,5,23 Nov only,BM22,
-male toilet,5,extended,BM03,BM02
+canteen,5,core,BM01 BM16 BM19,BM11 BM25
+disabled_toilet,5,23 Nov only,BM21,
+escalator_down,5,core,BM13 BM17,BM12
+escalator_up,5,core,BM12 BM18,BM24
+exit_10,5,extended,BM11 BM15,BM10
+exit_5,5,extended,BM02 BM20,BM01
+exit_5_stairs,5,23 Nov only,BM23 BM26,
+female_toilet,5,extended,BM10,BM09
+lift_5,5,23 Nov only,BM22,
+male_toilet,5,extended,BM03,BM02
 sr10,5,core,BM06,BM05
 sr11,5,core,BM05,BM04
 sr8,5,core,BM08,BM07
 sr9,5,core,BM07,BM06
 y5202,5,extended,BM09,BM08
-y5302,5,extended,BM04 BM25,BM03
+y5302,5,extended,BM04,BM03
+y5302_back,5,23 Nov only,BM25,
 y5401,5,23 Nov only,BM24,
-disabled toilet bawah,4,23 Nov only,BM29,
-esca naik bawah,4,core,BM35,BM23
-esca turun bawah,4,core,BM33 BM41,BM13
-exit 5 stairs bawah,4,23 Nov only,BM27,
-exit lift 10 bawah,4,23 Nov only,BM38,
-exit lift 5 bawah,4,23 Nov only,BM30,
-lift 5 bawah,4,23 Nov only,BM28,
-lt1 a,4,core,BM37,BM16
-lt1 b,4,core,BM36,BM15
-lt2 a,4,core,BM31,BM20
-lt2 b,4,core,BM32,BM21
-pintu keluar,4,core,BM39,BM18
+disabled_toilet_4F,4,23 Nov only,BM29,
+entrance_exit,4,core,BM39,BM18
+escalator_down_4F,4,core,BM33 BM41,BM13
+escalator_up_4F,4,core,BM35 BM42,BM23
+exit_10_4F,4,extended,BM38,BM17
+exit_5_4F,4,extended,BM30 BM40,BM19
+exit_5_stairs_4F,4,23 Nov only,BM27,
+lift_5_4F,4,23 Nov only,BM28,
+lt1a,4,core,BM37,BM16
+lt1b,4,core,BM36,BM15
+lt2a,4,core,BM31,BM20
+lt2b,4,core,BM32,BM21
 y4502,4,core,BM34,BM14 BM22
