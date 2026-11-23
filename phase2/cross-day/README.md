@@ -16,7 +16,7 @@ On the first run the script rebuilds the gitignored 23-Nov sensor CSVs. It copie
 
 | File | What it is |
 |---|---|
-| `labels_23nov_confirmed.csv` | **The 23-Nov labels.** 23 Nov is the reference dataset. Columns: `stop_id, label, floor, confirmed, note`. Each place has one English ID per physical spot; a floor-4 spot with a floor-5 namesake gets `_4F`. The labels come from the collector's own route list (one walk per line, 37 lines = the 37 walk files in time order), lined up with the stop timestamps and walk-file names. Floor comes from the collector's rule (floor 5 until the stairs walk after BM26, floor 4 after it) and agrees with the barometer for all 42 stops. 41 stops are `confirmed=yes`. BM14 is `no` (see below). Edit, then rerun. |
+| `labels_23nov_confirmed.csv` | **The 23-Nov labels.** 23 Nov is the reference dataset. Columns: `stop_id, label, floor, confirmed, note`. Each place has one English ID per physical spot; a floor-4 spot with a floor-5 namesake gets `_4F`. The labels come from the collector's own route list (one walk per line, 37 lines = the 37 walk files in time order), lined up with the stop timestamps and walk-file names. Floor comes from the collector's rule (floor 5 until the stairs walk after BM26, floor 4 after it) and agrees with the barometer for all 42 stops. All 42 stops are `confirmed=yes` (the collector confirmed BM14). Edit, then rerun. |
 | `crosswalk_17nov_to_23nov.csv` | Maps each 17-Nov stop onto a 23-Nov place name, with `confidence` (high/medium/low/none), the basis and a note. Only `high` and `medium` are used. |
 
 **Label rule:** a 23-Nov stop is used if `confirmed=yes`, or if it has its own `From X` walk file after it. `clean.py` named each stop after the next walk's origin, so a stop with no walk after it got a copy of the following stop's label.
@@ -27,7 +27,9 @@ On the first run the script rebuilds the gitignored 23-Nov sensor CSVs. It copie
 - BM40: esca turun bawah → `exit_5_4F` (end of the "entrance/exit → exit 5" walk).
 - BM42: no label → `escalator_up_4F` (end of the last walk, "escalator down → up", file 'From esca turun bawah').
 - BM25: y5302 → `y5302_back` (the back door; a different spot from BM04).
-- BM14: exit lift 10 → `exit_5`, but **not confirmed**. Route step 13 ends at exit 5, yet step 14 starts at exit 10 with no walk recorded between BM14 and BM15, and the phone moved during BM14. It is excluded.
+- BM14: exit lift 10 → `exit_5`, confirmed by the collector. Step 13 ends at exit 5 (BM14); they then walked to exit 10 without recording it, and step 14 starts there (BM15). The phone moved during BM14 (magnetometer spread 23 µT), so it is a noisy training visit.
+
+**Walks that were not recorded** (the collector skipped them): exit 5 → exit 10 between BM14 and BM15; escalator down → escalator up between BM17 and BM18; canteen → exit 5 between BM19 and BM20 (after the 32-minute break; skipped because that walk was already recorded as step 1); exit 5 (4F) → escalator down (4F) between BM40 and BM41.
 
 The other 36 stops keep Dicta's meaning under the new IDs. Dicta's floors are all correct.
 
@@ -35,7 +37,7 @@ The other 36 stops keep Dicta's meaning under the new IDs. Dicta's floors are al
 
 All features are 2 s magnetometer windows (field strength |B|: mean, sd, 10th and 90th percentile; optionally also the mean x/y/z) or 10 s Wi-Fi chunks (strongest RSSI per BSSID, -100 if not heard). The models are kNN (k=5, distance-weighted) and a random forest (200 trees, balanced, seed 21). "Baro floor +" means the barometer picks the floor first, then a model trained only on that floor's places picks the place. A visit's answer is the majority vote over its windows.
 
-1. **MAIN: 23 Nov, later revisits.** Nine places were recorded more than once (the collector re-recorded a spot every time they passed it). Training uses every other usable 23-Nov stop (32 visits, 31 places). Testing uses the latest visit of each of the 9 places. The classifier chooses among all 31 places, so chance is 3.2%.
+1. **MAIN: 23 Nov, later revisits.** Nine places were recorded more than once (the collector re-recorded a spot every time they passed it). Training uses every other 23-Nov stop (33 visits, 31 places). Testing uses the latest visit of each of the 9 places. The classifier chooses among all 31 places, so chance is 3.2%.
 
    | place | train stop(s) | test stop | gap from the latest training visit |
    |---|---|---|---|
@@ -47,7 +49,7 @@ All features are 2 s magnetometer windows (field strength |B|: mean, sd, 10th an
    | escalator_down_4F | BM33 | BM41 | 12 min |
    | escalator_up | BM12 | BM18 | 13 min |
    | exit_5_4F | BM30 | BM40 | 16 min |
-   | exit_5 | BM02 | BM20 | 62 min |
+   | exit_5 | BM02, BM14 | BM20 | 44 min (62 min from BM02) |
 
    This is **leakage-reduced, not leakage-free**: it is the same day, the same phone and the same person. `revisit_23_reverse` (train on the later visits, test on the earliest) is also in the JSON.
 2. **SECONDARY: true cross-day.** Train on 23 Nov and test on 17 Nov, using only the places both days share. "Core" means 15 places with high-confidence matches (17 test visits, chance 6.7%). "Extended" adds 8 route-inferred matches, giving 23 places. The reverse direction (train 17, test 23) is in the JSON only.
@@ -55,14 +57,14 @@ All features are 2 s magnetometer windows (field strength |B|: mean, sd, 10th an
 
 ## Numbers (place accuracy per visit; window-level and within-one-neighbour figures are in the JSON)
 
-| Method | Same visit, 23 Nov (n=41) | **Revisit, 23 Nov (n=9)** | Same visit, 17 Nov core (n=17) | **Cross-day 23→17 core (n=17)** |
+| Method | Same visit, 23 Nov (n=42) | **Revisit, 23 Nov (n=9)** | Same visit, 17 Nov core (n=17) | **Cross-day 23→17 core (n=17)** |
 |---|---|---|---|---|
-| Magnetic \|B\| kNN | 49% | 0% | 59% | 18% |
-| Baro floor + magnetic \|B\| kNN | 56% | 11% | 77% | 18% (within one neighbour 35%) |
-| Magnetic \|B\|+xyz kNN | 100% | 78% | 100% | 24% (4/17) |
-| Baro floor + magnetic \|B\|+xyz kNN | 100% | **78%** (7/9, window 70%, within one neighbour 89%) | 100% | 18% (within one neighbour 53%) |
-| Wi-Fi RSSI RF | 13% | 0% | 11% | 11% (n=9, chance 11%) |
-| Baro floor + Wi-Fi RSSI RF | 16% | 0% | 22% | 22% |
+| Magnetic \|B\| kNN | 38% | 0% | 59% | 18% |
+| Baro floor + magnetic \|B\| kNN | 57% | 11% | 77% | 18% (within one neighbour 35%) |
+| Magnetic \|B\|+xyz kNN | 98% | 78% | 100% | 24% (4/17) |
+| Baro floor + magnetic \|B\|+xyz kNN | 100% | **78%** (7/9, window 69%, within one neighbour 89%) | 100% | 18% (within one neighbour 53%) |
+| Wi-Fi RSSI RF | 10% | 0% | 11% | 11% (n=9, chance 11%) |
+| Baro floor + Wi-Fi RSSI RF | 10% | 0% | 22% | 22% |
 | chance | 3.2% | 3.2% | 6.7% | 6.7% |
 
 The two misses on revisits are BM40 (exit_5_4F, predicted lt2a, its neighbour) and BM41 (escalator_down_4F, predicted lt1b).

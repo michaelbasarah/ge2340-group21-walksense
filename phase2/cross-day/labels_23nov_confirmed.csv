@@ -7,18 +7,18 @@ BM05,sr11,5,yes,Step 4 -> 5.
 BM06,sr10,5,yes,Step 5 -> 6.
 BM07,sr9,5,yes,Step 6 -> 7.
 BM08,sr8,5,yes,Step 7 -> 8.
-BM09,y5202,5,yes,"Step 8 -> 9 'kelas'; walk file named 'From y5202'."
+BM09,y5202,5,yes,Step 8 -> 9 'kelas'; walk file named 'From y5202'.
 BM10,female_toilet,5,yes,Step 9 -> 10 (toilet cwe).
 BM11,exit_10,5,yes,Step 10 -> 11; walk file 'From exit lift 10'.
 BM12,escalator_up,5,yes,"Step 11 -> 12 (esca naik, top of the up escalator). Dicta's 'esca naik' = 'esca naik atas', same spot."
 BM13,escalator_down,5,yes,Step 12 -> 13 (esca turun = top of the down escalator).
-BM14,exit_5,5,no,"End of step 13 (esca turun -> exit 5), recorded 0 s after that walk ended. But step 14 starts at exit 10 and no walk was recorded between BM14 and BM15 (3.5 min gap). Dicta's copied label said exit lift 10. Phone was moving during this stop (magnetometer spread 23 uT). Excluded until confirmed."
+BM14,exit_5,5,yes,Confirmed by the collector: end of step 13 (esca turun -> exit 5). They then walked to exit 10 without recording that walk (step 14 starts at exit 10). Phone was moving during this recording (magnetometer spread 23 uT).
 BM15,exit_10,5,yes,Start of step 14 (exit 10 -> kantin); walk file 'From exit lift 10'.
 BM16,canteen,5,yes,End of step 14 / start of step 15.
 BM17,escalator_down,5,yes,"End of step 15 (kantin -> esca turun), 4 s after that walk ended. Dicta's copied label said 'esca naik atas'. The move to BM18 (escalator down -> up) was not recorded."
 BM18,escalator_up,5,yes,Start of step 16 (esca naik -> kantin); walk file 'From esca naik atas'.
 BM19,canteen,5,yes,"End of step 16 (esca naik -> kantin), 3 s after that walk ended. Dicta's copied label said 'exit lift 5'. A 32-minute break follows."
-BM20,exit_5,5,yes,Start of step 17 (Exit 5 -> toilet male disabled) after the break; walk file 'From exit lift 5'.
+BM20,exit_5,5,yes,Start of step 17 (Exit 5 -> toilet male disabled) after the break; walk file 'From exit lift 5'. Collector confirmed the canteen (BM19) -> exit 5 walk was skipped because that walk was already recorded (step 1).
 BM21,disabled_toilet,5,yes,Step 17 -> 18 (male disabled toilet).
 BM22,lift_5,5,yes,Step 18 -> 19.
 BM23,exit_5_stairs,5,yes,Step 19 -> 20. No Wi-Fi was logged at this stop.
