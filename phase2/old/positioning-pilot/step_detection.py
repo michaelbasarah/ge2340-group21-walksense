@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Dead-reckoning pilot — count steps in each walk recording (method A feasibility).
 
-Uses the accelerometer movement recordings in ../clean-data/2026-11-17/. Removes gravity
+Uses the accelerometer movement recordings in ../../clean-data/2026-11-17/. Removes gravity
 with a short moving-average high-pass, then counts peaks (each bounce = one step).
 
 NOTE: this gives STEPS, not metres. Converting steps to metres needs a stride length, and
@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
-DATA = ROOT / '..' / 'clean-data' / '2026-11-17'
+DATA = ROOT / '..' / '..' / 'clean-data' / '2026-11-17'
 OUT = ROOT / 'out'; OUT.mkdir(exist_ok=True)
 PEAK_THRESHOLD = 0.9      # m/s^2 on the gravity-removed signal
 REFRACTORY_S = 0.30       # min time between steps (caps cadence ~3.3 steps/s)

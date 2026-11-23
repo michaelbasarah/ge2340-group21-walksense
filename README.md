@@ -12,6 +12,10 @@ Team workspace for the current sensor acquisition, fresh recording labels, indoo
 - **Phase 1:** [sanitized copy of current submitted proposal source](phase1-work/Phase1_Proposal_v2.tex) preserves the technical content of the Phase1_Submission_Group21 proposal source, with student IDs/emails withheld. Other proposal drafts in that folder are historical. Identity-bearing PDFs, signed forms and the class roster remain privately preserved outside this repository; sanitized editable source is included.
 - **Course instructions/templates:** [Project-Description.pdf](Project-Description.pdf), root LaTeX templates and style. Students must write the report; course policy permits LLM polishing only. No new submission prose or results have been generated for this handoff.
 
+## Progress log
+
+[PROCESS-LOG.md](PROCESS-LOG.md) is the chronological record of everything we did on this project, failures included (internal team notes, not report text). Start there for context and for what we learned. Current work is in `phase2/new/`; superseded work is in `phase2/old/`. Agents and teammates: see [CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md) for the rule that every piece of work adds a log entry.
+
 ## What is ready and what remains
 
 The latest acquisition is **2026-11-14 v4**, expanded under `phase2/clean-data/2026-11-14/`: 26 real stationary recordings, 23 real movement recordings, 46,124 accepted sensor readings and descriptive feature tables. Existing names/numbers in historical manifests are **untrusted candidate labels**. There are 26 stop recordings but only 25 older descriptions; no extra visit has been identified or deleted. BM IDs are source-file IDs, not physical location numbers. The new 49-row template has no old candidate names.

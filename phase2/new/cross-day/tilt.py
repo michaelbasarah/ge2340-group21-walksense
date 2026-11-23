@@ -13,7 +13,7 @@ one clock, so for each walk we:
 Then compare feature sets on exactly the same samples:
   |B| only, raw x/y/z, tilt-corrected (B_vertical, B_horizontal).
 
-Run after crossday.py (it builds the 23-Nov cache):  python phase2/cross-day/tilt.py
+Run after crossday.py (it builds the 23-Nov cache):  python phase2/new/cross-day/tilt.py
 Writes out/tilt_results.json, out/tilt_endpoints.csv, out/fig_tilt.png.
 17-Nov walks logged only the accelerometer, so they cannot be used here.
 """

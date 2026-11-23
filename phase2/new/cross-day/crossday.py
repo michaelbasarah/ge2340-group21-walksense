@@ -11,7 +11,7 @@ labels). 17 Nov is mapped onto 23-Nov places by crosswalk_17nov_to_23nov.csv.
   BASELINE   Same-day block split: inside every stop, the first 60% of the time trains
              and the last 40% tests (one 2 s window gap). This is the leaky number.
 
-Run (from anywhere):   python phase2/cross-day/crossday.py
+Run (from anywhere):   python phase2/new/cross-day/crossday.py
 Needs: numpy pandas scikit-learn matplotlib.   Everything is written to ./out/.
 
 The 23-Nov sensor CSVs are gitignored. On the first run this script copies the team's
@@ -44,7 +44,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 HERE = Path(__file__).resolve().parent
-PHASE2 = HERE.parent
+PHASE2 = HERE.parent.parent   # phase2/ (this folder is phase2/new/cross-day/)
 D17 = PHASE2 / 'clean-data' / '2026-11-17'
 D23 = PHASE2 / 'clean-data' / '2026-11-23'
 CACHE23 = HERE / 'cache' / '2026-11-23'

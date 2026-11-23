@@ -5,11 +5,17 @@ zip (`../ge2340-group21-walksense-main/`). Nothing here touches their folder.
 
 Needs: Python 3 with `numpy pandas scikit-learn matplotlib model2vec` (all installed on this laptop).
 
+Full history of what we tried and what happened (failures included): [`../PROCESS-LOG.md`](../PROCESS-LOG.md).
+
+## old/ and new/
+`old/` holds work that is superseded and is kept only so history stays readable: the positioning pilot trained and tested on the same recording (leakage), and the old collect list predates the 24-Nov findings. `new/` holds today's analysis and what to do next. Start with `new/TEAM-SUMMARY-2026-11-24.md`, then follow `new/DAY3-CHECKLIST.md` when collecting. `clean-data/`, `map/`, `prototype/`, `request-matching/` and `field-sheet.html` stay where they are.
+
 ## Folders
 | Folder | What it is | Run |
 |---|---|---|
 | `clean-data/2026-11-17/` | The cleaned 17 Nov session (26 stops, 23 walks, Wi-Fi), labelled + validated. | `python clean.py` then `python feature_extraction.py` |
-| `positioning-pilot/` | Magnetic checkpoint ID + barometer floor + step detection; figures in `out/`. | `python pilot_train.py`, `python step_detection.py` |
+| `old/` | **Superseded 2026-11-24.** Dicta's positioning pilot (`old/positioning-pilot/`, its ~94% was leaky) and the old collect list. Kept for history. | `cd old/positioning-pilot && python pilot_train.py` |
+| `new/` | **Current.** `new/cross-day/` = leakage-reduced and cross-day analysis; `new/TEAM-SUMMARY-2026-11-24.md`; `new/DAY3-CHECKLIST.md` = the collection rules for day 3. | `python new/cross-day/crossday.py`, then `tilt.py` |
 | `request-matching/` | Objective #9 — type a request, get a place (keyword + embedding). | `python match.py` or `python match.py "where can i eat"` |
 | `map/` | Floor-5 coordinates → metres, corridor graph, map previews. | `python build_map.py` |
 | `prototype/` | The demo web app (search + positioning replay + floor-5 map + routing). | `python server.py` → http://127.0.0.1:5173 |

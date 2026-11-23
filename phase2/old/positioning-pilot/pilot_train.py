@@ -15,7 +15,7 @@ WHAT THIS IS NOT
   left 12 of 26 stops with no Wi-Fi in this session.
 
 Run:  python pilot_train.py
-Reads the cleaned dataset in ../clean-data/2026-11-17/.
+Reads the cleaned dataset in ../../clean-data/2026-11-17/.
 Writes features, metrics and figures into ./out/.
 """
 from pathlib import Path
@@ -33,7 +33,7 @@ from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, silhouette_score, confusion_matrix
 
 ROOT = Path(__file__).resolve().parent
-DATA = ROOT / '..' / 'clean-data' / '2026-11-17'
+DATA = ROOT / '..' / '..' / 'clean-data' / '2026-11-17'
 OUT = ROOT / 'out'; OUT.mkdir(exist_ok=True)
 WINDOW_S = 2.0          # slice length (the plan's 2-second windows)
 MIN_READINGS = 40       # minimum magnetometer readings to accept a slice

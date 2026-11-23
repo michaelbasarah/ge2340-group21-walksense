@@ -2,7 +2,7 @@
 
 *Internal team notes, not report text (course rule: an LLM may only polish our own writing).*
 
-Every number below comes from `out/results.json`, `out/tilt_results.json` or `README.md` in this folder. Visit-level accuracy means: each stop gets one answer (the majority vote of its 2-second windows), and we count how many stops are right.
+Every number below comes from `cross-day/out/results.json`, `cross-day/out/tilt_results.json` or `cross-day/README.md`. Visit-level accuracy means: each stop gets one answer (the majority vote of its 2-second windows), and we count how many stops are right.
 
 ## a. What we did today
 
@@ -11,7 +11,7 @@ Every number below comes from `out/results.json`, `out/tilt_results.json` or `RE
 - BM25 is the Y5302 back door (`y5302_back`), a different spot from BM04.
 - 4 walks were never recorded (the collector skipped them). That is fine: a stop with no walk after it just can't be named automatically.
 - The floor of every stop agrees with the barometer (42/42).
-- Full list of changes: `out/label_changes_vs_provisional.csv`.
+- Full list of changes: `cross-day/out/label_changes_vs_provisional.csv`.
 
 ## b. Results compared with before
 
@@ -46,9 +46,9 @@ Ideally collect by **Thu 26 Nov** (deadline 30 Nov).
 - [ ] **One phone for both stops and walks, the same phone on every day.** Why: the two iPhones disagree (r = 0.20), and we can't check whether the same phone was used on both days.
 - [ ] **Accelerometer and gyroscope ON during stops, not only during walks.** Why: stops only logged the barometer and magnetometer, so the phone's tilt at a stop is unknown. With the accelerometer we can do the tilt correction on every stop.
 - [ ] **A Wi-Fi logger that saves every scan.** Test WiGLE's database export first, or use a scan-logging app. Check that an access point heard at one stop also appears at the stops next to it. Why: the WiGLE CSV drops repeats.
-- [ ] **60-s stops, with the same place IDs as `labels_23nov_confirmed.csv`, always a stop and then a walk.** Why: 30-s stops hurt 17 Nov, and a stop with no walk after it can't be named automatically.
+- [ ] **60-s stops, with the same place IDs as `cross-day/labels_23nov_confirmed.csv`, always a stop and then a walk.** Why: 30-s stops hurt 17 Nov, and a stop with no walk after it can't be named automatically.
 - [ ] **Phone flat, facing the landmark, the same way at every stop.** Why: magnetic x/y/z only works if the phone is held the same way.
-- [ ] **A separate test walk on another day, with "I'm here" taps** at each checkpoint (the plan in `WHATS-LEFT-TO-COLLECT.md`). Why: the taps give ground truth for scoring.
+- [ ] **A separate test walk on another day, with "I'm here" taps** at each checkpoint (see `DAY3-CHECKLIST.md`). Why: the taps give ground truth for scoring.
 - [ ] **Floor-4 map pins** (Google Maps pins, like floor 5). Why: there is no floor-4 map yet, so "within one neighbour" can't use real floor-4 distances.
 
 ## d. What we expect after day 3 (expectations to test, NOT results)
@@ -62,22 +62,22 @@ Ideally collect by **Thu 26 Nov** (deadline 30 Nov).
 From the repo root (needs `numpy pandas scikit-learn matplotlib`):
 
 ```sh
-python phase2/cross-day/crossday.py   # about 30 s; writes out/results.json and the figures
-python phase2/cross-day/tilt.py       # run after crossday.py; writes the tilt outputs
+python phase2/new/cross-day/crossday.py   # about 30 s; writes out/results.json and the figures
+python phase2/new/cross-day/tilt.py       # run after crossday.py; writes the tilt outputs
 ```
 
-On the first run `crossday.py` rebuilds the gitignored 23-Nov sensor CSVs into `cache/` (the cleaning code is not changed). Outputs are all in `phase2/cross-day/out/`:
+On the first run `crossday.py` rebuilds the gitignored 23-Nov sensor CSVs into `cache/` (the cleaning code is not changed). Outputs are all in `phase2/new/cross-day/out/`:
 
 - `results.json`, `summary_table.csv`: every experiment and method
 - `revisit_check_23nov.csv`, `places.csv`, `label_changes_vs_provisional.csv`
 - `tilt_results.json`, `tilt_endpoints.csv`
 - figures: `fig_accuracy_overview.png`, `fig_confusion_revisit_23nov.png`, `fig_confusion_cross_day.png`, `fig_pressure_by_stop.png`, `fig_magnetic_17_vs_23.png`, `fig_tilt.png`
 
-To change a label, edit `labels_23nov_confirmed.csv` and rerun. More detail: `README.md` in this folder.
+To change a label, edit `cross-day/labels_23nov_confirmed.csv` and rerun. More detail: `cross-day/README.md`.
 
 ## f. Open questions about 17 Nov (optional)
 
-See `crosswalk_17nov_to_23nov.csv`. The 17-Nov names are generic, so 8 matches rest on route order (`confidence = medium`). If anyone remembers the 17-Nov walk, these would help:
+See `cross-day/crosswalk_17nov_to_23nov.csv`. The 17-Nov names are generic, so 8 matches rest on route order (`confidence = medium`). If anyone remembers the 17-Nov walk, these would help:
 
 - BM17 and BM19 were labelled "Exit 5 (revisit)" on 17 Nov but were actually on floor 4 (we mapped them to exit_10_4F and exit_5_4F).
 - BM01, BM02, BM03, BM08, BM09, BM10: route-order matches (exit_5, male_toilet, y5302, y5202, female_toilet, exit_10). The 17-Nov labels for BM08 to BM10 called them revisits of earlier places, but the 23-Nov route says they are different spots.

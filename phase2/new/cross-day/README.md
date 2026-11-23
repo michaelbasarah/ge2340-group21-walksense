@@ -5,7 +5,7 @@ Code and numbers only. This folder doesn't contain report text. The course allow
 ## Run
 
 ```sh
-python phase2/cross-day/crossday.py
+python phase2/new/cross-day/crossday.py
 ```
 
 Needs `numpy pandas scikit-learn matplotlib` (the same as the rest of `phase2/`). A run takes about 30 s. Every number below comes from `out/results.json`, which this command writes.
@@ -86,7 +86,7 @@ One floor step is 0.58 hPa (17 Nov) and 0.68 hPa (23 Nov). On 23 Nov the weather
 
 ## Orientation correction (tilt), 23-Nov walks only
 
-Run `python phase2/cross-day/tilt.py` after `crossday.py`. It writes `out/tilt_results.json`, `out/tilt_endpoints.csv` and `out/fig_tilt.png`. The baseline results above are unchanged.
+Run `python phase2/new/cross-day/tilt.py` after `crossday.py`. It writes `out/tilt_results.json`, `out/tilt_endpoints.csv` and `out/fig_tilt.png`. The baseline results above are unchanged.
 
 **Why only walks.** Stop recordings (BM*) logged only the barometer and magnetometer on both days, so the phone's tilt at a stop is unknown and stops can't be corrected. The 23-Nov walk recordings (ACC*) logged accelerometer, gyroscope and magnetometer in one file on one clock (starts agree within 0.11 s, all ~100 Hz). The 17-Nov walks logged only the accelerometer, so they can't be used.
 
@@ -147,8 +147,8 @@ There is no per-device calibration. |B|-only features don't depend on how the ph
 - **Small n.** The main result has 9 test visits and the cross-day result has 17. One visit is 11% or 6% of the score. Treat them as first estimates.
 - **Labels.** The 23-Nov labels come from the collector's route list lined up by time, so they are much firmer than before. The 17-Nov side is still inferred: 8 of the 23 cross-day place matches rest on route order rather than labels. See `note` in both CSVs.
 - **Only 2 days,** at different times (17 Nov around 21:15, 23 Nov 17:17–19:01), with stops of different lengths (30 s vs 60 s).
-- **Wi-Fi is not a fingerprint in this data.** WiGLE writes a network to its CSV only when it is new or its signal improves, so 80% of 23-Nov BSSIDs appear at just one stop. The nine revisit pairs share 0–3 access points (out of 4–192 per stop). Wi-Fi therefore scores near zero even inside one stop. This is a logging limitation, not proof that Wi-Fi can't locate. It also means "dense Wi-Fi" in `WHATS-LEFT-TO-COLLECT.md` means many rows, not repeated scans. 17 Nov has Wi-Fi at only 9 of the 15 core places.
-- **"Within one neighbour"** uses consecutive stops on either route plus `map/edges_floor5.csv`. There is no floor-4 map yet.
+- **Wi-Fi is not a fingerprint in this data.** WiGLE writes a network to its CSV only when it is new or its signal improves, so 80% of 23-Nov BSSIDs appear at just one stop. The nine revisit pairs share 0–3 access points (out of 4–192 per stop). Wi-Fi therefore scores near zero even inside one stop. This is a logging limitation, not proof that Wi-Fi can't locate. It also means "dense Wi-Fi" in `phase2/old/WHATS-LEFT-TO-COLLECT.md` (superseded; see `phase2/new/DAY3-CHECKLIST.md`) means many rows, not repeated scans. 17 Nov has Wi-Fi at only 9 of the 15 core places.
+- **"Within one neighbour"** uses consecutive stops on either route plus `phase2/map/edges_floor5.csv`. There is no floor-4 map yet.
 
 ## What day 3 would add
 
@@ -159,4 +159,4 @@ There is no per-device calibration. |B|-only features don't depend on how the ph
 
 ## Reused code
 
-The model set-up (median impute + standard scaling, distance-weighted kNN, 200-tree balanced random forest with seed 21) and the per-recording majority vote were adapted from `phase2/training/pipeline.py` on the unmerged `prep/training` branch (8a51469). That branch's label-gated workflow targets the 14-Nov data format, so it wasn't run here. The windowing follows `positioning-pilot/pilot_train.py` (2 s windows, time split inside a stop).
+The model set-up (median impute + standard scaling, distance-weighted kNN, 200-tree balanced random forest with seed 21) and the per-recording majority vote were adapted from `phase2/training/pipeline.py` on the unmerged `prep/training` branch (8a51469). That branch's label-gated workflow targets the 14-Nov data format, so it wasn't run here. The windowing follows `phase2/old/positioning-pilot/pilot_train.py` (2 s windows, time split inside a stop).

@@ -1,3 +1,5 @@
+> **Superseded on 2026-11-24. See `phase2/new/DAY3-CHECKLIST.md`.** This list predates the 24-Nov findings (one phone, accelerometer at stops, a Wi-Fi logger that saves every scan). Kept for history only.
+
 # What's left to collect
 
 Status after the **23 Nov** two-floor session (42 stops, both floors, gyro + dense Wi-Fi).

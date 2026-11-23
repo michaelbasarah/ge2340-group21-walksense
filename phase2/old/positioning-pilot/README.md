@@ -1,3 +1,5 @@
+> **Superseded on 2026-11-24. See `phase2/new/`.** This pilot trained and tested on the same recording (leakage), so its ~94% is not a real result. Kept for history only.
+
 # Positioning pilot — GE2340
 
 A dry run of the positioning pipeline on the **2026-11-17** session, to check whether the
@@ -6,11 +8,11 @@ the course); all numbers come from our own real recordings.
 
 ## How to run
 ```bash
-cd phase2/positioning-pilot
+cd phase2/old/positioning-pilot
 python pilot_train.py
 ```
 Needs: `numpy pandas scikit-learn matplotlib` (`python -m pip install scikit-learn`).
-Reads `../clean-data/2026-11-17/`. Writes everything to `out/`.
+Reads `../../clean-data/2026-11-17/`. Writes everything to `out/`.
 
 ## What it does
 1. Cuts each 30 s stop's magnetometer into **2 s slices** (15 per stop, 390 total) and
