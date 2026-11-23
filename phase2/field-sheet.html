@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WalkSense — Data Collection Field Sheet</title>
+<style>
+  :root { --ink:#1a1a1a; --line:#999; --soft:#ccc; --accent:#0b5; --muted:#666; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--ink); margin: 0; padding: 14mm 12mm;
+    font-size: 11px; line-height: 1.35;
+  }
+  h1 { font-size: 20px; margin: 0 0 2px; letter-spacing: .3px; }
+  h1 small { font-weight: normal; color: var(--muted); font-size: 12px; }
+  h2 { font-size: 13px; margin: 16px 0 6px; padding-bottom: 3px;
+       border-bottom: 2px solid var(--ink); text-transform: uppercase; letter-spacing: .5px; }
+  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 14px; margin-top: 8px; }
+  .fld { border-bottom: 1px solid var(--line); min-height: 20px; padding: 2px 2px 1px; }
+  .fld .lbl { font-size: 8.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  ul.check { list-style: none; margin: 4px 0; padding: 0; }
+  ul.check li { padding: 3px 0 3px 22px; position: relative; break-inside: avoid; }
+  ul.check li::before {
+    content: ""; position: absolute; left: 0; top: 2px;
+    width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 2px;
+  }
+  .must li { font-weight: 600; }
+  .note { color: var(--muted); font-size: 10px; }
+  .box { border: 1px solid var(--soft); border-radius: 4px; padding: 8px 10px; }
+  .pace { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; align-items: end; }
+  table { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 10px; }
+  th, td { border: 1px solid var(--soft); padding: 3px 4px; text-align: left; vertical-align: middle; }
+  th { background: #f0f0f0; font-size: 8.5px; text-transform: uppercase; letter-spacing: .3px; }
+  td.id { font-weight: 700; white-space: nowrap; }
+  td.fill { background: #fcfcfc; }
+  .rev { color: var(--muted); font-style: italic; }
+  .esc { background: #fff6e8; }
+  .grid-area {
+    height: 150mm; border: 1px solid var(--line);
+    background-image:
+      linear-gradient(#e6e6e6 1px, transparent 1px),
+      linear-gradient(90deg, #e6e6e6 1px, transparent 1px);
+    background-size: 5mm 5mm;
+    position: relative;
+  }
+  .grid-area .origin { position: absolute; left: 6px; bottom: 4px; font-size: 9px; color: var(--muted); }
+  .grid-area .scale { position: absolute; right: 6px; top: 4px; font-size: 9px; color: var(--muted); }
+  .legend { font-size: 9px; color: var(--muted); margin-top: 4px; }
+  .pagebreak { page-break-before: always; }
+  @page { size: A4 portrait; margin: 0; }
+  @media print { body { padding: 10mm 10mm; } .noprint { display: none; } }
+  .tip { background: #eefaf2; border-left: 3px solid var(--accent); padding: 6px 9px; margin: 6px 0; font-size: 10px; }
+</style>
+</head>
+<body>
+
+<h1>WalkSense — Field Data Sheet <small>GE2340 Group 21 · indoor positioning</small></h1>
+
+<div class="meta">
+  <div class="fld"><div class="lbl">Date</div></div>
+  <div class="fld"><div class="lbl">Day type (fingerprint 1 / 2 / test)</div></div>
+  <div class="fld"><div class="lbl">Start time (write exact!)</div></div>
+  <div class="fld"><div class="lbl">Collectors</div></div>
+</div>
+
+<h2>Phones &amp; clock sync</h2>
+<div class="note" style="margin-bottom:4px">Photograph all three screens showing the same clock at the start. Record each phone's clock at that moment so offsets can be computed later.</div>
+<div class="row3">
+  <div class="box">
+    <div class="fld"><div class="lbl">Phone A — iPhone · records at each STOP</div></div>
+    <div class="note" style="margin-top:3px"><b>Barometer + Magnetometer</b> (30s, held flat)</div>
+    <div class="fld" style="margin-top:6px"><div class="lbl">Clock reading @ start</div></div>
+  </div>
+  <div class="box">
+    <div class="fld"><div class="lbl">Phone B — iPhone · records during each WALK</div></div>
+    <div class="note" style="margin-top:3px"><b>Accelerometer + Gyroscope + Magnetometer</b> (one log per walk)</div>
+    <div class="fld" style="margin-top:6px"><div class="lbl">Clock reading @ start</div></div>
+  </div>
+  <div class="box">
+    <div class="fld"><div class="lbl">Phone C — Samsung · whole session</div></div>
+    <div class="note" style="margin-top:3px"><b>Wi-Fi / WiGLE</b> (started once, never paused)</div>
+    <div class="fld" style="margin-top:6px"><div class="lbl">Clock reading @ start</div></div>
+  </div>
+</div>
+
+<h2>Before you start — checklist</h2>
+<div class="row2">
+  <ul class="check must">
+    <li>Samsung: Wi-Fi scan throttling <b>OFF</b> (Developer options) — verified</li>
+    <li>WiGLE set to export <b>full database</b> (not KML/summary)</li>
+    <li>Phone B logs <b>accelerometer + gyroscope + magnetometer together</b> — tested</li>
+    <li>Home dry-run done: stood 30s, export showed several BSSID rows in-window</li>
+    <li>All 3 phones synced / start-clock photo taken</li>
+    <li>Pace calibrated (box below filled in)</li>
+  </ul>
+  <ul class="check">
+    <li>All phones &gt;80% battery</li>
+    <li>Sensor-logging apps open &amp; tested (one dry recording each)</li>
+    <li>Route printed; filenames will follow <code>From To</code> style</li>
+    <li>This sheet + pen on a clipboard</li>
+    <li>WiGLE STARTED and left running the whole walk (don't pause)</li>
+  </ul>
+</div>
+
+<h2>Pace calibration</h2>
+<div class="box pace">
+  <div>
+    <div class="lbl note">Walk a known distance once, count steps. metres ÷ steps = metres/step.</div>
+    <div class="fld" style="margin-top:4px"><div class="lbl">Known distance used</div></div>
+  </div>
+  <div class="fld"><div class="lbl">Distance (m)</div></div>
+  <div class="fld"><div class="lbl">Steps</div></div>
+  <div class="fld"><div class="lbl">m / step</div></div>
+</div>
+<div class="tip"><b>Why:</b> with metres-per-step you can turn paced counts into approximate x,y and report positioning error <b>in metres</b> — not just "right room / wrong room."</div>
+
+<!-- ===== PAGE 2: sketch ===== -->
+<div class="pagebreak"></div>
+<h2>Floor sketch <span class="note" style="text-transform:none;font-weight:normal">— pick ONE corner as origin (0,0). Draw route &amp; mark each BMxx. 1 big square = ___ m</span></h2>
+<div class="grid-area">
+  <span class="origin">◹ origin (0,0) — circle your chosen corner</span>
+  <span class="scale">scale: 1 square = ____ m</span>
+</div>
+<div class="legend">Mark floor changes clearly (escalator landings BM12/13 going down, BM23/24 going up span two floors). Note which floor each half of the loop is on.</div>
+
+<!-- ===== PAGE 3: checkpoint table ===== -->
+<div class="pagebreak"></div>
+<h2>Checkpoints — fill x,y (paced) · floor · notes</h2>
+<div class="note" style="margin-bottom:4px">Route pre-filled from the 17-Nov loop. Confirm each name on site; cross out / renumber if the route changes. <b>Test day:</b> also tick "here✓" the instant you arrive, for ground truth.</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:34px">ID</th>
+      <th>Location</th>
+      <th style="width:34px">Floor</th>
+      <th style="width:40px">x (m)</th>
+      <th style="width:40px">y (m)</th>
+      <th style="width:52px">steps from prev</th>
+      <th style="width:34px">here✓</th>
+      <th>Notes / corrections</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="id">BM01</td><td>Exit 5 <span class="note">(start)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill">—</td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM02</td><td>Toilet</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM03</td><td>Y5</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM04</td><td>Study room 11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM05</td><td>Study room 10</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM06</td><td>Study room 9</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM07</td><td>Study room 8</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM08</td><td>Y5 <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM09</td><td>Toilet <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM10</td><td>Exit 5 <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM11</td><td>Canteen</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr class="esc"><td class="id">BM12</td><td>Escalator, upper landing <span class="note">(going down)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr class="esc"><td class="id">BM13</td><td>Escalator, lower landing <span class="note">(going down)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM14</td><td>Y4</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM15</td><td>Lecture theatre 1B</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM16</td><td>Lecture theatre 1A</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM17</td><td>Exit 5 <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM18</td><td>Exit gate <span class="note">(pintu keluar)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM19</td><td>Exit 5 <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM20</td><td>Lecture theatre 2A</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM21</td><td>Lecture theatre 2B</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM22</td><td>Y4 <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr class="esc"><td class="id">BM23</td><td>Escalator, lower landing <span class="note">(going up)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr class="esc"><td class="id">BM24</td><td>Escalator, upper landing <span class="note">(going up)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM25</td><td>Canteen <span class="rev">(revisit)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    <tr><td class="id">BM26</td><td>Exit 5 <span class="note">(final)</span></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+  </tbody>
+</table>
+
+<h2>Per-stop routine &amp; wrap-up</h2>
+<div class="row2">
+  <div class="box">
+    <b>At every stop</b>
+    <ul class="check" style="margin-top:2px">
+      <li>Stand still ~30s, phone <b>held flat, same facing</b> as the corridor</li>
+      <li>Record baro/mag (Phone A) &amp; note the stop</li>
+      <li>On each walk, Phone B logs <b>accel + gyro + mag</b> together</li>
+      <li>Name the walk file <code>From To</code> (e.g. Sr11 Sr10)</li>
+      <li>Test day only: tick "here✓" on arrival</li>
+    </ul>
+  </div>
+  <div class="box">
+    <b>End of session</b>
+    <ul class="check" style="margin-top:2px">
+      <li>Stop recordings; <b>export WiGLE full DB</b></li>
+      <li>Write the <b>end time</b> here: __________</li>
+      <li>Open WiGLE export — sanity-check it isn't empty</li>
+      <li>Back up all files before leaving the building</li>
+    </ul>
+  </div>
+</div>
+
+<p class="note" style="margin-top:14px">Plan: 2 fingerprint days (training) + 1 separate test-walk day with "here✓" ground truth. Keep each visit as one unit — don't split one visit's samples into train &amp; test.</p>
+
+</body>
+</html>

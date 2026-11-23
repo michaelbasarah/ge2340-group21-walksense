@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "check_count": 6,
+  "checks": [
+    {
+      "check": "unique_stops_numbered_in_order",
+      "passed": true
+    },
+    {
+      "check": "row_accounting",
+      "passed": true
+    },
+    {
+      "check": "all_samples_finite_nonneg",
+      "passed": true
+    },
+    {
+      "check": "accepted_samples_have_epoch",
+      "passed": true
+    },
+    {
+      "check": "gyroscope_present_in_movements",
+      "passed": true
+    },
+    {
+      "check": "no_duplicate_rows_in_accepted",
+      "passed": true
+    }
+  ]
+}

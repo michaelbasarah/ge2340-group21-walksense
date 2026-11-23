@@ -1,0 +1,44 @@
+{
+  "dataset": "2026-11-23 two-floor (floor 5 + floor 4)",
+  "source": "C:\\Users\\Admin\\School\\Year 3 Sem A\\GE2340\\Project\\Data 23-11",
+  "stops_unique": 42,
+  "movements": 37,
+  "wifi_logs": 2,
+  "duplicate_reexport_intervals": 3,
+  "sensor_rows_source": 382278,
+  "sensor_rows_clean": 364067,
+  "sensor_rows_excluded": 18211,
+  "sensor_counts": {
+    "magnetometer": 288441,
+    "barometer": 2312,
+    "accelerometer": 36662,
+    "gyroscope": 36652
+  },
+  "exclusion_reason_counts": {
+    "negative_experiment_time": 60,
+    "duplicate_reexport_interval_superseded_by_BM03": 12101,
+    "duplicate_reexport_interval_superseded_by_BM04": 6050
+  },
+  "floor_counts": {
+    "5": 26,
+    "4": 16
+  },
+  "wifi": {
+    "logs": 2,
+    "source_rows": 9337,
+    "wifi_clean": 6522,
+    "non_wifi": 31,
+    "excluded": 2784,
+    "unique_bssids": 3112,
+    "provisional_associations": 1891,
+    "stops_with_wifi": 41,
+    "stops_total": 42
+  },
+  "uncertainties": [
+    "Stop labels are provisional, taken from the origin of the next movement file; confirm against the route.",
+    "Two stop files (pause/resume re-exports) were de-duplicated to 42 unique stops.",
+    "Floors split from barometer medians; confirm floor-change landings (stairs/escalator/lift).",
+    "Gyroscope included in movements for heading; no calibration applied.",
+    "Two WiGLE logs merged; Android scan throttling may still limit per-stop Wi-Fi coverage."
+  ]
+}
