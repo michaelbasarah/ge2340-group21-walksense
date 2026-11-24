@@ -30,6 +30,7 @@ Contents:
 19. 24 Nov: graph edges and step counting (PDR) on the walks
 20. 24 Nov: route-aware tracker (HMM on the graph): helps across days, not on 23-Nov LOVO; v1 FAILED to recover
 21. 24 Nov: circle navigator UI prototype (circles on lines)
+22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
 - Lessons learned
 - Open questions / next steps
 
@@ -281,6 +282,18 @@ Contents:
 
 ---
 
+## 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
+
+- **What we tried:** a second version of the graph with two places merged, from the collector's 24-Nov hand-drawn maps: the four study rooms `sr8`/`sr9`/`sr10`/`sr11` into one node `sr9`, and lift+stairs `lift_5`+`exit_5_stairs` into `lift_stairs` (5F) and `lift_5_4F`+`exit_5_stairs_4F` into `lift_stairs_4F` (4F). `Y5-202` and `Y5-302` were kept separate (not part of the study-room cluster).
+- **Why:** the four study rooms are within ~5 m of each other (`a5_study_rooms` radius in `area_check.csv`), so a fingerprint classifier only confuses them; the collector treats the cluster, and the lift/stairs pair, as one place each. Wanted both the routing graph and the cross-day classifier labels to reflect that, without touching v1.
+- **How:** `phase2/new/graph-v2/merge_v2.py` reads `../graph/nodes.csv`, `../graph/edges.csv`, `../cross-day/labels_23nov_confirmed.csv` and `../graph/area_check.csv` and writes a fresh `graph-v2/`. Node contraction: internal edges (both ends in one merged node) are dropped; the distance to a merged cluster is the boundary edge distance (e.g. `y5302–sr9` keeps 8.0 m from the old `y5302–sr11`, `sr9–y5202` keeps 7.1 m from the old `sr8–y5202`); duplicate edges after contraction keep the shorter `distance_m`. Merged lift/stairs nodes are placed at the mean of their members' coordinates. v1 files are not modified; `crossday.py` is not switched over.
+- **Result:** real places 31 → 26; `nodes.csv` 35 rows (26 real + 9 virtual midpoints), `edges.csv` 34 edges, graph connected (26/26 real nodes reachable from `canteen`, checked in Python). `labels_23nov_merged.csv` has all 42 rows with the study-room and lift/stairs rows remapped (BM05/06/08 → `sr9`, BM22/23/26 → `lift_stairs`, BM27/28 → `lift_stairs_4F`), each `note` recording the `old->new`. `area_check_v2.csv` has the remapped membership lists (metrics not recomputed).
+- **Outcome:** success as a data artifact; non-destructive. Not yet an accuracy result — nobody has rerun the classifier on the merged labels.
+- **What changed because of it:** the team can point `crossday.py` at `labels_23nov_merged.csv` to score merged classes, and the map/UI can read `graph-v2/` to show one study-room circle and one lift/stairs circle per floor. v1 stays as the record of the un-merged graph.
+- **Links:** `phase2/new/graph-v2/` (`merge_v2.py`, `nodes.csv`, `edges.csv`, `labels_23nov_merged.csv`, `area_check_v2.csv`, `README.md`).
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -305,4 +318,5 @@ Contents:
 - **Unmerged branches** `prep/training`, `prep/map`, `prep/ready` are still local and unmerged; decide later whether any of it is wanted.
 - **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
+- **graph-v2 (entry 22):** rerun `crossday.py` against `phase2/new/graph-v2/labels_23nov_merged.csv` to see whether merging the study rooms and lift/stairs changes the exact/area numbers, and decide whether v2 replaces v1 for the map/UI. The collector should confirm the two merges match the hand-drawn maps.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
