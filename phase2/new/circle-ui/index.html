@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>WalkSense circle navigator</title>
+<style>
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#1a2330; --mut:#5a6676; --line:#d8dee6;
+  --idle:#7d8897; --blue:#0072B2; --blue-dim:#a9cde6; --blue-dim-line:#5b9cc6;
+  --route:#E69F00; --dest:#009E73; --bad:#D55E00; --area:#56B4E9; --on-color:#ffffff;
+  --shadow:0 1px 2px rgba(20,30,45,.08),0 4px 14px rgba(20,30,45,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1319; --card:#171e27; --ink:#e8edf3; --mut:#9ba7b6; --line:#2c3643;
+    --idle:#78859a; --blue:#56B4E9; --blue-dim:#2a5a7a; --blue-dim-line:#4a86ad;
+    --route:#F5B83A; --dest:#2fd1a0; --bad:#ff8a5c; --area:#56B4E9; --on-color:#0e1319;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1319; --card:#171e27; --ink:#e8edf3; --mut:#9ba7b6; --line:#2c3643;
+  --idle:#78859a; --blue:#56B4E9; --blue-dim:#2a5a7a; --blue-dim-line:#4a86ad;
+  --route:#F5B83A; --dest:#2fd1a0; --bad:#ff8a5c; --area:#56B4E9; --on-color:#0e1319;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+button,input,select{font:inherit;color:inherit}
+header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;max-width:1280px;margin:0 auto}
+header h1{font-size:17px;margin:0;letter-spacing:.01em}
+header .sp{flex:1}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:6px;padding:3px 9px;font-size:12px;font-weight:700;letter-spacing:.04em;border:2px solid var(--line)}
+.badge.mock{border-color:var(--bad);color:var(--bad);background:transparent}
+.badge.mock::before{content:"";width:0;height:0;border:6px solid transparent;border-bottom:10px solid var(--bad);border-top:0}
+.badge.real{border-color:var(--dest);color:var(--dest)}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 11px;cursor:pointer;min-height:36px}
+.btn:hover{border-color:var(--idle)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,.result:focus-visible,.tab:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-color);font-weight:700}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:14px;max-width:1280px;margin:0 auto;padding:0 16px 150px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}
+.card h2{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:0 0 8px;font-weight:700}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.maps{min-width:0}
+.tabs{display:none;gap:6px;margin-bottom:8px}
+.tab{flex:1;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px;cursor:pointer;font-weight:700;min-height:40px}
+.tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-color)}
+.tab .live{font-weight:400;font-size:12px;opacity:.85;margin-left:4px}
+.floors{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.floor{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 8px 4px;box-shadow:var(--shadow);min-width:0}
+.floor.active{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.floor h3{margin:2px 6px 2px;font-size:13px;display:flex;justify-content:space-between;gap:8px;color:var(--mut)}
+.floor h3 b{color:var(--ink);font-size:15px}
+.floor svg{display:block;width:100%;height:auto;max-height:78vh}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 4px 0;color:var(--mut);font-size:12px}
+.maplegend span{display:inline-flex;align-items:center;gap:5px}
+.maplegend svg{width:26px;height:20px;flex:none}
+
+/* ---- svg parts ---- */
+.area{fill:var(--area);stroke:var(--area);stroke-width:34;stroke-linejoin:round;opacity:.13}
+.areaOutline{fill:none;stroke:var(--idle);stroke-opacity:.45;stroke-width:1.5;stroke-dasharray:2 5;stroke-linejoin:round;stroke-linecap:round}
+.area.cur{opacity:.34}
+.areaOutline.cur{stroke:var(--blue);stroke-opacity:1;stroke-width:2.4;stroke-dasharray:none}
+.edge{fill:none;stroke:var(--idle);stroke-width:3;stroke-linecap:round;stroke-opacity:.7}
+.edge.traveled{stroke:var(--blue-dim-line);stroke-width:5;stroke-opacity:1}
+.edgeRoute{fill:none;stroke:var(--route);stroke-width:6;stroke-linecap:round;stroke-dasharray:11 7;display:none}
+.edgeRoute.on{display:block}
+.stub{fill:none;stroke:var(--idle);stroke-width:3;stroke-dasharray:2 5;stroke-linecap:round}
+.stub.traveled{stroke:var(--blue-dim-line)}
+.stubBadge rect{fill:var(--card);stroke:var(--idle);stroke-width:1.5}
+.stubBadge text{fill:var(--ink);font-size:11px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.fill{fill:none;stroke:var(--blue);stroke-width:7;stroke-linecap:round;display:none}
+.fill.on{display:block}
+.nlabel{fill:var(--ink);font-size:11.5px;paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round}
+.node .halo{fill:none;stroke:none}
+.node .body{fill:var(--card);stroke:var(--idle);stroke-width:2.5}
+.node .g{display:none;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.node.next .body{stroke:var(--blue);stroke-width:3.5;stroke-dasharray:4 3}
+.node.visited .body{fill:var(--blue-dim);stroke:var(--blue-dim-line);stroke-width:2}
+.node.visited .g-check{display:block;stroke:var(--ink);stroke-width:2.4}
+.node.cur .body{fill:var(--blue);stroke:var(--card);stroke-width:3}
+.node.cur .halo{stroke:var(--blue);stroke-width:3;display:block}
+.node.cur .g-check{display:none}
+.node.cur .g-dot{display:block;fill:var(--on-color);stroke:none}
+.node.dest .body{fill:var(--dest);stroke:var(--card);stroke-width:3}
+.node.dest .halo{stroke:var(--dest);stroke-width:2.5}
+.node.dest .g-check,.node.dest .g-dot{display:none}
+.node.dest .g-flag{display:block;stroke:var(--on-color);stroke-width:2;fill:var(--on-color)}
+.node.dest.cur .halo{stroke-width:4}
+.node.cur .halo{animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.18)}}
+@media (prefers-reduced-motion:reduce){.node.cur .halo{animation:none}}
+.marker{display:none;pointer-events:none}
+.marker.on{display:block}
+.marker polygon{fill:var(--ink);stroke:var(--card);stroke-width:2.5;stroke-linejoin:round}
+
+/* ---- side panel ---- */
+.banner{display:none;border-radius:10px;padding:9px 12px;font-weight:700;background:var(--dest);color:var(--on-color);align-items:center;gap:8px}
+.banner.on{display:flex}
+.banner.off{background:transparent;border:2px solid var(--bad);color:var(--bad)}
+.place{display:flex;gap:12px;align-items:center}
+.place .pn{font-size:21px;font-weight:700;line-height:1.15;overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:12.5px;white-space:nowrap}
+.chip b{font-weight:700}
+.chip.ok{border-color:var(--dest);color:var(--dest)}
+.chip.warn{border-color:var(--bad);color:var(--bad)}
+.dirArrow{flex:none;width:58px;height:58px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;background:var(--bg)}
+.dirArrow svg{width:36px;height:36px;transition:transform .25s}
+.dirArrow polygon{fill:var(--ink)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin-top:10px}
+.kv dt{color:var(--mut);font-size:13px}
+.kv dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.top3 .row{display:grid;grid-template-columns:1fr auto;gap:2px 8px;margin-bottom:7px}
+.top3 .nm{overflow-wrap:anywhere}
+.top3 .pc{font-variant-numeric:tabular-nums;font-weight:700}
+.top3 .bar{grid-column:1/-1;height:7px;border-radius:4px;background:var(--line);overflow:hidden}
+.top3 .bar i{display:block;height:100%;background:var(--blue)}
+.top3 .row:first-child .bar i{background:var(--blue)}
+.top3 .row:not(:first-child) .bar i{background:repeating-linear-gradient(135deg,var(--blue-dim-line) 0 4px,transparent 4px 7px)}
+.top3 .truth{font-size:11.5px;color:var(--mut);margin-left:6px}
+.verdict{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.vbox{border:2px solid var(--line);border-radius:10px;padding:7px 10px}
+.vbox .k{font-size:12px;color:var(--mut)}
+.vbox .v{font-size:19px;font-weight:800}
+.vbox.ok{border-color:var(--dest)} .vbox.ok .v{color:var(--dest)}
+.vbox.no{border-color:var(--bad);border-style:dashed} .vbox.no .v{color:var(--bad)}
+.vbox .s{font-size:12px;color:var(--mut);overflow-wrap:anywhere}
+.tally{font-size:12.5px;color:var(--mut);margin-top:8px}
+.search{display:flex;gap:8px}
+.search input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:8px 11px;min-height:40px}
+.results{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
+.result{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 10px;cursor:pointer;min-height:38px}
+.result small{color:var(--mut)}
+.result.sel{border-color:var(--dest);border-width:2px}
+.examples{margin-top:8px;color:var(--mut);font-size:12.5px}
+.examples a{color:var(--blue);cursor:pointer;margin-right:10px;text-decoration:underline}
+.note{color:var(--mut);font-size:12.5px;margin-top:6px}
+.msg{display:none;margin:0 16px 8px;max-width:1248px;border:2px solid var(--bad);border-radius:8px;padding:8px 12px;color:var(--bad)}
+.msg.on{display:block}
+@media (min-width:1280px){.msg{margin-left:auto;margin-right:auto}}
+
+/* ---- replay bar ---- */
+.controls{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));z-index:5}
+.controls .in{max-width:1248px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.controls .scrubrow{flex:1 1 100%;display:flex;align-items:center;gap:10px;order:-1}
+.controls input[type=range]{flex:1;min-width:0;height:28px;accent-color:var(--blue)}
+.controls .time{font-variant-numeric:tabular-nums;color:var(--mut);font-size:12.5px;white-space:nowrap}
+.controls .tag{font-size:12px;color:var(--mut)}
+.controls select{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 8px;min-height:36px}
+
+@media (max-width:1040px){
+  .app{grid-template-columns:1fr;gap:12px;padding-bottom:170px}
+  .side{display:contents}
+  .c-search{order:1}.maps{order:2}.c-status{order:3}.c-top3{order:4}.c-replay{order:5}.c-legend{order:6}
+  .tabs{display:flex}
+  .floors{grid-template-columns:1fr}
+  .floor{display:none}
+  .floor.active{display:block}
+  .floor.active{box-shadow:none}
+}
+@media (max-width:480px){
+  header{padding:8px 16px}
+  .place .pn{font-size:19px}
+  .controls .hide-s,.controls #restart{display:none}
+  .controls{padding-top:4px}
+  .controls .btn{padding:4px 10px;min-height:34px}
+  .c-search .examples,.c-search .note{display:none}
+  .btn{padding:4px 9px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>WalkSense · circle navigator</h1>
+  <span id="srcBadge" class="badge">loading</span>
+  <span class="sp"></span>
+  <button class="btn" id="loadBtn" type="button">Load JSON</button>
+  <input id="file" type="file" accept=".json,application/json" hidden>
+  <button class="btn" id="themeBtn" type="button" aria-label="Colour theme">Theme: auto</button>
+</header>
+<div id="msg" class="msg" role="alert"></div>
+
+<div class="app">
+  <section class="maps" aria-label="Floor maps">
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="floors" id="floors"></div>
+    <div class="maplegend" id="legend"></div>
+  </section>
+
+  <aside class="side">
+    <div class="card c-search">
+      <h2>Where to?</h2>
+      <form class="search" id="searchForm" autocomplete="off">
+        <input id="q" type="text" placeholder="e.g. toilet, somewhere to eat, lt1a" aria-label="Destination search">
+        <button class="btn primary" type="submit">Go</button>
+      </form>
+      <ul class="results" id="results"></ul>
+      <div class="examples" id="examples">try:
+        <a data-q="somewhere to eat">somewhere to eat</a>
+        <a data-q="toilet">toilet</a>
+        <a data-q="lecture theatre 1a">lecture theatre 1a</a>
+        <a data-q="leave the building">leave the building</a>
+      </div>
+      <div class="note">Offline keyword rules, ported from Dicta's matcher (<code>request-matching/match.py</code>). Ties go to the nearest place.</div>
+    </div>
+
+    <div class="card c-status" aria-live="polite">
+      <div id="banner" class="banner"></div>
+      <h2>You are at</h2>
+      <div class="place">
+        <div>
+          <div class="pn" id="placeName">-</div>
+          <div class="meta" id="placeMeta"></div>
+        </div>
+        <div class="dirArrow" id="dirBox" title="Direction along the route"><svg id="dirSvg" viewBox="-12 -12 24 24" aria-hidden="true"><polygon points="0,-10 8,8 0,3.5 -8,8"/></svg></div>
+      </div>
+      <dl class="kv">
+        <dt>Area</dt><dd id="areaName">-</dd>
+        <dt>Next circle</dt><dd id="nextName">-</dd>
+        <dt>Destination</dt><dd id="destName">-</dd>
+        <dt>Steps</dt><dd id="steps">0</dd>
+      </dl>
+    </div>
+
+    <div class="card c-top3">
+      <h2>Top 3 guesses</h2>
+      <div class="top3" id="top3"></div>
+    </div>
+
+    <div class="card c-replay">
+      <h2>Replay check</h2>
+      <div class="verdict">
+        <div class="vbox" id="vExact"><div class="k">Exact point</div><div class="v">-</div><div class="s"></div></div>
+        <div class="vbox" id="vArea"><div class="k">Area</div><div class="v">-</div><div class="s"></div></div>
+      </div>
+      <div class="tally" id="tally"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="controls">
+  <div class="in">
+    <div class="scrubrow">
+      <input id="scrub" type="range" min="0" max="100" step="0.1" value="0" aria-label="Replay position">
+      <span class="time" id="time">0:00 / 0:00</span>
+    </div>
+    <button class="btn primary" id="play" type="button" aria-label="Play or pause" style="min-width:84px">Play</button>
+    <button class="btn" id="back" type="button" aria-label="Previous frame">&#9664;&#9664;</button>
+    <button class="btn" id="fwd" type="button" aria-label="Next frame">&#9654;&#9654;</button>
+    <button class="btn" id="restart" type="button">Restart</button>
+    <label class="tag">Speed <select id="speed">
+      <option value="1">1x</option><option value="2">2x</option><option value="4" selected>4x</option>
+      <option value="8">8x</option><option value="16">16x</option></select></label>
+    <span class="tag hide-s" id="frameInfo"></span>
+  </div>
+</div>
+
+<!-- data: mock replay + Dicta's destination table (both set a window global, so file:// works) -->
+<script src="places_data.js"></script>
+<script src="mock_replay.js"></script>
+<script>
+'use strict';
+/* =====================================================================
+   WalkSense circle navigator. Vanilla JS + SVG, no build step.
+   Input: replay JSON {graph:{nodes,edges}, destination, frames}.
+   ===================================================================== */
+const NS = 'http://www.w3.org/2000/svg';
+const $ = id => document.getElementById(id);
+const el = (tag, attrs, parent) => {
+  const e = document.createElementNS(NS, tag);
+  for (const k in (attrs || {})) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const ekey = (a, b) => a < b ? a + '|' + b : b + '|' + a;
+// DOM builder: all text goes in through textContent (replay values are never parsed as HTML)
+const h = (tag, cls, text, kids) => {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  (kids || []).forEach(k => e.appendChild(k));
+  return e;
+};
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const params = new URLSearchParams(location.search);
+
+/* ---------- names ---------- */
+function prettyCore(id) {
+  const parts = id.split('_').map((w, i) => {
+    if (/^[a-z]{1,2}\d+[a-z]?$/i.test(w)) return w.toUpperCase();
+    if (/^\d+$/.test(w)) return w;
+    return i === 0 ? w[0].toUpperCase() + w.slice(1) : w;
+  });
+  return parts.join(' ');
+}
+function splitFloor(id) {
+  const m = id.match(/_(\d)F$/i);
+  return m ? [id.slice(0, -m[0].length), m[1] + 'F'] : [id, ''];
+}
+const pretty = id => { const [c, f] = splitFloor(id); return prettyCore(c) + (f ? ' (' + f + ')' : ''); };
+const shortName = id => prettyCore(splitFloor(id)[0]);
+function areaName(z) {
+  if (!z) return 'Unknown area';
+  const m = String(z).match(/^(\d)F[-_ ](.+)$/i);
+  const rest = (m ? m[2] : String(z)).replace(/[-_]+/g, ' ');
+  return (m ? m[1] + 'F · ' : '') + rest[0].toUpperCase() + rest.slice(1);
+}
+
+/* ---------- Dicta's keyword matcher, ported to JS (request-matching/match.py) ---------- */
+const normToks = t => t.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+const PLACES = (window.PLACES || []).map(d => ({
+  id: d.place_id, name: d.name, tags: new Set((d.tags || '').split(';').filter(Boolean)),
+  aliases: (d.aliases || '').split(';').map(a => a.trim()).filter(Boolean)
+}));
+const PLACE_BY_ID = Object.fromEntries(PLACES.map(p => [p.id, p]));
+function placeFor(nodeId) {            // graph node -> one of Dicta's destination rows
+  const id = nodeId.toLowerCase();
+  let m;
+  if (id.includes('canteen')) return 'CANTEEN';
+  if (id.includes('toilet')) return 'TOILET';
+  if (id === 'entrance_exit') return 'GATE';
+  if (id === 'exit_5') return 'EXIT5';
+  if ((m = id.match(/^sr(\d+)/))) return 'SR' + m[1];
+  if ((m = id.match(/^lt(1a|1b|2a|2b)/))) return 'LT' + m[1].toUpperCase();
+  if (/^y5/.test(id)) return 'Y5';
+  if (/^y4/.test(id)) return 'Y4';
+  if (/escalator|^lift|stairs/.test(id)) return 'ESCALATOR';
+  return null;
+}
+function nodeProfile(n) {              // aliases + tags the keyword rules can hit for a node
+  const p = PLACE_BY_ID[placeFor(n.id)];
+  const own = [shortName(n.id).toLowerCase(), n.id.replace(/_/g, ' ').toLowerCase()];
+  return { aliases: [...own, ...(p ? p.aliases : [])], tags: new Set([...(p ? p.tags : []), n.kind].filter(Boolean)) };
+}
+function keywordScore(query, prof) {   // same rule as keyword_match: longest alias substring, then tag hits
+  const qt = normToks(query), q = qt.join(' ');
+  let alias = 0;
+  for (const a of prof.aliases) if (a && q.includes(a)) alias = Math.max(alias, a.length);
+  if (!alias) {                        // typing in progress: prefix of a word of an alias
+    for (const t of qt) if (t.length >= 3) for (const a of prof.aliases) if (a.split(' ').some(w => w.startsWith(t))) alias = Math.max(alias, t.length * 0.5);
+  }
+  let tags = 0; for (const t of qt) if (prof.tags.has(t)) tags++;
+  return [alias, tags];
+}
+
+/* ---------- model ---------- */
+let M = null;      // current dataset + derived structures
+const S = { t: 0, playing: false, speed: 4, manualFloor: null, lastFrameFloor: null, dest: null, lastTs: 0 };
+
+const ID_RE = /^[A-Za-z0-9_]+$/, ZONE_RE = /^[A-Za-z0-9_-]+$/;
+const isNum = v => typeof v === 'number' && isFinite(v);
+function validate(d) {
+  const bad = m => { throw new Error(m); };
+  if (!d || !d.graph || !Array.isArray(d.graph.nodes) || !Array.isArray(d.graph.edges) || !Array.isArray(d.frames))
+    bad('Not a replay file: expected {graph:{nodes,edges}, destination, frames}.');
+  if (!d.graph.nodes.length || !d.frames.length) bad('Replay has no nodes or no frames.');
+  const ids = new Set();
+  d.graph.nodes.forEach((n, i) => {
+    if (!n || typeof n.id !== 'string' || !ID_RE.test(n.id)) bad('Node ' + i + ': id must be letters, digits or underscore.');
+    if (!Number.isInteger(n.floor)) bad('Node ' + n.id + ': floor must be an integer.');
+    if (!isNum(n.x) || !isNum(n.y)) bad('Node ' + n.id + ': x and y must be numbers.');
+    if (n.zone != null && (typeof n.zone !== 'string' || !ZONE_RE.test(n.zone))) bad('Node ' + n.id + ': zone has unexpected characters.');
+    if (n.kind != null && typeof n.kind !== 'string') bad('Node ' + n.id + ': kind must be text.');
+    ids.add(n.id);
+  });
+  d.graph.edges.forEach(e => {
+    if (!e || !ids.has(e.from) || !ids.has(e.to)) bad('Edge uses an unknown node.');
+    for (const k of ['distance_m', 'median_steps']) if (e[k] != null && !isNum(e[k])) bad('Edge ' + e.from + '-' + e.to + ': ' + k + ' must be a number.');
+  });
+  if (d.destination != null && !(typeof d.destination === 'string' && ID_RE.test(d.destination))) bad('destination must be a node id.');
+  const nid = v => v == null || (typeof v === 'string' && ID_RE.test(v));
+  d.frames.forEach((f, i) => {
+    const w = 'Frame ' + i + ': ';
+    if (!f || !isNum(f.t)) bad(w + 't must be a number.');
+    if (f.floor != null && !Number.isInteger(f.floor)) bad(w + 'floor must be an integer.');
+    if (f.progress != null && !isNum(f.progress)) bad(w + 'progress must be a number or null.');
+    if (typeof f.confirmed !== 'boolean') bad(w + 'confirmed must be true or false.');
+    if (!nid(f.edge_from) || !nid(f.edge_to) || !nid(f.node) || !nid(f.true_node)) bad(w + 'a node id has unexpected characters.');
+    if (f.steps_total != null && !isNum(f.steps_total)) bad(w + 'steps_total must be a number.');
+    if (f.top3 != null && (!Array.isArray(f.top3) || f.top3.some(r => !Array.isArray(r) || typeof r[0] !== 'string' || !ID_RE.test(r[0]) || !isNum(r[1]))))
+      bad(w + 'top3 must be [[id, probability], ...].');
+  });
+}
+
+function buildModel(data, label, isMock) {
+  validate(data);
+  const nodes = {}; data.graph.nodes.forEach(n => nodes[n.id] = n);
+  const adj = {}; Object.keys(nodes).forEach(i => adj[i] = []);
+  const edges = {};
+  data.graph.edges.forEach(e => {
+    const w = (typeof e.distance_m === 'number' ? e.distance_m : (typeof e.median_steps === 'number' ? e.median_steps * 0.7 : 1)) || 1;
+    edges[ekey(e.from, e.to)] = e;
+    adj[e.from].push({ to: e.to, w, e }); adj[e.to].push({ to: e.from, w, e });
+  });
+  const frames = data.frames.slice().sort((a, b) => a.t - b.t);
+  const floors = [...new Set(data.graph.nodes.map(n => n.floor))].sort((a, b) => b - a);
+  // prefix events (visited nodes, travelled edges, accuracy tallies)
+  const cur = [], visit = [], trav = [], cumN = [], cumX = [], cumA = [];
+  let last = null, n = 0, x = 0, a = 0;
+  frames.forEach((f, i) => {
+    if (f.confirmed && f.node && nodes[f.node]) {
+      if (f.node !== last) {
+        visit.push({ id: f.node, i });
+        if (last && edges[ekey(last, f.node)]) trav.push({ k: ekey(last, f.node), i });
+        last = f.node;
+      }
+    }
+    cur[i] = last;
+    if (f.true_node && f.top3 && f.top3.length && nodes[f.true_node]) {
+      n++;
+      const top = f.top3[0][0];
+      if (top === f.true_node) x++;
+      if (nodes[top] && nodes[top].zone === nodes[f.true_node].zone) a++;
+    }
+    cumN[i] = n; cumX[i] = x; cumA[i] = a;
+  });
+  const areas = {};
+  data.graph.nodes.forEach(nd => (areas[nd.zone || '?'] = areas[nd.zone || '?'] || []).push(nd.id));
+  return { data, label, isMock, nodes, adj, edges, frames, floors, cur, visit, trav, cumN, cumX, cumA, areas,
+           tmax: frames[frames.length - 1].t, distTo: null, view: {} };
+}
+
+function dijkstra(adj, src) {
+  const dist = {}, done = {}; Object.keys(adj).forEach(k => dist[k] = Infinity); dist[src] = 0;
+  for (;;) {
+    let u = null, best = Infinity;
+    for (const k in dist) if (!done[k] && dist[k] < best) { best = dist[k]; u = k; }
+    if (u === null) break;
+    done[u] = true;
+    for (const { to, w } of adj[u]) if (dist[u] + w < dist[to]) dist[to] = dist[u] + w;
+  }
+  return dist;
+}
+function routeFrom(u) {                // shortest path to the destination, by distance (BFS-style walk on Dijkstra distances)
+  const path = [u]; const dist = M.distTo;
+  if (!M.nodes[u] || dist[u] === Infinity) return path;
+  let guard = 0;
+  while (u !== S.dest && guard++ < 500) {
+    let best = null, bv = Infinity;
+    for (const { to, w } of M.adj[u]) if (w + dist[to] < bv - 1e-9) { bv = w + dist[to]; best = to; }
+    if (!best || path.includes(best)) break;
+    path.push(best); u = best;
+  }
+  return path;
+}
+function setDestination(id) {
+  if (!M.nodes[id]) return;
+  S.dest = id; M.distTo = dijkstra(M.adj, id);
+  render();
+}
+
+/* ---------- drawing: one SVG per floor ---------- */
+const W = 360, PADX = 48, STUB = 38;
+function hull(pts) {                   // convex hull (monotone chain)
+  const p = pts.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  if (p.length < 3) return p;
+  const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], up = [];
+  for (const q of p) { while (lo.length > 1 && cr(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (const q of p.slice().reverse()) { while (up.length > 1 && cr(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
+  return lo.slice(0, -1).concat(up.slice(0, -1));
+}
+function segDist(p, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy;
+  const t = l2 ? clamp(((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2, 0, 1) : 0;
+  return Math.hypot(p[0] - (a[0] + t * dx), p[1] - (a[1] + t * dy));
+}
+function nodeGlyphs(g) {
+  el('circle', { class: 'halo', r: 17 }, g);
+  el('circle', { class: 'body', r: 11 }, g);
+  el('path', { class: 'g g-check', d: 'M-4.5,0.5 L-1.5,3.8 L4.5,-3.6' }, g);
+  el('circle', { class: 'g g-dot', r: 4 }, g);
+  el('path', { class: 'g g-flag', d: 'M-3,-6.5 V6.5 M-3,-6.5 H5 L2,-2.5 L5,1.5 H-3' }, g);
+}
+
+function buildFloor(fl) {
+  const nodes = M.data.graph.nodes.filter(n => n.floor === fl);
+  const ids = new Set(nodes.map(n => n.id));
+  const xs = nodes.map(n => n.x), ys = nodes.map(n => n.y);
+  const x0 = Math.min(...xs), y0 = Math.min(...ys), bw = Math.max(...xs) - x0 || 1, bh = Math.max(...ys) - y0 || 1;
+  let sc = (W - 2 * PADX) / bw;
+  sc = Math.min(sc, 470 / bh);
+  const pos = {};
+  nodes.forEach(n => pos[n.id] = [PADX + (n.x - x0) * sc + (W - 2 * PADX - bw * sc) / 2, (n.y - y0) * sc]);
+
+  // floor-change stubs
+  const stubs = {};
+  M.data.graph.edges.filter(e => e.floor_change).forEach(e => {
+    [[e.from, e.to], [e.to, e.from]].forEach(([me, other]) => {
+      if (!ids.has(me) || ids.has(other)) return;
+      const of = M.nodes[other].floor, dir = of < fl ? 1 : -1;
+      const p = pos[me], k = me + '>' + of;
+      stubs[k] = { node: me, other: of, dir, x0: p[0], y0: p[1] + dir * 14, x1: p[0], y1: p[1] + dir * (14 + STUB) };
+    });
+  });
+  const allY = Object.values(pos).map(p => p[1]).concat(Object.values(stubs).map(s => s.y1));
+  const topPad = 26 + (Object.values(stubs).some(s => s.dir < 0) ? 18 : 0), botPad = 30 + (Object.values(stubs).some(s => s.dir > 0) ? 18 : 0);
+  const ymin = Math.min(...allY) - topPad, ymax = Math.max(...allY) + botPad;
+  Object.values(pos).forEach(p => p[1] -= ymin);
+  Object.values(stubs).forEach(s => { s.y0 -= ymin; s.y1 -= ymin; });
+  const H = ymax - ymin;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'floor'; wrap.dataset.floor = fl;
+  wrap.appendChild(h('h3', null, null, [h('b', null, fl + 'F'), h('span', 'fstate')]));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H.toFixed(0)}`, role: 'img', 'aria-label': 'Floor ' + fl + ' circle map' });
+  wrap.appendChild(svg);
+
+  // areas (hull of its circles on this floor)
+  const gArea = el('g', {}, svg), gEdge = el('g', {}, svg), gStub = el('g', {}, svg), gRoute = el('g', {}, svg),
+        fill = el('path', { class: 'fill' }, svg), gNode = el('g', {}, svg), gLab = el('g', {}, svg),
+        marker = el('g', { class: 'marker' }, svg);
+  el('polygon', { points: '0,-10 8.5,8 0,3.5 -8.5,8' }, marker);
+  const ref = { fl, wrap, svg, pos, stubs, areas: {}, edges: {}, nodes: {}, stubEls: {}, fill, marker, H };
+  for (const z in M.areas) {
+    const here = M.areas[z].filter(i => ids.has(i)); if (!here.length) continue;
+    const h = hull(here.map(i => pos[i])); const pts = h.map(p => p.join(',')).join(' ');
+    const a = el('polygon', { class: 'area', points: pts }, gArea);
+    const o = el('polygon', { class: 'areaOutline', points: pts }, gArea);
+    ref.areas[z] = [a, o];
+  }
+  // edges (curve around nodes that sit on the line)
+  M.data.graph.edges.forEach(e => {
+    if (!ids.has(e.from) || !ids.has(e.to) || e.floor_change) return;
+    const a = pos[e.from], b = pos[e.to], k = ekey(e.from, e.to);
+    const first = e.from < e.to ? e.from : e.to, A = pos[first], B = pos[first === e.from ? e.to : e.from];
+    const others = nodes.filter(n => n.id !== e.from && n.id !== e.to).map(n => pos[n.id]);
+    const clear = pts => others.every(o => pts.every(p => Math.hypot(p[0] - o[0], p[1] - o[1]) > 16));
+    const sample = (A, B, c) => { const s = []; for (let t = 0.05; t < 1; t += 0.05) s.push(c ? [(1 - t) * (1 - t) * A[0] + 2 * t * (1 - t) * c[0] + t * t * B[0], (1 - t) * (1 - t) * A[1] + 2 * t * (1 - t) * c[1] + t * t * B[1]] : [A[0] + t * (B[0] - A[0]), A[1] + t * (B[1] - A[1])]); return s; };
+    let ctrl = null;
+    if (!clear(sample(A, B, null))) {
+      const mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2, dx = B[0] - A[0], dy = B[1] - A[1], l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l;
+      for (const off of [30, -30, 52, -52, 76, -76]) { const c = [mx + nx * off * 2, my + ny * off * 2]; if (clear(sample(A, B, c))) { ctrl = c; break; } }
+    }
+    const geo = { A, B, ctrl, first };
+    const d = (from) => from === first ? `M${A} ${ctrl ? 'Q' + ctrl : 'L'} ${B}` : `M${B} ${ctrl ? 'Q' + ctrl : 'L'} ${A}`;
+    const base = el('path', { class: 'edge', d: d(first) }, gEdge);
+    const route = el('path', { class: 'edgeRoute', d: d(first) }, gRoute);
+    ref.edges[k] = { base, route, d, geo };
+  });
+  // stubs
+  for (const k in ref.stubs) {
+    const s = ref.stubs[k];
+    const line = el('path', { class: 'stub', d: `M${s.x0} ${s.y0} L${s.x1} ${s.y1}` }, gStub);
+    const gb = el('g', { class: 'stubBadge', transform: `translate(${s.x1} ${s.y1 + s.dir * 11})` }, gStub);
+    el('rect', { x: -19, y: -10, width: 38, height: 20, rx: 6 }, gb);
+    const tx = el('text', {}, gb); tx.textContent = (s.dir > 0 ? '▼ ' : '▲ ') + s.other + 'F';
+    s.line = line; ref.stubEls[k] = { line };
+  }
+  // nodes
+  nodes.forEach(n => {
+    const g = el('g', { class: 'node', transform: `translate(${pos[n.id][0]} ${pos[n.id][1]})` }, gNode);
+    const t = el('title', {}, g); t.textContent = pretty(n.id);
+    nodeGlyphs(g);
+    ref.nodes[n.id] = g;
+  });
+  // labels (greedy placement, avoids circles and earlier labels)
+  const placed = [], circ = nodes.map(n => pos[n.id]);
+  nodes.slice().sort((a, b) => pos[a.id][1] - pos[b.id][1] || pos[a.id][0] - pos[b.id][0]).forEach(n => {
+    const [px, py] = pos[n.id], txt = shortName(n.id), w = txt.length * 6.4 + 4, h = 13;
+    const cands = [[px + 16, py, 'start', px + 16, py - h / 2], [px - 16, py, 'end', px - 16 - w, py - h / 2],
+                   [px, py + 26, 'middle', px - w / 2, py + 26 - h + 2], [px, py - 20, 'middle', px - w / 2, py - 20 - h + 2]];
+    let pick = null;
+    for (const c of cands) {
+      const bx = c[3], by = c[4];
+      const inside = bx >= 2 && bx + w <= W - 2 && by >= 0 && by + h <= H;
+      const hitNode = circ.some(o => o[0] > bx - 13 && o[0] < bx + w + 13 && o[1] > by - 13 && o[1] < by + h + 13 && !(o === pos[n.id] && false));
+      const hitLab = placed.some(r => bx < r[0] + r[2] && bx + w > r[0] && by < r[1] + r[3] && by + h > r[1]);
+      const selfOverlap = Math.hypot(clamp(px, bx, bx + w) - px, clamp(py, by, by + h) - py) < 14;
+      if (inside && !hitNode && !hitLab && !selfOverlap) { pick = c; break; }
+    }
+    if (!pick) pick = cands.find(c => c[3] >= 2 && c[3] + w <= W - 2 && !placed.some(r => c[3] < r[0] + r[2] && c[3] + w > r[0] && c[4] < r[1] + r[3] && c[4] + h > r[1])) || cands[2];
+    placed.push([pick[3], pick[4], w, h]);
+    const t = el('text', { class: 'nlabel', x: pick[0], y: pick[1], 'text-anchor': pick[2], 'dominant-baseline': 'central' }, gLab);
+    t.textContent = txt;
+  });
+  return ref;
+}
+
+function buildAll() {
+  $('floors').textContent = ''; $('tabs').textContent = '';
+  M.view = {};
+  M.floors.forEach(fl => {
+    const ref = buildFloor(fl); M.view[fl] = ref; $('floors').appendChild(ref.wrap);
+    const b = document.createElement('button');
+    b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.floor = fl;
+    b.appendChild(document.createTextNode(fl + 'F ')); b.appendChild(h('span', 'live'));
+    b.onclick = () => { S.manualFloor = fl; render(); };
+    $('tabs').appendChild(b);
+  });
+}
+
+function buildLegend() {
+  const items = [['idle', 'not reached'], ['next', 'next circle'], ['cur', 'you (confirmed)'], ['visited', 'visited'], ['dest', 'destination']];
+  let html = '';
+  items.forEach(([st, label]) => {
+    html += `<span><svg viewBox="-16 -16 32 32" aria-hidden="true"><g class="node ${st}">${'<circle class="halo" r="14"></circle><circle class="body" r="9"></circle><path class="g g-check" d="M-4,0.5 L-1.2,3.4 L4,-3.2"></path><circle class="g g-dot" r="3.4"></circle><path class="g g-flag" d="M-2.6,-5.5 V5.5 M-2.6,-5.5 H4.4 L1.8,-2.2 L4.4,1.2 H-2.6"></path>'}</g></svg>${label}</span>`;
+  });
+  html += '<span><svg viewBox="0 0 26 20" aria-hidden="true"><path d="M2 10 H24" class="edge" style="stroke-width:6;stroke:var(--blue)"/></svg>filling as you walk</span>';
+  html += '<span><svg viewBox="0 0 26 20" aria-hidden="true"><path d="M2 10 H24" class="edgeRoute" style="display:block"/></svg>planned route</span>';
+  html += '<span><svg viewBox="0 0 26 20" aria-hidden="true"><rect x="1" y="2" width="24" height="16" rx="6" class="area cur" style="stroke:none"/><rect x="1" y="2" width="24" height="16" rx="6" class="areaOutline cur"/></svg>current area</span>';
+  $('legend').innerHTML = html;
+}
+
+/* ---------- frame lookup + render ---------- */
+function frameAt(t) {
+  const fr = M.frames; let lo = 0, hi = fr.length - 1;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (fr[m].t <= t) lo = m; else hi = m - 1; }
+  return lo;
+}
+const fmt = s => { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+function render() {
+  if (!M) return;
+  const idx = frameAt(S.t), f = M.frames[idx], nx = M.frames[idx + 1];
+  const N = M.nodes;
+  // progress, interpolated between frames of the same edge
+  let p = f.progress;
+  if (p != null && nx && nx.progress != null && nx.edge_from === f.edge_from && nx.edge_to === f.edge_to && nx.t > f.t && !(nx.confirmed && nx.node))
+    p = p + (nx.progress - p) * clamp((S.t - f.t) / (nx.t - f.t), 0, 1);
+  const confirmedHere = f.confirmed && f.node && N[f.node];
+  const onEdge = !confirmedHere && p != null && N[f.edge_from] && N[f.edge_to] && M.edges[ekey(f.edge_from, f.edge_to)];
+  const cur = confirmedHere ? f.node : M.cur[idx];            // last confirmed circle
+  const eFrom = onEdge ? f.edge_from : null, eTo = onEdge ? f.edge_to : null;
+  const edge = onEdge ? M.edges[ekey(eFrom, eTo)] : null;
+
+  // route + direction
+  const at = onEdge ? eTo : cur;
+  const route = at ? routeFrom(at) : [];
+  let offRoute = false;
+  if (onEdge) {
+    const w = (M.adj[eFrom].find(a => a.to === eTo) || { w: 0 }).w;
+    offRoute = M.distTo[eTo] + w > M.distTo[eFrom] + 0.05;
+  }
+  const arrived = !!(confirmedHere && f.node === S.dest);
+  let nextId = onEdge ? eTo : (route.length > 1 ? route[1] : null);
+  if (arrived) nextId = null;
+
+  // which floor panel is active
+  let floorNow = f.floor != null ? f.floor : (cur ? N[cur].floor : M.floors[0]);
+  if (S.lastFrameFloor !== floorNow) { S.manualFloor = null; S.lastFrameFloor = floorNow; }
+  const showFloor = S.manualFloor != null ? S.manualFloor : floorNow;
+
+  // clear per-floor dynamic state
+  const visited = new Set(); M.visit.forEach(v => { if (v.i <= idx) visited.add(v.id); });
+  const trav = new Set(); M.trav.forEach(v => { if (v.i <= idx) trav.add(v.k); });
+  const routeKeys = new Set(); for (let i = 1; i < route.length; i++) routeKeys.add(ekey(route[i - 1], route[i]));
+  const curArea = cur && N[cur] ? (onEdge && p > 0.5 && N[eTo] ? N[eTo].zone : N[cur].zone) : null;
+
+  M.floors.forEach(fl => {
+    const v = M.view[fl];
+    v.wrap.classList.toggle('active', fl === showFloor);
+    v.wrap.querySelector('.fstate').textContent = fl === floorNow ? 'you are on this floor' : '';
+    for (const z in v.areas) { const c = z === curArea; v.areas[z][0].classList.toggle('cur', c); v.areas[z][1].classList.toggle('cur', c); }
+    for (const k in v.edges) { v.edges[k].base.classList.toggle('traveled', trav.has(k)); v.edges[k].route.classList.toggle('on', routeKeys.has(k) && !(onEdge && k === ekey(eFrom, eTo) && false)); }
+    for (const k in v.stubs) { const s = v.stubs[k]; const key = ekey(s.node, Object.keys(N).find(o => N[o].floor === s.other && M.edges[ekey(s.node, o)] && M.edges[ekey(s.node, o)].floor_change) || ''); s.line.classList.toggle('traveled', trav.has(key)); }
+    for (const id in v.nodes) {
+      const cls = ['node'];
+      if (id === S.dest) cls.push('dest');
+      if (confirmedHere ? id === cur : id === cur && !onEdge) cls.push('cur');
+      else if (visited.has(id)) cls.push('visited');
+      if (visited.has(id) && !cls.includes('cur')) { if (!cls.includes('visited')) cls.push('visited'); }
+      if (id === nextId && id !== S.dest && !arrived) cls.push('next');
+      v.nodes[id].setAttribute('class', cls.join(' '));
+    }
+    v.fill.classList.remove('on'); v.marker.classList.remove('on');
+  });
+  // the walking fill + arrow marker
+  let dirAngle = null;
+  const place = (v, d, frac, reverseOk) => {
+    v.fill.setAttribute('d', d);
+    const len = v.fill.getTotalLength();
+    v.fill.style.strokeDasharray = `${len * frac} ${len + 2}`;
+    v.fill.classList.toggle('on', frac > 0.002);
+    const L = len * clamp(frac, 0, 1), pt = v.fill.getPointAtLength(L);
+    const a = v.fill.getPointAtLength(Math.max(0, L - 3)), b = v.fill.getPointAtLength(Math.min(len, L + 3));
+    const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 90;
+    v.marker.setAttribute('transform', `translate(${pt.x} ${pt.y}) rotate(${ang})`); v.marker.classList.add('on');
+    dirAngle = ang;
+  };
+  if (onEdge) {
+    if (!edge.floor_change) {
+      const fl = N[eFrom].floor, v = M.view[fl], ge = v.edges[ekey(eFrom, eTo)];
+      if (ge) place(v, ge.d(eFrom), clamp(p, 0, 1));
+    } else {
+      // stairs / lift between floors: fill the stub on the floor the frame says we are on
+      const fF = N[eFrom].floor, fT = N[eTo].floor;
+      const onFrom = floorNow !== fT;
+      const nodeId = onFrom ? eFrom : eTo, other = onFrom ? fT : fF, v = M.view[onFrom ? fF : fT];
+      const s = v.stubs[nodeId + '>' + other];
+      if (s) {
+        const frac = onFrom ? clamp(p * 2, 0, 1) : clamp(p * 2 - 1, 0, 1);
+        const d = onFrom ? `M${s.x0} ${s.y0} L${s.x1} ${s.y1}` : `M${s.x1} ${s.y1} L${s.x0} ${s.y0}`;
+        place(v, d, onFrom ? frac : frac);
+      }
+    }
+  } else if (cur && N[cur]) {
+    // standing on a circle: arrow sits just outside it, pointing at the next hop
+    const v = M.view[N[cur].floor];
+    if (nextId && !arrived) {
+      let tx, ty;
+      const nn = N[nextId];
+      if (nn.floor !== N[cur].floor) { const s = v.stubs[cur + '>' + nn.floor]; if (s) { tx = s.x1; ty = s.y1; } }
+      else { const ge = v.edges[ekey(cur, nextId)]; if (ge) { const L = M.view[N[cur].floor].pos; tx = L[nextId][0]; ty = L[nextId][1]; if (ge.geo.ctrl) { const c = ge.geo.ctrl; const fromFirst = ge.geo.first === cur; const s0 = fromFirst ? ge.geo.A : ge.geo.B; const dx = c[0] - s0[0], dy = c[1] - s0[1]; tx = s0[0] + dx; ty = s0[1] + dy; } } }
+      if (tx != null) {
+        const sx = v.pos[cur][0], sy = v.pos[cur][1], l = Math.hypot(tx - sx, ty - sy) || 1;
+        const ux = (tx - sx) / l, uy = (ty - sy) / l;
+        dirAngle = Math.atan2(uy, ux) * 180 / Math.PI + 90;
+        v.marker.setAttribute('transform', `translate(${sx + ux * 27} ${sy + uy * 27}) rotate(${dirAngle})`); v.marker.classList.add('on');
+      }
+    }
+  }
+
+  // ----- panel -----
+  const badgeOff = $('banner');
+  if (arrived) { badgeOff.className = 'banner on'; badgeOff.textContent = '⚑ Arrived: ' + pretty(S.dest); }
+  else if (offRoute) { badgeOff.className = 'banner on off'; badgeOff.textContent = '✕ Off the planned route, re-routing from ' + shortName(eTo); }
+  else badgeOff.className = 'banner';
+
+  $('placeName').textContent = onEdge ? (edge.floor_change ? 'Changing floor: ' + pretty(eFrom) + ' to ' + pretty(eTo) : 'Between ' + shortName(eFrom) + ' and ' + shortName(eTo)) : (cur ? pretty(cur) : 'Waiting for first fix');
+  const meta = $('placeMeta'); meta.textContent = '';
+  meta.appendChild(h('span', 'chip', null, [h('b', null, floorNow + 'F')]));
+  if (confirmedHere) meta.appendChild(h('span', 'chip ok', '\u2713 confirmed'));
+  else if (onEdge) meta.appendChild(h('span', 'chip', 'walking, ' + Math.round(clamp(p, 0, 1) * 100) + '% of the way'));
+  else meta.appendChild(h('span', 'chip warn', 'unconfirmed guess'));
+  const zoneNow = curArea || (cur && N[cur] && N[cur].zone);
+  $('areaName').textContent = zoneNow ? areaName(zoneNow) : '-';
+  // next + steps
+  let nextTxt = '-', stepsLeft = null;
+  if (arrived) nextTxt = 'You are here';
+  else if (nextId) {
+    const hop = onEdge ? edge : M.edges[ekey(cur, nextId)];
+    const hopLeft = hop ? Math.max(0, Math.round((onEdge ? 1 - clamp(p, 0, 1) : 1) * (hop.median_steps || 0))) : null;
+    nextTxt = (hop && hop.floor_change ? (N[nextId].floor < N[at === nextId && onEdge ? eFrom : cur].floor ? 'Stairs/lift down to ' : 'Stairs/lift up to ') : '') + pretty(nextId) + (hopLeft != null ? ' (about ' + hopLeft + ' steps)' : '');
+    if (hopLeft != null) { stepsLeft = hopLeft; for (let i = 1; i < route.length - (onEdge ? 0 : 1) && onEdge ? i < route.length : i < route.length - 1; i++) { const e2 = M.edges[ekey(route[i], route[i + 1])]; if (e2 && route[i + 1]) stepsLeft += e2.median_steps || 0; } }
+  }
+  $('nextName').textContent = nextTxt;
+  $('destName').textContent = S.dest ? pretty(S.dest) + (arrived ? '' : (stepsLeft != null ? '  ·  about ' + stepsLeft + ' steps to go' : '')) : '-';
+  $('steps').textContent = (f.steps_total != null ? f.steps_total : 0) + ' total';
+  $('dirSvg').style.transform = 'rotate(' + (dirAngle != null ? dirAngle : 0) + 'deg)';
+  $('dirBox').style.opacity = dirAngle != null ? 1 : .35;
+
+  // top 3
+  const truth = f.true_node;
+  const t3 = $('top3'); t3.textContent = '';
+  (f.top3 || []).slice(0, 3).forEach(([id, pr], i) => {
+    const nm = h('span', 'nm', (i + 1) + '. ' + (N[id] ? pretty(id) : id));
+    if (truth === id) nm.appendChild(h('span', 'truth', '\u2190 true place'));
+    const bar = h('span', 'bar', null, [h('i')]); bar.firstChild.style.width = clamp(pr * 100, 0, 100) + '%';
+    t3.appendChild(h('div', 'row', null, [nm, h('span', 'pc', Math.round(pr * 100) + '%'), bar]));
+  });
+  if (!t3.firstChild) t3.appendChild(h('div', 'note', 'No guesses in this frame.'));
+
+  // replay verdicts
+  const vE = $('vExact'), vA = $('vArea');
+  if (truth && N[truth] && f.top3 && f.top3.length) {
+    const top = f.top3[0][0], okE = top === truth, okA = N[top] && N[top].zone === N[truth].zone;
+    vE.className = 'vbox ' + (okE ? 'ok' : 'no'); vA.className = 'vbox ' + (okA ? 'ok' : 'no');
+    vE.querySelector('.v').textContent = okE ? '✓ right' : '✗ wrong';
+    vA.querySelector('.v').textContent = okA ? '✓ right' : '✗ wrong';
+    vE.querySelector('.s').textContent = 'guess ' + shortName(top) + ' / true ' + shortName(truth);
+    vA.querySelector('.s').textContent = 'guess ' + areaName(N[top] && N[top].zone) + ' / true ' + areaName(N[truth].zone);
+  } else {
+    [vE, vA].forEach(b => { b.className = 'vbox'; b.querySelector('.v').textContent = '-'; b.querySelector('.s').textContent = truth ? '' : 'no ground truth in this frame'; });
+  }
+  const n = M.cumN[idx];
+  $('tally').textContent = n ? `So far in this replay (${n} frames with a true place): exact ${M.cumX[idx]}/${n}, area ${M.cumA[idx]}/${n}.` : 'No frame with a true place yet.';
+
+  // tabs + controls
+  document.querySelectorAll('.tab').forEach(b => {
+    const fl = +b.dataset.floor; b.setAttribute('aria-selected', fl === showFloor);
+    b.querySelector('.live').textContent = fl === floorNow ? '● you' : '';
+  });
+  $('scrub').max = M.tmax; $('scrub').value = S.t;
+  $('time').textContent = fmt(S.t) + ' / ' + fmt(M.tmax);
+  $('play').textContent = S.playing ? 'Pause' : 'Play';
+  $('frameInfo').textContent = 'frame ' + (idx + 1) + '/' + M.frames.length;
+}
+
+/* ---------- replay loop ---------- */
+function tick(ts) {
+  if (S.playing && M) {
+    const dt = Math.min(0.25, (ts - S.lastTs) / 1000);
+    S.t += dt * S.speed;
+    if (S.t >= M.tmax) { S.t = M.tmax; S.playing = false; }
+    render();
+  }
+  S.lastTs = ts; requestAnimationFrame(tick);
+}
+function stepFrame(d) {
+  const i = clamp(frameAt(S.t) + d, 0, M.frames.length - 1); S.t = M.frames[i].t; S.playing = false; render();
+}
+$('play').onclick = () => { if (S.t >= M.tmax) S.t = 0; S.playing = !S.playing; render(); };
+$('back').onclick = () => stepFrame(-1);
+$('fwd').onclick = () => stepFrame(1);
+$('restart').onclick = () => { S.t = 0; S.playing = false; render(); };
+$('speed').onchange = e => { S.speed = +e.target.value; };
+$('scrub').oninput = e => { S.t = +e.target.value; render(); };
+document.addEventListener('keydown', e => {
+  if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName) && e.target.type !== 'range') return;
+  if (e.key === ' ' && e.target.tagName !== 'BUTTON') { e.preventDefault(); $('play').click(); }
+  else if (e.key === 'ArrowRight' && e.target.type !== 'range') stepFrame(1);
+  else if (e.key === 'ArrowLeft' && e.target.type !== 'range') stepFrame(-1);
+});
+
+/* ---------- search ---------- */
+let searchHits = [];
+function runSearch(q) {
+  const ul = $('results'); ul.textContent = ''; searchHits = [];
+  if (!M || !q.trim()) return;
+  const idx = frameAt(S.t), from = M.cur[idx] || M.data.graph.nodes[0].id, dFrom = dijkstra(M.adj, from);
+  const hits = [];
+  M.data.graph.nodes.forEach(n => {
+    const [a, t] = keywordScore(q, nodeProfile(n));
+    if (a || t) hits.push({ n, a, t, d: dFrom[n.id] });
+  });
+  hits.sort((x, y) => y.a - x.a || y.t - x.t || x.d - y.d);
+  searchHits = hits.slice(0, 6);
+  if (!searchHits.length) { ul.appendChild(h('li', 'note', 'No match. Try "toilet", "eat", "lt1a" or "exit".')); return; }
+  searchHits.forEach(hit => {
+    const li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button'; b.className = 'result' + (hit.n.id === S.dest ? ' sel' : '');
+    b.appendChild(h('span', null, pretty(hit.n.id)));
+    b.appendChild(h('small', null, hit.n.floor + 'F \u00B7 ' + areaName(hit.n.zone).replace(/^\dF \u00B7 /, '') + (isFinite(hit.d) ? ' \u00B7 ' + Math.round(hit.d) + ' m' : '')));
+    b.onclick = () => { setDestination(hit.n.id); runSearch(q); };
+    li.appendChild(b); ul.appendChild(li);
+  });
+}
+$('searchForm').onsubmit = e => { e.preventDefault(); runSearch($('q').value); if (searchHits[0]) { setDestination(searchHits[0].n.id); runSearch($('q').value); } };
+$('q').oninput = e => runSearch(e.target.value);
+document.querySelectorAll('.examples a').forEach(a => a.onclick = () => { $('q').value = a.dataset.q; $('searchForm').requestSubmit(); });
+
+/* ---------- loading data ---------- */
+function showMsg(t) { $('msg').textContent = t || ''; $('msg').classList.toggle('on', !!t); }
+function useData(data, label, isMock) {
+  try {
+    M = buildModel(data, label, isMock);
+  } catch (err) { showMsg('Could not use that file: ' + err.message); return false; }
+  showMsg('');
+  const b = $('srcBadge');
+  b.className = 'badge ' + (isMock ? 'mock' : 'real');
+  b.textContent = isMock ? 'MOCK DATA' : 'REPLAY: ' + label;
+  b.title = isMock ? 'Made by make_mock.py. Fake positions, steps and guesses. Only the place names and order come from the 23-Nov labels.' : label;
+  document.title = 'WalkSense circle navigator' + (isMock ? ' (MOCK DATA)' : '');
+  S.t = 0; S.playing = false; S.manualFloor = null; S.lastFrameFloor = null;
+  buildAll();
+  const dest = data.destination && M.nodes[data.destination] ? data.destination : M.data.graph.nodes[M.data.graph.nodes.length - 1].id;
+  S.dest = dest; M.distTo = dijkstra(M.adj, dest);
+  const t0 = parseFloat(params.get('t')); if (!isNaN(t0)) S.t = clamp(t0, 0, M.tmax);
+  if (params.get('floor')) S.manualFloor = +params.get('floor');
+  render();
+  return true;
+}
+function useMock(why) {
+  if (!window.MOCK_REPLAY) { showMsg('No mock data found (mock_replay.js missing). Run make_mock.py or load a replay JSON.'); return; }
+  useData(window.MOCK_REPLAY, 'mock', true);
+  if (why) console.info('Using mock replay: ' + why);
+}
+async function loadFromUrl(url) {
+  // only same-origin paths: a crafted ?data= link must not make the page load someone else's file
+  let u; try { u = new URL(url, location.href); } catch (e) { throw new Error('bad address'); }
+  if (u.origin !== location.origin || !/^https?:$/.test(u.protocol)) throw new Error('only same-site paths are allowed');
+  const r = await fetch(u.href, { cache: 'no-store' });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+async function boot() {
+  const q = params.get('data');
+  if (q === 'mock') return useMock('?data=mock');
+  const url = q || (location.protocol.startsWith('http') ? '../tracking/out/replay_23nov.json' : null);
+  if (url) {
+    try {
+      const d = await loadFromUrl(url);
+      if (useData(d, url.split('/').pop(), false)) return;
+    } catch (err) {
+      useMock('could not load ' + url + ' (' + err.message + ')');
+      if (q) showMsg('Could not load that address (' + err.message + '). Showing the mock instead.');
+      return;
+    }
+  }
+  useMock(url ? 'real replay not found at ' + url : 'opened from disk (use "Load replay JSON" for a real file)');
+}
+function readFile(file) {
+  const r = new FileReader();
+  r.onload = () => { try { useData(JSON.parse(r.result), file.name, false); } catch (err) { showMsg('Could not read ' + file.name + ': ' + err.message); } };
+  r.readAsText(file);
+}
+$('loadBtn').onclick = () => $('file').click();
+$('file').onchange = e => { if (e.target.files[0]) readFile(e.target.files[0]); };
+window.addEventListener('dragover', e => e.preventDefault());
+window.addEventListener('drop', e => { e.preventDefault(); if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]); });
+
+/* ---------- theme ---------- */
+const THEMES = ['auto', 'light', 'dark'];
+function setTheme(t) {
+  if (t === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t);
+  $('themeBtn').textContent = 'Theme: ' + t; $('themeBtn').dataset.t = t;
+}
+$('themeBtn').onclick = () => setTheme(THEMES[(THEMES.indexOf($('themeBtn').dataset.t || 'auto') + 1) % 3]);
+setTheme(THEMES.includes(params.get('theme')) ? params.get('theme') : 'auto');
+if (params.get('speed')) { S.speed = +params.get('speed'); $('speed').value = String(S.speed); }
+
+buildLegend();
+boot().then(() => { if (params.get('play') === '1' && M) { S.playing = true; render(); } });
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
