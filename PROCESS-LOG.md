@@ -26,6 +26,7 @@ Contents:
 15. 24 Nov: tilt correction on walk endpoints, 39% vs 0%
 16. 24 Nov: team summary written and pushed to main
 17. 24 Nov: old/new reorganisation, day-3 checklist, this log
+18. 24 Nov: area definitions pre-registered (circles-on-lines graph nodes)
 - Lessons learned
 - Open questions / next steps
 
@@ -215,6 +216,16 @@ Contents:
 - **Result:** verification after the move: `crossday.py` (about 37 s) and `tilt.py` (about 3 s) rerun; every file in `new/cross-day/out/` is byte-identical to before, including `results.json` and `tilt_results.json`. `pilot_train.py` and `step_detection.py` rerun; CSV and JSON outputs are identical, the 3 PNGs differed only in bytes (plotting library output), so the originals were restored and `old/` stays as it was. The `cache/` and `__pycache__/` folders are ignored by `phase2/new/cross-day/.gitignore`.
 - **Outcome:** succeeded.
 - **Links:** `phase2/README.md`, `phase2/new/DAY3-CHECKLIST.md`, `CLAUDE.md`, `AGENTS.md`.
+
+## 18. 24 Nov: area definitions pre-registered (circles-on-lines graph nodes)
+
+- **What we tried:** fix the "areas" used for the second accuracy measure (right area, not only the right checkpoint) before any tracker result exists, so the grouping can't be tuned to the results.
+- **Why:** the user's design decision: a "circles on lines" map instead of Google Maps, and accuracy measured as exact checkpoint AND area, since people only need to know the area and can see the rooms around them.
+- **How:** `phase2/new/graph/nodes.csv` (hand-edited input) and the grouping rule in `phase2/new/graph/README.md`, committed on their own, on branch `feat/circle-tracking`. The only data used: floor-5 metre coordinates (`phase2/map/coordinates_meters.csv`) and 23-Nov step counts per walk (`phase2/new/tracking/pdr.py`, next commit). Rule: same floor and connected; members with coordinates within 6 m of their centroid; a checkpoint without coordinates at most 20 steps from another member; longest path inside an area at most 36 steps; ties go to the tighter area.
+- **Result** (`nodes.csv`): 31 real checkpoints (18 on floor 5, 13 on floor 4) in 11 areas (7 on floor 5, 4 on floor 4), plus 9 display-only virtual midpoints on long edges. 3 areas hold a single checkpoint (`y5302`, `y5202`, `lt1b`).
+- **Outcome:** done, but slightly above the 8 to 10 areas we aimed for: the 6 m rule would not let the two classrooms merge with the study rooms or toilets. Floor-4 areas are larger than floor-5 ones because floor 4 has only step counts, no coordinates.
+- **What changed because of it:** the tracker evaluation (next entry) scores "area correct" with exactly these groups.
+- **Links:** `phase2/new/graph/nodes.csv`, `phase2/new/graph/README.md`.
 
 ---
 
