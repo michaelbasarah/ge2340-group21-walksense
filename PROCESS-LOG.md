@@ -29,6 +29,7 @@ Contents:
 18. 24 Nov: area definitions pre-registered (circles-on-lines graph nodes)
 19. 24 Nov: graph edges and step counting (PDR) on the walks
 20. 24 Nov: route-aware tracker (HMM on the graph): helps across days, not on 23-Nov LOVO; v1 FAILED to recover
+21. 24 Nov: circle navigator UI prototype (circles on lines)
 - Lessons learned
 - Open questions / next steps
 
@@ -267,6 +268,19 @@ Contents:
 
 ---
 
+## 21. 24 Nov: circle navigator UI prototype (circles on lines)
+
+- **What we tried:** a phone-first navigator UI replacing Google Maps. Checkpoints are circles joined by lines on two floor panels (5F, 4F). The line to the next circle fills with the step count and snaps when the sensors confirm the circle. The destination is green with the planned route highlighted. The current area is shaded, and the panel shows exact-point and area ✓/✗ against `true_node`.
+- **Why:** a UI that matches what the tracker produces (graph, edge progress, confirmed node, top-3, area). It was built against the agreed JSON format on a mock while the tracker was built in parallel.
+- **How:** `phase2/new/circle-ui/index.html` (vanilla JS + SVG, no build step). Route = Dijkstra in JS over `distance_m` (else `median_steps`). Search = a JS port of Dicta's keyword matcher (`phase2/request-matching/match.py`, `destinations.csv`). `make_mock.py` builds the mock from `phase2/new/cross-day/labels_23nov_confirmed.csv` (31 nodes, 39 edges, 680 frames, 10 areas, destination `lt1a`, seed 23). Checked in headless Chromium at 1280 px and 390 px, light and dark.
+- **Result:** no console errors. Opened from disk the mock loads; over http it loads `../tracking/out/replay_23nov.json`, falling back to the mock, labelled "MOCK DATA".
+- **Outcome:** success as a UI prototype. The mock's positions, steps and guesses are invented. Security review fix before commit: replay values are written with `textContent` only, the file is validated (id/zone character sets, integer floors, numeric/boolean fields), and `?data=` accepts same-origin paths only. Tested with injection ids/zones and a cross-origin URL: all refused.
+- **Integration with the real tracker output (done when landing on `main`):** the UI was opened with the real `replay_23nov.json` (40 nodes incl. 9 virtual midpoints, 39 edges, 5874 frames, destination `escalator_up_4F`) in headless Chromium; no console errors, every frame scrubbed. The tracker's code and outputs were not changed. Minimal fixes in `circle-ui/index.html` only: (1) virtual midpoints (`virtual: true`, `zone: null`, `on_edge`) are accepted and drawn as small display-only dots, with no label, area, search hit or route (before the fix they were full circles labelled "V canteen exit 5" and added a shaded "?" area); (2) the validator also checks `virtual` (boolean) and `on_edge` (node ids), still refusing bad characters in non-null ids and zones; (3) real area ids (`a5_canteen_front`) are shown as "5F · Canteen front"; (4) playback skips recording breaks (gap above 5 s between frames, e.g. the 32-minute break); (5) edges with `median_steps: null` show no step count instead of "0 steps"; (6) after a floor change the tracker's unconfirmed guess on the new floor is shown as "you" (the last confirmed circle was on the other floor); (7) a file refused by validation keeps its error message on screen, and a missing destination falls back to the last real node, not a virtual one. Exact/area counts skip frames with no `true_node` (792 of 5874); per 0.5 s frame on 23 Nov they are exact 1251/5082 and area 1740/5082, the same as recomputed from the file in Python. These frame counts are not the per-stop numbers of entry 20. Re-tested after the fixes: the mock still loads (from disk and `?data=mock`); an injection id, an injection zone, a bad `on_edge` and a non-boolean `virtual` are refused with a message and nothing runs; `?data=` with another origin, another port, `//host/...` and `javascript:` is refused; `replay_17nov.json` loads.
+- **What changed because of it:** the JSON format is exercised by a consumer. `zone` carries the area id; "area correct" = the zone of the top guess equals the zone of `true_node`. The real replay shows the tracker's weak points visibly, for example the stairs walk ends on 5F and the first 4F frame is an unconfirmed guess.
+- **Links:** `phase2/new/circle-ui/` (README: real data vs mock), screenshots with real data `phase2/new/circle-ui/screenshots/real-desktop-*.png` and `real-phone-*.png` (start, mid-walk, stairs on 5F, floor switch to 4F, arrival), commit 66a437c on `feat/circle-ui` (merged into `main`).
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -290,4 +304,5 @@ Contents:
 - **Floor-4 Google Maps pins** are still missing, so the map and routing stop at floor 5.
 - **Unmerged branches** `prep/training`, `prep/map`, `prep/ready` are still local and unmerged; decide later whether any of it is wanted.
 - **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
+- **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.

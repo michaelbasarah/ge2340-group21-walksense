@@ -76,6 +76,7 @@ header .sp{flex:1}
 .stubBadge text{fill:var(--ink);font-size:11px;font-weight:700;text-anchor:middle;dominant-baseline:central}
 .fill{fill:none;stroke:var(--blue);stroke-width:7;stroke-linecap:round;display:none}
 .fill.on{display:block}
+.vdot{fill:var(--idle);fill-opacity:.55;stroke:var(--card);stroke-width:1.2}
 .nlabel{fill:var(--ink);font-size:11.5px;paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round}
 .node .halo{fill:none;stroke:none}
 .node .body{fill:var(--card);stroke:var(--idle);stroke-width:2.5}
@@ -307,7 +308,7 @@ const pretty = id => { const [c, f] = splitFloor(id); return prettyCore(c) + (f 
 const shortName = id => prettyCore(splitFloor(id)[0]);
 function areaName(z) {
   if (!z) return 'Unknown area';
-  const m = String(z).match(/^(\d)F[-_ ](.+)$/i);
+  const m = String(z).match(/^(\d)F[-_ ](.+)$/i) || String(z).match(/^a(\d)[-_ ](.+)$/i);   // '5F-name' or 'a5_name'
   const rest = (m ? m[2] : String(z)).replace(/[-_]+/g, ' ');
   return (m ? m[1] + 'F · ' : '') + rest[0].toUpperCase() + rest.slice(1);
 }
@@ -367,6 +368,8 @@ function validate(d) {
     if (!isNum(n.x) || !isNum(n.y)) bad('Node ' + n.id + ': x and y must be numbers.');
     if (n.zone != null && (typeof n.zone !== 'string' || !ZONE_RE.test(n.zone))) bad('Node ' + n.id + ': zone has unexpected characters.');
     if (n.kind != null && typeof n.kind !== 'string') bad('Node ' + n.id + ': kind must be text.');
+    if (n.virtual != null && typeof n.virtual !== 'boolean') bad('Node ' + n.id + ': virtual must be true or false.');
+    if (n.on_edge != null && (!Array.isArray(n.on_edge) || n.on_edge.some(v => typeof v !== 'string' || !ID_RE.test(v)))) bad('Node ' + n.id + ': on_edge must be a list of node ids.');
     ids.add(n.id);
   });
   d.graph.edges.forEach(e => {
@@ -421,7 +424,8 @@ function buildModel(data, label, isMock) {
     cumN[i] = n; cumX[i] = x; cumA[i] = a;
   });
   const areas = {};
-  data.graph.nodes.forEach(nd => (areas[nd.zone || '?'] = areas[nd.zone || '?'] || []).push(nd.id));
+  // virtual midpoints (zone null) are display-only: no area, no search, no label
+  data.graph.nodes.forEach(nd => { if (!nd.virtual && nd.zone) (areas[nd.zone] = areas[nd.zone] || []).push(nd.id); });
   return { data, label, isMock, nodes, adj, edges, frames, floors, cur, visit, trav, cumN, cumX, cumA, areas,
            tmax: frames[frames.length - 1].t, distTo: null, view: {} };
 }
@@ -480,14 +484,15 @@ function nodeGlyphs(g) {
 }
 
 function buildFloor(fl) {
-  const nodes = M.data.graph.nodes.filter(n => n.floor === fl);
+  const allNodes = M.data.graph.nodes.filter(n => n.floor === fl);
+  const nodes = allNodes.filter(n => !n.virtual), vnodes = allNodes.filter(n => n.virtual);   // circles vs display-only dots
   const ids = new Set(nodes.map(n => n.id));
-  const xs = nodes.map(n => n.x), ys = nodes.map(n => n.y);
+  const xs = allNodes.map(n => n.x), ys = allNodes.map(n => n.y);
   const x0 = Math.min(...xs), y0 = Math.min(...ys), bw = Math.max(...xs) - x0 || 1, bh = Math.max(...ys) - y0 || 1;
   let sc = (W - 2 * PADX) / bw;
   sc = Math.min(sc, 470 / bh);
   const pos = {};
-  nodes.forEach(n => pos[n.id] = [PADX + (n.x - x0) * sc + (W - 2 * PADX - bw * sc) / 2, (n.y - y0) * sc]);
+  allNodes.forEach(n => pos[n.id] = [PADX + (n.x - x0) * sc + (W - 2 * PADX - bw * sc) / 2, (n.y - y0) * sc]);
 
   // floor-change stubs
   const stubs = {};
@@ -553,6 +558,11 @@ function buildFloor(fl) {
     const tx = el('text', {}, gb); tx.textContent = (s.dir > 0 ? '▼ ' : '▲ ') + s.other + 'F';
     s.line = line; ref.stubEls[k] = { line };
   }
+  // virtual midpoints: small dots on the line, drawn under the circles, no state, no label
+  vnodes.forEach(n => {
+    const c = el('circle', { class: 'vdot', r: 3.2, cx: pos[n.id][0], cy: pos[n.id][1] }, gEdge);
+    const t = el('title', {}, c); t.textContent = 'midpoint (display only)';
+  });
   // nodes
   nodes.forEach(n => {
     const g = el('g', { class: 'node', transform: `translate(${pos[n.id][0]} ${pos[n.id][1]})` }, gNode);
@@ -626,7 +636,9 @@ function render() {
     p = p + (nx.progress - p) * clamp((S.t - f.t) / (nx.t - f.t), 0, 1);
   const confirmedHere = f.confirmed && f.node && N[f.node];
   const onEdge = !confirmedHere && p != null && N[f.edge_from] && N[f.edge_to] && M.edges[ekey(f.edge_from, f.edge_to)];
-  const cur = confirmedHere ? f.node : M.cur[idx];            // last confirmed circle
+  let cur = confirmedHere ? f.node : M.cur[idx];              // last confirmed circle
+  // after a floor change the last confirmed circle is on the other floor: show the tracker's (unconfirmed) guess on this floor instead
+  if (!confirmedHere && f.floor != null && f.node && N[f.node] && N[f.node].floor === f.floor && !f.edge_from && cur && N[cur] && N[cur].floor !== f.floor) cur = f.node;
   const eFrom = onEdge ? f.edge_from : null, eTo = onEdge ? f.edge_to : null;
   const edge = onEdge ? M.edges[ekey(eFrom, eTo)] : null;
 
@@ -736,7 +748,7 @@ function render() {
   if (arrived) nextTxt = 'You are here';
   else if (nextId) {
     const hop = onEdge ? edge : M.edges[ekey(cur, nextId)];
-    const hopLeft = hop ? Math.max(0, Math.round((onEdge ? 1 - clamp(p, 0, 1) : 1) * (hop.median_steps || 0))) : null;
+    const hopLeft = hop && hop.median_steps != null ? Math.max(0, Math.round((onEdge ? 1 - clamp(p, 0, 1) : 1) * hop.median_steps)) : null;
     nextTxt = (hop && hop.floor_change ? (N[nextId].floor < N[at === nextId && onEdge ? eFrom : cur].floor ? 'Stairs/lift down to ' : 'Stairs/lift up to ') : '') + pretty(nextId) + (hopLeft != null ? ' (about ' + hopLeft + ' steps)' : '');
     if (hopLeft != null) { stepsLeft = hopLeft; for (let i = 1; i < route.length - (onEdge ? 0 : 1) && onEdge ? i < route.length : i < route.length - 1; i++) { const e2 = M.edges[ekey(route[i], route[i + 1])]; if (e2 && route[i + 1]) stepsLeft += e2.median_steps || 0; } }
   }
@@ -788,6 +800,8 @@ function tick(ts) {
   if (S.playing && M) {
     const dt = Math.min(0.25, (ts - S.lastTs) / 1000);
     S.t += dt * S.speed;
+    const gi = frameAt(S.t), gn = M.frames[gi + 1];       // recording breaks (e.g. 32 min): jump to the next frame
+    if (gn && gn.t - M.frames[gi].t > 5 && S.t > M.frames[gi].t + 1) S.t = gn.t;
     if (S.t >= M.tmax) { S.t = M.tmax; S.playing = false; }
     render();
   }
@@ -817,6 +831,7 @@ function runSearch(q) {
   const idx = frameAt(S.t), from = M.cur[idx] || M.data.graph.nodes[0].id, dFrom = dijkstra(M.adj, from);
   const hits = [];
   M.data.graph.nodes.forEach(n => {
+    if (n.virtual) return;
     const [a, t] = keywordScore(q, nodeProfile(n));
     if (a || t) hits.push({ n, a, t, d: dFrom[n.id] });
   });
@@ -850,7 +865,7 @@ function useData(data, label, isMock) {
   document.title = 'WalkSense circle navigator' + (isMock ? ' (MOCK DATA)' : '');
   S.t = 0; S.playing = false; S.manualFloor = null; S.lastFrameFloor = null;
   buildAll();
-  const dest = data.destination && M.nodes[data.destination] ? data.destination : M.data.graph.nodes[M.data.graph.nodes.length - 1].id;
+  const dest = data.destination && M.nodes[data.destination] ? data.destination : (M.data.graph.nodes.filter(n => !n.virtual).pop() || M.data.graph.nodes[0]).id;
   S.dest = dest; M.distTo = dijkstra(M.adj, dest);
   const t0 = parseFloat(params.get('t')); if (!isNaN(t0)) S.t = clamp(t0, 0, M.tmax);
   if (params.get('floor')) S.manualFloor = +params.get('floor');
@@ -878,6 +893,8 @@ async function boot() {
     try {
       const d = await loadFromUrl(url);
       if (useData(d, url.split('/').pop(), false)) return;
+      const why = $('msg').textContent;                    // validation refused the file: keep that message on screen
+      useMock('refused ' + url); showMsg(why + ' Showing the mock instead.'); return;
     } catch (err) {
       useMock('could not load ' + url + ' (' + err.message + ')');
       if (q) showMsg('Could not load that address (' + err.message + '). Showing the mock instead.');
