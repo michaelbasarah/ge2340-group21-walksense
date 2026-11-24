@@ -1,0 +1,36 @@
+{
+  "dataset": "2026-11-24 Sesi 1 (floor 5 + floor 4)",
+  "phones": [
+    "a55",
+    "a56",
+    "iphone",
+    "s24"
+  ],
+  "recordings_raw": 221,
+  "recordings_unique": 220,
+  "recordings_written": 220,
+  "stops": 27,
+  "walks": 28,
+  "stops_floor5": 15,
+  "stops_floor4": 12,
+  "walks_floor5": 15,
+  "walks_floor4": 13,
+  "wifi": {
+    "logs": 8,
+    "empty_logs": [
+      "s24_WigleWifi_20261124170829.csv.gz",
+      "s24_old_WigleWifi_20261124165729.csv.gz"
+    ],
+    "source_rows": 18756,
+    "non_wifi": 77,
+    "wifi_clean": 18668,
+    "unique_bssids": 4839,
+    "associations": 13597,
+    "in_window": 1789,
+    "approach": 11808,
+    "stops_with_wifi": 27,
+    "stops_total": 27,
+    "infra_obs": 14022
+  },
+  "warnings": []
+}

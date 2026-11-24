@@ -31,6 +31,7 @@ Contents:
 20. 24 Nov: route-aware tracker (HMM on the graph): helps across days, not on 23-Nov LOVO; v1 FAILED to recover
 21. 24 Nov: circle navigator UI prototype (circles on lines)
 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
+23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
 - Lessons learned
 - Open questions / next steps
 
@@ -291,6 +292,18 @@ Contents:
 - **Outcome:** success as a data artifact; non-destructive. Not yet an accuracy result — nobody has rerun the classifier on the merged labels.
 - **What changed because of it:** the team can point `crossday.py` at `labels_23nov_merged.csv` to score merged classes, and the map/UI can read `graph-v2/` to show one study-room circle and one lift/stairs circle per floor. v1 stays as the record of the un-merged graph.
 - **Links:** `phase2/new/graph-v2/` (`merge_v2.py`, `nodes.csv`, `edges.csv`, `labels_23nov_merged.csv`, `area_check_v2.csv`, `README.md`).
+
+---
+
+## 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
+
+- **What we tried:** cleaned and published both 24-Nov collection sessions (floor 5 + floor 4), raw and organized, under one isolated folder `phase2/clean-data/2026-11-24/` (`README.md`, `sesi1/`, `sesi2/`, `floor-sketch-v1.pdf`, `scripts/`). Each session has `raw/` (byte-identical phone ZIPs + WiGLE `.csv.gz`) and `clean/` (browsable tree + tables).
+- **Why:** day-3 training data; a second independent pass (sesi2) gives a real cross-session train/test split (train sesi1, test sesi2) without the same-day leakage that inflated earlier numbers.
+- **How:** `scripts/build_clean.py` groups each physical stop/walk across phones by **timestamp** (raw labels are noisy — three languages + typos), assigns a canonical node + floor, de-duplicates (including the nested `attachments.zip` bundles), copies each sensor CSV verbatim, and associates WiGLE first-sightings to the **nearest** stop (`in_window` inside the 60 s dwell, else `approach` within 120 s, since WiGLE scans in bursts between stops). `gen_docs.py` and `make_route_html.py` write the ROUTE/README. Floor split is by route: floor 4 begins at the "lift stair 5 lantai 4" landing (collector-confirmed); barometer alone can't split the floors because pressure drifted over the day.
+- **Result:** Sesi 1 — 220 unique recordings (4 phones iphone/s24/a55/a56, 55 each), 27 stops + 28 walks (15+15 floor 5, 12+13 floor 4), Wi-Fi 18,668 obs / 4,839 BSSIDs, 27/27 stops covered (`sesi1/clean/summary.json`). Sesi 2 — 108 recordings (2 phones, 54 each), 26 stops + 28 walks, Wi-Fi 17,376 obs / 7,852 BSSIDs, 26/26 stops covered (`sesi2/clean/summary.json`). Both verified: no empty sensor files, every stop has ≥ 1 iPhone barometer.
+- **Outcome:** success — both sessions complete and organized; a friend can train directly from `clean/` or rebuild it from `raw/` with `scripts/build_clean.py`.
+- **What changed because of it:** floor 4 is now covered with repeated visits, and the cross-session split (sesi1→sesi2) replaces same-day leakage. Confirmed from `sesi2/clean/summary.json` that the **s24 (SM-S9280) barometer is unreliable** (drifts several hPa standing still) — use the iPhone `Barometer.csv` for floor features. Note: Y5302 was recorded at two different doors (`y5302` + `y5302_point2`, not a revisit); the floor-5 escalators form a canteen triangle (canteen→esca_down, esca_up→canteen, esca_up→esca_down).
+- **Links:** `phase2/clean-data/2026-11-24/` (`README.md`, `sesi1/`, `sesi2/`, `scripts/`, `floor-sketch-v1.pdf`); summaries `sesi1/clean/summary.json`, `sesi2/clean/summary.json`.
 
 ---
 

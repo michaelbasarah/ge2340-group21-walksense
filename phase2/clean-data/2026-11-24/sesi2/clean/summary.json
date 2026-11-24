@@ -1,0 +1,32 @@
+{
+  "dataset": "2026-11-24 Sesi 2 (floor 5 + floor 4)",
+  "phones": [
+    "iphone",
+    "s24"
+  ],
+  "recordings_raw": 108,
+  "recordings_unique": 108,
+  "recordings_written": 108,
+  "stops": 26,
+  "walks": 28,
+  "stops_floor5": 14,
+  "stops_floor4": 12,
+  "walks_floor5": 15,
+  "walks_floor4": 13,
+  "wifi": {
+    "logs": 1,
+    "empty_logs": [],
+    "source_rows": 17431,
+    "non_wifi": 55,
+    "wifi_clean": 17376,
+    "unique_bssids": 7852,
+    "associations": 3881,
+    "stops_with_wifi": 26,
+    "stops_total": 26,
+    "infra_obs": 10280
+  },
+  "note": "WiGLE Wi-Fi added (s24 scanner, 1 log).",
+  "warnings": [
+    "s24 (SM-S9280) barometer is UNRELIABLE: it drifts multiple hPa even standing still (up to 1.35 hPa std / 4.6 hPa range within one 60s stop) and does not resolve the ~0.5 hPa floor step. Use the iPhone Barometer.csv for floor features; ignore/down-weight the s24 Pressure.csv column. The iPhone barometer is clean (~0.02 hPa std) and shows a correct +0.5 hPa step from floor 5 to floor 4."
+  ]
+}

@@ -1,0 +1,109 @@
+floor,type,node,from_node,to_node,place,phone,device,start_hk,duration_s,n_accel,n_gyro,n_mag,n_baro,pressure_hpa,folder,source_zip
+5,stop,canteen,,,Canteen,iphone,"iPhone17,4",21:55:13,60.0,5995,5995,5995,56,1019.65,floor5/stops/s01_canteen,poin 2026-11-24 21-55-13.zip
+5,stop,canteen,,,Canteen,s24,SM-S9280,21:55:12,60.0,27910,27910,6001,1499,1015.46,floor5/stops/s01_canteen,kantin 2026-11-24 21-55-12.zip
+5,stop,exit5_door,,,Exit 5 door,iphone,"iPhone17,4",21:57:43,60.0,5995,5994,5994,56,1019.62,floor5/stops/s02_exit5_door,exit 5 door 2026-11-24 21-57-43.zip
+5,stop,exit5_door,,,Exit 5 door,s24,SM-S9280,21:57:40,60.1,27920,27912,6001,1498,1015.1,floor5/stops/s02_exit5_door,exit5 door 2026-11-24 21-57-40.zip
+5,stop,male_toilet,,,Male toilet,iphone,"iPhone17,4",22:01:35,60.0,5995,5994,5994,56,1019.6,floor5/stops/s03_male_toilet,toet men 2026-11-24 22-01-35.zip
+5,stop,male_toilet,,,Male toilet,s24,SM-S9280,22:01:25,61.1,28375,28364,6097,1520,1014.91,floor5/stops/s03_male_toilet,toilet cwo 2026-11-24 22-01-25.zip
+5,stop,y5302,,,Y5302,iphone,"iPhone17,4",22:04:15,60.0,5995,5994,5994,56,1019.69,floor5/stops/s04_y5302,y5302 2026-11-24 22-04-15.zip
+5,stop,y5302,,,Y5302,s24,SM-S9280,22:04:13,60.1,27920,27911,6001,1498,1015.17,floor5/stops/s04_y5302,My Experiment y5302 2026-11-24 22-04-13.zip
+5,stop,sr9,,,SR9 (study rooms),iphone,"iPhone17,4",22:07:25,60.0,5996,5995,5995,56,1019.55,floor5/stops/s05_sr9,sr9 2026-11-24 22-07-25.zip
+5,stop,sr9,,,SR9 (study rooms),s24,SM-S9280,22:07:22,60.0,27905,27905,6001,1498,1012.26,floor5/stops/s05_sr9,sr9 2026-11-24 22-07-22.zip
+5,stop,y5202,,,Y5202,iphone,"iPhone17,4",22:10:35,60.0,5995,5995,5995,56,1019.49,floor5/stops/s06_y5202,y5202 2026-11-24 22-10-35.zip
+5,stop,y5202,,,Y5202,s24,SM-S9280,22:10:36,60.1,27911,27908,6001,1498,1013.36,floor5/stops/s06_y5202,My Experiment t5202 2026-11-24 22-10-36.zip
+5,stop,female_toilet,,,Female toilet,iphone,"iPhone17,4",22:14:15,60.0,5995,5994,5994,56,1019.55,floor5/stops/s07_female_toilet,toilet cewe 2026-11-24 22-14-15.zip
+5,stop,female_toilet,,,Female toilet,s24,SM-S9280,22:14:16,60.0,27898,27899,6000,1498,1013.92,floor5/stops/s07_female_toilet,My Experiment toilet cwe 2026-11-24 22-14-16.zip
+5,stop,exit10_door,,,Exit 10 door,iphone,"iPhone17,4",22:16:29,60.0,5995,5994,5994,56,1019.62,floor5/stops/s08_exit10_door,exit 10 2026-11-24 22-16-29.zip
+5,stop,exit10_door,,,Exit 10 door,s24,SM-S9280,22:16:28,60.1,27915,27909,6001,1498,1014.08,floor5/stops/s08_exit10_door,ext 10 2026-11-24 22-16-28.zip
+5,stop,esca_up,,,Escalator up,iphone,"iPhone17,4",22:20:04,60.0,5995,5994,5994,56,1019.69,floor5/stops/s09_esca_up,eska naik atas 2026-11-24 22-20-04.zip
+5,stop,esca_up,,,Escalator up,s24,SM-S9280,22:18:51,60.1,27911,27908,6001,1498,1012.67,floor5/stops/s09_esca_up,esc ats 2026-11-24 22-18-51.zip
+5,stop,esca_down,,,Escalator down,iphone,"iPhone17,4",22:25:46,60.0,5995,5994,5994,56,1019.7,floor5/stops/s10_esca_down,eska turun atas 2026-11-24 22-25-46.zip
+5,stop,esca_down,,,Escalator down,s24,SM-S9280,22:25:43,60.0,27902,27902,6000,1498,1013.04,floor5/stops/s10_esca_down,esca turun 2026-11-24 22-25-43.zip
+5,stop,male_disabled_toilet,,,Male disabled toilet,iphone,"iPhone17,4",22:31:07,60.0,5993,5991,5991,56,1019.71,floor5/stops/s11_male_disabled_toilet,toilet disabled cowo 2026-11-24 22-31-07.zip
+5,stop,male_disabled_toilet,,,Male disabled toilet,s24,SM-S9280,22:29:32,60.1,27911,27907,6001,1498,1014.36,floor5/stops/s11_male_disabled_toilet,toilet disb cwo 2026-11-24 22-29-32.zip
+5,stop,lift_stairs5,,,Lift / stairs 5,iphone,"iPhone17,4",22:35:59,60.0,5994,5992,5992,56,1019.76,floor5/stops/s12_lift_stairs5,lift stair 2026-11-24 22-35-59.zip
+5,stop,lift_stairs5,,,Lift / stairs 5,s24,SM-S9280,22:33:56,60.0,27904,27901,6000,1498,1013.93,floor5/stops/s12_lift_stairs5,lifstair 5 2026-11-24 22-33-56.zip
+5,stop,y5401,,,Y5401,iphone,"iPhone17,4",22:41:06,60.0,5993,5992,5992,56,1019.76,floor5/stops/s13_y5401,y5401 2026-11-24 22-41-06.zip
+5,stop,y5401,,,Y5401,s24,SM-S9280,22:39:41,60.1,27910,27907,6002,1498,1012.64,floor5/stops/s13_y5401,y5401 2026-11-24 22-39-41.zip
+5,stop,y5302_point2,,,Y5302 (point 2),iphone,"iPhone17,4",22:44:22,60.1,6008,6006,6006,56,1019.72,floor5/stops/s14_y5302_point2,y5302 2026-11-24 22-44-22.zip
+5,stop,y5302_point2,,,Y5302 (point 2),s24,SM-S9280,22:44:28,60.1,27909,27905,6000,1498,1011.94,floor5/stops/s14_y5302_point2,My Experiment y5302 2026-11-24 22-44-28.zip
+5,walk,,canteen,exit5_door,,iphone,"iPhone17,4",21:56:05,11.1,1107,1107,1107,10,1019.6,floor5/walks/w01_canteen__exit5_door,canteen to exit 5 2026-11-24 21-56-05.zip
+5,walk,,canteen,exit5_door,,s24,SM-S9280,21:55:59,9.7,4504,4497,965,239,1016.78,floor5/walks/w01_canteen__exit5_door,kantin exit 5 door 2026-11-24 21-55-59.zip
+5,walk,,exit5_door,male_toilet,,iphone,"iPhone17,4",21:58:19,6.2,623,623,623,5,1019.66,floor5/walks/w02_exit5_door__male_toilet,exit 5 to toilet 2026-11-24 21-58-19.zip
+5,walk,,exit5_door,male_toilet,,s24,SM-S9280,21:58:18,5.5,2529,2526,541,134,1016.82,floor5/walks/w02_exit5_door__male_toilet,My Experiment ex 5 door toilet 2026-11-24 21-58-18.zip
+5,walk,,male_toilet,y5302,,iphone,"iPhone17,4",22:02:37,8.8,884,883,883,8,1019.64,floor5/walks/w03_male_toilet__y5302,toilet to y5302 2026-11-24 22-02-37.zip
+5,walk,,male_toilet,y5302,,s24,SM-S9280,22:02:33,8.3,3838,3838,824,204,1019.87,floor5/walks/w03_male_toilet__y5302,toilet cwo y5302 2026-11-24 22-02-33.zip
+5,walk,,y5302,sr9,,iphone,"iPhone17,4",22:04:59,10.9,1091,1089,1089,10,1019.61,floor5/walks/w04_y5302__sr9,y5302 to sr9 2026-11-24 22-04-59.zip
+5,walk,,y5302,sr9,,s24,SM-S9280,22:04:54,10.4,4819,4831,1038,258,1016.5,floor5/walks/w04_y5302__sr9,y5302 sr9 2026-11-24 22-04-54.zip
+5,walk,,sr9,y5202,,iphone,"iPhone17,4",22:08:30,9.6,961,959,959,8,1019.49,floor5/walks/w05_sr9__y5202,sr 9 y5202 2026-11-24 22-08-30.zip
+5,walk,,sr9,y5202,,s24,SM-S9280,22:08:28,9.1,4234,4229,908,225,1014.88,floor5/walks/w05_sr9__y5202,sr9 y5202 2026-11-24 22-08-28.zip
+5,walk,,y5202,female_toilet,,iphone,"iPhone17,4",22:11:42,8.4,839,839,839,7,1019.55,floor5/walks/w06_y5202__female_toilet,y5202 toilet cewe 2026-11-24 22-11-42.zip
+5,walk,,y5202,female_toilet,,s24,SM-S9280,22:11:30,8.1,3762,3759,807,200,1015.07,floor5/walks/w06_y5202__female_toilet,My Experiment y5202 toilet cwe 2026-11-24 22-11-30.zip
+5,walk,,female_toilet,exit10_door,,iphone,"iPhone17,4",22:14:53,5.8,577,576,576,5,1019.63,floor5/walks/w07_female_toilet__exit10_door,toilet cewe exit 10 2026-11-24 22-14-53.zip
+5,walk,,female_toilet,exit10_door,,s24,SM-S9280,22:14:49,5.8,2698,2692,577,142,1015.25,floor5/walks/w07_female_toilet__exit10_door,tlt cwe exit 10 2026-11-24 22-14-49.zip
+5,walk,,exit10_door,canteen,,iphone,"iPhone17,4",22:17:16,10.2,1023,1021,1021,9,1019.69,floor5/walks/w08_exit10_door__canteen,exit 10 kantin 2026-11-24 22-17-16.zip
+5,walk,,exit10_door,canteen,,s24,SM-S9280,22:17:13,9.2,4280,4274,917,227,1013.95,floor5/walks/w08_exit10_door__canteen,ext 10 cantin 2026-11-24 22-17-13.zip
+5,walk,,esca_up,canteen,,iphone,"iPhone17,4",22:22:43,5.3,530,530,530,5,1019.69,floor5/walks/w09_esca_up__canteen,eska naik atas canteen 2026-11-24 22-22-43.zip
+5,walk,,esca_up,canteen,,s24,SM-S9280,22:22:40,5.1,2360,2346,505,124,1014.05,floor5/walks/w09_esca_up__canteen,esca naik kantin 2026-11-24 22-22-40.zip
+5,walk,,canteen,esca_down,,iphone,"iPhone17,4",22:23:18,6.2,618,618,618,5,1019.67,floor5/walks/w10_canteen__esca_down,kantin eska turun atas 2026-11-24 22-23-18.zip
+5,walk,,canteen,esca_down,,s24,SM-S9280,22:23:13,5.5,2554,2549,546,135,1016.23,floor5/walks/w10_canteen__esca_down,My Experiment kantin esca tueun 2026-11-24 22-23-13.zip
+5,walk,,esca_up,esca_down,,iphone,"iPhone17,4",22:23:57,6.0,598,597,597,5,1019.72,floor5/walks/w11_esca_up__esca_down,eska naik atas eska turun atas 2026-11-24 22-23-57.zip
+5,walk,,esca_up,esca_down,,s24,SM-S9280,22:23:54,6.1,2850,2850,611,151,1016.37,floor5/walks/w11_esca_up__esca_down,My Experiment esca nik turun 2026-11-24 22-23-54.zip
+5,walk,,exit5_door,male_disabled_toilet,,iphone,"iPhone17,4",22:27:50,4.0,404,403,403,4,1019.67,floor5/walks/w12_exit5_door__male_disabled_toilet,exit 5 toilet disabled men 2026-11-24 22-27-50.zip
+5,walk,,exit5_door,male_disabled_toilet,,s24,SM-S9280,22:27:47,6.0,2785,2782,597,147,1014.94,floor5/walks/w12_exit5_door__male_disabled_toilet,exit 5 toilet disb 2026-11-24 22-27-47.zip
+5,walk,,male_disabled_toilet,lift_stairs5,,iphone,"iPhone17,4",22:32:18,8.0,798,797,797,7,1019.67,floor5/walks/w13_male_disabled_toilet__lift_stairs5,toilet disabled cowo lift stair 2026-11-24 22-32-18.zip
+5,walk,,male_disabled_toilet,lift_stairs5,,s24,SM-S9280,22:32:13,7.3,3366,3364,722,178,1015.82,floor5/walks/w13_male_disabled_toilet__lift_stairs5,disb cwo lidtstair5 2026-11-24 22-32-13.zip
+5,walk,,lift_stairs5,y5401,,iphone,"iPhone17,4",22:38:04,8.2,821,820,820,7,1019.82,floor5/walks/w14_lift_stairs5__y5401,lift stair y5 hallway 2026-11-24 22-38-04.zip
+5,walk,,lift_stairs5,y5401,,s24,SM-S9280,22:38:02,9.7,4474,4483,962,239,1013.97,floor5/walks/w14_lift_stairs5__y5401,My Experiment lifstair5 y5hallway 2026-11-24 22-38-02.zip
+5,walk,,y5401,y5302_point2,,iphone,"iPhone17,4",22:41:57,4.6,463,463,463,4,1019.76,floor5/walks/w15_y5401__y5302_point2,y5401 y5302 back 2026-11-24 22-41-57.zip
+5,walk,,y5401,y5302_point2,,s24,SM-S9280,22:41:56,4.8,2226,2222,475,117,1015.45,floor5/walks/w15_y5401__y5302_point2,y5401 y5302 bacm 2026-11-24 22-41-56.zip
+4,stop,lift_stairs5,,,Lift / stairs 5,iphone,"iPhone17,4",22:47:50,60.0,5995,5995,5995,56,1020.3,floor4/stops/s01_lift_stairs5,lift stair bawah 2026-11-24 22-47-50.zip
+4,stop,lift_stairs5,,,Lift / stairs 5,s24,SM-S9280,22:47:49,60.1,27906,27907,6002,1499,1012.52,floor4/stops/s01_lift_stairs5,My Experiment lifstair 5 4th floor 2026-11-24 22-47-49.zip
+4,stop,disabled_toilet,,,Disabled toilet,iphone,"iPhone17,4",22:50:31,60.0,5995,5994,5994,56,1020.3,floor4/stops/s02_disabled_toilet,toilet disabled bawah 2026-11-24 22-50-31.zip
+4,stop,disabled_toilet,,,Disabled toilet,s24,SM-S9280,22:50:33,60.1,27902,27910,6001,1498,1013.49,floor4/stops/s02_disabled_toilet,My Experiment toil disb mix 2026-11-24 22-50-33.zip
+4,stop,exit5_door,,,Exit 5 door,iphone,"iPhone17,4",22:53:11,60.0,5995,5994,5994,56,1020.23,floor4/stops/s03_exit5_door,exit 5 bawah 2026-11-24 22-53-11.zip
+4,stop,exit5_door,,,Exit 5 door,s24,SM-S9280,22:53:15,60.1,27912,27908,6001,1498,1012.85,floor4/stops/s03_exit5_door,ext 5 2026-11-24 22-53-15.zip
+4,stop,lt2a,,,LT2A,iphone,"iPhone17,4",22:56:02,60.0,5995,5994,5994,56,1020.12,floor4/stops/s04_lt2a,lt2a 2026-11-24 22-56-02.zip
+4,stop,lt2a,,,LT2A,s24,SM-S9280,22:56:03,60.1,27900,27908,6001,1498,1009.73,floor4/stops/s04_lt2a,lt2a 2026-11-24 22-56-03.zip
+4,stop,lt2b,,,LT2B,iphone,"iPhone17,4",22:58:57,60.0,5995,5994,5994,56,1020.1,floor4/stops/s05_lt2b,lt2b 2026-11-24 22-58-57.zip
+4,stop,lt2b,,,LT2B,s24,SM-S9280,22:59:05,60.1,27914,27900,6000,1498,1011.16,floor4/stops/s05_lt2b,My Experiment lt2b 2026-11-24 22-59-05.zip
+4,stop,esca_down,,,Escalator down,iphone,"iPhone17,4",23:02:21,60.0,5995,5995,5995,56,1020.15,floor4/stops/s06_esca_down,eska turun bawah 2026-11-24 23-02-21.zip
+4,stop,esca_down,,,Escalator down,s24,SM-S9280,23:02:16,60.1,27912,27908,6000,1498,1011.43,floor4/stops/s06_esca_down,My Experiment esc trun bwh 2026-11-24 23-02-16.zip
+4,stop,y4502,,,Y4502,iphone,"iPhone17,4",23:04:58,60.0,5996,5995,5995,56,1020.06,floor4/stops/s07_y4502,y4502 2026-11-24 23-04-58.zip
+4,stop,y4502,,,Y4502,s24,SM-S9280,23:04:55,60.0,27909,27909,6001,1498,1012.14,floor4/stops/s07_y4502,My Experiment y4502 2026-11-24 23-04-55.zip
+4,stop,esca_up,,,Escalator up,iphone,"iPhone17,4",23:08:50,60.0,5996,5995,5995,56,1019.99,floor4/stops/s08_esca_up,esc turun bawah 2026-11-24 23-08-50.zip
+4,stop,esca_up,,,Escalator up,s24,SM-S9280,23:09:04,60.0,27907,27905,6000,1498,1013.57,floor4/stops/s08_esca_up,My Experiment esc naik 2026-11-24 23-09-04.zip
+4,stop,lt1b,,,LT1B,iphone,"iPhone17,4",23:11:39,60.0,5996,5995,5995,56,1019.86,floor4/stops/s09_lt1b,lt 1b 2026-11-24 23-11-39.zip
+4,stop,lt1b,,,LT1B,s24,SM-S9280,23:11:36,60.1,27915,27911,6000,1498,1013.7,floor4/stops/s09_lt1b,My Experiment 1b 2026-11-24 23-11-36.zip
+4,stop,lt1a,,,LT1A,iphone,"iPhone17,4",23:15:10,60.0,5996,5995,5995,56,1019.86,floor4/stops/s10_lt1a,lt1a 2026-11-24 23-15-10.zip
+4,stop,lt1a,,,LT1A,s24,SM-S9280,23:15:09,60.0,27905,27904,6000,1498,1013.72,floor4/stops/s10_lt1a,My Experiment 1a 2026-11-24 23-15-09.zip
+4,stop,exit10_door,,,Exit 10 door,iphone,"iPhone17,4",23:17:28,60.4,6031,6030,6030,56,1019.87,floor4/stops/s11_exit10_door,exit 10 bawah 2026-11-24 23-17-28.zip
+4,stop,exit10_door,,,Exit 10 door,s24,SM-S9280,23:17:25,60.1,27910,27917,6002,1498,1013.23,floor4/stops/s11_exit10_door,My Experiment ext 10 2026-11-24 23-17-25.zip
+4,stop,gate,,,Gate (building entrance/exit),iphone,"iPhone17,4",23:21:41,60.0,5996,5995,5995,56,1019.91,floor4/stops/s12_gate,gate 2026-11-24 23-21-41.zip
+4,stop,gate,,,Gate (building entrance/exit),s24,SM-S9280,23:21:30,60.1,27919,27913,6001,1498,1013.99,floor4/stops/s12_gate,My Experiment gate 2026-11-24 23-21-30.zip
+4,walk,,lift_stairs5,disabled_toilet,,iphone,"iPhone17,4",22:48:51,8.4,834,833,833,7,1020.32,floor4/walks/w01_lift_stairs5__disabled_toilet,lift stair bawah toilet disabled bawah 2026-11-24 22-48-51.zip
+4,walk,,lift_stairs5,disabled_toilet,,s24,SM-S9280,22:48:46,7.4,3408,3418,733,182,1017.55,floor4/walks/w01_lift_stairs5__disabled_toilet,My Experiment liftstair 5 disablws toilet mix 2026-11-24 22-48-46.zip
+4,walk,,disabled_toilet,exit5_door,,iphone,"iPhone17,4",22:51:29,3.7,371,370,370,3,1020.19,floor4/walks/w02_disabled_toilet__exit5_door,toilet disabled bawah exit 5 bawah 2026-11-24 22-51-29.zip
+4,walk,,disabled_toilet,exit5_door,,s24,SM-S9280,22:51:35,6.0,2794,2791,598,147,1013.62,floor4/walks/w02_disabled_toilet__exit5_door,disb toilet mix to exit 5 2026-11-24 22-51-35.zip
+4,walk,,exit5_door,lt2a,,iphone,"iPhone17,4",22:53:50,4.9,494,493,493,4,1020.21,floor4/walks/w03_exit5_door__lt2a,exit 5 bawah lt2a 2026-11-24 22-53-50.zip
+4,walk,,exit5_door,lt2a,,s24,SM-S9280,22:53:46,5.6,2583,2577,552,136,1013.01,floor4/walks/w03_exit5_door__lt2a,ext 5 lt2a 2026-11-24 22-53-46.zip
+4,walk,,lt2a,lt2b,,iphone,"iPhone17,4",22:56:53,13.5,1350,1349,1349,12,1020.12,floor4/walks/w04_lt2a__lt2b,lt2a lt2b 2026-11-24 22-56-53.zip
+4,walk,,lt2a,lt2b,,s24,SM-S9280,22:56:52,13.1,6098,6093,1308,325,1012.99,floor4/walks/w04_lt2a__lt2b,lt2a 2b 2026-11-24 22-56-52.zip
+4,walk,,lt2b,esca_down,,iphone,"iPhone17,4",23:00:05,4.9,489,488,488,4,1020.12,floor4/walks/w05_lt2b__esca_down,lt2b eska turun bawah 2026-11-24 23-00-05.zip
+4,walk,,lt2b,esca_down,,s24,SM-S9280,23:00:04,5.4,2522,2518,539,133,1011.68,floor4/walks/w05_lt2b__esca_down,My Experiment2b esca trun 2026-11-24 23-00-04.zip
+4,walk,,esca_down,y4502,,iphone,"iPhone17,4",23:03:08,8.0,803,802,802,7,1020.1,floor4/walks/w06_esca_down__y4502,eska turun bawah y4502 2026-11-24 23-03-08.zip
+4,walk,,esca_down,y4502,,s24,SM-S9280,23:03:04,8.3,3872,3864,831,206,1012.0,floor4/walks/w06_esca_down__y4502,My Experiment esc trun y4502 2026-11-24 23-03-04.zip
+4,walk,,y4502,esca_up,,iphone,"iPhone17,4",23:05:41,8.2,822,821,821,7,1020.01,floor4/walks/w07_y4502__esca_up,y4502 2026-11-24 23-05-41.zip
+4,walk,,y4502,esca_up,,s24,SM-S9280,23:05:38,7.6,3542,3539,759,188,1014.86,floor4/walks/w07_y4502__esca_up,My Experiment y4502 esc atas 2026-11-24 23-05-38.zip
+4,walk,,esca_down,esca_up,,iphone,"iPhone17,4",23:06:41,6.7,667,666,666,6,1020.03,floor4/walks/w08_esca_down__esca_up,eska turun bawah eska naik bawah 2026-11-24 23-06-41.zip
+4,walk,,esca_down,esca_up,,s24,SM-S9280,23:06:40,7.5,3483,3480,747,185,1015.13,floor4/walks/w08_esca_down__esca_up,My Experiment esc trun esc naik 2026-11-24 23-06-40.zip
+4,walk,,esca_up,lt1b,,iphone,"iPhone17,4",23:09:50,5.4,535,534,534,5,1019.93,floor4/walks/w09_esca_up__lt1b,esc turun bawah lt1b 2026-11-24 23-09-50.zip
+4,walk,,esca_up,lt1b,,s24,SM-S9280,23:09:54,5.0,2314,2310,495,122,1013.61,floor4/walks/w09_esca_up__lt1b,My Experiment esc naik 1b 2026-11-24 23-09-54.zip
+4,walk,,lt1b,lt1a,,iphone,"iPhone17,4",23:12:25,12.0,1199,1198,1198,11,1019.89,floor4/walks/w10_lt1b__lt1a,lt1b lt1a 2026-11-24 23-12-25.zip
+4,walk,,lt1b,lt1a,,s24,SM-S9280,23:12:23,13.5,6253,6251,1342,334,1014.51,floor4/walks/w10_lt1b__lt1a,My Experiment 1b1a 2026-11-24 23-12-23.zip
+4,walk,,lt1a,exit10_door,,iphone,"iPhone17,4",23:15:47,5.3,527,527,527,5,1019.9,floor4/walks/w11_lt1a__exit10_door,lt1a exit 10 2026-11-24 23-15-47.zip
+4,walk,,lt1a,exit10_door,,s24,SM-S9280,23:15:43,4.7,2174,2170,464,114,1014.76,floor4/walks/w11_lt1a__exit10_door,My Experiment 1a ext 1p 2026-11-24 23-15-43.zip
+4,walk,,exit10_door,gate,,iphone,"iPhone17,4",23:18:26,9.8,975,973,973,9,1019.91,floor4/walks/w12_exit10_door__gate,ezit 10 to gate 2026-11-24 23-18-26.zip
+4,walk,,exit10_door,gate,,s24,SM-S9280,23:18:23,8.9,4126,4120,884,219,1015.87,floor4/walks/w12_exit10_door__gate,My Experiment ext 10 gate 2026-11-24 23-18-23.zip
+4,walk,,gate,exit5_door,,iphone,"iPhone17,4",23:18:59,9.8,976,976,976,9,1019.94,floor4/walks/w13_gate__exit5_door,gate to exit 5 2026-11-24 23-18-59.zip
+4,walk,,gate,exit5_door,,s24,SM-S9280,23:18:54,9.1,4200,4196,901,223,1015.8,floor4/walks/w13_gate__exit5_door,My Experiment agte ext5 2026-11-24 23-18-54.zip
