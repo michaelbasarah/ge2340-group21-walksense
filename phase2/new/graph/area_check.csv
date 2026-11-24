@@ -1,0 +1,12 @@
+area,floor,n_checkpoints,checkpoints,radius_m_coordinate_members,longest_step_path,worst_join_steps_no_coordinates,rule_ok
+a4_escalators,4,4,lt2b escalator_down_4F y4502 escalator_up_4F,0.0,28.0,18.0,True
+a4_exit10_entrance,4,3,lt1a exit_10_4F entrance_exit,0.0,31.0,20.0,True
+a4_exit5_corner,4,5,exit_5_stairs_4F lift_5_4F disabled_toilet_4F exit_5_4F lt2a,0.0,33.0,8.0,True
+a4_lt1b,4,1,lt1b,0.0,0.0,,True
+a5_canteen_front,5,3,canteen escalator_up escalator_down,0.0,19.0,15.0,True
+a5_exit10_toilet,5,2,female_toilet exit_10,2.21,8.0,,True
+a5_exit5_corner,5,5,exit_5 male_toilet disabled_toilet lift_5 exit_5_stairs,1.8,31.0,6.0,True
+a5_study_rooms,5,4,sr11 sr10 sr9 sr8,4.85,21.6,,True
+a5_y5202,5,1,y5202,0.0,0.0,,True
+a5_y5302_front,5,1,y5302,0.0,0.0,,True
+a5_y5401_y5302back,5,2,y5401 y5302_back,0.0,11.0,11.0,True

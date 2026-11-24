@@ -2,7 +2,7 @@
 
 *Internal team notes, not report text (course rule: an LLM may only polish our own writing).*
 
-Each checkpoint is a circle (node); each walkable connection is a line (edge). `nodes.csv` is a hand-edited input. `edges.csv` is built from the 23-Nov walks by `build_graph.py` (added in a later commit).
+Each checkpoint is a circle (node); each walkable connection is a line (edge). `nodes.csv` is a hand-edited input. `edges.csv` is built from the 23-Nov walks by `build_graph.py` (run `python phase2/new/tracking/pdr.py` first; or use `phase2/new/tracking/run_all.sh`).
 
 ## nodes.csv
 
@@ -53,3 +53,26 @@ Floor-4 areas are bigger than the floor-5 ones because floor 4 has no metre coor
 ## Virtual midpoints
 
 Edges of at least 10 m (floor-5 map) or at least 20 steps get one display-only midpoint (`virtual = 1`) so the UI can light the line in two halves. They have no fingerprint data and the tracker never answers them. The stairs walk (53 steps) is a floor change and has none.
+
+## edges.csv (built by build_graph.py)
+
+| column | meaning |
+|---|---|
+| `from`, `to` | node IDs (undirected; `from` is the walk's direction on 23 Nov) |
+| `floor_change` | 1 if the edge joins floor 5 and floor 4 |
+| `distance_m` | floor-5 map distance (`phase2/map/edges_floor5.csv`), empty elsewhere |
+| `median_steps` | detected steps on the 23-Nov walk(s) of this edge (`../tracking/out/pdr_walks_23nov.csv`); empty if the only walk had sampling gaps (ACC06 sr10-sr9, ACC11 exit_10-escalator_up) or there is no walk |
+| `n_walks` | number of 23-Nov walks on this edge |
+| `source` | `walk_23nov`, `map_floor5`, `escalator_17nov` |
+| `walks_23nov`, `median_steps_17nov`, `walks_17nov` | the walk IDs, and the 17-Nov steps where that day walked the same edge |
+| `long_edge` | at least 10 m or 20 steps (gets a virtual midpoint in `nodes.csv`) |
+
+How the edges were made:
+- **Every 23-Nov walk is an edge** (37 walks, each matched by time to the stop before and after it). Every walk turned out to be a different edge, so `n_walks` is 1 everywhere.
+- **All 11 floor-5 map edges** were also walked on 23 Nov, so they only add `distance_m`.
+- **Floor changes:** the stairs walk `exit_5_stairs` to `exit_5_stairs_4F` (ACC23, 53 steps), and the two escalators (`escalator_down` to `escalator_down_4F`, `escalator_up_4F` to `escalator_up`). Nobody rode an escalator on 23 Nov; the 17-Nov session has back-to-back stops at the top and bottom landings (BM12 to BM13 and BM23 to BM24, no walk file, one-floor pressure jump), which is the data support. **No lift ride was recorded on either day, so `lift_5` and `lift_5_4F` are not joined.**
+- **Not edges:** the 4 moves the collector made without recording a walk (exit_5 to exit_10, escalator_down to escalator_up, canteen to exit_5, exit_5_4F to escalator_down_4F). The second and third are already edges from other walks; the tracker treats each unrecorded move as "stay or move up to 3 lines" with no step information.
+
+Size: floor 5 has 18 nodes and 22 same-floor edges, floor 4 has 13 nodes and 14 same-floor edges, plus 3 floor-change edges (39 edges in all) and 9 virtual midpoints.
+
+`area_check.csv` recomputes the area rule for each area (radius of the members with coordinates, longest step path, worst join). All 11 areas pass. Where a walk's steps are unreliable but the map distance exists (sr10-sr9), metres are converted to steps at the median 23-Nov stride (0.54 m per step, `../tracking/out/pdr_summary.json`).

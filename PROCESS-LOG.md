@@ -27,6 +27,7 @@ Contents:
 16. 24 Nov: team summary written and pushed to main
 17. 24 Nov: old/new reorganisation, day-3 checklist, this log
 18. 24 Nov: area definitions pre-registered (circles-on-lines graph nodes)
+19. 24 Nov: graph edges and step counting (PDR) on the walks
 - Lessons learned
 - Open questions / next steps
 
@@ -226,6 +227,21 @@ Contents:
 - **Outcome:** done, but slightly above the 8 to 10 areas we aimed for: the 6 m rule would not let the two classrooms merge with the study rooms or toilets. Floor-4 areas are larger than floor-5 ones because floor 4 has only step counts, no coordinates.
 - **What changed because of it:** the tracker evaluation (next entry) scores "area correct" with exactly these groups.
 - **Links:** `phase2/new/graph/nodes.csv`, `phase2/new/graph/README.md`.
+
+## 19. 24 Nov: graph edges and step counting (PDR) on the walks
+
+- **What we tried:** build the lines of the circles-on-lines map from the collector's real 23-Nov route, and count steps and gyro turns on every walk.
+- **Why:** step counting fills the line between two circles; the step counts also tell the tracker how long each line is.
+- **How:** `phase2/new/tracking/pdr.py` (step detector reused unchanged from `phase2/old/positioning-pilot/step_detection.py`; turns = gyroscope around gravity, 23 Nov only because 17-Nov walks have no gyroscope). `phase2/new/graph/build_graph.py` writes `edges.csv` and `area_check.csv`. Every walk is matched by time to the stop before and after it.
+- **Result** (`tracking/out/pdr_summary.json`, `graph/edges.csv`, `graph/area_check.csv`):
+  - Graph: floor 5 has 18 nodes and 22 edges, floor 4 has 13 nodes and 14 edges, plus 3 floor-change edges (stairs, and the two escalators supported by the 17-Nov back-to-back landing stops). 39 edges, 9 long edges with virtual midpoints. Each of the 37 walks is a different edge. No lift ride on either day, so no lift edge.
+  - Steps, 23 Nov: 37 walks, 558 steps, median cadence 1.55 steps/s. 2 walks (ACC06, ACC11) have big sampling gaps, so their steps are marked unreliable. 17 Nov: 23 walks, 353 steps, median cadence 1.57; ACC16 unreliable.
+  - Stride against the floor-5 map (straight-line pin distances): median 0.54 m per step on 23 Nov (10 walks, range 0.32 to 1.59) and 0.46 on 17 Nov (10 walks, range 0.29 to 0.77). The 1.59 is ACC01 (canteen to exit 5, 7 steps for 11.1 m), which looks like an undercount.
+  - Turns: the two reliable straight study-room corridor walks (ACC05, ACC07) show no turn (net -8 and +6 degrees). The stairs walk (ACC23) shows one -136 degree turn and -190 degrees in total, consistent with turning on a landing. 3 of 37 walks have a turn of 45 degrees or more.
+  - Area rule check: all 11 pre-registered areas pass (`area_check.csv`).
+- **Outcome:** partly succeeded. Steps look realistic (about 1.5 steps/s) and are good enough to say "moving along a line" and roughly how far. The stride varies a lot between walks, so steps alone cannot place someone to within a few metres. Turns can only be checked in two places (straight corridor and stairs), because there is no corridor map for the other walks and none for floor 4.
+- **What changed because of it:** the tracker (next entry) uses steps only to judge "which line, and how far along it", and the barometer and magnetometer to confirm the circle.
+- **Links:** `phase2/new/tracking/pdr.py`, `.../out/pdr_walks_23nov.csv`, `.../out/pdr_walks_17nov.csv`, `.../out/pdr_summary.json`, `phase2/new/graph/build_graph.py`, `.../edges.csv`, `.../area_check.csv`, `.../README.md`.
 
 ---
 

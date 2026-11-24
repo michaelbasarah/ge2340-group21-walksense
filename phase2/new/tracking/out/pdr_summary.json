@@ -1,0 +1,215 @@
+{
+ "settings": {
+  "step_detector": "phase2/old/positioning-pilot/step_detection.py count_steps (unchanged): |a| minus 0.40 s moving average, peak > 0.9 m/s^2, >= 0.30 s apart",
+  "turns": "yaw rate = gyro . gravity (1 s moving-average accelerometer), smoothed 0.5 s; turn = run above 30 deg/s, kept if >= 45.0 deg; + = anticlockwise (left)",
+  "reliable_if_coverage_at_least": 0.5
+ },
+ "23Nov": {
+  "walks": 37,
+  "walks_reliable": 35,
+  "unreliable_walks": [
+   "ACC06",
+   "ACC11"
+  ],
+  "steps_total": 558,
+  "median_cadence_reliable": 1.55,
+  "floor5_map_edges": {
+   "n_walks": 10,
+   "median_m_per_step": 0.54,
+   "min_m_per_step": 0.32,
+   "max_m_per_step": 1.59,
+   "note": "map distance is the straight line between pins, so real strides are a bit longer",
+   "walks": [
+    {
+     "walk": "ACC01",
+     "edge": "canteen-exit_5",
+     "map_m": 11.1,
+     "steps": 7,
+     "m_per_step": 1.59
+    },
+    {
+     "walk": "ACC02",
+     "edge": "exit_5-male_toilet",
+     "map_m": 3.6,
+     "steps": 8,
+     "m_per_step": 0.45
+    },
+    {
+     "walk": "ACC03",
+     "edge": "male_toilet-y5302",
+     "map_m": 11.6,
+     "steps": 19,
+     "m_per_step": 0.61
+    },
+    {
+     "walk": "ACC04",
+     "edge": "y5302-sr11",
+     "map_m": 8.0,
+     "steps": 15,
+     "m_per_step": 0.53
+    },
+    {
+     "walk": "ACC05",
+     "edge": "sr11-sr10",
+     "map_m": 2.9,
+     "steps": 9,
+     "m_per_step": 0.32
+    },
+    {
+     "walk": "ACC07",
+     "edge": "sr9-sr8",
+     "map_m": 3.5,
+     "steps": 7,
+     "m_per_step": 0.5
+    },
+    {
+     "walk": "ACC08",
+     "edge": "sr8-y5202",
+     "map_m": 7.1,
+     "steps": 18,
+     "m_per_step": 0.39
+    },
+    {
+     "walk": "ACC09",
+     "edge": "y5202-female_toilet",
+     "map_m": 10.7,
+     "steps": 19,
+     "m_per_step": 0.56
+    },
+    {
+     "walk": "ACC10",
+     "edge": "female_toilet-exit_10",
+     "map_m": 4.4,
+     "steps": 8,
+     "m_per_step": 0.55
+    },
+    {
+     "walk": "ACC14",
+     "edge": "exit_10-canteen",
+     "map_m": 11.6,
+     "steps": 16,
+     "m_per_step": 0.72
+    }
+   ]
+  },
+  "turn_checks": {
+   "straight_corridor_walks_sr11_to_sr8": {
+    "walks": [
+     "ACC05",
+     "ACC07"
+    ],
+    "turns_detected": [
+     0,
+     0
+    ],
+    "net_heading_deg": [
+     -8.0,
+     6.0
+    ],
+    "expected": "no turn"
+   },
+   "stairs_walk_5F_to_4F": {
+    "walk": [
+     "ACC23"
+    ],
+    "turns": [
+     "-136@14.59s"
+    ],
+    "net_heading_deg": [
+     -190.0
+    ],
+    "expected": "at least one U-turn on the landing (not verified on site)"
+   },
+   "walks_with_a_turn": 3,
+   "note": "only these two checks have a known expected answer; the floor-5 map has straight edges between pins and floor 4 has no map, so other turns cannot be checked against the route without the collector"
+  }
+ },
+ "17Nov": {
+  "walks": 23,
+  "walks_reliable": 22,
+  "unreliable_walks": [
+   "ACC16"
+  ],
+  "steps_total": 353,
+  "median_cadence_reliable": 1.57,
+  "floor5_map_edges": {
+   "n_walks": 10,
+   "median_m_per_step": 0.46,
+   "min_m_per_step": 0.29,
+   "max_m_per_step": 0.77,
+   "note": "map distance is the straight line between pins, so real strides are a bit longer",
+   "walks": [
+    {
+     "walk": "ACC01",
+     "edge": "exit_5-male_toilet",
+     "map_m": 3.6,
+     "steps": 12,
+     "m_per_step": 0.3
+    },
+    {
+     "walk": "ACC02",
+     "edge": "male_toilet-y5302",
+     "map_m": 11.6,
+     "steps": 15,
+     "m_per_step": 0.77
+    },
+    {
+     "walk": "ACC03",
+     "edge": "y5302-sr11",
+     "map_m": 8.0,
+     "steps": 16,
+     "m_per_step": 0.5
+    },
+    {
+     "walk": "ACC04",
+     "edge": "sr11-sr10",
+     "map_m": 2.9,
+     "steps": 7,
+     "m_per_step": 0.41
+    },
+    {
+     "walk": "ACC05",
+     "edge": "sr10-sr9",
+     "map_m": 3.0,
+     "steps": 7,
+     "m_per_step": 0.43
+    },
+    {
+     "walk": "ACC06",
+     "edge": "sr9-sr8",
+     "map_m": 3.5,
+     "steps": 7,
+     "m_per_step": 0.5
+    },
+    {
+     "walk": "ACC07",
+     "edge": "sr8-y5202",
+     "map_m": 7.1,
+     "steps": 18,
+     "m_per_step": 0.39
+    },
+    {
+     "walk": "ACC08",
+     "edge": "y5202-female_toilet",
+     "map_m": 10.7,
+     "steps": 18,
+     "m_per_step": 0.59
+    },
+    {
+     "walk": "ACC09",
+     "edge": "female_toilet-exit_10",
+     "map_m": 4.4,
+     "steps": 15,
+     "m_per_step": 0.29
+    },
+    {
+     "walk": "ACC10",
+     "edge": "exit_10-canteen",
+     "map_m": 11.6,
+     "steps": 21,
+     "m_per_step": 0.55
+    }
+   ]
+  }
+ }
+}
