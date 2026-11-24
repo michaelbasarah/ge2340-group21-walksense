@@ -1,0 +1,27 @@
+stop_id,true,floor_obs,tracker,tracker_p,tracker_top3,arrival,snapshot_knn,emission_only,crosswalk_confidence
+BM01,exit_5,5,exit_5,0.389,exit_5 escalator_up male_toilet,canteen,exit_5,exit_5,medium
+BM02,male_toilet,5,male_toilet,0.357,male_toilet exit_5 y5302,escalator_down,male_toilet,y5302,medium
+BM03,y5302,5,sr11,0.485,sr11 escalator_down y5302,y5302,y5401,y5401,medium
+BM04,sr11,5,sr9,0.247,sr9 sr11 sr10,y5302,sr9,sr9,high
+BM05,sr10,5,sr10,0.824,sr10 sr9 exit_5,sr10,sr10,sr10,high
+BM06,sr9,5,sr9,0.747,sr9 sr11 sr10,sr9,escalator_down,escalator_down,high
+BM07,sr8,5,sr8,0.874,sr8 sr10 sr11,sr10,lift_5,lift_5,high
+BM08,y5202,5,y5202,0.917,y5202 canteen female_toilet,y5202,canteen,canteen,medium
+BM09,female_toilet,5,female_toilet,0.711,female_toilet exit_10 sr8,sr8,canteen,canteen,medium
+BM10,exit_10,5,exit_10,0.434,exit_10 canteen y5202,y5202,canteen,canteen,medium
+BM11,canteen,5,escalator_up,0.232,escalator_up exit_5 canteen,escalator_up,exit_5,exit_5,high
+BM12,escalator_down,5,escalator_down,0.703,escalator_down exit_10 sr11,escalator_down,escalator_down,sr11,high
+BM13,escalator_down_4F,4,escalator_up_4F,0.463,escalator_up_4F escalator_down_4F y4502,escalator_down,lt1a,lt1a,high
+BM14,y4502,4,escalator_down_4F,0.701,escalator_down_4F y4502 lt1b,y4502,escalator_down_4F,escalator_down_4F,high
+BM15,lt1b,4,escalator_down_4F,0.634,escalator_down_4F escalator_up_4F y4502,escalator_up_4F,escalator_down_4F,escalator_down_4F,high
+BM16,lt1a,4,escalator_up_4F,0.73,escalator_up_4F lt1a exit_5_4F,escalator_up,escalator_up_4F,exit_5_stairs_4F,high
+BM17,exit_10_4F,4,lt1b,0.53,lt1b escalator_down_4F lt2a,lt1b,lt2b,lt2b,medium
+BM18,entrance_exit,4,escalator_up_4F,0.663,escalator_up_4F lt1a exit_5_4F,lt1b,escalator_up_4F,escalator_up_4F,high
+BM19,exit_5_4F,4,y4502,0.793,y4502 escalator_down_4F exit_10_4F,escalator_down_4F,y4502,y4502,medium
+BM20,lt2a,4,escalator_down_4F,0.317,escalator_down_4F y4502 exit_5_4F,escalator_up_4F,y4502,y4502,high
+BM21,lt2b,4,y4502,0.661,y4502 lt2a lt2b,entrance_exit,disabled_toilet_4F,disabled_toilet_4F,high
+BM22,y4502,4,escalator_down_4F,0.92,escalator_down_4F escalator_up_4F y4502,escalator_up_4F,escalator_down_4F,escalator_down_4F,high
+BM23,escalator_up_4F,4,escalator_up_4F,0.596,escalator_up_4F lt2b escalator_down_4F,lt2b,escalator_down_4F,exit_5_4F,high
+BM24,escalator_up,5,canteen,0.669,canteen exit_10 exit_5,escalator_up_4F,canteen,canteen,high
+BM25,canteen,5,exit_5,0.898,exit_5 escalator_up male_toilet,exit_5,exit_5,exit_5,high
+BM26,,5,escalator_down,0.901,escalator_down disabled_toilet escalator_up,escalator_down,disabled_toilet,disabled_toilet,none

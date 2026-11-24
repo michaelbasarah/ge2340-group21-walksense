@@ -15,7 +15,7 @@ Full history of what we tried and what happened (failures included): [`../PROCES
 |---|---|---|
 | `clean-data/2026-11-17/` | The cleaned 17 Nov session (26 stops, 23 walks, Wi-Fi), labelled + validated. | `python clean.py` then `python feature_extraction.py` |
 | `old/` | **Superseded 2026-11-24.** Dicta's positioning pilot (`old/positioning-pilot/`, its ~94% was leaky) and the old collect list. Kept for history. | `cd old/positioning-pilot && python pilot_train.py` |
-| `new/` | **Current.** `new/cross-day/` = leakage-reduced and cross-day analysis; `new/TEAM-SUMMARY-2026-11-24.md`; `new/DAY3-CHECKLIST.md` = the collection rules for day 3. | `python new/cross-day/crossday.py`, then `tilt.py` |
+| `new/` | **Current.** `new/cross-day/` = leakage-reduced and cross-day analysis; `new/TEAM-SUMMARY-2026-11-24.md`; `new/DAY3-CHECKLIST.md` = the collection rules for day 3; `new/graph/` = circles-on-lines map (nodes, edges, pre-registered areas); `new/tracking/` = step counting, route-aware tracker, replay file for the UI. | `python new/cross-day/crossday.py`, then `tilt.py`; `sh new/tracking/run_all.sh` |
 | `request-matching/` | Objective #9 — type a request, get a place (keyword + embedding). | `python match.py` or `python match.py "where can i eat"` |
 | `map/` | Floor-5 coordinates → metres, corridor graph, map previews. | `python build_map.py` |
 | `prototype/` | The demo web app (search + positioning replay + floor-5 map + routing). | `python server.py` → http://127.0.0.1:5173 |

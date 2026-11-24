@@ -28,6 +28,7 @@ Contents:
 17. 24 Nov: old/new reorganisation, day-3 checklist, this log
 18. 24 Nov: area definitions pre-registered (circles-on-lines graph nodes)
 19. 24 Nov: graph edges and step counting (PDR) on the walks
+20. 24 Nov: route-aware tracker (HMM on the graph): helps across days, not on 23-Nov LOVO; v1 FAILED to recover
 - Lessons learned
 - Open questions / next steps
 
@@ -243,6 +244,27 @@ Contents:
 - **What changed because of it:** the tracker (next entry) uses steps only to judge "which line, and how far along it", and the barometer and magnetometer to confirm the circle.
 - **Links:** `phase2/new/tracking/pdr.py`, `.../out/pdr_walks_23nov.csv`, `.../out/pdr_walks_17nov.csv`, `.../out/pdr_summary.json`, `phase2/new/graph/build_graph.py`, `.../edges.csv`, `.../area_check.csv`, `.../README.md`.
 
+## 20. 24 Nov: route-aware tracker (HMM on the graph): helps across days, not on 23-Nov LOVO; v1 FAILED to recover
+
+- **What we tried:** proposal method D, a tracker that follows you along the circles-on-lines graph. Steps move the belief along a line, and the barometer floor plus the magnetometer confirm the circle at a stop. We compared it on the same stops with the independent snapshot classifier from `crossday.py`, and exported a replay file for the UI.
+- **Why:** the user's design: light up circles as you walk, with no Google Maps and no compass.
+- **How:** `phase2/new/tracking/tracker.py` (run everything with `sh phase2/new/tracking/run_all.sh`). 23 Nov is replayed in time order with leave-one-visit-out (the magnetic model for a stop never contains that stop) and leave-one-walk-out step lengths. Cross-day: train on 23 Nov, replay 17 Nov. Metrics per stop visit with 95% Wilson intervals: exact, area (pre-registered, entry 18), within one neighbour, top-3, floor, within 5 m. v1 used parameters fixed before the first run. After v1's failure analysis, v2 changed exactly two things: 5% re-localisation after each move and a floor weight of 0.99.
+- **Result** (`tracking/out/tracker_results.json`):
+  - **23 Nov, all 42 stops:** tracker v2 exact 12/42 = 29% [17 to 44], area 16/42 = 38%, floor 40/42; tracker v1 exact 11/42, area 17/42; snapshot exact 15/42 = 36% [23 to 51], area 19/42 = 45%, floor 42/42. 22 of the 42 stops are the only visit to their place, so they have no fingerprint when tested: 0/22 exact for every method. On the 9 latest revisits both get 7/9 (the same as `crossday.py`'s 78%).
+  - **Cross-day 23 to 17, core (17 visits):** tracker v2 exact 5/17 = 29% [13 to 53], area 12/17 = 71% [47 to 87], top-3 12/17, floor 17/17; tracker v1 exact 6/17, area 12/17; snapshot exact 2/17 = 12% [3 to 34], area 7/17 = 41% [22 to 64]. Extended (25 visits): tracker v2 exact 10/25, area 17/25; snapshot 4/25 and 9/25.
+  - Steps alone (belief on arrival, before the stop's data): 2/42 exact on 23 Nov.
+  - Optimistic variant (line lengths from the same walks): 23 Nov exact 14/42, area 19/42, floor 42/42.
+  - Sensitivity (v2, temperature x window weight, 9 settings): 23-Nov exact 26% to 33%.
+  - "Confirmed" (top circle at least 0.6): 2000 of 5082 stop frames, of which only 660 are correct.
+  - Replay: `out/replay_23nov.json` 5874 frames, `out/replay_17nov.json` 2078 frames.
+- **Outcome:** mixed.
+  - FAILURE (v1): with no re-localisation a wrong belief could never come back, and the 0.95 floor weight lost to the transition prior. v2 fixes the first problem but barely changes the numbers.
+  - 23 Nov: no better than the snapshot, because half the stops have no fingerprint, and the graph carries the resulting errors forward. BM27 and BM28 (right after the stairs) are on the wrong floor in both versions: under leave-one-walk-out the stairs line has no known length, so 53 steps look implausible.
+  - Cross-day: the graph clearly helps (area 12/17 vs 7/17). This is optimistic: the graph was built from the same route, the transition prior assumes one recorded line per walk, the escalator lines come from the 17-Nov data, and the intervals overlap.
+  - "Confirmed" is not reliable yet.
+- **What changed because of it:** the UI builds against `replay_23nov.json` (keys documented in `phase2/new/tracking/README.md`). For day 3, every place needs at least two visits, so that a leave-one-visit-out test has a fingerprint for every place, and a test walk off the recorded route would check the optimistic part.
+- **Links:** `phase2/new/tracking/tracker.py`, `.../run_all.sh`, `.../README.md`, `.../out/tracker_results.json`, `.../out/tracker_visits_23nov.csv`, `.../out/tracker_visits_17nov.csv` (`_v1` files for v1), `.../out/replay_23nov.json`, `.../out/replay_17nov.json`; area pre-registration commit `dc76ab2`; graph/PDR commit `b62d9e0`.
+
 ---
 
 ## Lessons learned
@@ -254,6 +276,8 @@ Contents:
 - **Log everything at stops that you log on walks.** Not having the accelerometer at stops blocked the tilt correction.
 - **Use one phone for the whole protocol.** Two phones disagreed (r = 0.20).
 - **Small n.** 9 revisit visits and 17 cross-day visits: one visit is 6 to 11%. Present them as first estimates.
+- **A tracker needs a way back.** Limiting moves to neighbouring circles without a small "could be anywhere" share meant one wrong stop was never corrected (entry 20, v1).
+- **A map can't replace a fingerprint.** Where a place had no fingerprint in training, the graph did not find it (0/22 on 23 Nov); it helps most when every place has a fingerprint and the magnetometer is weak (cross-day, area 12/17 vs 7/17).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
@@ -265,4 +289,5 @@ Contents:
 - **17-Nov labels:** 8 of 23 place matches rest on route order. Anyone who remembers that walk can help (see section f of the team summary).
 - **Floor-4 Google Maps pins** are still missing, so the map and routing stop at floor 5.
 - **Unmerged branches** `prep/training`, `prep/map`, `prep/ready` are still local and unmerged; decide later whether any of it is wanted.
+- **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
