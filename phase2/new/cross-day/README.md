@@ -84,6 +84,24 @@ One floor step is 0.58 hPa (17 Nov) and 0.68 hPa (23 Nov). On 23 Nov the weather
 - Cross-day place accuracy is about 3 times chance; it is worse than same-day revisits, so day-to-day change (and how the phone is held) matters more than time within a day.
 - The floor is solved by step tracking.
 
+## graph-v2 rerun (merged study rooms and lift/stairs), 25 Nov
+
+```sh
+python phase2/new/cross-day/crossday.py --v2        # labels from ../graph-v2/labels_23nov_merged.csv, writes out-v2/
+python phase2/new/cross-day/compare_v1_v2.py        # exact AND area accuracy, v1 vs v2, writes out-v2/v1_vs_v2.json/.csv
+```
+
+`--v2` scores on the 26 merged places (sr8/sr10/sr11 -> sr9, lift_5 + exit_5_stairs -> lift_stairs, and the same on 4F). The 17-Nov crosswalk and the floor-5 map names are merged the same way. `out/` (v1) is not touched and stays byte-identical. Numbers, from `out-v2/v1_vs_v2.json` (visits correct / test visits):
+
+| Split | Method | v1 exact | v1 area | v2 exact | v2 area | chance v1 / v2 |
+|---|---|---|---|---|---|---|
+| 23-Nov revisit | baro floor + \|B\|+xyz kNN | 7/9 | 8/9 | 7/11 | 8/11 | 3.2% / 3.8% |
+| Cross-day 23→17 core | \|B\|+xyz kNN | 4/17 | 8/17 | 5/17 | 8/17 | 6.7% / 8.3% |
+| Cross-day 23→17 core | baro floor + \|B\|+xyz kNN | 3/17 | 10/17 | 4/17 | 10/17 | 6.7% / 8.3% |
+| Cross-day 23→17 extended | baro floor + \|B\|+xyz kNN | 4/25 | 10/25 | 5/25 | 10/25 | 4.3% / 5.0% |
+
+Merging gains exactly one cross-day visit (17-Nov BM04, sr11 predicted sr9, now the same class); area accuracy cannot change because the merged places were already in one area. The v2 revisit split has two extra test visits (BM08 = study room, BM28 = 4F lift/stairs) that only count as "revisits" because different rooms were merged; both are wrong. On the 9 shared revisit visits v1 and v2 are identical (7/9).
+
 ## Orientation correction (tilt), 23-Nov walks only
 
 Run `python phase2/new/cross-day/tilt.py` after `crossday.py`. It writes `out/tilt_results.json`, `out/tilt_endpoints.csv` and `out/fig_tilt.png`. The baseline results above are unchanged.

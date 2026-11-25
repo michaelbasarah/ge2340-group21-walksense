@@ -1,0 +1,43 @@
+stop_id,provisional_label_dicta,label_now,labels_agree,floor_now,floor_dicta,floor_from_barometer_gap,floor_agrees_with_barometer,confirmed,used
+BM01,Canteen,canteen,True,5,5,5,True,True,True
+BM02,exit lift 5,exit_5,True,5,5,5,True,True,True
+BM03,male toilet,male_toilet,True,5,5,5,True,True,True
+BM04,y5302,y5302,True,5,5,5,True,True,True
+BM05,sr11,sr9,False,5,5,5,True,True,True
+BM06,sr10,sr9,False,5,5,5,True,True,True
+BM07,sr9,sr9,True,5,5,5,True,True,True
+BM08,sr8,sr9,False,5,5,5,True,True,True
+BM09,y5202,y5202,True,5,5,5,True,True,True
+BM10,female toilet,female_toilet,True,5,5,5,True,True,True
+BM11,exit lift 10,exit_10,True,5,5,5,True,True,True
+BM12,esca naik,escalator_up,True,5,5,5,True,True,True
+BM13,esca turun atas,escalator_down,True,5,5,5,True,True,True
+BM14,exit lift 10,exit_5,False,5,5,5,True,True,True
+BM15,exit lift 10,exit_10,True,5,5,5,True,True,True
+BM16,canteen,canteen,True,5,5,5,True,True,True
+BM17,esca naik atas,escalator_down,False,5,5,5,True,True,True
+BM18,esca naik atas,escalator_up,True,5,5,5,True,True,True
+BM19,exit lift 5,canteen,False,5,5,5,True,True,True
+BM20,exit lift 5,exit_5,True,5,5,5,True,True,True
+BM21,disabled toilet,disabled_toilet,True,5,5,5,True,True,True
+BM22,lift 5,lift_stairs,False,5,5,5,True,True,True
+BM23,exit 5 stairs,lift_stairs,False,5,5,5,True,True,True
+BM24,y5401,y5401,True,5,5,5,True,True,True
+BM25,y5302,y5302_back,False,5,5,5,True,True,True
+BM26,exit 5 stairs,lift_stairs,False,5,5,5,True,True,True
+BM27,exit 5 stairs bawah,lift_stairs_4F,False,4,4,4,True,True,True
+BM28,lift 5 bawah,lift_stairs_4F,False,4,4,4,True,True,True
+BM29,disabled toilet bawah,disabled_toilet_4F,True,4,4,4,True,True,True
+BM30,exit lift 5 bawah,exit_5_4F,True,4,4,4,True,True,True
+BM31,lt2 a,lt2a,True,4,4,4,True,True,True
+BM32,lt2 b,lt2b,True,4,4,4,True,True,True
+BM33,esca turun bawah,escalator_down_4F,True,4,4,4,True,True,True
+BM34,y4502,y4502,True,4,4,4,True,True,True
+BM35,esca naik bawah,escalator_up_4F,True,4,4,4,True,True,True
+BM36,lt1 b,lt1b,True,4,4,4,True,True,True
+BM37,lt1 a,lt1a,True,4,4,4,True,True,True
+BM38,exit lift 10 bawah,exit_10_4F,True,4,4,4,True,True,True
+BM39,pintu keluar,entrance_exit,True,4,4,4,True,True,True
+BM40,esca turun bawah,exit_5_4F,False,4,4,4,True,True,True
+BM41,esca turun bawah,escalator_down_4F,True,4,4,4,True,True,True
+BM42,(final stop - confirm),escalator_up_4F,False,4,4,4,True,True,True

@@ -1,0 +1,28 @@
+place,stop_id,start_hk,minutes_after_first_visit,median_hpa,walk_file_before,own_walk_file_after,confirmed,verdict,used
+canteen,BM01,17:17,0.0,1014.62,,Canteen start 2026-11-23 17-18-44.zip,True,used: confirmed,True
+canteen,BM16,17:43,26.4,1014.98,From exit lift 10 2026-11-23 17-43-33.zip,From canteen 2026-11-23 17-45-02.zip,True,used: confirmed,True
+canteen,BM19,17:48,31.6,1014.94,From esca naik atas 2026-11-23 17-48-45.zip,,True,used: confirmed,True
+escalator_down,BM13,17:34,0.0,1014.93,From esca naik 2026-11-23 17-34-39.zip,From esca turun atas 2026-11-23 17-37-33.zip,True,used: confirmed,True
+escalator_down,BM17,17:45,10.3,1014.98,From canteen 2026-11-23 17-45-02.zip,,True,used: confirmed,True
+escalator_down_4F,BM33,18:45,0.0,1015.92,From lt2 b 2026-11-23 18-45-34.zip,From esca turun bawah 2026-11-23 18-47-15.zip,True,used: confirmed,True
+escalator_down_4F,BM41,18:58,13.0,1016.08,,From esca turun bawah 2026-11-23 19-00-12.zip,True,used: confirmed,True
+escalator_up,BM12,17:33,0.0,1014.88,From exit lift 10 2026-11-23 17-33-26.zip,From esca naik 2026-11-23 17-34-39.zip,True,used: confirmed,True
+escalator_up,BM18,17:47,13.9,1014.97,,From esca naik atas 2026-11-23 17-48-45.zip,True,used: confirmed,True
+escalator_up_4F,BM35,18:48,0.0,1015.96,From y4502 2026-11-23 18-48-44.zip,From esca naik bawah 2026-11-23 18-50-14.zip,True,used: confirmed,True
+escalator_up_4F,BM42,19:00,11.5,1016.13,From esca turun bawah 2026-11-23 19-00-12.zip,,True,used: confirmed,True
+exit_10,BM11,17:31,0.0,1014.86,From female toilet 2026-11-23 17-31-30.zip,From exit lift 10 2026-11-23 17-33-26.zip,True,used: confirmed,True
+exit_10,BM15,17:42,10.6,1014.97,,From exit lift 10 2026-11-23 17-43-33.zip,True,used: confirmed,True
+exit_5,BM02,17:18,0.0,1014.67,Canteen start 2026-11-23 17-18-44.zip,From exit lift 5 2026-11-23 17-20-06.zip,True,used: confirmed,True
+exit_5,BM14,17:37,18.9,1014.94,From esca turun atas 2026-11-23 17-37-33.zip,,True,used: confirmed,True
+exit_5,BM20,18:21,63.4,1015.08,,From exit lift 5 2026-11-23 18-23-37.zip,True,used: confirmed,True
+exit_5_4F,BM30,18:39,0.0,1015.8,From disabled toilet bawah 2026-11-23 18-39-47.zip,From exit lift 5 bawah 2026-11-23 18-41-51.zip,True,used: confirmed,True
+exit_5_4F,BM40,18:56,16.9,1016.05,From pintu keluar 2026-11-23 18-56-41.zip,,True,used: confirmed,True
+lift_stairs,BM22,18:25,0.0,1015.05,From disabled toilet 2026-11-23 18-25-18.zip,From lift 5 2026-11-23 18-26-45.zip,True,used: confirmed,True
+lift_stairs,BM23,18:26,1.6,1015.04,From lift 5 2026-11-23 18-26-45.zip,From exit 5 stairs 2026-11-23 18-28-34.zip,True,used: confirmed,True
+lift_stairs,BM26,18:31,6.7,1015.01,From y5302 2026-11-23 18-31-55.zip,From exit 5 stairs 2026-11-23 18-34-55.zip,True,used: confirmed,True
+lift_stairs_4F,BM27,18:34,0.0,1015.7,From exit 5 stairs 2026-11-23 18-34-55.zip,From exit 5 stairs bawah 2026-11-23 18-36-26.zip,True,used: confirmed,True
+lift_stairs_4F,BM28,18:36,1.6,1015.74,From exit 5 stairs bawah 2026-11-23 18-36-26.zip,From lift 5 bawah 2026-11-23 18-38-26.zip,True,used: confirmed,True
+sr9,BM05,17:22,0.0,1014.7,From y5302 2026-11-23 17-23-00.zip,From sr11 2026-11-23 17-24-13.zip,True,used: confirmed,True
+sr9,BM06,17:24,1.3,1014.72,From sr11 2026-11-23 17-24-13.zip,From sr10 2026-11-23 17-25-33.zip,True,used: confirmed,True
+sr9,BM07,17:25,2.6,1014.72,From sr10 2026-11-23 17-25-33.zip,From sr9 2026-11-23 17-26-57.zip,True,used: confirmed,True
+sr9,BM08,17:26,4.0,1014.76,From sr9 2026-11-23 17-26-57.zip,From sr8 2026-11-23 17-28-21.zip,True,used: confirmed,True

@@ -14,6 +14,11 @@ labels). 17 Nov is mapped onto 23-Nov places by crosswalk_17nov_to_23nov.csv.
 Run (from anywhere):   python phase2/new/cross-day/crossday.py
 Needs: numpy pandas scikit-learn matplotlib.   Everything is written to ./out/.
 
+  --v2   score on the graph-v2 merged places instead (../graph-v2/labels_23nov_merged.csv:
+         study rooms sr8/sr10/sr11 -> sr9, lift+stairs -> lift_stairs / lift_stairs_4F).
+         The 17-Nov crosswalk and the floor-5 map names are merged the same way.
+         Writes to ./out-v2/ and leaves ./out/ untouched.
+
 The 23-Nov sensor CSVs are gitignored. On the first run this script copies the team's
 unmodified clean-data/2026-11-23/clean.py into ./cache/2026-11-23/ and runs it there with
 --source pointing at the repo's raw/attachments, so nothing in clean-data/ is rewritten.
@@ -49,6 +54,12 @@ D17 = PHASE2 / 'clean-data' / '2026-11-17'
 D23 = PHASE2 / 'clean-data' / '2026-11-23'
 CACHE23 = HERE / 'cache' / '2026-11-23'
 OUT = HERE / 'out'
+LABELS = HERE / 'labels_23nov_confirmed.csv'
+# graph-v2 merges (copied from ../graph-v2/merge_v2.py MERGE; used only with --v2)
+V2_MERGE = {'sr8': 'sr9', 'sr10': 'sr9', 'sr11': 'sr9',
+            'lift_5': 'lift_stairs', 'exit_5_stairs': 'lift_stairs',
+            'lift_5_4F': 'lift_stairs_4F', 'exit_5_stairs_4F': 'lift_stairs_4F'}
+PLACE_MAP = {}            # empty = v1 names; set to V2_MERGE by --v2
 D_17, D_23 = '17Nov', '23Nov'
 
 WINDOW_S = 2.0            # magnetometer window (same as the pilot and the prep pipeline)
@@ -124,7 +135,7 @@ def walk_files_23(sessions):
 
 
 def load_labels(walks):
-    lab = pd.read_csv(HERE / 'labels_23nov_confirmed.csv', dtype=str).fillna('')
+    lab = pd.read_csv(LABELS, dtype=str).fillna('')
     lab['place'] = lab['label'].str.strip()
     lab['floor'] = lab['floor'].astype(int)
     lab['confirmed'] = lab['confirmed'].str.strip().str.lower().isin(['yes', 'y', 'true', '1'])
@@ -319,7 +330,9 @@ def adjacency(routes):
     e = pd.read_csv(PHASE2 / 'map' / 'edges_floor5.csv')
     for a, b in zip(e['from'], e['to']):
         if a in MAP_NAMES and b in MAP_NAMES:
-            adj[MAP_NAMES[a]].add(MAP_NAMES[b]); adj[MAP_NAMES[b]].add(MAP_NAMES[a])
+            na, nb = (PLACE_MAP.get(MAP_NAMES[x], MAP_NAMES[x]) for x in (a, b))
+            if na != nb:
+                adj[na].add(nb); adj[nb].add(na)
     return adj
 
 
@@ -425,6 +438,9 @@ def fig_mag_stability(M, place_of, shared, place_floor):
 
 # ============================================================================ main
 def main():
+    global OUT, LABELS, PLACE_MAP
+    if '--v2' in sys.argv[1:]:
+        OUT, LABELS, PLACE_MAP = HERE / 'out-v2', HERE.parent / 'graph-v2' / 'labels_23nov_merged.csv', V2_MERGE
     OUT.mkdir(exist_ok=True)
     ensure_23nov_cache()
 
@@ -440,7 +456,7 @@ def main():
     place_of = {f'{D_23}:{s}': p for s, p in zip(use23['stop_id'], use23['place'])}
     place_floor = dict(zip(use23['place'], use23['floor']))
     places23 = set(use23['place'])
-    cw['place'] = cw['place_23nov'].str.strip()
+    cw['place'] = cw['place_23nov'].str.strip().map(lambda p: PLACE_MAP.get(p, p))
     cw_ok = cw[(cw['rank'] >= 2) & cw['place'].isin(places23)]
     for s, p in zip(cw_ok['stop_id_17nov'], cw_ok['place']):
         place_of[f'{D_17}:{s}'] = p
@@ -564,7 +580,9 @@ def main():
     devices = {d: sessions[d][sessions[d]['stop_id'].str.startswith('BM')]['device_model'].unique().tolist() for d in [D_17, D_23]}
     results = {
         'what': 'GE2340 WalkSense positioning evaluation. Every number here is computed by crossday.py from committed data.',
-        'reference_dataset': '2026-11-23 (labels from labels_23nov_confirmed.csv)',
+        'reference_dataset': '2026-11-23 (labels from labels_23nov_confirmed.csv)' if not PLACE_MAP else
+                             '2026-11-23 (labels from ../graph-v2/labels_23nov_merged.csv)',
+        **({'place_merge_applied_to_crosswalk_and_map': PLACE_MAP} if PLACE_MAP else {}),
         'labels': {'n_23nov_stops': len(lab), 'n_usable': int(lab['usable'].sum()), 'n_confirmed_by_team': int(lab['confirmed'].sum()),
                    'excluded': {s: r for s, r in zip(lab['stop_id'], lab['reason_if_excluded']) if r},
                    'n_places_23nov': len(places23)},

@@ -32,6 +32,7 @@ Contents:
 21. 24 Nov: circle navigator UI prototype (circles on lines)
 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
+24. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
 - Lessons learned
 - Open questions / next steps
 
@@ -307,6 +308,24 @@ Contents:
 
 ---
 
+## 24. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
+
+- **What we tried:** the open item from entry 22: score `crossday.py` on the graph-v2 merged places (study rooms -> `sr9`, lift+stairs -> `lift_stairs` / `lift_stairs_4F`) and compare exact and area accuracy with v1.
+- **Why:** to see whether merging places that a fingerprint can't separate changes the numbers before anyone uses v2 for the map/UI or quotes it.
+- **How:** `crossday.py` got a `--v2` flag: labels from `phase2/new/graph-v2/labels_23nov_merged.csv`, the same merge applied to the 17-Nov crosswalk and the floor-5 map names, output to `phase2/new/cross-day/out-v2/`. Without the flag nothing changes: after the edit `out/` was regenerated and is byte-identical (checked with `git status`; the new venv with numpy 2.5.5, pandas 3.1.1, scikit-learn 1.9.1, matplotlib 3.11.2 also reproduces it byte for byte). New `compare_v1_v2.py` scores exact and area (pre-registered areas from `graph/nodes.csv` and `graph-v2/nodes.csv`) per stop visit from both `results.json` files, with 95% Wilson intervals.
+- **Result** (`phase2/new/cross-day/out-v2/v1_vs_v2.json`, `out-v2/results.json`):
+  - Places: 31 -> 26; cross-day core places 15 -> 12, extended 23 -> 20 (`out-v2/results.json`: `labels.n_places_23nov`, `crosswalk.core`, `crosswalk.extended`).
+  - 23-Nov revisit, baro floor + |B|+xyz kNN: v1 exact 7/9, area 8/9 (chance 3.2%); v2 exact 7/11, area 8/11 (chance 3.8%). The two extra v2 test visits (BM08 study room, BM28 4F lift/stairs) only became "revisits" because different spots were merged; both are wrong. On the 9 shared visits v1 and v2 are identical (7/9).
+  - Cross-day 23 -> 17 core (17 visits): |B|+xyz kNN v1 exact 4/17, area 8/17 -> v2 exact 5/17, area 8/17; baro floor + |B|+xyz kNN v1 3/17, area 10/17 -> v2 4/17, area 10/17. Chance 6.7% (v1) and 8.3% (v2).
+  - Cross-day extended (25 visits), baro floor + |B|+xyz kNN: v1 4/25, area 10/25 -> v2 5/25, area 10/25.
+  - Wi-Fi (9 core visits only), baro floor + RSSI RF: v1 2/9 -> v2 6/9 (chance 11% -> 17%). Four of the 9 Wi-Fi test visits are study rooms, so merging them decides most of this jump.
+  - Floor results are unchanged (42/42 and 26/26 step tracking).
+- **Outcome:** success as a check; the merge is cosmetic for the magnetometer. It gains exactly one exact visit (17-Nov BM04, sr11 predicted sr9) and cannot change area accuracy, because the merged spots were already in one area. The Wi-Fi jump rests on 9 visits and mostly on the study rooms becoming one class, so it is not evidence that Wi-Fi works.
+- **What changed because of it:** v2 is fine for the map/UI (one study-room circle, one lift/stairs circle per floor) and costs nothing in accuracy. When quoting accuracy, say which place list was used; area accuracy is the same either way. The day-3 (24-Nov) evaluation (entry 25) uses the graph-v2 names.
+- **Links:** `phase2/new/cross-day/crossday.py` (`--v2`), `phase2/new/cross-day/compare_v1_v2.py`, `phase2/new/cross-day/out-v2/` (`results.json`, `v1_vs_v2.json`, `v1_vs_v2.csv`, `summary_table.csv`, figures), `phase2/new/cross-day/README.md` (graph-v2 section), `.gitignore` (`.venv/`).
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -318,6 +337,7 @@ Contents:
 - **Small n.** 9 revisit visits and 17 cross-day visits: one visit is 6 to 11%. Present them as first estimates.
 - **A tracker needs a way back.** Limiting moves to neighbouring circles without a small "could be anywhere" share meant one wrong stop was never corrected (entry 20, v1).
 - **A map can't replace a fingerprint.** Where a place had no fingerprint in training, the graph did not find it (0/22 on 23 Nov); it helps most when every place has a fingerprint and the magnetometer is weak (cross-day, area 12/17 vs 7/17).
+- **Merging places only renames errors inside an area.** graph-v2 gained one exact cross-day visit and no area visits (entry 24); a merge can't fix a weak fingerprint, and "revisits" created by merging different spots are not real revisits.
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
@@ -331,5 +351,5 @@ Contents:
 - **Unmerged branches** `prep/training`, `prep/map`, `prep/ready` are still local and unmerged; decide later whether any of it is wanted.
 - **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
-- **graph-v2 (entry 22):** rerun `crossday.py` against `phase2/new/graph-v2/labels_23nov_merged.csv` to see whether merging the study rooms and lift/stairs changes the exact/area numbers, and decide whether v2 replaces v1 for the map/UI. The collector should confirm the two merges match the hand-drawn maps.
+- **graph-v2 (entries 22, 24):** done: the merge changes cross-day exact by one visit and area not at all (entry 24). Still open: decide whether v2 replaces v1 for the map/UI; the collector should confirm the two merges match the hand-drawn maps.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
