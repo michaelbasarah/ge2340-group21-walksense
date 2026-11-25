@@ -4,9 +4,9 @@
 <title>WalkSense kNN playground</title>
 <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js" integrity="sha384-cCVCZkAjYNxaYKbM8lsArLznDF/SvMFr1jcZrvOpSTCa0W40ZAdLzHCEulnUa5i7" crossorigin="anonymous"></script>
 <style>
-:root{--bg:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--line:#e6e5e0;--accent:#2a78d6;--good:#17895f;--bad:#c93a2e;--warn:#fff3cd;--warnink:#5c4600}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1a1a19;--card:#232321;--ink:#f0efec;--ink2:#c3c2b7;--line:#3a3a38;--accent:#6aa9f4;--good:#4fd1a0;--bad:#ff7b6e;--warn:#3a3114;--warnink:#f1dc8c}}
-:root[data-theme="dark"]{--bg:#1a1a19;--card:#232321;--ink:#f0efec;--ink2:#c3c2b7;--line:#3a3a38;--accent:#6aa9f4;--good:#4fd1a0;--bad:#ff7b6e;--warn:#3a3114;--warnink:#f1dc8c}
+:root{--bg:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--line:#e6e5e0;--accent:#2a78d6;--good:#17895f;--bad:#c93a2e;--warn:#fff3cd;--warnink:#5c4600;--v1:#8aa0b6;--v2:#c9b27a;--v3:#e8812a;--v4:#8a5cd6;--v5:#17a673}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1a1a19;--card:#232321;--ink:#f0efec;--ink2:#c3c2b7;--line:#3a3a38;--accent:#6aa9f4;--good:#4fd1a0;--bad:#ff7b6e;--warn:#3a3114;--warnink:#f1dc8c;--v1:#7d93aa;--v2:#b8a26a;--v3:#f09a4c;--v4:#a98bf0;--v5:#4fd1a0}}
+:root[data-theme="dark"]{--bg:#1a1a19;--card:#232321;--ink:#f0efec;--ink2:#c3c2b7;--line:#3a3a38;--accent:#6aa9f4;--good:#4fd1a0;--bad:#ff7b6e;--warn:#3a3114;--warnink:#f1dc8c;--v1:#7d93aa;--v2:#b8a26a;--v3:#f09a4c;--v4:#a98bf0;--v5:#4fd1a0}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
@@ -32,6 +32,7 @@ button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .small{font-size:12px;color:var(--ink2)}
 .row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:4px 0}
 .row label{display:flex;align-items:center;gap:4px}
+.row label{max-width:100%;min-width:0}.row label select{min-width:0;flex:1 1 auto;text-overflow:ellipsis}
 .sl{display:grid;grid-template-columns:110px minmax(0,1fr) 62px;gap:6px;align-items:center;margin:5px 0}
 .sl input[type=range]{width:100%;min-width:0;accent-color:var(--accent)}
 .sl .v{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
@@ -50,6 +51,17 @@ th{position:sticky;top:0;background:var(--card);color:var(--ink2)}
 .seg button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
 .phonepick{font-weight:650;color:var(--ink)}.phonepick select{border:2px solid var(--accent);font-weight:600}
 .fl{font-weight:650;color:var(--ink)}
+.placepick{font-weight:650;color:var(--ink)}.placepick select{border:2px solid var(--accent);font-weight:600}
+.plgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 8px;max-height:200px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin:4px 0}
+.plgrid label{display:flex;align-items:center;gap:4px;font-size:12.5px}
+.vfeat{margin:8px 0 12px}.vfeat .vh{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:13px}
+.vb{display:flex;height:18px;border-radius:5px;overflow:hidden;background:var(--line);margin:3px 0 2px}.vb.ctx{height:8px;opacity:.75}
+.vb>i{display:block;height:100%}
+.vlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;margin:4px 0 8px}
+.vlegend .sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.vnote{font-size:12px;color:var(--ink2)}
+.cmx td.c{min-width:118px;font-size:12px;line-height:1.4}
+.cmx .far{background:color-mix(in srgb,var(--bad) 24%,transparent);border-radius:4px;font-weight:650}
 .sesspick{font-weight:650;color:var(--ink)}.sesspick select{border:2px solid var(--accent);font-weight:600}
 .mx{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
 .mx table{width:auto;min-width:100%}
@@ -85,7 +97,8 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   <div class="row tabs small">
     <label class="phonepick">Phone <select id="pphone" title="show and train on one phone only"></select></label>
     <label class="sesspick">Session <select id="psess" title="show and train on one session, or all (same as the session boxes in the filters card)"></select></label>
-    <span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button></span></span>
+    <label class="placepick">Place <select id="pplace" title="show (and train on) one place, a floor, or all places (same as the place checklist in the filters card)"></select></label>
+    <span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button><button data-c="session" aria-pressed="false">session</button></span></span>
     <label>View <select id="view"><option value="pca">PCA projection (linear)</option><option value="raw">Raw features: X vs Y</option></select></label>
     <label id="xw" hidden>X <select id="xa"></select></label>
     <label id="yw" hidden>Y <select id="ya"></select></label>
@@ -132,14 +145,34 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   </div>
 
   <div class="card">
-    <h2>Training filters (also what is drawn)</h2>
+    <h2>Filters (what is drawn, and what trains the kNN)</h2>
     <div class="row"><label>Floor <select id="ffloor"><option value="all">both</option><option value="5">5</option><option value="4">4</option></select></label></div>
     <div class="row"><span class="fl">Sessions:</span><span class="row" id="fsess" style="margin:0"></span></div>
     <div class="row"><span class="fl">Phones:</span><span class="row" id="fphone" style="margin:0"></span></div>
+    <div class="row"><span class="fl">Places:</span><button id="plall">all</button><button id="plnone">none</button><label><input type="checkbox" id="ptrain" checked> filter training too</label></div>
+    <div class="plgrid" id="fplace"></div>
+    <div class="small">Untick "filter training too" to only hide points: the kNN then still uses the full bank (all places that pass the other filters), so you can look at one place's spread while the model is unchanged.</div>
     <div class="small" id="fnote"></div>
   </div>
 </section>
 </div>
+
+<section class="card" id="varcard">
+  <h2>Where does the variance come from?</h2>
+  <div class="banner" style="margin:0 0 8px"><b>Live demo, not evaluation results.</b> Nested sums of squares of the 5 s window values, for the windows that pass the filters above (session, phone, floor and <b>place</b>; the hold-out of "Try it" is ignored). The same numbers computed in Python are in <code>out/variance_by_place.csv</code>.</div>
+  <div class="row">
+    <label>Nesting <select id="vorder"><option value="session_first">place &gt; session &gt; phone (same session) &gt; recording &gt; window</option><option value="phone_first">place &gt; phone &gt; session (same phone) &gt; recording &gt; window</option></select></label>
+    <span class="small" id="vsel"></span>
+  </div>
+  <div class="vlegend" id="vleg"></div>
+  <div id="vbars"></div>
+  <p class="vnote" id="vexp"></p>
+  <details><summary>Numbers: share of the variance (and sd contribution in the feature's unit)</summary><div class="mx"><table id="vtab"></table></div></details>
+  <details><summary>Method</summary><div class="small" id="vmethod"></div></details>
+  <h2 style="margin-top:16px">Per place: mean ± sd of |B| and B_vertical for each phone and session</h2>
+  <div class="mx cmx" style="max-height:520px;overflow:auto"><table id="ctab"></table></div>
+  <div class="small" id="cnote"></div>
+</section>
 
 <section class="card" id="mxcard">
   <h2>How each phone performs across sessions</h2>
@@ -164,6 +197,7 @@ function buildBank(P) {
   for (const f of P.feats) bank[f] = Float64Array.from(c[f], v => v === null ? NaN : v);
   bank.place = Int32Array.from(c.place); bank.sess = Int32Array.from(c.sess); bank.phone = Int32Array.from(c.phone);
   bank.rec = Int32Array.from(c.rec); bank.visit = Int32Array.from(c.visit); bank.floor = Int32Array.from(c.floor);
+  bank.hpa = Float64Array.from(c.hpa, v => v === null ? NaN : v);        // pressure of the window's own handset (per-stop mean)
   return bank;
 }
 // q: {B,x,y,z,Bv,Bh (NaN = no tilt), floor}; w: {B,xyz,tilt,baro}; use: Uint8Array mask. Returns Float64Array of D (Infinity = unusable).
@@ -207,12 +241,13 @@ function knn(bank, D, k, nPlaces) {
   if (tot > 0) for (let p = 0; p < nPlaces; p++) { shares[p] /= tot; if (shares[p] > best) { best = shares[p]; pred = p; } }
   return {order, shares, counts, pred};
 }
-// f: {sessOn[], phoneOn[], ffloor ('all'|'4'|'5'), loaded (window index or -1), holdout ('session'|'visit'|'rec'|'none'), samePhone (bool)}
-// Returns the training mask (Uint8Array). Same rules for what is drawn and what trains the kNN.
-function buildMask(bank, f) {
-  const m = new Uint8Array(bank.n), L = f.loaded;
+// f: {sessOn[], phoneOn[], placeOn[] (optional), placeTrain (default true), ffloor ('all'|'4'|'5'), loaded (window index or -1), holdout ('session'|'visit'|'rec'|'none'), samePhone (bool)}
+// draw = false: the training mask (the place filter applies only if f.placeTrain !== false). draw = true: the mask of what is drawn (the place filter always applies).
+// Same rules for the other filters in both. Returns a Uint8Array.
+function buildMask(bank, f, draw) {
+  const m = new Uint8Array(bank.n), L = f.loaded, usePlace = !!f.placeOn && (draw || f.placeTrain !== false);
   for (let i = 0; i < bank.n; i++) {
-    let ok = f.sessOn[bank.sess[i]] && f.phoneOn[bank.phone[i]] && (f.ffloor === 'all' || bank.floor[i] === parseInt(f.ffloor));
+    let ok = f.sessOn[bank.sess[i]] && f.phoneOn[bank.phone[i]] && (!usePlace || f.placeOn[bank.place[i]]) && (f.ffloor === 'all' || bank.floor[i] === parseInt(f.ffloor));
     if (ok && L >= 0) {
       if (f.samePhone && bank.phone[i] !== bank.phone[L]) ok = false;
       else if (f.holdout === 'session' && bank.sess[i] === bank.sess[L]) ok = false;
@@ -275,6 +310,72 @@ function phoneSessionMatrix(bank, P, w, k) {
     cells.push({mode, phone: ph, col: col.label, cell: matrixCell(bank, P, w, k, mode, ph, col)});
   return {cols, cells};
 }
+// ---- where does the variance come from: nested sums of squares (python reference: variance.py). vals = a per-window Float64Array
+// (NaN = missing), use = window mask, order 'session_first' (place > session > phone > recording > window) or 'phone_first'
+// (place > phone > session > recording > window). Returns {n, mean, total, ss:{place,session,phone,rec,within}, nPlaces, nRec} or null.
+function varianceDecomp(bank, vals, use, order, dims) {
+  const nS = dims.nS, nPh = dims.nPh, idx = [];
+  let sum = 0;
+  for (let i = 0; i < bank.n; i++) if (use[i] && Number.isFinite(vals[i])) { idx.push(i); sum += vals[i]; }
+  const n = idx.length;
+  if (!n) return null;
+  const g = sum / n, A = order === 'session_first';
+  const k1 = i => A ? bank.place[i] * nS + bank.sess[i] : bank.place[i] * nPh + bank.phone[i];
+  const k2 = i => A ? k1(i) * nPh + bank.phone[i] : k1(i) * nS + bank.sess[i];
+  const means = keyf => {
+    const s = new Map(), c = new Map();
+    for (const i of idx) { const k = keyf(i); s.set(k, (s.get(k) || 0) + vals[i]); c.set(k, (c.get(k) || 0) + 1); }
+    const m = new Map(); for (const [k, v] of s) m.set(k, v / c.get(k));
+    return m;
+  };
+  const mP = means(i => bank.place[i]), m1 = means(k1), m2 = means(k2), mR = means(i => bank.rec[i]);
+  const a = {place: 0, l1: 0, l2: 0, rec: 0, within: 0};
+  let total = 0;
+  for (const i of idx) {
+    const v = vals[i], p = mP.get(bank.place[i]), x1 = m1.get(k1(i)), x2 = m2.get(k2(i)), r = mR.get(bank.rec[i]);
+    total += (v - g) * (v - g); a.place += (p - g) * (p - g); a.l1 += (x1 - p) * (x1 - p); a.l2 += (x2 - x1) * (x2 - x1);
+    a.rec += (r - x2) * (r - x2); a.within += (v - r) * (v - r);
+  }
+  return {n, mean: g, total, ss: {place: a.place, session: A ? a.l1 : a.l2, phone: A ? a.l2 : a.l1, rec: a.rec, within: a.within}, nPlaces: mP.size, nRec: mR.size};
+}
+// 'xyz' pools the three magnetic axes (their sums of squares add).
+function varianceFeature(bank, feat, use, order, dims) {
+  if (feat !== 'xyz') return varianceDecomp(bank, bank[feat], use, order, dims);
+  const parts = ['x', 'y', 'z'].map(f => varianceDecomp(bank, bank[f], use, order, dims));
+  if (parts.some(p => !p)) return null;
+  const ss = {}; for (const k of ['place', 'session', 'phone', 'rec', 'within']) ss[k] = parts.reduce((a, p) => a + p.ss[k], 0);
+  return {n: parts[0].n, mean: NaN, total: parts.reduce((a, p) => a + p.total, 0), ss, nPlaces: parts[0].nPlaces, nRec: parts[0].nRec};
+}
+// Per place x phone x session: n, recordings, mean and sd (ddof 1) of |B| and B_vertical; deviation of each cell from the place's overall
+// (window-weighted) mean; furthest = the cell(s) with the largest |deviation| per feature. Returns {placeIndex: {overall:{B,Bv}, cells:[...]}}.
+function placeCells(bank, use) {
+  const by = new Map();
+  for (let i = 0; i < bank.n; i++) {
+    if (!use[i]) continue;
+    let pl = by.get(bank.place[i]); if (!pl) { pl = {cells: new Map(), all: {B: [], Bv: []}}; by.set(bank.place[i], pl); }
+    const key = bank.phone[i] * 1000 + bank.sess[i];
+    let c = pl.cells.get(key); if (!c) { c = {ph: bank.phone[i], s: bank.sess[i], n: 0, recs: new Set(), B: [], Bv: []}; pl.cells.set(key, c); }
+    c.n++; c.recs.add(bank.rec[i]);
+    for (const f of ['B', 'Bv']) if (Number.isFinite(bank[f][i])) { c[f].push(bank[f][i]); pl.all[f].push(bank[f][i]); }
+  }
+  const mean = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : NaN;
+  const sd = a => { if (a.length < 2) return NaN; const m = mean(a); return Math.sqrt(a.reduce((x, y) => x + (y - m) * (y - m), 0) / (a.length - 1)); };
+  const out = {};
+  for (const [p, pl] of by) {
+    const overall = {B: mean(pl.all.B), Bv: mean(pl.all.Bv)};
+    const cells = [...pl.cells.values()].sort((a, b) => a.ph - b.ph || a.s - b.s).map(c => {
+      const o = {ph: c.ph, s: c.s, n: c.n, nRec: c.recs.size};
+      for (const f of ['B', 'Bv']) { o[f] = {n: c[f].length, mean: mean(c[f]), sd: sd(c[f])}; o[f].dev = o[f].mean - overall[f]; }
+      return o;
+    });
+    for (const f of ['B', 'Bv']) {
+      let mx = -1; for (const c of cells) if (Number.isFinite(c[f].dev)) mx = Math.max(mx, Math.abs(c[f].dev));
+      for (const c of cells) c[f].furthest = mx > 0 && Number.isFinite(c[f].dev) && Math.abs(c[f].dev) >= mx - 1e-12;
+    }
+    out[p] = {overall, cells};
+  }
+  return out;
+}
 function projectPCA(P, q) {
   const pc = P.pca, S = P.scale, z = {};
   const v = [];
@@ -298,8 +399,10 @@ const NP = P.places.length, FE = P.feats;
 const SYM = ['circle', 'square', 'triangle-up', 'diamond', 'cross'];
 const st = {q: {}, floor: 5, tiltOn: true, w: Object.assign({}, P.model.weights), k: P.model.k,
   sessOn: P.sessions.map(() => true), phoneOn: P.phones.map(() => true), ffloor: 'all',
-  view: 'pca', xa: 'B', ya: 'Bv', loaded: -1, moved: false, holdout: 'session', theme: 'auto', colorBy: 'place', samePhone: false};
+  view: 'pca', xa: 'B', ya: 'Bv', loaded: -1, moved: false, holdout: 'session', theme: 'auto', colorBy: 'place', samePhone: false,
+  placeOn: P.places.map(() => true), placeTrain: true, vorder: 'session_first'};
 const PHCOL = ['#2a78d6', '#e8812a', '#17a673', '#9b5de5', '#c2185b'];
+const SESSCOL = ['#6b4fd8', '#d99a00', '#0e9aa7'];
 const phoneN = P.phones.map((_, i) => { let c = 0; for (let j = 0; j < bank.n; j++) if (bank.phone[j] === i) c++; return c; });
 const pName = i => P.phone_info[P.phones[i]].display;                    // display name (config.json phones.display)
 const pFull = i => `${pName(i)} · ${P.phone_info[P.phones[i]].model}`;    // display name + model id
@@ -399,11 +502,53 @@ $('pphone').onchange = e => {
   st.phoneOn = P.phones.map((_, i) => v === 'all' || String(i) === v); syncPhone(); refresh();
 };
 $('lsame').onchange = e => { st.samePhone = e.target.checked; refresh(); };
-document.querySelectorAll('#colby button').forEach(b => b.onclick = () => {
-  st.colorBy = b.dataset.c;
-  document.querySelectorAll('#colby button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  drawPoints();
+function setColorBy(c) {
+  st.colorBy = c;
+  document.querySelectorAll('#colby button').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.c === c)));
+}
+document.querySelectorAll('#colby button').forEach(b => b.onclick = () => { setColorBy(b.dataset.c); drawPoints(); });
+
+// ---- place filter: top dropdown, checklist in the filters card (two views of st.placeOn) and "filter training too"
+const placeN = P.places.map((_, i) => { let c = 0; for (let j = 0; j < bank.n; j++) if (bank.place[j] === i) c++; return c; });
+const FLOORS = [...new Set(P.place_floor)].sort((a, b) => b - a);
+const floorSet = fl => P.places.map((_, i) => P.place_floor[i] === fl);
+$('pplace').add(new Option(`all places (${bank.n})`, 'all'));
+FLOORS.forEach(fl => $('pplace').add(new Option(`all floor ${fl} (${P.places.reduce((a, _, i) => a + (P.place_floor[i] === fl ? placeN[i] : 0), 0)})`, 'f' + fl)));
+FLOORS.forEach(fl => {
+  const g = document.createElement('optgroup'); g.label = `floor ${fl}, one place`;
+  P.places.forEach((p, i) => { if (P.place_floor[i] === fl) g.appendChild(new Option(`${p} (${placeN[i]})`, i)); });
+  $('pplace').appendChild(g);
 });
+$('pplace').add(new Option('custom (several)', 'custom')); $('pplace').lastChild.hidden = true;
+const plBoxes = [];
+P.places.forEach((p, i) => {
+  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${p} <span class="small">F${P.place_floor[i]} · ${placeN[i]}</span>`; $('fplace').appendChild(l);
+  plBoxes.push(l.firstChild);
+  l.firstChild.onchange = e => { st.placeOn[i] = e.target.checked; placeChanged(); };
+});
+function syncPlace() {
+  plBoxes.forEach((b, i) => { b.checked = st.placeOn[i]; });
+  const on = st.placeOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
+  let v = 'custom';
+  if (on.length === NP) v = 'all';
+  else if (on.length === 1) v = String(on[0]);
+  else for (const fl of FLOORS) { const fs = floorSet(fl); if (fs.every((b, i) => b === st.placeOn[i])) v = 'f' + fl; }
+  $('pplace').value = v;
+}
+function placeChanged() {
+  syncPlace();
+  if (st.placeOn.filter(Boolean).length === 1 && st.colorBy === 'place') setColorBy('phone');   // one colour per place would show nothing: show the spread by phone
+  refresh();
+}
+$('pplace').onchange = e => {
+  const v = e.target.value; if (v === 'custom') return;
+  st.placeOn = P.places.map((_, i) => v === 'all' || v === 'f' + P.place_floor[i] || String(i) === v);
+  placeChanged();
+};
+$('plall').onclick = () => { st.placeOn = P.places.map(() => true); placeChanged(); };
+$('plnone').onclick = () => { st.placeOn = P.places.map(() => false); placeChanged(); };
+$('ptrain').onchange = e => { st.placeTrain = e.target.checked; refresh(); };
+$('vorder').onchange = e => { st.vorder = e.target.value; renderVar(); };
 $('ffloor').onchange = e => { st.ffloor = e.target.value; refresh(); };
 $('lplace').add(new Option('any place', -1));
 P.places.forEach((p, i) => $('lplace').add(new Option(`${p} (F${P.place_floor[i]})`, i)));
@@ -431,11 +576,16 @@ const LOADNOTE = $('loadnote').textContent;
 $('free').onclick = () => { st.loaded = -1; st.moved = false; refresh(); };
 
 // ---------- state -> mask
-let mask = new Uint8Array(bank.n);
-let nTr = NP;      // number of data traces (places or phones); overlay traces follow
+let mask = new Uint8Array(bank.n);     // training mask
+let dmask = new Uint8Array(bank.n);    // drawn windows (= training mask unless "filter training too" is off)
+let nDraw = 0;
+let nTr = NP;      // number of data traces (places, phones or sessions); overlay traces follow
+function filterSpec() { return {sessOn: st.sessOn, phoneOn: st.phoneOn, placeOn: st.placeOn, placeTrain: st.placeTrain, ffloor: st.ffloor, loaded: st.loaded, holdout: st.holdout, samePhone: st.samePhone}; }
 function computeMask() {
-  mask = buildMask(bank, {sessOn: st.sessOn, phoneOn: st.phoneOn, ffloor: st.ffloor, loaded: st.loaded, holdout: st.holdout, samePhone: st.samePhone});
-  let cnt = 0; for (let i = 0; i < bank.n; i++) cnt += mask[i];
+  const f = filterSpec();
+  mask = buildMask(bank, f, false); dmask = buildMask(bank, f, true);
+  let cnt = 0; nDraw = 0;
+  for (let i = 0; i < bank.n; i++) { cnt += mask[i]; nDraw += dmask[i]; }
   return cnt;
 }
 
@@ -461,13 +611,14 @@ function axisRange(vals) {
 }
 function drawPoints() {
   if (typeof Plotly === 'undefined') { $('plot').innerHTML = '<p class="small">Plotly could not be loaded from cdn.jsdelivr.net (offline?). The numbers on the right still work.</p>'; return; }
-  const byPhone = st.colorBy === 'phone', G = byPhone ? P.phones.length : NP;
+  const mode = st.colorBy, byPhone = mode === 'phone', bySess = mode === 'session';
+  const G = byPhone ? P.phones.length : bySess ? P.sessions.length : NP;
   const groups = Array.from({length: G}, () => []);
-  for (let i = 0; i < bank.n; i++) if (mask[i]) groups[byPhone ? bank.phone[i] : bank.place[i]].push(i);
+  for (let i = 0; i < bank.n; i++) if (dmask[i]) groups[byPhone ? bank.phone[i] : bySess ? bank.sess[i] : bank.place[i]].push(i);
   const traces = groups.map((ix, g) => {
     const xy = ix.map(coords);
-    return {type: 'scatter', mode: 'markers', name: byPhone ? phLab(g) : P.places[g], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
-      marker: {size: 7, color: byPhone ? PHCOL[g % PHCOL.length] : P.colours[g], symbol: ix.map(i => SYM[bank.sess[i]]), opacity: byPhone ? 0.7 : 0.8, line: {width: 0.5, color: css('--bg')}},
+    return {type: 'scatter', mode: 'markers', name: byPhone ? `${pFull(g)} (${ix.length})` : bySess ? `${P.sessions[g]} (${ix.length})` : P.places[g], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
+      marker: {size: 7, color: byPhone ? PHCOL[g % PHCOL.length] : bySess ? SESSCOL[g % SESSCOL.length] : P.colours[g], symbol: ix.map(i => bySess ? SYM[bank.phone[i] % SYM.length] : SYM[bank.sess[i]]), opacity: byPhone || bySess ? 0.7 : 0.8, line: {width: 0.5, color: css('--bg')}},
       text: ix.map(i => `<b>${P.places[bank.place[i]]}</b> (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${pFull(bank.phone[i])}<br>${P.recs[bank.rec[i]]}`),
       hovertemplate: '%{text}<extra></extra>'};
   });
@@ -475,7 +626,9 @@ function drawPoints() {
   traces.push({type: 'scatter', mode: 'lines', name: 'neighbour lines', x: [], y: [], line: {color: css('--ink'), width: 1}, hoverinfo: 'skip', showlegend: false});
   traces.push({type: 'scatter', mode: 'markers', name: 'neighbours', x: [], y: [], marker: {size: 13, symbol: 'circle-open', color: css('--ink'), line: {width: 1.6, color: css('--ink')}}, hoverinfo: 'skip', showlegend: false});
   traces.push({type: 'scatter', mode: 'markers', name: 'query', x: [], y: [], marker: {size: 24, symbol: 'star', color: '#f5c518', line: {width: 2, color: css('--ink')}}, hoverinfo: 'skip', showlegend: false});
-  const all = Array.from({length: bank.n}, (_, i) => i).map(coords);
+  // axes: the full range, or (when some places are filtered out) the range of the drawn windows so a single place fills the plot
+  const placeFiltered = st.placeOn.some(v => !v) && nDraw > 0;
+  const all = Array.from({length: bank.n}, (_, i) => i).filter(i => !placeFiltered || dmask[i]).map(coords);
   const narrow = window.innerWidth < 860;
   const lay = {paper_bgcolor: css('--card'), plot_bgcolor: css('--card'), font: {color: css('--ink'), size: 12}, margin: {l: 48, r: 8, t: 8, b: 42},
     xaxis: {title: st.view === 'pca' ? `PC1 (${(P.pca.explained[0] * 100).toFixed(0)}% of variance)` : P.labels[st.xa], range: axisRange(all.map(a => a[0])), gridcolor: css('--line'), zeroline: false},
@@ -485,7 +638,10 @@ function drawPoints() {
   $('plotnote').textContent = (st.view === 'pca'
     ? 'Linear PCA of the standardised, weighted features (fixed at the default weights; groups with weight 0 get 0.05 so every slider moves the star). The star is projected with the same components.'
     : 'Raw features on the axes; tilt axes only show windows that have tilt (not 23 Nov).')
-    + (st.colorBy === 'phone' ? ' Colour = phone (place is in the hover), shape = session (circle 23 Nov, square 24 s1, triangle 24 s2).' : ' Colour = place, shape = session (circle 23 Nov, square 24 s1, triangle 24 s2).') + ' Lines go to the k nearest in the FULL space, so in a 2-D picture a neighbour can look far away.';
+    + (st.colorBy === 'phone' ? ' Colour = phone (place is in the hover), shape = session (circle 23 Nov, square 24 s1, triangle 24 s2).'
+      : st.colorBy === 'session' ? ' Colour = session (violet 23 Nov, amber 24 s1, teal 24 s2), shape = phone (circle, square, triangle, diamond, cross = the phones in the order of the Phone list).'
+      : ' Colour = place, shape = session (circle 23 Nov, square 24 s1, triangle 24 s2).')
+    + (placeFiltered ? ' The axes zoom to the drawn windows because places are filtered.' : '') + ' Lines go to the k nearest in the FULL space, so in a 2-D picture a neighbour can look far away.';
 }
 let overlayPending = false;
 function updateOverlay() {
@@ -512,7 +668,8 @@ function render() {
   FE.forEach(f => { $('v_' + f).textContent = (f === 'Bv' || f === 'Bh') && !st.tiltOn ? 'n/a' : fmt(st.q[f]); });
   $('kv').textContent = st.k;
   const L = st.loaded, kk = Math.min(st.k, nTrain);
-  $('fnote').textContent = `${nTrain} of ${bank.n} windows are used for training and drawn` + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + (L >= 0 && st.samePhone ? `, same phone only (${pFull(bank.phone[L])})` : '') + '.';
+  const nsel = st.placeOn.filter(Boolean).length;
+  $('fnote').textContent = `${nTrain} of ${bank.n} windows train the kNN, ${nDraw} are drawn` + (nsel < NP ? ` (${nsel} of ${NP} places shown${st.placeTrain ? ', training filtered to them too' : ', training NOT filtered by place: the model keeps every place'})` : '') + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + (L >= 0 && st.samePhone ? `, same phone only (${pFull(bank.phone[L])})` : '') + '.';
   if (!res || res.pred < 0) {
     $('pred').textContent = nTrain === 0 ? 'No training windows' : 'No distance (all weights 0?)';
     $('truth').textContent = ''; $('predsub').textContent = ''; $('votes').innerHTML = ''; $('nn').innerHTML = ''; $('distsum').textContent = ''; $('votenote').textContent = ''; return;
@@ -533,7 +690,73 @@ function render() {
   $('distsum').textContent = `nearest ${fmt(dd[0], 3)} · median ${fmt(dd[dd.length >> 1], 3)} · k-th ${fmt(dd[dd.length - 1], 3)}`;
   $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.places[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${pName(bank.phone[i])}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
 }
-function refresh() { nTrain = computeMask(); drawPoints(); live(); }
+function refresh() { nTrain = computeMask(); drawPoints(); live(); renderVar(); }
+
+// ---------- where does the variance come from (live demo; same sums of squares as variance.py)
+const VPIECES = ['within', 'rec', 'phone', 'session', 'place'];
+const VCOL = {within: 'var(--v1)', rec: 'var(--v2)', phone: 'var(--v3)', session: 'var(--v4)', place: 'var(--v5)'};
+const VDIMS = {nS: P.sessions.length, nPh: P.phones.length};
+function vlabel(k, order) {
+  return {within: 'within recording (window to window)', rec: 'between recordings (repeat visits)',
+    phone: order === 'session_first' ? 'between phones (same session)' : 'between phones (sessions pooled)',
+    session: order === 'session_first' ? 'between sessions / days (phones pooled)' : 'between sessions / days (same phone)',
+    place: 'between places (the signal)'}[k];
+}
+function varSpec(allPlaces) {
+  return {sessOn: st.sessOn, phoneOn: st.phoneOn, placeOn: allPlaces ? P.places.map(() => true) : st.placeOn, placeTrain: true, ffloor: st.ffloor, loaded: -1, holdout: 'none', samePhone: false};
+}
+const pc1 = (a, t) => t > 0 ? `${(100 * a / t).toFixed(a / t < 0.1 ? 1 : 0)}%` : 'n/a';
+const sdOf = (a, n) => Math.sqrt(a / n);
+function barHtml(r, ctx) {
+  if (!r || !(r.total > 0)) return `<div class="vb${ctx ? ' ctx' : ''}"></div>`;
+  return `<div class="vb${ctx ? ' ctx' : ''}">` + VPIECES.map(k => `<i style="width:${(100 * r.ss[k] / r.total).toFixed(3)}%;background:${VCOL[k]}" title="${vlabel(k, st.vorder)}: ${pc1(r.ss[k], r.total)}"></i>`).join('') + '</div>';
+}
+function renderVar() {
+  const order = st.vorder, nsel = st.placeOn.filter(Boolean).length, ctx = nsel < NP;
+  const vm = buildMask(bank, varSpec(false), true), vc = ctx ? buildMask(bank, varSpec(true), true) : null;
+  $('vleg').innerHTML = VPIECES.map(k => `<span><span class="sw" style="background:${VCOL[k]}"></span>${vlabel(k, order)}</span>`).join('');
+  let nw = 0; for (let i = 0; i < bank.n; i++) nw += vm[i];
+  const selPlaces = st.placeOn.map((v, i) => v ? P.places[i] : null).filter(Boolean);
+  $('vsel').textContent = nw ? `${nw} windows, ${nsel === NP ? 'all ' + NP + ' places' : nsel === 1 ? 'place ' + selPlaces[0] : nsel + ' places'}` : 'no windows pass the filters';
+  const rows = [], head = '<thead><tr><th>feature</th><th>n</th><th>total sd</th>' + VPIECES.map(k => `<th>${vlabel(k, order).replace(/ \(.*\)/, '')}</th>`).join('') + '</tr></thead>';
+  let h = '', tb = '';
+  for (const [f, lab] of P.vfeats) {
+    const r = varianceFeature(bank, f, vm, order, VDIMS), rc = ctx ? varianceFeature(bank, f, vc, order, VDIMS) : null;
+    if (!r) { h += `<div class="vfeat"><div class="vh"><span>${lab}</span><span class="small">no windows with this feature</span></div></div>`; continue; }
+    h += `<div class="vfeat"><div class="vh"><span>${lab}</span><span class="small">n=${r.n} · total sd ${sdOf(r.total, r.n).toFixed(r.total / r.n < 1 ? 3 : 2)}</span></div>${barHtml(r, false)}`
+      + `<div class="vnote">${VPIECES.map(k => `${vlabel(k, order).replace(/ \(.*\)/, '').replace('between ', '').replace('within recording', 'within rec.')} ${pc1(r.ss[k], r.total)}`).join(' · ')}</div>`
+      + (ctx && rc ? `${barHtml(rc, true)}<div class="vnote">context, all places: ${VPIECES.map(k => `${vlabel(k, order).replace(/ \(.*\)/, '').replace('between ', '').replace('within recording', 'within rec.')} ${pc1(rc.ss[k], rc.total)}`).join(' · ')}</div>` : '') + '</div>';
+    tb += `<tr><td>${lab}</td><td>${r.n}</td><td>${sdOf(r.total, r.n).toPrecision(3)}</td>` + VPIECES.map(k => `<td>${pc1(r.ss[k], r.total)} · ${sdOf(r.ss[k], r.n).toPrecision(2)}</td>`).join('') + '</tr>';
+  }
+  $('vbars').innerHTML = nw ? h : '<div class="small">No windows pass the filters.</div>';
+  $('vtab').innerHTML = nw ? head + '<tbody>' + tb + '</tbody>' : '';
+  $('vexp').innerHTML = '<b>How to read it.</b> A big <b>between phones</b> or <b>between sessions</b> share means the fingerprint drifts there (the same place looks different on another handset or another day). A big <b>between places</b> share, relative to the others, means the place is easy to tell apart.'
+    + (ctx ? ` The thin bar under each bar is the same filters with all places, for context${nsel === 1 ? ' (with one place selected, between places is 0 by definition)' : ''}.` : '');
+  $('vmethod').innerHTML = 'Each 5 s window value is split, for the windows that pass the filters, into five nested pieces whose sums of squares add up exactly to the total around the grand mean: place mean minus grand mean (between places); then, nesting '
+    + (order === 'session_first' ? 'sessions first: place+session mean minus place mean (between sessions, the phones of that session pooled), then place+session+phone mean minus place+session mean (between phones in the same session)'
+      : 'phones first: place+phone mean minus place mean (between phones, all their sessions pooled), then place+phone+session mean minus place+phone mean (between sessions of the same phone)')
+    + '; then recording mean minus its cell mean (repeat recordings of the same place, session and phone); then window minus recording mean (window-to-window noise). Share = piece / total; the sd column is sqrt(piece / n), so the squares of the five sds add to the total sd squared. '
+    + 'Windows count equally, so a long stop weighs more. The two nestings differ only in how the phone-by-session part is split (the design is crossed and unbalanced: ip16 has two sessions, the S24 two, the others one). Plain sums of squares, not unbiased random-effects variance components. '
+    + 'Pressure is the per-stop mean of that handset\'s barometer (the A55 and A56 have none), so it has no window noise (0%) and it includes weather drift between sessions. x/y/z pooled adds the sums of squares of the three axes. Python reference: variance.py, out/variance_by_place.csv.';
+  renderCells(vm);
+}
+function renderCells(vm) {
+  const C = placeCells(bank, vm), places = Object.keys(C).map(Number).sort((a, b) => a - b);
+  const keys = new Set(); places.forEach(p => C[p].cells.forEach(c => keys.add(c.ph * 1000 + c.s)));
+  const cols = [...keys].sort((a, b) => a - b);
+  const f2 = (v, d = 1) => Number.isFinite(v) ? v.toFixed(d) : '—';
+  const line = (lab, o, d) => Number.isFinite(o.mean) ? `<div class="${o.furthest ? 'far' : ''}" title="deviation from the place's overall mean: ${o.dev >= 0 ? '+' : ''}${o.dev.toFixed(2)}${o.furthest ? ' (furthest cell)' : ''}">${lab} ${f2(o.mean, d)}${Number.isFinite(o.sd) ? ' ± ' + f2(o.sd, d) : ''} <span class="small">(${o.dev >= 0 ? '+' : ''}${o.dev.toFixed(1)})</span></div>` : `<div class="small">${lab} —</div>`;
+  let h = '<thead><tr><th class="ph">place</th>' + cols.map(k => `<th>${pName(Math.floor(k / 1000))}<div class="small">${P.sessions[k % 1000]}</div></th>`).join('') + '<th>whole place</th></tr></thead><tbody>';
+  for (const p of places) {
+    const m = {}; C[p].cells.forEach(c => { m[c.ph * 1000 + c.s] = c; });
+    h += `<tr><th class="ph">${P.places[p]}<div class="small">F${P.place_floor[p]}</div></th>` + cols.map(k => {
+      const c = m[k]; if (!c) return '<td class="c na"></td>';
+      return `<td class="c">${line('|B|', c.B, 1)}${line('Bv', c.Bv, 1)}<div class="small">n=${c.n} · ${c.nRec} rec</div></td>`;
+    }).join('') + `<td class="c"><div>|B| ${f2(C[p].overall.B)}</div><div>Bv ${f2(C[p].overall.Bv)}</div></td></tr>`;
+  }
+  $('ctab').innerHTML = places.length ? h + '</tbody>' : '';
+  $('cnote').textContent = places.length ? 'Each cell: mean ± sd (n−1) of the 5 s windows, in uT, and in brackets the cell mean minus the place\'s overall mean (all windows of the place that pass the filters). The shaded line is the cell furthest from the overall mean for that feature (|B| and B_vertical are judged separately). Bv = B_vertical, absent on 23 Nov (no accelerometer). Blank = that phone did not record that place in that session.' : 'No windows pass the filters.';
+}
 
 // ---------- phone x session matrix (live demo, uses the current k and weights)
 let mxTimer = null, mxData = null;
@@ -609,8 +832,8 @@ $('mxtab').addEventListener('mouseleave', () => { tip.hidden = true; });
 $('mxmode').onchange = renderMatrix; $('mxcol').onchange = renderMatrix; $('mxgo').onclick = computeMatrix;
 
 $('k').value = st.k; syncWeights(); syncSliders();
-syncPhone(); syncSess();
-window.__pg = {st, bank, P, refresh, syncPhone, syncSess, live, loadWindow, getRes: () => res, qobj, computeMatrix, getMatrix: () => mxData};
+syncPhone(); syncSess(); syncPlace();
+window.__pg = {st, bank, P, refresh, syncPhone, syncSess, syncPlace, placeChanged, setColorBy, renderVar, live, loadWindow, getRes: () => res, qobj, computeMatrix, getMatrix: () => mxData};
 refresh();
 computeMatrix();
 window.addEventListener('resize', () => { if (plotReady) drawPoints(); });

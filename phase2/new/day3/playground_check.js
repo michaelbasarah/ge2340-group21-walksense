@@ -3,7 +3,7 @@ const fs = require('fs');
 const html = fs.readFileSync(process.argv[2], 'utf8');
 const P = JSON.parse(html.match(/<script type="application\/json" id="data">([\s\S]*?)<\/script>/)[1]);
 const core = html.match(/\/\/ CORE-START[^\n]*\n([\s\S]*?)\/\/ CORE-END/)[1];
-const lib = new Function(core + '\nreturn {buildBank, distances, knn, projectPCA, buildMask, phoneSessionMatrix};')();
+const lib = new Function(core + '\nreturn {buildBank, distances, knn, projectPCA, buildMask, phoneSessionMatrix, varianceFeature, placeCells};')();
 const bank = lib.buildBank(P);
 const mxArg = process.argv[5];                 // optional: 'matrix' -> write the live panel's matrix at the default weights/k
 if (mxArg === 'matrix') {
@@ -11,6 +11,24 @@ if (mxArg === 'matrix') {
   fs.writeFileSync(process.argv[4], JSON.stringify(m.cells.map(c => ({mode: c.mode, phone: P.phones[c.phone], col: c.col, cell: c.cell && {
     win: c.cell.win, rec: c.cell.rec, chance: c.cell.chance, ntr: c.cell.ntr, nte: c.cell.nte, cross: c.cell.cross,
     trainPhones: c.cell.trainPhones.map(i => P.phones[i]), per: Object.fromEntries(Object.entries(c.cell.per).map(([t, v]) => [P.places[t], v]))}}))));
+  process.exit(0);
+}
+if (mxArg === 'variance') {            // nested variance decomposition + per-place cell table for the page's own filter logic
+  const vc = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+  const dims = {nS: P.sessions.length, nPh: P.phones.length};
+  fs.writeFileSync(process.argv[4], JSON.stringify(vc.map(c => {
+    const use = lib.buildMask(bank, c.filter, true), r = {};
+    for (const order of ['session_first', 'phone_first']) {
+      r[order] = {};
+      for (const [f] of P.vfeats) r[order][f] = lib.varianceFeature(bank, f, use, order, dims);
+    }
+    return {n: use.reduce((a, b) => a + b, 0), var: r, cells: lib.placeCells(bank, use)};
+  })));
+  process.exit(0);
+}
+if (mxArg === 'masks') {               // training mask vs drawn mask for place filters
+  const mc = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+  fs.writeFileSync(process.argv[4], JSON.stringify(mc.map(f => ({train: Array.from(lib.buildMask(bank, f, false)), draw: Array.from(lib.buildMask(bank, f, true))}))));
   process.exit(0);
 }
 const cases = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));

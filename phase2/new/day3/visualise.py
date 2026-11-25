@@ -328,7 +328,10 @@ body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font:14px/1.45 
 h1{font-size:18px;margin:0 0 4px} p{color:var(--ink2);margin:0 0 10px;max-width:70em}
 .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 select,button{font:inherit;padding:4px 8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;max-width:100%}
-.phonepick{font-weight:650}.phonepick select{border:2px solid #2a78d6;font-weight:600}
+.phonepick,.placepick{font-weight:650}.phonepick select,.placepick select{border:2px solid #2a78d6;font-weight:600}
+.plgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 8px;max-height:200px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin:4px 0}
+.plgrid label{display:flex;align-items:center;gap:4px;font-size:12.5px}
+details summary{cursor:pointer;color:var(--ink2);font-size:13px}
 .seg{display:inline-flex;align-items:center;gap:6px}.seg .btns{display:inline-flex}
 .seg button{border-radius:0;padding:4px 10px;cursor:pointer}.seg button:first-child{border-radius:6px 0 0 6px}.seg button:last-child{border-radius:0 6px 6px 0;border-left:0}
 .seg button[aria-pressed=true]{background:#2a78d6;color:#fff;border-color:#2a78d6}
@@ -338,13 +341,16 @@ body{overflow-x:hidden}
 <h1>WalkSense: what the stop data looks like</h1>
 <p>One dot per 5 s window of a stop recording (Wi-Fi view: one dot per stop). Colour = place (click a legend entry to hide it, double-click to show only that place).
 Shape = session: circle 23 Nov, square 24 Nov session 1, triangle 24 Nov session 2. Hover for place, session, phone and recording.
-Use <b>Phone</b> to look at one handset at a time, or <b>Colour by phone</b> to see per-handset clusters. The phone is the real handset (read from each recording's metadata): <span id="phnote"></span>
+Use <b>Phone</b>, <b>Session</b> and <b>Place</b> to look at one handset, one day or one place at a time (a place or a floor from the dropdown, or tick several places in the list below), and <b>Colour by phone / session</b> to see where a place's spread comes from (with one place selected the colour switches to phone; colour by session uses the shape for the phone). The variance split per place is in the kNN playground (out/knn_playground.html) and out/variance_by_place.csv. The phone is the real handset (read from each recording's metadata): <span id="phnote"></span>
 Same place in different sessions landing together = a fingerprint that carries over; separate clumps per session = drift. Internal team notes, not report text.</p>
 <div class="row"><label>View <select id="view"></select></label>
 <label class="phonepick">Phone <select id="phone"></select></label>
-<span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button></span></span>
+<label class="placepick">Place <select id="place"></select></label>
+<span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button><button data-c="session" aria-pressed="false">session</button></span></span>
 <label>Floor <select id="floor"><option value="all">both</option><option value="5">5</option><option value="4">4</option></select></label>
 <label>Session <select id="sess"><option value="all">all</option><option>23nov</option><option>24s1</option><option>24s2</option></select></label></div>
+<details id="pldet"><summary>Place checklist (tick several places)</summary>
+<div class="row"><button id="plall">all</button><button id="plnone">none</button></div><div class="plgrid" id="plgrid"></div></details>
 <div id="plot"></div>
 <script>
 const DATA = __DATA__;
@@ -354,6 +360,35 @@ const pname = p => DATA.phone_info[p] ? DATA.phone_info[p].display : p;
 const PHCOL = ['#2a78d6', '#e8812a', '#17a673', '#9b5de5', '#c2185b'];
 const view = document.getElementById('view'), fsel = document.getElementById('floor'), ssel = document.getElementById('sess'), psel = document.getElementById('phone');
 let colorBy = 'place';
+const SESSCOL = {"23nov": '#6b4fd8', "24s1": '#d99a00', "24s2": '#0e9aa7'};
+const PHSYM = ['circle', 'square', 'triangle-up', 'diamond', 'cross'];
+const NPL = DATA.places.length, placeOn = DATA.places.map(() => true);
+const psel2 = document.getElementById('place'), plgrid = document.getElementById('plgrid'), plBoxes = [];
+const FLOORS = [...new Set(DATA.floor)].sort((a, b) => b - a);
+(function () {
+  const add = (v, t, parent) => { const o = document.createElement('option'); o.value = v; o.textContent = t; (parent || psel2).appendChild(o); return o; };
+  add('all', 'all places');
+  FLOORS.forEach(fl => add('f' + fl, `all floor ${fl}`));
+  FLOORS.forEach(fl => { const g = document.createElement('optgroup'); g.label = `floor ${fl}, one place`; psel2.appendChild(g); DATA.places.forEach((p, i) => { if (DATA.floor[i] === fl) add(String(i), p, g); }); });
+  add('custom', 'custom (several)').hidden = true;
+  DATA.places.forEach((p, i) => {
+    const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${p} <span style="color:var(--ink2)">F${DATA.floor[i]}</span>`; plgrid.appendChild(l);
+    plBoxes.push(l.firstChild); l.firstChild.onchange = e => { placeOn[i] = e.target.checked; placeChanged(); };
+  });
+})();
+function syncPlace() {
+  plBoxes.forEach((b, i) => { b.checked = placeOn[i]; });
+  const on = placeOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
+  let v = 'custom';
+  if (on.length === NPL) v = 'all'; else if (on.length === 1) v = String(on[0]);
+  else FLOORS.forEach(fl => { if (placeOn.every((b, i) => b === (DATA.floor[i] === fl))) v = 'f' + fl; });
+  psel2.value = v;
+}
+function setColorBy(c) { colorBy = c; document.querySelectorAll('#colby button').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.c === c))); }
+function placeChanged() { syncPlace(); if (placeOn.filter(Boolean).length === 1 && colorBy === 'place') setColorBy('phone'); draw(); }
+psel2.onchange = e => { const v = e.target.value; if (v === 'custom') return; DATA.places.forEach((_, i) => { placeOn[i] = v === 'all' || v === 'f' + DATA.floor[i] || String(i) === v; }); placeChanged(); };
+document.getElementById('plall').onclick = () => { placeOn.fill(true); placeChanged(); };
+document.getElementById('plnone').onclick = () => { placeOn.fill(false); placeChanged(); };
 Object.keys(DATA.views).forEach(k => { const o = document.createElement('option'); o.value = k; o.textContent = k; view.appendChild(o); });
 // phone options show how many points the current view has per phone
 function fillPhones() {
@@ -368,15 +403,18 @@ function fillPhones() {
 function draw(){
   const v = DATA.views[view.value], f = fsel.value, s = ssel.value, ph = psel.value;
   const css = getComputedStyle(document.documentElement);
-  const keepPt = (q, i) => (f === 'all' || String(DATA.floor[i]) === f) && (s === 'all' || q[3] === s) && (ph === 'all' || q[6] === ph);
+  const keepPt = (q, i) => placeOn[i] && (f === 'all' || String(DATA.floor[i]) === f) && (s === 'all' || q[3] === s) && (ph === 'all' || q[6] === ph);
   const hover = q => `<b>${DATA.places[q[2]]}</b> (floor ${DATA.floor[q[2]]})<br>${q[3]} · ${q[4]}<br>${q[5]}`;
   const mk = (name, ix, color) => ({type: 'scattergl', mode: 'markers', name, x: ix.map(q => q[0]), y: ix.map(q => q[1]),
-    marker: {size: v.size, color, symbol: ix.map(q => SYM[q[3]]), opacity: 0.8},
+    marker: {size: v.size, color, symbol: ix.map(q => colorBy === 'session' ? PHSYM[DATA.phones.indexOf(q[6]) % PHSYM.length] : SYM[q[3]]), opacity: 0.8},
     text: ix.map(hover), hovertemplate: '%{text}<extra></extra>'});
   let traces;
   if (colorBy === 'phone') {
     const cnt = {}; v.pts.forEach(q => { cnt[q[6]] = (cnt[q[6]] || 0) + 1; });
     traces = DATA.phones.map((p, j) => mk(`${pname(p)} (${cnt[p] || 0})`, v.pts.filter(q => q[6] === p && keepPt(q, q[2])), PHCOL[j % PHCOL.length]));
+  } else if (colorBy === 'session') {
+    const ss = [...new Set(v.pts.map(q => q[3]))].sort();
+    traces = ss.map(sn => mk(`${sn} (${v.pts.filter(q => q[3] === sn).length})`, v.pts.filter(q => q[3] === sn && keepPt(q, q[2])), SESSCOL[sn] || '#888'));
   } else {
     traces = DATA.places.map((p, i) => mk(p, v.pts.filter(q => q[2] === i && keepPt(q, i)), DATA.colours[i]));
   }
@@ -386,10 +424,9 @@ function draw(){
     yaxis: {title: v.yl, gridcolor: css.getPropertyValue('--line'), zeroline: false}, legend: {font: {size: 10}}, showlegend: window.innerWidth > 700}, {responsive: true});
 }
 view.addEventListener('change', fillPhones);
-document.querySelectorAll('#colby button').forEach(b => b.addEventListener('click', () => {
-  colorBy = b.dataset.c; document.querySelectorAll('#colby button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw();
-}));
-[view, fsel, ssel, psel].forEach(e => e.addEventListener('change', draw)); fillPhones(); draw();
+document.querySelectorAll('#colby button').forEach(b => b.addEventListener('click', () => { setColorBy(b.dataset.c); draw(); }));
+[view, fsel, ssel, psel].forEach(e => e.addEventListener('change', draw)); fillPhones(); syncPlace(); draw();
+window.__ex = {placeOn, placeChanged, setColorBy, draw};
 </script></body></html>
 """
 

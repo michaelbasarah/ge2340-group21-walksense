@@ -20,6 +20,7 @@ import csv
 
 import data
 import phone_matrix
+import variance
 
 OUT = data.OUT
 TEMPLATE = data.HERE / 'playground_template.html'
@@ -83,7 +84,8 @@ def main():
         'rec': [recs.index(s) for s in W['key']],
         'visit': [visits.index(s) for s in W['visit']],
         'floor': [int(f) for f in W['floor']],
-        'hpa': round_col(W['visit'].map(V['hpa_iphone']).to_numpy(float), 1),
+        # pressure of the window's OWN handset (per-stop mean: iPhone slot -> hpa_iphone, S24 -> hpa_s24, A55/A56 have none)
+        'hpa': round_col(np.where(W['slot'] == 'iphone', W['visit'].map(V['hpa_iphone']), np.where(W['slot'] == 's24', W['visit'].map(V['hpa_s24']), np.nan)).astype(float), 2),
     }
     for f in FEATS:
         cols[f] = round_col(W[COLS[f]].to_numpy(float), 3)
@@ -137,7 +139,7 @@ def main():
     payload = {
         'n': n, 'places': plist, 'place_floor': places['floor'].astype(int).tolist(), 'colours': colours,
         'sessions': sessions, 'phones': phones, 'phone_info': phone_info, 'recs': recs, 'visits': visits, 'cols': cols,
-        'feats': FEATS, 'labels': LABELS, 'scale': scale, 'med': med,
+        'feats': FEATS, 'labels': LABELS, 'vfeats': variance.VFEATS, 'scale': scale, 'med': med,
         'model': {'weights': wdef, 'wifi_weight_dropped': model['weights']['wifi'], 'k': model['k'],
                   'loso_inner_acc': model['loso_inner_acc']},
         'pca': {'names': names, 'scale': [fs[f] for f in names], 'center': center.tolist(),
@@ -146,6 +148,7 @@ def main():
     # python reference of the live "phone x session" panel (same recipe, default weights and k)
     cells = phone_matrix.compute(payload)
     export_matrix(payload, cells)
+    variance.export(payload, OUT)          # nested variance decomposition (python reference of the page's variance panel)
     html = TEMPLATE.read_text().replace('__DATA__', json.dumps(payload, separators=(',', ':')))
     (OUT / 'knn_playground.html').write_text(html)
     print(f'wrote knn_playground.html: {n} windows, {len(plist)} places, {len(recs)} recordings, '

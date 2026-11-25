@@ -12,6 +12,8 @@ from pathlib import Path
 import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import phone_matrix
+import variance
+import pandas as pd
 from scipy.spatial.distance import cdist
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -150,4 +152,87 @@ for j, p_, e in zip(js, py, exp):
     bad += int(not ok)
     if not ok: print('MATRIX MISMATCH', j['mode'], j['phone'], j['col'])
 print(f'phone x session matrix: JS panel == python reference == out/phone_session_matrix.json in {ncell - bad}/{ncell} cells ({nna} greyed-out cells with no data)')
-sys.exit(0 if ag == tot and mask_bad == 0 and bad == 0 else 1)
+
+# ---- place filter: the page's training mask / drawn mask == independent numpy masks (place subsets, with and without "filter training too")
+NPL = len(P['places']); place = y
+mrng = np.random.default_rng(11)
+mcases, mexp = [], []
+for t in range(40):
+    pon = mrng.random(NPL) < (0.2 if t % 2 else 0.6)
+    if not pon.any(): pon[mrng.integers(NPL)] = True
+    pht = bool(t % 3)
+    son = [bool(v) for v in (mrng.random(len(P['sessions'])) < .8)] if t % 4 == 0 else [True] * len(P['sessions'])
+    if not any(son): son[0] = True
+    ffl = ['all', '5', '4'][t % 3]
+    L = int(mrng.integers(n)) if t % 5 else -1
+    hold = ['session', 'visit', 'rec', 'none'][t % 4]
+    spec = {'sessOn': son, 'phoneOn': [True] * NPH, 'placeOn': [bool(v) for v in pon], 'placeTrain': pht, 'ffloor': ffl, 'loaded': L, 'holdout': hold, 'samePhone': False}
+    base = np.array(son)[sess] & (np.ones(n, bool) if ffl == 'all' else floor == int(ffl))
+    if L >= 0:
+        base &= {'session': sess != sess[L], 'visit': visit != visit[L], 'rec': np.array(c['rec']) != c['rec'][L], 'none': np.ones(n, bool)}[hold]
+    mcases.append(spec); mexp.append((base & (pon[place] if pht else True), base & pon[place]))
+(tmp / 'mc.json').write_text(json.dumps(mcases))
+subprocess.run(['node', str(HERE / 'playground_check.js'), str(HTML), str(tmp / 'mc.json'), str(tmp / 'mo.json'), 'masks'], check=True)
+mo = json.loads((tmp / 'mo.json').read_text())
+mbad = sum(int(not (np.array_equal(np.array(o['train'], bool), e[0]) and np.array_equal(np.array(o['draw'], bool), e[1]))) for o, e in zip(mo, mexp))
+print(f'place filter: the page\'s training mask and drawn mask equal the numpy masks in {len(mo) - mbad}/{len(mo)} random cases (place subsets x filter-training on/off x floor x session x hold-out)')
+
+# ---- variance decomposition: the page's JS == variance.py (pandas) == out/variance_by_place.json, at the default 'all' settings, 3 single places, a floor, and combined filters
+exp_v = json.loads((HERE / 'out' / 'variance_by_place.json').read_text())
+df = variance.frame(P)
+cells_per_place = df.groupby('place').apply(lambda d: d.groupby(['phone', 'sess']).ngroups)
+fl_of = np.array(P['place_floor'])
+nrec = df.groupby('place')['rec'].nunique(); nwin = df.groupby('place').size()
+sel = [int(nrec.idxmax()), int(nrec[fl_of == 4].idxmax()), int(nwin.idxmin())]      # most recordings, most recordings on floor 4, fewest windows
+assert len(set(sel)) == 3, sel
+SN, PN = len(P['sessions']), NPH
+def spec(placeOn=None, phoneOn=None, sessOn=None, ffloor='all'):
+    return {'sessOn': sessOn or [True] * SN, 'phoneOn': phoneOn or [True] * PN, 'placeOn': placeOn or [True] * NPL, 'placeTrain': True, 'ffloor': ffloor, 'loaded': -1, 'holdout': 'none', 'samePhone': False}
+one = lambda i: [j == i for j in range(NPL)]
+vcases = [('all places, all phones and sessions (default)', spec(), None)]
+for i in sel:
+    vcases.append((f"single place {P['places'][i]} (F{P['place_floor'][i]}, {int(nrec[i])} recordings, {int(nwin[i])} windows)", spec(placeOn=one(i)), P['places'][i]))
+vcases.append(('all floor 5 (place dropdown)', spec(placeOn=[int(f) == 5 for f in P['place_floor']]), 'all floor 5'))
+vcases.append(('three places x phones ip16+s24 x sessions 24s1+24s2', spec(placeOn=[j in sel for j in range(NPL)], phoneOn=[p in ('ip16', 's24') for p in P['phones']], sessOn=[s != '23nov' for s in P['sessions']]), None))
+(tmp / 'vc.json').write_text(json.dumps([{'filter': f} for _, f, _ in vcases]))
+subprocess.run(['node', str(HERE / 'playground_check.js'), str(HTML), str(tmp / 'vc.json'), str(tmp / 'vo.json'), 'variance'], check=True)
+vo = json.loads((tmp / 'vo.json').read_text())
+vbad = 0
+def close(a, b, tol=1e-9):
+    return abs(a - b) <= tol * max(1.0, abs(b))
+for (name, f, scope), o in zip(vcases, vo):
+    m = np.array(f['sessOn'])[sess] & np.array(f['phoneOn'])[phone] & np.array(f['placeOn'])[place]
+    d = df[m]
+    nfeat = bad_f = 0
+    for order in variance.ORDERS:
+        for feat, _ in variance.VFEATS:
+            r = variance.decompose(d, feat, order); j = o['var'][order][feat]
+            nfeat += 1
+            if r is None:
+                ok = j is None
+            else:
+                ok = (j is not None and j['n'] == r['n'] and close(j['total'], r['total']) and all(close(j['ss'][k], r['ss'][k]) for k in variance.PIECES)
+                      and j['nPlaces'] == r['n_places'] and j['nRec'] == r['n_rec'] and close(sum(r['ss'].values()), r['total']) and close(sum(j['ss'].values()), j['total']))
+                if ok and scope in exp_v['variance']:                       # also equal to what was written to out/variance_by_place.json (rounded to 4 decimals)
+                    e = exp_v['variance'][scope][order][feat]
+                    ok = e['n_windows'] == r['n'] and all(abs(e[f'ss_{k}'] - r['ss'][k]) < 1e-3 for k in variance.PIECES)
+            bad_f += int(not ok)
+            if not ok: print('VARIANCE MISMATCH', name, order, feat)
+    # per-place cell table (mean, sd, deviation, furthest flag)
+    ref = variance.cell_table(d, P['places'])
+    cb = 0
+    for rc in ref:
+        jc = next((c for c in o['cells'][str(rc['place_idx'])]['cells'] if c['ph'] == rc['phone_idx'] and c['s'] == rc['sess_idx']), None)
+        okc = jc is not None and jc['n'] == rc['n'] and jc['nRec'] == rc['n_rec']
+        for ft, _ in variance.CELL_FEATS:
+            jj = jc[ft] if jc else {}
+            for key_py, key_js in (('mean', 'mean'), ('sd', 'sd'), ('dev', 'dev')):
+                a, b = rc[f'{ft}_{key_py}'], jj.get(key_js)
+                okc = okc and ((a is None) == (b is None)) and (a is None or close(a, b))
+            okc = okc and rc[f'{ft}_furthest'] == jj.get('furthest')
+        cb += int(not okc)
+    ncells = len(ref)
+    print(f"variance: {name}: {o['n']} windows, JS == python in {nfeat - bad_f}/{nfeat} feature x nesting results, per-place cell table in {ncells - cb}/{ncells} cells")
+    vbad += bad_f + cb
+print(f'variance decomposition: JS panel == variance.py (and out/variance_by_place.json) {"in all cases" if vbad == 0 else "FAILED in " + str(vbad)}; pieces add up to the total in every case')
+sys.exit(0 if ag == tot and mask_bad == 0 and bad == 0 and mbad == 0 and vbad == 0 else 1)

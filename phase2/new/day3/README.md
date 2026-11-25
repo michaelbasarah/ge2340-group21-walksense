@@ -21,7 +21,7 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | weighted fused kNN, nested CV | `fused_knn.py` | `out/fused_knn.json`, `out/fused_model.json`, `out/fused_window_predictions.csv` |
 | tracker on 24 Nov + UI replay | `track24.py` | `out/track24_results.json`, `out/track24_visits.csv`, `out/replay_24nov_s2.json` |
 | figures + data explorer | `visualise.py` | `out/*.png`, `out/explore.html` |
-| kNN playground (sliders -> neighbours -> place; phone x session panel; internal) | `playground.py` (template `playground_template.html`; python reference `phone_matrix.py`; check `playground_check.py`) | `out/knn_playground.html`, `out/phone_session_matrix.csv`, `out/phone_session_matrix.json` |
+| kNN playground (sliders -> neighbours -> place; phone x session panel; place filter; variance panel; internal) | `playground.py` (template `playground_template.html`; python references `phone_matrix.py`, `variance.py`; check `playground_check.py`) | `out/knn_playground.html`, `out/phone_session_matrix.csv/.json`, `out/variance_by_place.csv/.json`, `out/variance_cells_by_place.csv` |
 
 ## Adding a session collected later
 
@@ -157,6 +157,7 @@ Optimistic in the same ways as entry 20: the graph and the walk order are the ro
 
 ## Figures (`out/`)
 
+- `out/variance_by_place.csv` / `.json`, `out/variance_cells_by_place.csv`: the variance split per place and feature, and mean +- sd per place x phone x session (section h; python reference of the playground's variance panel, not evaluation results).
 - `out/phone_session_matrix.csv` / `.json`: the playground's live "how each phone performs across sessions" panel computed in Python at the default weights and k (not evaluation results; see section g).
 - `fig_accuracy_vs_chance.png`: accuracy per feature set vs chance (cross-session iPhone and S24, cross-day same iPhone).
 - `fig_leaky_vs_honest.png`: the same fused kNN under the four splits.
@@ -165,13 +166,33 @@ Optimistic in the same ways as entry 20: the graph and the walk order are the ro
 - `fig_per_place_B_pressure.png`: \|B\| and pressure per place and session (strip plot).
 - `fig_knn_neighbour_graph.png`: nearest-neighbour "confusion as a graph" on the graph-v2 layout.
 - `fig_embed_*.png`: PCA and t-SNE of the magnetic features, \|B\|+tilt (24 Nov), the fused space (t-SNE on the learned-weight distance) and Wi-Fi (MDS, one dot per stop).
-- **`explore.html`**: interactive explorer (plotly from a CDN, pinned with an integrity hash). Views: every embedding above, raw \|B\| vs B_vertical, barometer per stop. Hover shows place, session, handset (display name + model id) and recording; click legend entries to show or hide places. A **Phone** dropdown shows one handset at a time and **Colour by place / phone** shows per-phone clusters (the playground has the same, plus a "train on same phone only" test).
+- **`explore.html`**: interactive explorer (plotly from a CDN, pinned with an integrity hash). Views: every embedding above, raw \|B\| vs B_vertical, barometer per stop. Hover shows place, session, handset (display name + model id) and recording; click legend entries to show or hide places. **Phone**, **Session** and **Place** dropdowns (place: all, all floor 5, all floor 4, or one place, plus a tick list for several) and **Colour by place / phone / session** show per-phone, per-session and per-place clusters; with one place selected the colour switches to phone, and colour by session uses the shape for the phone (the playground has the same, plus a "train on same phone only" test and the variance panel of section h).
 
 ### g. kNN playground panel: how each phone performs across sessions (live demo, not evaluation results)
 
 `out/knn_playground.html` has a panel with phones as rows and train -> test session pairs plus one leave-one-session-out column; each cell shows recordings (majority vote of the recording's 5 s windows) and windows as correct/total, and chance (1 / places in training). It uses the page's current k and weights live (default = `fused_model.json`: B 0.1, xyz 0.7, tilt 0, baro 0.1, k 25) and the page's recipe (global scaling, true floor), not the per-fold recipe of `evaluate.py` / `fused_knn.py`, so its numbers differ from the tables above. Two modes: same phone only, or all phones of the training session(s) (cells where the training includes other handsets are marked cross-handset). Grey = that phone has no data in the test or training session. `phone_matrix.py` computes the same matrix in Python (`out/phone_session_matrix.csv/.json`); `playground_check.py` checks that the panel equals it in all 70 cells. The page also has an "any session" option in the Try-it session dropdown and a top-level Session dropdown synced with the session checkboxes.
 
 Default settings, same phone only (recordings, windows; chance 3.8%): ip16 23 Nov -> 24 s2 14/26, 158/312; ip16 24 s2 -> 23 Nov 18/42, 220/504; ip16 leave-one-session-out 32/68, 378/816; s24 24 s1 -> 24 s2 8/26, 96/312; s24 24 s2 -> 24 s1 10/27, 125/324; s24 leave-one-session-out 18/53, 221/636; ip18, a55 and a56 have data in 24 s1 only, so there is no same-phone cross-session cell. All other cells and the all-phones mode are in the CSV.
+
+### h. Place filter and "where does the variance come from" (playground; live demo, not evaluation results)
+
+**Place filter** (playground and explorer): a top-level **Place** dropdown next to Phone and Session (all places, all floor 5, all floor 4, or one place) and, in the playground's filters card, a place checklist with all/none buttons; the dropdown and the checklist are two views of one state, like the phone and session controls. In the playground the filter applies to what is drawn and, by default, to the kNN training bank; untick **filter training too** to only hide points and keep the full model (the note under the filters says how many windows train and how many are drawn). With one place selected the colour switches from place to phone (the user can pick session, which uses the shape for the phone), and the axes zoom to the drawn windows.
+
+**Variance panel** (playground): for the windows that pass the filters (session, phone, floor, place; the hold-out of "Try it" is ignored) and for each of |B|, B_x, B_y, B_z, x/y/z pooled, B_vertical, B_horizontal and pressure, the sum of squares around the grand mean is split exactly into five nested pieces (window-weighted, so a long stop weighs more): within recording (window to window), between recordings of the same place+session+phone (repeat visits), between phones, between sessions, between places. Two nestings (selector in the panel): **session first** (place > session > phone within the session, so "between phones" = same session) and **phone first** (place > phone > session within the phone, so "between sessions" = same handset on another day). They share the total and the recording and within-recording pieces and differ only in how the phone-by-session part is split (the design is crossed and unbalanced: ip16 has two sessions, s24 two, ip18/a55/a56 one, 23 Nov has only ip16 stops). Shown as one stacked bar per feature (plus a thin context bar with all places when fewer places are selected) and a table of shares and sd contributions (sqrt(SS/n); the five squares add to the total variance). A per-place table gives mean +- sd of |B| and B_vertical for each phone x session cell and shades the cell furthest from the place's overall mean (per feature). Method and caveats are in the `variance.py` docstring and the panel's "Method" fold-out: plain sums of squares, not unbiased random-effects components; pressure is the handset's per-stop mean (a55/a56 have none), so it has no window noise and it contains weather drift; B_vertical/B_horizontal do not exist on 23 Nov.
+
+Python reference: `variance.py` (called by `playground.py`) writes `out/variance_by_place.csv/.json` (scope = all places, each floor, each place; both nestings; SS, shares, sd per piece) and `out/variance_cells_by_place.csv`. `playground_check.py` checks the page's JS equals the python in 16/16 feature x nesting results (8 features x 2 nestings) at the default settings, at 3 single places (canteen, escalator_down_4F, disabled_toilet), at floor 5 and at a combined phone/session/place filter, plus the per-place cell tables (182/182 cells at the default), and that the page's training and drawn masks equal numpy masks in 40 random place-filter cases.
+
+Headline at the default settings (all 2425 windows, 26 places; `out/variance_by_place.csv`, share of the total variance, session-first nesting; phone-first in brackets where it differs):
+
+| feature | within recording | between recordings | between phones | between sessions | between places |
+|---|---|---|---|---|---|
+| \|B\| | 0.9% | 2.3% | 51.5% (44.4%) | 31.4% (38.5%) | 13.8% |
+| x/y/z pooled | 0.7% | 2.3% | 31.2% (23.9%) | 10.4% (17.8%) | 55.2% |
+| B_vertical | 0.5% | 0.8% | 64.5% | 11.5% | 22.7% |
+| B_horizontal | 0.8% | 2.0% | 78.0% | 8.3% | 10.9% |
+| pressure | 0.0% | 0.0% | 81.7% | 14.9% | 3.4% |
+
+Reading it: window noise is negligible (<= 1%); for |B| the handset and the day explain about 83% of the spread and the place only 14%, which is why |B| alone cannot name a place; the three axes keep 55% in the place (they carry direction), but a third of their spread is still the phone. Places with the largest drift (|B|, sd of the between-session + between-phone pieces in uT, session-first): escalator_down_4F 42.1 (almost all between sessions: the ip16 cell in 24 s2 has a |B| mean of 147.8 uT, see Data issues), escalator_up_4F 39.5 (phones 32.9, sessions 22.0), disabled_toilet 29.9 (phones 28.4), escalator_down 21.1 (phones 18.1) and y5401 20.6 (phones 19.7). For x/y/z pooled: escalator_down_4F 71.0, escalator_up_4F 65.1, disabled_toilet 41.0, escalator_down 37.0, lt1a 31.0.
 
 ## Data issues found
 
