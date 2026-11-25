@@ -17,13 +17,67 @@
 ├── raw/source_files.csv    file, sha256, size, sender (first name), chat time
 ├── raw/missing_from_export.csv   media messages of 25 Nov after 17:30 that the export did not contain (73)
 ├── labels_override.csv     hand decisions that beat the name rules (the 11 'DOC-...' files)
+├── duplicates_vs_2026-11-25.csv   which of our files are already in Dicta's ../2026-11-25 (scripts/find_duplicates.py)
 ├── scripts/index_sources.py   hashes + sender per file (+ missing list when given the chat .txt, which stays private)
+├── scripts/find_duplicates.py   our raw files vs Dicta's ../2026-11-25/raw -> duplicates_vs_2026-11-25.csv
 ├── scripts/build_clean.py     raw -> clean/ (same layout as 2026-11-24: floor*/stops|walks/<folder>/<phone>/<Sensor>.csv)
 └── clean/   manifest.csv, labels_used.csv, locations.csv, edges.csv, floor_check.csv, duplicates.csv, wifi/, summary.json
              (floor4/, floor5/ and wifi/observations.csv are gitignored: rebuild with build_clean.py, a few seconds)
 ```
 
 Rebuild: `python -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py` (the day-3 `run_all.sh` does it first).
+
+## Overlap with Dicta's complete set (`duplicates_vs_2026-11-25.csv`)
+
+`scripts/find_duplicates.py` compares every file in `raw/attachments/` with every recording in `../2026-11-25/raw/`
+(her nested `attachments.zip` included): SHA-256 of the ZIP bytes, then same device model + phyphox START within 2 s.
+Result: **36 byte-identical** (all the round recordings: ip18 19, a56 17; none more found by device + START),
+**16 unique** (ip16 4, s24 11, and the WiGLE log `DOC-20261125-WA0062.gz`). The CSV sits at the folder root because
+`build_clean.py` rebuilds `clean/` from scratch. The day-3 session `25spots` (`phase2/new/day3/config.json`,
+`exclude_sources`) leaves the 36 out, so every recording is in the training set once; what `25spots` adds is the 7
+labelled spot stops (ip16: escalator_down, sr9, escalator_down_4F, escalator_up_4F; s24: escalator_down,
+escalator_down_4F, escalator_up_4F, medium confidence) and the S24 WiGLE log. The 8 unlabelled S24 files stay out.
+
+**For the user to decide (not done):** the 36 duplicate raw ZIPs below are stored byte-identically in
+`../2026-11-25/raw/` too. They could be deleted from this folder without losing data; they are kept until the user
+says so.
+
+- `Canteen 2026-11-25 17-37-05.zip` = `../2026-11-25/raw/Canteen 2026-11-25 17-37-05.zip`
+- `Canteen ke esca down 2026-11-25 18-10-56.zip` = `../2026-11-25/raw/Canteen ke esca down 2026-11-25 18-10-56.zip`
+- `Canteen ke exit 5 door 2026-11-25 17-38-21.zip` = `../2026-11-25/raw/Canteen ke exit 5 door 2026-11-25 17-38-21.zip`
+- `Esca up 2026-11-25 18-08-14.zip` = `../2026-11-25/raw/Esca up 2026-11-25 18-08-14.zip`
+- `Esca up ke kantin 2026-11-25 18-09-41.zip` = `../2026-11-25/raw/Esca up ke kantin 2026-11-25 18-09-41.zip`
+- `Exit 10 door 2026-11-25 18-02-18.zip` = `../2026-11-25/raw/Exit 10 door 2026-11-25 18-02-18.zip`
+- `Exit 10 door ke kantin 2026-11-25 18-03-42.zip` = `../2026-11-25/raw/Exit 10 door ke kantin 2026-11-25 18-03-42.zip`
+- `Exit 5 door 2026-11-25 17-40-32.zip` = `../2026-11-25/raw/Exit 5 door 2026-11-25 17-40-32.zip`
+- `Exit 5 door ke toilet cowo 2026-11-25 17-41-24.zip` = `../2026-11-25/raw/Exit 5 door ke toilet cowo 2026-11-25 17-41-24.zip`
+- `Sr9 2026-11-25 17-51-54.zip` = `../2026-11-25/raw/Sr9 2026-11-25 17-51-54.zip`
+- `Sr9 ke y5202 2026-11-25 17-52-59.zip` = `../2026-11-25/raw/Sr9 ke y5202 2026-11-25 17-52-59.zip`
+- `Toilet cewe 2026-11-25 17-58-59.zip` = `../2026-11-25/raw/Toilet cewe 2026-11-25 17-58-59.zip`
+- `Toilet cewe ke exit 10 door 2026-11-25 18-00-32.zip` = `../2026-11-25/raw/Toilet cewe ke exit 10 door 2026-11-25 18-00-32.zip`
+- `Toilet cowo 2026-11-25 17-44-43.zip` = `../2026-11-25/raw/Toilet cowo 2026-11-25 17-44-43.zip`
+- `Toilet cowo ke y5302 2026-11-25 17-46-09.zip` = `../2026-11-25/raw/Toilet cowo ke y5302 2026-11-25 17-46-09.zip`
+- `Y5202 2026-11-25 17-55-10.zip` = `../2026-11-25/raw/Y5202 2026-11-25 17-55-10.zip`
+- `Y5202 ke toilet cewe 2026-11-25 17-56-17.zip` = `../2026-11-25/raw/Y5202 ke toilet cewe 2026-11-25 17-56-17.zip`
+- `Y5302 2026-11-25 17-48-05.zip` = `../2026-11-25/raw/Y5302 2026-11-25 17-48-05.zip`
+- `Y5302 ke sr9 2026-11-25 17-49-32.zip` = `../2026-11-25/raw/Y5302 ke sr9 2026-11-25 17-49-32.zip`
+- `esca naik 2026-11-25 18-07-50.zip` = `../2026-11-25/raw/esca naik 2026-11-25 18-07-50.zip`
+- `esca naik to kantin 2026-11-25 18-09-54.zip` = `../2026-11-25/raw/esca naik to kantin 2026-11-25 18-09-54.zip`
+- `exit 10 door ke kantin 2026-11-25 18-03-36.zip` = `../2026-11-25/raw/exit 10 door ke kantin 2026-11-25 18-03-36.zip`
+- `exit 5 2026-11-25 17-40-19.zip` = `../2026-11-25/raw/exit 5 2026-11-25 17-40-19.zip`
+- `ext 10 2026-11-25 18-02-16.zip` = `../2026-11-25/raw/ext 10 2026-11-25 18-02-16.zip`
+- `ext 5 to toilet cwk 2026-11-25 17-41-14.zip` = `../2026-11-25/raw/ext 5 to toilet cwk 2026-11-25 17-41-14.zip`
+- `kantin 2026-11-25 17-36-50.zip` = `../2026-11-25/raw/kantin 2026-11-25 17-36-50.zip`
+- `kantin exit 5 2026-11-25 17-38-36.zip` = `../2026-11-25/raw/kantin exit 5 2026-11-25 17-38-36.zip`
+- `kantin to esca turun 2026-11-25 18-10-48.zip` = `../2026-11-25/raw/kantin to esca turun 2026-11-25 18-10-48.zip`
+- `study room 2026-11-25 17-51-27.zip` = `../2026-11-25/raw/study room 2026-11-25 17-51-27.zip`
+- `studyroom to y5 202 2026-11-25 17-52-58.zip` = `../2026-11-25/raw/studyroom to y5 202 2026-11-25 17-52-58.zip`
+- `toilet cewe 2026-11-25 17-59-01.zip` = `../2026-11-25/raw/toilet cewe 2026-11-25 17-59-01.zip`
+- `toilet cewe to ext 10 2026-11-25 18-00-08.zip` = `../2026-11-25/raw/toilet cewe to ext 10 2026-11-25 18-00-08.zip`
+- `tolet cowo to y5302 2026-11-25 17-46-02.zip` = `../2026-11-25/raw/tolet cowo to y5302 2026-11-25 17-46-02.zip`
+- `y5202 to toilet cewe 2026-11-25 17-56-08.zip` = `../2026-11-25/raw/y5202 to toilet cewe 2026-11-25 17-56-08.zip`
+- `y5302 2026-11-25 17-47-42.zip` = `../2026-11-25/raw/y5302 2026-11-25 17-47-42.zip`
+- `y5302 to study room 2026-11-25 17-49-14.zip` = `../2026-11-25/raw/y5302 to study room 2026-11-25 17-49-14.zip`
 
 ## Who recorded what (device read from each ZIP's `meta/device.csv`)
 

@@ -139,6 +139,21 @@
   },
   {
    "session": "25nov",
+   "log": "WigleWifi_20261125191559.csv.gz",
+   "scanner": "a56",
+   "rows": 7178,
+   "unique_bssids": 2760,
+   "rows_per_bssid_median": 2.0,
+   "rows_per_bssid_mean": 2.6,
+   "share_bssids_with_one_row": 0.37,
+   "repeat_rows": 4418,
+   "share_repeats_stronger_than_all_earlier_rows": 0.873,
+   "repeat_gap_s_median": 209.0,
+   "distinct_timestamps": 661,
+   "span_min": 100.8
+  },
+  {
+   "session": "25spots",
    "log": "DOC-20261125-WA0062.gz",
    "scanner": "s24",
    "rows": 4461,
@@ -179,7 +194,15 @@
    "rows_per_bssid_inside_one_stop_max": 1.28
   },
   "25nov": {
-   "stop_visits": 13,
+   "stop_visits": 26,
+   "stop_x_scanner_pairs_with_in_window_rows": 24,
+   "distinct_scan_timestamps_per_60s_stop_median": 8.0,
+   "bssids_per_stop_median": 47.0,
+   "rows_per_bssid_inside_one_stop_median": 1.04,
+   "rows_per_bssid_inside_one_stop_max": 1.15
+  },
+  "25spots": {
+   "stop_visits": 4,
    "stop_x_scanner_pairs_with_in_window_rows": 4,
    "distinct_scan_timestamps_per_60s_stop_median": 8.0,
    "bssids_per_stop_median": 90.0,
@@ -205,6 +228,11 @@
     "share_heard_at_3plus_stops": 0.136
    },
    "25nov": {
+    "bssids": 1135,
+    "share_heard_at_one_stop_only": 0.814,
+    "share_heard_at_3plus_stops": 0.018
+   },
+   "25spots": {
     "bssids": 541,
     "share_heard_at_one_stop_only": 0.922,
     "share_heard_at_3plus_stops": 0.0
@@ -227,6 +255,11 @@
     "share_heard_at_3plus_stops": 0.215
    },
    "25nov": {
+    "bssids": 2751,
+    "share_heard_at_one_stop_only": 0.483,
+    "share_heard_at_3plus_stops": 0.258
+   },
+   "25spots": {
     "bssids": 1574,
     "share_heard_at_one_stop_only": 0.68,
     "share_heard_at_3plus_stops": 0.013
@@ -252,6 +285,14 @@
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.455
    },
    "23nov_vs_25nov": {
+    "test_visits_with_wifi": 24,
+    "train_visits_with_wifi": 41,
+    "jaccard_same_place_median": 0.057,
+    "jaccard_other_places_median": 0.006,
+    "nearest_by_jaccard_is_same_place": "11/24",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.487
+   },
+   "23nov_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 41,
     "jaccard_same_place_median": 0.02,
@@ -268,6 +309,14 @@
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.405
    },
    "24s1_vs_25nov": {
+    "test_visits_with_wifi": 24,
+    "train_visits_with_wifi": 26,
+    "jaccard_same_place_median": 0.058,
+    "jaccard_other_places_median": 0.005,
+    "nearest_by_jaccard_is_same_place": "13/23",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.483
+   },
+   "24s1_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 26,
     "jaccard_same_place_median": 0.04,
@@ -276,12 +325,28 @@
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.438
    },
    "24s2_vs_25nov": {
+    "test_visits_with_wifi": 24,
+    "train_visits_with_wifi": 26,
+    "jaccard_same_place_median": 0.048,
+    "jaccard_other_places_median": 0.011,
+    "nearest_by_jaccard_is_same_place": "6/24",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.829
+   },
+   "24s2_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 26,
     "jaccard_same_place_median": 0.005,
     "jaccard_other_places_median": 0.014,
     "nearest_by_jaccard_is_same_place": "1/4",
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.588
+   },
+   "25nov_vs_25spots": {
+    "test_visits_with_wifi": 4,
+    "train_visits_with_wifi": 24,
+    "jaccard_same_place_median": 0.016,
+    "jaccard_other_places_median": 0.008,
+    "nearest_by_jaccard_is_same_place": "1/4",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.45
    }
   },
   "nearest_stop_120s_all_scanners": {
@@ -302,6 +367,14 @@
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.645
    },
    "23nov_vs_25nov": {
+    "test_visits_with_wifi": 26,
+    "train_visits_with_wifi": 42,
+    "jaccard_same_place_median": 0.129,
+    "jaccard_other_places_median": 0.02,
+    "nearest_by_jaccard_is_same_place": "13/26",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.789
+   },
+   "23nov_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 42,
     "jaccard_same_place_median": 0.038,
@@ -318,6 +391,14 @@
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.833
    },
    "24s1_vs_25nov": {
+    "test_visits_with_wifi": 26,
+    "train_visits_with_wifi": 27,
+    "jaccard_same_place_median": 0.266,
+    "jaccard_other_places_median": 0.041,
+    "nearest_by_jaccard_is_same_place": "20/26",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.946
+   },
+   "24s1_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 27,
     "jaccard_same_place_median": 0.148,
@@ -326,12 +407,28 @@
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.966
    },
    "24s2_vs_25nov": {
+    "test_visits_with_wifi": 26,
+    "train_visits_with_wifi": 26,
+    "jaccard_same_place_median": 0.148,
+    "jaccard_other_places_median": 0.035,
+    "nearest_by_jaccard_is_same_place": "8/26",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.968
+   },
+   "24s2_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 26,
     "jaccard_same_place_median": 0.069,
     "jaccard_other_places_median": 0.057,
     "nearest_by_jaccard_is_same_place": "1/4",
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.987
+   },
+   "25nov_vs_25spots": {
+    "test_visits_with_wifi": 4,
+    "train_visits_with_wifi": 26,
+    "jaccard_same_place_median": 0.064,
+    "jaccard_other_places_median": 0.063,
+    "nearest_by_jaccard_is_same_place": "0/4",
+    "share_of_test_bssids_ever_heard_in_train_session_median": 0.958
    }
   },
   "nearest_stop_120s_s24_only": {
@@ -351,7 +448,7 @@
     "nearest_by_jaccard_is_same_place": "6/26",
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.645
    },
-   "23nov_vs_25nov": {
+   "23nov_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 42,
     "jaccard_same_place_median": 0.038,
@@ -367,7 +464,7 @@
     "nearest_by_jaccard_is_same_place": "7/13",
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.606
    },
-   "24s1_vs_25nov": {
+   "24s1_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 14,
     "jaccard_same_place_median": 0.237,
@@ -375,7 +472,7 @@
     "nearest_by_jaccard_is_same_place": "1/2",
     "share_of_test_bssids_ever_heard_in_train_session_median": 0.879
    },
-   "24s2_vs_25nov": {
+   "24s2_vs_25spots": {
     "test_visits_with_wifi": 4,
     "train_visits_with_wifi": 26,
     "jaccard_same_place_median": 0.069,
@@ -399,6 +496,10 @@
    "within_120s": 11475
   },
   "25nov": {
+   "in_window": 1460,
+   "within_120s": 7055
+  },
+  "25spots": {
    "in_window": 611,
    "within_120s": 2871
   }
@@ -407,6 +508,7 @@
   "23nov": "42/42",
   "24s1": "27/27",
   "24s2": "26/26",
-  "25nov": "4/13"
+  "25nov": "26/26",
+  "25spots": "4/4"
  }
 }

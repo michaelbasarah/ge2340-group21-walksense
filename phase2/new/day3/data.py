@@ -153,11 +153,24 @@ def assign_wifi(obs: pd.DataFrame, V: pd.DataFrame, max_gap: float) -> pd.DataFr
     return obs[g <= max_gap].reset_index(drop=True)
 
 
+def excluded_sources(s: dict) -> set:
+    """Source ZIPs a session leaves out (config `exclude_sources`: a CSV with columns source_zip and status; every row
+    whose status is not 'unique' is excluded, e.g. recordings that are already in another session)."""
+    if not s.get('exclude_sources'):
+        return set()
+    x = pd.read_csv(HERE / s['exclude_sources'], dtype=str).fillna('')
+    return set(x.loc[x['status'] != 'unique', 'source_zip'])
+
+
 def load_clean_tree(s: dict, win: float, max_gap: float):
     root = (HERE / s['path']).resolve()
     names = pd.read_csv(HERE / s['names'], dtype={'floor': int}).fillna('')
-    nm = names.set_index(['floor', 'node_24nov'])['place_v2'].to_dict()
+    node_col = next(c for c in names.columns if c.startswith('node_'))        # node_24nov, node_25nov, ...
+    nm = names.set_index(['floor', node_col])['place_v2'].to_dict()
     m = pd.read_csv(root / 'manifest.csv', dtype=str).fillna('')
+    ex = excluded_sources(s)
+    if ex:
+        m = m[~m['source_zip'].isin(ex)].reset_index(drop=True)
     m['floor'] = m['floor'].astype(int)
     day = datetime.fromisoformat(s['day']).replace(tzinfo=HK)
     m['start'] = [(day + timedelta(hours=int(h), minutes=int(mi), seconds=int(sec))).timestamp()
@@ -217,7 +230,14 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
     obs = pd.DataFrame()
     if wf.exists():
         cols = pd.read_csv(wf, nrows=0).columns
-        o = pd.read_csv(wf, usecols=['scanner_phone', 'source_log', 'bssid', 'rssi', 'epoch'] + (['track'] if 'track' in cols else []))
+        if 'epoch' in cols:
+            o = pd.read_csv(wf, usecols=['scanner_phone', 'source_log', 'bssid', 'rssi', 'epoch'] + (['track'] if 'track' in cols else []))
+        else:
+            # a tree whose observations.csv has no epoch / scanner / log columns (Dicta's 25-Nov build: bssid, ssid,
+            # rssi, is_cityu_infra, firstseen_hk): epoch from firstseen_hk, scanner and log from the session config
+            o = pd.read_csv(wf, usecols=['bssid', 'rssi', 'firstseen_hk'])
+            o['epoch'] = pd.to_datetime(o.pop('firstseen_hk')).map(lambda t: t.timestamp())
+            o['scanner_phone'], o['source_log'] = s['wifi_scanner'], s.get('wifi_log', '')
         o = o.rename(columns={'scanner_phone': 'scanner'})
         if 'track' in o.columns:          # the scanner walked with one track only: assign its rows to that track's stops
             o['track'] = s['id'] + ':' + o['track'].astype(str)

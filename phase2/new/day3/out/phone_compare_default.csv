@@ -1,11 +1,11 @@
 mode,holdout,phone,n_test_recordings,n_test_windows,rec_correct,rec_accuracy,win_correct,win_accuracy,macro_precision,macro_recall,macro_f1,top3_rate,chance
-"train on all phones, test on this phone",leave one session out,ip16,72,864,34,0.4722,422,0.4884,0.4186,0.5064,0.4462,0.7917,0.0385
-"train on all phones, test on this phone",leave one session out,ip18,36,432,26,0.7222,307,0.7106,0.6026,0.6731,0.6205,0.9444,0.0385
-"train on all phones, test on this phone",leave one session out,s24,56,672,17,0.3036,207,0.308,0.266,0.3077,0.2679,0.6429,0.0385
-"train on all phones, test on this phone",leave one session out,a55,27,324,7,0.2593,74,0.2284,0.1538,0.25,0.1821,0.4444,0.0385
-"train on all phones, test on this phone",leave one session out,a56,34,409,17,0.5,189,0.4621,0.4821,0.5256,0.4756,0.8235,0.0385
-train and test on the same phone only,leave one session out,ip16,72,864,32,0.4444,390,0.4514,0.4186,0.4808,0.4331,0.7361,0.0385
-train and test on the same phone only,leave one session out,ip18,36,432,17,0.4722,199,0.4606,0.1885,0.3077,0.2273,0.5,0.0385
-train and test on the same phone only,leave one session out,s24,56,672,14,0.25,169,0.2515,0.1821,0.25,0.2067,0.4821,0.0385
-train and test on the same phone only,leave one session out,a55,0,0,0,,0,,,,,,0.0385
-train and test on the same phone only,leave one session out,a56,34,409,5,0.1471,57,0.1394,0.0869,0.0897,0.0778,0.2647,0.0385
+"train on all phones, test on this phone",leave one session out,ip16,72,864,35,0.4861,438,0.5069,0.4494,0.5385,0.4647,0.8194,0.0385
+"train on all phones, test on this phone",leave one session out,ip18,53,636,41,0.7736,461,0.7248,0.7756,0.7692,0.7449,0.9245,0.0385
+"train on all phones, test on this phone",leave one session out,s24,56,672,18,0.3214,210,0.3125,0.3038,0.3205,0.2976,0.6964,0.0385
+"train on all phones, test on this phone",leave one session out,a55,53,636,17,0.3208,191,0.3003,0.2782,0.3205,0.281,0.566,0.0385
+"train on all phones, test on this phone",leave one session out,a56,53,637,32,0.6038,384,0.6028,0.6487,0.6026,0.5892,0.8491,0.0385
+train and test on the same phone only,leave one session out,ip16,72,864,32,0.4444,379,0.4387,0.4167,0.4808,0.4323,0.75,0.0385
+train and test on the same phone only,leave one session out,ip18,53,636,40,0.7547,472,0.7421,0.6795,0.75,0.6962,0.9057,0.0385
+train and test on the same phone only,leave one session out,s24,56,672,19,0.3393,241,0.3586,0.2821,0.3397,0.2966,0.6786,0.0385
+train and test on the same phone only,leave one session out,a55,53,636,11,0.2075,130,0.2044,0.1372,0.2115,0.163,0.434,0.0385
+train and test on the same phone only,leave one session out,a56,53,637,29,0.5472,339,0.5322,0.5042,0.5577,0.4987,0.8679,0.0385

@@ -26,12 +26,14 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | per-sample predictions with top-3 (learned-weight fused kNN, every scheme) | `fused_knn.py` | `out/fused_sample_predictions.csv` |
 | per-phone x per-place sheet (append one run; not run by `run_all.sh`) | `perf_sheet.py` | `out/phone_place_performance.xlsx` (README, Ranking, Progress, one tab per run), `out/perf_csv/` |
 | places never / rarely correct (before vs after new data) | `hard_places.py` | `out/perf_csv/hard_places_<label>.csv` |
-| 25-Nov clean tree (rebuilt first by `run_all.sh`) | `../../clean-data/2026-11-25-spots/scripts/build_clean.py` | `clean-data/2026-11-25-spots/clean/` |
+| 25-Nov spots clean tree (our partial export; rebuilt first by `run_all.sh`) | `../../clean-data/2026-11-25-spots/scripts/build_clean.py` | `clean-data/2026-11-25-spots/clean/` |
+| 25-Nov spots vs Dicta's complete 25 Nov: which recordings are duplicates | `../../clean-data/2026-11-25-spots/scripts/find_duplicates.py` | `clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv` (session `25spots` leaves the duplicates out via `exclude_sources`) |
+| 25-Nov complete dataset (Dicta, committed built) | `../../clean-data/2026-11-25/scripts/build25.py` | `clean-data/2026-11-25/clean/` |
 
 ## Adding a session collected later
 
-1. Clean it into the `clean/` layout (`manifest.csv`, `floor*/stops|walks/<folder>/<phone>/<Sensor>.csv`, `wifi/observations.csv`): 24 Nov used `phase2/clean-data/2026-11-24/scripts/build_clean.py` (fixed route order); 25 Nov uses `phase2/clean-data/2026-11-25-spots/scripts/build_clean.py` (labels from each file name, with confidence; see its README). A manifest may carry a `track` column (the stops one group walked in order): barometer floor tracking and Wi-Fi assignment then run per track; without it the session is one track.
-2. Add one entry to `config.json` under `sessions` (`"loader": "clean_tree"`, `path`, `day`, `names`, and `raw` so `phone_map.py` checks the handset of every recording against the raw ZIP). If the new session uses node names that `names_24nov.csv` does not know, add rows there (or point `names` at a new CSV with the same columns; 25 Nov uses graph-v2 names directly, `names_25nov.csv` is the identity map). Unknown names are listed in `data.py`'s output and are never silently dropped from the log.
+1. Clean it into the `clean/` layout (`manifest.csv`, `floor*/stops|walks/<folder>/<phone>/<Sensor>.csv`, `wifi/observations.csv`): 24 Nov used `phase2/clean-data/2026-11-24/scripts/build_clean.py` (fixed route order); 25 Nov: Dicta's `phase2/clean-data/2026-11-25/scripts/build25.py` (route order by timestamp, the complete set, session `25nov`) and our `phase2/clean-data/2026-11-25-spots/scripts/build_clean.py` (labels from each file name, with confidence; session `25spots`, see its README). A manifest may carry a `track` column (the stops one group walked in order): barometer floor tracking and Wi-Fi assignment then run per track; without it the session is one track.
+2. Add one entry to `config.json` under `sessions` (`"loader": "clean_tree"`, `path`, `day`, `names`, and `raw` so `phone_map.py` checks the handset of every recording against the raw ZIP). If the new session uses node names that `names_24nov.csv` does not know, add rows there (or point `names` at a new CSV with the same columns, first column `floor`, a `node_<day>` column and `place_v2`: `names_25nov.csv` maps Dicta's node names, `names_25spots.csv` is the identity map of the spots tree). Optional session keys: `exclude_sources` (a CSV with `source_zip` and `status`; every row whose status is not `unique` is left out, e.g. recordings already in another session), `wifi_scanner` / `wifi_log` (for an `observations.csv` without `scanner_phone` / `epoch` columns: epoch from `firstseen_hk`). Unknown names are listed in `data.py`'s output and are never silently dropped from the log.
 3. `sh phase2/new/day3/run_all.sh` (and `--split20`). The fused kNN automatically adds the new session as one more leave-one-session-out fold. `evaluate.py` has named splits for 23/24 Nov and the leave-25-Nov-out splits; `track24.py` is 24 Nov only.
 4. Append the run to the sheet: `python phase2/new/day3/perf_sheet.py --run-dir out-split20 --tab "<date> split20 <what>" --data "<sessions>"` (a new tab and a Progress row; nothing earlier is changed), and `python phase2/new/day3/hard_places.py --label <name> out out-split20`. Keep the old playground as a dated copy (`knn_playground_<date><letter>.html`) before the rerun overwrites it.
 
@@ -264,6 +266,23 @@ Places never correct before (entry 41), leave one session out, correct / samples
 | y5302_back | 0 | 0/7 -> 0/7 | 0/21 -> 0/21 |
 
 Places with zero correct after (leave one session out, per sample): default lift_stairs, y5302_back, y5401; split20 disabled_toilet, escalator_down, lift_stairs, y5302_back, y5401 (before: y5401 4/7 and 5/21, disabled_toilet 3/7 and 6/21, escalator_down 2/8 and 6/24). The playgrounds before the rerun are kept as `out*/knn_playground_2026-11-25a.html` and the per-sample predictions as `out*/fused_sample_predictions_2026-11-25a.csv`.
+
+### l. The complete 25 Nov (Dicta's set as session `25nov`, our spot stops as `25spots`; PROCESS-LOG entries 49, 50)
+
+`25nov` is now Dicta's complete pass (`../../clean-data/2026-11-25/`, 26 stops x ip18 + a55 + a56); `25spots` is our partial
+export minus the 36 recordings that are byte-identical to hers (`../../clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv`),
+i.e. 7 spot takes of ip16 and s24. The old session set is `config_2026-11-25_partial25nov.json`
+(`DAY3_CONFIG=config_2026-11-25_partial25nov.json sh run_all.sh` reproduces entries 44 to 47).
+
+| leave one session out, learned-weight fused kNN | before (entries 44/45) | after |
+|---|---|---|
+| default (takes) | 91/225 = 40.4% | 123/287 = 42.9% |
+| split20 (20 s pieces) | 248/643 = 38.6% | 385/818 = 47.1% |
+
+Leave 25 Nov out (train 23/24 Nov, kNN k=5, |B|+xyz + baro floor, all phones; default / split20): ip18 17/26 / 57/78, a56 10/26 / 31/75,
+a55 8/26 / 22/70, ip16 1/4 / 2/9, s24 0/3 / 0/9. No place has zero correct any more (leave one session out); weakest: lift_stairs
+(precision 0.143), y5302_back, y5401, disabled_toilet. Phone ranking (default accuracy, macro precision): ip18 0.698, 0.667;
+ip16 0.500, 0.474; a56 0.453, 0.409; s24 0.250, 0.250; a55 0.226, 0.173. All numbers: PROCESS-LOG entry 50.
 
 ## Data issues found
 

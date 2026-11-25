@@ -176,20 +176,23 @@ def main():
     tr = np.concatenate([sel('23nov', 'iphone'), sel('24s1', 'iphone')])
     R['xday_23nov+24s1_to_24s2_iphone'] = run_split(bank, tr, sel('24s2', 'iphone'), ['23nov', '24s1'], area,
                                                     note=f"train two earlier sessions (two iPhone handsets: {hs('23nov', 'iphone')} and {hs('24s1', 'iphone')}), test 24s2 {hs('24s2', 'iphone')}")
-    # ---- leave 25 Nov out (only when the session is in config.json): train every earlier session, test 25 Nov, per phone.
-    #      'all phones' = every handset of the earlier sessions trains; 'same handset' = only that phone's earlier recordings.
-    if '25nov' in set(W['session']):
-        early = [x for x in sorted(set(W['session'])) if x != '25nov']
-        for h in sorted(set(W.loc[W['session'] == '25nov', 'phone'])):
-            te = np.where((W['session'] == '25nov') & (W['phone'] == h))[0]
-            tr_all = np.where(W['session'] != '25nov')[0]
+    # ---- leave 25 Nov out (only when a 25-Nov session is in config.json): train every session of an earlier day, test
+    #      every 25-Nov session (25nov, 25spots, ...) per phone. 'all phones' = every handset of the earlier days trains;
+    #      'same handset' = only that phone's earlier recordings. The whole day is held out, so no 25-Nov session trains.
+    d25 = (W['day'] == '2026-11-25').to_numpy()
+    if d25.any():
+        early = [x for x in sorted(set(W.loc[~d25, 'session']))]
+        s25 = '+'.join(sorted(set(W.loc[d25, 'session'])))
+        for h in sorted(set(W.loc[d25, 'phone'])):
+            te = np.where(d25 & (W['phone'] == h).to_numpy())[0]
+            tr_all = np.where(~d25)[0]
             R[f'leave25nov_out_allphones_test_{h}'] = run_split(bank, tr_all, te, early, area,
-                                                                note=f'train {"+".join(early)} (all handsets), test 25nov {h} ({model_of_h(W, h)})')
-            tr_same = np.where((W['session'] != '25nov') & (W['phone'] == h))[0]
+                                                                note=f'train {"+".join(early)} (all handsets), test {s25} {h} ({model_of_h(W, h)})')
+            tr_same = np.where(~d25 & (W['phone'] == h).to_numpy())[0]
             if len(tr_same):
                 ss = sorted(set(W.loc[tr_same, 'session']))
                 R[f'leave25nov_out_samehandset_test_{h}'] = run_split(bank, tr_same, te, ss, area,
-                                                                      note=f'train {h} only ({"+".join(ss)}), test 25nov {h}')
+                                                                      note=f'train {h} only ({"+".join(ss)}), test {s25} {h}')
     # ---- leaky reference
     R['LEAKY_same_recording_time_split_24s2_iphone'] = block_split(bank, sorted(set(bank.rec[sel('24s2', 'iphone')])), area)
     R['LEAKY_same_recording_time_split_24s2_s24'] = block_split(bank, sorted(set(bank.rec[sel('24s2', 's24')])), area)

@@ -27,6 +27,7 @@ import data
 CD = data.HERE.parent.parent / 'clean-data'
 SES = [('23nov', CD / '2026-11-23', 'raw/attachments'), ('24s1', CD / '2026-11-24/sesi1', 'raw'),
        ('24s2', CD / '2026-11-24/sesi2', 'raw')]
+EXCL = {s['id']: data.excluded_sources(s) for s in data.config()['sessions']}     # recordings a session leaves out
 OTHER = [('14nov', CD / '2026-11-14', 'raw'), ('17nov', CD / '2026-11-17', 'raw')]   # not used by day3, counted only
 # sessions added later: config.json entry with `raw` (raw folder, relative to day3/) and `path` (= <root>/clean)
 for _s in data.config()['sessions']:
@@ -65,7 +66,8 @@ def main():
                     'slot': 'iphone', 'manifest_model': r['device_model']} for r in csv.DictReader(open(root / 'sessions.csv'))]
         else:
             src = [{'recording': f"{sid}:{r['folder']}:{r['phone']}", 'type': r['type'], 'source_zip': r['source_zip'],
-                    'slot': r['phone'], 'manifest_model': r['device']} for r in csv.DictReader(open(root / 'clean' / 'manifest.csv'))]
+                    'slot': r['phone'], 'manifest_model': r['device']} for r in csv.DictReader(open(root / 'clean' / 'manifest.csv'))
+                   if r['source_zip'] not in EXCL.get(sid, set())]
         for r in src:
             found = models.get(r['source_zip'], set())
             mm = r['manifest_model']

@@ -22,8 +22,13 @@
      "path": "../../clean-data/2026-11-24/sesi2/clean", "names": "names_24nov.csv",
      "note": "2 phones; iPhone slot = ip16 (iPhone17,4, the 23-Nov stop handset)"},
     {"id": "25nov", "day": "2026-11-25", "loader": "clean_tree",
-     "path": "../../clean-data/2026-11-25-spots/clean", "raw": "../../clean-data/2026-11-25-spots/raw/attachments", "names": "names_25nov.csv",
-     "note": "partial WhatsApp export: floor-5 round (track 'round': ip18 = iPhone19,2 + a56) and spot recordings (track 'spots': ip16 = iPhone17,4 + s24); labels per recording in clean-data/2026-11-25-spots/clean/labels_used.csv"}
+     "path": "../../clean-data/2026-11-25/clean", "raw": "../../clean-data/2026-11-25/raw", "names": "names_25nov.csv",
+     "wifi_scanner": "a56", "wifi_log": "WigleWifi_20261125191559.csv.gz",
+     "note": "Dicta's complete 25-Nov dataset (PROCESS-LOG entry 28): one continuous pass of floor 5 + floor 4, 3 phones (iphone slot = ip18 = iPhone19,2, a55, a56), 26 stops; node names mapped in names_25nov.csv. Her wifi/observations.csv has no epoch/scanner columns: epoch from firstseen_hk, scanner a56 (her clean/README: the one non-empty WiGLE log was scanned on a56), log name from her clean/wifi/log_summary.csv"},
+    {"id": "25spots", "day": "2026-11-25", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-25-spots/clean", "raw": "../../clean-data/2026-11-25-spots/raw/attachments", "names": "names_25spots.csv",
+     "exclude_sources": "../../clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv",
+     "note": "our partial WhatsApp export of 25 Nov minus every recording already in 25nov (exclude_sources: the 36 round recordings of ip18 + a56 are byte-identical to Dicta's). Left: the spot stops by ip16 (iPhone17,4, Tian) and s24 (SM-S9280, Michael) with a label in clean/labels_used.csv (track 'spots'); the 8 unlabelled s24 files are not in the clean tree"}
   ],
   "variants": {
     "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 40).",

@@ -10,12 +10,12 @@
   "outlier_angle_deg": 20.0,
   "walk_endpoints_dropped": 8
  },
- "takes": 225,
- "pieces_total": 676,
+ "takes": 287,
+ "pieces_total": 862,
  "pieces_by_status": {
-  "kept": 643,
+  "kept": 818,
+  "outlier": 25,
   "excluded": 18,
-  "outlier": 14,
   "incomplete": 1
  },
  "by_session": {
@@ -36,8 +36,13 @@
    "kept": 156
   },
   "25nov": {
-   "takes": 23,
-   "kept": 66,
+   "takes": 78,
+   "kept": 223,
+   "outlier": 11
+  },
+  "25spots": {
+   "takes": 7,
+   "kept": 18,
    "outlier": 3
   }
  },
@@ -75,20 +80,26 @@
    "takes": 26,
    "kept": 78
   },
-  "25nov/a56": {
-   "takes": 7,
-   "kept": 21
+  "25nov/a55": {
+   "takes": 26,
+   "kept": 70,
+   "outlier": 8
   },
-  "25nov/ip16": {
+  "25nov/a56": {
+   "takes": 26,
+   "kept": 75,
+   "outlier": 3
+  },
+  "25nov/ip18": {
+   "takes": 26,
+   "kept": 78
+  },
+  "25spots/ip16": {
    "takes": 4,
    "kept": 9,
    "outlier": 3
   },
-  "25nov/ip18": {
-   "takes": 9,
-   "kept": 27
-  },
-  "25nov/s24": {
+  "25spots/s24": {
    "takes": 3,
    "kept": 9
   }
@@ -107,14 +118,18 @@
    61.01
   ],
   "25nov": [
+   59.9,
+   60.03
+  ],
+  "25spots": [
    59.98,
    61.22
   ]
  },
  "kept_pieces_per_take": {
-  "1": 4,
-  "2": 3,
-  "3": 211
+  "1": 7,
+  "2": 8,
+  "3": 265
  },
  "takes_with_no_kept_piece": [
   "23nov:BM05:iphone",
@@ -125,23 +140,23 @@
   "23nov:BM26:iphone",
   "23nov:BM27:iphone"
  ],
- "windows_kept": 2572,
+ "windows_kept": 3272,
  "places_kept": 26,
  "within_take_spread": {
-  "n_pieces": 657,
-  "dev_B_uT_mad": 0.309,
+  "n_pieces": 843,
+  "dev_B_uT_mad": 0.362,
   "abs_dev_B_uT_quantiles": {
-   "0.5": 0.308,
-   "0.9": 1.195,
-   "0.95": 2.249,
-   "0.99": 13.084,
+   "0.5": 0.361,
+   "0.9": 1.529,
+   "0.95": 3.596,
+   "0.99": 16.134,
    "max": 32.282
   },
   "angle_deg_quantiles": {
-   "0.5": 1.011,
-   "0.9": 3.75,
-   "0.95": 5.702,
-   "0.99": 14.437,
+   "0.5": 1.069,
+   "0.9": 3.941,
+   "0.95": 6.048,
+   "0.99": 16.113,
    "max": 124.457
   }
  }
