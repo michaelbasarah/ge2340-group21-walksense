@@ -1,0 +1,11 @@
+track,floor,walk_no,from_node,to_node,n_phones,phones,start_hk
+round,5,w01,canteen,exit_5,2,a56 iphone,17:37:54
+round,5,w02,exit_5,male_toilet,2,a56 iphone,17:41:07
+round,5,w03,male_toilet,y5302,2,a56 iphone,17:45:54
+round,5,w04,y5302,sr9,2,a56 iphone,17:49:03
+round,5,w05,sr9,y5202,2,a56 iphone,17:52:42
+round,5,w06,y5202,female_toilet,2,a56 iphone,17:55:54
+round,5,w07,female_toilet,exit_10,2,a56 iphone,17:59:59
+round,5,w08,exit_10,canteen,2,a56 iphone,18:03:19
+round,5,w09,escalator_up,canteen,2,a56 iphone,18:09:27
+round,5,w10,canteen,escalator_down,2,a56 iphone,18:10:37
