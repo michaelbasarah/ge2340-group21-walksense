@@ -45,6 +45,11 @@ table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:
 th,td{padding:3px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
 th{position:sticky;top:0;background:var(--card);color:var(--ink2)}
 .tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.seg{display:inline-flex;align-items:center;gap:6px}.seg .btns{display:inline-flex}
+.seg button{border-radius:0;padding:4px 10px}.seg button:first-child{border-radius:6px 0 0 6px}.seg button:last-child{border-radius:0 6px 6px 0;border-left:0}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.phonepick{font-weight:650;color:var(--ink)}.phonepick select{border:2px solid var(--accent);font-weight:600}
+.fl{font-weight:650;color:var(--ink)}
 details summary{cursor:pointer;color:var(--ink2);font-size:13px}
 @media (max-width:860px){
   .layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"stage" "controls" "details"}
@@ -68,6 +73,8 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
     <span class="small" id="predsub"></span>
   </div>
   <div class="row tabs small">
+    <label class="phonepick">Phone <select id="pphone" title="show and train on one phone only"></select></label>
+    <span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button></span></span>
     <label>View <select id="view"><option value="pca">PCA projection (linear)</option><option value="raw">Raw features: X vs Y</option></select></label>
     <label id="xw" hidden>X <select id="xa"></select></label>
     <label id="yw" hidden>Y <select id="ya"></select></label>
@@ -88,10 +95,12 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
     <div class="row">
       <label>Session <select id="lsess"></select></label>
       <label>Place <select id="lplace"></select></label>
+      <label>Phone <select id="lphone"></select></label>
     </div>
+    <div class="row"><label><input type="checkbox" id="lsame"> train on same phone only (same-handset test)</label></div>
     <div class="row"><button class="primary" id="rand">Random window</button><button id="free">Free query (clear)</button></div>
     <div class="row"><label>Keep out of training <select id="holdout"><option value="session">its whole session</option><option value="visit">its whole stop (all phones)</option><option value="rec">its recording only (leaky)</option><option value="none">nothing (self-match!)</option></select></label></div>
-    <div class="small" id="loadnote">Sets all sliders to a real 5 s window and shows its true place next to the prediction. Default holds its whole session out, the honest cross-session test.</div>
+    <div class="small" id="loadnote">Sets all sliders to a real 5 s window and shows its true place next to the prediction. Default holds its whole session out, the honest cross-session test. "Same phone only" keeps just that phone's windows in training, as the README recommends (one model per phone). Caution: "iphone" is two handsets (iPhone17,4 on 23 Nov and 24 s2, iPhone19,2 on 24 s1), so for the iPhone only 23 Nov vs 24 s2 is a true same-handset test; the S24 is one handset throughout.</div>
   </div>
 
   <div class="card">
@@ -114,8 +123,8 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   <div class="card">
     <h2>Training filters (also what is drawn)</h2>
     <div class="row"><label>Floor <select id="ffloor"><option value="all">both</option><option value="5">5</option><option value="4">4</option></select></label></div>
-    <div class="row" id="fsess"></div>
-    <div class="row" id="fphone"></div>
+    <div class="row"><span class="fl">Sessions:</span><span class="row" id="fsess" style="margin:0"></span></div>
+    <div class="row"><span class="fl">Phones:</span><span class="row" id="fphone" style="margin:0"></span></div>
     <div class="small" id="fnote"></div>
   </div>
 </section>
@@ -166,6 +175,22 @@ function knn(bank, D, k, nPlaces) {
   if (tot > 0) for (let p = 0; p < nPlaces; p++) { shares[p] /= tot; if (shares[p] > best) { best = shares[p]; pred = p; } }
   return {order, shares, counts, pred};
 }
+// f: {sessOn[], phoneOn[], ffloor ('all'|'4'|'5'), loaded (window index or -1), holdout ('session'|'visit'|'rec'|'none'), samePhone (bool)}
+// Returns the training mask (Uint8Array). Same rules for what is drawn and what trains the kNN.
+function buildMask(bank, f) {
+  const m = new Uint8Array(bank.n), L = f.loaded;
+  for (let i = 0; i < bank.n; i++) {
+    let ok = f.sessOn[bank.sess[i]] && f.phoneOn[bank.phone[i]] && (f.ffloor === 'all' || bank.floor[i] === parseInt(f.ffloor));
+    if (ok && L >= 0) {
+      if (f.samePhone && bank.phone[i] !== bank.phone[L]) ok = false;
+      else if (f.holdout === 'session' && bank.sess[i] === bank.sess[L]) ok = false;
+      else if (f.holdout === 'visit' && bank.visit[i] === bank.visit[L]) ok = false;
+      else if (f.holdout === 'rec' && bank.rec[i] === bank.rec[L]) ok = false;
+    }
+    m[i] = ok ? 1 : 0;
+  }
+  return m;
+}
 function projectPCA(P, q) {
   const pc = P.pca, S = P.scale, z = {};
   const v = [];
@@ -189,7 +214,10 @@ const NP = P.places.length, FE = P.feats;
 const SYM = ['circle', 'square', 'triangle-up', 'diamond', 'cross'];
 const st = {q: {}, floor: 5, tiltOn: true, w: Object.assign({}, P.model.weights), k: P.model.k,
   sessOn: P.sessions.map(() => true), phoneOn: P.phones.map(() => true), ffloor: 'all',
-  view: 'pca', xa: 'B', ya: 'Bv', loaded: -1, moved: false, holdout: 'session', theme: 'auto'};
+  view: 'pca', xa: 'B', ya: 'Bv', loaded: -1, moved: false, holdout: 'session', theme: 'auto', colorBy: 'place', samePhone: false};
+const PHCOL = ['#2a78d6', '#e8812a', '#17a673', '#9b5de5', '#c2185b'];
+const phoneN = P.phones.map((_, i) => { let c = 0; for (let j = 0; j < bank.n; j++) if (bank.phone[j] === i) c++; return c; });
+const phLab = i => `${P.phones[i]} (${phoneN[i]})`;
 const ranges = {};
 function median(a) { a = a.filter(Number.isFinite).sort((x, y) => x - y); const m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; }
 FE.forEach(f => {
@@ -247,9 +275,32 @@ P.sessions.forEach((s, i) => {
   l.firstChild.onchange = e => { st.sessOn[i] = e.target.checked; refresh(); };
   $('lsess').add(new Option(s, i, false, s === '24s2'));
 });
+const phBoxes = [];
 P.phones.forEach((s, i) => {
-  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${s}`; $('fphone').appendChild(l);
-  l.firstChild.onchange = e => { st.phoneOn[i] = e.target.checked; refresh(); };
+  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${phLab(i)}`; $('fphone').appendChild(l);
+  phBoxes.push(l.firstChild);
+  l.firstChild.onchange = e => { st.phoneOn[i] = e.target.checked; syncPhone(); refresh(); };
+  $('lphone').add(new Option(phLab(i), i));
+});
+$('lphone').add(new Option(`any phone (${bank.n})`, -1), 0); $('lphone').value = '-1';
+// top dropdown and the checkboxes in the filter card are two views of st.phoneOn
+$('pphone').add(new Option(`all phones (${bank.n})`, 'all'));
+P.phones.forEach((s, i) => $('pphone').add(new Option(phLab(i), i)));
+$('pphone').add(new Option('custom (several)', 'custom')); $('pphone').lastChild.hidden = true;
+function syncPhone() {
+  phBoxes.forEach((b, i) => { b.checked = st.phoneOn[i]; });
+  const on = st.phoneOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
+  $('pphone').value = on.length === st.phoneOn.length ? 'all' : on.length === 1 ? String(on[0]) : 'custom';
+}
+$('pphone').onchange = e => {
+  const v = e.target.value; if (v === 'custom') return;
+  st.phoneOn = P.phones.map((_, i) => v === 'all' || String(i) === v); syncPhone(); refresh();
+};
+$('lsame').onchange = e => { st.samePhone = e.target.checked; refresh(); };
+document.querySelectorAll('#colby button').forEach(b => b.onclick = () => {
+  st.colorBy = b.dataset.c;
+  document.querySelectorAll('#colby button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  drawPoints();
 });
 $('ffloor').onchange = e => { st.ffloor = e.target.value; refresh(); };
 $('lplace').add(new Option('any place', -1));
@@ -268,27 +319,21 @@ function loadWindow(i) {
   syncSliders(); refresh();
 }
 $('rand').onclick = () => {
-  const s = parseInt($('lsess').value), p = parseInt($('lplace').value), c = [];
-  for (let i = 0; i < bank.n; i++) if (bank.sess[i] === s && (p < 0 || bank.place[i] === p)) c.push(i);
-  if (!c.length) { $('loadnote').textContent = 'No windows for that session and place.'; return; }
+  const s = parseInt($('lsess').value), p = parseInt($('lplace').value), ph = parseInt($('lphone').value), c = [];
+  for (let i = 0; i < bank.n; i++) if (bank.sess[i] === s && (p < 0 || bank.place[i] === p) && (ph < 0 || bank.phone[i] === ph)) c.push(i);
+  if (!c.length) { $('loadnote').textContent = 'No windows for that session, place and phone.'; return; }
+  $('loadnote').textContent = LOADNOTE;
   loadWindow(c[Math.floor(Math.random() * c.length)]);
 };
+const LOADNOTE = $('loadnote').textContent;
 $('free').onclick = () => { st.loaded = -1; st.moved = false; refresh(); };
 
 // ---------- state -> mask
 let mask = new Uint8Array(bank.n);
+let nTr = NP;      // number of data traces (places or phones); overlay traces follow
 function computeMask() {
-  let cnt = 0;
-  const L = st.loaded;
-  for (let i = 0; i < bank.n; i++) {
-    let ok = st.sessOn[bank.sess[i]] && st.phoneOn[bank.phone[i]] && (st.ffloor === 'all' || bank.floor[i] === parseInt(st.ffloor));
-    if (ok && L >= 0) {
-      if (st.holdout === 'session' && bank.sess[i] === bank.sess[L]) ok = false;
-      else if (st.holdout === 'visit' && bank.visit[i] === bank.visit[L]) ok = false;
-      else if (st.holdout === 'rec' && bank.rec[i] === bank.rec[L]) ok = false;
-    }
-    mask[i] = ok ? 1 : 0; cnt += ok ? 1 : 0;
-  }
+  mask = buildMask(bank, {sessOn: st.sessOn, phoneOn: st.phoneOn, ffloor: st.ffloor, loaded: st.loaded, holdout: st.holdout, samePhone: st.samePhone});
+  let cnt = 0; for (let i = 0; i < bank.n; i++) cnt += mask[i];
   return cnt;
 }
 
@@ -314,15 +359,17 @@ function axisRange(vals) {
 }
 function drawPoints() {
   if (typeof Plotly === 'undefined') { $('plot').innerHTML = '<p class="small">Plotly could not be loaded from cdn.jsdelivr.net (offline?). The numbers on the right still work.</p>'; return; }
-  const byPlace = Array.from({length: NP}, () => []);
-  for (let i = 0; i < bank.n; i++) if (mask[i]) byPlace[bank.place[i]].push(i);
-  const traces = byPlace.map((ix, p) => {
+  const byPhone = st.colorBy === 'phone', G = byPhone ? P.phones.length : NP;
+  const groups = Array.from({length: G}, () => []);
+  for (let i = 0; i < bank.n; i++) if (mask[i]) groups[byPhone ? bank.phone[i] : bank.place[i]].push(i);
+  const traces = groups.map((ix, g) => {
     const xy = ix.map(coords);
-    return {type: 'scatter', mode: 'markers', name: P.places[p], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
-      marker: {size: 7, color: P.colours[p], symbol: ix.map(i => SYM[bank.sess[i]]), opacity: 0.8, line: {width: 0.5, color: css('--bg')}},
-      text: ix.map(i => `${P.places[p]} (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${P.phones[bank.phone[i]]}<br>${P.recs[bank.rec[i]]}`),
+    return {type: 'scatter', mode: 'markers', name: byPhone ? phLab(g) : P.places[g], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
+      marker: {size: 7, color: byPhone ? PHCOL[g % PHCOL.length] : P.colours[g], symbol: ix.map(i => SYM[bank.sess[i]]), opacity: byPhone ? 0.7 : 0.8, line: {width: 0.5, color: css('--bg')}},
+      text: ix.map(i => `<b>${P.places[bank.place[i]]}</b> (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${P.phones[bank.phone[i]]}<br>${P.recs[bank.rec[i]]}`),
       hovertemplate: '%{text}<extra></extra>'};
   });
+  nTr = G;
   traces.push({type: 'scatter', mode: 'lines', name: 'neighbour lines', x: [], y: [], line: {color: css('--ink'), width: 1}, hoverinfo: 'skip', showlegend: false});
   traces.push({type: 'scatter', mode: 'markers', name: 'neighbours', x: [], y: [], marker: {size: 13, symbol: 'circle-open', color: css('--ink'), line: {width: 1.6, color: css('--ink')}}, hoverinfo: 'skip', showlegend: false});
   traces.push({type: 'scatter', mode: 'markers', name: 'query', x: [], y: [], marker: {size: 24, symbol: 'star', color: '#f5c518', line: {width: 2, color: css('--ink')}}, hoverinfo: 'skip', showlegend: false});
@@ -336,7 +383,7 @@ function drawPoints() {
   $('plotnote').textContent = (st.view === 'pca'
     ? 'Linear PCA of the standardised, weighted features (fixed at the default weights; groups with weight 0 get 0.05 so every slider moves the star). The star is projected with the same components.'
     : 'Raw features on the axes; tilt axes only show windows that have tilt (not 23 Nov).')
-    + ' Colour = place, shape = session (circle 23 Nov, square 24 s1, triangle 24 s2). Lines go to the k nearest in the FULL space, so in a 2-D picture a neighbour can look far away.';
+    + (st.colorBy === 'phone' ? ' Colour = phone (place is in the hover), shape = session (circle 23 Nov, square 24 s1, triangle 24 s2).' : ' Colour = place, shape = session (circle 23 Nov, square 24 s1, triangle 24 s2).') + ' Lines go to the k nearest in the FULL space, so in a 2-D picture a neighbour can look far away.';
 }
 let overlayPending = false;
 function updateOverlay() {
@@ -347,7 +394,7 @@ function updateOverlay() {
     lx.push(qp[0], c[0], null); ly.push(qp[1], c[1], null); nx.push(c[0]); ny.push(c[1]);
   }
   const col = res.pred >= 0 ? P.colours[res.pred] : '#f5c518';
-  Plotly.restyle('plot', {x: [lx, nx, [qp[0]]], y: [ly, ny, [qp[1]]], 'marker.color': [css('--ink'), css('--ink'), col]}, [NP, NP + 1, NP + 2]);
+  Plotly.restyle('plot', {x: [lx, nx, [qp[0]]], y: [ly, ny, [qp[1]]], 'marker.color': [css('--ink'), css('--ink'), col]}, [nTr, nTr + 1, nTr + 2]);
 }
 
 // ---------- live compute + render
@@ -363,7 +410,7 @@ function render() {
   FE.forEach(f => { $('v_' + f).textContent = (f === 'Bv' || f === 'Bh') && !st.tiltOn ? 'n/a' : fmt(st.q[f]); });
   $('kv').textContent = st.k;
   const L = st.loaded, kk = Math.min(st.k, nTrain);
-  $('fnote').textContent = `${nTrain} of ${bank.n} windows are used for training and drawn` + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + '.';
+  $('fnote').textContent = `${nTrain} of ${bank.n} windows are used for training and drawn` + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + (L >= 0 && st.samePhone ? `, same phone only (${P.phones[bank.phone[L]]})` : '') + '.';
   if (!res || res.pred < 0) {
     $('pred').textContent = nTrain === 0 ? 'No training windows' : 'No distance (all weights 0?)';
     $('truth').textContent = ''; $('predsub').textContent = ''; $('votes').innerHTML = ''; $('nn').innerHTML = ''; $('distsum').textContent = ''; $('votenote').textContent = ''; return;
@@ -387,7 +434,8 @@ function render() {
 function refresh() { nTrain = computeMask(); drawPoints(); live(); }
 
 $('k').value = st.k; syncWeights(); syncSliders();
-window.__pg = {st, bank, P, refresh, live, loadWindow, getRes: () => res, qobj};
+syncPhone();
+window.__pg = {st, bank, P, refresh, syncPhone, live, loadWindow, getRes: () => res, qobj};
 refresh();
 window.addEventListener('resize', () => { if (plotReady) drawPoints(); });
 })();

@@ -325,37 +325,67 @@ HTML = """<!doctype html>
 body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
 h1{font-size:18px;margin:0 0 4px} p{color:var(--ink2);margin:0 0 10px;max-width:70em}
 .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-select,button{font:inherit;padding:4px 8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px}
+select,button{font:inherit;padding:4px 8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;max-width:100%}
+.phonepick{font-weight:650}.phonepick select{border:2px solid #2a78d6;font-weight:600}
+.seg{display:inline-flex;align-items:center;gap:6px}.seg .btns{display:inline-flex}
+.seg button{border-radius:0;padding:4px 10px;cursor:pointer}.seg button:first-child{border-radius:6px 0 0 6px}.seg button:last-child{border-radius:0 6px 6px 0;border-left:0}
+.seg button[aria-pressed=true]{background:#2a78d6;color:#fff;border-color:#2a78d6}
+body{overflow-x:hidden}
 #plot{width:100%;height:72vh;min-height:420px}
 </style></head><body>
 <h1>WalkSense: what the stop data looks like</h1>
 <p>One dot per 5 s window of a stop recording (Wi-Fi view: one dot per stop). Colour = place (click a legend entry to hide it, double-click to show only that place).
 Shape = session: circle 23 Nov, square 24 Nov session 1, triangle 24 Nov session 2. Hover for place, session, phone and recording.
+Use <b>Phone</b> to look at one handset at a time, or <b>Colour by phone</b> to see per-phone clusters (the "iphone" is two handsets: iPhone17,4 on 23 Nov and 24 s2, iPhone19,2 on 24 s1).
 Same place in different sessions landing together = a fingerprint that carries over; separate clumps per session = drift. Internal team notes, not report text.</p>
 <div class="row"><label>View <select id="view"></select></label>
+<label class="phonepick">Phone <select id="phone"></select></label>
+<span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button></span></span>
 <label>Floor <select id="floor"><option value="all">both</option><option value="5">5</option><option value="4">4</option></select></label>
 <label>Session <select id="sess"><option value="all">all</option><option>23nov</option><option>24s1</option><option>24s2</option></select></label></div>
 <div id="plot"></div>
 <script>
 const DATA = __DATA__;
 const SYM = {"23nov":"circle","24s1":"square","24s2":"triangle-up"};
-const view = document.getElementById('view'), fsel = document.getElementById('floor'), ssel = document.getElementById('sess');
+const PHCOL = ['#2a78d6', '#e8812a', '#17a673', '#9b5de5', '#c2185b'];
+const view = document.getElementById('view'), fsel = document.getElementById('floor'), ssel = document.getElementById('sess'), psel = document.getElementById('phone');
+let colorBy = 'place';
 Object.keys(DATA.views).forEach(k => { const o = document.createElement('option'); o.value = k; o.textContent = k; view.appendChild(o); });
+// phone options show how many points the current view has per phone
+function fillPhones() {
+  const pts = DATA.views[view.value].pts, keep = psel.value || 'all', n = {};
+  pts.forEach(q => { n[q[6]] = (n[q[6]] || 0) + 1; });
+  psel.innerHTML = '';
+  const add = (v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; psel.appendChild(o); };
+  add('all', `all phones (${pts.length})`);
+  DATA.phones.forEach(p => add(p, `${p} (${n[p] || 0})`));
+  psel.value = [...psel.options].some(o => o.value === keep) ? keep : 'all';
+}
 function draw(){
-  const v = DATA.views[view.value], f = fsel.value, s = ssel.value;
+  const v = DATA.views[view.value], f = fsel.value, s = ssel.value, ph = psel.value;
   const css = getComputedStyle(document.documentElement);
-  const traces = DATA.places.map((p, i) => {
-    const ix = v.pts.filter(q => q[2] === i && (f === 'all' || String(DATA.floor[i]) === f) && (s === 'all' || q[3] === s));
-    return {type: 'scattergl', mode: 'markers', name: p, x: ix.map(q => q[0]), y: ix.map(q => q[1]),
-      marker: {size: v.size, color: DATA.colours[i], symbol: ix.map(q => SYM[q[3]]), opacity: 0.8},
-      text: ix.map(q => `${p} (floor ${DATA.floor[i]})<br>${q[3]} · ${q[4]}<br>${q[5]}`), hovertemplate: '%{text}<extra></extra>'};
-  });
+  const keepPt = (q, i) => (f === 'all' || String(DATA.floor[i]) === f) && (s === 'all' || q[3] === s) && (ph === 'all' || q[6] === ph);
+  const hover = q => `<b>${DATA.places[q[2]]}</b> (floor ${DATA.floor[q[2]]})<br>${q[3]} · ${q[4]}<br>${q[5]}`;
+  const mk = (name, ix, color) => ({type: 'scattergl', mode: 'markers', name, x: ix.map(q => q[0]), y: ix.map(q => q[1]),
+    marker: {size: v.size, color, symbol: ix.map(q => SYM[q[3]]), opacity: 0.8},
+    text: ix.map(hover), hovertemplate: '%{text}<extra></extra>'});
+  let traces;
+  if (colorBy === 'phone') {
+    const cnt = {}; v.pts.forEach(q => { cnt[q[6]] = (cnt[q[6]] || 0) + 1; });
+    traces = DATA.phones.map((p, j) => mk(`${p} (${cnt[p] || 0})`, v.pts.filter(q => q[6] === p && keepPt(q, q[2])), PHCOL[j % PHCOL.length]));
+  } else {
+    traces = DATA.places.map((p, i) => mk(p, v.pts.filter(q => q[2] === i && keepPt(q, i)), DATA.colours[i]));
+  }
   Plotly.react('plot', traces, {paper_bgcolor: css.getPropertyValue('--bg'), plot_bgcolor: css.getPropertyValue('--bg'),
     font: {color: css.getPropertyValue('--ink'), size: 12}, margin: {l: 40, r: 10, t: 30, b: 40},
     title: {text: view.value, font: {size: 13}, x: 0}, xaxis: {title: v.xl, gridcolor: css.getPropertyValue('--line'), zeroline: false},
-    yaxis: {title: v.yl, gridcolor: css.getPropertyValue('--line'), zeroline: false}, legend: {font: {size: 10}}}, {responsive: true});
+    yaxis: {title: v.yl, gridcolor: css.getPropertyValue('--line'), zeroline: false}, legend: {font: {size: 10}}, showlegend: window.innerWidth > 700}, {responsive: true});
 }
-[view, fsel, ssel].forEach(e => e.addEventListener('change', draw)); draw();
+view.addEventListener('change', fillPhones);
+document.querySelectorAll('#colby button').forEach(b => b.addEventListener('click', () => {
+  colorBy = b.dataset.c; document.querySelectorAll('#colby button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw();
+}));
+[view, fsel, ssel, psel].forEach(e => e.addEventListener('change', draw)); fillPhones(); draw();
 </script></body></html>
 """
 
@@ -371,22 +401,22 @@ def explorer(bank, emb, P):
         if k.startswith('_'):
             continue
         g = W.iloc[ix]
-        views[k] = {'size': 6, 'xl': '', 'yl': '', 'pts': [[round(float(a), 3), round(float(b), 3), pi[p], s, ph, f'{kk} window {w}']
+        views[k] = {'size': 6, 'xl': '', 'yl': '', 'pts': [[round(float(a), 3), round(float(b), 3), pi[p], s, ph, f'{kk} window {w}', ph]
                                                           for (a, b), p, s, ph, kk, w in zip(xy, g['place'], g['session'], g['phone'], g['key'], g['window'])]}
     xy, vis = emb['_wifi_visits']
     vv = V.loc[vis]
-    views['Wi-Fi per stop visit: MDS'] = {'size': 10, 'xl': '', 'yl': '', 'pts': [[round(float(a), 3), round(float(b), 3), pi[p], s, 'wifi s24', v]
+    views['Wi-Fi per stop visit: MDS'] = {'size': 10, 'xl': '', 'yl': '', 'pts': [[round(float(a), 3), round(float(b), 3), pi[p], s, 'wifi s24', v, 's24']
                                                                                    for (a, b), p, s, v in zip(xy, vv['place'], vv['session'], vis)]}
     views['raw: |B| mean vs B_vertical (24 Nov)'] = {'size': 6, 'xl': '|B| mean (uT)', 'yl': 'B_vertical (uT)', 'pts': [
-        [round(float(a), 2), round(float(b), 2), pi[p], s, ph, kk] for a, b, p, s, ph, kk in
+        [round(float(a), 2), round(float(b), 2), pi[p], s, ph, kk, ph] for a, b, p, s, ph, kk in
         zip(W['B_mean'], W['Bv'], W['place'], W['session'], W['phone'], W['key']) if np.isfinite(b)]}
     Vs = V.reset_index().sort_values('start')
     rel = Vs['hpa_iphone'] - Vs.groupby('session')['hpa_iphone'].transform('first')
     tmin = (Vs['start'] - Vs.groupby('session')['start'].transform('min')) / 60
     views['barometer: iPhone pressure per stop vs time'] = {'size': 10, 'xl': 'minutes since first stop', 'yl': 'hPa minus first stop (higher = lower floor)',
-                                                            'pts': [[round(float(a), 2), round(float(b), 3), pi[p], s, 'iphone', v]
+                                                            'pts': [[round(float(a), 2), round(float(b), 3), pi[p], s, 'iphone', v, 'iphone']
                                                                     for a, b, p, s, v in zip(tmin, rel, Vs['place'], Vs['session'], Vs['visit'])]}
-    payload = {'places': places, 'floor': [int(P.loc[p, 'floor']) for p in places], 'colours': colours, 'views': views}
+    payload = {'phones': sorted(W['phone'].unique()), 'places': places, 'floor': [int(P.loc[p, 'floor']) for p in places], 'colours': colours, 'views': views}
     (OUT / 'explore.html').write_text(HTML.replace('__DATA__', json.dumps(payload, separators=(',', ':'))))
     print('wrote explore.html')
 

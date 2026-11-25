@@ -39,6 +39,7 @@ Contents:
 28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
 29. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
 30. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
+31. 25 Nov: per-phone filtering and colouring in the playground and the explorer
 - Lessons learned
 - Open questions / next steps
 
@@ -431,6 +432,18 @@ Contents:
 
 ---
 
+## 31. 25 Nov: per-phone filtering and colouring in the playground and the explorer
+
+- **What we tried:** make the data viewable per phone (iphone, s24, a55, a56) in both interactive pages. The playground already had phone checkboxes, but unlabelled in the last card, and the user did not find them. Internal team tool, not report text.
+- **Why:** the phones' magnetometers disagree (entries 14, 27) and the README recommends a same-phone test, so the team wants to see each phone's windows on their own and test "train on the same phone only".
+- **How:** edited the generators, not only the HTML: `phase2/new/day3/playground_template.html` (+ `playground.py`, unchanged) and `visualise.py`, then reran `visualise.py` and `playground.py`. Playground: a labelled **Phone** dropdown at the top next to Colour/View (all phones plus each phone, with window counts); the filter card now has labelled "Sessions:" and "Phones:" rows; dropdown and checkboxes are two views of the same state (several ticked phones show "custom (several)"); **Colour by place / phone** toggle (shape stays session, place goes first in the hover); "Try it" has a Phone dropdown for the random window and a "train on same phone only" checkbox (with the note that "iphone" is two handsets). The training-mask rule moved into the CORE block as `buildMask()` so the Node check runs the page's own filtering. Explorer: Phone dropdown (counts per phone for the current view), Colour by place/phone toggle, every point now carries a phone key (the Wi-Fi view counts as s24, the barometer view as iphone). `playground_check.py`/`.js`: new cases that go through `buildMask` (single-phone s24 with own session held out, single-phone iphone with whole stop held out, a55 only, "same phone only"), plus a check that the page's mask equals an independent numpy mask.
+- **Result:** windows per phone (from `data.load()`, shown in the page labels): iphone 1140, s24 636, a56 325, a55 324 (total 2425); per phone and session: iphone 504 (23 Nov) / 324 (24 s1) / 312 (24 s2), s24 324 (24 s1) / 312 (24 s2), a55 324 and a56 325 (24 s1 only). `playground_check.py`: JS prediction equals sklearn in 960/960 cases (the earlier 720 plus 240 new single-phone and same-phone cases, 60 per setting), same neighbour set in all, largest vote-share difference 1.3e-15, and the page's training mask equals the numpy mask in 960/960. Rendered headless in Chromium (playwright-core), desktop 1280 and 390 px, no horizontal scroll, no console errors; selecting s24 in the dropdown ticks only s24 in the filter card (636 of 2425 windows used), "random window + s24 + same phone only" trained on 324 windows, all nearest neighbours s24. Screenshots: `phone_*.png` in the session scratchpad (not committed).
+- **Outcome:** success. A first run of the new check gave 932/960 only because my numpy mask did not implement the "whole stop" hold-out (the page was right); fixed in the check, so that is a bug in the check, not in the page.
+- **What changed because of it:** `out/explore.html` and `out/knn_playground.html` regenerated (PNGs identical on rerun); README unchanged except the explorer line.
+- **Links:** `phase2/new/day3/playground_template.html`, `visualise.py`, `playground_check.py`, `playground_check.js`, `out/explore.html`, `out/knn_playground.html`; the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -448,6 +461,7 @@ Contents:
 - **Step tracking on the barometer breaks over long pauses.** Weather moved the pressure 0.833 hPa during a break and four stops went to the wrong floor (entry 25).
 - **A same-day win can vanish across days.** Tilt correction helped on 23-Nov walk endpoints (39% vs 0%) but added nothing across days or at stops (entry 25).
 - **Check the check.** The first sklearn comparison of the playground disagreed in 8 of 720 cases because the reference mishandled a missing feature (entry 30); compare the missing-data rules, not only the maths.
+- **Put the filter rule in the code that is tested.** The playground's training-mask rule now lives in the checked block and the check compares it with an independent mask (entry 31); a mask bug would otherwise hide behind a correct kNN.
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps

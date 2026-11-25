@@ -60,6 +60,26 @@ settings = {
     'xyz+baro only, k=1, own stop held out, iphone only': ({'B': 0, 'xyz': 1, 'tilt': 0, 'baro': .3}, 1, lambda i: (visit != visit[i]) & (phone == P['phones'].index('iphone'))),
     'default weights, k=50, floor 5 only': (DEF, 50, lambda i: floor == 5),
 }
+
+NPH = len(P['phones'])
+def filt(i, only_phone=None, same_phone=False, holdout='session'):
+    """Filter spec for the page's buildMask (JS) and the independent numpy mask for the same rule."""
+    on = [only_phone is None or j == only_phone for j in range(NPH)]
+    f = {'sessOn': [True] * len(P['sessions']), 'phoneOn': on, 'ffloor': 'all', 'loaded': int(i), 'holdout': holdout, 'samePhone': same_phone}
+    m = np.array(on)[phone]
+    if same_phone: m = m & (phone == phone[i])
+    if holdout == 'session': m = m & (sess != sess[i])
+    elif holdout == 'visit': m = m & (visit != visit[i])
+    return f, m
+
+
+# (name, weights, k, mask function, filter-spec function or None).  Phone-filter cases go through the page's buildMask in JS.
+FILT = {
+    'single-phone filter s24 (checkbox/dropdown), own session held out': (lambda i: filt(i, only_phone=P['phones'].index('s24')), lambda i: phone[i] == P['phones'].index('s24')),
+    'single-phone filter iphone, whole stop held out': (lambda i: filt(i, only_phone=P['phones'].index('iphone'), holdout='visit'), lambda i: phone[i] == P['phones'].index('iphone')),
+    'single-phone filter a55 only, no hold-out': (lambda i: filt(i, only_phone=P['phones'].index('a55'), holdout='none'), lambda i: phone[i] == P['phones'].index('a55')),
+    'train on same phone only (query phone), own session held out': (lambda i: filt(i, same_phone=True), lambda i: True),
+}
 cases, meta = [], []
 for name, (w, k, mk) in settings.items():
     for i in rng.choice(n, 60, replace=False):
@@ -67,13 +87,25 @@ for name, (w, k, mk) in settings.items():
             m = mk(i)
             if m.sum() < k: continue
             cases.append({'i': int(i), 'w': w, 'k': k, 'tilt': tilt, 'use': m.astype(int).tolist()}); meta.append((name, int(i), w, k, tilt, m))
+for name, (spec, qok) in FILT.items():
+    done = 0
+    for i in rng.permutation(n):
+        if done >= 30: break
+        if not qok(i): continue
+        f, m = spec(int(i))
+        if m.sum() < 25: continue
+        for tilt in (True, False):
+            cases.append({'i': int(i), 'w': DEF, 'k': 25, 'tilt': tilt, 'filter': f}); meta.append((name, int(i), DEF, 25, tilt, m))
+        done += 1
 tmp = Path(tempfile.mkdtemp())
 (tmp / 'cases.json').write_text(json.dumps(cases))
 subprocess.run(['node', str(HERE / 'playground_check.js'), str(HTML), str(tmp / 'cases.json'), str(tmp / 'out.json')], check=True)
 out = json.loads((tmp / 'out.json').read_text())
 stats = {}
 pcdiff = 0
+mask_bad = 0
 for (name, i, w, k, tilt, m), o in zip(meta, out):
+    mask_bad += int(not np.array_equal(np.array(o['use'], bool), m))   # the page's mask == the independent numpy mask
     pred, share, nn = sk_predict(i, w, k, tilt, m)
     s = stats.setdefault(name, {'n': 0, 'pred_agree': 0, 'nn_set_agree': 0, 'max_share_diff': 0.0})
     s['n'] += 1; s['pred_agree'] += int(pred == o['pred'])
@@ -85,4 +117,5 @@ tot = sum(s['n'] for s in stats.values()); ag = sum(s['pred_agree'] for s in sta
 for name, s in stats.items():
     print(f"{name}: predicted place agrees {s['pred_agree']}/{s['n']}, same neighbour set {s['nn_set_agree']}/{s['n']}, max |share diff| {s['max_share_diff']:.2e}")
 print(f'TOTAL predicted place agrees {ag}/{tot}; max |JS PCA projection - embedded pc| over checked windows = {pcdiff:.4f} (embedded values are rounded to 3 decimals)')
-sys.exit(0 if ag == tot else 1)
+print(f'training masks built by the page differ from the numpy masks in {mask_bad} of {tot} cases')
+sys.exit(0 if ag == tot and mask_bad == 0 else 1)

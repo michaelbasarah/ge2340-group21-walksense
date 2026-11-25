@@ -158,7 +158,7 @@ Optimistic in the same ways as entry 20: the graph and the walk order are the ro
 - `fig_per_place_B_pressure.png`: \|B\| and pressure per place and session (strip plot).
 - `fig_knn_neighbour_graph.png`: nearest-neighbour "confusion as a graph" on the graph-v2 layout.
 - `fig_embed_*.png`: PCA and t-SNE of the magnetic features, \|B\|+tilt (24 Nov), the fused space (t-SNE on the learned-weight distance) and Wi-Fi (MDS, one dot per stop).
-- **`explore.html`**: interactive explorer (plotly from a CDN, pinned with an integrity hash). Views: every embedding above, raw \|B\| vs B_vertical, barometer per stop. Hover shows place, session, phone and recording; click legend entries to show or hide places.
+- **`explore.html`**: interactive explorer (plotly from a CDN, pinned with an integrity hash). Views: every embedding above, raw \|B\| vs B_vertical, barometer per stop. Hover shows place, session, phone and recording; click legend entries to show or hide places. A **Phone** dropdown shows one handset at a time and **Colour by place / phone** shows per-phone clusters (the playground has the same, plus a "train on same phone only" test).
 
 ## Data issues found
 
