@@ -141,8 +141,16 @@ if cm.exists():
             return 'Men', 'wc'
         if 'toilet' in n:
             return 'WC', 'wc'
+        if 'exit 10' in n:
+            return 'Exit 10', 'exit'
+        if 'exit 5' in n:
+            return 'Exit 5', 'exit'
         if 'exit' in n or 'gate' in n:
             return 'Exit', 'exit'
+        if 'escalator up' in n:
+            return 'Esc up', 'stairs'
+        if 'escalator down' in n:
+            return 'Esc down', 'stairs'
         if 'escalator' in n:
             return 'Escalator', 'stairs'
         m = _re.search(r'study room (\d+)', n)

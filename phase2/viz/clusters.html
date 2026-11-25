@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>WalkSense - kNN cluster explorer</title>
+<style>
+ :root{--ink:#16202b;--mut:#6b7684;--line:#e3e8ee;--accent:#126782;--q:#e8306b}
+ *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:#eef1f6}
+ header{padding:16px 22px;background:#fff;border-bottom:1px solid var(--line)}
+ h1{margin:0;font-size:19px} .sub{color:var(--mut);font-size:13px;margin-top:3px}
+ .wrap{display:flex;gap:16px;max-width:1280px;margin:16px auto;padding:0 14px;align-items:flex-start;flex-wrap:wrap}
+ .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+ .plot{flex:1;min-width:560px} .side{width:330px}
+ svg{width:100%;height:auto;background:#fafcff;border:1px solid var(--line);border-radius:10px;display:block}
+ h2{font-size:14px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+ .row{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:13px}
+ .row label{width:92px;color:var(--mut)} .row input[type=range]{flex:1}
+ .row .val{width:58px;text-align:right;font-variant-numeric:tabular-nums}
+ .row .chk{width:auto}
+ select{padding:6px 8px;border:1px solid var(--line);border-radius:7px;font-size:13px;background:#fff}
+ .axes{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+ .axes label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--mut)}
+ .pred{margin-top:12px;padding:11px 13px;border-radius:9px;background:#fff4f8;border:1px solid #f6c9db}
+ .pred .big{font-size:18px;font-weight:700;color:var(--q)} .pred .mut{font-size:12px;color:var(--mut)}
+ .votes{margin-top:8px;font-size:12px} .votes div{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dashed var(--line)}
+ .foot{color:var(--mut);font-size:12px;margin:4px auto 24px;max-width:1280px;padding:0 16px;line-height:1.5}
+ .kchip{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:1px 9px;font-weight:700}
+</style></head><body>
+<header><h1>WalkSense - kNN cluster explorer</h1>
+<div class="sub">Each dot is one recorded stop in magnetometer / pressure / Wi-Fi feature space. Drag the sliders to move the pink query point; it predicts a location by majority vote of its <span class="kchip">k</span> nearest stops. Data: <b id="dayl"></b>.</div></header>
+<div class="wrap">
+ <div class="panel plot">
+  <div class="axes">
+   <label>X axis<select id="xsel"></select></label>
+   <label>Y axis<select id="ysel"></select></label>
+  </div>
+  <svg id="plot" viewBox="0 0 640 520" role="img" aria-label="cluster plot"></svg>
+ </div>
+ <div class="panel side">
+  <h2>k (neighbours)</h2>
+  <div class="row"><label>k</label><input id="kr" type="range" min="1" max="12" value="5"><span class="val" id="kv">5</span></div>
+  <h2 style="margin-top:14px">Query point (drag)</h2>
+  <div id="sliders"></div>
+  <div class="pred">
+   <div class="mut">predicted location</div>
+   <div class="big" id="pred">-</div>
+   <div class="mut" id="predsub"></div>
+   <div class="votes" id="votes"></div>
+  </div>
+ </div>
+</div>
+<div class="foot">
+ The shaded circle is the neighbourhood: its radius reaches the farthest of the k nearest stops <i>in the current 2-D view</i>. A checkbox turns a feature on/off in the distance calculation (distance is standardised z-score Euclidean over the ticked features). Turn off everything except Mag features to see the magnetometer-only vote; add Wi-Fi to watch it re-rank. This is the magneto(+wifi) confidence step, made draggable - floor-gating and step/distance limits happen outside this picture.
+</div>
+<script>
+const DATA = {"day": "2026-11-17", "feats": [{"key": "magx", "name": "Mag X (uT)"}, {"key": "magy", "name": "Mag Y (uT)"}, {"key": "magz", "name": "Mag Z (uT)"}, {"key": "magmag", "name": "Mag |B| (uT)"}, {"key": "press", "name": "Pressure (hPa)"}, {"key": "wifi", "name": "Wi-Fi count"}], "stops": [{"id": "BM01", "label": "Exit 5", "f": {"magx": 34.15957396712379, "magy": -22.828605328515376, "magz": -2.4751103615201533, "magmag": 48.21379814261131, "press": 1014.3854466296297, "wifi": 113.0}}, {"id": "BM02", "label": "Toilet", "f": {"magx": 31.524120960904238, "magy": -24.005968991831832, "magz": -18.521581319793125, "magmag": 43.84480259224247, "press": 1014.3848165185185, "wifi": 55.0}}, {"id": "BM03", "label": "Y5", "f": {"magx": 14.418227574117784, "magy": -27.537635607337336, "magz": -19.086843640457126, "magmag": 36.606394688315014, "press": 1014.3995637407407, "wifi": 62.0}}, {"id": "BM04", "label": "Study room 11", "f": {"magx": -17.275793338418417, "magy": -21.0880999103003, "magz": -17.562076938718718, "magmag": 32.73800202648205, "press": 1014.405738, "wifi": 65.0}}, {"id": "BM05", "label": "Study room 10", "f": {"magx": -13.363905898065399, "magy": -11.192224308410744, "magz": -11.036413103666334, "magmag": 20.715210521280213, "press": 1014.4049356296297, "wifi": 64.0}}, {"id": "BM06", "label": "Study room 9", "f": {"magx": -30.557092945393595, "magy": -0.9761681025688113, "magz": -10.230143461333888, "magmag": 33.234213526089725, "press": 1014.4111868076923, "wifi": 46.0}}, {"id": "BM07", "label": "Study room 8", "f": {"magx": -42.82845091596731, "magy": 2.535154916509057, "magz": -26.001201351594396, "magmag": 50.23623920946114, "press": 1014.4086625555556, "wifi": 47.0}}, {"id": "BM08", "label": "Y5 (revisit)", "f": {"magx": 13.63801492990624, "magy": 30.626322000677344, "magz": -30.19308475298632, "magmag": 45.1894565082681, "press": 1014.4189776153846, "wifi": 0.0}}, {"id": "BM09", "label": "Toilet (revisit)", "f": {"magx": 10.320178252668113, "magy": 26.4809178103469, "magz": -27.863591837344895, "magmag": 39.82624480615233, "press": 1014.4328336296296, "wifi": 45.0}}, {"id": "BM10", "label": "Exit 5 (revisit)", "f": {"magx": 11.916664049689022, "magy": 25.690432772906238, "magz": -22.690484084734734, "magmag": 36.326337413532634, "press": 1014.4426783333333, "wifi": 97.0}}, {"id": "BM11", "label": "Canteen", "f": {"magx": 34.52736024460794, "magy": -22.247402075281947, "magz": -9.377346424510511, "magmag": 42.27541975861141, "press": 1014.4490785925926, "wifi": 59.0}}, {"id": "BM12", "label": "Escalator, upper landing (going down)", "f": {"magx": -12.261075696631632, "magy": -35.24350271897231, "magz": -9.516620693100434, "magmag": 38.5826686212028, "press": 1014.4652104814814, "wifi": 79.0}}, {"id": "BM13", "label": "Escalator, lower landing (going down)", "f": {"magx": -7.573744688910244, "magy": -22.19794977063397, "magz": -30.601881416029364, "magmag": 38.69169889280777, "press": 1015.0348748148148, "wifi": 62.0}}, {"id": "BM14", "label": "Y4", "f": {"magx": -29.64970280589256, "magy": 11.412436372273831, "magz": -39.05256910317985, "magmag": 50.68301495271875, "press": 1015.0374264814815, "wifi": 0.0}}, {"id": "BM15", "label": "Lecture theatre 1 B", "f": {"magx": 14.06378092370604, "magy": 26.207731321418084, "magz": -39.19184033507508, "magmag": 49.32059656308919, "press": 1015.047954925926, "wifi": 0.0}}, {"id": "BM16", "label": "Lecture theatre 1 A", "f": {"magx": 17.213969230020346, "magy": 7.873042263792528, "magz": -22.831910761994664, "magmag": 29.890864897420446, "press": 1015.0536826296296, "wifi": 0.0}}, {"id": "BM17", "label": "Exit 5 (revisit)", "f": {"magx": 28.38112278503837, "magy": 25.081590186006007, "magz": -33.55306309259927, "magmag": 50.746476602520055, "press": 1015.0637958518519, "wifi": 0.0}}, {"id": "BM18", "label": "Exit gate (pintu keluar)", "f": {"magx": 27.819166214601267, "magy": -19.760710213810476, "magz": -13.857289296209544, "magmag": 36.99854165759823, "press": 1015.0654431851852, "wifi": 0.0}}, {"id": "BM19", "label": "Exit 5 (revisit)", "f": {"magx": -5.210243151275275, "magy": -42.00835618543544, "magz": -22.817097805515516, "magmag": 48.142332549584616, "press": 1015.0545021111111, "wifi": 0.0}}, {"id": "BM20", "label": "Lecture theatre 2 A", "f": {"magx": -13.683529805058392, "magy": -33.60931459622956, "magz": -38.18581230118785, "magmag": 52.928592271702605, "press": 1015.0573420370371, "wifi": 156.0}}, {"id": "BM21", "label": "Lecture theatre 2 B", "f": {"magx": -16.744865789062395, "magy": -45.663716389673006, "magz": -14.29849866832666, "magmag": 50.804713243918755, "press": 1015.0626995185186, "wifi": 0.0}}, {"id": "BM22", "label": "Y4 (revisit)", "f": {"magx": -33.7533645757505, "magy": 11.784950251292528, "magz": -39.33909923764176, "magmag": 53.364230200859836, "press": 1015.0656411111111, "wifi": 0.0}}, {"id": "BM23", "label": "Escalator, lower landing (going up)", "f": {"magx": 6.0795827540393725, "magy": 18.670596459102434, "magz": -37.54675105975976, "magmag": 42.46510940754321, "press": 1015.0614788148148, "wifi": 11.0}}, {"id": "BM24", "label": "Escalator, upper landing (going up)", "f": {"magx": 21.49586731633756, "magy": 30.505660746094062, "magz": -7.441676974692795, "magmag": 38.10992665278119, "press": 1014.4765952962963, "wifi": 0.0}}, {"id": "BM25", "label": "Canteen (revisit)", "f": {"magx": 37.63464569492662, "magy": -19.35105509197465, "magz": -3.711379627935298, "magmag": 42.61424023171398, "press": 1014.4944876666667, "wifi": 0.0}}, {"id": "BM26", "label": "Exit 5 (final)", "f": {"magx": -11.659661173991662, "magy": -39.549185887051365, "magz": 7.554491210594397, "magmag": 42.159482307573285, "press": 1014.5052508888889, "wifi": 0.0}}]};
+const S = DATA.stops, FEATS = DATA.feats;
+document.getElementById('dayl').textContent = DATA.day + '  (' + S.length + ' stops)';
+const stat = {};
+FEATS.forEach(ft=>{const v=S.map(s=>s.f[ft.key]);const mn=Math.min(...v),mx=Math.max(...v);
+  const mean=v.reduce((a,b)=>a+b,0)/v.length; const sd=Math.sqrt(v.reduce((a,b)=>a+(b-mean)**2,0)/v.length)||1;
+  stat[ft.key]={mn,mx,mean,sd};});
+// colour per label
+const labels=[...new Set(S.map(s=>s.label))];
+const PAL=['#126782','#e0a43b','#1b8a5a','#c0392b','#8e6bb0','#2f9c8f','#d97915','#4a63b0','#b0556b','#5a8f3a','#9c6b2f','#3a7d9d','#7a3a9d','#9d3a5a','#3a9d7a','#6b6b6b'];
+const col={}; labels.forEach((l,i)=>col[l]=PAL[i%PAL.length]);
+
+const q={}; FEATS.forEach(ft=>q[ft.key]=stat[ft.key].mean);
+const on={}; FEATS.forEach(ft=>on[ft.key]=true);
+let xKey=FEATS[0].key, yKey=FEATS[1].key, k=5;
+
+const xsel=document.getElementById('xsel'), ysel=document.getElementById('ysel');
+FEATS.forEach(ft=>{xsel.add(new Option(ft.name,ft.key)); ysel.add(new Option(ft.name,ft.key));});
+xsel.value=xKey; ysel.value=yKey;
+xsel.onchange=()=>{xKey=xsel.value;render();}; ysel.onchange=()=>{yKey=ysel.value;render();};
+const kr=document.getElementById('kr');
+kr.oninput=()=>{k=+kr.value;document.getElementById('kv').textContent=k;render();};
+
+const sliders=document.getElementById('sliders');
+FEATS.forEach(ft=>{
+ const st=stat[ft.key], step=((st.mx-st.mn)/200)||1;
+ const row=document.createElement('div'); row.className='row';
+ row.innerHTML='<input class="chk" type="checkbox" checked title="use in distance"><label>'+ft.name+'</label>'+
+   '<input type="range" min="'+st.mn+'" max="'+st.mx+'" step="'+step+'" value="'+q[ft.key]+'"><span class="val"></span>';
+ const chk=row.querySelector('.chk'), rng=row.querySelector('input[type=range]'), val=row.querySelector('.val');
+ val.textContent=q[ft.key].toFixed(1);
+ rng.oninput=()=>{q[ft.key]=+rng.value;val.textContent=q[ft.key].toFixed(1);render();};
+ chk.onchange=()=>{on[ft.key]=chk.checked;render();};
+ sliders.appendChild(row);
+});
+
+const NS='http://www.w3.org/2000/svg', svg=document.getElementById('plot');
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+const W=640,H=520,pad=52;
+function dist(a,b){let s=0;FEATS.forEach(ft=>{if(!on[ft.key])return;const z=(a[ft.key]-b[ft.key])/stat[ft.key].sd;s+=z*z;});return Math.sqrt(s);}
+
+function render(){
+ while(svg.firstChild)svg.removeChild(svg.firstChild);
+ const xs=stat[xKey], ys=stat[yKey];
+ const xmn=Math.min(xs.mn,q[xKey]), xmx=Math.max(xs.mx,q[xKey]);
+ const ymn=Math.min(ys.mn,q[yKey]), ymx=Math.max(ys.mx,q[yKey]);
+ const sx=v=>pad+(v-xmn)/((xmx-xmn)||1)*(W-2*pad);
+ const sy=v=>H-pad-(v-ymn)/((ymx-ymn)||1)*(H-2*pad);
+ // axes
+ svg.appendChild(el('line',{x1:pad,y1:H-pad,x2:W-pad,y2:H-pad,stroke:'#c6cfda'}));
+ svg.appendChild(el('line',{x1:pad,y1:pad,x2:pad,y2:H-pad,stroke:'#c6cfda'}));
+ const xl=el('text',{x:W/2,y:H-16,'text-anchor':'middle','font-size':12,fill:'#6b7684'});xl.textContent=FEATS.find(f=>f.key===xKey).name;svg.appendChild(xl);
+ const yl=el('text',{x:16,y:H/2,'text-anchor':'middle','font-size':12,fill:'#6b7684',transform:'rotate(-90 16 '+(H/2)+')'});yl.textContent=FEATS.find(f=>f.key===yKey).name;svg.appendChild(yl);
+ // knn
+ const ranked=S.map(s=>({s,d:dist(q,s.f)})).sort((a,b)=>a.d-b.d);
+ const near=ranked.slice(0,Math.min(k,ranked.length));
+ const nearSet=new Set(near.map(n=>n.s.id));
+ // neighbourhood circle radius in display space
+ let rad=0; near.forEach(n=>{const dx=sx(n.s.f[xKey])-sx(q[xKey]),dy=sy(n.s.f[yKey])-sy(q[yKey]);rad=Math.max(rad,Math.hypot(dx,dy));});
+ svg.appendChild(el('circle',{cx:sx(q[xKey]),cy:sy(q[yKey]),r:rad+10,fill:'rgba(232,48,107,0.09)',stroke:'rgba(232,48,107,0.5)','stroke-dasharray':'5 4'}));
+ // points
+ S.forEach(s=>{const isN=nearSet.has(s.id);
+  svg.appendChild(el('circle',{cx:sx(s.f[xKey]),cy:sy(s.f[yKey]),r:isN?8:5.5,fill:col[s.label],stroke:isN?'#16202b':'#fff','stroke-width':isN?2:1,opacity:isN?1:0.72}));
+ });
+ // labels for nearest only (avoid clutter)
+ near.forEach(n=>{const t=el('text',{x:sx(n.s.f[xKey])+9,y:sy(n.s.f[yKey])+4,'font-size':10,fill:'#16202b'});t.textContent=n.s.label;svg.appendChild(t);});
+ // query point
+ svg.appendChild(el('circle',{cx:sx(q[xKey]),cy:sy(q[yKey]),r:7,fill:'#e8306b',stroke:'#fff','stroke-width':2}));
+ // vote
+ const tally={}; near.forEach(n=>tally[n.s.label]=(tally[n.s.label]||0)+1);
+ const order=Object.entries(tally).sort((a,b)=>b[1]-a[1]);
+ const pred=order.length?order[0][0]:'-';
+ document.getElementById('pred').textContent=pred;
+ document.getElementById('predsub').textContent=order.length?(order[0][1]+' of '+near.length+' nearest agree'):'';
+ const vt=document.getElementById('votes'); vt.innerHTML='';
+ order.forEach(([l,c])=>{const d=document.createElement('div');
+   d.innerHTML='<span style="color:'+col[l]+'">&#9679;</span> '+l+'<b>'+c+'</b>';vt.appendChild(d);});
+}
+render();
+</script></body></html>
