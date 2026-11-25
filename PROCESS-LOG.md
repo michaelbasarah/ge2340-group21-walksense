@@ -53,6 +53,7 @@ Contents:
 42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
 43. 25 Nov: 25 Nov added as a fourth session: before/after, leave 25 Nov out, the never-correct places again
 44. 25 Nov: per-phone x per-place performance sheet (xlsx) and the regenerated playgrounds
+45. 25 Nov: playground top bar as checkbox groups and a "Compare phones side by side" panel
 - Lessons learned
 - Open questions / next steps
 
@@ -668,6 +669,17 @@ Contents:
 - **What changed because of it:** after each new run: `perf_sheet.py --run-dir <out dir> --tab "<date> <variant> <what>" --data "<sessions>"` (day3 README "Adding a session", step 4).
 - **Links:** `phase2/new/day3/perf_sheet.py`, `out/phone_place_performance.xlsx`, `out/perf_csv/`, `out/knn_playground.html`, `out-split20/knn_playground.html`, `out*/knn_playground_2026-11-25a.html`, `out/explore.html`, `out-split20/explore.html`; the commit that adds this entry.
 
+## 45. 25 Nov: playground top bar as checkbox groups and a "Compare phones side by side" panel
+
+- **What we tried:** replace the single-choice Phone / Session / Place dropdowns of `knn_playground.html` by multi-select checkbox groups, and add a panel that shows the ticked phones side by side (accuracy, precision, per-place hits) so phones can be compared on the same settings.
+- **Why:** the team wants to compare the phones' accuracy directly instead of picking one phone at a time.
+- **How:** `phase2/new/day3/playground_template.html`: top-bar groups (all / none toggle each, places grouped by floor with a toggle per floor) synced with the filters-card checklists (`st.phoneOn`, `st.sessOn`, `st.placeOn`); the Try-it selects are unchanged. New pure function `comparePhones()` in the CORE block (reuses `distances`, `knn`, the recording vote of the phone x session matrix; hold-out `session` or `visit`; training mode `all` or `same`), panel + Plotly bar chart. Python reference `compare_phones.py` (numpy distances of `phone_matrix.py`, sklearn `accuracy_score` and `precision_recall_fscore_support(labels = places with test recordings, average='macro', zero_division=0)`); `playground.py` writes `out*/phone_compare_default.csv/.json`; `playground_check.py` / `playground_check.js` compare the page with it. Old playgrounds kept as `out/knn_playground_2026-11-25b.html` and `out-split20/knn_playground_2026-11-25b.html`. Commands: `playground.py` and `DAY3_VARIANT=split20 playground.py`, then `playground_check.py` in both.
+- **Result:** `playground_check.py` exit 0 for `out/` and `DAY3_VARIANT=split20`: predicted place 1320/1320, matrix 130/130, place masks 40/40, variance all cases, and the new check: page == `compare_phones.py` in 43/43 phone results over 13 settings (default both training modes, 10 random place / session / phone / weight / k subsets, leave one stop out). Default compare numbers (`out/phone_compare_default.csv`: train on all phones, leave one session out, all sessions and places, k 25; recordings correct / n, accuracy, macro precision, top-3): ip16 34/72, 0.472, 0.419, 0.792; ip18 26/36, 0.722, 0.603, 0.944; s24 17/56, 0.304, 0.266, 0.643; a55 7/27, 0.259, 0.154, 0.444; a56 17/34, 0.500, 0.482, 0.824. split20 (`out-split20/phone_compare_default.csv`): ip16 111/190, 0.584, 0.623, 0.732; ip18 78/108, 0.722, 0.632, 0.815; s24 49/168, 0.292, 0.313, 0.411; a55 11/76, 0.145, 0.099, 0.184; a56 37/101, 0.366, 0.320, 0.525. Same phone only (default run): ip16 32/72, ip18 17/36, s24 14/56, a55 no test data (one session), a56 5/34. Browser test: Chromium 151 (headless, driven over the DevTools protocol) loaded `out/knn_playground.html`: no console errors, the panel's numbers equal the Python ones, a55 / a56 unticked and floor 4 unticked updated the panel and the filters-card boxes, unticking all sessions gave the "tick at least two sessions" note; screenshots `out/compare_panel_check_topbar_2026-11-25b.png` and `out/compare_panel_check_2026-11-25b.png`.
+  - Note: the panel uses the page's recipe (global scaling, true floor, current learned weights B 0, xyz 0.25, tilt 0.5, baro 0.25 from `fused_model.json`), not the per-fold recipe of `fused_knn.py`, so its numbers differ from the tables of entries 43 and 44 (e.g. leave one session out ip18 26/36 here). Macro metrics are on recording votes over the places the phone has test recordings of; the tables of entry 44 are per sample.
+- **Outcome:** success. The numbers are a live demo, not evaluation results.
+- **What changed because of it:** the playground has the compare panel and checkbox groups; day-3 README section k.
+- **Links:** `phase2/new/day3/playground_template.html`, `compare_phones.py`, `playground.py`, `playground_check.py`, `playground_check.js`, `README.md` (section k); `out/knn_playground.html`, `out-split20/knn_playground.html`, `out*/phone_compare_default.csv/.json`, `out*/knn_playground_2026-11-25b.html`; the commit that adds this entry.
+
 ---
 
 ## Lessons learned
@@ -699,10 +711,12 @@ Contents:
 - **Name the hard cases before adding the data that should fix them.** The never-correct list was written down before the 25-Nov rerun (entry 40), so the after numbers (female_toilet 0/7 -> 5/9, lift_stairs still 0/9) cannot be cherry-picked (entry 43).
 - **A missing value in one phone can break a median.** One S24 stop without pressure made the S24 floor threshold `nan` and moved two old floor scores; use nan-safe statistics and diff the old numbers after adding data (entry 43).
 - **New data can help some places and hurt others.** Adding 25 Nov fixed female_toilet, but y5401 and the disabled toilet lost their correct predictions; check per place, not only the total (entry 43).
+- **Compare phones on the same settings, in one place.** Pick the held-out rule once and show every ticked phone under it (entry 45); the training mode matters more than expected for phones with one session (same phone only: a55 has no leave-one-session-out test).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
 
+- **Compare panel (entry 45):** the team should say which training mode and hold-out the report should quote for phone comparisons (the panel defaults to train on all phones, leave one session out); the numbers are a live demo, not evaluation results.
 - **Day-3 data (24 Nov) is in and evaluated (entries 29 to 33).** Still worth collecting if time allows (deadline 30 Nov): (1) a test walk that leaves the recorded route, with "I'm here" taps, to measure the tracker without the optimistic parts; (2) one handset for every session (the 24-Nov "iphone" was two devices, now labelled ip16 and ip18; ip18 has stops in 24 s1 only, so it has no same-handset cross-session test); (3) a Wi-Fi logger that saves every scan. A further fingerprint session with the same handset would add a fourth leave-one-session-out fold (one line in `phase2/new/day3/config.json`).
 - **Cross-day with the new protocol (entry 29):** same handset 23 Nov -> 24 Nov s2 13/26 and the reverse 18/42 (chance 3.8%, 26 places), up from 18 to 24% on 17 Nov, still below the 23-Nov 78% revisit number. Only one same-handset day pair exists, so this is one estimate.
 - **Open question: does a scan-every-time Wi-Fi logger make Wi-Fi usable?** Still untested; the 24-Nov WiGLE logs are again new-or-stronger only (entry 30).

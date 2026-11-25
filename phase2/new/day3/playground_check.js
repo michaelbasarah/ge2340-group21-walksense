@@ -3,7 +3,7 @@ const fs = require('fs');
 const html = fs.readFileSync(process.argv[2], 'utf8');
 const P = JSON.parse(html.match(/<script type="application\/json" id="data">([\s\S]*?)<\/script>/)[1]);
 const core = html.match(/\/\/ CORE-START[^\n]*\n([\s\S]*?)\/\/ CORE-END/)[1];
-const lib = new Function(core + '\nreturn {buildBank, distances, knn, projectPCA, buildMask, phoneSessionMatrix, varianceFeature, placeCells};')();
+const lib = new Function(core + '\nreturn {buildBank, distances, knn, projectPCA, buildMask, phoneSessionMatrix, varianceFeature, placeCells, comparePhones};')();
 const bank = lib.buildBank(P);
 const mxArg = process.argv[5];                 // optional: 'matrix' -> write the live panel's matrix at the default weights/k
 if (mxArg === 'matrix') {
@@ -24,6 +24,11 @@ if (mxArg === 'variance') {            // nested variance decomposition + per-pl
     }
     return {n: use.reduce((a, b) => a + b, 0), var: r, cells: lib.placeCells(bank, use)};
   })));
+  process.exit(0);
+}
+if (mxArg === 'compare') {             // compare-phones panel: argv[3] = cases [{w, k, o}] (o = the panel's options), result = comparePhones() per case
+  const cc = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+  fs.writeFileSync(process.argv[4], JSON.stringify(cc.map(c => lib.comparePhones(bank, P, c.w, c.k, c.o))));
   process.exit(0);
 }
 if (mxArg === 'masks') {               // training mask vs drawn mask for place filters

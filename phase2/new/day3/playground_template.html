@@ -49,9 +49,24 @@ th{position:sticky;top:0;background:var(--card);color:var(--ink2)}
 .seg{display:inline-flex;align-items:center;gap:6px}.seg .btns{display:inline-flex}
 .seg button{border-radius:0;padding:4px 10px}.seg button:first-child{border-radius:6px 0 0 6px}.seg button:last-child{border-radius:0 6px 6px 0;border-left:0}
 .seg button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
-.phonepick{font-weight:650;color:var(--ink)}.phonepick select{border:2px solid var(--accent);font-weight:600}
+.cbg{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 8px;border:2px solid var(--accent);border-radius:8px;padding:2px 8px;font-weight:650;color:var(--ink);background:var(--card);max-width:100%}
+.cbg label{font-weight:500;font-size:12.5px;gap:3px}
+.cbg .tg{padding:0 8px;font-size:12px;border-radius:10px}
+.cbg .cbs{display:inline-flex;flex-wrap:wrap;gap:2px 8px}
+details.cbg{position:relative;display:inline-block}
+details.cbg>summary{list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650}
+details.cbg>summary::-webkit-details-marker{display:none}
+details.cbg>summary::after{content:" \25BE"}
+.pop{position:absolute;top:calc(100% + 6px);left:-2px;z-index:30;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;box-shadow:0 6px 22px rgba(0,0,0,.28);width:min(560px,86vw);max-height:60vh;overflow:auto;font-weight:500}
+.pop .flr{margin:4px 0 8px}.pop .flr>div.cbs{margin-top:3px}
+.pop .cbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.cmp td.best{background:color-mix(in srgb,var(--good) 30%,transparent);font-weight:650}
+.cmp td.na{color:var(--ink2)}
+.cmp th.sub{background:var(--bg);color:var(--ink2);font-size:11.5px;text-transform:uppercase;letter-spacing:.03em}
+.cmp td,.cmp th{white-space:nowrap}
+.cmp th.ph{position:sticky;left:0;z-index:2;background:var(--card)}
+#cmplot{width:100%;height:250px}
 .fl{font-weight:650;color:var(--ink)}
-.placepick{font-weight:650;color:var(--ink)}.placepick select{border:2px solid var(--accent);font-weight:600}
 .plgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 8px;max-height:200px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin:4px 0}
 .plgrid label{display:flex;align-items:center;gap:4px;font-size:12.5px}
 .vfeat{margin:8px 0 12px}.vfeat .vh{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:13px}
@@ -62,7 +77,6 @@ th{position:sticky;top:0;background:var(--card);color:var(--ink2)}
 .vnote{font-size:12px;color:var(--ink2)}
 .cmx td.c{min-width:118px;font-size:12px;line-height:1.4}
 .cmx .far{background:color-mix(in srgb,var(--bad) 24%,transparent);border-radius:4px;font-weight:650}
-.sesspick{font-weight:650;color:var(--ink)}.sesspick select{border:2px solid var(--accent);font-weight:600}
 .mx{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
 .mx table{width:auto;min-width:100%}
 .mx th,.mx td{white-space:normal;vertical-align:top;border-right:1px solid var(--line)}
@@ -95,9 +109,9 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
     <span class="small" id="predsub"></span>
   </div>
   <div class="row tabs small">
-    <label class="phonepick">Phone <select id="pphone" title="show and train on one phone only"></select></label>
-    <label class="sesspick">Session <select id="psess" title="show and train on one session, or all (same as the session boxes in the filters card)"></select></label>
-    <label class="placepick">Place <select id="pplace" title="show (and train on) one place, a floor, or all places (same as the place checklist in the filters card)"></select></label>
+    <span class="cbg" id="gphone" title="show and train on these phones (same as the phone boxes in the filters card)">Phone <button class="tg" id="tgphone">none</button><span class="cbs" id="pphoneb"></span></span>
+    <span class="cbg" id="gsess" title="show and train on these sessions (same as the session boxes in the filters card)">Session <button class="tg" id="tgsess">none</button><span class="cbs" id="psessb"></span></span>
+    <details class="cbg" id="gplace"><summary id="pplacesum">Place</summary><div class="pop"><div class="row" style="margin:0 0 4px"><button class="tg" id="tgplace">none</button><span class="small">same as the place checklist in the filters card; each floor has its own toggle</span></div><div id="pplaceb"></div></div></details>
     <span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button><button data-c="session" aria-pressed="false">session</button></span></span>
     <label>View <select id="view"><option value="pca">PCA projection (linear)</option><option value="raw">Raw features: X vs Y</option></select></label>
     <label id="xw" hidden>X <select id="xa"></select></label>
@@ -185,6 +199,18 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   </div>
   <div class="mx"><table id="mxtab"></table></div>
   <div class="small" id="mxnote"></div>
+</section>
+<section class="card" id="cmpcard">
+  <h2>Compare phones side by side</h2>
+  <div class="banner" style="margin:0 0 8px"><b>Live demo, not evaluation results.</b> One column per ticked phone (top bar), using the ticked sessions and places, the current <b>k</b> and <b>weights</b>. Recording result = majority vote of its 5 s windows. <b id="cmrule"></b></div>
+  <div class="row">
+    <label>Training <select id="cmmode"><option value="all">train on all phones, test on this phone</option><option value="same">train and test on the same phone only</option></select></label>
+    <label>Hold out <select id="cmhold"><option value="session">leave one session out (default)</option><option value="visit">leave one stop out (all phones of that stop)</option></select></label>
+    <button id="cmgo" class="primary">Recompute</button><span class="small" id="cmstat"></span>
+  </div>
+  <div id="cmplot"></div>
+  <div class="mx"><table class="cmp" id="cmtab"></table></div>
+  <div class="small" id="cmnote"></div>
 </section>
 <div id="mxtip" hidden></div>
 <p class="small" style="margin-top:6px"><b>What this is not.</b> Wi-Fi is left out (a 100+-dimension vector cannot be slid); the weight normalisation simply ignores it. The |B| group here is the window mean only (fused_knn.py also uses sd, p10, p90 of |B|). Distances and scales use all 2425 windows. Pooling all phones mixes different magnetometers (day-3 README e). One query is one 5 s window, so a single prediction is much noisier than the per-recording numbers in the README.</p>
@@ -376,6 +402,72 @@ function placeCells(bank, use) {
   }
   return out;
 }
+// ---- compare phones side by side (live demo; python reference: compare_phones.py, which uses sklearn for the metrics).
+// o: {phones: [phone idx], sessOn[], placeOn[], mode: 'same' | 'all', holdout: 'session' | 'visit'}. For each phone, its windows in the
+// checked sessions and places are tested; training = windows of the checked sessions and places (mode 'same': that phone only, 'all': every
+// phone), minus the held-out part of the test window: 'session' = its whole session (leave one session out), 'visit' = its whole stop (all phones).
+// A recording's prediction = majority vote of its window predictions (ties -> lowest place index); top-3 = its true place is among the 3
+// places with the largest summed vote share over the recording's windows (share > 0). Macro precision / recall / F1 = mean over the places that
+// the phone has test recordings of (a place never predicted has precision 0), like sklearn precision_recall_fscore_support(zero_division=0).
+// Returns one object per phone: counts, rates (NaN when nothing could be tested) and per[placeIdx] = [recHit, recN, winHit, winN].
+function comparePhones(bank, P, w, k, o) {
+  const nP = P.places.length, out = [];
+  for (const ph of o.phones) {
+    const pool = new Uint8Array(bank.n), te = [];
+    for (let i = 0; i < bank.n; i++) {
+      if (!o.sessOn[bank.sess[i]] || !o.placeOn[bank.place[i]]) continue;
+      if (o.mode === 'all' || bank.phone[i] === ph) pool[i] = 1;
+      if (bank.phone[i] === ph) te.push(i);
+    }
+    const folds = new Map();
+    for (const i of te) { const key = o.holdout === 'visit' ? bank.visit[i] : bank.sess[i]; let f = folds.get(key); if (!f) { f = []; folds.set(key, f); } f.push(i); }
+    let wh = 0, wn = 0, nf = 0;
+    const per = {}, votes = new Map(), acc = new Map(), truth = new Map();
+    const tally = t => per[t] || (per[t] = [0, 0, 0, 0]);
+    for (const [key, ix] of folds) {
+      const use = new Uint8Array(bank.n); let cnt = 0;
+      for (let i = 0; i < bank.n; i++) {
+        if (!pool[i]) continue;
+        if (o.holdout === 'visit' ? bank.visit[i] === key : bank.sess[i] === key) continue;
+        use[i] = 1; cnt++;
+      }
+      if (!cnt) continue;
+      let used = 0;
+      for (const i of ix) {
+        const q = {B: bank.B[i], x: bank.x[i], y: bank.y[i], z: bank.z[i], Bv: bank.Bv[i], Bh: bank.Bh[i], floor: bank.floor[i]};
+        const r = knn(bank, distances(bank, q, w, use), Math.min(k, cnt), nP);
+        if (r.pred < 0) continue;
+        used++; const hit = r.pred === bank.place[i] ? 1 : 0;
+        wh += hit; wn++;
+        const t = tally(bank.place[i]); t[2] += hit; t[3]++;
+        let v = votes.get(bank.rec[i]);
+        if (!v) { v = new Int32Array(nP); votes.set(bank.rec[i], v); acc.set(bank.rec[i], new Float64Array(nP)); truth.set(bank.rec[i], bank.place[i]); }
+        v[r.pred]++;
+        const a = acc.get(bank.rec[i]); for (let p = 0; p < nP; p++) a[p] += r.shares[p];
+      }
+      if (used) nf++;
+    }
+    let rh = 0, rn = 0, t3 = 0;
+    const predN = new Int32Array(nP), tp = new Int32Array(nP);
+    for (const [rec, v] of votes) {
+      let b = 0; for (let p = 1; p < nP; p++) if (v[p] > v[b]) b = p;
+      const tr = truth.get(rec), hit = b === tr ? 1 : 0, t = tally(tr);
+      rh += hit; rn++; t[0] += hit; t[1]++; predN[b]++; tp[tr] += hit;
+      const a = acc.get(rec), top = Array.from({length: nP}, (_, p) => p).sort((x, y) => a[y] - a[x] || x - y).slice(0, 3);
+      if (top.includes(tr) && a[tr] > 0) t3++;
+    }
+    let sp = 0, sr = 0, sf = 0, nl = 0;
+    for (const key of Object.keys(per)) {
+      const p = +key, tn = per[p][1];
+      if (!tn) continue;
+      const pr = predN[p] ? tp[p] / predN[p] : 0, rc = tp[p] / tn, f1 = predN[p] + tn ? 2 * tp[p] / (predN[p] + tn) : 0;
+      sp += pr; sr += rc; sf += f1; nl++;
+    }
+    out.push({phone: ph, nRec: rn, nWin: wn, recHit: rh, winHit: wh, nFolds: nf, top3Hit: t3,
+      acc: rn ? rh / rn : NaN, winAcc: wn ? wh / wn : NaN, prec: nl ? sp / nl : NaN, recall: nl ? sr / nl : NaN, f1: nl ? sf / nl : NaN, top3: rn ? t3 / rn : NaN, per});
+  }
+  return out;
+}
 function projectPCA(P, q) {
   const pc = P.pca, S = P.scale, z = {};
   const v = [];
@@ -422,7 +514,7 @@ function css(name) { return getComputedStyle(document.documentElement).getProper
 $('theme').onclick = () => {
   st.theme = {auto: 'light', light: 'dark', dark: 'auto'}[st.theme];
   if (st.theme === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', st.theme);
-  $('theme').textContent = 'theme: ' + st.theme; drawPoints();
+  $('theme').textContent = 'theme: ' + st.theme; drawPoints(); drawCompareChart();
 };
 if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => drawPoints());
 
@@ -466,20 +558,18 @@ P.sessions.forEach((s, i) => {
   $('lsess').add(new Option(`${s} (${sessN[i]})`, i));
 });
 $('lsess').add(new Option(`any session (${bank.n})`, -1), 0); $('lsess').value = '-1';
-// top-level session dropdown and the session checkboxes in the filter card are two views of st.sessOn
-const sessBoxes = [...document.querySelectorAll('#fsess input')];
-$('psess').add(new Option(`all sessions (${bank.n})`, 'all'));
-P.sessions.forEach((s, i) => $('psess').add(new Option(`${s} (${sessN[i]})`, i)));
-$('psess').add(new Option('custom (several)', 'custom')); $('psess').lastChild.hidden = true;
-function syncSess() {
-  sessBoxes.forEach((b, i) => { b.checked = st.sessOn[i]; });
-  const on = st.sessOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
-  $('psess').value = on.length === st.sessOn.length ? 'all' : on.length === 1 ? String(on[0]) : 'custom';
+// top-bar session checkboxes and the session checkboxes in the filter card are two views of st.sessOn
+const sessBoxes = [...document.querySelectorAll('#fsess input')], topSe = [];
+function addBox(parent, html, title, list, fn) {
+  const l = document.createElement('label'); l.title = title || ''; l.innerHTML = `<input type="checkbox" checked> ${html}`;
+  parent.appendChild(l); const b = l.firstChild; list.push(b); b.onchange = () => fn(b.checked); return b;
 }
-$('psess').onchange = e => {
-  const v = e.target.value; if (v === 'custom') return;
-  st.sessOn = P.sessions.map((_, i) => v === 'all' || String(i) === v); syncSess(); refresh();
-};
+P.sessions.forEach((s, i) => addBox($('psessb'), s, `${s}: ${sessN[i]} windows`, topSe, v => { st.sessOn[i] = v; syncSess(); refresh(); }));
+function syncSess() {
+  sessBoxes.forEach((b, i) => { b.checked = st.sessOn[i]; }); topSe.forEach((b, i) => { b.checked = st.sessOn[i]; });
+  $('tgsess').textContent = st.sessOn.every(Boolean) ? 'none' : 'all';
+}
+$('tgsess').onclick = () => { const all = st.sessOn.every(Boolean); st.sessOn = st.sessOn.map(() => !all); syncSess(); refresh(); };
 const phBoxes = [];
 P.phones.forEach((s, i) => {
   const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${phLab(i)}`; $('fphone').appendChild(l);
@@ -488,19 +578,14 @@ P.phones.forEach((s, i) => {
   $('lphone').add(new Option(phLab(i), i));
 });
 $('lphone').add(new Option(`any phone (${bank.n})`, -1), 0); $('lphone').value = '-1';
-// top dropdown and the checkboxes in the filter card are two views of st.phoneOn
-$('pphone').add(new Option(`all phones (${bank.n})`, 'all'));
-P.phones.forEach((s, i) => $('pphone').add(new Option(phLab(i), i)));
-$('pphone').add(new Option('custom (several)', 'custom')); $('pphone').lastChild.hidden = true;
+// top-bar phone checkboxes and the checkboxes in the filter card are two views of st.phoneOn
+const topPh = [];
+P.phones.forEach((s, i) => addBox($('pphoneb'), `<span class="chip" style="background:${PHCOL[i % PHCOL.length]};margin:0"></span>${pName(i)}`, phLab(i), topPh, v => { st.phoneOn[i] = v; syncPhone(); refresh(); }));
 function syncPhone() {
-  phBoxes.forEach((b, i) => { b.checked = st.phoneOn[i]; });
-  const on = st.phoneOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
-  $('pphone').value = on.length === st.phoneOn.length ? 'all' : on.length === 1 ? String(on[0]) : 'custom';
+  phBoxes.forEach((b, i) => { b.checked = st.phoneOn[i]; }); topPh.forEach((b, i) => { b.checked = st.phoneOn[i]; });
+  $('tgphone').textContent = st.phoneOn.every(Boolean) ? 'none' : 'all';
 }
-$('pphone').onchange = e => {
-  const v = e.target.value; if (v === 'custom') return;
-  st.phoneOn = P.phones.map((_, i) => v === 'all' || String(i) === v); syncPhone(); refresh();
-};
+$('tgphone').onclick = () => { const all = st.phoneOn.every(Boolean); st.phoneOn = st.phoneOn.map(() => !all); syncPhone(); refresh(); };
 $('lsame').onchange = e => { st.samePhone = e.target.checked; refresh(); };
 function setColorBy(c) {
   st.colorBy = c;
@@ -512,40 +597,39 @@ document.querySelectorAll('#colby button').forEach(b => b.onclick = () => { setC
 const placeN = P.places.map((_, i) => { let c = 0; for (let j = 0; j < bank.n; j++) if (bank.place[j] === i) c++; return c; });
 const FLOORS = [...new Set(P.place_floor)].sort((a, b) => b - a);
 const floorSet = fl => P.places.map((_, i) => P.place_floor[i] === fl);
-$('pplace').add(new Option(`all places (${bank.n})`, 'all'));
-FLOORS.forEach(fl => $('pplace').add(new Option(`all floor ${fl} (${P.places.reduce((a, _, i) => a + (P.place_floor[i] === fl ? placeN[i] : 0), 0)})`, 'f' + fl)));
-FLOORS.forEach(fl => {
-  const g = document.createElement('optgroup'); g.label = `floor ${fl}, one place`;
-  P.places.forEach((p, i) => { if (P.place_floor[i] === fl) g.appendChild(new Option(`${p} (${placeN[i]})`, i)); });
-  $('pplace').appendChild(g);
-});
-$('pplace').add(new Option('custom (several)', 'custom')); $('pplace').lastChild.hidden = true;
-const plBoxes = [];
+const plBoxes = [], topPl = [], flTg = {};
 P.places.forEach((p, i) => {
   const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${p} <span class="small">F${P.place_floor[i]} · ${placeN[i]}</span>`; $('fplace').appendChild(l);
   plBoxes.push(l.firstChild);
   l.firstChild.onchange = e => { st.placeOn[i] = e.target.checked; placeChanged(); };
 });
+FLOORS.forEach(fl => {
+  const d = document.createElement('div'); d.className = 'flr';
+  d.innerHTML = `<b>${fl}F</b> <button class="tg" data-fl="${fl}"></button><div class="cbs"></div>`;
+  $('pplaceb').appendChild(d); flTg[fl] = d.querySelector('button');
+  flTg[fl].onclick = () => { const on = P.places.every((_, i) => P.place_floor[i] !== fl || st.placeOn[i]); st.placeOn = st.placeOn.map((v, i) => P.place_floor[i] === fl ? !on : v); placeChanged(); };
+  P.places.forEach((p, i) => { if (P.place_floor[i] === fl) addBox(d.querySelector('.cbs'), p, `${p}: ${placeN[i]} windows`, topPl, v => { st.placeOn[i] = v; placeChanged(); }); });
+});
+// topPl was filled floor by floor: remember which place each box is
+const topPlIdx = []; FLOORS.forEach(fl => P.places.forEach((p, i) => { if (P.place_floor[i] === fl) topPlIdx.push(i); }));
 function syncPlace() {
-  plBoxes.forEach((b, i) => { b.checked = st.placeOn[i]; });
+  plBoxes.forEach((b, i) => { b.checked = st.placeOn[i]; }); topPl.forEach((b, j) => { b.checked = st.placeOn[topPlIdx[j]]; });
+  FLOORS.forEach(fl => { flTg[fl].textContent = P.places.every((_, i) => P.place_floor[i] !== fl || st.placeOn[i]) ? 'none' : 'all'; });
   const on = st.placeOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
-  let v = 'custom';
-  if (on.length === NP) v = 'all';
-  else if (on.length === 1) v = String(on[0]);
-  else for (const fl of FLOORS) { const fs = floorSet(fl); if (fs.every((b, i) => b === st.placeOn[i])) v = 'f' + fl; }
-  $('pplace').value = v;
+  let t = `${on.length} of ${NP}`;
+  if (on.length === NP) t = `all ${NP}`;
+  else if (!on.length) t = 'none';
+  else if (on.length === 1) t = P.places[on[0]];
+  else for (const fl of FLOORS) { const fs = floorSet(fl); if (fs.every((b, i) => b === st.placeOn[i])) t = `floor ${fl} only (${on.length})`; }
+  $('pplacesum').textContent = `Place: ${t}`;
 }
 function placeChanged() {
   syncPlace();
   if (st.placeOn.filter(Boolean).length === 1 && st.colorBy === 'place') setColorBy('phone');   // one colour per place would show nothing: show the spread by phone
   refresh();
 }
-$('pplace').onchange = e => {
-  const v = e.target.value; if (v === 'custom') return;
-  st.placeOn = P.places.map((_, i) => v === 'all' || v === 'f' + P.place_floor[i] || String(i) === v);
-  placeChanged();
-};
 $('plall').onclick = () => { st.placeOn = P.places.map(() => true); placeChanged(); };
+$('tgplace').onclick = () => { const all = st.placeOn.every(Boolean); st.placeOn = st.placeOn.map(() => !all); placeChanged(); };
 $('plnone').onclick = () => { st.placeOn = P.places.map(() => false); placeChanged(); };
 $('ptrain').onchange = e => { st.placeTrain = e.target.checked; refresh(); };
 $('vorder').onchange = e => { st.vorder = e.target.value; renderVar(); };
@@ -690,7 +774,7 @@ function render() {
   $('distsum').textContent = `nearest ${fmt(dd[0], 3)} · median ${fmt(dd[dd.length >> 1], 3)} · k-th ${fmt(dd[dd.length - 1], 3)}`;
   $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.places[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${pName(bank.phone[i])}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
 }
-function refresh() { nTrain = computeMask(); drawPoints(); live(); renderVar(); }
+function refresh() { nTrain = computeMask(); drawPoints(); live(); renderVar(); scheduleCompare(); }
 
 // ---------- where does the variance come from (live demo; same sums of squares as variance.py)
 const VPIECES = ['within', 'rec', 'phone', 'session', 'place'];
@@ -761,6 +845,7 @@ function renderCells(vm) {
 // ---------- phone x session matrix (live demo, uses the current k and weights)
 let mxTimer = null, mxData = null;
 function scheduleMatrix() {
+  scheduleCompare();
   if (!$('mxlive').checked) { $('mxstat').textContent = mxData ? 'k or weights changed: press Recompute' : ''; return; }
   clearTimeout(mxTimer); $('mxstat').textContent = 'updating...'; mxTimer = setTimeout(computeMatrix, 350);
 }
@@ -831,11 +916,80 @@ $('mxtab').addEventListener('mousemove', e => {
 $('mxtab').addEventListener('mouseleave', () => { tip.hidden = true; });
 $('mxmode').onchange = renderMatrix; $('mxcol').onchange = renderMatrix; $('mxgo').onclick = computeMatrix;
 
+// ---------- compare phones side by side (live demo; core: comparePhones, python reference: compare_phones.py)
+let cmTimer = null, cmData = null, cmKey = '';
+const CMRULE = {session: 'Held-out rule: leave one session out (each ticked session is tested on a model trained on the other ticked sessions; needs at least two ticked sessions).',
+  visit: 'Held-out rule: leave one stop out (each test window is predicted without any window of its own stop, so other sessions and phones of other stops train it).'};
+function cmOpts() { return {phones: st.phoneOn.map((v, i) => v ? i : -1).filter(i => i >= 0), sessOn: st.sessOn.slice(), placeOn: st.placeOn.slice(), mode: $('cmmode').value, holdout: $('cmhold').value}; }
+function scheduleCompare() {
+  const o = cmOpts(), key = JSON.stringify([o, st.w, st.k]);
+  if (key === cmKey) return;
+  clearTimeout(cmTimer); $('cmstat').textContent = 'updating...'; cmTimer = setTimeout(computeCompare, 350);
+}
+function computeCompare() {
+  clearTimeout(cmTimer);
+  const o = cmOpts(), t0 = performance.now();
+  cmKey = JSON.stringify([o, st.w, st.k]);
+  cmData = {o, k: st.k, w: Object.assign({}, st.w), res: comparePhones(bank, P, Object.assign({}, st.w), st.k, o), nPl: o.placeOn.filter(Boolean).length};
+  $('cmstat').textContent = `computed in ${Math.round(performance.now() - t0)} ms with k=${st.k}, weights B ${st.w.B.toFixed(2)} xyz ${st.w.xyz.toFixed(2)} tilt ${st.w.tilt.toFixed(2)} baro ${st.w.baro.toFixed(2)}`;
+  renderCompare();
+}
+const p1 = v => Number.isFinite(v) ? (100 * v).toFixed(1) + '%' : 'n/a';
+function renderCompare() {
+  if (!cmData) return;
+  const {o, res, nPl} = cmData, T = $('cmtab');
+  $('cmrule').textContent = CMRULE[o.holdout];
+  if (!res.length) { T.innerHTML = ''; $('cmnote').textContent = 'No phone is ticked in the top bar.'; drawCompareChart(); return; }
+  const nSess = o.sessOn.filter(Boolean).length;
+  let h = '<thead><tr><th class="ph">metric</th>' + res.map(r => `<th><span class="chip" style="background:${PHCOL[r.phone % PHCOL.length]}"></span>${pName(r.phone)}<div class="small">${P.phone_info[P.phones[r.phone]].model}</div></th>`).join('') + '</tr></thead><tbody>';
+  const row = (lab, f, cls) => { h += `<tr><th class="ph">${lab}</th>` + res.map(r => r.nRec ? `<td${cls ? ` class="${cls(r)}"` : ''}>${f(r)}</td>` : '<td class="na">no data</td>').join('') + '</tr>'; };
+  row('test recordings (windows)', r => `${r.nRec} (${r.nWin})`);
+  row('accuracy (recording vote)', r => `<b>${p1(r.acc)}</b> <span class="small">${r.recHit}/${r.nRec}</span>`);
+  row('window accuracy', r => `${p1(r.winAcc)} <span class="small">${r.winHit}/${r.nWin}</span>`);
+  row('macro precision', r => p1(r.prec));
+  row('macro recall', r => p1(r.recall));
+  row('macro F1', r => p1(r.f1));
+  row('top-3 rate (recording)', r => `${p1(r.top3)} <span class="small">${r.top3Hit}/${r.nRec}</span>`);
+  row('chance (1 / ticked places)', () => nPl ? p1(1 / nPl) : 'n/a');
+  h += `<tr><th class="sub ph" colspan="${res.length + 1}">per place: recordings correct / n (best per row shaded)</th></tr>`;
+  const places = P.places.map((_, i) => i).filter(i => o.placeOn[i] && res.some(r => r.per[i] && r.per[i][1])).sort((a, b) => P.place_floor[b] - P.place_floor[a] || P.places[a].localeCompare(P.places[b]));
+  for (const p of places) {
+    const rates = res.map(r => r.per[p] && r.per[p][1] ? r.per[p][0] / r.per[p][1] : null), have = rates.filter(v => v !== null);
+    const best = have.length > 1 ? Math.max(...have) : -1;
+    h += `<tr><th class="ph">${P.places[p]} <span class="small">F${P.place_floor[p]}</span></th>` + res.map((r, j) => {
+      const t = r.per[p];
+      if (!t || !t[1]) return '<td class="na">-</td>';
+      return `<td class="${rates[j] === best && best > 0 ? 'best' : ''}" title="windows ${t[2]}/${t[3]}">${t[0]}/${t[1]} <span class="small">${p1(rates[j])}</span></td>`;
+    }).join('') + '</tr>';
+  }
+  T.innerHTML = h + '</tbody>';
+  const none = res.filter(r => !r.nRec).map(r => pName(r.phone));
+  $('cmnote').innerHTML = (o.mode === 'all' ? 'Training = every phone (not only the ticked ones), so the ticked phones are compared on the same footing; ' : 'Training = the tested phone only, so a phone that has one session in the data cannot be tested with leave one session out; ')
+    + 'test = that phone\'s windows in the ticked sessions and places; training also uses only the ticked sessions and places. '
+    + 'Macro precision / recall / F1 = mean over the places the phone has test recordings of, on recording votes (a place never predicted counts precision 0, like sklearn zero_division=0); window accuracy is on single 5 s windows. '
+    + 'Top-3 = true place among the 3 largest summed vote shares of the recording. Chance = 1 / number of ticked places. The floor filter and the Try-it hold-out do not apply here. Hover a place cell for window counts.'
+    + (none.length ? ` <b>No test data for: ${none.join(', ')}</b> (${o.holdout === 'session' && nSess < 2 ? 'tick at least two sessions' : o.mode === 'same' ? 'it needs data in the held-out session and in another ticked session' : 'no test windows with these filters'}).` : '');
+  drawCompareChart();
+}
+function drawCompareChart() {
+  const el = $('cmplot');
+  if (!cmData || typeof Plotly === 'undefined') { if (typeof Plotly === 'undefined') el.innerHTML = '<p class="small">Plotly could not be loaded (offline?); the table still works.</p>'; return; }
+  const res = cmData.res.filter(r => r.nRec), x = res.map(r => pName(r.phone));
+  const mk = (name, key, color) => ({type: 'bar', name, x, y: res.map(r => 100 * r[key]), marker: {color}, text: res.map(r => (100 * r[key]).toFixed(0) + '%'), textposition: 'outside', cliponaxis: false, hovertemplate: '%{x}: %{y:.1f}%<extra>' + name + '</extra>'});
+  const lay = {barmode: 'group', paper_bgcolor: css('--card'), plot_bgcolor: css('--card'), font: {color: css('--ink'), size: 12}, margin: {l: 44, r: 8, t: 22, b: 30},
+    yaxis: {title: '%', range: [0, 105], gridcolor: css('--line'), zeroline: false}, xaxis: {gridcolor: css('--line')}, legend: {orientation: 'h', y: 1.18, font: {size: 11}},
+    shapes: cmData.nPl ? [{type: 'line', xref: 'paper', x0: 0, x1: 1, y0: 100 / cmData.nPl, y1: 100 / cmData.nPl, line: {color: css('--ink2'), width: 1, dash: 'dot'}}] : [],
+    annotations: cmData.nPl ? [{xref: 'paper', x: 1, y: 100 / cmData.nPl, xanchor: 'right', yanchor: 'bottom', text: 'chance', showarrow: false, font: {size: 10, color: css('--ink2')}}] : []};
+  Plotly.react('cmplot', res.length ? [mk('accuracy (recording vote)', 'acc', css('--accent')), mk('macro precision', 'prec', css('--v3'))] : [], lay, {responsive: true, displaylogo: false});
+}
+$('cmmode').onchange = scheduleCompare; $('cmhold').onchange = scheduleCompare; $('cmgo').onclick = () => { cmKey = ''; computeCompare(); };
+
 $('k').value = st.k; syncWeights(); syncSliders();
 syncPhone(); syncSess(); syncPlace();
-window.__pg = {st, bank, P, refresh, syncPhone, syncSess, syncPlace, placeChanged, setColorBy, renderVar, live, loadWindow, getRes: () => res, qobj, computeMatrix, getMatrix: () => mxData};
+window.__pg = {st, bank, P, refresh, syncPhone, syncSess, syncPlace, placeChanged, setColorBy, renderVar, live, loadWindow, getRes: () => res, qobj, computeMatrix, getMatrix: () => mxData, computeCompare, getCompare: () => cmData};
 refresh();
 computeMatrix();
+computeCompare();
 window.addEventListener('resize', () => { if (plotReady) drawPoints(); });
 })();
 </script>

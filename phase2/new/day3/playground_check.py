@@ -13,6 +13,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import phone_matrix
 import variance
+import compare_phones
 import pandas as pd
 from scipy.spatial.distance import cdist
 from sklearn.neighbors import KNeighborsClassifier
@@ -236,4 +237,43 @@ for (name, f, scope), o in zip(vcases, vo):
     print(f"variance: {name}: {o['n']} windows, JS == python in {nfeat - bad_f}/{nfeat} feature x nesting results, per-place cell table in {ncells - cb}/{ncells} cells")
     vbad += bad_f + cb
 print(f'variance decomposition: JS panel == variance.py (and out/variance_by_place.json) {"in all cases" if vbad == 0 else "FAILED in " + str(vbad)}; pieces add up to the total in every case')
-sys.exit(0 if ag == tot and mask_bad == 0 and bad == 0 and mbad == 0 and vbad == 0 else 1)
+# ---- compare-phones panel: the page's comparePhones() == compare_phones.py (numpy distances + sklearn metrics): default settings (all phones, sessions
+# and places, leave one session out, both training modes) plus random place / session / phone subsets, weights, k and the leave-one-stop-out rule
+NSE = len(P['sessions'])
+crng = np.random.default_rng(23)
+ccases = []
+for mode in ('all', 'same'):
+    ccases.append(('default', {'w': DEF, 'k': P['model']['k'], 'o': {'phones': list(range(NPH)), 'sessOn': [True] * NSE, 'placeOn': [True] * NPL, 'mode': mode, 'holdout': 'session'}}))
+for t in range(10):
+    pon = crng.random(NPL) < 0.5
+    if pon.sum() < 3: pon[crng.choice(NPL, 3, replace=False)] = True
+    son = crng.random(NSE) < 0.75
+    if son.sum() < 2: son[:2] = True
+    phs = [int(j) for j in range(NPH) if crng.random() < 0.7] or [0]
+    w_ = DEF if t % 2 else {g: float(crng.choice([0, .1, .3, .7])) for g in DEF} | {'xyz': 0.5}
+    ccases.append((f'random {t}', {'w': w_, 'k': int(crng.choice([1, 5, 25])), 'o': {'phones': phs, 'sessOn': [bool(v) for v in son], 'placeOn': [bool(v) for v in pon],
+                                                                                'mode': ['all', 'same'][t % 2], 'holdout': ['session', 'visit'][(t // 2) % 2]}}))
+ccases.append(('default, leave one stop out', {'w': DEF, 'k': P['model']['k'], 'o': {'phones': list(range(NPH)), 'sessOn': [True] * NSE, 'placeOn': [True] * NPL, 'mode': 'all', 'holdout': 'visit'}}))
+(tmp / 'cp.json').write_text(json.dumps([c for _, c in ccases]))
+subprocess.run(['node', str(HERE / 'playground_check.js'), str(HTML), str(tmp / 'cp.json'), str(tmp / 'cpo.json'), 'compare'], check=True)
+cpo = json.loads((tmp / 'cpo.json').read_text())
+cbad = ncmp = 0
+KEYS = ['nRec', 'nWin', 'recHit', 'winHit', 'top3Hit']
+for (name, c), jres in zip(ccases, cpo):
+    o = c['o']
+    pres = compare_phones.compute(P, w=c['w'], k=c['k'], phones=o['phones'], sess_on=o['sessOn'], place_on=o['placeOn'], mode=o['mode'], holdout=o['holdout'])
+    assert len(pres) == len(jres)
+    for pr, jr in zip(pres, jres):
+        ncmp += 1
+        ok = all(pr[k_] == jr[k_] for k_ in KEYS)
+        for k_ in ('acc', 'winAcc', 'prec', 'recall', 'f1', 'top3'):
+            a, b = pr[k_], jr[k_]
+            ok = ok and ((a is None) == (b is None)) and (a is None or abs(a - b) < 1e-9)
+        ok = ok and {int(t): v for t, v in pr['per'].items()} == {int(t): v for t, v in jr['per'].items()}
+        cbad += int(not ok)
+        if not ok: print('COMPARE MISMATCH', name, P['phones'][jr['phone']], {k_: (pr[k_], jr[k_]) for k_ in KEYS + ['acc', 'prec']})
+dflt = compare_phones.compute(P, mode='all')
+print(f'compare phones: the page\'s per-phone accuracy, window accuracy, macro precision / recall / F1, top-3 and per-place counts equal compare_phones.py (numpy + sklearn) in {ncmp - cbad}/{ncmp} phone results over {len(ccases)} settings (default, random subsets, leave one stop out)')
+for r in dflt:
+    print(f"  default (all phones train, leave one session out) {r['phone']}: rec {r['recHit']}/{r['nRec']} acc {r['acc']:.4f} prec {r['prec']:.4f}" if r['nRec'] else f"  {r['phone']}: no data")
+sys.exit(0 if ag == tot and mask_bad == 0 and bad == 0 and mbad == 0 and vbad == 0 and cbad == 0 else 1)

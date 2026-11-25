@@ -19,6 +19,7 @@ import numpy as np
 import csv
 
 import data
+import compare_phones
 import phone_matrix
 import variance
 
@@ -57,6 +58,24 @@ def export_matrix(P, cells):
                 'Computed by phone_matrix.py at the default weights and k.',
         'weights': P['model']['weights'], 'k': P['model']['k'], 'phones': P['phone_info'], 'cells': cells}, indent=1))
     print(f'wrote phone_session_matrix.csv/.json ({len(rows)} cells)')
+
+
+def export_compare(P):
+    """Python reference of the page's 'Compare phones' panel at the default settings (all phones, sessions and places, k and weights of fused_model.json)."""
+    rows, js = [], {}
+    for mode in ('all', 'same'):
+        res = compare_phones.compute(P, mode=mode, holdout='session')
+        js[mode] = res
+        for r in compare_phones.export_rows(P, res):
+            rows.append({'mode': {'all': 'train on all phones, test on this phone', 'same': 'train and test on the same phone only'}[mode], 'holdout': 'leave one session out', **r})
+    flds = list(rows[0])
+    with (OUT / 'phone_compare_default.csv').open('w', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=flds); w.writeheader(); w.writerows({k: (round(v, 4) if isinstance(v, float) else ('' if v is None else v)) for k, v in r.items()} for r in rows)
+    (OUT / 'phone_compare_default.json').write_text(json.dumps({
+        'what': 'Live-demo recipe of the Compare phones panel in knn_playground.html (not evaluation results): per phone, all sessions and places, leave one session out, '
+                'recording majority vote; macro metrics over the places the phone has test recordings of (sklearn, zero_division=0). Computed by compare_phones.py at the default weights and k.',
+        'weights': P['model']['weights'], 'k': P['model']['k'], 'results': js}, indent=1, default=float))
+    print(f'wrote phone_compare_default.csv/.json ({len(rows)} rows)')
 
 
 def main():
@@ -148,6 +167,7 @@ def main():
     # python reference of the live "phone x session" panel (same recipe, default weights and k)
     cells = phone_matrix.compute(payload)
     export_matrix(payload, cells)
+    export_compare(payload)
     variance.export(payload, OUT)          # nested variance decomposition (python reference of the page's variance panel)
     html = TEMPLATE.read_text().replace('__DATA__', json.dumps(payload, separators=(',', ':')))
     (OUT / 'knn_playground.html').write_text(html)
