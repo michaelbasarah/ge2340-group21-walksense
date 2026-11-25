@@ -1,8 +1,16 @@
 floor,type,node,from_node,to_node,place,phone,device,start_hk,duration_s,n_accel,n_gyro,n_mag,n_baro,pressure_hpa,folder,source_zip,track,label_raw,label_source,confidence
-5,stop,escalator_down,,,escalator_down,iphone,"iPhone17,4",17:41:47,60.0,5994,5993,5993,55,1016.28,floor5/stops/spots_s01_escalator_down,eska turun atas 2026-11-25 17-42-52.zip,spots,eska turun atas,rule,high
-5,stop,escalator_down,,,escalator_down,s24,SM-S9280,17:41:56,61.3,28487,28483,6123,1529,1015.01,floor5/stops/spots_s01_escalator_down,DOC-20261125-WA0052.zip,spots,DOC-20261125-WA0052,override,medium
-5,stop,sr9,,,sr9,iphone,"iPhone17,4",17:46:37,60.0,5995,5995,5995,55,1016.29,floor5/stops/spots_s02_sr9,sr9 2026-11-25 17-47-43.zip,spots,sr9,rule,high
-4,stop,escalator_down_4F,,,escalator_down_4F,iphone,"iPhone17,4",17:49:21,60.0,5995,5994,5994,55,1016.87,floor4/stops/spots_s03_escalator_down_4F,eska turun bawah 2026-11-25 17-50-26.zip,spots,eska turun bawah,rule,high
-4,stop,escalator_down_4F,,,escalator_down_4F,s24,SM-S9280,17:49:26,60.0,27901,27899,6000,1498,1009.71,floor4/stops/spots_s03_escalator_down_4F,DOC-20261125-WA0055.zip,spots,DOC-20261125-WA0055,override,medium
-4,stop,escalator_up_4F,,,escalator_up_4F,iphone,"iPhone17,4",17:51:44,60.0,5993,5993,5993,55,1016.87,floor4/stops/spots_s04_escalator_up_4F,eska naik bawah 2026-11-25 17-52-49.zip,spots,eska naik bawah,rule,high
-4,stop,escalator_up_4F,,,escalator_up_4F,s24,SM-S9280,17:51:47,60.0,27910,27906,6001,1498,1011.99,floor4/stops/spots_s04_escalator_up_4F,DOC-20261125-WA0056.zip,spots,DOC-20261125-WA0056,override,medium
+5,stop,escalator_down,,,escalator_down,s24,SM-S9280,17:40:24,60.1,27923,27914,6001,1498,1019.31,floor5/stops/spots_s01_escalator_down,DOC-20261125-WA0051.zip,spots,DOC-20261125-WA0051,user_filename,high
+5,stop,escalator_down,,,escalator_down,iphone,"iPhone17,4",17:41:47,60.0,5994,5993,5993,55,1016.28,floor5/stops/spots_s02_escalator_down,eska turun atas 2026-11-25 17-42-52.zip,spots,eska turun atas,rule,high
+5,stop,escalator_up,,,escalator_up,s24,SM-S9280,17:41:56,61.3,28487,28483,6123,1529,1015.01,floor5/stops/spots_s03_escalator_up,DOC-20261125-WA0052.zip,spots,DOC-20261125-WA0052,user correction 2026-11-26,high
+5,stop,female_toilet,,,female_toilet,s24,SM-S9280,17:45:43,60.0,27909,27909,6001,1498,1015.59,floor5/stops/spots_s04_female_toilet,DOC-20261125-WA0053.zip,spots,DOC-20261125-WA0053,user_filename,high
+5,stop,sr9,,,sr9,iphone,"iPhone17,4",17:46:37,60.0,5995,5995,5995,55,1016.29,floor5/stops/spots_s05_sr9,sr9 2026-11-25 17-47-43.zip,spots,sr9,rule,high
+5,stop,sr9,,,sr9,s24,SM-S9280,17:47:07,61.1,28408,28405,6107,1525,1012.5,floor5/stops/spots_s05_sr9,DOC-20261125-WA0054.zip,spots,DOC-20261125-WA0054,user_filename,high
+4,stop,escalator_down_4F,,,escalator_down_4F,iphone,"iPhone17,4",17:49:21,60.0,5995,5994,5994,55,1016.87,floor4/stops/spots_s06_escalator_down_4F,eska turun bawah 2026-11-25 17-50-26.zip,spots,eska turun bawah,rule,high
+5,stop,disabled_toilet,,,disabled_toilet,s24,SM-S9280,17:49:26,60.0,27901,27899,6000,1498,1009.71,floor5/stops/spots_s07_disabled_toilet,DOC-20261125-WA0055.zip,spots,DOC-20261125-WA0055,user_filename,high
+4,stop,escalator_up_4F,,,escalator_up_4F,iphone,"iPhone17,4",17:51:44,60.0,5993,5993,5993,55,1016.87,floor4/stops/spots_s08_escalator_up_4F,eska naik bawah 2026-11-25 17-52-49.zip,spots,eska naik bawah,rule,high
+5,stop,lift_stairs,,,lift_stairs,s24,SM-S9280,17:51:47,60.0,27910,27906,6001,1498,1011.99,floor5/stops/spots_s09_lift_stairs,DOC-20261125-WA0056.zip,spots,DOC-20261125-WA0056,user_filename,high
+4,stop,escalator_down_4F,,,escalator_down_4F,s24,SM-S9280,17:54:03,61.0,28369,28363,6099,1523,1012.48,floor4/stops/spots_s10_escalator_down_4F,DOC-20261125-WA0057.zip,spots,DOC-20261125-WA0057,user_filename,high
+4,stop,escalator_up_4F,,,escalator_up_4F,s24,SM-S9280,17:56:58,60.1,27917,27914,6002,1499,1007.94,floor4/stops/spots_s11_escalator_up_4F,DOC-20261125-WA0058.zip,spots,DOC-20261125-WA0058,user_filename,high
+4,stop,exit_10_4F,,,exit_10_4F,s24,SM-S9280,17:59:13,60.1,27916,27911,6001,1499,1011.25,floor4/stops/spots_s12_exit_10_4F,DOC-20261125-WA0059.zip,spots,DOC-20261125-WA0059,user_filename,high
+4,stop,exit_5_4F,,,exit_5_4F,s24,SM-S9280,18:02:10,68.3,30007,29998,6448,1608,1009.42,floor4/stops/spots_s13_exit_5_4F,DOC-20261125-WA0060.zip,spots,DOC-20261125-WA0060,user_filename,high
+4,stop,lift_stairs_4F,,,lift_stairs_4F,s24,SM-S9280,18:04:01,60.9,28313,28311,6087,1520,1010.43,floor4/stops/spots_s14_lift_stairs_4F,DOC-20261125-WA0061.zip,spots,DOC-20261125-WA0061,user_filename,high

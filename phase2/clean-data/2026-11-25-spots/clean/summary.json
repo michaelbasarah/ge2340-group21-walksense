@@ -22,37 +22,34 @@
  "recordings_unreadable": [],
  "duplicates_dropped": 0,
  "recordings_unique": 15,
- "recordings_labelled": 7,
- "recordings_unlabelled": [
-  "DOC-20261125-WA0051.zip (SM-S9280, 17:40:24, 60 s): Michael's S24 spot, START 17:40:24 (60 s). WhatsApp stripped the file name; no labelled recording at the same time. Needs the name from the phone (re-export) or from Michael",
-  "DOC-20261125-WA0053.zip (SM-S9280, 17:45:43, 60 s): Michael's S24 spot, START 17:45:43 (60 s). Name stripped by WhatsApp; no labelled recording at the same time",
-  "DOC-20261125-WA0054.zip (SM-S9280, 17:47:07, 61 s): Michael's S24 spot, START 17:47:07 (61 s). Overlaps Tian's 'sr9' (START 17:46:37) by about 30 s only, so it may be sr9 but the starts are 30 s apart: not used until confirmed",
-  "DOC-20261125-WA0057.zip (SM-S9280, 17:54:03, 61 s): Michael's S24 spot, START 17:54:03 (61 s). Name stripped by WhatsApp; Tian had stopped recording; needs the name",
-  "DOC-20261125-WA0058.zip (SM-S9280, 17:56:58, 60 s): Michael's S24 spot, START 17:56:58 (60 s). Name stripped by WhatsApp; needs the name",
-  "DOC-20261125-WA0059.zip (SM-S9280, 17:59:13, 60 s): Michael's S24 spot, START 17:59:13 (60 s). Name stripped by WhatsApp; needs the name",
-  "DOC-20261125-WA0060.zip (SM-S9280, 18:02:10, 68 s): Michael's S24 spot, START 18:02:10 (68 s, 4 time events = paused and resumed). Name stripped by WhatsApp; needs the name",
-  "DOC-20261125-WA0061.zip (SM-S9280, 18:04:01, 61 s): Michael's S24 spot, START 18:04:01 (61 s). Name stripped by WhatsApp; needs the name"
- ],
- "recordings_written": 7,
+ "recordings_labelled": 15,
+ "recordings_unlabelled": [],
+ "recordings_written": 15,
  "per_track_device": {
-  "spots/SM-S9280": 3,
+  "spots/SM-S9280": 11,
   "spots/iPhone17,4": 4
  },
- "stops": 4,
+ "stops": 14,
  "walks": 0,
  "stops_per_track_floor": {
-  "spots/floor4": 2,
-  "spots/floor5": 2
+  "spots/floor4": 7,
+  "spots/floor5": 7
  },
  "places_with_a_stop": [
+  "disabled_toilet",
   "escalator_down",
   "escalator_down_4F",
+  "escalator_up",
   "escalator_up_4F",
+  "exit_10_4F",
+  "exit_5_4F",
+  "female_toilet",
+  "lift_stairs",
+  "lift_stairs_4F",
   "sr9"
  ],
  "confidence": {
-  "high": 4,
-  "medium": 3
+  "high": 15
  },
  "stop_durations_s": [
   60.0,
@@ -76,9 +73,9 @@
   ],
   "wifi_rows": 4461,
   "unique_bssids": 2224,
-  "rows_assigned_within_120s": 2871,
-  "rows_in_window": 537,
-  "stops_with_wifi": 4,
-  "stops_total": 4
+  "rows_assigned_within_120s": 4166,
+  "rows_in_window": 1283,
+  "stops_with_wifi": 14,
+  "stops_total": 14
  }
 }

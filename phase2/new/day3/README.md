@@ -42,7 +42,7 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 
 `names_24nov.csv` maps every 24-Nov node to a graph-v2 place (26 places; every 24-Nov stop and walk end is mapped, nothing unmapped). Places are scored on the graph-v2 names (study rooms = `sr9`, lift+stairs = `lift_stairs` / `lift_stairs_4F`).
 
-Needs confirmation from the collector (mapped by route position, `confidence = medium`):
+Mapped by route position, **confirmed by the user on 2026-11-26** (`confidence = high`, basis `user confirmed 2026-11-26` in `names_24nov.csv` and `names_25nov.csv`; they were `medium`):
 - `male_disabled_toilet` (5F) = 23-Nov `disabled_toilet` (exit 5 -> it -> lift/stairs on both days).
 - `y5302_point2` (5F, "other door") = 23-Nov `y5302_back` (after Y5401 on both days).
 - `gate` (4F) = 23-Nov `entrance_exit` (exit 10 -> it -> exit 5 on both days).
@@ -256,6 +256,8 @@ Per phone, leave one session out (`out/phone_place_performance.xlsx`, `out/perf_
 
 Leave 25 Nov out (`results.json` `leave25nov_out_*`, kNN k=5, \|B\|+xyz + baro floor; train on 23/24 Nov, all phones or the same handset only), per take (default) and per piece (split20): ip18 8/9 and 7/9 (24/27 and 21/27); a56 1/7 and 2/7 (3/21 and 6/21); ip16 1/4 and 1/4 (2/9 and 0/9); s24 0/3 and 0/3 (0/9 and 0/9). Barometer floor on 25 Nov per track (step tracking): iPhone round 9/9, iPhone spots 4/4, S24 spots 3/4.
 
+Update 26 Nov (PROCESS-LOG entry 69, the 11 S24 spot takes now labelled from the user's file names): leave 25 Nov out, |B|+xyz + baro floor, s24 (11 takes, 33 pieces): all phones 3/11 and 6/33, same handset only 2/11 and 6/33 (the 0/3 and 0/9 above were for 3 takes). Leave one session out, fused kNN: default 122/295 = 41.4% (was 123/287), split20 375/842 = 44.5% (was 385/818); s24 25-Nov takes 1/11 (default) and 8/33 (split20).
+
 Places never correct before (entry 41), leave one session out, correct / samples (`out/perf_csv/hard_places_before_25nov_rerun.csv` -> `hard_places_after_25nov.csv`):
 
 | place | 25-Nov takes | default before -> after | split20 before -> after |
@@ -291,10 +293,15 @@ ip16 0.500, 0.474; a56 0.453, 0.409; s24 0.250, 0.250; a55 0.226, 0.173. All num
 - `sesi2/clean/ROUTE.md` says "Sensors-only (no Wi-Fi logged)", but the same session has a WiGLE log (`sesi2/clean/README.md`, `summary.json`).
 - Session 2 has walks out of route order (floor 5: exit10 -> canteen, then the escalator-up stop, then three walks esca_up -> canteen, canteen -> esca_down, esca_up -> esca_down; floor 4: the walk gate -> exit 5 was recorded before the gate stop). The tracker attaches each walk to the last stop before it.
 - Session 1 has S24 Wi-Fi rows at only 14 of 27 stops; two S24 logs are empty (`sesi1/clean/summary.json`).
-- 25 Nov (`../../clean-data/2026-11-25-spots/`): 73 media messages are missing from the WhatsApp export (the rest of the 5F round from 18:13, the whole 4F round, Tian's ranking xlsx); 8 of Michael's 11 spot files have no name and are not used; 3 of his are labelled by co-recording with Tian (medium confidence). The 4F escalator pieces of ip16 on 25 Nov disagree within the take (\|B\| 6.6 to 32.3 uT from the take median), so the outlier rule removed 3 of its 6 pieces there.
+- 25 Nov (`../../clean-data/2026-11-25-spots/`): 73 media messages are missing from the WhatsApp export (the rest of the 5F round from 18:13, the whole 4F round, Tian's ranking xlsx); all 11 of Michael's S24 spot files are labelled from his own file names (user-confirmed 2026-11-26, high confidence; PROCESS-LOG entry 69). The 4F escalator pieces of ip16 on 25 Nov disagree within the take (\|B\| 6.6 to 32.3 uT from the take median), so the outlier rule removed 3 of its 6 pieces there.
 
 ### k. Playground: top-bar checkboxes and the "Compare phones side by side" panel (live demo, not evaluation results; PROCESS-LOG entry 46)
 
 The Phone, Session and Place dropdowns of the top bar are now multi-select checkbox groups with an all / none toggle each; places are grouped by floor (5F, 4F) inside a pop-up with a toggle per floor. They are views of the same state as the checklists in the filters card (one source of truth: `st.phoneOn`, `st.sessOn`, `st.placeOn`). The Try-it selectors (Session / Place / Phone) only pick one recording to load and stay selects.
 
 The panel at the bottom has one column per ticked phone, all with the current k and weights, the ticked sessions and places, and a hold-out rule (leave one session out = default, or leave one stop out) and a training mode (train on all phones and test on this phone = default, or train and test on the same phone only). Rows: test recordings (windows), accuracy (recording majority vote), window accuracy, macro precision / recall / F1 (on recording votes, mean over the places the phone has test recordings of, a never-predicted place counts precision 0 like `perf_sheet.py`), top-3 rate (true place among the 3 largest summed vote shares of the recording), chance (1 / ticked places), then recordings correct / n per place with the best phone per row shaded; a bar chart of accuracy and macro precision per phone. The computation is `comparePhones()` in the checked core block; `compare_phones.py` is the numpy + sklearn reference and `playground_check.py` compares them (default settings, random subsets, leave one stop out). Defaults at the current k and weights are in `out/phone_compare_default.csv/.json` and `out-split20/...`. Not applied here: the floor filter and the Try-it hold-out.
+
+
+## Display names of the two disabled toilets (2026-11-26)
+
+User: the 5F `disabled_toilet` is the **male disabled toilet**, the 4F `disabled_toilet_4F` is a **mixed (unisex) disabled toilet**. The place ids are unchanged; `config.json` `place_display` gives the shown names ("Male disabled toilet (5F)", "Mixed disabled toilet (4F)"), used by the interactive pages, the figures, `perf_sheet.py` and `gaps_sheet.py` (`data.relabel_sheet`), and the routing graph / `request-matching/destinations.csv` names.

@@ -43,6 +43,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from openpyxl import Workbook
+
+import data   # place display names (config.json place_display) for the sheets
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
@@ -119,6 +121,7 @@ def append_perf_tab(tab, C, P, R):
     for _, x in R.head(30).iterrows():
         ws.append([int(x[c]) if isinstance(x[c], (np.integer,)) else x[c] for c in cols])
     autowidth(ws, 80)
+    data.relabel_sheet(ws)
     wb.save(xl)
     print('appended tab', tab, 'to', xl)
 
@@ -353,6 +356,8 @@ def main():
                     c.number_format = '0.0%'
         r += 3
     autowidth(wsum)
+    for _w in wb.worksheets:
+        data.relabel_sheet(_w)
     OUT.parent.mkdir(exist_ok=True)
     wb.save(OUT)
     CSV_DIR.mkdir(exist_ok=True)

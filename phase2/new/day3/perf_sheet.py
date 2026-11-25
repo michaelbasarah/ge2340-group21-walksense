@@ -33,6 +33,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from openpyxl import Workbook, load_workbook
+
+import data   # place display names (config.json place_display) for the sheets
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
@@ -239,6 +241,7 @@ def main():
     order = ['README', 'Ranking', 'Progress'] + [s for s in wb.sheetnames if s not in ('README', 'Ranking', 'Progress')]
     wb._sheets = [wb[s] for s in order]
     XLSX.parent.mkdir(exist_ok=True)
+    data.relabel_sheet(wb[a.tab]); data.relabel_sheet(wb['Ranking'])   # display names only; place ids stay in the data files
     wb.save(XLSX)
 
     # ---- CSV copies

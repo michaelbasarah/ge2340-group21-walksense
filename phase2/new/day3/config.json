@@ -11,6 +11,11 @@
     "SM-A556E": {"id": "a55", "display": "a55", "marketing": "Samsung Galaxy A55"},
     "SM-A566B": {"id": "a56", "display": "a56", "marketing": "Samsung Galaxy A56"}
   },
+  "place_display": {
+    "_comment": "Display names only (user 2026-11-26): the 5F disabled toilet is the MALE disabled toilet, the 4F one is a MIXED (unisex) disabled toilet. Place ids stay unchanged (keys in every file and comparison). Used by the interactive pages and the Excel sheets.",
+    "disabled_toilet": "Male disabled toilet (5F)",
+    "disabled_toilet_4F": "Mixed disabled toilet (4F)"
+  },
   "sessions": [
     {"id": "23nov", "day": "2026-11-23", "loader": "crossday_23nov",
      "labels": "../graph-v2/labels_23nov_merged.csv",

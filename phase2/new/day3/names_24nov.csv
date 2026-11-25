@@ -4,17 +4,17 @@ floor,node_24nov,place_v2,place_v1,confidence,basis,note
 5,exit5_door,exit_5,exit_5,high,label+route,
 5,male_toilet,male_toilet,male_toilet,high,label+route,
 5,y5302,y5302,y5302,high,label+route,
-5,sr9,sr9,,high,label+route,"v2 only: 24-Nov 'SR9 (study rooms)' is the merged study-room place; which of v1 sr8/sr9/sr10/sr11 it was is unknown"
+5,sr9,sr9,,high,label+route,v2 only: 24-Nov 'SR9 (study rooms)' is the merged study-room place; which of v1 sr8/sr9/sr10/sr11 it was is unknown
 5,y5202,y5202,y5202,high,label+route,
 5,female_toilet,female_toilet,female_toilet,high,label+route,
 5,exit10_door,exit_10,exit_10,high,label+route,
 5,esca_down,escalator_down,escalator_down,high,label,
 5,esca_up,escalator_up,escalator_up,high,label,
-5,male_disabled_toilet,disabled_toilet,disabled_toilet,medium,route,"24 Nov calls it 'Male disabled toilet', 23 Nov 'disabled_toilet'; same route slot (exit 5 -> it -> lift/stairs) on both days. Collector to confirm it is the same door"
+5,male_disabled_toilet,disabled_toilet,disabled_toilet,high,user confirmed 2026-11-26,"24 Nov calls it 'Male disabled toilet', 23 Nov 'disabled_toilet'; same route slot (exit 5 -> it -> lift/stairs) on both days. Confirmed by the user 2026-11-26 (was medium)"
 5,lift_stairs5,lift_stairs,,high,label+route,"v2 only: 24 Nov recorded one 'Lift / stairs 5' stop; v1 had lift_5 and exit_5_stairs as two places, so no v1 name"
 5,y5401,y5401,y5401,high,label+route,
-5,y5302_point2,y5302_back,y5302_back,medium,route,"24 Nov 'Y5302 (point 2 - other door)'; 23 Nov y5302_back (back door, BM25). Same route slot (y5401 -> it). Collector to confirm it is the same door"
-4,lift_stairs5,lift_stairs_4F,,high,label+route,"v2 only: floor-4 landing of lift/stairs; v1 had lift_5_4F and exit_5_stairs_4F"
+5,y5302_point2,y5302_back,y5302_back,high,user confirmed 2026-11-26,"24 Nov 'Y5302 (point 2 - other door)'; 23 Nov y5302_back (back door, BM25). Same route slot (y5401 -> it). Confirmed by the user 2026-11-26 (was medium)"
+4,lift_stairs5,lift_stairs_4F,,high,label+route,v2 only: floor-4 landing of lift/stairs; v1 had lift_5_4F and exit_5_stairs_4F
 4,disabled_toilet,disabled_toilet_4F,disabled_toilet_4F,high,label+route,
 4,exit5_door,exit_5_4F,exit_5_4F,high,label+route,
 4,lt2a,lt2a,lt2a,high,label+route,
@@ -25,4 +25,4 @@ floor,node_24nov,place_v2,place_v1,confidence,basis,note
 4,lt1b,lt1b,lt1b,high,label+route,
 4,lt1a,lt1a,lt1a,high,label+route,
 4,exit10_door,exit_10_4F,exit_10_4F,high,label+route,
-4,gate,entrance_exit,entrance_exit,medium,label+route,"24 Nov 'Gate (building entrance/exit)', 23 Nov entrance_exit ('pintu keluar'); same route slot (exit 10 -> it -> exit 5) on both days"
+4,gate,entrance_exit,entrance_exit,high,user confirmed 2026-11-26,"24 Nov 'Gate (building entrance/exit)', 23 Nov entrance_exit ('pintu keluar'); same route slot (exit 10 -> it -> exit 5) on both days"

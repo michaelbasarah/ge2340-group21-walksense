@@ -35,9 +35,7 @@ Rebuild: `python -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py` (
 Result: **36 byte-identical** (all the round recordings: ip18 19, a56 17; none more found by device + START),
 **16 unique** (ip16 4, s24 11, and the WiGLE log `DOC-20261125-WA0062.gz`). The CSV sits at the folder root because
 `build_clean.py` rebuilds `clean/` from scratch. The day-3 session `25spots` (`phase2/new/day3/config.json`,
-`exclude_sources`) leaves the 36 out, so every recording is in the training set once; what `25spots` adds is the 7
-labelled spot stops (ip16: escalator_down, sr9, escalator_down_4F, escalator_up_4F; s24: escalator_down,
-escalator_down_4F, escalator_up_4F, medium confidence) and the S24 WiGLE log. The 8 unlabelled S24 files stay out.
+`exclude_sources`) leaves the 36 out, so every recording is in the training set once; what `25spots` adds is the 15 labelled spot stops (ip16 4, s24 11, all high confidence after the 26-Nov relabel) and the S24 WiGLE log.
 
 **Deleted on 26 Nov (user-approved, PROCESS-LOG entry 68):** the 36 `byte_identical` ZIPs were removed from `raw/attachments/`
 (`git rm`, so they stay in history). Before deleting, SHA-256 was recomputed for all 52 files here and for all 116 top-level
@@ -68,15 +66,19 @@ A track = the stops one group walked in order. The barometer floor tracking and 
   escalator_up/down, exit/ext 5/10 -> exit_5/exit_10, ...), floor words (bawah/lantai 4/lt4/lvl 4 -> floor 4,
   atas/lv5 -> floor 5). A place that exists on one floor fixes the floor; an escalator/exit/lift without a floor word
   takes the floor of the track's previous labelled recording. Stop = at least 30 s (as 24 Nov), walk = shorter.
-- 7 of 15 recordings labelled: 4 high, 3 medium confidence. 0 duplicates. Floor check (iPhone barometer,
-  consecutive stops of one handset, 0.3 hPa): 3 of 3 pairs agree with the labels (`floor_check.csv`). (Before the 26-Nov
-  deletion `clean/` held 51 recordings, 43 labelled: 34 high, 9 medium, 11 of 11 pairs; the 36 round recordings are
-  now only in Dicta's tree.)
-- **Medium, to confirm:** the 3 Michael S24 recordings labelled by timing (WhatsApp renamed his files `DOC-...`, the
-  names are lost): `DOC-...WA0052` = escalator_down (starts 9 s after Tian's "eska turun atas"),
-  `WA0055` = escalator_down_4F (5 s after "eska turun bawah"), `WA0056` = escalator_up_4F (3 s after "eska naik bawah").
-- **Unlabelled, not used (8):** Michael's S24 `DOC-...WA0051, 53, 54, 57, 58, 59, 60, 61` (no name, no simultaneous
-  labelled recording; WA0054 overlaps Tian's sr9 by about 30 s only; WA0060 was paused and resumed, 68 s).
+- 15 of 15 recordings labelled, all high confidence: 4 by the name rules (Tian's ip16 files) and 11 by the user's own file
+  names (`label_source` `user_filename`; `user correction 2026-11-26` for WA0052). 0 duplicates. Floor check (iPhone
+  barometer, consecutive stops of one handset, 0.3 hPa): 3 of 3 pairs agree with the labels (`floor_check.csv`). (Before
+  the 26-Nov deletion `clean/` held 51 recordings; the 36 round recordings are now only in Dicta's tree.)
+- **Michael's 11 S24 stops (user-confirmed 2026-11-26).** WhatsApp renamed his files `DOC-...`, but each file's send time
+  (`raw/source_files.csv`) equals the chat time of his named message, so the names are known. They are in
+  `labels_override.csv` (column `label_source`, which `build_clean.py` now copies into `labels_used.csv`): WA0051 esca turun lv5
+  (escalator_down), WA0052 esca naik lv4 (escalator_up: the user corrected 2026-11-26 that it was on the 5th floor although the
+  name says lv4), WA0053 female toilet, WA0054 sr9, WA0055 male disb tlt (disabled_toilet, 5F), WA0056 liftstair5 (lift_stairs),
+  WA0057 esca turun lv4 (escalator_down_4F), WA0058 esca naik lv4 (escalator_up_4F), WA0059 exit 10 door lvl 4 (exit_10_4F),
+  WA0060 ex 5 door lvl 4 (exit_5_4F; 68 s, 4 time events = paused and resumed, loaded as one stop), WA0061 liftstair5 lt4
+  (lift_stairs_4F). They replace the 3 earlier timing guesses (WA0052, WA0055, WA0056), which were wrong (PROCESS-LOG entry 69).
+  The S24 barometer does not follow the floors (see entry 69); the user's labels are kept.
 
 ## Missing from this export (`raw/missing_from_export.csv`)
 

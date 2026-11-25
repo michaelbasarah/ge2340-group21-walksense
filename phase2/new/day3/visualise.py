@@ -23,6 +23,8 @@ from sklearn.manifold import MDS, TSNE
 import data
 import gknn
 
+DISP = data.place_display()   # display names only (config.json place_display); ids stay the keys
+
 OUT = data.OUT
 S1, S2, S3 = '#2a78d6', '#eb6834', '#1baf7a'          # categorical slots 1-3 (validated all-pairs)
 S4 = '#8f4fd1'                                         # 4th session (25 Nov)
@@ -130,8 +132,8 @@ def confusion_panel(ax, truth, pred, labels, title):
             M[idx[t], idx[p]] += 1
     n = M.sum(1, keepdims=True)
     im = ax.imshow(M / np.maximum(n, 1), cmap='Blues', vmin=0, vmax=1, aspect='auto')
-    ax.set_xticks(range(len(labels))); ax.set_xticklabels(labels, rotation=90, fontsize=6.5)
-    ax.set_yticks(range(len(labels))); ax.set_yticklabels(labels, fontsize=6.5)
+    ax.set_xticks(range(len(labels))); ax.set_xticklabels([DISP.get(l, l) for l in labels], rotation=90, fontsize=6.5)
+    ax.set_yticks(range(len(labels))); ax.set_yticklabels([DISP.get(l, l) for l in labels], fontsize=6.5)
     ax.set_xlabel('predicted place', fontsize=8, color=INK2); ax.set_ylabel('true place', fontsize=8, color=INK2)
     ax.set_title(title, fontsize=9, loc='left', color=INK)
     k = int(M.trace()); f5 = sum(1 for l in labels if not l.endswith('4F') and l not in FLOOR4)
@@ -226,7 +228,7 @@ def fig_per_place(W, V, P):
     for ax in axes:
         style(ax); ax.axvline(f5 - 0.5, color=AX, linewidth=1)
         ax.legend(frameon=False, fontsize=7, loc='upper left', ncol=3, markerscale=1.5)
-    axes[1].set_xticks(range(len(order))); axes[1].set_xticklabels(order, rotation=90, fontsize=7)
+    axes[1].set_xticks(range(len(order))); axes[1].set_xticklabels([DISP.get(o, o) for o in order], rotation=90, fontsize=7)
     axes[1].text(f5 - 0.4, axes[1].get_ylim()[1], 'floor 4 ->', fontsize=7, color=INK2, va='top')
     save(fig, 'fig_per_place_B_pressure.png')
 

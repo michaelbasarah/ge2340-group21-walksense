@@ -104,9 +104,9 @@
       ],
       "failures": [
         "the WhatsApp export wrote '<Media omitted>' for 73 media messages after 17:30; the rest of the floor-5 round and the whole 4F round were missing from it (covered by Dicta's complete set) [42, 49]",
-        "{{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#recordings_unlabelled|len}} recordings of our export unlabelled (names stripped) and not used [42]",
-        "Wi-Fi from one scanner only (S24, spots track): 4 of 13 stops have Wi-Fi [42]; Dicta's Wi-Fi log was scanned on a56, which the fused kNN does not use (s24 scanner only) [49]",
-        "no lift_stairs, disabled toilet, y5401 or y5302_back data for 25 Nov in our export [42] (Dicta's set has all 26 places [49])"
+        "{{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#recordings_unlabelled|len}} recordings of our export unlabelled (WhatsApp stripped 11 S24 names; recovered 26 Nov from the user's own file names, high confidence) [42]",
+        "Wi-Fi from one scanner only (S24, spots track): {{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#wifi.stops_with_wifi}} of {{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#wifi.stops_total}} stops have Wi-Fi [42]; Dicta's Wi-Fi log was scanned on a56, which the fused kNN does not use (s24 scanner only) [49]",
+        "no y5401 or y5302_back data for 25 Nov in our export, and lift_stairs and the disabled toilet only from the S24 spot takes [42] (Dicta's set has all 26 places [49])"
       ],
       "lessons": [
         "hash a second export before adding it: duplicates would put the same take in training and test [49]",

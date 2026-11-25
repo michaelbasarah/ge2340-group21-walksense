@@ -1,14 +1,14 @@
 {
  "what": "Deployable fused kNN settings, tuned by leave-one-session-out CV on all sessions (fused_knn.py).",
  "weights": {
-  "B": 0.0,
-  "xyz": 0.5,
-  "tilt": 0.1,
+  "B": 0.1,
+  "xyz": 0.3,
+  "tilt": 0.0,
   "wifi": 0.0,
-  "baro": 0.4
+  "baro": 0.6
  },
  "k": 25,
- "loso_inner_acc": 0.481,
+ "loso_inner_acc": 0.478,
  "floor_jump_threshold_hpa": 0.292,
  "sessions": [
   "23nov",

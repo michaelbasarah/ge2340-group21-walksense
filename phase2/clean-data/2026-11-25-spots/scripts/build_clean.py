@@ -169,7 +169,7 @@ def main():
         r['type'] = 'stop' if r['dur'] >= STOP_MIN_S else 'walk'
         o = ov.get(r['src'])
         if o:
-            r.update(source='override', confidence=o['confidence'], reason=o['reason'], status=o.get('status', 'ok') or 'ok')
+            r.update(source=(o.get('label_source') or 'override'), confidence=o['confidence'], reason=o['reason'], status=o.get('status', 'ok') or 'ok')
             if r['status'] != 'ok':
                 r.update(floor='', node='', frm='', to='')
             else:

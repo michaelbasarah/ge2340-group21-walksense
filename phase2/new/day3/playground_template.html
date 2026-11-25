@@ -485,6 +485,7 @@ function projectPCA(P, q) {
 <script>
 (function () {
 const P = JSON.parse(document.getElementById('data').textContent);
+P.pn = P.places.map(p => (P.place_labels || {})[p] || p);   // display names only (config.json place_display); ids stay the keys
 const bank = buildBank(P);
 const $ = id => document.getElementById(id);
 const NP = P.places.length, FE = P.feats;
@@ -599,7 +600,7 @@ const FLOORS = [...new Set(P.place_floor)].sort((a, b) => b - a);
 const floorSet = fl => P.places.map((_, i) => P.place_floor[i] === fl);
 const plBoxes = [], topPl = [], flTg = {};
 P.places.forEach((p, i) => {
-  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${p} <span class="small">F${P.place_floor[i]} · ${placeN[i]}</span>`; $('fplace').appendChild(l);
+  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${P.pn[i]} <span class="small">F${P.place_floor[i]} · ${placeN[i]}</span>`; $('fplace').appendChild(l);
   plBoxes.push(l.firstChild);
   l.firstChild.onchange = e => { st.placeOn[i] = e.target.checked; placeChanged(); };
 });
@@ -608,7 +609,7 @@ FLOORS.forEach(fl => {
   d.innerHTML = `<b>${fl}F</b> <button class="tg" data-fl="${fl}"></button><div class="cbs"></div>`;
   $('pplaceb').appendChild(d); flTg[fl] = d.querySelector('button');
   flTg[fl].onclick = () => { const on = P.places.every((_, i) => P.place_floor[i] !== fl || st.placeOn[i]); st.placeOn = st.placeOn.map((v, i) => P.place_floor[i] === fl ? !on : v); placeChanged(); };
-  P.places.forEach((p, i) => { if (P.place_floor[i] === fl) addBox(d.querySelector('.cbs'), p, `${p}: ${placeN[i]} windows`, topPl, v => { st.placeOn[i] = v; placeChanged(); }); });
+  P.places.forEach((p, i) => { if (P.place_floor[i] === fl) addBox(d.querySelector('.cbs'), p, `${P.pn[i]}: ${placeN[i]} windows`, topPl, v => { st.placeOn[i] = v; placeChanged(); }); });
 });
 // topPl was filled floor by floor: remember which place each box is
 const topPlIdx = []; FLOORS.forEach(fl => P.places.forEach((p, i) => { if (P.place_floor[i] === fl) topPlIdx.push(i); }));
@@ -619,7 +620,7 @@ function syncPlace() {
   let t = `${on.length} of ${NP}`;
   if (on.length === NP) t = `all ${NP}`;
   else if (!on.length) t = 'none';
-  else if (on.length === 1) t = P.places[on[0]];
+  else if (on.length === 1) t = P.pn[on[0]];
   else for (const fl of FLOORS) { const fs = floorSet(fl); if (fs.every((b, i) => b === st.placeOn[i])) t = `floor ${fl} only (${on.length})`; }
   $('pplacesum').textContent = `Place: ${t}`;
 }
@@ -635,7 +636,7 @@ $('ptrain').onchange = e => { st.placeTrain = e.target.checked; refresh(); };
 $('vorder').onchange = e => { st.vorder = e.target.value; renderVar(); };
 $('ffloor').onchange = e => { st.ffloor = e.target.value; refresh(); };
 $('lplace').add(new Option('any place', -1));
-P.places.forEach((p, i) => $('lplace').add(new Option(`${p} (F${P.place_floor[i]})`, i)));
+P.places.forEach((p, i) => $('lplace').add(new Option(`${P.pn[i]} (F${P.place_floor[i]})`, i)));
 $('holdout').onchange = e => { st.holdout = e.target.value; refresh(); };
 $('view').onchange = e => { st.view = e.target.value; $('xw').hidden = $('yw').hidden = st.view !== 'raw'; drawPoints(); };
 [['xa', 'B'], ['ya', 'Bv']].forEach(([id, def]) => {
@@ -701,9 +702,9 @@ function drawPoints() {
   for (let i = 0; i < bank.n; i++) if (dmask[i]) groups[byPhone ? bank.phone[i] : bySess ? bank.sess[i] : bank.place[i]].push(i);
   const traces = groups.map((ix, g) => {
     const xy = ix.map(coords);
-    return {type: 'scatter', mode: 'markers', name: byPhone ? `${pFull(g)} (${ix.length})` : bySess ? `${P.sessions[g]} (${ix.length})` : P.places[g], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
+    return {type: 'scatter', mode: 'markers', name: byPhone ? `${pFull(g)} (${ix.length})` : bySess ? `${P.sessions[g]} (${ix.length})` : P.pn[g], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
       marker: {size: 7, color: byPhone ? PHCOL[g % PHCOL.length] : bySess ? SESSCOL[g % SESSCOL.length] : P.colours[g], symbol: ix.map(i => bySess ? SYM[bank.phone[i] % SYM.length] : SYM[bank.sess[i]]), opacity: byPhone || bySess ? 0.7 : 0.8, line: {width: 0.5, color: css('--bg')}},
-      text: ix.map(i => `<b>${P.places[bank.place[i]]}</b> (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${pFull(bank.phone[i])}<br>${P.recs[bank.rec[i]]}`),
+      text: ix.map(i => `<b>${P.pn[bank.place[i]]}</b> (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${pFull(bank.phone[i])}<br>${P.recs[bank.rec[i]]}`),
       hovertemplate: '%{text}<extra></extra>'};
   });
   nTr = G;
@@ -758,21 +759,21 @@ function render() {
     $('pred').textContent = nTrain === 0 ? 'No training windows' : 'No distance (all weights 0?)';
     $('truth').textContent = ''; $('predsub').textContent = ''; $('votes').innerHTML = ''; $('nn').innerHTML = ''; $('distsum').textContent = ''; $('votenote').textContent = ''; return;
   }
-  $('pred').innerHTML = `${chip(res.pred)}${P.places[res.pred]}`;
+  $('pred').innerHTML = `${chip(res.pred)}${P.pn[res.pred]}`;
   $('predsub').textContent = `vote share ${(res.shares[res.pred] * 100).toFixed(0)}% · ${res.counts[res.pred]}/${kk} neighbours`;
   if (L >= 0) {
     const t = bank.place[L], ok = t === res.pred;
-    $('truth').innerHTML = `true place: ${chip(t)}<b>${P.places[t]}</b> <span class="${ok ? 'ok' : 'no'}">${ok ? '✓ match' : '✗ miss'}</span>` + (st.moved ? ' <span class="small">(sliders moved since loading)</span>' : '');
+    $('truth').innerHTML = `true place: ${chip(t)}<b>${P.pn[t]}</b> <span class="${ok ? 'ok' : 'no'}">${ok ? '✓ match' : '✗ miss'}</span>` + (st.moved ? ' <span class="small">(sliders moved since loading)</span>' : '');
   } else $('truth').textContent = 'free query: no true place';
   const rows = [];
   for (let p = 0; p < NP; p++) if (res.counts[p] > 0) rows.push(p);
   rows.sort((a, b) => res.shares[b] - res.shares[a]);
-  $('votes').innerHTML = rows.slice(0, 10).map((p, j) => `<div class="vr ${j === 0 ? 'top' : ''}"><span>${chip(p)}${P.places[p]}</span><div class="bar"><i style="width:${(res.shares[p] * 100).toFixed(1)}%"></i></div><span>${res.counts[p]}/${kk} · ${(res.shares[p] * 100).toFixed(0)}%</span></div>`).join('')
+  $('votes').innerHTML = rows.slice(0, 10).map((p, j) => `<div class="vr ${j === 0 ? 'top' : ''}"><span>${chip(p)}${P.pn[p]}</span><div class="bar"><i style="width:${(res.shares[p] * 100).toFixed(1)}%"></i></div><span>${res.counts[p]}/${kk} · ${(res.shares[p] * 100).toFixed(0)}%</span></div>`).join('')
     + (rows.length > 10 ? `<div class="small">+ ${rows.length - 10} more places with fewer votes</div>` : '');
   $('votenote').textContent = 'count = neighbours in that place; % = share of the 1/dist-weighted vote (the prediction is the largest %).';
   const dd = res.order.map(i => st.D[i]);
   $('distsum').textContent = `nearest ${fmt(dd[0], 3)} · median ${fmt(dd[dd.length >> 1], 3)} · k-th ${fmt(dd[dd.length - 1], 3)}`;
-  $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.places[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${pName(bank.phone[i])}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
+  $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.pn[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${pName(bank.phone[i])}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
 }
 function refresh() { nTrain = computeMask(); drawPoints(); live(); renderVar(); scheduleCompare(); }
 
@@ -833,7 +834,7 @@ function renderCells(vm) {
   let h = '<thead><tr><th class="ph">place</th>' + cols.map(k => `<th>${pName(Math.floor(k / 1000))}<div class="small">${P.sessions[k % 1000]}</div></th>`).join('') + '<th>whole place</th></tr></thead><tbody>';
   for (const p of places) {
     const m = {}; C[p].cells.forEach(c => { m[c.ph * 1000 + c.s] = c; });
-    h += `<tr><th class="ph">${P.places[p]}<div class="small">F${P.place_floor[p]}</div></th>` + cols.map(k => {
+    h += `<tr><th class="ph">${P.pn[p]}<div class="small">F${P.place_floor[p]}</div></th>` + cols.map(k => {
       const c = m[k]; if (!c) return '<td class="c na"></td>';
       return `<td class="c">${line('|B|', c.B, 1)}${line('Bv', c.Bv, 1)}<div class="small">n=${c.n} · ${c.nRec} rec</div></td>`;
     }).join('') + `<td class="c"><div>|B| ${f2(C[p].overall.B)}</div><div>Bv ${f2(C[p].overall.Bv)}</div></td></tr>`;
@@ -905,7 +906,7 @@ $('mxtab').addEventListener('mousemove', e => {
     const rows = Object.keys(m.per).map(Number).sort((a, b) => P.place_floor[b] - P.place_floor[a] || P.places[a].localeCompare(P.places[b]));
     h += '<table style="margin-top:4px"><thead><tr><th>place</th><th>rec</th><th>win</th></tr></thead><tbody>' + rows.map(p => {
       const t = m.per[p], ok = t[3] && t[2] === t[3];
-      return `<tr><td>${P.places[p]}</td><td class="${ok ? 'h' : t[2] ? '' : 'm'}">${t[2]}/${t[3]} ${ok ? '✓' : t[2] ? '' : '✗'}</td><td>${t[0]}/${t[1]}</td></tr>`;
+      return `<tr><td>${P.pn[p]}</td><td class="${ok ? 'h' : t[2] ? '' : 'm'}">${t[2]}/${t[3]} ${ok ? '✓' : t[2] ? '' : '✗'}</td><td>${t[0]}/${t[1]}</td></tr>`;
     }).join('') + '</tbody></table>';
   }
   tip.innerHTML = h; tip.hidden = false;
@@ -956,7 +957,7 @@ function renderCompare() {
   for (const p of places) {
     const rates = res.map(r => r.per[p] && r.per[p][1] ? r.per[p][0] / r.per[p][1] : null), have = rates.filter(v => v !== null);
     const best = have.length > 1 ? Math.max(...have) : -1;
-    h += `<tr><th class="ph">${P.places[p]} <span class="small">F${P.place_floor[p]}</span></th>` + res.map((r, j) => {
+    h += `<tr><th class="ph">${P.pn[p]} <span class="small">F${P.place_floor[p]}</span></th>` + res.map((r, j) => {
       const t = r.per[p];
       if (!t || !t[1]) return '<td class="na">-</td>';
       return `<td class="${rates[j] === best && best > 0 ? 'best' : ''}" title="windows ${t[2]}/${t[3]}">${t[0]}/${t[1]} <span class="small">${p1(rates[j])}</span></td>`;

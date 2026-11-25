@@ -66,6 +66,24 @@ def display_names() -> dict:
     return {v['id']: v['display'] for k, v in config()['phones'].items() if not k.startswith('_')}
 
 
+def place_display() -> dict:
+    """place id -> display name (config.json `place_display`; ids stay the keys, only shown text changes)."""
+    return {k: v for k, v in config().get('place_display', {}).items() if not k.startswith('_')}
+
+
+def relabel_sheet(ws) -> None:
+    """Show display names in an openpyxl sheet: every place id (whole word) inside a text cell is replaced by its display name."""
+    import re
+    disp = place_display()
+    if not disp:
+        return
+    pat = re.compile(r'\b(' + '|'.join(sorted(map(re.escape, disp), key=len, reverse=True)) + r')\b')
+    for row in ws.iter_rows():
+        for c in row:
+            if isinstance(c.value, str) and not c.value.startswith('='):
+                c.value = pat.sub(lambda m: disp[m.group(1)], c.value)
+
+
 def places() -> pd.DataFrame:
     n = pd.read_csv((HERE / config()['places_graph']).resolve())
     return n[n['virtual'] == 0].set_index('node_id')

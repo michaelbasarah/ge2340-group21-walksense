@@ -11,7 +11,7 @@ Which dot is which place (25-Nov, entry 25 of PROCESS-LOG):
   toilet north-east). Escalator up vs down from the headings of the three escalator walks
   (6 of 6 recordings agree: down = the south dot).
 - 4F: the 9-dot loop + the escalator/Y4502 triangle match the 24-Nov walks; the lift landing sits
-  under the 5F lift. The 4F disabled toilet has NO dot: placed at the 5F offset between Exit 5 and
+  under the 5F lift. The 4F mixed (unisex) disabled toilet has NO dot: placed at the 5F offset between Exit 5 and
   the male disabled toilet (marked inferred).
 """
 import json

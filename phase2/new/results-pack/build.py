@@ -46,6 +46,7 @@ ap.add_argument("--repo-root", help="read the sources from this checkout instead
 ap.add_argument("--config", default=str(HERE / "config.json"))
 ARGS = ap.parse_args()
 CFG = json.loads(Path(ARGS.config).read_text())
+PLACE_DISPLAY = {k: v for k, v in json.loads((Path(__file__).resolve().parent.parent / "day3" / "config.json").read_text()).get("place_display", {}).items() if not k.startswith("_")}   # display names only
 ROOT = Path(ARGS.repo_root).resolve() if ARGS.repo_root else (Path(ARGS.config).resolve().parent / CFG["repo_root"]).resolve()
 MISSING = []  # (what, why)
 
@@ -664,7 +665,7 @@ def _heat(ax, M, N, rows, cols, s, title=None, show_cols=True):
                 ax.text(j, i, f"{int(M[i, j])}/{int(N[i, j])}", ha="center", va="center", fontsize=s["small"] - (1 if s["base"] > 10 else 0.5),
                         color="white" if a > 0.55 else "black")
     ax.set_xticks(range(nc), cols if show_cols else [])
-    ax.set_yticks(range(nr), rows)
+    ax.set_yticks(range(nr), [PLACE_DISPLAY.get(r, r) for r in rows])   # display names only (day3/config.json place_display)
     ax.set_xticks(np.arange(-0.5, nc, 1), minor=True)
     ax.set_yticks(np.arange(-0.5, nr, 1), minor=True)
     ax.grid(which="minor", color="#BBBBBB", lw=0.6)

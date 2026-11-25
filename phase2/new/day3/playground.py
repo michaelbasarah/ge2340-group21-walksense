@@ -156,7 +156,7 @@ def main():
         colours.append('#%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255)))
 
     payload = {
-        'n': n, 'places': plist, 'place_floor': places['floor'].astype(int).tolist(), 'colours': colours,
+        'n': n, 'places': plist, 'place_labels': {k: v for k, v in data.config().get('place_display', {}).items() if not k.startswith('_')}, 'place_floor': places['floor'].astype(int).tolist(), 'colours': colours,
         'sessions': sessions, 'phones': phones, 'phone_info': phone_info, 'recs': recs, 'visits': visits, 'cols': cols,
         'feats': FEATS, 'labels': LABELS, 'vfeats': variance.VFEATS, 'scale': scale, 'med': med,
         'model': {'weights': wdef, 'wifi_weight_dropped': model['weights']['wifi'], 'k': model['k'],
