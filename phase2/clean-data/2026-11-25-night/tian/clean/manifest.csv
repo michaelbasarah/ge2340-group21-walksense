@@ -31,7 +31,6 @@ floor,type,node,from_node,to_node,place,phone,device,start_hk,start_iso,duration
 4,stop,lift_stairs5,,,Lift / stairs 5 (floor-4 landing),iphone,"iPhone17,4",22:29:02,2026-11-25 22:29:02,60.0,5995,5994,5994,55,1018.23,floor4/stops/s01_lift_stairs5,stair lift bawah 2026-11-25 22-30-12.zip,stair lift bawah,high
 4,walk,,lift_stairs5,disabled_toilet,,iphone,"iPhone17,4",22:30:46,2026-11-25 22:30:46,9.3,925,924,924,7,1018.22,floor4/walks/w01_lift_stairs5__disabled_toilet,stair lift bawah toilet disabled bawah 2026-11-25 22-31-05.zip,stair lift bawah toilet disabled bawah,high
 4,stop,disabled_toilet,,,Disabled toilet,iphone,"iPhone17,4",22:32:05,2026-11-25 22:32:04,60.0,5994,5993,5993,55,1018.24,floor4/stops/s02_disabled_toilet,toilet disabled bawah 2026-11-25 22-33-12.zip,toilet disabled bawah,high
-4,walk,,disabled_toilet,lt2a,,iphone,"iPhone17,4",22:33:42,2026-11-25 22:33:42,8.5,844,843,843,6,1018.24,floor4/walks/w02_disabled_toilet__lt2a,toilet disabled bawah lt2a 2026-11-25 22-33-58.zip,toilet disabled bawah lt2a,high
 4,stop,lt2a,,,LT2A,iphone,"iPhone17,4",22:34:32,2026-11-25 22:34:32,60.0,5994,5993,5993,55,1018.22,floor4/stops/s03_lt2a,lt2a 2026-11-25 22-35-40.zip,lt2a,high
 4,walk,,lt2a,lt2b,,iphone,"iPhone17,4",22:36:21,2026-11-25 22:36:21,15.3,1524,1523,1523,13,1018.23,floor4/walks/w03_lt2a__lt2b,lt2a lt2b 2026-11-25 22-36-48.zip,lt2a lt2b,high
 4,stop,lt2b,,,LT2B,iphone,"iPhone17,4",22:37:32,2026-11-25 22:37:32,60.0,5995,5993,5993,55,1018.21,floor4/stops/s04_lt2b,lt2b 2026-11-25 22-38-42.zip,lt2b,high

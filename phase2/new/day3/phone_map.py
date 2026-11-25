@@ -33,7 +33,7 @@ OTHER = [('14nov', CD / '2026-11-14', 'raw'), ('17nov', CD / '2026-11-17', 'raw'
 for _s in data.config()['sessions']:
     if _s.get('raw') and _s['id'] not in {x[0] for x in SES}:
         _root = (data.HERE / _s['path']).resolve().parent
-        SES.append((_s['id'], _root, str((data.HERE / _s['raw']).resolve().relative_to(_root))))
+        SES.append((_s['id'], _root, str((data.HERE / _s['raw']).resolve())))   # absolute: root / abs = abs (25night raw/ is shared by two trees)
 
 
 def raw_models(raw: Path) -> dict[str, set]:

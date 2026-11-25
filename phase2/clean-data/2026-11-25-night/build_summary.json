@@ -83,21 +83,21 @@
      "iPhone17,4"
     ]
    },
-   "recordings_written": 47,
+   "recordings_written": 46,
    "stops": 23,
-   "walks": 24,
+   "walks": 23,
    "stops_floor5": 14,
    "stops_floor4": 9,
    "walks_floor5": 15,
-   "walks_floor4": 9,
+   "walks_floor4": 8,
    "per_phone": {
     "iphone": {
      "stop": 23,
-     "walk": 24
+     "walk": 23
     }
    },
    "confidence": {
-    "high": 45,
+    "high": 44,
     "medium": 2
    },
    "slots_missing_a_phone": [],
@@ -115,6 +115,13 @@
  "raw_zips": 169,
  "raw_without_label_row": [],
  "labels_not_built": [
+  {
+   "source_zip": "toilet disabled bawah lt2a 2026-11-25 22-33-58.zip",
+   "slot": "iphone",
+   "track": "tian",
+   "status": "review",
+   "reason": "Tian's file name: 4F disabled toilet -> LT2A (he skipped the 4F exit 5 door stop). Left out: the place graph and the app's floor plan have no direct corridor disabled_toilet - lt2a on 4F (the walk passes the exit 5 door), so including it would add an undrawn corridor to the upload app (test_walksense floor-plan test). Set ok if the team adds that corridor"
+  },
   {
    "source_zip": "eska naik bawah lt2 b 2026-11-25 22-49-29.zip",
    "slot": "iphone",

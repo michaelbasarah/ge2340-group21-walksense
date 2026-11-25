@@ -5,7 +5,7 @@ real date). Built by `../../scripts/build_night.py` from `../../labels_night.csv
 
 | phone | stops | walks |
 |---|---|---|
-| iphone | 23 | 24 |
+| iphone | 23 | 23 |
 
 ## Floor 5
 
@@ -45,14 +45,13 @@ real date). Built by `../../scripts/build_night.py` from `../../labels_night.csv
 
 ## Floor 4
 
-9 stops, 9 walks.
+9 stops, 8 walks.
 
 | # | time | type | place | phones |
 |---|------|------|-------|--------|
 | s01_lift_stairs5 | 22:29:02 | STOP | Lift / stairs 5 (floor-4 landing) | iphone (1) |
 | w01_lift_stairs5__disabled_toilet | 22:30:46 | walk | lift_stairs5 → disabled_toilet | iphone (1) |
 | s02_disabled_toilet | 22:32:05 | STOP | Disabled toilet | iphone (1) |
-| w02_disabled_toilet__lt2a | 22:33:42 | walk | disabled_toilet → lt2a | iphone (1) |
 | s03_lt2a | 22:34:32 | STOP | LT2A | iphone (1) |
 | w03_lt2a__lt2b | 22:36:21 | walk | lt2a → lt2b | iphone (1) |
 | s04_lt2b | 22:37:32 | STOP | LT2B | iphone (1) |
