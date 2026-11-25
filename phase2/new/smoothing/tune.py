@@ -399,6 +399,7 @@ def visit_calibration():
 
 def main():
     t_start = time.time()
+    OUT.mkdir(exist_ok=True)
     models = ws.build_models()
     G['models'] = models
     G['trainwin'] = {STREAMS[s]['device']: train_windows(STREAMS[s]['device']) for s in STREAMS}
@@ -490,6 +491,7 @@ def main():
     OUT.mkdir(exist_ok=True)
     OUT_JSON.write_text(json.dumps(out, indent=1, default=float))
     with open(OUT_CSV, 'w', newline='', encoding='utf-8') as f:
+        r3 = lambda v: round(v, 3) if isinstance(v, float) else v      # CSV only; selection used full precision
         cols = ['top1', 'top3', 'flips_per_min', 'lock_median_s', 'locked_stops', 'first_correct_median_s', 'wrong_lit_events',
                 'lit_events', 'walk_on_corridor', 'walk_flips_per_min', 'walk_wrong_lits']
         w = csv.writer(f)
@@ -504,7 +506,7 @@ def main():
             w.writerow([smooth.Config(**{a: b for a, b in c.items() if a != 'calib'}).label(), fam_of(c), c['tick'], c['window'], c['prefilter'], c['calib'],
                         c['gate'], c['method'], ' '.join(f'{x:g}' for x in c['weights']), c['alpha'] if c['method'] == 'ema' else '',
                         c['guard'], *(c[x] if c['method'] == 'hmm' else '' for x in ('beta', 'eps', 'p_stay'))] +
-                       [ss[s][col] for s in STREAMS for col in cols] + [sp[col] for col in cols])
+                       [r3(ss[s][col]) for s in STREAMS for col in cols] + [r3(sp[col]) for col in cols])
     print(json.dumps({k: out[k] for k in ('baseline_pooled_tick_0.5', 'end_to_end_check', 'visit_level_calibration', 'seconds')}, indent=1))
     return out
 

@@ -49,6 +49,7 @@ Contents:
 38. 25 Nov: GitHub main (teammates' entries 24 to 27) merged into our local main; our entries renumbered 28 to 37
 39. 25 Nov: 20 s pieces, 23-Nov stairs and sr8/sr10/sr11 excluded, obvious outliers removed (split20 variant), before/after
 60. 25 Nov: continuous place estimate (kNN every tick, smoothed): design and selection rule fixed before any result (number provisional)
+61. 25 Nov: continuous place estimate results: smoothing does not raise stop accuracy; gating stops the jumps while walking; per-phone offset FAILED (number provisional)
 - Lessons learned
 - Open questions / next steps
 
@@ -611,6 +612,42 @@ Contents:
 
 ---
 
+## 61. 25 Nov: continuous place estimate results: smoothing does not raise stop accuracy, gating stops the jumps while walking, per-phone offset FAILED
+
+*Number provisional (branch `feat/live-smoothing`); renumber at landing.*
+
+- **What we tried:** ran the study fixed in entry 60: every setting replayed on both 24-Nov sessions, chosen on one and scored on the other, compared with Tian's 3 s rule on the same ticks.
+- **Why:** to answer the user's question with held-out numbers: does a, b, c smoothing (or EMA, an HMM on the corridors, gating, abstaining, a per-phone offset) make a 1 s live estimate accurate and steady?
+- **How:** `python phase2/new/smoothing/tune.py` (22,896 settings per session; `seconds` 306 on 20 cores). A small smoke run on a reduced grid (to test the code) was seen before entry 60 was committed; the rule had already been written in `tune.py` and was not changed after it. The first full run crashed after the search because `out/` did not exist when the first figure was saved (fixed: `out/` is made at the start); a third run, after rounding the CSV values only, gave the same JSON as the second apart from timings, and is the committed output. Session 1 stream is scored with the iPhone17,4 (ip16) model trained on session 2, session 2 with the iPhone19,2 (ip18) model trained on session 1: always across handsets. 26 and 25 stops scored (first stop of each stream left out), 28 walks each.
+- **Result** (`phase2/new/smoothing/out/live_smoothing.json`, all settings in `live_smoothing.csv`; standing = 5 s after the stop starts to 5 s before it ends):
+  - **Tian's 3 s rule, per tick (tick 0.5 s):** session 1: top-1 0.622, top-3 0.744, flips 0.55 per min, median lock 3.0 s (17/26 stops lock), wrong lights 17 of 36 lit events; session 2: top-1 0.615, top-3 0.886, flips 0.10 per min, lock 3.0 s (16/25), wrong lights 11 of 26. Pooled: top-1 0.618, flips 0.33 per min.
+  - **Held out, each family chosen on the other session** (scored on session 2 / scored on session 1; top-1, flips per min, median lock):
+    - none (N = 1): 0.649, 0.47, 1.0 s / 0.621, 1.23, 1.25 s (tick 0.5, W 3 s / W 2 s).
+    - FIR a,b,c: 0.647, 0.66, 1.5 s (tick 1, W 1, weights 0.5, 0.1, 0.1, 0.1, 0.1, 0.1, gate still) / 0.621, 1.05, 1.75 s (tick 0.5, W 1, weights 0.3, 0.3, 0.2, 0.2).
+    - EMA: 0.650, 0.66, 1.5 s (alpha 0.6, gate still) / 0.620, 1.14, 1.25 s (alpha 0.7).
+    - jump guard: 0.645, 0.47, 2.5 s / 0.621, 1.51, 1.75 s.
+    - HMM: 0.643, 0.28, 1.0 s (tick 1, W 1, beta 1, eps 0.05, p_stay 0.995, gate still; wrong lights 15 of 33) / 0.621, 1.05, 1.25 s (tick 0.5, W 1, beta 2, eps 0.01, p_stay 0.9).
+    - overall choice: the HMM row when chosen on session 1, the guard row (none + guard 2, gate still) when chosen on session 2.
+    - Every family was feasible on its tune session; on the held-out session 1 all of them went above 1.0 flip per minute (1.05 to 1.51).
+  - **Pooled choice (the rule on both sessions together): FIR a = 0.7, b = 0.3, tick 1 s, W 1 s, gate still, no pre-filter, no offset.** Pooled top-1 0.637, top-3 0.800, flips 0.99 per min, median lock 1.0 s (36/51 stops lock), wrong lights 58 of 106; session 1 0.621 and 1.04 flips, session 2 0.653 and 0.94. Runner-up worth knowing: HMM with gate still (tick 1, W 1, beta 0.5, eps 0.001, p_stay 0.9) pooled top-1 0.635, flips 0.51 per min, lock 1.5 s (37/51), wrong lights 42 of 82.
+  - **Gating:** at stops it changes almost nothing (1 s still test true on 0.985 and 0.998 of standing ticks); on walks it is what stops the jumping. HMM pooled choice: walk flips 15.7 per min ungated vs 2.2 gated, wrong lights on walks 33 vs 13. FIR pooled choice (gated): walk flips 0.7 per min. Still-and-flat gives the same as still (walk ticks still 0.094 and 0.011; walk tilt p99 15.0 and 20.9 deg).
+  - **Pre-filter (|B| jump > 5 uT from the 0.3 s rolling median):** no effect: the best setting with the pre-filter on is the same setting as with it off, with identical scores in both directions and pooled.
+  - **Abstain:** the shown probability is over-confident. No threshold reached the pre-set precision 0.80 on either tune session, so the rule took the highest-precision threshold, 0.9: scored on session 2 coverage 0.991, precision 0.647 (no abstain: 0.643); on session 1 coverage 0.901, precision 0.635 (no abstain: 0.621). Pooled choice: threshold 0 coverage 1.0, precision 0.637; 0.8: 0.927, 0.662; 0.9: 0.874, 0.672.
+  - **Per-phone offset: FAILURE.** Visit level (as `walksense.py evaluate`, first stop left out): ip18 -> ip16 none 16/25, median-normalised 15/25, first-stop offset 15/25; ip16 -> ip18 none 16/26, median 15/26, first-stop 13/26. Per tick (nested): first-stop offset 0.632 (scored on session 2) and 0.468 (session 1) vs 0.643 and 0.621 without; running-median offset 0.424 and 0.429.
+  - Check: the pooled choice rerun through the `LiveTracker` subclass gave exactly the search's scores on both sessions (`end_to_end_check`). CPU: median 0.74 to 0.86 ms per tick, p95 1.14 to 1.34 ms in the replay (`ms_per_tick_in_replay`).
+  - Figures: `out/fig_heldout.png` (held-out top-1, flips, lock per family vs Tian), `out/fig_timeline.png` (shown place every tick over six session-2 stops: no smoothing scatters during walks, gated FIR/HMM do not).
+- **Outcome:** mixed, and clear about why.
+  - A kNN every 1 s works: it reaches Tian's accuracy (0.62 to 0.65 per tick vs 0.62) and locks on in about 1 to 1.75 s after the stop recording starts instead of 3 s.
+  - Smoothing the class probabilities (a, b, c, EMA, HMM) does not raise accuracy: every family lands within about 1 percentage point of no smoothing on the held-out session. At a stop the wrong answers are steady wrong places (the cross-handset magnetic difference), not one-tick jumps, so averaging the last few ticks cannot fix them. Tian's rule already averages the whole stop, so it flips less (0.10 to 0.55 per min) than any 1 s estimate.
+  - The "west suddenly east" jumps happen while walking (the kNN was trained on still, flat, door-facing stops). Feeding the kNN only while the phone is still removes them; smoothing alone does not.
+  - The rule picked FIR 0.7 / 0.3 by 0.1 to 0.2 percentage points over EMA, HMM and no smoothing; with about 51 stops that is not a real difference. HMM + gating halves the flips for 0.2 points.
+  - A single per-phone offset made it worse: the two iPhones differ by more than a constant shift.
+  - Caveats: the 24-Nov recordings have gaps of tens of seconds between a walk and the next stop, so "arrival" is the stop recording's start and the pre-arrival history is not a real continuous walk; Tian's rule also gets a fast start after each gap. 23 Nov could not be used (no accelerometer at stops). Only two sessions, two handsets.
+- **What changed because of it:** nothing in the app (offline study by request). If live mode ever gets a continuous estimate: tick 1 s, W 1 s, FIR 0.7 / 0.3 (or HMM, beta 0.5, eps 0.001, p_stay 0.9, for fewer flips), fed only while still; keep Tian's 3 s rule for the "lit" answer.
+- **Links:** `phase2/new/smoothing/` (`README.md`, `smooth.py`, `replay.py`, `tune.py`, `out/live_smoothing.json`, `out/live_smoothing.csv`, `out/fig_heldout.png`, `out/fig_timeline.png`); entry 60; the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -637,6 +674,7 @@ Contents:
 - **A few seconds of standing hold almost all the place information.** 3 s gave the same top-1 as 10 s (entry 27); the field at a spot does not change.
 - **More pieces of the same take are not more evidence.** Splitting 60 s takes into three 20 s samples tripled n but not the information; removing pieces raised accuracy mostly by removing hard test pieces (entry 39). Run a control and compare on the same test pieces before calling a cleaning step an improvement.
 - **Number log entries only when they land on the shared branch.** Two people adding "entry 24" on different machines collided; the public numbers won and ours moved by +4 (entry 38).
+- **Smoothing fixes jitter, not bias.** A 1 s kNN averaged over the last ticks scored the same as no averaging (entry 61): the wrong answers at a stop were steady, not jumpy. The jumps were on walks, and the fix was to feed the model only when the phone is still. A constant per-phone offset made things worse.
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
@@ -659,4 +697,5 @@ Contents:
 - **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`.
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **split20 (entry 39):** confirm with the user that "do s8 10 11" means dropping the 23-Nov sr8/sr10/sr11 stops (that is how it was done) and whether "for each dataset" was meant to include 14 Nov (10 s stops, no full 20 s piece) and 17 Nov (30 s stops, one piece), which only `cross-day/` uses. Decide which numbers the team quotes: take level (`out/`) or pieces (`out-split20/`, with the control); if pieces, say that pieces of one take are not independent. BM14 (23 Nov exit_5) was removed whole by the outlier rule; the collector may know what happened there.
+- **Continuous estimate (entries 60, 61):** retune with the 25-Nov data once it is in main (same handset in more sessions would show whether smoothing helps when the errors are not cross-handset); test arrival latency on a real continuous walk (the 24-Nov recordings have gaps before each stop). Not wired into the app (user decision).
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.

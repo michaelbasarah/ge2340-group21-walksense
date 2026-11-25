@@ -1,0 +1,4803 @@
+{
+ "what": "python phase2/new/smoothing/tune.py   # ~10 min on 20 cores -> out/live_smoothing.json, .csv, figures",
+ "rule": "(written in PROCESS-LOG entry 60 before any result was computed):\n  standing part of a stop = from 5 s after the stop recording starts to 5 s before it ends;\n  the first stop of each stream is never scored (the 'start' calibration uses it).\n  best = highest per-tick top-1 over the standing ticks, among settings with\n         standing flips <= 1.0 per minute AND median lock time <= 5.0 s\n         (lock time = from the stop's start until the shown place is right and stays right for 5 s;\n         a stop that never locks counts as infinite);\n  ties (top-1 equal to 0.1 percentage point) -> lower median lock time -> fewer flips ->\n         simpler (none < ema < fir < guard < hmm; fewer taps) -> tick 0.5 before 1.0;\n  if no setting is feasible: the setting with the fewest flips, then the same tie-breaks.\n  Nested leave-one-session-out: choose on one stream, score on the other, both directions.\n  Abstain threshold: on the chosen setting, the highest coverage with precision >= 0.80 on the tune\n  stream (none reaches it: the highest precision); scored on the other stream.",
+ "streams": {
+  "sesi1": {
+   "model": "iPhone17,4",
+   "model_trained_on": "sesi2",
+   "scored_stops": 26,
+   "walks": 28
+  },
+  "sesi2": {
+   "model": "iPhone19,2",
+   "model_trained_on": "sesi1",
+   "scored_stops": 25,
+   "walks": 28
+  }
+ },
+ "gate_stats": {
+  "sesi1 stop": {
+   "ticks": 2727,
+   "still_share": 0.9846,
+   "tilt_p50_p95_p99": [
+    5.4,
+    10.4,
+    12.4
+   ],
+   "still_flat_share": 0.9846
+  },
+  "sesi1 walk": {
+   "ticks": 533,
+   "still_share": 0.0938,
+   "tilt_p50_p95_p99": [
+    7.3,
+    11.8,
+    15.0
+   ],
+   "still_flat_share": 0.0938
+  },
+  "sesi2 stop": {
+   "ticks": 2626,
+   "still_share": 0.9977,
+   "tilt_p50_p95_p99": [
+    6.4,
+    10.2,
+    11.8
+   ],
+   "still_flat_share": 0.9977
+  },
+  "sesi2 walk": {
+   "ticks": 447,
+   "still_share": 0.0112,
+   "tilt_p50_p95_p99": [
+    11.7,
+    17.9,
+    20.9
+   ],
+   "still_flat_share": 0.0067
+  }
+ },
+ "ms_per_tick_in_replay": {
+  "sesi1 tick 0.5": {
+   "ticks": 3798,
+   "ms_median": 0.864,
+   "ms_p95": 1.235,
+   "ms_max": 31.27
+  },
+  "sesi1 tick 1.0": {
+   "ticks": 1928,
+   "ms_median": 0.781,
+   "ms_p95": 1.335,
+   "ms_max": 12.79
+  },
+  "sesi2 tick 0.5": {
+   "ticks": 3591,
+   "ms_median": 0.75,
+   "ms_p95": 1.209,
+   "ms_max": 12.39
+  },
+  "sesi2 tick 1.0": {
+   "ticks": 1825,
+   "ms_median": 0.74,
+   "ms_p95": 1.137,
+   "ms_max": 19.13
+  }
+ },
+ "baseline_tian_3s": {
+  "sesi1 tick 0.5": {
+   "top1": 0.6219,
+   "top3": 0.7441,
+   "flips_per_min": 0.548,
+   "lock_median_s": 2.9985281040999325,
+   "locked_stops": 17,
+   "first_correct_median_s": 2.998440854250248,
+   "ever_correct_stops": 18,
+   "n_stops": 26,
+   "lit_events": 36,
+   "wrong_lit_events": 17,
+   "wrong_lit_tick_share": 0.2696,
+   "walk_on_corridor": 0.6379,
+   "walk_flips_per_min": 0.0,
+   "walk_wrong_lits": 6,
+   "n_stand_ticks": 2626
+  },
+  "sesi1 tick 1.0": {
+   "top1": 0.6222,
+   "top3": 0.7436,
+   "flips_per_min": 0.543,
+   "lock_median_s": 3.4990505208998,
+   "locked_stops": 17,
+   "first_correct_median_s": 3.498553750249812,
+   "ever_correct_stops": 18,
+   "n_stops": 26,
+   "lit_events": 34,
+   "wrong_lit_events": 16,
+   "wrong_lit_tick_share": 0.27,
+   "walk_on_corridor": 0.636,
+   "walk_flips_per_min": 0.0,
+   "walk_wrong_lits": 6,
+   "n_stand_ticks": 1326
+  },
+  "sesi2 tick 0.5": {
+   "top1": 0.6147,
+   "top3": 0.8863,
+   "flips_per_min": 0.095,
+   "lock_median_s": 2.9985861662999014,
+   "locked_stops": 16,
+   "first_correct_median_s": 2.9985861662999014,
+   "ever_correct_stops": 17,
+   "n_stops": 25,
+   "lit_events": 26,
+   "wrong_lit_events": 11,
+   "wrong_lit_tick_share": 0.2717,
+   "walk_on_corridor": 0.6063,
+   "walk_flips_per_min": 0.0,
+   "walk_wrong_lits": 3,
+   "n_stand_ticks": 2525
+  },
+  "sesi2 tick 1.0": {
+   "top1": 0.6149,
+   "top3": 0.8863,
+   "flips_per_min": 0.094,
+   "lock_median_s": 3.4990861663000032,
+   "locked_stops": 16,
+   "first_correct_median_s": 3.4990861663000032,
+   "ever_correct_stops": 17,
+   "n_stops": 25,
+   "lit_events": 26,
+   "wrong_lit_events": 11,
+   "wrong_lit_tick_share": 0.2722,
+   "walk_on_corridor": 0.6033,
+   "walk_flips_per_min": 0.0,
+   "walk_wrong_lits": 3,
+   "n_stand_ticks": 1275
+  }
+ },
+ "baseline_pooled_tick_0.5": {
+  "top1": 0.6183,
+  "top3": 0.8138,
+  "flips_per_min": 0.326,
+  "lock_median_s": 2.9985861662999014,
+  "locked_stops": 33,
+  "first_correct_median_s": 2.9985861662999014,
+  "ever_correct_stops": 35,
+  "n_stops": 51,
+  "lit_events": 62,
+  "wrong_lit_events": 28,
+  "wrong_lit_tick_share": 0.2706,
+  "walk_on_corridor": 0.6235,
+  "walk_flips_per_min": 0.0,
+  "walk_wrong_lits": 9,
+  "n_stand_ticks": 5151
+ },
+ "nested": {
+  "none (control, N=1)": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 0.5,
+     "window": 3.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=3 none calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6192,
+     "top3": 0.7289,
+     "flips_per_min": 0.777,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 55,
+     "wrong_lit_events": 33,
+     "wrong_lit_tick_share": 0.3477,
+     "walk_on_corridor": 0.1576,
+     "walk_flips_per_min": 11.707,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 2626
+    },
+    "test": {
+     "top1": 0.6495,
+     "top3": 0.8566,
+     "flips_per_min": 0.475,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 45,
+     "wrong_lit_events": 21,
+     "wrong_lit_tick_share": 0.2891,
+     "walk_on_corridor": 0.2013,
+     "walk_flips_per_min": 15.57,
+     "walk_wrong_lits": 8,
+     "n_stand_ticks": 2525
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 2.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=2 none calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6527,
+     "top3": 0.8562,
+     "flips_per_min": 0.76,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.2879,
+     "walk_on_corridor": 0.1879,
+     "walk_flips_per_min": 16.644,
+     "walk_wrong_lits": 10,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6207,
+     "top3": 0.7312,
+     "flips_per_min": 1.234,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 63,
+     "wrong_lit_events": 39,
+     "wrong_lit_tick_share": 0.3454,
+     "walk_on_corridor": 0.1782,
+     "walk_flips_per_min": 13.959,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 2.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=2 none calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6355,
+     "top3": 0.792,
+     "flips_per_min": 0.854,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 37,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 59,
+     "wrong_lit_tick_share": 0.3183,
+     "walk_on_corridor": 0.1733,
+     "walk_flips_per_min": 13.371,
+     "walk_wrong_lits": 28,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6192,
+     "top3": 0.7308,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 36,
+     "wrong_lit_tick_share": 0.3469,
+     "walk_on_corridor": 0.1625,
+     "walk_flips_per_min": 12.297,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6525,
+     "top3": 0.8557,
+     "flips_per_min": 0.659,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.2886,
+     "walk_on_corridor": 0.186,
+     "walk_flips_per_min": 14.628,
+     "walk_wrong_lits": 10,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "fir (a,b,c weights)": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.5000000000000001,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.50,0.10,0.10,0.10,0.10,0.10 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6237,
+     "top3": 0.7624,
+     "flips_per_min": 0.905,
+     "lock_median_s": 1.4945261458500454,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4907564583501198,
+     "ever_correct_stops": 18,
+     "n_stops": 26,
+     "lit_events": 53,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.322,
+     "walk_on_corridor": 0.3145,
+     "walk_flips_per_min": 2.544,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6471,
+     "top3": 0.8682,
+     "flips_per_min": 0.659,
+     "lock_median_s": 1.4970912500000395,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4970912500000395,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 39,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.2753,
+     "walk_on_corridor": 0.5537,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.3,
+      0.3,
+      0.2,
+      0.2
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 fir 0.30,0.30,0.20,0.20 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6535,
+     "top3": 0.863,
+     "flips_per_min": 0.713,
+     "lock_median_s": 1.4972833750998689,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4972833750998689,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 46,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.2148,
+     "walk_flips_per_min": 20.134,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6207,
+     "top3": 0.7456,
+     "flips_per_min": 1.051,
+     "lock_median_s": 1.746787020800184,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 20,
+     "n_stops": 26,
+     "lit_events": 58,
+     "wrong_lit_events": 34,
+     "wrong_lit_tick_share": 0.3317,
+     "walk_on_corridor": 0.2083,
+     "walk_flips_per_min": 18.236,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "ema": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "ema",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.6,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 ema a=0.6 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6214,
+     "top3": 0.7217,
+     "flips_per_min": 0.95,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 51,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.3326,
+     "walk_on_corridor": 0.2049,
+     "walk_flips_per_min": 1.484,
+     "walk_wrong_lits": 12,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6502,
+     "top3": 0.7945,
+     "flips_per_min": 0.659,
+     "lock_median_s": 1.4970862915997714,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4970862915997714,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 41,
+     "wrong_lit_events": 21,
+     "wrong_lit_tick_share": 0.2769,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 2.0,
+     "method": "ema",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.7,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=2 ema a=0.7 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6527,
+     "top3": 0.7541,
+     "flips_per_min": 0.76,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 46,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.2844,
+     "walk_on_corridor": 0.1902,
+     "walk_flips_per_min": 16.644,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.62,
+     "top3": 0.789,
+     "flips_per_min": 1.142,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 54,
+     "wrong_lit_events": 31,
+     "wrong_lit_tick_share": 0.3389,
+     "walk_on_corridor": 0.1764,
+     "walk_flips_per_min": 13.734,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 2.0,
+     "method": "ema",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.9,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=2 ema a=0.9 calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6355,
+     "top3": 0.7716,
+     "flips_per_min": 0.854,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 37,
+     "n_stops": 51,
+     "lit_events": 97,
+     "wrong_lit_events": 51,
+     "wrong_lit_tick_share": 0.313,
+     "walk_on_corridor": 0.1733,
+     "walk_flips_per_min": 13.371,
+     "walk_wrong_lits": 27,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6192,
+     "top3": 0.7888,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 52,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.3401,
+     "walk_on_corridor": 0.1625,
+     "walk_flips_per_min": 12.297,
+     "walk_wrong_lits": 17,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6525,
+     "top3": 0.7537,
+     "flips_per_min": 0.659,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 45,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.2847,
+     "walk_on_corridor": 0.186,
+     "walk_flips_per_min": 14.628,
+     "walk_wrong_lits": 10,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "fir/ema/none + jump guard": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.5000000000000001,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.50,0.10,0.10,0.10,0.10,0.10 guard2 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6229,
+     "top3": 0.7624,
+     "flips_per_min": 0.814,
+     "lock_median_s": 2.495280208349641,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.9968881459999466,
+     "ever_correct_stops": 18,
+     "n_stops": 26,
+     "lit_events": 53,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.322,
+     "walk_on_corridor": 0.3392,
+     "walk_flips_per_min": 4.028,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6447,
+     "top3": 0.8682,
+     "flips_per_min": 0.471,
+     "lock_median_s": 2.4956887497000935,
+     "locked_stops": 17,
+     "first_correct_median_s": 2.4956887497000935,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 39,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.2753,
+     "walk_on_corridor": 0.562,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5369,
+     "walk_flips_per_min": 1.074,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.6,
+      0.4
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.60,0.40 guard2 calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8005,
+     "flips_per_min": 0.807,
+     "lock_median_s": 1.4983791250997456,
+     "locked_stops": 36,
+     "first_correct_median_s": 1.4970912500000395,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 101,
+     "wrong_lit_events": 54,
+     "wrong_lit_tick_share": 0.306,
+     "walk_on_corridor": 0.2324,
+     "walk_flips_per_min": 13.943,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6222,
+     "top3": 0.7421,
+     "flips_per_min": 0.95,
+     "lock_median_s": 1.9972093332501117,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4977276459494533,
+     "ever_correct_stops": 20,
+     "n_stops": 26,
+     "lit_events": 55,
+     "wrong_lit_events": 32,
+     "wrong_lit_tick_share": 0.3303,
+     "walk_on_corridor": 0.2261,
+     "walk_flips_per_min": 13.145,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6525,
+     "top3": 0.8612,
+     "flips_per_min": 0.659,
+     "lock_median_s": 1.4970912500000395,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4970912500000395,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 46,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.2808,
+     "walk_on_corridor": 0.2397,
+     "walk_flips_per_min": 14.876,
+     "walk_wrong_lits": 1,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "hmm": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 2.0,
+     "eps": 0.01,
+     "p_stay": 0.9,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 hmm b=2 e=0.01 s=0.9 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6507,
+     "top3": 0.7184,
+     "flips_per_min": 0.57,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3438,
+     "walk_on_corridor": 0.1767,
+     "walk_flips_per_min": 15.57,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6207,
+     "top3": 0.6847,
+     "flips_per_min": 1.051,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9993261459003406,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 36,
+     "wrong_lit_tick_share": 0.3679,
+     "walk_on_corridor": 0.182,
+     "walk_flips_per_min": 15.985,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 2.0,
+     "eps": 0.05,
+     "p_stay": 0.9,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 hmm b=2 e=0.05 s=0.9 calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6356,
+     "top3": 0.7012,
+     "flips_per_min": 0.839,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 35,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 37,
+     "n_stops": 51,
+     "lit_events": 95,
+     "wrong_lit_events": 52,
+     "wrong_lit_tick_share": 0.3553,
+     "walk_on_corridor": 0.1796,
+     "walk_flips_per_min": 15.673,
+     "walk_wrong_lits": 33,
+     "n_stand_ticks": 5151
+    },
+    "sesi1": {
+     "top1": 0.6207,
+     "top3": 0.6847,
+     "flips_per_min": 1.097,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 57,
+     "wrong_lit_events": 34,
+     "wrong_lit_tick_share": 0.3663,
+     "walk_on_corridor": 0.182,
+     "walk_flips_per_min": 15.76,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2626
+    },
+    "sesi2": {
+     "top1": 0.6511,
+     "top3": 0.7184,
+     "flips_per_min": 0.57,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3438,
+     "walk_on_corridor": 0.1767,
+     "walk_flips_per_min": 15.57,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2525
+    }
+   }
+  },
+  "overall": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5369,
+     "walk_flips_per_min": 1.074,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "gate=none": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6244,
+     "top3": 0.687,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 50,
+     "wrong_lit_events": 28,
+     "wrong_lit_tick_share": 0.3643,
+     "walk_on_corridor": 0.1731,
+     "walk_flips_per_min": 13.357,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 34,
+     "wrong_lit_events": 16,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.1694,
+     "walk_flips_per_min": 13.14,
+     "walk_wrong_lits": 9,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4970862915997714,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4970862915997714,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 59,
+     "wrong_lit_events": 28,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.2125,
+     "walk_flips_per_min": 19.866,
+     "walk_wrong_lits": 2,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6215,
+     "top3": 0.7327,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.746787020800184,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4995201459505552,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 75,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3416,
+     "walk_on_corridor": 0.2008,
+     "walk_flips_per_min": 18.011,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.6,
+      0.4
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.60,0.40 guard2 calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8005,
+     "flips_per_min": 0.807,
+     "lock_median_s": 1.4983791250997456,
+     "locked_stops": 36,
+     "first_correct_median_s": 1.4970912500000395,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 101,
+     "wrong_lit_events": 54,
+     "wrong_lit_tick_share": 0.306,
+     "walk_on_corridor": 0.2324,
+     "walk_flips_per_min": 13.943,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6222,
+     "top3": 0.7421,
+     "flips_per_min": 0.95,
+     "lock_median_s": 1.9972093332501117,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4977276459494533,
+     "ever_correct_stops": 20,
+     "n_stops": 26,
+     "lit_events": 55,
+     "wrong_lit_events": 32,
+     "wrong_lit_tick_share": 0.3303,
+     "walk_on_corridor": 0.2261,
+     "walk_flips_per_min": 13.145,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6525,
+     "top3": 0.8612,
+     "flips_per_min": 0.659,
+     "lock_median_s": 1.4970912500000395,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4970912500000395,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 46,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.2808,
+     "walk_on_corridor": 0.2397,
+     "walk_flips_per_min": 14.876,
+     "walk_wrong_lits": 1,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "gate=still": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5369,
+     "walk_flips_per_min": 1.074,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "gate=still_flat": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still_flat",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still_flat calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5826,
+     "walk_flips_per_min": 0.992,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still_flat",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still_flat calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5727,
+     "walk_flips_per_min": 0.537,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still_flat",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still_flat calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3695,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 17,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5661,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "prefilter=False": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5369,
+     "walk_flips_per_min": 1.074,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "prefilter=True": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": true,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still pref calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": true,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still pref calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5369,
+     "walk_flips_per_min": 1.074,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": true,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still pref calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "calib=none": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "none",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 2,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 none guard2 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6543,
+     "top3": 0.8562,
+     "flips_per_min": 0.998,
+     "lock_median_s": 1.4967932915997153,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4967932915997153,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 60,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.2875,
+     "walk_on_corridor": 0.5369,
+     "walk_flips_per_min": 1.074,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6211,
+     "top3": 0.73,
+     "flips_per_min": 1.508,
+     "lock_median_s": 1.7464136665503247,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 74,
+     "wrong_lit_events": 45,
+     "wrong_lit_tick_share": 0.3435,
+     "walk_on_corridor": 0.2251,
+     "walk_flips_per_min": 4.953,
+     "walk_wrong_lits": 14,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "calib=start": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 0.25,
+     "eps": 0.01,
+     "p_stay": 0.9,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "start"
+    },
+    "label": "d=1 W=1 hmm b=0.25 e=0.01 s=0.9 calib=start",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.4668,
+     "top3": 0.549,
+     "flips_per_min": 0.588,
+     "lock_median_s": 3.9965343751996443,
+     "locked_stops": 15,
+     "first_correct_median_s": 3.9965343751996443,
+     "ever_correct_stops": 15,
+     "n_stops": 26,
+     "lit_events": 51,
+     "wrong_lit_events": 32,
+     "wrong_lit_tick_share": 0.503,
+     "walk_on_corridor": 0.2898,
+     "walk_flips_per_min": 11.025,
+     "walk_wrong_lits": 9,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6322,
+     "top3": 0.7192,
+     "flips_per_min": 0.235,
+     "lock_median_s": 2.499074791699968,
+     "locked_stops": 17,
+     "first_correct_median_s": 2.499074791699968,
+     "ever_correct_stops": 17,
+     "n_stops": 25,
+     "lit_events": 40,
+     "wrong_lit_events": 21,
+     "wrong_lit_tick_share": 0.3373,
+     "walk_on_corridor": 0.3843,
+     "walk_flips_per_min": 11.901,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.8,
+      0.2
+     ],
+     "alpha": 0.5,
+     "guard": 3,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "start"
+    },
+    "label": "d=1 W=1 fir 0.80,0.20 guard3 gate=still calib=start",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6478,
+     "top3": 0.811,
+     "flips_per_min": 0.565,
+     "lock_median_s": 2.4976637503004895,
+     "locked_stops": 18,
+     "first_correct_median_s": 2.4976637503004895,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 44,
+     "wrong_lit_events": 21,
+     "wrong_lit_tick_share": 0.2769,
+     "walk_on_corridor": 0.5496,
+     "walk_flips_per_min": 0.992,
+     "walk_wrong_lits": 2,
+     "n_stand_ticks": 1275
+    },
+    "test": {
+     "top1": 0.4676,
+     "top3": 0.6101,
+     "flips_per_min": 0.769,
+     "lock_median_s": null,
+     "locked_stops": 13,
+     "first_correct_median_s": 12.998098331600033,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 50,
+     "wrong_lit_events": 31,
+     "wrong_lit_tick_share": 0.4872,
+     "walk_on_corridor": 0.2226,
+     "walk_flips_per_min": 4.24,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 1326
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 0.5,
+     "eps": 0.001,
+     "p_stay": 0.9,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "start"
+    },
+    "label": "d=0.5 W=1 hmm b=0.5 e=0.001 s=0.9 gate=still calib=start",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.5558,
+     "top3": 0.6273,
+     "flips_per_min": 0.699,
+     "lock_median_s": 1.9985668746999181,
+     "locked_stops": 30,
+     "first_correct_median_s": 1.4984877501001392,
+     "ever_correct_stops": 34,
+     "n_stops": 51,
+     "lit_events": 90,
+     "wrong_lit_events": 49,
+     "wrong_lit_tick_share": 0.4285,
+     "walk_on_corridor": 0.5378,
+     "walk_flips_per_min": 3.796,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 5151
+    },
+    "sesi1": {
+     "top1": 0.4737,
+     "top3": 0.5354,
+     "flips_per_min": 0.868,
+     "lock_median_s": null,
+     "locked_stops": 13,
+     "first_correct_median_s": 1.7465077082499647,
+     "ever_correct_stops": 15,
+     "n_stops": 26,
+     "lit_events": 51,
+     "wrong_lit_events": 31,
+     "wrong_lit_tick_share": 0.5076,
+     "walk_on_corridor": 0.4053,
+     "walk_flips_per_min": 3.827,
+     "walk_wrong_lits": 12,
+     "n_stand_ticks": 2626
+    },
+    "sesi2": {
+     "top1": 0.6412,
+     "top3": 0.7228,
+     "flips_per_min": 0.523,
+     "lock_median_s": 1.4970862915997714,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4960261249998439,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 39,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3461,
+     "walk_on_corridor": 0.6957,
+     "walk_flips_per_min": 3.758,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 2525
+    }
+   }
+  },
+  "calib=median": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 2.0,
+     "method": "ema",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.2,
+     "guard": 3,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "median"
+    },
+    "label": "d=1 W=2 ema a=0.2 guard3 calib=median",
+    "feasible_on_tune": false,
+    "tune": {
+     "top1": 0.4472,
+     "top3": 0.5528,
+     "flips_per_min": 0.362,
+     "lock_median_s": 41.49624527420019,
+     "locked_stops": 14,
+     "first_correct_median_s": 41.49624527420019,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 39,
+     "wrong_lit_events": 25,
+     "wrong_lit_tick_share": 0.4698,
+     "walk_on_corridor": 0.2509,
+     "walk_flips_per_min": 6.36,
+     "walk_wrong_lits": 2,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.4243,
+     "top3": 0.4431,
+     "flips_per_min": 0.235,
+     "lock_median_s": null,
+     "locked_stops": 11,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 11,
+     "n_stops": 25,
+     "lit_events": 28,
+     "wrong_lit_events": 17,
+     "wrong_lit_tick_share": 0.4847,
+     "walk_on_corridor": 0.3182,
+     "walk_flips_per_min": 6.198,
+     "walk_wrong_lits": 2,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 1.0,
+     "window": 2.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 0.25,
+     "eps": 0.001,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": true,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "median"
+    },
+    "label": "d=1 W=2 hmm b=0.25 e=0.001 s=0.98 pref calib=median",
+    "feasible_on_tune": false,
+    "tune": {
+     "top1": 0.4306,
+     "top3": 0.4816,
+     "flips_per_min": 0.141,
+     "lock_median_s": null,
+     "locked_stops": 11,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 11,
+     "n_stops": 25,
+     "lit_events": 34,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.5561,
+     "walk_on_corridor": 0.3347,
+     "walk_flips_per_min": 7.686,
+     "walk_wrong_lits": 7,
+     "n_stand_ticks": 1275
+    },
+    "test": {
+     "top1": 0.4291,
+     "top3": 0.5558,
+     "flips_per_min": 0.362,
+     "lock_median_s": 51.99531468920031,
+     "locked_stops": 14,
+     "first_correct_median_s": 51.99531468920031,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 50,
+     "wrong_lit_events": 36,
+     "wrong_lit_tick_share": 0.549,
+     "walk_on_corridor": 0.258,
+     "walk_flips_per_min": 6.572,
+     "walk_wrong_lits": 11,
+     "n_stand_ticks": 1326
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 2.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 0.5,
+     "eps": 0.001,
+     "p_stay": 0.9,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "median"
+    },
+    "label": "d=1 W=2 hmm b=0.5 e=0.001 s=0.9 calib=median",
+    "feasible": false,
+    "pooled": {
+     "top1": 0.4329,
+     "top3": 0.519,
+     "flips_per_min": 0.254,
+     "lock_median_s": null,
+     "locked_stops": 25,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 25,
+     "n_stops": 51,
+     "lit_events": 90,
+     "wrong_lit_events": 64,
+     "wrong_lit_tick_share": 0.5552,
+     "walk_on_corridor": 0.2095,
+     "walk_flips_per_min": 10.057,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.4344,
+     "top3": 0.5581,
+     "flips_per_min": 0.362,
+     "lock_median_s": 49.9959510642002,
+     "locked_stops": 14,
+     "first_correct_median_s": 49.9959510642002,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 54,
+     "wrong_lit_events": 40,
+     "wrong_lit_tick_share": 0.549,
+     "walk_on_corridor": 0.1661,
+     "walk_flips_per_min": 8.481,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.4314,
+     "top3": 0.4784,
+     "flips_per_min": 0.141,
+     "lock_median_s": null,
+     "locked_stops": 11,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 11,
+     "n_stops": 25,
+     "lit_events": 36,
+     "wrong_lit_events": 24,
+     "wrong_lit_tick_share": 0.5616,
+     "walk_on_corridor": 0.2603,
+     "walk_flips_per_min": 11.901,
+     "walk_wrong_lits": 7,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "fir, calib=none": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.5000000000000001,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.50,0.10,0.10,0.10,0.10,0.10 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6237,
+     "top3": 0.7624,
+     "flips_per_min": 0.905,
+     "lock_median_s": 1.4945261458500454,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4907564583501198,
+     "ever_correct_stops": 18,
+     "n_stops": 26,
+     "lit_events": 53,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.322,
+     "walk_on_corridor": 0.3145,
+     "walk_flips_per_min": 2.544,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6471,
+     "top3": 0.8682,
+     "flips_per_min": 0.659,
+     "lock_median_s": 1.4970912500000395,
+     "locked_stops": 17,
+     "first_correct_median_s": 1.4970912500000395,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 39,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.2753,
+     "walk_on_corridor": 0.5537,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.3,
+      0.3,
+      0.2,
+      0.2
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 fir 0.30,0.30,0.20,0.20 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6535,
+     "top3": 0.863,
+     "flips_per_min": 0.713,
+     "lock_median_s": 1.4972833750998689,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4972833750998689,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 46,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.2148,
+     "walk_flips_per_min": 20.134,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6207,
+     "top3": 0.7456,
+     "flips_per_min": 1.051,
+     "lock_median_s": 1.746787020800184,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4988256458509568,
+     "ever_correct_stops": 20,
+     "n_stops": 26,
+     "lit_events": 58,
+     "wrong_lit_events": 34,
+     "wrong_lit_tick_share": 0.3317,
+     "walk_on_corridor": 0.2083,
+     "walk_flips_per_min": 18.236,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.7,
+      0.3
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 fir 0.70,0.30 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6371,
+     "top3": 0.8001,
+     "flips_per_min": 0.992,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 36,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 106,
+     "wrong_lit_events": 58,
+     "wrong_lit_tick_share": 0.3099,
+     "walk_on_corridor": 0.3524,
+     "walk_flips_per_min": 0.686,
+     "walk_wrong_lits": 16,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6214,
+     "top3": 0.7413,
+     "flips_per_min": 1.041,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3386,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 1.272,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6533,
+     "top3": 0.8612,
+     "flips_per_min": 0.941,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 23,
+     "wrong_lit_tick_share": 0.28,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "fir, calib=start": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 3.0,
+     "method": "fir",
+     "weights": [
+      0.4,
+      0.2,
+      0.1,
+      0.1,
+      0.1,
+      0.1
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "start"
+    },
+    "label": "d=1 W=3 fir 0.40,0.20,0.10,0.10,0.10,0.10 calib=start",
+    "feasible_on_tune": false,
+    "tune": {
+     "top1": 0.4661,
+     "top3": 0.6275,
+     "flips_per_min": 0.633,
+     "lock_median_s": null,
+     "locked_stops": 13,
+     "first_correct_median_s": 11.495223769399729,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 42,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.4819,
+     "walk_on_corridor": 0.1696,
+     "walk_flips_per_min": 11.873,
+     "walk_wrong_lits": 1,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6369,
+     "top3": 0.8133,
+     "flips_per_min": 0.612,
+     "lock_median_s": 2.4982878753999103,
+     "locked_stops": 18,
+     "first_correct_median_s": 2.4982878753999103,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 34,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.2839,
+     "walk_on_corridor": 0.2851,
+     "walk_flips_per_min": 13.884,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 2.0,
+     "method": "fir",
+     "weights": [
+      0.9,
+      0.1
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "start"
+    },
+    "label": "d=0.5 W=2 fir 0.90,0.10 calib=start",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6455,
+     "top3": 0.8075,
+     "flips_per_min": 0.855,
+     "lock_median_s": 1.4980588749999697,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4970862915997714,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 43,
+     "wrong_lit_events": 20,
+     "wrong_lit_tick_share": 0.2859,
+     "walk_on_corridor": 0.1902,
+     "walk_flips_per_min": 17.45,
+     "walk_wrong_lits": 11,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.4646,
+     "top3": 0.6051,
+     "flips_per_min": 1.28,
+     "lock_median_s": null,
+     "locked_stops": 13,
+     "first_correct_median_s": 9.994491020950306,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 57,
+     "wrong_lit_events": 36,
+     "wrong_lit_tick_share": 0.5015,
+     "walk_on_corridor": 0.1614,
+     "walk_flips_per_min": 12.833,
+     "walk_wrong_lits": 19,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.4,
+      0.2,
+      0.1,
+      0.1,
+      0.1,
+      0.1
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "start"
+    },
+    "label": "d=1 W=1 fir 0.40,0.20,0.10,0.10,0.10,0.10 calib=start",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.5536,
+     "top3": 0.7282,
+     "flips_per_min": 0.854,
+     "lock_median_s": 4.490284166399761,
+     "locked_stops": 31,
+     "first_correct_median_s": 2.4936407919994963,
+     "ever_correct_stops": 33,
+     "n_stops": 51,
+     "lit_events": 79,
+     "wrong_lit_events": 42,
+     "wrong_lit_tick_share": 0.3802,
+     "walk_on_corridor": 0.2114,
+     "walk_flips_per_min": 17.029,
+     "walk_wrong_lits": 1,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.4698,
+     "top3": 0.6373,
+     "flips_per_min": 0.95,
+     "lock_median_s": null,
+     "locked_stops": 13,
+     "first_correct_median_s": 4.493743083699769,
+     "ever_correct_stops": 15,
+     "n_stops": 26,
+     "lit_events": 41,
+     "wrong_lit_events": 26,
+     "wrong_lit_tick_share": 0.4781,
+     "walk_on_corridor": 0.1837,
+     "walk_flips_per_min": 16.325,
+     "walk_wrong_lits": 1,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6408,
+     "top3": 0.8227,
+     "flips_per_min": 0.753,
+     "lock_median_s": 1.4980588749999697,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4980588749999697,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 16,
+     "wrong_lit_tick_share": 0.2784,
+     "walk_on_corridor": 0.2438,
+     "walk_flips_per_min": 17.851,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "fir, calib=median": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 2.0,
+     "method": "fir",
+     "weights": [
+      0.30000000000000004,
+      0.20000000000000004,
+      0.20000000000000004,
+      0.20000000000000004,
+      0.10000000000000002
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "median"
+    },
+    "label": "d=1 W=2 fir 0.30,0.20,0.20,0.20,0.10 calib=median",
+    "feasible_on_tune": false,
+    "tune": {
+     "top1": 0.4578,
+     "top3": 0.6003,
+     "flips_per_min": 0.452,
+     "lock_median_s": 31.992416504200264,
+     "locked_stops": 14,
+     "first_correct_median_s": 31.992416504200264,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 43,
+     "wrong_lit_events": 29,
+     "wrong_lit_tick_share": 0.4947,
+     "walk_on_corridor": 0.1519,
+     "walk_flips_per_min": 10.601,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.4204,
+     "top3": 0.5545,
+     "flips_per_min": 0.282,
+     "lock_median_s": null,
+     "locked_stops": 11,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 11,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 20,
+     "wrong_lit_tick_share": 0.5051,
+     "walk_on_corridor": 0.2314,
+     "walk_flips_per_min": 12.149,
+     "walk_wrong_lits": 2,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.5000000000000001,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "median"
+    },
+    "label": "d=1 W=1 fir 0.50,0.10,0.10,0.10,0.10,0.10 calib=median",
+    "feasible_on_tune": false,
+    "tune": {
+     "top1": 0.4235,
+     "top3": 0.5545,
+     "flips_per_min": 0.282,
+     "lock_median_s": null,
+     "locked_stops": 12,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 12,
+     "n_stops": 25,
+     "lit_events": 35,
+     "wrong_lit_events": 22,
+     "wrong_lit_tick_share": 0.5004,
+     "walk_on_corridor": 0.2025,
+     "walk_flips_per_min": 18.843,
+     "walk_wrong_lits": 0,
+     "n_stand_ticks": 1275
+    },
+    "test": {
+     "top1": 0.4563,
+     "top3": 0.6018,
+     "flips_per_min": 0.814,
+     "lock_median_s": 32.49475531420012,
+     "locked_stops": 14,
+     "first_correct_median_s": 32.49475531420012,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 46,
+     "wrong_lit_events": 32,
+     "wrong_lit_tick_share": 0.4955,
+     "walk_on_corridor": 0.1413,
+     "walk_flips_per_min": 12.509,
+     "walk_wrong_lits": 3,
+     "n_stand_ticks": 1326
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "fir",
+     "weights": [
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.01,
+     "p_stay": 0.98,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "median"
+    },
+    "label": "d=1 W=1 fir 0.20,0.20,0.20,0.20,0.20 gate=still calib=median",
+    "feasible": false,
+    "pooled": {
+     "top1": 0.4402,
+     "top3": 0.579,
+     "flips_per_min": 0.369,
+     "lock_median_s": null,
+     "locked_stops": 25,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 25,
+     "n_stops": 51,
+     "lit_events": 94,
+     "wrong_lit_events": 66,
+     "wrong_lit_tick_share": 0.5029,
+     "walk_on_corridor": 0.3924,
+     "walk_flips_per_min": 0.229,
+     "walk_wrong_lits": 19,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.4578,
+     "top3": 0.6018,
+     "flips_per_min": 0.452,
+     "lock_median_s": 32.49475531420012,
+     "locked_stops": 14,
+     "first_correct_median_s": 32.49475531420012,
+     "ever_correct_stops": 14,
+     "n_stops": 26,
+     "lit_events": 47,
+     "wrong_lit_events": 33,
+     "wrong_lit_tick_share": 0.5015,
+     "walk_on_corridor": 0.3816,
+     "walk_flips_per_min": 0.424,
+     "walk_wrong_lits": 12,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.422,
+     "top3": 0.5553,
+     "flips_per_min": 0.282,
+     "lock_median_s": null,
+     "locked_stops": 11,
+     "first_correct_median_s": null,
+     "ever_correct_stops": 11,
+     "n_stops": 25,
+     "lit_events": 47,
+     "wrong_lit_events": 33,
+     "wrong_lit_tick_share": 0.5043,
+     "walk_on_corridor": 0.405,
+     "walk_flips_per_min": 0.0,
+     "walk_wrong_lits": 7,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "hmm, gate=none": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6244,
+     "top3": 0.687,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 50,
+     "wrong_lit_events": 28,
+     "wrong_lit_tick_share": 0.3643,
+     "walk_on_corridor": 0.1731,
+     "walk_flips_per_min": 13.357,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 34,
+     "wrong_lit_events": 16,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.1694,
+     "walk_flips_per_min": 13.14,
+     "walk_wrong_lits": 9,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 2.0,
+     "eps": 0.01,
+     "p_stay": 0.9,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 hmm b=2 e=0.01 s=0.9 calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6507,
+     "top3": 0.7184,
+     "flips_per_min": 0.57,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3438,
+     "walk_on_corridor": 0.1767,
+     "walk_flips_per_min": 15.57,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6207,
+     "top3": 0.6847,
+     "flips_per_min": 1.051,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9993261459003406,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 59,
+     "wrong_lit_events": 36,
+     "wrong_lit_tick_share": 0.3679,
+     "walk_on_corridor": 0.182,
+     "walk_flips_per_min": 15.985,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 2.0,
+     "eps": 0.05,
+     "p_stay": 0.9,
+     "gate": "none",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 hmm b=2 e=0.05 s=0.9 calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6356,
+     "top3": 0.7012,
+     "flips_per_min": 0.839,
+     "lock_median_s": 0.999977625099973,
+     "locked_stops": 35,
+     "first_correct_median_s": 0.9997386667000683,
+     "ever_correct_stops": 37,
+     "n_stops": 51,
+     "lit_events": 95,
+     "wrong_lit_events": 52,
+     "wrong_lit_tick_share": 0.3553,
+     "walk_on_corridor": 0.1796,
+     "walk_flips_per_min": 15.673,
+     "walk_wrong_lits": 33,
+     "n_stand_ticks": 5151
+    },
+    "sesi1": {
+     "top1": 0.6207,
+     "top3": 0.6847,
+     "flips_per_min": 1.097,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 57,
+     "wrong_lit_events": 34,
+     "wrong_lit_tick_share": 0.3663,
+     "walk_on_corridor": 0.182,
+     "walk_flips_per_min": 15.76,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2626
+    },
+    "sesi2": {
+     "top1": 0.6511,
+     "top3": 0.7184,
+     "flips_per_min": 0.57,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9967803750996609,
+     "ever_correct_stops": 18,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3438,
+     "walk_on_corridor": 0.1767,
+     "walk_flips_per_min": 15.57,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2525
+    }
+   }
+  },
+  "hmm, gate=still": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5289,
+     "walk_flips_per_min": 0.744,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 2.0,
+     "eps": 0.01,
+     "p_stay": 0.9,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 hmm b=2 e=0.01 s=0.9 gate=still calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6507,
+     "top3": 0.7184,
+     "flips_per_min": 0.57,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3438,
+     "walk_on_corridor": 0.5436,
+     "walk_flips_per_min": 2.685,
+     "walk_wrong_lits": 7,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6188,
+     "top3": 0.682,
+     "flips_per_min": 0.96,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 57,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3671,
+     "walk_on_corridor": 0.2195,
+     "walk_flips_per_min": 4.278,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 0.5,
+     "eps": 0.001,
+     "p_stay": 0.9,
+     "gate": "still",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=0.5 e=0.001 s=0.9 gate=still calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6355,
+     "top3": 0.6705,
+     "flips_per_min": 0.507,
+     "lock_median_s": 1.4960261249998439,
+     "locked_stops": 37,
+     "first_correct_median_s": 1.4914285417000883,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 82,
+     "wrong_lit_events": 42,
+     "wrong_lit_tick_share": 0.3479,
+     "walk_on_corridor": 0.6057,
+     "walk_flips_per_min": 2.171,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6222,
+     "top3": 0.6644,
+     "flips_per_min": 0.724,
+     "lock_median_s": 1.497433708349945,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4943019167000102,
+     "ever_correct_stops": 18,
+     "n_stops": 26,
+     "lit_events": 48,
+     "wrong_lit_events": 28,
+     "wrong_lit_tick_share": 0.3582,
+     "walk_on_corridor": 0.5512,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 9,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6494,
+     "top3": 0.6769,
+     "flips_per_min": 0.282,
+     "lock_median_s": 1.494458916700296,
+     "locked_stops": 19,
+     "first_correct_median_s": 1.4909353750999799,
+     "ever_correct_stops": 20,
+     "n_stops": 25,
+     "lit_events": 34,
+     "wrong_lit_events": 14,
+     "wrong_lit_tick_share": 0.3373,
+     "walk_on_corridor": 0.6694,
+     "walk_flips_per_min": 2.231,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 1275
+    }
+   }
+  },
+  "hmm, gate=still_flat": {
+   "tune sesi1 -> score sesi2": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 1.0,
+     "eps": 0.05,
+     "p_stay": 0.995,
+     "gate": "still_flat",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=1 e=0.05 s=0.995 gate=still_flat calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6259,
+     "top3": 0.6863,
+     "flips_per_min": 0.814,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 49,
+     "wrong_lit_events": 27,
+     "wrong_lit_tick_share": 0.3635,
+     "walk_on_corridor": 0.2014,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 18,
+     "n_stand_ticks": 1326
+    },
+    "test": {
+     "top1": 0.6431,
+     "top3": 0.7224,
+     "flips_per_min": 0.282,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 33,
+     "wrong_lit_events": 15,
+     "wrong_lit_tick_share": 0.3506,
+     "walk_on_corridor": 0.5826,
+     "walk_flips_per_min": 0.992,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 1275
+    }
+   },
+   "tune sesi2 -> score sesi1": {
+    "config": {
+     "tick": 0.5,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 2.0,
+     "eps": 0.01,
+     "p_stay": 0.9,
+     "gate": "still_flat",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=0.5 W=1 hmm b=2 e=0.01 s=0.9 gate=still_flat calib=none",
+    "feasible_on_tune": true,
+    "tune": {
+     "top1": 0.6507,
+     "top3": 0.7184,
+     "flips_per_min": 0.57,
+     "lock_median_s": 0.9967803750996609,
+     "locked_stops": 18,
+     "first_correct_median_s": 0.9965872500001751,
+     "ever_correct_stops": 19,
+     "n_stops": 25,
+     "lit_events": 38,
+     "wrong_lit_events": 18,
+     "wrong_lit_tick_share": 0.3438,
+     "walk_on_corridor": 0.5794,
+     "walk_flips_per_min": 2.685,
+     "walk_wrong_lits": 6,
+     "n_stand_ticks": 2525
+    },
+    "test": {
+     "top1": 0.6188,
+     "top3": 0.682,
+     "flips_per_min": 0.96,
+     "lock_median_s": 1.2457030834000307,
+     "locked_stops": 17,
+     "first_correct_median_s": 0.9998581459000206,
+     "ever_correct_stops": 19,
+     "n_stops": 26,
+     "lit_events": 57,
+     "wrong_lit_events": 35,
+     "wrong_lit_tick_share": 0.3671,
+     "walk_on_corridor": 0.2195,
+     "walk_flips_per_min": 4.278,
+     "walk_wrong_lits": 20,
+     "n_stand_ticks": 2626
+    }
+   },
+   "pooled choice (deploy)": {
+    "config": {
+     "tick": 1.0,
+     "window": 1.0,
+     "method": "hmm",
+     "weights": [
+      1.0
+     ],
+     "alpha": 0.5,
+     "guard": 0,
+     "beta": 0.5,
+     "eps": 0.001,
+     "p_stay": 0.9,
+     "gate": "still_flat",
+     "abstain": 0.0,
+     "prefilter": false,
+     "shift": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "calib": "none"
+    },
+    "label": "d=1 W=1 hmm b=0.5 e=0.001 s=0.9 gate=still_flat calib=none",
+    "feasible": true,
+    "pooled": {
+     "top1": 0.6355,
+     "top3": 0.6705,
+     "flips_per_min": 0.507,
+     "lock_median_s": 1.4960261249998439,
+     "locked_stops": 37,
+     "first_correct_median_s": 1.4914285417000883,
+     "ever_correct_stops": 38,
+     "n_stops": 51,
+     "lit_events": 82,
+     "wrong_lit_events": 42,
+     "wrong_lit_tick_share": 0.3479,
+     "walk_on_corridor": 0.6019,
+     "walk_flips_per_min": 1.829,
+     "walk_wrong_lits": 13,
+     "n_stand_ticks": 2601
+    },
+    "sesi1": {
+     "top1": 0.6222,
+     "top3": 0.6644,
+     "flips_per_min": 0.724,
+     "lock_median_s": 1.497433708349945,
+     "locked_stops": 18,
+     "first_correct_median_s": 1.4943019167000102,
+     "ever_correct_stops": 18,
+     "n_stops": 26,
+     "lit_events": 48,
+     "wrong_lit_events": 28,
+     "wrong_lit_tick_share": 0.3582,
+     "walk_on_corridor": 0.5512,
+     "walk_flips_per_min": 2.12,
+     "walk_wrong_lits": 9,
+     "n_stand_ticks": 1326
+    },
+    "sesi2": {
+     "top1": 0.6494,
+     "top3": 0.6769,
+     "flips_per_min": 0.282,
+     "lock_median_s": 1.494458916700296,
+     "locked_stops": 19,
+     "first_correct_median_s": 1.4909353750999799,
+     "ever_correct_stops": 20,
+     "n_stops": 25,
+     "lit_events": 34,
+     "wrong_lit_events": 14,
+     "wrong_lit_tick_share": 0.3373,
+     "walk_on_corridor": 0.6612,
+     "walk_flips_per_min": 1.488,
+     "walk_wrong_lits": 4,
+     "n_stand_ticks": 1275
+    }
+   }
+  }
+ },
+ "abstain": {
+  "tune sesi1 -> score sesi2": {
+   "config": {
+    "tick": 1.0,
+    "window": 1.0,
+    "method": "hmm",
+    "weights": [
+     1.0
+    ],
+    "alpha": 0.5,
+    "guard": 0,
+    "beta": 1.0,
+    "eps": 0.05,
+    "p_stay": 0.995,
+    "gate": "still",
+    "abstain": 0.0,
+    "prefilter": false,
+    "shift": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "calib": "none"
+   },
+   "tune_curve": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6259,
+     "shown_ticks": 1326,
+     "right_ticks": 830,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 1.0,
+     "precision": 0.6259,
+     "shown_ticks": 1326,
+     "right_ticks": 830,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 1.0,
+     "precision": 0.6259,
+     "shown_ticks": 1326,
+     "right_ticks": 830,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 0.9992,
+     "precision": 0.6257,
+     "shown_ticks": 1325,
+     "right_ticks": 829,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9992,
+     "precision": 0.6257,
+     "shown_ticks": 1325,
+     "right_ticks": 829,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.9992,
+     "precision": 0.6257,
+     "shown_ticks": 1325,
+     "right_ticks": 829,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.9955,
+     "precision": 0.6265,
+     "shown_ticks": 1320,
+     "right_ticks": 827,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.9849,
+     "precision": 0.6279,
+     "shown_ticks": 1306,
+     "right_ticks": 820,
+     "standing_ticks": 1326
+    }
+   ],
+   "test_curve": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6431,
+     "shown_ticks": 1275,
+     "right_ticks": 820,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 1.0,
+     "precision": 0.6431,
+     "shown_ticks": 1275,
+     "right_ticks": 820,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 1.0,
+     "precision": 0.6431,
+     "shown_ticks": 1275,
+     "right_ticks": 820,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 1.0,
+     "precision": 0.6431,
+     "shown_ticks": 1275,
+     "right_ticks": 820,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9984,
+     "precision": 0.6434,
+     "shown_ticks": 1273,
+     "right_ticks": 819,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.9976,
+     "precision": 0.6439,
+     "shown_ticks": 1272,
+     "right_ticks": 819,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.9953,
+     "precision": 0.6454,
+     "shown_ticks": 1269,
+     "right_ticks": 819,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.9914,
+     "precision": 0.6472,
+     "shown_ticks": 1264,
+     "right_ticks": 818,
+     "standing_ticks": 1275
+    }
+   ],
+   "chosen_threshold": 0.9,
+   "test_at_chosen": {
+    "threshold": 0.9,
+    "coverage": 0.9914,
+    "precision": 0.6472,
+    "shown_ticks": 1264,
+    "right_ticks": 818,
+    "standing_ticks": 1275
+   }
+  },
+  "tune sesi2 -> score sesi1": {
+   "config": {
+    "tick": 0.5,
+    "window": 1.0,
+    "method": "none",
+    "weights": [
+     1.0
+    ],
+    "alpha": 0.5,
+    "guard": 2,
+    "beta": 1.0,
+    "eps": 0.01,
+    "p_stay": 0.98,
+    "gate": "still",
+    "abstain": 0.0,
+    "prefilter": false,
+    "shift": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "calib": "none"
+   },
+   "tune_curve": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6543,
+     "shown_ticks": 2525,
+     "right_ticks": 1652,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 0.9996,
+     "precision": 0.6545,
+     "shown_ticks": 2524,
+     "right_ticks": 1652,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 0.9964,
+     "precision": 0.6546,
+     "shown_ticks": 2516,
+     "right_ticks": 1647,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 0.9933,
+     "precision": 0.6563,
+     "shown_ticks": 2508,
+     "right_ticks": 1646,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9659,
+     "precision": 0.6642,
+     "shown_ticks": 2439,
+     "right_ticks": 1620,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.9402,
+     "precision": 0.6794,
+     "shown_ticks": 2374,
+     "right_ticks": 1613,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.9125,
+     "precision": 0.6823,
+     "shown_ticks": 2304,
+     "right_ticks": 1572,
+     "standing_ticks": 2525
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.8685,
+     "precision": 0.6995,
+     "shown_ticks": 2193,
+     "right_ticks": 1534,
+     "standing_ticks": 2525
+    }
+   ],
+   "test_curve": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6211,
+     "shown_ticks": 2626,
+     "right_ticks": 1631,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 0.9962,
+     "precision": 0.6227,
+     "shown_ticks": 2616,
+     "right_ticks": 1629,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 0.9947,
+     "precision": 0.6237,
+     "shown_ticks": 2612,
+     "right_ticks": 1629,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 0.9931,
+     "precision": 0.6242,
+     "shown_ticks": 2608,
+     "right_ticks": 1628,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9844,
+     "precision": 0.6259,
+     "shown_ticks": 2585,
+     "right_ticks": 1618,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.9638,
+     "precision": 0.6353,
+     "shown_ticks": 2531,
+     "right_ticks": 1608,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.96,
+     "precision": 0.6347,
+     "shown_ticks": 2521,
+     "right_ticks": 1600,
+     "standing_ticks": 2626
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.901,
+     "precision": 0.6352,
+     "shown_ticks": 2366,
+     "right_ticks": 1503,
+     "standing_ticks": 2626
+    }
+   ],
+   "chosen_threshold": 0.9,
+   "test_at_chosen": {
+    "threshold": 0.9,
+    "coverage": 0.901,
+    "precision": 0.6352,
+    "shown_ticks": 2366,
+    "right_ticks": 1503,
+    "standing_ticks": 2626
+   }
+  },
+  "pooled choice": {
+   "config": {
+    "tick": 1.0,
+    "window": 1.0,
+    "method": "fir",
+    "weights": [
+     0.7,
+     0.3
+    ],
+    "alpha": 0.5,
+    "guard": 0,
+    "beta": 1.0,
+    "eps": 0.01,
+    "p_stay": 0.98,
+    "gate": "still",
+    "abstain": 0.0,
+    "prefilter": false,
+    "shift": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "calib": "none"
+   },
+   "sesi1": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6214,
+     "shown_ticks": 1326,
+     "right_ticks": 824,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 1.0,
+     "precision": 0.6214,
+     "shown_ticks": 1326,
+     "right_ticks": 824,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 1.0,
+     "precision": 0.6214,
+     "shown_ticks": 1326,
+     "right_ticks": 824,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 0.9985,
+     "precision": 0.6216,
+     "shown_ticks": 1324,
+     "right_ticks": 823,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9879,
+     "precision": 0.626,
+     "shown_ticks": 1310,
+     "right_ticks": 820,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.9729,
+     "precision": 0.6341,
+     "shown_ticks": 1290,
+     "right_ticks": 818,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.9517,
+     "precision": 0.6387,
+     "shown_ticks": 1262,
+     "right_ticks": 806,
+     "standing_ticks": 1326
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.8839,
+     "precision": 0.6433,
+     "shown_ticks": 1172,
+     "right_ticks": 754,
+     "standing_ticks": 1326
+    }
+   ],
+   "sesi2": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6533,
+     "shown_ticks": 1275,
+     "right_ticks": 833,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 1.0,
+     "precision": 0.6533,
+     "shown_ticks": 1275,
+     "right_ticks": 833,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 1.0,
+     "precision": 0.6533,
+     "shown_ticks": 1275,
+     "right_ticks": 833,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 1.0,
+     "precision": 0.6533,
+     "shown_ticks": 1275,
+     "right_ticks": 833,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9678,
+     "precision": 0.6653,
+     "shown_ticks": 1234,
+     "right_ticks": 821,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.942,
+     "precision": 0.6769,
+     "shown_ticks": 1201,
+     "right_ticks": 813,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.902,
+     "precision": 0.687,
+     "shown_ticks": 1150,
+     "right_ticks": 790,
+     "standing_ticks": 1275
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.8635,
+     "precision": 0.7021,
+     "shown_ticks": 1101,
+     "right_ticks": 773,
+     "standing_ticks": 1275
+    }
+   ],
+   "pooled_curve": [
+    {
+     "threshold": 0.0,
+     "coverage": 1.0,
+     "precision": 0.6371
+    },
+    {
+     "threshold": 0.3,
+     "coverage": 1.0,
+     "precision": 0.6371
+    },
+    {
+     "threshold": 0.4,
+     "coverage": 1.0,
+     "precision": 0.6371
+    },
+    {
+     "threshold": 0.5,
+     "coverage": 0.9992,
+     "precision": 0.6372
+    },
+    {
+     "threshold": 0.6,
+     "coverage": 0.9781,
+     "precision": 0.645
+    },
+    {
+     "threshold": 0.7,
+     "coverage": 0.9577,
+     "precision": 0.6548
+    },
+    {
+     "threshold": 0.8,
+     "coverage": 0.9273,
+     "precision": 0.6617
+    },
+    {
+     "threshold": 0.9,
+     "coverage": 0.8739,
+     "precision": 0.6718
+    }
+   ],
+   "chosen_threshold": 0.9
+  }
+ },
+ "visit_level_calibration": {
+  "sesi1->sesi2 (iPhone19,2 -> iPhone17,4) none": "16/25",
+  "sesi1->sesi2 (iPhone19,2 -> iPhone17,4) median (whole test session)": "15/25",
+  "sesi1->sesi2 (iPhone19,2 -> iPhone17,4) start (first stop known)": "15/25",
+  "sesi2->sesi1 (iPhone17,4 -> iPhone19,2) none": "16/26",
+  "sesi2->sesi1 (iPhone17,4 -> iPhone19,2) median (whole test session)": "15/26",
+  "sesi2->sesi1 (iPhone17,4 -> iPhone19,2) start (first stop known)": "13/26"
+ },
+ "end_to_end_check": {
+  "sesi1": {
+   "live_tracker": {
+    "top1": 0.6214,
+    "top3": 0.7413,
+    "flips_per_min": 1.041,
+    "lock_median_s": 1.2457030834000307,
+    "locked_stops": 18,
+    "first_correct_median_s": 0.9998581459000206,
+    "ever_correct_stops": 19,
+    "n_stops": 26,
+    "lit_events": 59,
+    "wrong_lit_events": 35,
+    "wrong_lit_tick_share": 0.3386,
+    "walk_on_corridor": 0.2014,
+    "walk_flips_per_min": 1.272,
+    "walk_wrong_lits": 13,
+    "n_stand_ticks": 1326
+   },
+   "matches_search": true,
+   "ticks": 1928,
+   "ms_per_tick_median": 0.764
+  },
+  "sesi2": {
+   "live_tracker": {
+    "top1": 0.6533,
+    "top3": 0.8612,
+    "flips_per_min": 0.941,
+    "lock_median_s": 0.9967803750996609,
+    "locked_stops": 18,
+    "first_correct_median_s": 0.9967803750996609,
+    "ever_correct_stops": 19,
+    "n_stops": 25,
+    "lit_events": 47,
+    "wrong_lit_events": 23,
+    "wrong_lit_tick_share": 0.28,
+    "walk_on_corridor": 0.5289,
+    "walk_flips_per_min": 0.0,
+    "walk_wrong_lits": 3,
+    "n_stand_ticks": 1275
+   },
+   "matches_search": true,
+   "ticks": 1825,
+   "ms_per_tick_median": 0.76
+  }
+ },
+ "figures": [
+  "out/fig_heldout.png",
+  "out/fig_timeline.png"
+ ],
+ "n_configs_per_session": 22896,
+ "seconds": 306
+}
