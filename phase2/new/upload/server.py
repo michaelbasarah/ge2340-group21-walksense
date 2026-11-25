@@ -119,7 +119,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def _eval_summary():
-    f = ws.OUT / 'eval.json'
+    f = ws.out_file('eval')
     if not f.exists():
         return None
     e = json.loads(f.read_text())
@@ -144,7 +144,7 @@ def main(argv):
     ap.add_argument('--floor', type=int, choices=(4, 5), default=5, help='floor you start on')
     a = ap.parse_args(argv)
     port = a.port
-    print('Training the place models on the 24-Nov stops ...')
+    print(f'Training the place models on the recorded sessions ({", ".join(ws.SESSIONS)}) ...')
     STATE['models'] = ws.build_models()
     LABELS.update(ws.place_labels())
     STATE['session'] = ws.Session(a.floor)

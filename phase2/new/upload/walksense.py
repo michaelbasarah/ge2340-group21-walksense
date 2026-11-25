@@ -6,7 +6,8 @@ Reused unchanged: step detector (old/positioning-pilot/step_detection.py), gyro 
 New here: a pressure floor tracker (jump from the median of recent readings), per-phone-model
 training on the 24-Nov stops, and a comparison of magnetic features (xyz / tilt / |B|).
 
-  python walksense.py evaluate      # train on one 24-Nov session, test on the other -> out/eval.json
+  python walksense.py evaluate      # leave one session out over the sessions -> out/eval.json
+  WALKSENSE_SESSIONS=24nov python walksense.py evaluate   # the old 24-Nov-only behaviour -> out/eval_24nov.json
 Needs: numpy pandas scikit-learn matplotlib (same as crossday.py).
 """
 from __future__ import annotations
@@ -14,6 +15,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import os
 import sys
 import zipfile
 from collections import Counter
@@ -28,8 +30,19 @@ import pdr                                   # noqa: E402  (also puts cross-day 
 from pdr import count_steps, turns           # noqa: E402
 from crossday import make_model              # noqa: E402
 
-DATA = NEW.parent / 'clean-data' / '2026-11-24'
-SESSIONS = ('sesi1', 'sesi2')
+DATA = NEW.parent / 'clean-data' / '2026-11-24'   # kept for ../smoothing/replay.py; new code uses session_dir()
+CLEAN = NEW.parent / 'clean-data'
+# Every session the app can train on: a name and the folder that holds its clean/ and raw/ folders.
+ALL_SESSIONS = [{'name': 'sesi1', 'path': CLEAN / '2026-11-24' / 'sesi1'},
+                {'name': 'sesi2', 'path': CLEAN / '2026-11-24' / 'sesi2'},
+                {'name': '25nov', 'path': CLEAN / '2026-11-25'}]
+# WALKSENSE_SESSIONS=24nov (or a comma list of names) limits the sessions; unset = all of them.
+_ENV = os.environ.get('WALKSENSE_SESSIONS', '').strip()
+TAG = _ENV.lower()
+_WANT = {'': None, 'all': None, '24nov': {'sesi1', 'sesi2'}}.get(TAG, set(TAG.split(',')) if TAG else None)
+SESSION_LIST = [s for s in ALL_SESSIONS if _WANT is None or s['name'] in _WANT]
+SESSIONS = tuple(s['name'] for s in SESSION_LIST)
+SESSION_PATH = {s['name']: s['path'] for s in ALL_SESSIONS}
 OUT = HERE / 'out'
 WINDOW_S = 2.0          # same window as crossday.py
 TRIM_S = 5.0            # skip the first/last 5 s of a stop (phone being placed or picked up)
@@ -91,8 +104,12 @@ def read_folder(folder: Path, device: str) -> dict:
     return rec
 
 
+def session_dir(session):
+    return SESSION_PATH[session]
+
+
 def manifest(session):
-    with open(DATA / session / 'clean' / 'manifest.csv', encoding='utf-8') as f:
+    with open(session_dir(session) / 'clean' / 'manifest.csv', encoding='utf-8') as f:
         return list(csv.DictReader(f))
 
 
@@ -152,7 +169,7 @@ def motion(rec):
 
 # ============================================================================ model
 class PlaceModel:
-    """Magnetic kNN per floor, trained on the 24-Nov stops of one phone model."""
+    """Magnetic kNN per floor, trained on the stops of one phone model."""
 
     def __init__(self, stops, kind='xyz'):
         self.kind, self.models, self.places = kind, {}, {}
@@ -178,7 +195,7 @@ class PlaceModel:
 
 
 def training_stops(device=None, sessions=SESSIONS, phone=None):
-    """Stops from the 24-Nov manifests, filtered by phone model (device) or phone folder name."""
+    """Stops from the session manifests, filtered by phone model (device) or phone folder name."""
     out = []
     for s in sessions:
         for r in manifest(s):
@@ -186,7 +203,7 @@ def training_stops(device=None, sessions=SESSIONS, phone=None):
                 continue
             out.append({'session': s, 'floor': int(r['floor']), 'place': MERGE.get(r['node'], r['node']),
                         'device': r['device'], 'start': hk_epoch(r['start_hk']),
-                        'rec': read_folder(DATA / s / 'clean' / r['folder'] / r['phone'], r['device'])})
+                        'rec': read_folder(session_dir(s) / 'clean' / r['folder'] / r['phone'], r['device'])})
     return out
 
 
@@ -257,7 +274,7 @@ def analyse(rec, session: Session, models: dict, kind='auto', truth=''):
 
 
 def build_models():
-    """One PlaceModel per phone model seen on 24 Nov, plus an all-phones fallback."""
+    """One PlaceModel per phone model seen in the sessions, plus an all-phones fallback."""
     models = {d: PlaceModel(training_stops(device=d)) for d in known_devices()}
     models['*'] = PlaceModel(training_stops())
     return models
@@ -265,46 +282,70 @@ def build_models():
 
 def pick_model(models, device):
     if device in models:
-        return models[device], f'trained on this phone model ({device}), 24-Nov stops'
+        return models[device], f'trained on this phone model ({device}), all sessions'
     # shortcut: unknown phones get the all-phones model; record a training session with that phone to fix it
     return models['*'], f'no training data for {device or "this phone"}: using all phones, expect low accuracy'
 
 
 # ============================================================================ evaluation
+def out_file(name):
+    """out/<name>.json normally; out/<name>_<tag>.json when WALKSENSE_SESSIONS limits the sessions."""
+    return OUT / (f'{name}_{TAG}.json' if TAG not in ('', 'all') else f'{name}.json')
+
+
+def eval_folds(stops):
+    """Leave-one-session-out folds. stops = {(session, phone): [stops]}. For each held-out session and phone:
+    same_model = train on the other sessions where this phone MODEL was recorded (Tian's rule);
+    cross_handset = train on the other sessions' stops of the same phone folder but a different model
+    (e.g. iPhone17,4 has only 24 s2, so it can only be tested this way)."""
+    for test in SESSIONS:
+        for (s, phone), te in stops.items():
+            if s != test or not te:
+                continue
+            dev = te[0]['device']
+            others = [(o, stops[(o, phone)]) for o in SESSIONS if o != test and stops.get((o, phone))]
+            for mode, keep in (('same_model', lambda d: d == dev), ('cross_handset', lambda d: d != dev)):
+                tr = [(o, x) for o, x in others if keep(x[0]['device'])]
+                if tr:
+                    yield phone, mode, [o for o, _ in tr], [r for _, x in tr for r in x], te
+
+
 def evaluate():
-    """Train on one 24-Nov session, test on the other (visit level, true floor given), per phone."""
+    """Leave one session out (visit level, true floor given), per phone folder and phone model."""
     OUT.mkdir(exist_ok=True)
-    res = {'what': 'Train on one 24-Nov session, test every stop of the other. Visit answer = mean kNN '
-                   'probability over its 2 s windows, among places on the true floor.', 'place': {}, 'floor_tracking': {}}
-    for phone in ('iphone', 's24'):
-        st = {s: training_stops(sessions=(s,), phone=phone) for s in SESSIONS}
-        for tr, te in (('sesi1', 'sesi2'), ('sesi2', 'sesi1')):
-            devs = f"{st[tr][0]['device']} -> {st[te][0]['device']}"
-            for kind in ('tilt', 'xyz', 'magnitude'):
-                m = PlaceModel(st[tr], kind)
-                top1 = top3 = 0
-                rows = []
-                for s in st[te]:
-                    t3 = m.top3(s['rec'], s['floor'])
-                    top1 += t3[0][0] == s['place']; top3 += s['place'] in [p for p, _ in t3]
-                    rows.append({'floor': s['floor'], 'truth': s['place'], 'guess': t3[0][0], 'p': t3[0][1]})
-                n = len(st[te])
-                res['place'][f'{phone} {tr}->{te} {kind}'] = {
-                    'devices': devs, 'n_test_stops': n, 'top1': f'{top1}/{n}', 'top1_acc': round(top1 / n, 3),
-                    'top3': f'{top3}/{n}', 'top3_acc': round(top3 / n, 3),
-                    'chance_top1': round(float(np.mean([1 / len(m.places[r['floor']]) for r in rows])), 3),
-                    **({'visits': rows} if kind == 'xyz' else {})}
+    res = {'what': 'Leave one session out. Train on the other sessions\' stops (same phone model = same_model; a '
+                   'different handset of the same phone = cross_handset), test every stop of the held-out session. '
+                   'Visit answer = mean kNN probability over its 2 s windows, among places on the true floor.',
+           'sessions': {s['name']: str(s['path'].relative_to(CLEAN.parent.parent)) for s in SESSION_LIST},
+           'place': {}, 'floor_tracking': {}}
+    stops = {(s, ph): training_stops(sessions=(s,), phone=ph) for s in SESSIONS for ph in ('iphone', 's24', 'a55', 'a56')}
+    for phone, mode, tr_names, tr, te in eval_folds(stops):
+        devs = f"{'+'.join(sorted({r['device'] for r in tr}))} -> {te[0]['device']}"
+        for kind in ('tilt', 'xyz', 'magnitude'):
+            m = PlaceModel(tr, kind)
+            top1 = top3 = 0
+            rows = []
+            for st in te:
+                t3 = m.top3(st['rec'], st['floor']) or [('', 0.0)]
+                top1 += t3[0][0] == st['place']; top3 += st['place'] in [p for p, _ in t3]
+                rows.append({'floor': st['floor'], 'truth': st['place'], 'guess': t3[0][0], 'p': t3[0][1]})
+            n = len(te)
+            res['place'][f"{phone} {'+'.join(tr_names)}->{te[0]['session']} {kind}"] = {
+                'mode': mode, 'devices': devs, 'n_train_stops': len(tr), 'n_test_stops': n, 'top1': f'{top1}/{n}', 'top1_acc': round(top1 / n, 3),
+                'top3': f'{top3}/{n}', 'top3_acc': round(top3 / n, 3),
+                'chance_top1': round(float(np.mean([1 / len(m.places[r['floor']]) for r in rows if r['floor'] in m.places])), 3),
+                **({'visits': rows} if kind == 'xyz' else {})}
     for s in SESSIONS:                       # floor tracker over each session's iPhone recordings in time order
         rows = sorted((r for r in manifest(s) if r['phone'] == 'iphone'), key=lambda r: hk_epoch(r['start_hk']))
         sess, ok, n = Session(floor=int(rows[0]['floor'])), 0, 0
         for r in rows:
-            rec = read_folder(DATA / s / 'clean' / r['folder'] / r['phone'], r['device'])
+            rec = read_folder(session_dir(s) / 'clean' / r['folder'] / r['phone'], r['device'])
             p0, p1 = edge_pressure(rec)
             sess.track_floor(p0, p1, hk_epoch(r['start_hk']), float(r['duration_s']))
             if r['type'] == 'stop':
                 n += 1; ok += sess.floor == int(r['floor'])
         res['floor_tracking'][f'{s} iphone'] = {'stops_correct': f'{ok}/{n}', 'acc': round(ok / n, 3)}
-    (OUT / 'eval.json').write_text(json.dumps(res, indent=1))
+    out_file('eval').write_text(json.dumps(res, indent=1))
     return res
 
 
@@ -312,7 +353,7 @@ if __name__ == '__main__':
     if sys.argv[1:] == ['evaluate']:
         r = evaluate()
         for k, v in r['place'].items():
-            print(f"{k:32} {v['devices']:28} top1 {v['top1']:>6}  top3 {v['top3']:>6}  chance {v['chance_top1']}")
+            print(f"{k:36} {v['mode']:13} {v['devices']:28} top1 {v['top1']:>6}  top3 {v['top3']:>6}  chance {v['chance_top1']}")
         for k, v in r['floor_tracking'].items():
             print(f'floor tracking {k}: {v["stops_correct"]}')
     else:

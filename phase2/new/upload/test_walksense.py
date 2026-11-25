@@ -17,7 +17,7 @@ def raw_zip(session, phone, typ, node=None, to=None):
     for r in ws.manifest(session):
         where = r['node'] if typ == 'stop' else r['from_node']      # walks have from_node/to_node, no node
         if r['phone'] == phone and r['type'] == typ and (node is None or where == node) and (to is None or r['to_node'] == to):
-            return (ws.DATA / session / 'raw' / r['source_zip']).read_bytes(), r
+            return (ws.session_dir(session) / 'raw' / r['source_zip']).read_bytes(), r
     raise LookupError((session, phone, typ, node, to))
 
 
@@ -50,6 +50,19 @@ class UploadTest(unittest.TestCase):
         self.assertEqual(rec['device'], row['device'])
         self.assertTrue(len(rec['mag']) > 1000 and len(rec['baro']) > 10 and rec['start_epoch'] > 1.7e9)
 
+    @unittest.skipUnless('25nov' in ws.SESSIONS, 'WALKSENSE_SESSIONS limits the sessions')
+    def test_session_list_and_25nov_upload(self):
+        self.assertEqual(ws.SESSIONS, ('sesi1', 'sesi2', '25nov'))
+        for x in ws.SESSION_LIST:
+            self.assertTrue((x['path'] / 'clean' / 'manifest.csv').exists(), x)
+        self.assertIn('iPhone19,2', server.STATE['models'])
+        self.post('/api/reset?floor=5')
+        data, row = raw_zip('25nov', 'iphone', 'stop', 'canteen')
+        code, body = self.post('/api/upload?kind=stop&truth=canteen', data)
+        self.assertEqual(code, 200, body)
+        self.assertEqual((body['result']['device'], body['result']['floor']), ('iPhone19,2', 5))
+        self.assertIn('trained on this phone model', body['result']['model_note'])
+
     def test_route_stop_walk_stop_and_floor_change(self):
         self.post('/api/reset?floor=5')
         data, _ = raw_zip('sesi2', 'iphone', 'stop', 'canteen')
@@ -69,7 +82,7 @@ class UploadTest(unittest.TestCase):
         for node, floor in (('lift_stairs5', 5), ('lift_stairs5', 4)):
             for r in ws.manifest('sesi2'):
                 if r['phone'] == 'iphone' and r['type'] == 'stop' and r['node'] == node and int(r['floor']) == floor:
-                    code, body = self.post('/api/upload?kind=stop', (ws.DATA / 'sesi2' / 'raw' / r['source_zip']).read_bytes())
+                    code, body = self.post('/api/upload?kind=stop', (ws.session_dir('sesi2') / 'raw' / r['source_zip']).read_bytes())
                     self.assertEqual(code, 200, body)
         self.assertEqual(body['result']['floor'], 4, body['result']['floor_note'])
 

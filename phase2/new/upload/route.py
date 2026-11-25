@@ -56,7 +56,7 @@ def walks(sessions=ws.SESSIONS):
     for s in sessions:
         for r in ws.manifest(s):
             if r['phone'] == 'iphone' and r['type'] == 'walk':
-                yield r, ws.read_folder(ws.DATA / s / 'clean' / r['folder'] / 'iphone', r['device'])
+                yield r, ws.read_folder(ws.session_dir(s) / 'clean' / r['folder'] / 'iphone', r['device'])
 
 
 def build(sessions=ws.SESSIONS):

@@ -1,22 +1,31 @@
 {
- "what": "Train on one 24-Nov session, test every stop of the other. Visit answer = mean kNN probability over its 2 s windows, among places on the true floor.",
+ "what": "Leave one session out. Train on the other sessions' stops (same phone model = same_model; a different handset of the same phone = cross_handset), test every stop of the held-out session. Visit answer = mean kNN probability over its 2 s windows, among places on the true floor.",
+ "sessions": {
+  "sesi1": "phase2/clean-data/2026-11-24/sesi1",
+  "sesi2": "phase2/clean-data/2026-11-24/sesi2",
+  "25nov": "phase2/clean-data/2026-11-25"
+ },
  "place": {
-  "iphone sesi1->sesi2 tilt": {
-   "devices": "iPhone19,2 -> iPhone17,4",
-   "n_test_stops": 26,
-   "top1": "11/26",
-   "top1_acc": 0.423,
-   "top3": "16/26",
-   "top3_acc": 0.615,
+  "iphone 25nov->sesi1 tilt": {
+   "mode": "same_model",
+   "devices": "iPhone19,2 -> iPhone19,2",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "13/27",
+   "top1_acc": 0.481,
+   "top3": "17/27",
+   "top3_acc": 0.63,
    "chance_top1": 0.077
   },
-  "iphone sesi1->sesi2 xyz": {
-   "devices": "iPhone19,2 -> iPhone17,4",
-   "n_test_stops": 26,
-   "top1": "17/26",
-   "top1_acc": 0.654,
-   "top3": "24/26",
-   "top3_acc": 0.923,
+  "iphone 25nov->sesi1 xyz": {
+   "mode": "same_model",
+   "devices": "iPhone19,2 -> iPhone19,2",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "18/27",
+   "top1_acc": 0.667,
+   "top3": "23/27",
+   "top3_acc": 0.852,
    "chance_top1": 0.077,
    "visits": [
     {
@@ -46,38 +55,44 @@
     {
      "floor": 5,
      "truth": "sr9",
-     "guess": "lift_stairs5",
-     "p": 0.731
+     "guess": "esca_down",
+     "p": 1.0
     },
     {
      "floor": 5,
      "truth": "y5202",
-     "guess": "y5202",
-     "p": 0.688
+     "guess": "female_toilet",
+     "p": 0.928
     },
     {
      "floor": 5,
      "truth": "female_toilet",
      "guess": "female_toilet",
-     "p": 0.993
+     "p": 0.798
     },
     {
      "floor": 5,
      "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 0.923
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
      "guess": "exit10_door",
      "p": 1.0
     },
     {
      "floor": 5,
      "truth": "esca_up",
-     "guess": "male_disabled_toilet",
+     "guess": "esca_up",
      "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "esca_down",
-     "guess": "male_disabled_toilet",
-     "p": 0.63
     },
     {
      "floor": 5,
@@ -89,19 +104,19 @@
      "floor": 5,
      "truth": "lift_stairs5",
      "guess": "lift_stairs5",
-     "p": 1.0
+     "p": 0.926
     },
     {
      "floor": 5,
      "truth": "y5401",
-     "guess": "y5401",
+     "guess": "y5302",
      "p": 1.0
     },
     {
      "floor": 5,
      "truth": "y5302_point2",
-     "guess": "y5202",
-     "p": 0.697
+     "guess": "y5302_point2",
+     "p": 1.0
     },
     {
      "floor": 4,
@@ -112,43 +127,43 @@
     {
      "floor": 4,
      "truth": "disabled_toilet",
-     "guess": "y4502",
+     "guess": "esca_up",
      "p": 1.0
     },
     {
      "floor": 4,
      "truth": "exit5_door",
-     "guess": "exit5_door",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "lt2a",
-     "guess": "y4502",
-     "p": 0.659
-    },
-    {
-     "floor": 4,
-     "truth": "lt2b",
      "guess": "lt2b",
      "p": 1.0
     },
     {
      "floor": 4,
-     "truth": "esca_down",
-     "guess": "disabled_toilet",
+     "truth": "lt2a",
+     "guess": "lt2a",
      "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "lift_stairs5",
+     "p": 0.675
     },
     {
      "floor": 4,
      "truth": "y4502",
      "guess": "y4502",
-     "p": 1.0
+     "p": 0.68
     },
     {
      "floor": 4,
      "truth": "esca_up",
-     "guess": "disabled_toilet",
+     "guess": "esca_up",
      "p": 1.0
     },
     {
@@ -161,13 +176,13 @@
      "floor": 4,
      "truth": "lt1a",
      "guess": "lt1a",
-     "p": 0.876
+     "p": 0.898
     },
     {
      "floor": 4,
      "truth": "exit10_door",
-     "guess": "esca_down",
-     "p": 1.0
+     "guess": "lift_stairs5",
+     "p": 0.816
     },
     {
      "floor": 4,
@@ -177,17 +192,21 @@
     }
    ]
   },
-  "iphone sesi1->sesi2 magnitude": {
-   "devices": "iPhone19,2 -> iPhone17,4",
-   "n_test_stops": 26,
-   "top1": "5/26",
-   "top1_acc": 0.192,
-   "top3": "13/26",
-   "top3_acc": 0.5,
+  "iphone 25nov->sesi1 magnitude": {
+   "mode": "same_model",
+   "devices": "iPhone19,2 -> iPhone19,2",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "7/27",
+   "top1_acc": 0.259,
+   "top3": "15/27",
+   "top3_acc": 0.556,
    "chance_top1": 0.077
   },
   "iphone sesi2->sesi1 tilt": {
+   "mode": "cross_handset",
    "devices": "iPhone17,4 -> iPhone19,2",
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "13/27",
    "top1_acc": 0.481,
@@ -196,7 +215,9 @@
    "chance_top1": 0.077
   },
   "iphone sesi2->sesi1 xyz": {
+   "mode": "cross_handset",
    "devices": "iPhone17,4 -> iPhone19,2",
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "17/27",
    "top1_acc": 0.63,
@@ -369,7 +390,9 @@
    ]
   },
   "iphone sesi2->sesi1 magnitude": {
+   "mode": "cross_handset",
    "devices": "iPhone17,4 -> iPhone19,2",
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "6/27",
    "top1_acc": 0.222,
@@ -377,193 +400,10 @@
    "top3_acc": 0.481,
    "chance_top1": 0.077
   },
-  "s24 sesi1->sesi2 tilt": {
-   "devices": "SM-S9280 -> SM-S9280",
-   "n_test_stops": 26,
-   "top1": "6/26",
-   "top1_acc": 0.231,
-   "top3": "9/26",
-   "top3_acc": 0.346,
-   "chance_top1": 0.077
-  },
-  "s24 sesi1->sesi2 xyz": {
-   "devices": "SM-S9280 -> SM-S9280",
-   "n_test_stops": 26,
-   "top1": "11/26",
-   "top1_acc": 0.423,
-   "top3": "13/26",
-   "top3_acc": 0.5,
-   "chance_top1": 0.077,
-   "visits": [
-    {
-     "floor": 5,
-     "truth": "canteen",
-     "guess": "canteen",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "exit5_door",
-     "guess": "exit5_door",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "male_toilet",
-     "guess": "y5302",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "y5302",
-     "guess": "y5302",
-     "p": 0.967
-    },
-    {
-     "floor": 5,
-     "truth": "sr9",
-     "guess": "lift_stairs5",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "y5202",
-     "guess": "female_toilet",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "female_toilet",
-     "guess": "y5302_point2",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "exit10_door",
-     "guess": "exit10_door",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "esca_up",
-     "guess": "lift_stairs5",
-     "p": 0.537
-    },
-    {
-     "floor": 5,
-     "truth": "esca_down",
-     "guess": "lift_stairs5",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "male_disabled_toilet",
-     "guess": "esca_up",
-     "p": 0.62
-    },
-    {
-     "floor": 5,
-     "truth": "lift_stairs5",
-     "guess": "female_toilet",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "y5401",
-     "guess": "y5401",
-     "p": 1.0
-    },
-    {
-     "floor": 5,
-     "truth": "y5302_point2",
-     "guess": "y5302_point2",
-     "p": 0.983
-    },
-    {
-     "floor": 4,
-     "truth": "lift_stairs5",
-     "guess": "exit10_door",
-     "p": 0.523
-    },
-    {
-     "floor": 4,
-     "truth": "disabled_toilet",
-     "guess": "disabled_toilet",
-     "p": 0.976
-    },
-    {
-     "floor": 4,
-     "truth": "exit5_door",
-     "guess": "esca_down",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "lt2a",
-     "guess": "esca_down",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "lt2b",
-     "guess": "lt2b",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "esca_down",
-     "guess": "lt1b",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "y4502",
-     "guess": "y4502",
-     "p": 0.96
-    },
-    {
-     "floor": 4,
-     "truth": "esca_up",
-     "guess": "exit10_door",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "lt1b",
-     "guess": "lt1b",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "lt1a",
-     "guess": "lift_stairs5",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "exit10_door",
-     "guess": "lt1a",
-     "p": 1.0
-    },
-    {
-     "floor": 4,
-     "truth": "gate",
-     "guess": "gate",
-     "p": 1.0
-    }
-   ]
-  },
-  "s24 sesi1->sesi2 magnitude": {
-   "devices": "SM-S9280 -> SM-S9280",
-   "n_test_stops": 26,
-   "top1": "1/26",
-   "top1_acc": 0.038,
-   "top3": "6/26",
-   "top3_acc": 0.231,
-   "chance_top1": 0.077
-  },
   "s24 sesi2->sesi1 tilt": {
+   "mode": "same_model",
    "devices": "SM-S9280 -> SM-S9280",
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "4/27",
    "top1_acc": 0.148,
@@ -572,7 +412,9 @@
    "chance_top1": 0.077
   },
   "s24 sesi2->sesi1 xyz": {
+   "mode": "same_model",
    "devices": "SM-S9280 -> SM-S9280",
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "10/27",
    "top1_acc": 0.37,
@@ -745,12 +587,1554 @@
    ]
   },
   "s24 sesi2->sesi1 magnitude": {
+   "mode": "same_model",
    "devices": "SM-S9280 -> SM-S9280",
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "2/27",
    "top1_acc": 0.074,
    "top3": "7/27",
    "top3_acc": 0.259,
+   "chance_top1": 0.077
+  },
+  "a55 25nov->sesi1 tilt": {
+   "mode": "same_model",
+   "devices": "SM-A556E -> SM-A556E",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "3/27",
+   "top1_acc": 0.111,
+   "top3": "7/27",
+   "top3_acc": 0.259,
+   "chance_top1": 0.077
+  },
+  "a55 25nov->sesi1 xyz": {
+   "mode": "same_model",
+   "devices": "SM-A556E -> SM-A556E",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "3/27",
+   "top1_acc": 0.111,
+   "top3": "11/27",
+   "top3_acc": 0.407,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "y5202",
+     "p": 0.609
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "male_disabled_toilet",
+     "p": 0.741
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "y5302",
+     "p": 0.76
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "sr9",
+     "p": 0.783
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "exit10_door",
+     "p": 0.547
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "female_toilet",
+     "p": 0.984
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "y5302_point2",
+     "p": 0.96
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "exit5_door",
+     "p": 0.833
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "y4502",
+     "p": 0.583
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "esca_up",
+     "p": 0.992
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "esca_down",
+     "p": 0.682
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "disabled_toilet",
+     "p": 0.484
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "lt2b",
+     "p": 0.992
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "esca_down",
+     "p": 0.8
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "lt2b",
+     "p": 0.95
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "lt2b",
+     "p": 0.91
+    }
+   ]
+  },
+  "a55 25nov->sesi1 magnitude": {
+   "mode": "same_model",
+   "devices": "SM-A556E -> SM-A556E",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "2/27",
+   "top1_acc": 0.074,
+   "top3": "6/27",
+   "top3_acc": 0.222,
+   "chance_top1": 0.077
+  },
+  "a56 25nov->sesi1 tilt": {
+   "mode": "same_model",
+   "devices": "SM-A566B -> SM-A566B",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "10/27",
+   "top1_acc": 0.37,
+   "top3": "15/27",
+   "top3_acc": 0.556,
+   "chance_top1": 0.077
+  },
+  "a56 25nov->sesi1 xyz": {
+   "mode": "same_model",
+   "devices": "SM-A566B -> SM-A566B",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "13/27",
+   "top1_acc": 0.481,
+   "top3": "18/27",
+   "top3_acc": 0.667,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5401",
+     "p": 0.508
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "exit10_door",
+     "p": 0.875
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "male_disabled_toilet",
+     "p": 0.992
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "exit10_door",
+     "p": 0.641
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "disabled_toilet",
+     "p": 0.577
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "exit5_door",
+     "p": 0.526
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "lt1b",
+     "p": 0.984
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "a56 25nov->sesi1 magnitude": {
+   "mode": "same_model",
+   "devices": "SM-A566B -> SM-A566B",
+   "n_train_stops": 26,
+   "n_test_stops": 27,
+   "top1": "3/27",
+   "top1_acc": 0.111,
+   "top3": "11/27",
+   "top3_acc": 0.407,
+   "chance_top1": 0.077
+  },
+  "iphone sesi1+25nov->sesi2 tilt": {
+   "mode": "cross_handset",
+   "devices": "iPhone19,2 -> iPhone17,4",
+   "n_train_stops": 53,
+   "n_test_stops": 26,
+   "top1": "13/26",
+   "top1_acc": 0.5,
+   "top3": "19/26",
+   "top3_acc": 0.731,
+   "chance_top1": 0.077
+  },
+  "iphone sesi1+25nov->sesi2 xyz": {
+   "mode": "cross_handset",
+   "devices": "iPhone19,2 -> iPhone17,4",
+   "n_train_stops": 53,
+   "n_test_stops": 26,
+   "top1": "18/26",
+   "top1_acc": 0.692,
+   "top3": "25/26",
+   "top3_acc": 0.962,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "esca_down",
+     "p": 0.882
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "y5202",
+     "p": 0.653
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "female_toilet",
+     "p": 0.632
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 0.983
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5202",
+     "p": 0.681
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "y4502",
+     "p": 0.633
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "disabled_toilet",
+     "p": 0.959
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "lt1a",
+     "p": 0.793
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "iphone sesi1+25nov->sesi2 magnitude": {
+   "mode": "cross_handset",
+   "devices": "iPhone19,2 -> iPhone17,4",
+   "n_train_stops": 53,
+   "n_test_stops": 26,
+   "top1": "9/26",
+   "top1_acc": 0.346,
+   "top3": "14/26",
+   "top3_acc": 0.538,
+   "chance_top1": 0.077
+  },
+  "s24 sesi1->sesi2 tilt": {
+   "mode": "same_model",
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "6/26",
+   "top1_acc": 0.231,
+   "top3": "9/26",
+   "top3_acc": 0.346,
+   "chance_top1": 0.077
+  },
+  "s24 sesi1->sesi2 xyz": {
+   "mode": "same_model",
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "11/26",
+   "top1_acc": 0.423,
+   "top3": "13/26",
+   "top3_acc": 0.5,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5302",
+     "p": 0.967
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "lift_stairs5",
+     "p": 0.537
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "esca_up",
+     "p": 0.62
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5302_point2",
+     "p": 0.983
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "exit10_door",
+     "p": 0.523
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "disabled_toilet",
+     "p": 0.976
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "y4502",
+     "p": 0.96
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "s24 sesi1->sesi2 magnitude": {
+   "mode": "same_model",
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "1/26",
+   "top1_acc": 0.038,
+   "top3": "6/26",
+   "top3_acc": 0.231,
+   "chance_top1": 0.077
+  },
+  "iphone sesi1->25nov tilt": {
+   "mode": "same_model",
+   "devices": "iPhone19,2 -> iPhone19,2",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "13/26",
+   "top1_acc": 0.5,
+   "top3": "16/26",
+   "top3_acc": 0.615,
+   "chance_top1": 0.077
+  },
+  "iphone sesi1->25nov xyz": {
+   "mode": "same_model",
+   "devices": "iPhone19,2 -> iPhone19,2",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "19/26",
+   "top1_acc": 0.731,
+   "top3": "21/26",
+   "top3_acc": 0.808,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "lift_stairs5",
+     "p": 0.517
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "sr9",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "lift_stairs5",
+     "p": 0.984
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 0.775
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "iphone sesi1->25nov magnitude": {
+   "mode": "same_model",
+   "devices": "iPhone19,2 -> iPhone19,2",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "10/26",
+   "top1_acc": 0.385,
+   "top3": "15/26",
+   "top3_acc": 0.577,
+   "chance_top1": 0.077
+  },
+  "iphone sesi2->25nov tilt": {
+   "mode": "cross_handset",
+   "devices": "iPhone17,4 -> iPhone19,2",
+   "n_train_stops": 26,
+   "n_test_stops": 26,
+   "top1": "10/26",
+   "top1_acc": 0.385,
+   "top3": "18/26",
+   "top3_acc": 0.692,
+   "chance_top1": 0.077
+  },
+  "iphone sesi2->25nov xyz": {
+   "mode": "cross_handset",
+   "devices": "iPhone17,4 -> iPhone19,2",
+   "n_train_stops": 26,
+   "n_test_stops": 26,
+   "top1": "17/26",
+   "top1_acc": 0.654,
+   "top3": "21/26",
+   "top3_acc": 0.808,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 0.8
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "lift_stairs5",
+     "p": 0.992
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "esca_down",
+     "p": 0.502
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "exit10_door",
+     "p": 0.829
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "male_disabled_toilet",
+     "p": 0.577
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5302_point2",
+     "p": 0.912
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "lt2b",
+     "p": 0.684
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "iphone sesi2->25nov magnitude": {
+   "mode": "cross_handset",
+   "devices": "iPhone17,4 -> iPhone19,2",
+   "n_train_stops": 26,
+   "n_test_stops": 26,
+   "top1": "9/26",
+   "top1_acc": 0.346,
+   "top3": "15/26",
+   "top3_acc": 0.577,
+   "chance_top1": 0.077
+  },
+  "a55 sesi1->25nov tilt": {
+   "mode": "same_model",
+   "devices": "SM-A556E -> SM-A556E",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "2/26",
+   "top1_acc": 0.077,
+   "top3": "8/26",
+   "top3_acc": 0.308,
+   "chance_top1": 0.077
+  },
+  "a55 sesi1->25nov xyz": {
+   "mode": "same_model",
+   "devices": "SM-A556E -> SM-A556E",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "5/26",
+   "top1_acc": 0.192,
+   "top3": "11/26",
+   "top3_acc": 0.423,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "y5202",
+     "p": 0.276
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "exit5_door",
+     "p": 0.523
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "sr9",
+     "p": 0.691
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "female_toilet",
+     "p": 0.644
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 0.738
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "esca_up",
+     "p": 0.887
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "exit5_door",
+     "p": 0.97
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "esca_down",
+     "p": 0.707
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "male_toilet",
+     "p": 0.902
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "lt2a",
+     "p": 0.708
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "lt2a",
+     "p": 0.661
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "lt2b",
+     "p": 0.711
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "lt2a",
+     "p": 0.867
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "esca_down",
+     "p": 0.88
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "esca_down",
+     "p": 0.737
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "esca_up",
+     "p": 0.96
+    }
+   ]
+  },
+  "a55 sesi1->25nov magnitude": {
+   "mode": "same_model",
+   "devices": "SM-A556E -> SM-A556E",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "2/26",
+   "top1_acc": 0.077,
+   "top3": "9/26",
+   "top3_acc": 0.346,
+   "chance_top1": 0.077
+  },
+  "a56 sesi1->25nov tilt": {
+   "mode": "same_model",
+   "devices": "SM-A566B -> SM-A566B",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "7/26",
+   "top1_acc": 0.269,
+   "top3": "13/26",
+   "top3_acc": 0.5,
+   "chance_top1": 0.077
+  },
+  "a56 sesi1->25nov xyz": {
+   "mode": "same_model",
+   "devices": "SM-A566B -> SM-A566B",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "14/26",
+   "top1_acc": 0.538,
+   "top3": "18/26",
+   "top3_acc": 0.692,
+   "chance_top1": 0.077,
+   "visits": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "guess": "y5302_point2",
+     "p": 0.992
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "guess": "y5302",
+     "p": 0.585
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "guess": "lift_stairs5",
+     "p": 0.637
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "guess": "lift_stairs5",
+     "p": 0.555
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "guess": "male_disabled_toilet",
+     "p": 0.634
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "guess": "exit10_door",
+     "p": 0.726
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "guess": "y5401",
+     "p": 0.976
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "guess": "y4502",
+     "p": 0.92
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "guess": "exit5_door",
+     "p": 0.792
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "guess": "esca_down",
+     "p": 0.848
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "guess": "esca_up",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "guess": "lt1b",
+     "p": 0.967
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "guess": "esca_down",
+     "p": 0.654
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "a56 sesi1->25nov magnitude": {
+   "mode": "same_model",
+   "devices": "SM-A566B -> SM-A566B",
+   "n_train_stops": 27,
+   "n_test_stops": 26,
+   "top1": "4/26",
+   "top1_acc": 0.154,
+   "top3": "9/26",
+   "top3_acc": 0.346,
    "chance_top1": 0.077
   }
  },
@@ -760,6 +2144,10 @@
    "acc": 1.0
   },
   "sesi2 iphone": {
+   "stops_correct": "26/26",
+   "acc": 1.0
+  },
+  "25nov iphone": {
    "stops_correct": "26/26",
    "acc": 1.0
   }

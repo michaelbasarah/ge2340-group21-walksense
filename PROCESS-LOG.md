@@ -74,6 +74,7 @@ Contents:
 63. 25 Nov: four feature branches landed on main (routing, request matching, live smoothing, results pack), entries renumbered
 64. 25 Nov: request matching, hybrid (keyword -> fuzzy -> LLM) and fuzzy keyword scored from the cached LLM answers
 65. 25 Nov: results pack rebuilt with the complete 25 Nov and the new request-matching methods
+66. 25 Nov: Tian's upload app retrained on 24 s1, 24 s2 and 25 Nov; leave-one-session-out evaluation over 3 sessions
 - Lessons learned
 - Open questions / next steps
 
@@ -1024,6 +1025,16 @@ Contents:
 - **What changed because of it:** every figure and table in the pack includes the complete 25 Nov; `timeline.md` has the 25-Nov block for both folders.
 - **Links:** `phase2/new/results-pack/build.py`, `timeline_facts.json`, `README.md`, `out/numbers.md`, `out/timeline.md`, `out/positioning_table.md`, `out/table_request_matching.csv`, `out/fig_*`; the commit that adds this entry.
 
+## 66. 25 Nov: Tian's upload app retrained on 24 s1, 24 s2 and 25 Nov; leave-one-session-out evaluation over 3 sessions
+
+- **What we tried:** make the session list of `phase2/new/upload/` data-driven so Dicta's complete 25-Nov pass trains the app, and extend `walksense.py evaluate` and `live.py check` from "24 s1 <-> 24 s2" to leave one session out over three sessions.
+- **Why:** the app trained only on 24 Nov (`DATA`, `SESSIONS = ('sesi1','sesi2')`); iPhone19,2 now has two sessions (24 s1, 25 Nov), so it gets the first same-handset cross-session test (iPhone17,4 is still in 24 s2 only).
+- **How:** minimal change, no UI work. `walksense.py`: `ALL_SESSIONS` = list of `{name, path}` (`sesi1`, `sesi2`, `25nov`), `session_dir()`, env var `WALKSENSE_SESSIONS=24nov` restores the old behaviour (outputs then get the tag, e.g. `eval_24nov.json`); `evaluate()` builds folds per held-out session and phone: `same_model` (train on other sessions with this phone model, Tian's rule) or `cross_handset` (same phone folder, another handset); raw x/y/z, 2 s windows, per floor, unchanged. Floor tracking now runs over each session's iPhone recordings. `route.py`, `live.py`, `test_*.py` use `session_dir()`; `live.py check` runs all ordered session pairs (standing time, walking dot) and adds replays of 25 Nov. `ws.DATA` kept for `phase2/new/smoothing/replay.py`. The old `out/eval.json` and `out/live_checks.json` were copied to `out/eval_2026-11-24.json` and `out/live_checks_2026-11-24.json` before they were overwritten. Check that the old behaviour is reproduced: `WALKSENSE_SESSIONS=24nov` on `evaluate` gave every old entry unchanged (compared key by key with the dated copy), and `live.py check` gave a byte-identical file (`cmp`). Map check: every 25-Nov stop node (26 per phone, 78 stops) is in `map/places.json` on its floor (script in the terminal, not saved); the places of all models equal the places of the map on both floors.
+- **Result** (`out/eval.json`, xyz top-1 / top-3, chance about 0.077 with the true floor given): iPhone19,2 -> iPhone19,2 (same handset) 24 s1 -> 25 Nov 19/26 (21/26), 25 Nov -> 24 s1 18/27 (23/27); iPhone17,4 -> iPhone19,2 24 s2 -> 24 s1 17/27 (22/27) and 24 s2 -> 25 Nov 17/26 (21/26); iPhone19,2 (24 s1 + 25 Nov) -> iPhone17,4 24 s2 18/26 (25/26) (before: 17/26, 24/26); S24 unchanged at 11/26 and 10/27 (no S24 in 25 Nov); a55 24 s1 -> 25 Nov 5/26 and 25 Nov -> 24 s1 3/27; a56 14/26 and 13/27. Floor tracking (iPhone, time order): sesi1 27/27, sesi2 26/26, 25nov 26/26. `out/live_checks.json`: 25 Nov streamed live with the iPhone17,4 model found 26/26 stops, floor 26/26, top-1 17/26, top-3 21/26, lit 23 (16 right); same handset from 24 s1 only 19/26 (lit 25, 19 right), 24 s1 from 25 Nov only 18/27; walking dot 24 s2 -> 25 Nov right corridor 26/28, end within 3 m 27/28. Tests `test_walksense.py` and `test_live.py`: 6 tests, OK (130 s), one new test uploads a 25-Nov iPhone stop.
+- **Outcome:** success. The 25-Nov numbers are on one more session, not a new method: n is 26 or 27 stops per fold and one stop is 3.7 to 3.8 points. a55 is the weakest phone (3/27 and 5/26).
+- **What changed because of it:** the server, live mode and route graph train on all three sessions; iPhone19,2 now trains on 24 s1 + 25 Nov. `phase2/new/results-pack/` still quotes the old eval wording ("train on one 24-Nov session") and must be rebuilt (entry 65 rule) to pick up the new `up.*` keys.
+- **Links:** `phase2/new/upload/walksense.py`, `live.py`, `route.py`, `server.py`, `test_walksense.py`, `test_live.py`, `README.md`, `out/eval.json`, `out/live_checks.json`, `out/eval_2026-11-24.json`, `out/live_checks_2026-11-24.json`; the commit that adds this entry.
+
 ---
 
 ## Lessons learned
@@ -1069,6 +1080,7 @@ Contents:
 - **Smoothing fixes jitter, not bias.** A 1 s kNN averaged over the last ticks scored the same as no averaging (entry 61): the wrong answers at a stop were steady, not jumpy. The jumps were on walks, and the fix was to feed the model only when the phone is still. A constant per-phone offset made things worse.
 - **Generate the numbers sheet from the files.** `phase2/new/results-pack/build.py` keeps every quoted number tied to a source file, a commit and a test definition (entry 62); quote chance and n together, because the chance level differs between files.
 - **A cascade is only as good as its first confident answer.** The hybrid's 13 misses were all wrong local matches that never reached the LLM (entry 64).
+- **Keep the old output and prove the old mode still reproduces it.** The app's 24-only mode matched the old `eval.json` key by key and `live_checks.json` byte for byte before the new numbers were quoted (entry 66).
 
 ## Open questions / next steps
 
@@ -1098,3 +1110,4 @@ Contents:
 - **Request matching (entries 57 to 59):** the team must read and correct the 105 `agent_draft` hard queries in `phase2/request-matching/test_queries.csv` (and the aliases/tags in `destinations.csv`), then rerun `evaluate.py` (dev, then final); the numbers are provisional until then. Open readings: no printer / charging / clinic / computer lab in our list, which exit leads to the MTR, whether the lift is step-free, whether "pintu keluar" means the gate or any exit. Repeat the LLM run once to see its variation (about 128 calls, about 11 min).
 - **Continuous estimate (entries 60, 61):** retune with the 25-Nov data once it is in main (same handset in more sessions would show whether smoothing helps when the errors are not cross-handset); test arrival latency on a real continuous walk (the 24-Nov recordings have gaps before each stop). Not wired into the app (user decision).
 - **Results pack (entries 62, 65):** rebuilt with the complete 25 Nov (entry 65); rerun `build.py` after every day-3 rerun; decide which chance level and which place list (v1 31 places, graph-v2 26) the report quotes, since the source files differ (list at the end of `phase2/new/results-pack/out/numbers.md`).
+- **Upload app (entry 66):** rebuild the results pack so it quotes the 3-session eval; iPhone17,4 still has no same-handset test; the live-mode default device is still iPhone17,4 (24 s2 only), so pass `--device iPhone19,2` for the handset with two sessions.

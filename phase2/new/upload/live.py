@@ -300,7 +300,7 @@ def _stream(session):
     rows = sorted((r for r in ws.manifest(session) if r['phone'] == 'iphone'), key=lambda r: ws.hk_epoch(r['start_hk']))
     t_first, parts, truth, prev_end = ws.hk_epoch(rows[0]['start_hk']), {s: [] for s in SENSORS}, [], -1.0
     for r in rows:
-        rec = ws.read_folder(ws.DATA / session / 'clean' / r['folder'] / 'iphone', r['device'])
+        rec = ws.read_folder(ws.session_dir(session) / 'clean' / r['folder'] / 'iphone', r['device'])
         start = min(rec[s][0, 0] for s in SENSORS)
         t0 = max(ws.hk_epoch(r['start_hk']) - t_first, prev_end + 0.5)     # manifest start times can overlap by a few s
         prev_end = t0 + max(rec[s][-1, 0] for s in SENSORS) - start
@@ -342,7 +342,7 @@ def check():
         for r in ws.manifest(s):
             if r['phone'] != 'iphone':
                 continue
-            acc = ws.read_folder(ws.DATA / s / 'clean' / r['folder'] / 'iphone', r['device'])['acc']
+            acc = ws.read_folder(ws.session_dir(s) / 'clean' / r['folder'] / 'iphone', r['device'])['acc']
             t, a = acc[:, 0], np.linalg.norm(acc[:, 1:4], axis=1)
             for t0 in np.arange(t[0] + 3, t[-1] - 10, 5):
                 w = (t >= t0) & (t < t0 + 10)
@@ -353,7 +353,8 @@ def check():
     out['acc_std_10s_windows'] = motion
     standing = {}
     st = {s: ws.training_stops(sessions=(s,), phone='iphone') for s in ws.SESSIONS}
-    for tr, te in (('sesi1', 'sesi2'), ('sesi2', 'sesi1')):
+    pairs = [(tr, te) for tr in ws.SESSIONS for te in ws.SESSIONS if tr != te]     # every ordered pair of sessions
+    for tr, te in pairs:
         m = ws.PlaceModel(st[tr])
         for secs in (3, 6, 10, 60):               # place guess from the first N s of each held-out stop
             ok = 0
@@ -363,11 +364,17 @@ def check():
                 ok += m.top3(win, s['floor'], trim=0.0)[0][0] == s['place']
             standing[f'{tr}->{te} {secs}s'] = f'{ok}/{len(st[te])}'
     out['top1_by_standing_time'] = standing
-    out['walking_dot'] = {f'{tr}->{te}': route.evaluate(tr, te) for tr, te in (('sesi1', 'sesi2'), ('sesi2', 'sesi1'))}
+    out['walking_dot'] = {f'{tr}->{te}': route.evaluate(tr, te) for tr, te in pairs}
     out['live_replay'] = {f'{s} streamed, model {d}': replay(s, d, models)
-                          for s, d in (('sesi1', 'iPhone17,4'), ('sesi2', 'iPhone19,2'))}
+                          for s, d in (('sesi1', 'iPhone17,4'), ('sesi2', 'iPhone19,2')) if s in ws.SESSIONS}
+    if '25nov' in ws.SESSIONS:                    # the 25-Nov iPhone (iPhone19,2) as a held-out stream
+        out['live_replay']['25nov streamed, model iPhone17,4'] = replay('25nov', 'iPhone17,4', models)
+        for held, other in (('sesi1', '25nov'), ('25nov', 'sesi1')):       # same handset, other session only
+            if held in ws.SESSIONS:
+                out['live_replay'][f'{held} streamed, model iPhone19,2 from {other} only'] = replay(
+                    held, 'iPhone19,2', {'iPhone19,2': ws.PlaceModel(ws.training_stops(sessions=(other,), device='iPhone19,2'))})
     ws.OUT.mkdir(exist_ok=True)
-    (ws.OUT / 'live_checks.json').write_text(json.dumps(out, indent=1))
+    ws.out_file('live_checks').write_text(json.dumps(out, indent=1))
     return out
 
 

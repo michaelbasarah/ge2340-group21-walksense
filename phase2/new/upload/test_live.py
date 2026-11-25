@@ -30,7 +30,7 @@ def build_stream():
     for kind, floor, node in ROUTE:
         r = next(r for r in rows.values() if r['type'] == kind and int(r['floor']) == floor
                  and (r['node'] if kind == 'stop' else r['from_node']) == node)
-        rec = ws.read_folder(ws.DATA / 'sesi2' / 'clean' / r['folder'] / 'iphone', r['device'])
+        rec = ws.read_folder(ws.session_dir('sesi2') / 'clean' / r['folder'] / 'iphone', r['device'])
         start = min(rec[s][0, 0] for s in live.SENSORS)
         for s in live.SENSORS:
             a = rec[s].copy(); a[:, 0] += t0 - start; parts[s].append(a)
