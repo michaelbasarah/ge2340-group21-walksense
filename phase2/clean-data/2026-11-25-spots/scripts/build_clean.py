@@ -63,6 +63,7 @@ TOK = [
     ('ESCUP', r'\b(esca|eska|esc|sk|escalator|eskalator)\s+(naik|nik|up)\b'),
     ('ESCDOWN', r'\b(esca|eska|esc|sk|escalator|eskalator)\s+(turun|trun|tueun|down|dwn)\b'),
     ('LIFT', r'\b(lift\s*stairs?|liftstairs?|lifstairs?|lidtstairs?|lift|stairs?|ls)\s*5?\b'),
+    ('Y5302B', r'\by\s*5\s*302\s+(back|belakang|point\s*2|p2)\b'),   # 'y5302 back' = the other door (added 26 Nov, entry 72)
     ('Y5302', r'\by\s*5\s*302\b'), ('Y5202', r'\by\s*5\s*202\b'), ('Y5401', r'\by\s*5\s*401\b'), ('Y4502', r'\by\s*4\s*502\b'),
     ('SR9', r'\b(sr\s*9|study\s*rooms?|studyroom)\b'),
     ('LT1A', r'\b(lt\s*)?1\s*a\b'), ('LT1B', r'\b(lt\s*)?1\s*b\b'), ('LT2A', r'\b(lt\s*)?2\s*a\b'), ('LT2B', r'\b(lt\s*)?2\s*b\b'),
@@ -72,7 +73,7 @@ FLOOR4 = r'\b(lantai\s*4|lt\s*4|lvl?\s*4|lv\s*4|4th(\s+floor)?|bawah|bwh|lower)\
 FLOOR5 = r'\b(lantai\s*5|lt\s*5|lvl?\s*5|lv\s*5|5th(\s+floor)?|atas|ats|upper)\b'
 # token -> {floor: graph-v2 place}; one entry = the place exists on one floor only
 PLACE = {'CANTEEN': {5: 'canteen'}, 'MTOILET': {5: 'male_toilet'}, 'FTOILET': {5: 'female_toilet'}, 'SR9': {5: 'sr9'},
-         'Y5302': {5: 'y5302'}, 'Y5202': {5: 'y5202'}, 'Y5401': {5: 'y5401'},
+         'Y5302': {5: 'y5302'}, 'Y5302B': {5: 'y5302_back'}, 'Y5202': {5: 'y5202'}, 'Y5401': {5: 'y5401'},
          'EXIT5': {5: 'exit_5', 4: 'exit_5_4F'}, 'EXIT10': {5: 'exit_10', 4: 'exit_10_4F'},
          'ESCUP': {5: 'escalator_up', 4: 'escalator_up_4F'}, 'ESCDOWN': {5: 'escalator_down', 4: 'escalator_down_4F'},
          'LIFT': {5: 'lift_stairs', 4: 'lift_stairs_4F'}, 'DTOILET': {5: 'disabled_toilet', 4: 'disabled_toilet_4F'},

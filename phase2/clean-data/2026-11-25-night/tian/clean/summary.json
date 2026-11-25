@@ -1,0 +1,38 @@
+{
+ "dataset": "2026-11-25 night run, track tian (floor 5 + floor 4)",
+ "phones": [
+  "iphone"
+ ],
+ "devices": {
+  "iphone": [
+   "iPhone17,4"
+  ]
+ },
+ "recordings_written": 46,
+ "stops": 23,
+ "walks": 23,
+ "stops_floor5": 14,
+ "stops_floor4": 9,
+ "walks_floor5": 15,
+ "walks_floor4": 8,
+ "per_phone": {
+  "iphone": {
+   "stop": 23,
+   "walk": 23
+  }
+ },
+ "confidence": {
+  "high": 44,
+  "medium": 2
+ },
+ "slots_missing_a_phone": [],
+ "dropped_second_take_same_slot": [],
+ "iphone_takes_without_barometer": 0,
+ "iphone_stops_without_barometer": [],
+ "wifi": "none",
+ "warnings": [
+  "Tian (iPhone17,4, folder `iphone` in this tree) walked the loop on his own, 21:40 to 23:00, in his own order; his named sequence defines the slots.",
+  "No 4F exit 5 door stop (he walked disabled toilet 4F -> LT2A directly).",
+  "His 22:50 'lt2b' and 22:53 'lt2a' stops (and the walks 'eska naik bawah lt2 b', 'lt2b lt2a', 'lt2a exit10') sit where the route has LT1B and LT1A; they are left out (status review), see ../README.md."
+ ]
+}

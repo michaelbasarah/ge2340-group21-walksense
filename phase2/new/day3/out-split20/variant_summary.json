@@ -10,11 +10,11 @@
   "outlier_angle_deg": 20.0,
   "walk_endpoints_dropped": 8
  },
- "takes": 295,
- "pieces_total": 887,
+ "takes": 386,
+ "pieces_total": 1160,
  "pieces_by_status": {
-  "kept": 842,
-  "outlier": 25,
+  "kept": 1108,
+  "outlier": 32,
   "excluded": 18,
   "incomplete": 2
  },
@@ -35,14 +35,23 @@
    "takes": 52,
    "kept": 156
   },
+  "25night": {
+   "takes": 64,
+   "kept": 185,
+   "outlier": 7
+  },
+  "25night_tian": {
+   "takes": 23,
+   "kept": 69
+  },
   "25nov": {
    "takes": 78,
    "kept": 223,
    "outlier": 11
   },
   "25spots": {
-   "takes": 15,
-   "kept": 42,
+   "takes": 19,
+   "kept": 54,
    "outlier": 3,
    "incomplete": 1
   }
@@ -81,6 +90,20 @@
    "takes": 26,
    "kept": 78
   },
+  "25night/a56": {
+   "takes": 32,
+   "kept": 91,
+   "outlier": 5
+  },
+  "25night/ip18": {
+   "takes": 32,
+   "kept": 94,
+   "outlier": 2
+  },
+  "25night_tian/ip16": {
+   "takes": 23,
+   "kept": 69
+  },
   "25nov/a55": {
    "takes": 26,
    "kept": 70,
@@ -96,13 +119,13 @@
    "kept": 78
   },
   "25spots/ip16": {
-   "takes": 4,
-   "kept": 9,
+   "takes": 6,
+   "kept": 15,
    "outlier": 3
   },
   "25spots/s24": {
-   "takes": 11,
-   "kept": 33,
+   "takes": 13,
+   "kept": 39,
    "incomplete": 1
   }
  },
@@ -119,6 +142,14 @@
    59.96,
    61.01
   ],
+  "25night": [
+   59.98,
+   60.02
+  ],
+  "25night_tian": [
+   59.97,
+   60.0
+  ],
   "25nov": [
    59.9,
    60.03
@@ -129,9 +160,9 @@
   ]
  },
  "kept_pieces_per_take": {
-  "1": 7,
-  "2": 8,
-  "3": 273
+  "1": 9,
+  "2": 11,
+  "3": 359
  },
  "takes_with_no_kept_piece": [
   "23nov:BM05:iphone",
@@ -142,23 +173,23 @@
   "23nov:BM26:iphone",
   "23nov:BM27:iphone"
  ],
- "windows_kept": 3368,
+ "windows_kept": 4432,
  "places_kept": 26,
  "within_take_spread": {
-  "n_pieces": 867,
-  "dev_B_uT_mad": 0.363,
+  "n_pieces": 1140,
+  "dev_B_uT_mad": 0.36,
   "abs_dev_B_uT_quantiles": {
-   "0.5": 0.361,
-   "0.9": 1.506,
-   "0.95": 3.402,
-   "0.99": 16.035,
-   "max": 32.282
+   "0.5": 0.36,
+   "0.9": 1.63,
+   "0.95": 3.265,
+   "0.99": 16.591,
+   "max": 179.668
   },
   "angle_deg_quantiles": {
-   "0.5": 1.046,
-   "0.9": 3.923,
-   "0.95": 5.906,
-   "0.99": 16.001,
+   "0.5": 0.996,
+   "0.9": 3.828,
+   "0.95": 5.43,
+   "0.99": 16.128,
    "max": 124.457
   }
  }

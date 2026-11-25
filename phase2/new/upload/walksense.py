@@ -35,7 +35,10 @@ CLEAN = NEW.parent / 'clean-data'
 # Every session the app can train on: a name and the folder that holds its clean/ and raw/ folders.
 ALL_SESSIONS = [{'name': 'sesi1', 'path': CLEAN / '2026-11-24' / 'sesi1'},
                 {'name': 'sesi2', 'path': CLEAN / '2026-11-24' / 'sesi2'},
-                {'name': '25nov', 'path': CLEAN / '2026-11-25'}]
+                {'name': '25nov', 'path': CLEAN / '2026-11-25'},
+                # 25-Nov night run (PROCESS-LOG entry 72): Dicta iPhone19,2 + Chris SM-A566B together; Tian iPhone17,4 on his own
+                {'name': '25night', 'path': CLEAN / '2026-11-25-night' / 'round'},
+                {'name': '25night_tian', 'path': CLEAN / '2026-11-25-night' / 'tian'}]
 # WALKSENSE_SESSIONS=24nov (or a comma list of names) limits the sessions; unset = all of them.
 _ENV = os.environ.get('WALKSENSE_SESSIONS', '').strip()
 TAG = _ENV.lower()

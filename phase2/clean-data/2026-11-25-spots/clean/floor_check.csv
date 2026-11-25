@@ -2,3 +2,5 @@ device,from,to,hpa_from,hpa_to,jump_hpa,label_floors,agrees
 "iPhone17,4",escalator_down 17:41:47,sr9 17:46:37,1016.28,1016.29,0.011,5->5,True
 "iPhone17,4",sr9 17:46:37,escalator_down_4F 17:49:21,1016.29,1016.87,0.584,5->4,True
 "iPhone17,4",escalator_down_4F 17:49:21,escalator_up_4F 17:51:44,1016.87,1016.87,-0.002,4->4,True
+"iPhone17,4",escalator_up_4F 17:51:44,y5401 20:22:00,1016.87,1017.18,0.313,4->5,False
+"iPhone17,4",y5401 20:22:00,y5302_back 20:23:49,1017.18,1017.13,-0.052,5->5,True

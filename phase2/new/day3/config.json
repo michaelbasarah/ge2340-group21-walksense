@@ -33,7 +33,13 @@
     {"id": "25spots", "day": "2026-11-25", "loader": "clean_tree",
      "path": "../../clean-data/2026-11-25-spots/clean", "raw": "../../clean-data/2026-11-25-spots/raw/attachments", "names": "names_25spots.csv",
      "exclude_sources": "../../clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv",
-     "note": "our partial WhatsApp export of 25 Nov minus every recording already in 25nov (exclude_sources: the 36 round recordings of ip18 + a56 are byte-identical to Dicta's). Left: the spot stops by ip16 (iPhone17,4, Tian) and s24 (SM-S9280, Michael) with a label in clean/labels_used.csv (track 'spots'); the 8 unlabelled s24 files are not in the clean tree"}
+     "note": "our partial WhatsApp export of 25 Nov minus every recording already in 25nov (exclude_sources: the 36 round recordings of ip18 + a56 are byte-identical to Dicta's). Left: the spot stops by ip16 (iPhone17,4, Tian) and s24 (SM-S9280, Michael) with a label in clean/labels_used.csv (track 'spots'); the 8 unlabelled s24 files are not in the clean tree"},
+    {"id": "25night", "day": "2026-11-25", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-25-night/round/clean", "raw": "../../clean-data/2026-11-25-night/raw", "names": "names_25night.csv",
+     "note": "Second collection run of 25 Nov, track 'round' (PROCESS-LOG entry 72): Dicta (iphone slot = ip18, iPhone19,2) and Chris (a56, SM-A566B) together, 21:47 to 00:40 (start_hk after midnight is written 24:mm:ss). Labels from their own file names, clean-data/2026-11-25-night/labels_night.csv (built by scripts/build_night.py). 32 stops (incl. 8 extra weak-spot stops after the loop) x 2 phones; Wi-Fi from Chris's a56 WiGLE log (observations.csv has epoch and scanner columns)"},
+    {"id": "25night_tian", "day": "2026-11-25", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-25-night/tian/clean", "raw": "../../clean-data/2026-11-25-night/raw", "names": "names_25night.csv",
+     "note": "Second collection run of 25 Nov, track 'tian' (PROCESS-LOG entry 72): Tian (iphone slot = ip16, iPhone17,4) on his own pass 21:40 to 23:00, labels from his own file names (labels_night.csv; 5 takes left out for review). 23 stops, no Wi-Fi log"}
   ],
   "variants": {
     "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 40).",

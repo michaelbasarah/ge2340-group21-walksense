@@ -287,6 +287,24 @@ a55 8/26 / 22/70, ip16 1/4 / 2/9, s24 0/3 / 0/9. No place has zero correct any m
 (precision 0.143), y5302_back, y5401, disabled_toilet. Phone ranking (default accuracy, macro precision): ip18 0.698, 0.667;
 ip16 0.500, 0.474; a56 0.453, 0.409; s24 0.250, 0.250; a55 0.226, 0.173. All numbers: PROCESS-LOG entry 50.
 
+### m. The 25-Nov night run (sessions `25night` and `25night_tian`; PROCESS-LOG entry 72)
+
+`25night` = Dicta's ip18 + Chris's a56, who walked in step (`../../clean-data/2026-11-25-night/round/clean`, 32 stops each,
+8 of them extra takes at weak places 00:15 to 00:40); `25night_tian` = Tian's ip16, who walked on his own
+(`.../tian/clean`, 23 stops). Both use `names_25night.csv` (Dicta's 25-Nov name map). Six spot takes at 20:22 to 20:27 went
+to `25spots`. `run_all.sh` rebuilds the night trees first (`build_night.py`).
+
+| leave one session out, learned-weight fused kNN | before (entry 69) | after |
+|---|---|---|
+| default (takes) | 122/295 = 41.4% | 169/386 = 43.8% |
+| split20 (20 s pieces) | 375/842 = 44.5% | 501/1108 = 45.2% |
+
+Per phone (default): ip18 60.4% -> 70.6%, ip16 48.6% -> 49.5%, a56 49.1% -> 34.1%, s24 23.4% -> 27.3%, a55 26.4% -> 26.4%.
+**Chris's a56 magnetometer was offset on the night run** (median |B| 110.9 uT against 40 to 45 uT on the other days,
+`../../clean-data/2026-11-25-night/field_check.csv`), so its 32 night takes score 2/32 and pull a56 down everywhere they are
+in the training set. They are kept; excluding them is a team decision (for example an `exclude_sources` CSV that lists them).
+All numbers: PROCESS-LOG entry 72.
+
 ## Data issues found
 
 - Very strong fields (place median \|B\| above 100 uT, `results.json` `magnetic_check`): 24 s2 iPhone at escalator_down_4F 147.9 and escalator_up_4F 142.5 uT, 24 s2 S24 at escalator_down_4F 127.7, 24 s1 S24 at disabled_toilet 121.6 and escalator_down 101.3. The iPhone on 23 Nov ranges 32.9 to 58.9 uT. Both phones see the 4F down-escalator in session 2, so it is more likely something physical there that night (running escalator machinery?) than one sensor. Worth asking the collector; see `fig_per_place_B_pressure.png`.
