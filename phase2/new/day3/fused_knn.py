@@ -20,7 +20,7 @@ With DAY3_VARIANT=split20 (data.py) a "recording" is a 20 s piece of a take; by_
 take (column `take`), so the pieces of one take are never on both sides; grouped and loso already group by stop/session.
 
 Run:  python phase2/new/day3/fused_knn.py      (about 5-10 min) writes out/fused_knn.json, out/fused_model.json,
-      out/fused_window_predictions.csv
+      out/fused_window_predictions.csv, out/fused_sample_predictions.csv (per sample: prediction and top-3)
 """
 from __future__ import annotations
 
@@ -103,14 +103,22 @@ def outer_score(bank, tr, te, tsess, tvis, w, k, area):
     keys = bank.rec[te]
     pred = gknn.aggregate(S[k], keys, classes)
     wpred = np.array(classes, dtype=object)[S[k].argmax(1)]
-    return pred, wpred, ytr[nn], len(classes)
+    # top-3 per sample (window scores summed per recording/piece, as gknn.aggregate; first = the prediction)
+    agg = pd.DataFrame(S[k], columns=classes).assign(key=keys).groupby('key').sum()
+    order = np.argsort(-agg.to_numpy(), axis=1, kind='stable')[:, :3]
+    top3 = {kk: [classes[j] for j in o] for kk, o in zip(agg.index, order)}
+    for kk in top3:
+        assert top3[kk][0] == pred[kk] or agg.loc[kk, top3[kk][0]] == agg.loc[kk, pred[kk]]
+        if top3[kk][0] != pred[kk]:            # tie: keep the prediction first
+            top3[kk] = [pred[kk]] + [c for c in top3[kk] if c != pred[kk]][:2]
+    return pred, wpred, ytr[nn], len(classes), top3
 
 
 def run_scheme(bank, name, outer, inner_fn, area):
     """outer: list of (train_idx, test_idx, train_sessions, train_visits, label)."""
     res = {'folds': []}
     agg = {}
-    win_rows = []
+    win_rows, sample_rows = [], []
     for tr, te, tsess, tvis, lab in outer:
         t0 = time.time()
         T = tune(bank, inner_fn(tr))
@@ -121,7 +129,7 @@ def run_scheme(bank, name, outer, inner_fn, area):
         variants = {'fused (learned weights)': T['chosen'], 'equal weights': T['equal'],
                     **{f'{g} only': T['corners'][g] for g in GROUPS}}
         for vname, (w, k) in variants.items():
-            pred, wpred, nnlab, ncls = outer_score(bank, tr, te, tsess, tvis, w, k, area)
+            pred, wpred, nnlab, ncls, top3 = outer_score(bank, tr, te, tsess, tvis, w, k, area)
             truth = dict(zip(bank.rec[te], bank.y[te]))
             a = agg.setdefault(vname, [0, 0, 0, 0, 0])
             a[0] += sum(pred[r] == truth[r] for r in pred); a[1] += len(pred)
@@ -133,6 +141,12 @@ def run_scheme(bank, name, outer, inner_fn, area):
                 win_rows += [{'scheme': name, 'fold': lab, 'key': kk, 'session': s, 'phone': p, 'true': t, 'pred_window': pw,
                               'nearest_neighbour_place': nl}
                              for kk, s, p, t, pw, nl in zip(bank.rec[te], bank.sess[te], bank.W.loc[te, 'phone'], bank.y[te], wpred, nnlab)]
+                first = pd.Series(te).groupby(bank.rec[te]).first()
+                nwin = pd.Series(bank.rec[te]).value_counts()
+                sample_rows += [{'scheme': name, 'fold': lab, 'key': kk, 'session': bank.sess[first[kk]], 'phone': bank.W.loc[first[kk], 'phone'],
+                                 'place_floor': int(bank.W.loc[first[kk], 'floor']), 'true': truth[kk], 'pred': pred[kk],
+                                 'top3': '|'.join(top3[kk]), 'in_top3': truth[kk] in top3[kk], 'n_windows': int(nwin[kk]),
+                                 'n_train_places': ncls} for kk in sorted(pred)]
         fold['seconds'] = round(time.time() - t0, 1)
         print(name, lab, fold['chosen_weights'], 'k', fold['chosen_k'], 'exact', fold['fused (learned weights)']['exact'],
               '/', fold['fused (learned weights)']['n_recordings'], f"({fold['seconds']} s)", flush=True)
@@ -141,7 +155,7 @@ def run_scheme(bank, name, outer, inner_fn, area):
                           'exact_ci95': gknn.wilson(a[0], a[1]), 'area': a[2], 'area_acc': round(a[2] / a[1], 3),
                           'window_acc': round(a[3] / a[4], 3), 'n_test_windows': a[4]} for v, a in agg.items()}
     res['chance_mean'] = round(float(np.mean([f['chance'] for f in res['folds']])), 3)
-    return res, win_rows
+    return res, (win_rows, sample_rows)
 
 
 def main():
@@ -181,7 +195,7 @@ def main():
     if data.VARIANT:
         out['variant'] = data.VARIANT
         out['samples']['takes'] = int(bank.W['take'].nunique())
-    wins = []
+    wins, samples = [], []
     rec_groups = bank.W['take'].to_numpy() if 'take' in bank.W else bank.rec     # split20: group pieces by their take
     vis_groups = bank.vis
     kf = KFold(5, shuffle=True, random_state=SEED)
@@ -200,7 +214,8 @@ def main():
                 assert not set(bank.vis[tr]) & set(bank.vis[te])
         res, w = run_scheme(bank, name, outer, inner, area)
         out['schemes'][name] = res
-        wins += w
+        wins += w[0]
+        samples += w[1]
     # deployable model: tune on everything with leave-one-session-out inner CV
     T = tune(bank, inner_loso(idx))
     model = {'what': 'Deployable fused kNN settings, tuned by leave-one-session-out CV on all sessions (fused_knn.py).',
@@ -210,6 +225,8 @@ def main():
     (data.OUT / 'fused_knn.json').write_text(json.dumps(out, indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o)))
     (data.OUT / 'fused_model.json').write_text(json.dumps(model, indent=1))
     pd.DataFrame(wins).to_csv(data.OUT / 'fused_window_predictions.csv', index=False)
+    # one row per test sample (take, or 20 s piece in split20) of the learned-weight model: prediction + top-3 (perf_sheet.py)
+    pd.DataFrame(samples).to_csv(data.OUT / 'fused_sample_predictions.csv', index=False)
     for s, r in out['schemes'].items():
         print(s, json.dumps({v: (o['exact'], o['n_recordings_scored'], o['exact_acc'], o['window_acc']) for v, o in r['overall'].items()}))
     print('model', model)

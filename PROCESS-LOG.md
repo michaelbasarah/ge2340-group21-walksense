@@ -50,6 +50,7 @@ Contents:
 39. 25 Nov: 20 s pieces, 23-Nov stairs and sr8/sr10/sr11 excluded, obvious outliers removed (split20 variant), before/after
 40. 25 Nov: places never classified correctly so far (named before adding the 25-Nov data)
 41. 25 Nov: 25-Nov data ingested from a partial WhatsApp export and labelled per recording
+42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
 - Lessons learned
 - Open questions / next steps
 
@@ -617,6 +618,20 @@ Contents:
 - **Outcome:** partial success. The floor-5 round and the escalator spots are clean and usable; most of the planned hard places (lift/stairs, the disabled toilets, the 4F round) are missing from this export, and 8 of Michael's 11 spot recordings cannot be used until their names are known.
 - **What changed because of it:** new `phase2/clean-data/2026-11-25/` (README with the steps to add the missing files: drop them into `raw/attachments/`, run `index_sources.py` and `build_clean.py`, then the day-3 pipeline). `.gitignore` covers the regenerable 25-Nov sensor CSVs.
 - **Links:** `phase2/clean-data/2026-11-25/README.md`, `scripts/build_clean.py`, `scripts/index_sources.py`, `labels_override.csv`, `clean/labels_used.csv`, `clean/summary.json`, `raw/source_files.csv`, `raw/missing_from_export.csv`; the commit that adds this entry.
+
+## 42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
+
+- **What we tried:** prepare the day-3 code for a session that is not one route walk (25 Nov: a route round and spot recordings at the same time, by different people and phones), and write the per-sample predictions the performance sheet needs, without changing any earlier number.
+- **Why:** the barometer step tracking and the Wi-Fi assignment assumed one walk per session (consecutive stops of the session). On 25 Nov the round (ip18 + a56) and the spots (ip16 + s24) interleave in time, use different iPhones (different barometer offsets), and only Michael's S24 scanned Wi-Fi, so per-session tracking would mix handsets and give the round Wi-Fi from somewhere else. The sheet needs precision and top-3 per sample, which `fused_window_predictions.csv` (per window) does not have.
+- **How:**
+  - `data.py`: a manifest `track` column becomes a visit column `track` (default = the session); Wi-Fi rows with a `track` are assigned only to that track's stops. `gknn.py`: `floor_threshold` and `tracked_floors` run per track; a stop without its own iPhone pressure gets an unknown floor and the barometer group is then unavailable for it (it no longer inherits the previous stop's floor; no 23/24-Nov stop lacks iPhone pressure). `evaluate.py`: `floor_eval` per track; new leave-25-Nov-out splits per phone (only when 25 Nov is in `config.json`). `data.py` also reads `DAY3_CONFIG=<file>` instead of `config.json` when set (used to run the default 25-Nov rerun next to the split20 regression run).
+  - `fused_knn.py`: also writes `fused_sample_predictions.csv` (every scheme, learned-weight model: sample key, session, phone, true, predicted, top-3, n windows); the top-3 comes from the same summed window scores as the prediction.
+  - `phone_map.py` picks up later sessions from `config.json` (`raw` key); `visualise.py` loops over the configured sessions (4th colour and marker for 25 Nov; floor figure one line per track); the explorer builds its session list from the data. `run_all.sh` first rebuilds the 25-Nov clean tree.
+  - Regression: `PYTHON=.venv/bin/python sh phase2/new/day3/run_all.sh` and `... --split20` with the unchanged `config.json` (23 Nov, 24 s1, 24 s2), then `git diff` on `out/` and `out-split20/`; the old playgrounds were first copied to `knn_playground_2026-11-25a.html` in both folders.
+- **Result:** both reruns changed nothing in `out/` and `out-split20/` except the fused-kNN `seconds` timings in `fused_knn.json` and `explore.html` (only its session list is now built from the data); `results.json`, `track24_results.json`, every figure, `knn_playground.html` (byte-identical to the dated copy) and the variance/matrix files are byte-identical to commit d82c4fc. Leave one session out stays 74/202 (default) and 222/577 (split20); the new per-sample file agrees with `fused_knn.json` for leave one session out (asserted by `perf_sheet.py`); kept as `fused_sample_predictions_2026-11-25a.csv` in both folders before the 25-Nov rerun. `playground_check.py` exit 0 on `out/` (all checks as in entry 39). The teammates' tests (`.venv/bin/python -m unittest test_walksense.py test_live.py` in `phase2/new/upload/`): 5 pass.
+- **Outcome:** success: the code change does not move any entry-39 number, so the "before" tabs of the sheet (entry 44) are the entry-39 state.
+- **What changed because of it:** the pipeline can take a session with several tracks; `fused_sample_predictions.csv` exists in `out/` and `out-split20/`.
+- **Links:** `phase2/new/day3/data.py`, `gknn.py`, `evaluate.py`, `fused_knn.py`, `phone_map.py`, `visualise.py`, `run_all.sh`, `README.md`; `out*/fused_sample_predictions.csv`, `out*/knn_playground_2026-11-25a.html`; the commit that adds this entry.
 
 ---
 

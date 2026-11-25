@@ -97,6 +97,8 @@ def endpoint_test(E, tr_mask, te_mask, area):
 def floor_eval(V):
     """Barometer floor per stop. iPhone: step tracking with a threshold learned on the other sessions."""
     res, stats = {}, {}
+    # step tracking runs per track (= the session, except 25 Nov: route round and spot recordings are separate tracks)
+    V = V.assign(session=V['track'] if 'track' in V else V['session'])
     for ph in ['iphone', 's24']:
         col = f'hpa_{ph}'
         for s, v in V.groupby('session'):
@@ -107,7 +109,7 @@ def floor_eval(V):
             ch = np.diff(f) != 0
             f5 = v[v['floor'] == 5]
             stats[f'{s}_{ph}'] = {'floor_step_hpa': [round(float(x), 3) for x in np.diff(p)[ch]],
-                                  'largest_same_floor_consecutive_change_hpa': round(float(np.nanmax(np.abs(np.diff(p))[~ch])), 3),
+                                  'largest_same_floor_consecutive_change_hpa': round(float(np.nanmax(np.abs(np.diff(p))[~ch])), 3) if (~ch).any() else None,
                                   'within_stop_sd_hpa_median': round(float(v[f'hpa_sd_{ph}'].median()), 3),
                                   'f5_range_hpa': round(float(f5[col].max() - f5[col].min()), 3),
                                   'f5_median_hpa': round(float(f5[col].median()), 3),
@@ -128,7 +130,7 @@ def floor_eval(V):
             T = float(np.median(steps)) / 2
             p, f = v[col].to_numpy(), v['floor'].to_numpy()
             trk = data.track_floor(p, T)
-            thr = (np.mean(f5s) + np.mean(f4s)) / 2
+            thr = (np.nanmean(f5s) + np.nanmean(f4s)) / 2
             absolute = np.where(p > thr, 4, 5)
             hk = lambda e: pd.Timestamp(e, unit='s', tz='Asia/Hong_Kong').strftime('%H:%M')
             res[f'{ph}_test_{s}'] = {'trained_on': others, 'jump_threshold_hpa': round(T, 3),
@@ -139,6 +141,10 @@ def floor_eval(V):
                                      'absolute_threshold_hpa': round(float(thr), 3),
                                      'absolute_threshold': f'{int((absolute == f).sum())}/{len(f)}'}
     return res, stats
+
+
+def model_of_h(W, h):
+    return '+'.join(sorted(set(W.loc[W['phone'] == h, 'device'])))
 
 
 def main():
@@ -170,6 +176,20 @@ def main():
     tr = np.concatenate([sel('23nov', 'iphone'), sel('24s1', 'iphone')])
     R['xday_23nov+24s1_to_24s2_iphone'] = run_split(bank, tr, sel('24s2', 'iphone'), ['23nov', '24s1'], area,
                                                     note=f"train two earlier sessions (two iPhone handsets: {hs('23nov', 'iphone')} and {hs('24s1', 'iphone')}), test 24s2 {hs('24s2', 'iphone')}")
+    # ---- leave 25 Nov out (only when the session is in config.json): train every earlier session, test 25 Nov, per phone.
+    #      'all phones' = every handset of the earlier sessions trains; 'same handset' = only that phone's earlier recordings.
+    if '25nov' in set(W['session']):
+        early = [x for x in sorted(set(W['session'])) if x != '25nov']
+        for h in sorted(set(W.loc[W['session'] == '25nov', 'phone'])):
+            te = np.where((W['session'] == '25nov') & (W['phone'] == h))[0]
+            tr_all = np.where(W['session'] != '25nov')[0]
+            R[f'leave25nov_out_allphones_test_{h}'] = run_split(bank, tr_all, te, early, area,
+                                                                note=f'train {"+".join(early)} (all handsets), test 25nov {h} ({model_of_h(W, h)})')
+            tr_same = np.where((W['session'] != '25nov') & (W['phone'] == h))[0]
+            if len(tr_same):
+                ss = sorted(set(W.loc[tr_same, 'session']))
+                R[f'leave25nov_out_samehandset_test_{h}'] = run_split(bank, tr_same, te, ss, area,
+                                                                      note=f'train {h} only ({"+".join(ss)}), test 25nov {h}')
     # ---- leaky reference
     R['LEAKY_same_recording_time_split_24s2_iphone'] = block_split(bank, sorted(set(bank.rec[sel('24s2', 'iphone')])), area)
     R['LEAKY_same_recording_time_split_24s2_s24'] = block_split(bank, sorted(set(bank.rec[sel('24s2', 's24')])), area)

@@ -58,25 +58,33 @@ class Bank:
     # ------------------------------------------------------------------ floor from the barometer
     def floor_threshold(self, train_sessions, train_visits=None) -> float:
         """Half the median pressure jump between consecutive stops on different floors, from training data only.
+        Consecutive = next stop of the same track (a track = the stops one group walked in order; = the session unless
+        the session's manifest has a `track` column, e.g. 25 Nov: route round vs spot recordings).
         train_visits: if given, only pairs of consecutive stops that are both training visits are used."""
         steps = []
         for s in train_sessions:
-            v = self.V[self.V['session'] == s].sort_values('start')
-            p, f = v['hpa_iphone'].to_numpy(), v['floor'].to_numpy()
-            ok = np.isfinite(p)
-            if train_visits is not None:
-                ok &= v.index.isin(list(train_visits))
-            idx = np.where(ok)[0]
-            for i, j in zip(idx, idx[1:]):
-                if j == i + 1 and f[i] != f[j]:
-                    steps.append(abs(p[j] - p[i]))
+            for _, v in self.V[self.V['session'] == s].groupby('track', sort=True):
+                v = v.sort_values('start')
+                p, f = v['hpa_iphone'].to_numpy(), v['floor'].to_numpy()
+                ok = np.isfinite(p)
+                if train_visits is not None:
+                    ok &= v.index.isin(list(train_visits))
+                idx = np.where(ok)[0]
+                for i, j in zip(idx, idx[1:]):
+                    if j == i + 1 and f[i] != f[j]:
+                        steps.append(abs(p[j] - p[i]))
         return float(np.median(steps)) / 2 if steps else 0.3
 
     def tracked_floors(self, threshold: float) -> dict:
+        """Barometer step tracking per track. A stop with no iPhone pressure of its own gets NaN (floor unknown, the
+        baro group is then unavailable for it) instead of inheriting the previous stop's floor."""
         out = {}
-        for s, v in self.V.groupby('session'):
+        for _, v in self.V.groupby('track', sort=True):
             v = v.sort_values('start')
-            out.update(dict(zip(v.index, data.track_floor(v['hpa_iphone'].to_numpy(), threshold))))
+            p = v['hpa_iphone'].to_numpy()
+            fl = data.track_floor(p, threshold).astype(float)
+            fl[~np.isfinite(p)] = np.nan
+            out.update(dict(zip(v.index, fl)))
         return out
 
     # ------------------------------------------------------------------ distances
@@ -108,7 +116,9 @@ class Bank:
             elif g == 'baro':
                 fl = self.tracked_floors(floor_threshold)
                 ft = np.array([fl[v] for v in self.vis[tr]]); fe = np.array([fl[v] for v in self.vis[te]])
-                out[g] = ((fe[:, None] != ft[None, :]).astype(np.float32), np.ones(len(te), bool), np.ones(len(tr), bool))
+                at, ae = np.isfinite(ft), np.isfinite(fe)
+                d = ((fe[:, None] != ft[None, :]) & ae[:, None] & at[None, :]).astype(np.float32)   # unknown floor -> 0, and marked unavailable
+                out[g] = (d, ae, at)
         return out
 
     @staticmethod

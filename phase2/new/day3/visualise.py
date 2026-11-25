@@ -25,9 +25,13 @@ import gknn
 
 OUT = data.OUT
 S1, S2, S3 = '#2a78d6', '#eb6834', '#1baf7a'          # categorical slots 1-3 (validated all-pairs)
-SESS_COL = {'23nov': S1, '24s1': S2, '24s2': S3}
-SESS_MARK = {'23nov': 'o', '24s1': 's', '24s2': '^'}
-SESS_NAME = {'23nov': '23 Nov', '24s1': '24 Nov session 1', '24s2': '24 Nov session 2'}
+S4 = '#8f4fd1'                                         # 4th session (25 Nov)
+SESS_COL = {'23nov': S1, '24s1': S2, '24s2': S3, '25nov': S4}
+SESS_MARK = {'23nov': 'o', '24s1': 's', '24s2': '^', '25nov': 'D'}
+SESS_NAME = {'23nov': '23 Nov', '24s1': '24 Nov session 1', '24s2': '24 Nov session 2', '25nov': '25 Nov'}
+SESSIONS = [s['id'] for s in data.config()['sessions']]          # config order; every figure loops over these
+for _i, _s in enumerate(SESSIONS):                               # a session added later without an entry above still draws
+    SESS_COL.setdefault(_s, ['#5c5c5c', '#b0306a'][_i % 2]); SESS_MARK.setdefault(_s, 'v'); SESS_NAME.setdefault(_s, _s)
 INK, INK2, GRID, AX = '#0b0b0b', '#52514e', '#e6e5e0', '#b5b4ad'
 GREY = '#8a8983'
 DN = data.display_names()           # handset id -> display name (config.json phones)
@@ -157,24 +161,34 @@ def fig_confusion(R, wp, P):
 
 
 def fig_floor(V, R):
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4.2), sharey=True)
-    for ax, s in zip(axes, ['23nov', '24s1', '24s2']):
-        v = V[V['session'] == s].sort_values('start')
-        t = (v['start'] - v['start'].min()) / 60
-        for ph, mk, lab in [('iphone', 'o', 'iPhone barometer'), ('s24', 'D', 'Galaxy S24 pressure')]:
-            p = v[f'hpa_{ph}']
-            if p.notna().sum() < 2:
-                continue
-            rel = p - p.iloc[0]
-            col = S1 if ph == 'iphone' else GREY
-            ax.plot(t, rel, color=col, linewidth=1, alpha=0.6)
-            for f, fc in [(5, 'white'), (4, col)]:
-                m = (v['floor'] == f).to_numpy()
-                ax.scatter(t[m], rel[m], marker=mk, s=28, facecolor=fc, edgecolor=col, linewidth=1.3, zorder=3,
-                           label=f'{lab}, floor {f}' if s == '24s1' or (s == '23nov' and ph == 'iphone') else None)
-        fl = R['floor'].get(f'iphone_test_{s}', {})
-        hsets = '/'.join(DN[h] for h in sorted(set(v['iphone_handset'])))
-        ax.set_title(f"{SESS_NAME[s]} ({hsets})\niPhone step tracking {fl.get('step_tracking', '')} stops, fixed threshold {fl.get('absolute_threshold', '')}",
+    ns = len(SESSIONS)
+    fig, axes = plt.subplots(1, ns, figsize=(14 * ns / 3, 4.2), sharey=True)
+    if 'track' not in V:
+        V = V.assign(track=V['session'])
+    for ax, s in zip(axes, SESSIONS):
+        vs = V[V['session'] == s]
+        t0 = vs['start'].min()
+        tracks = sorted(vs['track'].unique())
+        for tk, v in vs.groupby('track'):                 # one line per track (25 Nov: route round and spot recordings)
+            v = v.sort_values('start')
+            t = (v['start'] - t0) / 60
+            for ph, mk, lab in [('iphone', 'o', 'iPhone barometer'), ('s24', 'D', 'Galaxy S24 pressure')]:
+                p = v[f'hpa_{ph}']
+                if p.notna().sum() < 2:
+                    continue
+                rel = p - p.dropna().iloc[0]
+                col = S1 if ph == 'iphone' else GREY
+                ax.plot(t, rel, color=col, linewidth=1, alpha=0.6, linestyle='-' if tk == tracks[0] else '--')
+                for f, fc in [(5, 'white'), (4, col)]:
+                    m = (v['floor'] == f).to_numpy()
+                    ax.scatter(t[m], rel[m], marker=mk, s=28, facecolor=fc, edgecolor=col, linewidth=1.3, zorder=3,
+                               label=f'{lab}, floor {f}' if s == '24s1' or (s == '23nov' and ph == 'iphone') else None)
+        fl = [R['floor'][f'iphone_test_{tk}'] for tk in tracks if f'iphone_test_{tk}' in R['floor']]
+        steps = '+'.join(f['step_tracking'] for f in fl)
+        fixed = '+'.join(f['absolute_threshold'] for f in fl)
+        hsets = '/'.join(DN[h] for h in sorted(set(' '.join(vs['iphone_handset']).split())))
+        trk = f", {len(tracks)} tracks (dashed = {', '.join(t.split(':')[-1] for t in tracks[1:])})" if len(tracks) > 1 else ''
+        ax.set_title(f"{SESS_NAME[s]} ({hsets}){trk}\niPhone step tracking {steps} stops, fixed threshold {fixed}",
                      fontsize=9, loc='left', color=INK)
         ax.set_xlabel('minutes since first stop', fontsize=8, color=INK2)
         style(ax)
@@ -191,13 +205,16 @@ def fig_per_place(W, V, P):
     fig, axes = plt.subplots(2, 1, figsize=(13, 7.5), sharex=True)
     rng = np.random.default_rng(0)
     iph = W[W['slot'] == 'iphone']
-    for j, s in enumerate(['23nov', '24s1', '24s2']):
+    off = lambda j: (j - (len(SESSIONS) - 1) / 2) * 0.25
+    if 'track' not in V:
+        V = V.assign(track=V['session'])
+    for j, s in enumerate(SESSIONS):
         g = iph[iph['session'] == s]
-        x = g['place'].map(pos) + (j - 1) * 0.25 + rng.uniform(-0.06, 0.06, len(g))
+        x = g['place'].map(pos) + off(j) + rng.uniform(-0.06, 0.06, len(g))
         axes[0].scatter(x, g['B_mean'], s=9, color=SESS_COL[s], alpha=0.75, label=SESS_NAME[s], marker=SESS_MARK[s], linewidths=0)
         v = V[V['session'] == s].sort_values('start')
-        rel = v['hpa_iphone'] - v[v['floor'] == 5]['hpa_iphone'].median()
-        axes[1].scatter(v['place'].map(pos) + (j - 1) * 0.25, rel, s=30, color=SESS_COL[s], marker=SESS_MARK[s], label=SESS_NAME[s],
+        rel = v['hpa_iphone'] - v.groupby('track')['hpa_iphone'].transform(lambda h: h[v.loc[h.index, 'floor'] == 5].median())
+        axes[1].scatter(v['place'].map(pos) + off(j), rel, s=30, color=SESS_COL[s], marker=SESS_MARK[s], label=SESS_NAME[s],
                         edgecolor='white', linewidth=0.8)
     axes[0].set_ylabel('|B| per 5 s window (uT), iPhone', fontsize=8, color=INK2)
     axes[0].set_title(f"Field strength per place and session (iPhone stops; 23 Nov and 24 s2 = {DN['ip16']} (iPhone17,4), 24 s1 = {DN['ip18']} (iPhone19,2))",
@@ -254,7 +271,7 @@ def fig_embeddings(bank, emb, P):
         for ax, fl in zip(axes, [5, 4]):
             m = (g['floor'] == fl).to_numpy()
             ax.scatter(xy[~m, 0], xy[~m, 1], s=4, color='#e6e5e0', linewidths=0)
-            for s in ['23nov', '24s1', '24s2']:
+            for s in SESSIONS:
                 ms = m & (g['session'] == s).to_numpy()
                 ax.scatter(xy[ms, 0], xy[ms, 1], s=10, color=SESS_COL[s], marker=SESS_MARK[s], alpha=0.7, linewidths=0, label=SESS_NAME[s])
             for p, gp in g[m].groupby('place'):
@@ -272,7 +289,7 @@ def fig_embeddings(bank, emb, P):
     xy, vis = emb['_wifi_visits']
     V = bank.V.loc[vis]
     fig, ax = plt.subplots(figsize=(8, 6.2))
-    for s in ['23nov', '24s1', '24s2']:
+    for s in SESSIONS:
         m = (V['session'] == s).to_numpy()
         ax.scatter(xy[m, 0], xy[m, 1], s=30, color=SESS_COL[s], marker=SESS_MARK[s], label=SESS_NAME[s], edgecolor='white', linewidth=0.8)
     for (x, y), p in zip(xy, V['place']):
@@ -340,7 +357,7 @@ body{overflow-x:hidden}
 </style></head><body>
 <h1>WalkSense: what the stop data looks like</h1>
 <p>One dot per 5 s window of a stop recording (Wi-Fi view: one dot per stop). Colour = place (click a legend entry to hide it, double-click to show only that place).
-Shape = session: circle 23 Nov, square 24 Nov session 1, triangle 24 Nov session 2. Hover for place, session, phone and recording.
+Shape = session: circle 23 Nov, square 24 Nov session 1, triangle 24 Nov session 2, diamond 25 Nov (when present). Hover for place, session, phone and recording.
 Use <b>Phone</b>, <b>Session</b> and <b>Place</b> to look at one handset, one day or one place at a time (a place or a floor from the dropdown, or tick several places in the list below), and <b>Colour by phone / session</b> to see where a place's spread comes from (with one place selected the colour switches to phone; colour by session uses the shape for the phone). The variance split per place is in the kNN playground (out/knn_playground.html) and out/variance_by_place.csv. The phone is the real handset (read from each recording's metadata): <span id="phnote"></span>
 Same place in different sessions landing together = a fingerprint that carries over; separate clumps per session = drift. Internal team notes, not report text.</p>
 <div class="row"><label>View <select id="view"></select></label>
@@ -348,19 +365,20 @@ Same place in different sessions landing together = a fingerprint that carries o
 <label class="placepick">Place <select id="place"></select></label>
 <span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button><button data-c="session" aria-pressed="false">session</button></span></span>
 <label>Floor <select id="floor"><option value="all">both</option><option value="5">5</option><option value="4">4</option></select></label>
-<label>Session <select id="sess"><option value="all">all</option><option>23nov</option><option>24s1</option><option>24s2</option></select></label></div>
+<label>Session <select id="sess"><option value="all">all</option></select></label></div>
 <details id="pldet"><summary>Place checklist (tick several places)</summary>
 <div class="row"><button id="plall">all</button><button id="plnone">none</button></div><div class="plgrid" id="plgrid"></div></details>
 <div id="plot"></div>
 <script>
 const DATA = __DATA__;
-const SYM = {"23nov":"circle","24s1":"square","24s2":"triangle-up"};
+const SYM = {}, SESSCOL = {};
+DATA.sessions.forEach((s, i) => { SYM[s] = ['circle', 'square', 'triangle-up', 'diamond', 'cross', 'star'][i % 6]; SESSCOL[s] = ['#6b4fd8', '#d99a00', '#0e9aa7', '#c2185b', '#5c5c5c', '#2e7d32'][i % 6];
+  const o = document.createElement('option'); o.textContent = s; document.getElementById('sess').appendChild(o); });
 document.getElementById('phnote').textContent = DATA.phones.map(p => `${DATA.phone_info[p].display} = ${DATA.phone_info[p].model}`).join(', ') + '.';
 const pname = p => DATA.phone_info[p] ? DATA.phone_info[p].display : p;
 const PHCOL = ['#2a78d6', '#e8812a', '#17a673', '#9b5de5', '#c2185b'];
 const view = document.getElementById('view'), fsel = document.getElementById('floor'), ssel = document.getElementById('sess'), psel = document.getElementById('phone');
 let colorBy = 'place';
-const SESSCOL = {"23nov": '#6b4fd8', "24s1": '#d99a00', "24s2": '#0e9aa7'};
 const PHSYM = ['circle', 'square', 'triangle-up', 'diamond', 'cross'];
 const NPL = DATA.places.length, placeOn = DATA.places.map(() => true);
 const psel2 = document.getElementById('place'), plgrid = document.getElementById('plgrid'), plBoxes = [];
@@ -454,12 +472,13 @@ def explorer(bank, emb, P):
         [round(float(a), 2), round(float(b), 2), pi[p], s, phlab(ph, m), kk, ph] for a, b, p, s, ph, m, kk in
         zip(W['B_mean'], W['Bv'], W['place'], W['session'], W['phone'], W['device'], W['key']) if np.isfinite(b)]}
     Vs = V.reset_index().sort_values('start')
-    rel = Vs['hpa_iphone'] - Vs.groupby('session')['hpa_iphone'].transform('first')
+    rel = Vs['hpa_iphone'] - Vs.groupby('track')['hpa_iphone'].transform(lambda h: h.dropna().iloc[0] if h.notna().any() else np.nan)
     tmin = (Vs['start'] - Vs.groupby('session')['start'].transform('min')) / 60
     views['barometer: iPhone pressure per stop vs time'] = {'size': 10, 'xl': 'minutes since first stop', 'yl': 'hPa minus first stop (higher = lower floor)',
                                                             'pts': [[round(float(a), 2), round(float(b), 3), pi[p], s, phlab(h, mdl[h]), v, h]
-                                                                    for a, b, p, s, v, h in zip(tmin, rel, Vs['place'], Vs['session'], Vs['visit'], Vs['iphone_handset'])]}
-    payload = {'phones': sorted(W['phone'].unique()), 'phone_info': {h: {'display': DN[h], 'model': mdl[h]} for h in mdl}, 'places': places, 'floor': [int(P.loc[p, 'floor']) for p in places], 'colours': colours, 'views': views}
+                                                                    for a, b, p, s, v, h in zip(tmin, rel, Vs['place'], Vs['session'], Vs['visit'], Vs['iphone_handset'])
+                                                                    if np.isfinite(b) and h in mdl]}
+    payload = {'sessions': [s for s in SESSIONS if s in set(W['session'])], 'phones': sorted(W['phone'].unique()), 'phone_info': {h: {'display': DN[h], 'model': mdl[h]} for h in mdl}, 'places': places, 'floor': [int(P.loc[p, 'floor']) for p in places], 'colours': colours, 'views': views}
     (OUT / 'explore.html').write_text(HTML.replace('__DATA__', json.dumps(payload, separators=(',', ':'))))
     print('wrote explore.html')
 

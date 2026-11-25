@@ -49,7 +49,8 @@ V2_MERGE = {'sr8': 'sr9', 'sr10': 'sr9', 'sr11': 'sr9', 'lift_5': 'lift_stairs',
 
 
 def config() -> dict:
-    return json.loads((HERE / 'config.json').read_text())
+    # DAY3_CONFIG=<path> reads another config (e.g. to run two session sets side by side); default config.json
+    return json.loads((HERE / os.environ.get('DAY3_CONFIG', 'config.json')).read_text())
 
 
 def handset(model: str) -> str:
@@ -163,6 +164,9 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
                   for h, mi, sec in (t.split(':') for t in m['start_hk'])]
     m['end'] = m['start'] + m['duration_s'].astype(float)
     m['visit'] = s['id'] + ':' + m['folder']
+    # track = the stops one group walked in order (barometer step tracking and Wi-Fi assignment run per track);
+    # a manifest without a `track` column (24 Nov) is one track = the session
+    m['track'] = s['id'] + ':' + m['track'] if 'track' in m.columns else s['id']
     unmapped = []
     W, E, vrows = [], [], []
     for _, r in m.iterrows():
@@ -199,7 +203,7 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
         if not place:
             continue
         row = {'session': s['id'], 'day': s['day'], 'visit': v, 'place': place, 'floor': int(g['floor'].iloc[0]),
-               'start': g['start'].min(), 'end': g['end'].max(), 'phones': ' '.join(sorted(g['phone']))}
+               'start': g['start'].min(), 'end': g['end'].max(), 'phones': ' '.join(sorted(g['phone'])), 'track': g['track'].iloc[0]}
         for ph, fn in PRESSURE_FILE.items():
             p = _csv(root / g['folder'].iloc[0] / ph / f'{fn}.csv')
             row[f'hpa_{ph}'] = float(np.median(p[:, 1])) if p is not None and len(p) else np.nan
@@ -212,9 +216,17 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
     wf = root / 'wifi' / 'observations.csv'
     obs = pd.DataFrame()
     if wf.exists():
-        o = pd.read_csv(wf, usecols=['scanner_phone', 'source_log', 'bssid', 'rssi', 'epoch'])
+        cols = pd.read_csv(wf, nrows=0).columns
+        o = pd.read_csv(wf, usecols=['scanner_phone', 'source_log', 'bssid', 'rssi', 'epoch'] + (['track'] if 'track' in cols else []))
         o = o.rename(columns={'scanner_phone': 'scanner'})
-        obs = assign_wifi(o, V, max_gap)
+        if 'track' in o.columns:          # the scanner walked with one track only: assign its rows to that track's stops
+            o['track'] = s['id'] + ':' + o['track'].astype(str)
+            parts = [assign_wifi(g.drop(columns='track'), V[V['track'] == t].reset_index(drop=True), max_gap)
+                     for t, g in o.groupby('track') if (V['track'] == t).any()]
+            obs = pd.concat(parts, ignore_index=True) if parts else o.iloc[:0].drop(columns='track').assign(visit='', gap_s=0.0, in_window=False)
+            o = o.drop(columns='track')
+        else:
+            obs = assign_wifi(o, V, max_gap)
         obs['session'] = s['id']
         allobs = o.assign(session=s['id'])
     else:
@@ -248,7 +260,7 @@ def load_crossday_23nov(s: dict, win: float, max_gap: float):
         vrows.append({'session': s['id'], 'day': s['day'], 'visit': f"{s['id']}:{sid}", 'place': place[sid], 'floor': floor[sid],
                       'start': r['start_epoch_s'], 'end': r['end_epoch_s'], 'phones': 'iphone',
                       'hpa_iphone': float(hpa.loc[sid, 'median']), 'hpa_sd_iphone': float(hpa.loc[sid, 'std']),
-                      'hpa_s24': np.nan, 'hpa_sd_s24': np.nan, 'devices': r['device_model'],
+                      'hpa_s24': np.nan, 'hpa_sd_s24': np.nan, 'devices': r['device_model'], 'track': s['id'],
                       'handsets': handset(r['device_model']), 'iphone_handset': handset(r['device_model'])})
     V = pd.DataFrame(vrows).sort_values('start').reset_index(drop=True)
     o = pd.read_csv(cd.CACHE23 / 'wifi' / 'observations.csv', usecols=['source_log', 'MAC', 'RSSI', 'Type', 'observation_epoch_s'])

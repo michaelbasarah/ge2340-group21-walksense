@@ -28,6 +28,11 @@ CD = data.HERE.parent.parent / 'clean-data'
 SES = [('23nov', CD / '2026-11-23', 'raw/attachments'), ('24s1', CD / '2026-11-24/sesi1', 'raw'),
        ('24s2', CD / '2026-11-24/sesi2', 'raw')]
 OTHER = [('14nov', CD / '2026-11-14', 'raw'), ('17nov', CD / '2026-11-17', 'raw')]   # not used by day3, counted only
+# sessions added later: config.json entry with `raw` (raw folder, relative to day3/) and `path` (= <root>/clean)
+for _s in data.config()['sessions']:
+    if _s.get('raw') and _s['id'] not in {x[0] for x in SES}:
+        _root = (data.HERE / _s['path']).resolve().parent
+        SES.append((_s['id'], _root, str((data.HERE / _s['raw']).resolve().relative_to(_root))))
 
 
 def raw_models(raw: Path) -> dict[str, set]:
