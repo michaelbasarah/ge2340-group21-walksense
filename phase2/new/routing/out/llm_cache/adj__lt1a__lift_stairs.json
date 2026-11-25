@@ -1,0 +1,55 @@
+{
+ "condition": "adj",
+ "start": "lt1a",
+ "goal": "lift_stairs",
+ "stratum": "cross_4F_to_5F",
+ "model_requested": "haiku",
+ "date_utc": "2026-11-25T12:50:42+00:00",
+ "prompt": "FLOOR PLAN of a university building (floors 5 and 4). Each place has an ID, a name and a floor.\n\nPLACES\n- canteen: Canteen entrance, floor 5\n- disabled_toilet: Disabled toilet (5F), floor 5\n- escalator_down: Down escalator (5F), floor 5\n- escalator_up: Up escalator (5F), floor 5\n- exit_10: Exit 10 (by the toilets), floor 5\n- exit_5: Exit 5 (emergency exit), floor 5\n- female_toilet: Female toilet, floor 5\n- lift_stairs: Lift and stairs (5F), floor 5\n- male_toilet: Male toilet, floor 5\n- sr9: Study rooms (Y5-511 to Y5-514), floor 5\n- y5202: Room Y5-202, floor 5\n- y5302: Room Y5-302 (front door), floor 5\n- y5302_back: Room Y5-302 (back door), floor 5\n- y5401: Room Y5-401, floor 5\n- disabled_toilet_4F: Disabled toilet (4F), floor 4\n- entrance_exit: Entrance gate (4F), floor 4\n- escalator_down_4F: Down escalator (4F), floor 4\n- escalator_up_4F: Up escalator (4F), floor 4\n- exit_10_4F: Exit 10 (4F), floor 4\n- exit_5_4F: Exit 5 (4F), floor 4\n- lift_stairs_4F: Lift and stairs (4F), floor 4\n- lt1a: LT1a, floor 4\n- lt1b: LT1b, floor 4\n- lt2a: LT2a, floor 4\n- lt2b: LT2b, floor 4\n- y4502: Room Y4-502, floor 4\n\nCONNECTIONS (from each place, what you can reach in one step; a connection can only be used in the direction listed)\n- canteen: walk to escalator_down; walk to escalator_up; walk to exit_10; walk to exit_5.\n- disabled_toilet: walk to exit_5; walk to lift_stairs.\n- escalator_down: walk to canteen; ride the escalator down to escalator_down_4F; walk to escalator_up; walk to exit_5.\n- escalator_up: walk to canteen; walk to escalator_down; walk to exit_10.\n- exit_10: walk to canteen; walk to escalator_up; walk to female_toilet.\n- exit_5: walk to canteen; walk to disabled_toilet; walk to escalator_down; walk to male_toilet.\n- female_toilet: walk to exit_10; walk to y5202.\n- lift_stairs: walk to disabled_toilet; take the stairs or lift to lift_stairs_4F; walk to y5302_back; walk to y5401.\n- male_toilet: walk to exit_5; walk to y5302.\n- sr9: walk to y5202; walk to y5302.\n- y5202: walk to female_toilet; walk to sr9.\n- y5302: walk to male_toilet; walk to sr9.\n- y5302_back: walk to lift_stairs; walk to y5401.\n- y5401: walk to lift_stairs; walk to y5302_back.\n- disabled_toilet_4F: walk to exit_5_4F; walk to lift_stairs_4F.\n- entrance_exit: walk to exit_10_4F; walk to exit_5_4F.\n- escalator_down_4F: walk to escalator_up_4F; walk to lt2b; walk to y4502.\n- escalator_up_4F: walk to escalator_down_4F; ride the escalator up to escalator_up; walk to lt1b; walk to y4502.\n- exit_10_4F: walk to entrance_exit; walk to lt1a.\n- exit_5_4F: walk to disabled_toilet_4F; walk to entrance_exit; walk to lt2a.\n- lift_stairs_4F: walk to disabled_toilet_4F; take the stairs or lift to lift_stairs.\n- lt1a: walk to exit_10_4F; walk to lt1b.\n- lt1b: walk to escalator_up_4F; walk to lt1a.\n- lt2a: walk to exit_5_4F; walk to lt2b.\n- lt2b: walk to escalator_down_4F; walk to lt2a.\n- y4502: walk to escalator_down_4F; walk to escalator_up_4F.\n\nTASK: Give the quickest route from \"lt1a\" (LT1a) to \"lift_stairs\" (Lift and stairs (5F)).\nUse only places and connections that appear in the floor plan above, in the listed direction. Answer with ONLY a JSON array of place IDs in order, starting with lt1a and ending with lift_stairs, nothing else.",
+ "cli_command": "claude -p --model haiku --tools \"\" --no-session-persistence --setting-sources \"\" --system-prompt <SYSTEM> --output-format json <prompt>",
+ "system_prompt": "You are a careful navigation assistant. Follow the requested output format exactly.",
+ "latency_s": 6.771,
+ "attempt": 1,
+ "response": "[\"lt1a\", \"exit_10_4F\", \"entrance_exit\", \"exit_5_4F\", \"disabled_toilet_4F\", \"lift_stairs_4F\", \"lift_stairs\"]",
+ "api_ms": 4161,
+ "is_error": false,
+ "model_used": [
+  "claude-haiku-5-5"
+ ],
+ "usage": {
+  "input_tokens": 2,
+  "cache_creation_input_tokens": 2207,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 650,
+  "output_tokens_details": {
+   "thinking_tokens": 584
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 2207,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 650,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 2207,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2207
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "cost_usd": 0.0007666000000000001,
+ "cli_version": "2.1.332 (Claude Code)"
+}

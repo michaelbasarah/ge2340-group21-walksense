@@ -1,0 +1,151 @@
+condition,start,goal,stratum,latency_s,api_ms,parsed,answer,hops,bad_hops,unknown_id_hops,wrong_direction_hops,invented_hops,starts_ok,reaches_goal,valid,success,seconds,optimal_seconds,ratio,optimal,bad_hop_list
+adj,escalator_down_4F,exit_10_4F,4F_same_floor,7.032,3722,True,escalator_down_4F > escalator_up_4F > lt1b > lt1a > exit_10_4F,4,0,0,0,0,True,True,True,True,26.47,26.47,1.0,True,
+adj,escalator_up_4F,lt1a,4F_same_floor,6.31,2841,True,escalator_up_4F > lt1b > lt1a,2,0,0,0,0,True,True,True,True,15.31,15.31,1.0,True,
+adj,exit_5_4F,escalator_up_4F,4F_same_floor,6.115,3142,True,exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F,4,0,0,0,0,True,True,True,True,26.16,26.16,1.0,True,
+adj,lift_stairs_4F,escalator_up_4F,4F_same_floor,6.677,3704,True,lift_stairs_4F > disabled_toilet_4F > exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F,6,0,0,0,0,True,True,True,True,34.85,34.85,1.0,True,
+adj,lt1a,y4502,4F_same_floor,6.253,2286,True,lt1a > lt1b > escalator_up_4F > y4502,3,0,0,0,0,True,True,True,True,22.77,22.77,1.0,True,
+adj,lt2a,lift_stairs_4F,4F_same_floor,5.14,1942,True,lt2a > exit_5_4F > disabled_toilet_4F > lift_stairs_4F,3,0,0,0,0,True,True,True,True,12.0,12.0,1.0,True,
+adj,lt2b,escalator_up_4F,4F_same_floor,5.974,2283,True,lt2b > escalator_down_4F > escalator_up_4F,2,0,0,0,0,True,True,True,True,10.77,10.77,1.0,True,
+adj,lt2b,lt1b,4F_same_floor,5.911,2324,True,lt2b > escalator_down_4F > escalator_up_4F > lt1b,3,0,0,0,0,True,True,True,True,15.31,15.31,1.0,True,
+adj,canteen,lift_stairs,5F_same_floor,5.744,2436,True,canteen > exit_5 > disabled_toilet > lift_stairs,3,0,0,0,0,True,True,True,True,17.23,17.23,1.0,True,
+adj,escalator_down,y5302,5F_same_floor,5.179,2026,True,escalator_down > exit_5 > male_toilet > y5302,3,0,0,0,0,True,True,True,True,17.54,17.54,1.0,True,
+adj,escalator_down,y5302_back,5F_same_floor,6.0,2661,True,escalator_down > exit_5 > disabled_toilet > lift_stairs > y5302_back,4,0,0,0,0,True,True,True,True,27.0,27.0,1.0,True,
+adj,escalator_up,sr9,5F_same_floor,6.107,2520,True,escalator_up > exit_10 > female_toilet > y5202 > sr9,4,0,0,0,0,True,True,True,True,23.53,23.53,1.0,True,
+adj,escalator_up,y5202,5F_same_floor,5.54,1718,True,escalator_up > exit_10 > female_toilet > y5202,3,0,0,0,0,True,True,True,True,15.38,15.38,1.0,True,
+adj,escalator_up,y5302_back,5F_same_floor,7.122,4116,True,escalator_up > canteen > exit_5 > disabled_toilet > lift_stairs > y5302_back,5,0,0,0,0,True,True,True,True,35.92,34.92,1.0286,False,
+adj,exit_10,exit_5,5F_same_floor,4.971,1762,True,exit_10 > canteen > exit_5,2,0,0,0,0,True,True,True,True,17.46,17.46,1.0,True,
+adj,exit_5,y5202,5F_same_floor,6.687,3150,True,exit_5 > canteen > exit_10 > female_toilet > y5202,4,0,0,0,0,True,True,True,True,29.07,29.07,1.0,True,
+adj,female_toilet,disabled_toilet,5F_same_floor,6.077,2755,True,female_toilet > exit_10 > canteen > exit_5 > disabled_toilet,4,0,0,0,0,True,True,True,True,23.3,23.3,1.0,True,
+adj,female_toilet,male_toilet,5F_same_floor,6.652,2680,True,female_toilet > exit_10 > canteen > exit_5 > male_toilet,4,0,0,0,0,True,True,True,True,23.61,23.61,1.0,True,
+adj,lift_stairs,escalator_up,5F_same_floor,7.356,4348,True,lift_stairs > disabled_toilet > exit_5 > canteen > escalator_up,4,0,0,0,0,True,True,True,True,23.46,22.46,1.0445,False,
+adj,lift_stairs,y5202,5F_same_floor,6.914,3270,True,lift_stairs > disabled_toilet > exit_5 > male_toilet > y5302 > sr9 > y5202,6,0,0,0,0,True,True,True,True,39.22,37.76,1.0387,False,
+adj,male_toilet,canteen,5F_same_floor,4.77,1578,True,male_toilet > exit_5 > canteen,2,0,0,0,0,True,True,True,True,11.31,11.31,1.0,True,
+adj,male_toilet,female_toilet,5F_same_floor,5.638,2333,True,male_toilet > exit_5 > canteen > exit_10 > female_toilet,4,0,0,0,0,True,True,True,True,23.61,23.61,1.0,True,
+adj,male_toilet,sr9,5F_same_floor,5.555,2034,True,male_toilet > y5302 > sr9,2,0,0,0,0,True,True,True,True,19.61,19.61,1.0,True,
+adj,male_toilet,y5202,5F_same_floor,5.212,1923,True,male_toilet > y5302 > sr9 > y5202,3,0,0,0,0,True,True,True,True,27.76,27.76,1.0,True,
+adj,sr9,exit_10,5F_same_floor,5.744,1768,True,sr9 > y5202 > female_toilet > exit_10,3,0,0,0,0,True,True,True,True,19.76,19.76,1.0,True,
+adj,y5202,escalator_up,5F_same_floor,5.207,1823,True,y5202 > female_toilet > exit_10 > escalator_up,3,0,0,0,0,True,True,True,True,15.38,15.38,1.0,True,
+adj,y5302,lift_stairs,5F_same_floor,6.129,2632,True,y5302 > male_toilet > exit_5 > disabled_toilet > lift_stairs,4,0,0,0,0,True,True,True,True,20.38,20.38,1.0,True,
+adj,y5302_back,sr9,5F_same_floor,6.853,2996,True,y5302_back > lift_stairs > disabled_toilet > exit_5 > male_toilet > y5302 > sr9,6,0,0,0,0,True,True,True,True,43.53,43.53,1.0,True,
+adj,escalator_down_4F,canteen,cross_4F_to_5F,6.026,2319,True,escalator_down_4F > escalator_up_4F > escalator_up > canteen,3,0,0,0,0,True,True,True,True,32.85,32.85,1.0,True,
+adj,escalator_down_4F,exit_10,cross_4F_to_5F,6.66,2724,True,escalator_down_4F > escalator_up_4F > escalator_up > exit_10,3,0,0,0,0,True,True,True,True,30.39,30.39,1.0,True,
+adj,escalator_up_4F,exit_10,cross_4F_to_5F,6.241,2657,True,escalator_up_4F > escalator_up > exit_10,2,0,0,0,0,True,True,True,True,23.77,23.77,1.0,True,
+adj,exit_5_4F,exit_5,cross_4F_to_5F,6.858,4024,True,exit_5_4F > disabled_toilet_4F > lift_stairs_4F > lift_stairs > disabled_toilet > exit_5,5,0,0,0,0,True,True,True,True,47.38,47.38,1.0,True,
+adj,exit_5_4F,female_toilet,cross_4F_to_5F,7.268,4257,True,exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F > escalator_up > exit_10 > female_toilet,7,0,0,0,0,True,True,True,True,53.31,53.31,1.0,True,
+adj,lift_stairs_4F,escalator_down,cross_4F_to_5F,7.744,3908,True,lift_stairs_4F > lift_stairs > disabled_toilet > exit_5 > escalator_down,4,0,0,0,0,True,True,True,True,44.54,44.54,1.0,True,
+adj,lift_stairs_4F,escalator_up,cross_4F_to_5F,7.019,3971,True,lift_stairs_4F > lift_stairs > disabled_toilet > exit_5 > canteen > escalator_up,5,0,0,0,0,True,True,True,True,53.46,52.46,1.0191,False,
+adj,lt1a,canteen,cross_4F_to_5F,6.646,2417,True,lt1a > lt1b > escalator_up_4F > escalator_up > canteen,4,0,0,0,0,True,True,True,True,41.54,41.54,1.0,True,
+adj,lt1a,lift_stairs,cross_4F_to_5F,6.771,4161,True,lt1a > exit_10_4F > entrance_exit > exit_5_4F > disabled_toilet_4F > lift_stairs_4F > lift_stairs,6,0,0,0,0,True,True,True,True,62.77,57.77,1.0866,False,
+adj,lt2a,y5401,cross_4F_to_5F,6.116,2552,True,lt2a > exit_5_4F > disabled_toilet_4F > lift_stairs_4F > lift_stairs > y5401,5,0,0,0,0,True,True,True,True,49.92,49.92,1.0,True,
+adj,y4502,male_toilet,cross_4F_to_5F,7.223,4577,True,y4502 > escalator_up_4F > escalator_up > canteen > exit_5 > male_toilet,5,0,0,0,0,True,True,True,True,45.0,44.0,1.0227,False,
+adj,escalator_down,lt2a,cross_5F_to_4F,6.472,2281,True,escalator_down > escalator_down_4F > lt2b > lt2a,3,0,0,0,0,True,True,True,True,36.23,36.23,1.0,True,
+adj,escalator_up,lt1b,cross_5F_to_4F,7.653,3996,True,escalator_up > escalator_down > escalator_down_4F > escalator_up_4F > lt1b,4,0,0,0,0,True,True,True,True,39.08,39.08,1.0,True,
+adj,exit_5,entrance_exit,cross_5F_to_4F,8.381,5189,True,exit_5 > escalator_down > escalator_down_4F > lt2b > lt2a > exit_5_4F > entrance_exit,6,0,0,0,0,True,True,True,True,56.62,56.62,1.0,True,
+adj,exit_5,lt2b,cross_5F_to_4F,5.501,2477,True,exit_5 > escalator_down > escalator_down_4F > lt2b,3,0,0,0,0,True,True,True,True,30.0,30.0,1.0,True,
+adj,female_toilet,y4502,cross_5F_to_4F,6.804,3771,True,female_toilet > exit_10 > canteen > escalator_down > escalator_down_4F > y4502,5,0,0,0,0,True,True,True,True,45.99,42.53,1.0814,False,
+adj,lift_stairs,escalator_down_4F,cross_5F_to_4F,6.795,3890,True,lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_down_4F,4,0,0,0,0,True,True,True,True,34.54,34.54,1.0,True,
+adj,lift_stairs,escalator_up_4F,cross_5F_to_4F,6.991,3392,True,lift_stairs > lift_stairs_4F > disabled_toilet_4F > exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F,7,0,0,0,0,True,True,True,True,64.85,41.16,1.5756,False,
+adj,lift_stairs,y4502,cross_5F_to_4F,6.877,3201,True,lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_down_4F > y4502,5,0,0,0,0,True,True,True,True,42.0,42.0,1.0,True,
+adj,male_toilet,lt1a,cross_5F_to_4F,6.907,3269,True,male_toilet > exit_5 > escalator_down > escalator_down_4F > escalator_up_4F > lt1b > lt1a,6,0,0,0,0,True,True,True,True,50.55,50.55,1.0,True,
+adj,y5302,escalator_up_4F,cross_5F_to_4F,6.672,3675,True,y5302 > male_toilet > exit_5 > escalator_down > escalator_down_4F > escalator_up_4F,5,0,0,0,0,True,True,True,True,44.16,44.16,1.0,True,
+adj,y5302_back,lt1a,cross_5F_to_4F,6.882,3819,True,y5302_back > lift_stairs > lift_stairs_4F > disabled_toilet_4F > exit_5_4F > entrance_exit > exit_10_4F > lt1a,7,0,0,0,0,True,True,True,True,75.23,68.93,1.0914,False,
+dist,escalator_down_4F,exit_10_4F,4F_same_floor,6.963,3409,True,escalator_down_4F > escalator_up_4F > lt1b > lt1a > exit_10_4F,4,0,0,0,0,True,True,True,True,26.47,26.47,1.0,True,
+dist,escalator_up_4F,lt1a,4F_same_floor,6.139,2131,True,escalator_up_4F > lt1b > lt1a,2,0,0,0,0,True,True,True,True,15.31,15.31,1.0,True,
+dist,exit_5_4F,escalator_up_4F,4F_same_floor,8.139,5111,True,exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F,4,0,0,0,0,True,True,True,True,26.16,26.16,1.0,True,
+dist,lift_stairs_4F,escalator_up_4F,4F_same_floor,11.276,6477,True,lift_stairs_4F > disabled_toilet_4F > exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F,6,0,0,0,0,True,True,True,True,34.85,34.85,1.0,True,
+dist,lt1a,y4502,4F_same_floor,5.552,2752,True,lt1a > lt1b > escalator_up_4F > y4502,3,0,0,0,0,True,True,True,True,22.77,22.77,1.0,True,
+dist,lt2a,lift_stairs_4F,4F_same_floor,6.156,2245,True,lt2a > exit_5_4F > disabled_toilet_4F > lift_stairs_4F,3,0,0,0,0,True,True,True,True,12.0,12.0,1.0,True,
+dist,lt2b,escalator_up_4F,4F_same_floor,5.63,2519,True,lt2b > escalator_down_4F > escalator_up_4F,2,0,0,0,0,True,True,True,True,10.77,10.77,1.0,True,
+dist,lt2b,lt1b,4F_same_floor,6.87,3540,True,lt2b > escalator_down_4F > escalator_up_4F > lt1b,3,0,0,0,0,True,True,True,True,15.31,15.31,1.0,True,
+dist,canteen,lift_stairs,5F_same_floor,6.91,3927,True,canteen > exit_5 > disabled_toilet > lift_stairs,3,0,0,0,0,True,True,True,True,17.23,17.23,1.0,True,
+dist,escalator_down,y5302,5F_same_floor,5.867,3066,True,escalator_down > exit_5 > male_toilet > y5302,3,0,0,0,0,True,True,True,True,17.54,17.54,1.0,True,
+dist,escalator_down,y5302_back,5F_same_floor,8.572,5551,True,escalator_down > exit_5 > disabled_toilet > lift_stairs > y5302_back,4,0,0,0,0,True,True,True,True,27.0,27.0,1.0,True,
+dist,escalator_up,sr9,5F_same_floor,6.117,2832,True,escalator_up > exit_10 > female_toilet > y5202 > sr9,4,0,0,0,0,True,True,True,True,23.53,23.53,1.0,True,
+dist,escalator_up,y5202,5F_same_floor,6.604,2778,True,escalator_up > exit_10 > female_toilet > y5202,3,0,0,0,0,True,True,True,True,15.38,15.38,1.0,True,
+dist,escalator_up,y5302_back,5F_same_floor,10.267,7139,True,escalator_up > escalator_down > exit_5 > disabled_toilet > lift_stairs > y5302_back,5,0,0,0,0,True,True,True,True,34.92,34.92,1.0,True,
+dist,exit_10,exit_5,5F_same_floor,6.678,3560,True,exit_10 > canteen > exit_5,2,0,0,0,0,True,True,True,True,17.46,17.46,1.0,True,
+dist,exit_5,y5202,5F_same_floor,9.672,6217,True,exit_5 > canteen > exit_10 > female_toilet > y5202,4,0,0,0,0,True,True,True,True,29.07,29.07,1.0,True,
+dist,female_toilet,disabled_toilet,5F_same_floor,7.01,4285,True,female_toilet > exit_10 > canteen > exit_5 > disabled_toilet,4,0,0,0,0,True,True,True,True,23.3,23.3,1.0,True,
+dist,female_toilet,male_toilet,5F_same_floor,6.627,3900,True,female_toilet > exit_10 > canteen > exit_5 > male_toilet,4,0,0,0,0,True,True,True,True,23.61,23.61,1.0,True,
+dist,lift_stairs,escalator_up,5F_same_floor,7.687,5032,True,lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_up,4,0,0,0,0,True,True,True,True,22.46,22.46,1.0,True,
+dist,lift_stairs,y5202,5F_same_floor,12.665,9985,True,lift_stairs > disabled_toilet > exit_5 > canteen > exit_10 > female_toilet > y5202,6,0,0,0,0,True,True,True,True,37.76,37.76,1.0,True,
+dist,male_toilet,canteen,5F_same_floor,5.434,1846,True,male_toilet > exit_5 > canteen,2,0,0,0,0,True,True,True,True,11.31,11.31,1.0,True,
+dist,male_toilet,female_toilet,5F_same_floor,7.391,4514,True,male_toilet > exit_5 > canteen > exit_10 > female_toilet,4,0,0,0,0,True,True,True,True,23.61,23.61,1.0,True,
+dist,male_toilet,sr9,5F_same_floor,6.944,2419,True,male_toilet > y5302 > sr9,2,0,0,0,0,True,True,True,True,19.61,19.61,1.0,True,
+dist,male_toilet,y5202,5F_same_floor,6.944,4253,True,male_toilet > y5302 > sr9 > y5202,3,0,0,0,0,True,True,True,True,27.76,27.76,1.0,True,
+dist,sr9,exit_10,5F_same_floor,5.798,2426,True,sr9 > y5202 > female_toilet > exit_10,3,0,0,0,0,True,True,True,True,19.76,19.76,1.0,True,
+dist,y5202,escalator_up,5F_same_floor,6.044,2311,True,y5202 > female_toilet > exit_10 > escalator_up,3,0,0,0,0,True,True,True,True,15.38,15.38,1.0,True,
+dist,y5302,lift_stairs,5F_same_floor,6.8,4095,True,y5302 > male_toilet > exit_5 > disabled_toilet > lift_stairs,4,0,0,0,0,True,True,True,True,20.38,20.38,1.0,True,
+dist,y5302_back,sr9,5F_same_floor,8.269,5507,True,y5302_back > lift_stairs > disabled_toilet > exit_5 > male_toilet > y5302 > sr9,6,0,0,0,0,True,True,True,True,43.53,43.53,1.0,True,
+dist,escalator_down_4F,canteen,cross_4F_to_5F,9.708,5893,True,escalator_down_4F > escalator_up_4F > escalator_up > canteen,3,0,0,0,0,True,True,True,True,32.85,32.85,1.0,True,
+dist,escalator_down_4F,exit_10,cross_4F_to_5F,6.888,4108,True,escalator_down_4F > escalator_up_4F > escalator_up > exit_10,3,0,0,0,0,True,True,True,True,30.39,30.39,1.0,True,
+dist,escalator_up_4F,exit_10,cross_4F_to_5F,5.626,2586,True,escalator_up_4F > escalator_up > exit_10,2,0,0,0,0,True,True,True,True,23.77,23.77,1.0,True,
+dist,exit_5_4F,exit_5,cross_4F_to_5F,8.549,5833,True,exit_5_4F > disabled_toilet_4F > lift_stairs_4F > lift_stairs > disabled_toilet > exit_5,5,0,0,0,0,True,True,True,True,47.38,47.38,1.0,True,
+dist,exit_5_4F,female_toilet,cross_4F_to_5F,11.89,9245,True,exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F > escalator_up > exit_10 > female_toilet,7,0,0,0,0,True,True,True,True,53.31,53.31,1.0,True,
+dist,lift_stairs_4F,escalator_down,cross_4F_to_5F,7.182,4089,True,lift_stairs_4F > lift_stairs > disabled_toilet > exit_5 > escalator_down,4,0,0,0,0,True,True,True,True,44.54,44.54,1.0,True,
+dist,lift_stairs_4F,escalator_up,cross_4F_to_5F,9.403,6982,True,lift_stairs_4F > lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_up,5,0,0,0,0,True,True,True,True,52.46,52.46,1.0,True,
+dist,lt1a,canteen,cross_4F_to_5F,7.014,4339,True,lt1a > lt1b > escalator_up_4F > escalator_up > canteen,4,0,0,0,0,True,True,True,True,41.54,41.54,1.0,True,
+dist,lt1a,lift_stairs,cross_4F_to_5F,11.093,7196,True,lt1a > lt1b > escalator_up_4F > escalator_up > escalator_down > exit_5 > disabled_toilet > lift_stairs,7,0,0,0,0,True,True,True,True,57.77,57.77,1.0,True,
+dist,lt2a,y5401,cross_4F_to_5F,6.907,3369,True,lt2a > exit_5_4F > disabled_toilet_4F > lift_stairs_4F > lift_stairs > y5401,5,0,0,0,0,True,True,True,True,49.92,49.92,1.0,True,
+dist,y4502,male_toilet,cross_4F_to_5F,7.702,5084,True,y4502 > escalator_up_4F > escalator_up > escalator_down > exit_5 > male_toilet,5,0,0,0,0,True,True,True,True,44.0,44.0,1.0,True,
+dist,escalator_down,lt2a,cross_5F_to_4F,6.921,4151,True,escalator_down > escalator_down_4F > lt2b > lt2a,3,0,0,0,0,True,True,True,True,36.23,36.23,1.0,True,
+dist,escalator_up,lt1b,cross_5F_to_4F,8.542,5136,True,escalator_up > escalator_down > escalator_down_4F > escalator_up_4F > lt1b,4,0,0,0,0,True,True,True,True,39.08,39.08,1.0,True,
+dist,exit_5,entrance_exit,cross_5F_to_4F,7.932,4771,True,exit_5 > escalator_down > escalator_down_4F > lt2b > lt2a > exit_5_4F > entrance_exit,6,0,0,0,0,True,True,True,True,56.62,56.62,1.0,True,
+dist,exit_5,lt2b,cross_5F_to_4F,6.798,2933,True,exit_5 > escalator_down > escalator_down_4F > lt2b,3,0,0,0,0,True,True,True,True,30.0,30.0,1.0,True,
+dist,female_toilet,y4502,cross_5F_to_4F,8.203,4628,True,female_toilet > exit_10 > escalator_up > escalator_down > escalator_down_4F > y4502,5,0,0,0,0,True,True,True,True,42.53,42.53,1.0,True,
+dist,lift_stairs,escalator_down_4F,cross_5F_to_4F,7.694,5141,True,lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_down_4F,4,0,0,0,0,True,True,True,True,34.54,34.54,1.0,True,
+dist,lift_stairs,escalator_up_4F,cross_5F_to_4F,10.701,7929,True,lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_down_4F > escalator_up_4F,5,0,0,0,0,True,True,True,True,41.16,41.16,1.0,True,
+dist,lift_stairs,y4502,cross_5F_to_4F,7.067,4358,True,lift_stairs > disabled_toilet > exit_5 > escalator_down > escalator_down_4F > y4502,5,0,0,0,0,True,True,True,True,42.0,42.0,1.0,True,
+dist,male_toilet,lt1a,cross_5F_to_4F,10.883,6956,True,male_toilet > exit_5 > escalator_down > escalator_down_4F > escalator_up_4F > lt1b > lt1a,6,0,0,0,0,True,True,True,True,50.55,50.55,1.0,True,
+dist,y5302,escalator_up_4F,cross_5F_to_4F,8.214,5080,True,y5302 > male_toilet > exit_5 > escalator_down > escalator_down_4F > escalator_up_4F,5,0,0,0,0,True,True,True,True,44.16,44.16,1.0,True,
+dist,y5302_back,lt1a,cross_5F_to_4F,9.565,6737,True,y5302_back > lift_stairs > lift_stairs_4F > disabled_toilet_4F > exit_5_4F > entrance_exit > exit_10_4F > lt1a,7,0,0,0,0,True,True,True,True,75.23,68.93,1.0914,False,
+names,escalator_down_4F,exit_10_4F,4F_same_floor,6.247,2333,True,escalator_down_4F > exit_10_4F,1,1,0,0,1,True,True,False,False,,26.47,,False,escalator_down_4F>exit_10_4F (no such corridor)
+names,escalator_up_4F,lt1a,4F_same_floor,8.959,5148,True,,,,0,0,0,False,False,False,False,,15.31,,False,
+names,exit_5_4F,escalator_up_4F,4F_same_floor,6.703,2619,True,exit_5_4F > escalator_up_4F,1,1,0,0,1,True,True,False,False,,26.16,,False,exit_5_4F>escalator_up_4F (no such corridor)
+names,lift_stairs_4F,escalator_up_4F,4F_same_floor,5.962,2835,True,lift_stairs_4F > escalator_up_4F,1,1,0,0,1,True,True,False,False,,34.85,,False,lift_stairs_4F>escalator_up_4F (no such corridor)
+names,lt1a,y4502,4F_same_floor,8.267,4402,True,lt1a > lt1b > lift_stairs_4F > y4502,3,2,0,0,2,True,True,False,False,,22.77,,False,lt1b>lift_stairs_4F (no such corridor); lift_stairs_4F>y4502 (no such corridor)
+names,lt2a,lift_stairs_4F,4F_same_floor,5.863,2147,True,lt2a > lift_stairs_4F,1,1,0,0,1,True,True,False,False,,12.0,,False,lt2a>lift_stairs_4F (no such corridor)
+names,lt2b,escalator_up_4F,4F_same_floor,7.828,4276,True,lt2b > lt2a > escalator_up_4F,2,1,0,0,1,True,True,False,False,,10.77,,False,lt2a>escalator_up_4F (no such corridor)
+names,lt2b,lt1b,4F_same_floor,6.974,2663,True,lt2b > lt1b,1,1,0,0,1,True,True,False,False,,15.31,,False,lt2b>lt1b (no such corridor)
+names,canteen,lift_stairs,5F_same_floor,5.495,2133,True,canteen > lift_stairs,1,1,0,0,1,True,True,False,False,,17.23,,False,canteen>lift_stairs (no such corridor)
+names,escalator_down,y5302,5F_same_floor,6.52,2653,True,escalator_down > y5302,1,1,0,0,1,True,True,False,False,,17.54,,False,escalator_down>y5302 (no such corridor)
+names,escalator_down,y5302_back,5F_same_floor,7.743,3476,True,escalator_down > lift_stairs > y5302_back,2,1,0,0,1,True,True,False,False,,27.0,,False,escalator_down>lift_stairs (no such corridor)
+names,escalator_up,sr9,5F_same_floor,6.749,2722,True,escalator_up > sr9,1,1,0,0,1,True,True,False,False,,23.53,,False,escalator_up>sr9 (no such corridor)
+names,escalator_up,y5202,5F_same_floor,6.811,3319,True,escalator_up > y5202,1,1,0,0,1,True,True,False,False,,15.38,,False,escalator_up>y5202 (no such corridor)
+names,escalator_up,y5302_back,5F_same_floor,7.011,4114,True,escalator_up > y5302_back,1,1,0,0,1,True,True,False,False,,34.92,,False,escalator_up>y5302_back (no such corridor)
+names,exit_10,exit_5,5F_same_floor,6.823,3021,True,exit_10 > exit_5,1,1,0,0,1,True,True,False,False,,17.46,,False,exit_10>exit_5 (no such corridor)
+names,exit_5,y5202,5F_same_floor,7.045,3130,True,exit_5 > y5202,1,1,0,0,1,True,True,False,False,,29.07,,False,exit_5>y5202 (no such corridor)
+names,female_toilet,disabled_toilet,5F_same_floor,7.138,3402,True,female_toilet > disabled_toilet,1,1,0,0,1,True,True,False,False,,23.3,,False,female_toilet>disabled_toilet (no such corridor)
+names,female_toilet,male_toilet,5F_same_floor,6.642,2698,True,female_toilet > exit_10 > male_toilet,2,1,0,0,1,True,True,False,False,,23.61,,False,exit_10>male_toilet (no such corridor)
+names,lift_stairs,escalator_up,5F_same_floor,6.934,2689,True,lift_stairs > escalator_up,1,1,0,0,1,True,True,False,False,,22.46,,False,lift_stairs>escalator_up (no such corridor)
+names,lift_stairs,y5202,5F_same_floor,6.564,2637,True,lift_stairs > y5202,1,1,0,0,1,True,True,False,False,,37.76,,False,lift_stairs>y5202 (no such corridor)
+names,male_toilet,canteen,5F_same_floor,6.728,2893,True,male_toilet > canteen,1,1,0,0,1,True,True,False,False,,11.31,,False,male_toilet>canteen (no such corridor)
+names,male_toilet,female_toilet,5F_same_floor,7.078,2522,True,male_toilet > exit_10 > female_toilet,2,1,0,0,1,True,True,False,False,,23.61,,False,male_toilet>exit_10 (no such corridor)
+names,male_toilet,sr9,5F_same_floor,6.5,2664,True,male_toilet > lift_stairs > sr9,2,2,0,0,2,True,True,False,False,,19.61,,False,male_toilet>lift_stairs (no such corridor); lift_stairs>sr9 (no such corridor)
+names,male_toilet,y5202,5F_same_floor,7.065,4212,True,male_toilet > y5202,1,1,0,0,1,True,True,False,False,,27.76,,False,male_toilet>y5202 (no such corridor)
+names,sr9,exit_10,5F_same_floor,6.846,2971,True,sr9 > exit_10,1,1,0,0,1,True,True,False,False,,19.76,,False,sr9>exit_10 (no such corridor)
+names,y5202,escalator_up,5F_same_floor,5.592,2613,True,y5202 > escalator_up,1,1,0,0,1,True,True,False,False,,15.38,,False,y5202>escalator_up (no such corridor)
+names,y5302,lift_stairs,5F_same_floor,5.799,1877,True,y5302 > lift_stairs,1,1,0,0,1,True,True,False,False,,20.38,,False,y5302>lift_stairs (no such corridor)
+names,y5302_back,sr9,5F_same_floor,6.682,2872,True,y5302_back > lift_stairs > sr9,2,1,0,0,1,True,True,False,False,,43.53,,False,lift_stairs>sr9 (no such corridor)
+names,escalator_down_4F,canteen,cross_4F_to_5F,7.381,4511,True,escalator_down_4F > lift_stairs_4F > lift_stairs > canteen,3,2,0,0,2,True,True,False,False,,32.85,,False,escalator_down_4F>lift_stairs_4F (no such corridor); lift_stairs>canteen (no such corridor)
+names,escalator_down_4F,exit_10,cross_4F_to_5F,8.27,5072,True,escalator_down_4F > escalator_up_4F > escalator_up > exit_10,3,0,0,0,0,True,True,True,True,30.39,30.39,1.0,True,
+names,escalator_up_4F,exit_10,cross_4F_to_5F,6.771,3008,True,escalator_up_4F > escalator_up > exit_10,2,0,0,0,0,True,True,True,True,23.77,23.77,1.0,True,
+names,exit_5_4F,exit_5,cross_4F_to_5F,6.063,2487,True,exit_5_4F > lift_stairs_4F > lift_stairs > exit_5,3,2,0,0,2,True,True,False,False,,47.38,,False,exit_5_4F>lift_stairs_4F (no such corridor); lift_stairs>exit_5 (no such corridor)
+names,exit_5_4F,female_toilet,cross_4F_to_5F,7.184,3587,True,exit_5_4F > escalator_up_4F > escalator_up > female_toilet,3,2,0,0,2,True,True,False,False,,53.31,,False,exit_5_4F>escalator_up_4F (no such corridor); escalator_up>female_toilet (no such corridor)
+names,lift_stairs_4F,escalator_down,cross_4F_to_5F,6.943,3742,True,lift_stairs_4F > lift_stairs > escalator_down,2,1,0,0,1,True,True,False,False,,44.54,,False,lift_stairs>escalator_down (no such corridor)
+names,lift_stairs_4F,escalator_up,cross_4F_to_5F,7.216,4098,True,lift_stairs_4F > escalator_up_4F > escalator_up,2,1,0,0,1,True,True,False,False,,52.46,,False,lift_stairs_4F>escalator_up_4F (no such corridor)
+names,lt1a,canteen,cross_4F_to_5F,7.771,4133,True,lt1a > lift_stairs_4F > lift_stairs > canteen,3,2,0,0,2,True,True,False,False,,41.54,,False,lt1a>lift_stairs_4F (no such corridor); lift_stairs>canteen (no such corridor)
+names,lt1a,lift_stairs,cross_4F_to_5F,6.073,2456,True,lt1a > lift_stairs_4F > lift_stairs,2,1,0,0,1,True,True,False,False,,57.77,,False,lt1a>lift_stairs_4F (no such corridor)
+names,lt2a,y5401,cross_4F_to_5F,6.731,3031,True,lt2a > lift_stairs_4F > lift_stairs > y5401,3,1,0,0,1,True,True,False,False,,49.92,,False,lt2a>lift_stairs_4F (no such corridor)
+names,y4502,male_toilet,cross_4F_to_5F,7.144,2864,True,y4502 > lift_stairs_4F > lift_stairs > male_toilet,3,2,0,0,2,True,True,False,False,,44.0,,False,y4502>lift_stairs_4F (no such corridor); lift_stairs>male_toilet (no such corridor)
+names,escalator_down,lt2a,cross_5F_to_4F,7.565,4216,True,escalator_down > escalator_up_4F > lt2a,2,2,0,0,2,True,True,False,False,,36.23,,False,escalator_down>escalator_up_4F (no such corridor); escalator_up_4F>lt2a (no such corridor)
+names,escalator_up,lt1b,cross_5F_to_4F,8.795,6228,True,escalator_up > escalator_down > escalator_up_4F > lt1b,3,1,0,0,1,True,True,False,False,,39.08,,False,escalator_down>escalator_up_4F (no such corridor)
+names,exit_5,entrance_exit,cross_5F_to_4F,6.839,4070,True,exit_5 > lift_stairs > lift_stairs_4F > entrance_exit,3,2,0,0,2,True,True,False,False,,56.62,,False,exit_5>lift_stairs (no such corridor); lift_stairs_4F>entrance_exit (no such corridor)
+names,exit_5,lt2b,cross_5F_to_4F,7.994,5352,True,exit_5 > lift_stairs > lift_stairs_4F > lt2b,3,2,0,0,2,True,True,False,False,,30.0,,False,exit_5>lift_stairs (no such corridor); lift_stairs_4F>lt2b (no such corridor)
+names,female_toilet,y4502,cross_5F_to_4F,6.66,3688,True,female_toilet > lift_stairs > lift_stairs_4F > y4502,3,2,0,0,2,True,True,False,False,,42.53,,False,female_toilet>lift_stairs (no such corridor); lift_stairs_4F>y4502 (no such corridor)
+names,lift_stairs,escalator_down_4F,cross_5F_to_4F,7.049,3905,True,lift_stairs > escalator_down > escalator_down_4F,2,1,0,0,1,True,True,False,False,,34.54,,False,lift_stairs>escalator_down (no such corridor)
+names,lift_stairs,escalator_up_4F,cross_5F_to_4F,6.786,3444,True,lift_stairs > lift_stairs_4F > escalator_up_4F,2,1,0,0,1,True,True,False,False,,41.16,,False,lift_stairs_4F>escalator_up_4F (no such corridor)
+names,lift_stairs,y4502,cross_5F_to_4F,6.517,2722,True,lift_stairs > lift_stairs_4F > y4502,2,1,0,0,1,True,True,False,False,,42.0,,False,lift_stairs_4F>y4502 (no such corridor)
+names,male_toilet,lt1a,cross_5F_to_4F,6.65,2772,True,male_toilet > lift_stairs > lift_stairs_4F > lt1a,3,2,0,0,2,True,True,False,False,,50.55,,False,male_toilet>lift_stairs (no such corridor); lift_stairs_4F>lt1a (no such corridor)
+names,y5302,escalator_up_4F,cross_5F_to_4F,7.519,3995,True,y5302 > escalator_down > escalator_down_4F > escalator_up_4F,3,1,0,0,1,True,True,False,False,,44.16,,False,y5302>escalator_down (no such corridor)
+names,y5302_back,lt1a,cross_5F_to_4F,6.391,2707,True,y5302_back > lift_stairs > lift_stairs_4F > lt1a,3,1,0,0,1,True,True,False,False,,68.93,,False,lift_stairs_4F>lt1a (no such corridor)
