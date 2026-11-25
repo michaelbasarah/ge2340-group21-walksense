@@ -36,6 +36,7 @@ Contents:
 25. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
 26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
 27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
+28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
 - Lessons learned
 - Open questions / next steps
 
@@ -384,6 +385,23 @@ Contents:
 - **Outcome:** the leakage demonstration worked: 99.7% (random) -> 55.4% (by recording) -> 28.7% / 36.6% (honest). The second step is a leak we had not named before: Wi-Fi and the floor belong to the stop, not the phone, so holding out one phone of a 4-phone stop still leaves its Wi-Fi vector in training, and the tuner puts 0.7 of the weight on Wi-Fi. Under honest splits Wi-Fi gets 0 to 0.3 and x/y/z carries the result. Learned weights beat equal weights by 3 to 4 recordings, inside the interval. FAILURE: pooling all phones is worse than a per-phone model: the pooled model gets 9/42 on 23 Nov, the same-handset per-phone kNN gets 18/42 on the same stops (entry 25), because the phones' magnetometers disagree.
 - **What changed because of it:** report the honest splits only, with the leaky ones labelled as illustrations. For a deployable model, train per phone (or calibrate each phone's magnetometer) instead of pooling. New sessions are one line in `config.json` and add one leave-one-session-out fold automatically.
 - **Links:** `phase2/new/day3/fused_knn.py`, `phase2/new/day3/gknn.py`, `phase2/new/day3/out/fused_knn.json`, `.../fused_model.json`, `.../fused_window_predictions.csv`; previous commit `1a28a48`.
+
+---
+
+## 28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
+
+- **What we tried:** the tracker of entry 20 (v2 parameters, `tracking/tracker.py` reused unchanged) on 24 Nov with graph-v2, and a replay file the circle UI can load.
+- **Why:** the 23-Nov tracker test had no fingerprint for half its stops; on 24 Nov every place has a fingerprint from an independent session.
+- **How:** `phase2/new/day3/track24.py`: graph = `graph-v2/` (26 places); magnetic fingerprints = session-1 iPhone stops (iPhone19,2), |B|+xyz on 2 s windows as `crossday.py`; expected steps per line = median over session-1 iPhone walks on that line (step detector reused unchanged from `phase2/old/positioning-pilot/step_detection.py`, as `pdr.py`); floor = iPhone step tracking with the session-1 floor step. Replay of session 2 (iPhone17,4, a different handset) in time order; each walk is attached to the last stop that started before it. Same comparison as entry 20 (snapshot kNN, emission only, belief on arrival).
+- **Result** (`phase2/new/day3/out/track24_results.json`, `track24_visits.csv`; 26 stops, 26 places):
+  - Tracker: exact **20/26** [58 to 89%], area 20/26, within one neighbour 22/26, top-3 21/26, floor 24/26.
+  - Snapshot kNN (crossday.py recipe): exact 15/26, area 18/26, floor 26/26. Emission only: 15/26. Tracker on arrival (graph + steps only): 13/26.
+  - Floor tracking on session 2: 26/26 (threshold 0.243 hPa). 28 test walks, 401 steps, none flagged unreliable; every walked line exists in graph-v2.
+  - The tracker's two floor errors are the two 4F escalator stops, both put on the 5F `escalator_up` with probability 1.0: the very strong field there in session 2 (entry 29, `magnetic_check`) looks most like the strongest floor-5 fingerprint, and the magnetic evidence over 60 s outweighs the 0.99 floor weight.
+  - "Confirmed" frames: 2095 of 3122 stop frames, 1830 of them on the right circle. Replay: `out/replay_24nov_s2.json`, 3560 frames, same keys as `tracking/out/replay_23nov.json` (checked in Python against the UI's id/zone rules; no browser was available in this session to open it).
+- **Outcome:** success with the entry-20 caveats: the graph and the walk order come from the route both sessions walked, and every walk is one recorded line, so 20/26 is optimistic. The snapshot here (15/26, 2 s windows, sklearn per-floor kNN) differs from entry 25's 12/26 for the same split (5 s windows, `gknn.py`), so window length matters by a few stops.
+- **What changed because of it:** the circle UI can show a 24-Nov replay without code changes: `phase2/new/circle-ui/index.html?data=../day3/out/replay_24nov_s2.json` over http. The 23-Nov replay and the UI are untouched. A test walk that leaves the recorded route is still needed to measure the tracker without the optimistic parts.
+- **Links:** `phase2/new/day3/track24.py`, `phase2/new/day3/out/track24_results.json`, `.../track24_visits.csv`, `.../replay_24nov_s2.json`; `phase2/new/tracking/tracker.py` (unchanged); previous commits `1a28a48`, `3b9292c`.
 
 ---
 
