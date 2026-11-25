@@ -81,6 +81,7 @@ Contents:
 70. 26 Nov: the upload app's map becomes a vector floor plan in metres (Google screenshot under the sketch + pins + graph.json lengths, least-squares fit), picture kept as fallback
 71. 26 Nov: search bar in the upload app (Gemini when a key is pasted, keyword -> fuzzy offline) with the A* route drawn on the floor plan; Gemini backend for request matching
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
+73. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
 - Lessons learned
 - Open questions / next steps
 
@@ -1200,6 +1201,12 @@ Contents:
   - Workbooks copied to Downloads: `WalkSense phone_place_performance 2026-11-26.xlsx` and `WalkSense data gaps 2026-11-26b.xlsx`; the older copies are kept.
   - Later exports are added with `ingest_export.py` (night README).
 - **Links:** `phase2/clean-data/2026-11-25-night/` (README, `labels_night.csv`, `wifi_logs.csv`, `build_summary.json`, `field_check.csv`, `tian_lt_check.csv`, `scripts/`); `phase2/clean-data/2026-11-25-spots/` (`labels_override.csv`, `raw/source_files.csv`, `scripts/build_clean.py`, README "Added 26 Nov"); `phase2/new/day3/config.json`, `names_25night.csv`, `run_all.sh`, `phone_map.py`, `visualise.py`, `README.md` section m, `out/`, `out-split20/`; `phase2/new/upload/walksense.py`, `test_walksense.py`, `out/eval.json`, `out/live_checks.json`; branch `feat/night-run` commits 5d51f45, 5758f0e, 42020ad and the commit that completes this entry.
+
+---
+
+## 73. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
+
+- **In progress** (branch `feat/a56-offset`): `phase2/new/day3/a56_offset.py` and `a56_offset.sh` write `phase2/new/day3/out-a56/`; results follow in the commit that completes this entry.
 
 ---
 

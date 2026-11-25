@@ -1,0 +1,98 @@
+{
+ "a56": {
+  "all": {
+   "takes": 32,
+   "median_dx_dy_dz_uT": [
+    -40.0,
+    -73.0,
+    -3.2
+   ],
+   "sd_dx_dy_dz_uT": [
+    30.6,
+    34.0,
+    8.3
+   ]
+  },
+  "before 22:59": {
+   "takes": 11,
+   "median_dx_dy_dz_uT": [
+    -29.8,
+    -107.4,
+    1.6
+   ],
+   "sd_dx_dy_dz_uT": [
+    30.5,
+    31.6,
+    10.5
+   ]
+  },
+  "from 23:00": {
+   "takes": 20,
+   "median_dx_dy_dz_uT": [
+    -41.6,
+    -68.8,
+    -4.4
+   ],
+   "sd_dx_dy_dz_uT": [
+    24.4,
+    19.5,
+    7.0
+   ]
+  }
+ },
+ "ip18": {
+  "all": {
+   "takes": 32,
+   "median_dx_dy_dz_uT": [
+    3.3,
+    -2.1,
+    0.6
+   ],
+   "sd_dx_dy_dz_uT": [
+    14.1,
+    13.0,
+    9.6
+   ]
+  },
+  "before 22:59": {
+   "takes": 11,
+   "median_dx_dy_dz_uT": [
+    3.2,
+    -2.2,
+    0.5
+   ],
+   "sd_dx_dy_dz_uT": [
+    8.1,
+    17.5,
+    4.2
+   ]
+  },
+  "from 23:00": {
+   "takes": 20,
+   "median_dx_dy_dz_uT": [
+    3.3,
+    -2.0,
+    0.9
+   ],
+   "sd_dx_dy_dz_uT": [
+    7.1,
+    9.6,
+    4.5
+   ]
+  }
+ },
+ "a56_local_offset_range_uT": {
+  "ox": [
+   -44.2,
+   -32.5
+  ],
+  "oy": [
+   -125.2,
+   -71.1
+  ]
+ },
+ "a56_session_offset_uT": [
+  -32.5,
+  -84.6
+ ]
+}
