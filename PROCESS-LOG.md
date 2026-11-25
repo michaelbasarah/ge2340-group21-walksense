@@ -35,6 +35,7 @@ Contents:
 24. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
 25. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
 26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
+27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
 - Lessons learned
 - Open questions / next steps
 
@@ -366,6 +367,23 @@ Contents:
 - **Outcome:** FAILURE, as expected. The WiGLE CSV is still a "new or stronger" log, not a scan log: an access point heard at one stop is almost never written again at the next stop, so there is no fingerprint to compare. The approach rows give a little signal within one day, but that partly reflects the walking order (the same access points are new on the same walk in both sessions), not the place. Adding Wi-Fi to |B|+xyz does not help consistently.
 - **What changed because of it:** Wi-Fi stays out of the headline. Collecting usable Wi-Fi needs a logger that writes every scan (the open question from entry 12 is unchanged).
 - **Links:** `phase2/new/day3/wifi_check.py`, `phase2/new/day3/out/wifi_diagnosis.json`; entry 12.
+
+---
+
+## 27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
+
+- **What we tried:** the user's design: one kNN over every stop recording of every session and phone (23 Nov, 24 s1, 24 s2), where each sensor group has its own learned weight in the distance (w_B for |B|, w_xyz, w_tilt, w_wifi, w_baro), with the weights and k tuned by cross-validation. Scored four ways on purpose, to show the leakage gap next to the honest numbers.
+- **Why:** to see how far fusing everything gets, and to make the leakage visible: random row/window splits are exactly what produced the old 94%.
+- **How:** `phase2/new/day3/fused_knn.py` (uses `gknn.py`). Samples = 5 s windows (2425 windows, 202 recordings, 95 stops, 26 places). Per group: standardised squared distance scaled by its median over training pairs; Wi-Fi = S24 rows within 120 s of the stop; baro = iPhone step-tracking floor (threshold from training stops only); a missing group drops out of the weighted mean. Weights on the simplex (step 0.25, then step 0.1 within 0.25 of the best, plus each group alone and equal weights), k in {1, 3, 5, 9, 15, 25}, chosen by inner CV on the training part only (nested CV), then scored once on the held-out part. Outer splits: random windows KFold(5) (LEAKY, illustration only); GroupKFold(5) by recording (partly leaky); GroupKFold(5) by physical stop (honest); leave one session out with leave-one-session-out inner CV (most honest). Asserts check that the honest splits share no recording or stop. Deployable setting: tuned by leave-one-session-out on all sessions. About 5 minutes.
+- **Result** (`phase2/new/day3/out/fused_knn.json`, `fused_model.json`; per recording, chance 3.8%):
+  - Random windows (LEAKY): 932/935 = 99.7% (window accuracy 99.1%).
+  - Whole recordings (other phones of the same stop may be in training): 112/202 = 55.4%; "Wi-Fi only" also 112/202.
+  - Whole stops, grouped CV: **58/202 = 28.7%** [22.9 to 35.3]; equal weights 54/202; x/y/z only 52/202.
+  - Leave one session out: **74/202 = 36.6%** [30.3 to 43.5]; equal weights 71/202; x/y/z only 64/202; Wi-Fi only 29/202; baro only 16/202. Per fold: test 23 Nov 9/42 (weights B 0.1, xyz 0.5, tilt 0, wifi 0.3, baro 0.1, k 3), test 24 s1 42/108 (0.1, 0.6, 0, 0.2, 0.1, k 3), test 24 s2 23/52 (0, 0.2, 0, 0.3, 0.5, k 25).
+  - Deployable weights: **w_B 0.1, w_xyz 0.7, w_tilt 0, w_wifi 0.1, w_baro 0.1, k 25** (inner leave-one-session-out accuracy 0.46).
+- **Outcome:** the leakage demonstration worked: 99.7% (random) -> 55.4% (by recording) -> 28.7% / 36.6% (honest). The second step is a leak we had not named before: Wi-Fi and the floor belong to the stop, not the phone, so holding out one phone of a 4-phone stop still leaves its Wi-Fi vector in training, and the tuner puts 0.7 of the weight on Wi-Fi. Under honest splits Wi-Fi gets 0 to 0.3 and x/y/z carries the result. Learned weights beat equal weights by 3 to 4 recordings, inside the interval. FAILURE: pooling all phones is worse than a per-phone model: the pooled model gets 9/42 on 23 Nov, the same-handset per-phone kNN gets 18/42 on the same stops (entry 25), because the phones' magnetometers disagree.
+- **What changed because of it:** report the honest splits only, with the leaky ones labelled as illustrations. For a deployable model, train per phone (or calibrate each phone's magnetometer) instead of pooling. New sessions are one line in `config.json` and add one leave-one-session-out fold automatically.
+- **Links:** `phase2/new/day3/fused_knn.py`, `phase2/new/day3/gknn.py`, `phase2/new/day3/out/fused_knn.json`, `.../fused_model.json`, `.../fused_window_predictions.csv`; previous commit `1a28a48`.
 
 ---
 
