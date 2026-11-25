@@ -33,6 +33,8 @@ Contents:
 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
 24. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
+25. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
+26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
 - Lessons learned
 - Open questions / next steps
 
@@ -323,6 +325,47 @@ Contents:
 - **Outcome:** success as a check; the merge is cosmetic for the magnetometer. It gains exactly one exact visit (17-Nov BM04, sr11 predicted sr9) and cannot change area accuracy, because the merged spots were already in one area. The Wi-Fi jump rests on 9 visits and mostly on the study rooms becoming one class, so it is not evidence that Wi-Fi works.
 - **What changed because of it:** v2 is fine for the map/UI (one study-room circle, one lift/stairs circle per floor) and costs nothing in accuracy. When quoting accuracy, say which place list was used; area accuracy is the same either way. The day-3 (24-Nov) evaluation (entry 25) uses the graph-v2 names.
 - **Links:** `phase2/new/cross-day/crossday.py` (`--v2`), `phase2/new/cross-day/compare_v1_v2.py`, `phase2/new/cross-day/out-v2/` (`results.json`, `v1_vs_v2.json`, `v1_vs_v2.csv`, `summary_table.csv`, figures), `phase2/new/cross-day/README.md` (graph-v2 section), `.gitignore` (`.venv/`).
+
+---
+
+## 25. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
+
+- **What we tried:** honest place accuracy on the new 24-Nov two-session data (entry 23): train one session, test the other, per phone; train 23 Nov, test 24 Nov with the same handset; tilt-corrected features (now possible at stops, the accelerometer was logged); barometer floor per session.
+- **Why:** 23-Nov same-visit numbers were inflated by leakage and the 17-Nov cross-day test was weak (18 to 24%). Session 2 is an independent second pass, so it gives a real train/test split.
+- **How:** new folder `phase2/new/day3/`. `config.json` lists the sessions (23 Nov through `crossday.py`'s cache, 24 s1 and 24 s2 from `clean-data/2026-11-24/*/clean/`); `names_24nov.csv` maps every 24-Nov node to a graph-v2 place; `data.py` builds 5 s window features (|B| mean/sd/p10/p90, mean x/y/z, B_vertical/B_horizontal from the mean accelerometer in the window) and per-stop barometer and Wi-Fi tables, cached in `day3/cache/` (gitignored); `gknn.py` is a kNN where each feature group (|B|, xyz, tilt, Wi-Fi, baro floor) has its own distance and weight; `evaluate.py` runs the named splits (k = 5, equal weights, iPhone-barometer floor as an optional gate) and asserts that no recording or stop is in both train and test. Accuracy per stop recording, chance = 1/26 = 3.8% (26 graph-v2 places). Full tables: `phase2/new/day3/README.md`.
+- **Result** (`phase2/new/day3/out/results.json`, `summary_table.csv`):
+  - Phones (`devices`): the "iphone" is iPhone19,2 in 24 s1 and iPhone17,4 in 24 s2 (and the 23-Nov stops); the S24 (SM-S9280) is the same handset in both 24-Nov sessions. So iPhone s1 <-> s2 is a different-handset test.
+  - Cross-session, |B|+xyz + floor: iPhone 12/26 (s1 -> s2) and 14/27 (s2 -> s1); S24 8/26 and 10/27. |B| + floor alone 4/26 to 5/27. Leaky reference (same recording, time split): |B|+xyz 26/26 on both phones.
+  - Tilt at stops: B_vertical/B_horizontal alone 8/26 and 8/27 on the iPhone vs |B| alone 1/26 and 2/27 (no floor); added to |B|+xyz it changes the iPhone result by at most one recording (12/26 and 15/27 with floor) and lowers the S24 (7/26, 8/27).
+  - True cross-day, same handset iPhone17,4, |B|+xyz + floor: 23 Nov -> 24 s2 13/26 (area 14/26); 24 s2 -> 23 Nov 18/42 (area 19/42). Different handsets (23 Nov -> 24 s1): 11/27. Training on 23 Nov + 24 s1, testing 24 s2: 15/26 (|B|+xyz+tilt + floor 16/26).
+  - Walk endpoints, 1-NN as `tilt.py`, 23 Nov <-> 24 s1 with iPhone19,2 both days: raw x/y/z 15/54 and 21/66, tilt 13/54 and 19/66, |B| 6/54 and 5/66.
+  - Floor, iPhone step tracking (threshold from the other sessions): 23 Nov 42/42, 24 s2 26/26, **24 s1 23/27**. Fixed threshold: 26/42, 27/27, 12/26. S24 step tracking 13/27 and 17/26.
+  - Names (`unmapped_names`): nothing unmapped at graph-v2 level. Mapped by route position, needing confirmation: `male_disabled_toilet` = `disabled_toilet`, `y5302_point2` = `y5302_back`, `gate` = `entrance_exit`. No v1 name exists for the 24-Nov `sr9` and `lift_stairs5`, so 24 Nov can only be scored on graph-v2 places.
+- **Outcome:** success, with two failures logged.
+  - Same handset across days now gives 13/26 and 18/42 with 26 places, against 18 to 24% with 15 places on 17 Nov; the same protocol on both days is what changed. The 78% "revisit" number from 23 Nov is still not reached.
+  - FAILURE (floor): in 24 s1 the 4 floor-5 stops after the long break (escalator_up 16:49, then disabled_toilet 18:12) are called floor 4. Pressure rose 0.833 hPa across the break (`floor_stats`, `step_tracking_wrong_stops`), more than the 0.315 hPa jump threshold. Step tracking assumes no weather change between consecutive stops; a long pause breaks that.
+  - FAILURE (tilt): the 39% vs 0% walk-endpoint result on 23 Nov (entry 15) does not carry over across days; at stops (phone held the same way) and on walks (same walking direction both days) raw x/y/z already works, and tilt adds nothing on top.
+  - The S24 pressure sensor is confirmed unusable for floors (floor step -0.014 hPa in session 1, median within-stop SD 0.234 to 0.438 hPa vs iPhone 0.005 to 0.034).
+- **What changed because of it:** per-phone, same-handset models are the honest headline; the barometer rule needs a "long gap" guard (re-zero after a pause, or only accept a floor change when a walk or stair/escalator move happened in between). Not implemented here, because it would be tuned after seeing this failure.
+- **Links:** `phase2/new/day3/` (`config.json`, `names_24nov.csv`, `data.py`, `gknn.py`, `evaluate.py`, `.gitignore`), `phase2/new/day3/out/results.json`, `phase2/new/day3/out/summary_table.csv`.
+
+---
+
+## 26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
+
+- **What we tried:** check whether the 24-Nov WiGLE logs fixed the problem of entry 12 (each access point logged about once), and whether Wi-Fi can locate across sessions.
+- **Why:** session 1's `summary.json` shows 1789 rows inside the stop dwell vs 11808 "approach" rows, which looked like the same logging limit.
+- **How:** `phase2/new/day3/wifi_check.py` on all 9 WiGLE logs (23 Nov, 24 s1, 24 s2): rows per BSSID per log; whether a repeat row is stronger than every earlier row of that BSSID; rows per BSSID inside one 60 s stop; how many stops a BSSID is heard at; overlap (Jaccard) of BSSID sets between sessions for the same place vs other places. Each row is assigned to the nearest stop in time (in the dwell = in-window, else within 120 s). Classification with Wi-Fi is in `evaluate.py` (entry 25), using the S24 scanner only (the same scanner phone in every session).
+- **Result** (`phase2/new/day3/out/wifi_diagnosis.json`, `results.json`):
+  - Inside one stop, each BSSID appears a median of 1.04 (23 Nov), 1.02 (24 s1) and 1.08 (24 s2) times, while the scanner logged a median of 8, 6 and 12.5 distinct scan times per stop.
+  - Repeat rows that are stronger than all earlier rows of that BSSID: 0.898 to 1.000 across the 9 logs.
+  - Rows inside the dwell vs within 120 s: 24 s1 1841 vs 13597; 24 s2 4261 vs 11475; 23 Nov 1891 vs 4175.
+  - In-window BSSIDs heard at one stop only: 0.807 (23 Nov), 0.85 (24 s1), 0.632 (24 s2).
+  - Cross-session, S24 rows within 120 s: the stop with the largest BSSID overlap is the same place for 7/13 (24 s1 vs 24 s2) and 6/26 (23 Nov vs 24 s2). Only 14 of 27 session-1 stops have any S24 rows.
+  - Classification (`results.json`): in-window Wi-Fi 2/26 and 2/27 (chance 3.8%); with the 120 s rows and the floor 6 to 8 of 26/27 within 24 Nov, 4/26 and 5/42 across days.
+- **Outcome:** FAILURE, as expected. The WiGLE CSV is still a "new or stronger" log, not a scan log: an access point heard at one stop is almost never written again at the next stop, so there is no fingerprint to compare. The approach rows give a little signal within one day, but that partly reflects the walking order (the same access points are new on the same walk in both sessions), not the place. Adding Wi-Fi to |B|+xyz does not help consistently.
+- **What changed because of it:** Wi-Fi stays out of the headline. Collecting usable Wi-Fi needs a logger that writes every scan (the open question from entry 12 is unchanged).
+- **Links:** `phase2/new/day3/wifi_check.py`, `phase2/new/day3/out/wifi_diagnosis.json`; entry 12.
 
 ---
 

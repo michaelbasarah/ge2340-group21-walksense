@@ -1,0 +1,17 @@
+{
+  "_comment": "Sessions used by every day3 script. To add a session collected later, add one entry: loader 'clean_tree' reads any folder built by clean-data/2026-11-24/scripts/build_clean.py (manifest.csv, floor*/stops|walks/<folder>/<phone>/<Sensor>.csv, wifi/observations.csv); 'names' maps its node names onto graph-v2 place names (see names_24nov.csv for the columns). Then rerun: sh phase2/new/day3/run_all.sh",
+  "window_s": 5.0,
+  "wifi_nearest_stop_max_gap_s": 120,
+  "places_graph": "../graph-v2/nodes.csv",
+  "sessions": [
+    {"id": "23nov", "day": "2026-11-23", "loader": "crossday_23nov",
+     "labels": "../graph-v2/labels_23nov_merged.csv",
+     "note": "stops only logged magnetometer + barometer (iPhone17,4), no accelerometer, so no tilt features"},
+    {"id": "24s1", "day": "2026-11-24", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-24/sesi1/clean", "names": "names_24nov.csv",
+     "note": "4 phones; iphone = iPhone19,2 (not the same handset as 24s2)"},
+    {"id": "24s2", "day": "2026-11-24", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-24/sesi2/clean", "names": "names_24nov.csv",
+     "note": "2 phones; iphone = iPhone17,4 (the 23-Nov stop handset)"}
+  ]
+}
