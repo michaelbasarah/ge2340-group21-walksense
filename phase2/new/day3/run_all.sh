@@ -11,3 +11,4 @@ PY=${PYTHON:-python3}
 "$PY" phase2/new/day3/fused_knn.py       # out/fused_knn.json, out/fused_model.json (about 10 min)
 "$PY" phase2/new/day3/track24.py         # out/track24_results.json, out/replay_24nov_s2.json
 "$PY" phase2/new/day3/visualise.py       # out/*.png, out/explore.html
+"$PY" phase2/new/day3/playground.py      # out/knn_playground.html (interactive kNN playground, internal)

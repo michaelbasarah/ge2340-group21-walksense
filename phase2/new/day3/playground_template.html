@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WalkSense kNN playground</title>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js" integrity="sha384-cCVCZkAjYNxaYKbM8lsArLznDF/SvMFr1jcZrvOpSTCa0W40ZAdLzHCEulnUa5i7" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--line:#e6e5e0;--accent:#2a78d6;--good:#17895f;--bad:#c93a2e;--warn:#fff3cd;--warnink:#5c4600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1a1a19;--card:#232321;--ink:#f0efec;--ink2:#c3c2b7;--line:#3a3a38;--accent:#6aa9f4;--good:#4fd1a0;--bad:#ff7b6e;--warn:#3a3114;--warnink:#f1dc8c}}
+:root[data-theme="dark"]{--bg:#1a1a19;--card:#232321;--ink:#f0efec;--ink2:#c3c2b7;--line:#3a3a38;--accent:#6aa9f4;--good:#4fd1a0;--bad:#ff7b6e;--warn:#3a3114;--warnink:#f1dc8c}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{padding:12px 16px 32px;font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+h1{font-size:19px;margin:0}
+h2{font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2)}
+p{margin:0 0 8px;color:var(--ink2)}
+.banner{background:var(--warn);color:var(--warnink);border-radius:8px;padding:6px 10px;font-size:12.5px;margin:6px 0 10px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px;min-width:0}
+select,button,input[type=number]{font:inherit;padding:4px 8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;max-width:100%}
+button{cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.layout{display:grid;gap:12px;grid-template-columns:minmax(0,1fr) 400px;grid-template-areas:"stage controls" "details controls";align-items:start}
+.stage{grid-area:stage;min-width:0}
+.details{grid-area:details;min-width:0}
+.controls{grid-area:controls;min-width:0}
+#plot{width:100%;height:60vh;min-height:380px}
+.headline{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-bottom:6px}
+.pred{font-size:20px;font-weight:650}
+.chip{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+.truth{font-size:14px}.ok{color:var(--good);font-weight:650}.no{color:var(--bad);font-weight:650}
+.small{font-size:12px;color:var(--ink2)}
+.row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:4px 0}
+.row label{display:flex;align-items:center;gap:4px}
+.sl{display:grid;grid-template-columns:110px minmax(0,1fr) 62px;gap:6px;align-items:center;margin:5px 0}
+.sl input[type=range]{width:100%;min-width:0;accent-color:var(--accent)}
+.sl .v{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
+.sl.off{opacity:.45}
+.votes .vr{display:grid;grid-template-columns:minmax(90px,150px) minmax(0,1fr) 92px;gap:8px;align-items:center;margin:3px 0;font-size:13px}
+.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.vr.top .bar>i{background:var(--good)}
+.nn{max-height:230px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+th,td{padding:3px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{position:sticky;top:0;background:var(--card);color:var(--ink2)}
+.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+details summary{cursor:pointer;color:var(--ink2);font-size:13px}
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"stage" "controls" "details"}
+  .stage{position:sticky;top:0;z-index:5;margin-bottom:0}
+  #plot{height:34vh;min-height:230px}
+  .stage .row{margin:2px 0}
+  .sl{grid-template-columns:92px minmax(0,1fr) 56px}
+  .votes .vr{grid-template-columns:minmax(80px,120px) minmax(0,1fr) 78px}
+  .pred{font-size:17px}
+}
+</style></head><body>
+<div class="head"><h1>WalkSense kNN playground</h1><button id="theme" title="switch light/dark">theme: auto</button></div>
+<div class="banner"><b>Internal team tool, not report text.</b> Numbers shown here are a live demo of the fused kNN recipe, not evaluation results (those are in the day-3 README / <code>out/fused_knn.json</code>).</div>
+<p id="intro">Slide the features to place a query point (star) among the stop windows. The page finds its k nearest windows in the <b>full</b> standardised, weighted feature space (lines) and votes. The 2-D view is only a picture of that space.</p>
+
+<div class="layout">
+<section class="stage card">
+  <div class="headline">
+    <span class="pred" id="pred">...</span>
+    <span class="truth" id="truth"></span>
+    <span class="small" id="predsub"></span>
+  </div>
+  <div class="row tabs small">
+    <label>View <select id="view"><option value="pca">PCA projection (linear)</option><option value="raw">Raw features: X vs Y</option></select></label>
+    <label id="xw" hidden>X <select id="xa"></select></label>
+    <label id="yw" hidden>Y <select id="ya"></select></label>
+  </div>
+  <div id="plot"></div>
+</section>
+
+<section class="details">
+  <div class="card"><h2>Reading the plot</h2><div class="small" id="plotnote"></div></div>
+  <div class="card votes"><h2>Votes among the k nearest</h2><div id="votes"></div><div class="small" id="votenote"></div></div>
+  <div class="card"><h2>Nearest windows</h2><div class="small" id="distsum"></div><div class="nn"><table><thead><tr><th>#</th><th>place</th><th>session</th><th>phone</th><th>floor</th><th>dist</th></tr></thead><tbody id="nn"></tbody></table></div>
+  <div class="small">dist = combined weighted distance, 1.0 = a typical pair of windows. Vote weight = 1/dist.</div></div>
+</section>
+
+<section class="controls">
+  <div class="card">
+    <h2>Try it: load a real window</h2>
+    <div class="row">
+      <label>Session <select id="lsess"></select></label>
+      <label>Place <select id="lplace"></select></label>
+    </div>
+    <div class="row"><button class="primary" id="rand">Random window</button><button id="free">Free query (clear)</button></div>
+    <div class="row"><label>Keep out of training <select id="holdout"><option value="session">its whole session</option><option value="visit">its whole stop (all phones)</option><option value="rec">its recording only (leaky)</option><option value="none">nothing (self-match!)</option></select></label></div>
+    <div class="small" id="loadnote">Sets all sliders to a real 5 s window and shows its true place next to the prediction. Default holds its whole session out, the honest cross-session test.</div>
+  </div>
+
+  <div class="card">
+    <h2>Query features (sliders)</h2>
+    <div id="sliders"></div>
+    <div class="row"><label>Floor (from barometer) <select id="qfloor"><option value="5">5</option><option value="4">4</option></select></label>
+    <label><input type="checkbox" id="tiltOn" checked> tilt available</label></div>
+    <div class="small">Pressure itself is not slid: weather moved it 0.83 hPa in one break, more than the floor step (day-3 README d), so the model uses the floor it implies. Floor here is the true floor of the window.</div>
+  </div>
+
+  <div class="card">
+    <h2>k and weights</h2>
+    <div class="sl"><span>k neighbours</span><input type="range" id="k" min="1" max="50" step="1"><span class="v" id="kv"></span></div>
+    <div id="wsl"></div>
+    <div class="sl off"><span>Wi-Fi</span><input type="range" disabled value="0"><span class="v">off</span></div>
+    <div class="row"><button id="wreset">Reset to learned weights</button><button id="weq">Equal weights</button></div>
+    <div class="small" id="wnote"></div>
+  </div>
+
+  <div class="card">
+    <h2>Training filters (also what is drawn)</h2>
+    <div class="row"><label>Floor <select id="ffloor"><option value="all">both</option><option value="5">5</option><option value="4">4</option></select></label></div>
+    <div class="row" id="fsess"></div>
+    <div class="row" id="fphone"></div>
+    <div class="small" id="fnote"></div>
+  </div>
+</section>
+</div>
+<p class="small" style="margin-top:6px"><b>What this is not.</b> Wi-Fi is left out (a 100+-dimension vector cannot be slid); the weight normalisation simply ignores it. The |B| group here is the window mean only (fused_knn.py also uses sd, p10, p90 of |B|). Distances and scales use all 2425 windows. Pooling all phones mixes different magnetometers (day-3 README e). One query is one 5 s window, so a single prediction is much noisier than the per-recording numbers in the README.</p>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+// CORE-START (no DOM access below this line until CORE-END; the Node check evaluates exactly this text)
+function buildBank(P) {
+  const n = P.n, c = P.cols, bank = {n, feats: P.feats, scale: P.scale, med: P.med};
+  for (const f of P.feats) bank[f] = Float64Array.from(c[f], v => v === null ? NaN : v);
+  bank.place = Int32Array.from(c.place); bank.sess = Int32Array.from(c.sess); bank.phone = Int32Array.from(c.phone);
+  bank.rec = Int32Array.from(c.rec); bank.visit = Int32Array.from(c.visit); bank.floor = Int32Array.from(c.floor);
+  return bank;
+}
+// q: {B,x,y,z,Bv,Bh (NaN = no tilt), floor}; w: {B,xyz,tilt,baro}; use: Uint8Array mask. Returns Float64Array of D (Infinity = unusable).
+function distances(bank, q, w, use) {
+  const n = bank.n, sc = bank.scale, med = bank.med, out = new Float64Array(n);
+  const sB = sc.B[1], sx = sc.x[1], sy = sc.y[1], sz = sc.z[1], sv = sc.Bv[1], sh = sc.Bh[1];
+  const qtilt = Number.isFinite(q.Bv) && Number.isFinite(q.Bh);
+  for (let i = 0; i < n; i++) {
+    if (!use[i]) { out[i] = Infinity; continue; }
+    let num = 0, den = 0;
+    if (w.B > 0) { const d = (q.B - bank.B[i]) / sB; num += w.B * d * d / med.B; den += w.B; }
+    if (w.xyz > 0) {
+      const a = (q.x - bank.x[i]) / sx, b = (q.y - bank.y[i]) / sy, c = (q.z - bank.z[i]) / sz;
+      num += w.xyz * ((a * a + b * b + c * c) / 3) / med.xyz; den += w.xyz;
+    }
+    if (w.tilt > 0 && qtilt && Number.isFinite(bank.Bv[i])) {
+      const a = (q.Bv - bank.Bv[i]) / sv, b = (q.Bh - bank.Bh[i]) / sh;
+      num += w.tilt * ((a * a + b * b) / 2) / med.tilt; den += w.tilt;
+    }
+    if (w.baro > 0) { num += w.baro * (bank.floor[i] !== q.floor ? 1 : 0); den += w.baro; }
+    out[i] = den > 0 ? num / den : Infinity;
+  }
+  return out;
+}
+// Returns {order: indices of the k nearest (ascending D), shares: Float64Array over places, counts: Int32Array, pred: place index or -1}
+function knn(bank, D, k, nPlaces) {
+  const idx = [];
+  for (let i = 0; i < bank.n; i++) if (Number.isFinite(D[i])) idx.push(i);
+  idx.sort((a, b) => D[a] - D[b] || a - b);
+  const order = idx.slice(0, k), shares = new Float64Array(nPlaces), counts = new Int32Array(nPlaces);
+  let tot = 0;
+  for (const i of order) { const wt = 1 / (D[i] + 1e-6); shares[bank.place[i]] += wt; counts[bank.place[i]]++; tot += wt; }
+  let pred = -1, best = -1;
+  if (tot > 0) for (let p = 0; p < nPlaces; p++) { shares[p] /= tot; if (shares[p] > best) { best = shares[p]; pred = p; } }
+  return {order, shares, counts, pred};
+}
+function projectPCA(P, q) {
+  const pc = P.pca, S = P.scale, z = {};
+  const v = [];
+  for (let j = 0; j < pc.names.length; j++) {
+    const f = pc.names[j];
+    let val;
+    if (f === 'floor') val = (q.floor === 5 ? 1 : 0) * pc.scale[j];
+    else { const x = q[f]; val = Number.isFinite(x) ? (x - S[f][0]) / S[f][1] * pc.scale[j] : 0; }
+    v.push(val - pc.center[j]);
+  }
+  return [0, 1].map(r => v.reduce((a, x, j) => a + x * pc.comps[r][j], 0));
+}
+// CORE-END
+</script>
+<script>
+(function () {
+const P = JSON.parse(document.getElementById('data').textContent);
+const bank = buildBank(P);
+const $ = id => document.getElementById(id);
+const NP = P.places.length, FE = P.feats;
+const SYM = ['circle', 'square', 'triangle-up', 'diamond', 'cross'];
+const st = {q: {}, floor: 5, tiltOn: true, w: Object.assign({}, P.model.weights), k: P.model.k,
+  sessOn: P.sessions.map(() => true), phoneOn: P.phones.map(() => true), ffloor: 'all',
+  view: 'pca', xa: 'B', ya: 'Bv', loaded: -1, moved: false, holdout: 'session', theme: 'auto'};
+const ranges = {};
+function median(a) { a = a.filter(Number.isFinite).sort((x, y) => x - y); const m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; }
+FE.forEach(f => {
+  let mn = Infinity, mx = -Infinity;
+  for (const v of bank[f]) if (Number.isFinite(v)) { if (v < mn) mn = v; if (v > mx) mx = v; }
+  ranges[f] = [mn, mx]; st.q[f] = median(Array.from(bank[f]));
+});
+const fmt = (v, d = 2) => Number.isFinite(v) ? v.toFixed(d) : 'n/a';
+
+// ---------- theme
+function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+$('theme').onclick = () => {
+  st.theme = {auto: 'light', light: 'dark', dark: 'auto'}[st.theme];
+  if (st.theme === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', st.theme);
+  $('theme').textContent = 'theme: ' + st.theme; drawPoints();
+};
+if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => drawPoints());
+
+// ---------- build controls
+const slWrap = $('sliders');
+FE.forEach(f => {
+  const [mn, mx] = ranges[f], step = (mx - mn) / 1000;
+  const d = document.createElement('div'); d.className = 'sl'; d.id = 'sl_' + f;
+  d.innerHTML = `<span>${P.labels[f]}</span><input type="range" id="r_${f}" min="${mn}" max="${mx}" step="${step}"><span class="v" id="v_${f}"></span>`;
+  slWrap.appendChild(d);
+  $('r_' + f).addEventListener('input', e => { st.q[f] = parseFloat(e.target.value); st.moved = true; live(); });
+});
+function syncSliders() {
+  FE.forEach(f => { $('r_' + f).value = st.q[f]; $('v_' + f).textContent = (f === 'Bv' || f === 'Bh') && !st.tiltOn ? 'n/a' : fmt(st.q[f]); });
+  $('qfloor').value = String(st.floor); $('tiltOn').checked = st.tiltOn;
+  ['Bv', 'Bh'].forEach(f => $('sl_' + f).classList.toggle('off', !st.tiltOn));
+}
+$('qfloor').onchange = e => { st.floor = parseInt(e.target.value); st.moved = true; live(); };
+$('tiltOn').onchange = e => { st.tiltOn = e.target.checked; st.moved = true; syncSliders(); live(); };
+
+const WG = [['B', '|B| strength'], ['xyz', 'magnetic x/y/z'], ['tilt', 'tilt (Bv, Bh)'], ['baro', 'barometer floor']];
+WG.forEach(([g, lab]) => {
+  const d = document.createElement('div'); d.className = 'sl';
+  d.innerHTML = `<span>${lab}</span><input type="range" id="w_${g}" min="0" max="1" step="0.05"><span class="v" id="wv_${g}"></span>`;
+  $('wsl').appendChild(d);
+  $('w_' + g).addEventListener('input', e => { st.w[g] = parseFloat(e.target.value); syncWeights(); live(); });
+});
+function syncWeights() {
+  WG.forEach(([g]) => { $('w_' + g).value = st.w[g]; $('wv_' + g).textContent = st.w[g].toFixed(2); });
+  const dw = P.model.weights, tot = WG.reduce((a, [g]) => a + st.w[g], 0);
+  $('wnote').textContent = `Learned (fused_model.json, leave-one-session-out): B ${dw.B}, xyz ${dw.xyz}, tilt ${dw.tilt}, baro ${dw.baro}, k ${P.model.k}; Wi-Fi ${P.model.wifi_weight_dropped} dropped here. Weights are relative: they are divided by their sum over the groups available for each pair${tot > 0 ? '' : ' (all zero: no distance)'}.`;
+}
+$('wreset').onclick = () => { st.w = Object.assign({}, P.model.weights); syncWeights(); live(); };
+$('weq').onclick = () => { st.w = {B: .25, xyz: .25, tilt: .25, baro: .25}; syncWeights(); live(); };
+$('k').min = 1; $('k').max = 50;
+$('k').oninput = e => { st.k = parseInt(e.target.value); $('kv').textContent = st.k; live(); };
+
+P.sessions.forEach((s, i) => {
+  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${s}`; $('fsess').appendChild(l);
+  l.firstChild.onchange = e => { st.sessOn[i] = e.target.checked; refresh(); };
+  $('lsess').add(new Option(s, i, false, s === '24s2'));
+});
+P.phones.forEach((s, i) => {
+  const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${s}`; $('fphone').appendChild(l);
+  l.firstChild.onchange = e => { st.phoneOn[i] = e.target.checked; refresh(); };
+});
+$('ffloor').onchange = e => { st.ffloor = e.target.value; refresh(); };
+$('lplace').add(new Option('any place', -1));
+P.places.forEach((p, i) => $('lplace').add(new Option(`${p} (F${P.place_floor[i]})`, i)));
+$('holdout').onchange = e => { st.holdout = e.target.value; refresh(); };
+$('view').onchange = e => { st.view = e.target.value; $('xw').hidden = $('yw').hidden = st.view !== 'raw'; drawPoints(); };
+[['xa', 'B'], ['ya', 'Bv']].forEach(([id, def]) => {
+  FE.forEach(f => $(id).add(new Option(P.labels[f], f, false, f === def)));
+  $(id).onchange = e => { st[id] = e.target.value; drawPoints(); };
+});
+
+// ---------- load a real window
+function loadWindow(i) {
+  FE.forEach(f => { if (Number.isFinite(bank[f][i])) st.q[f] = bank[f][i]; });
+  st.tiltOn = Number.isFinite(bank.Bv[i]); st.floor = bank.floor[i]; st.loaded = i; st.moved = false;
+  syncSliders(); refresh();
+}
+$('rand').onclick = () => {
+  const s = parseInt($('lsess').value), p = parseInt($('lplace').value), c = [];
+  for (let i = 0; i < bank.n; i++) if (bank.sess[i] === s && (p < 0 || bank.place[i] === p)) c.push(i);
+  if (!c.length) { $('loadnote').textContent = 'No windows for that session and place.'; return; }
+  loadWindow(c[Math.floor(Math.random() * c.length)]);
+};
+$('free').onclick = () => { st.loaded = -1; st.moved = false; refresh(); };
+
+// ---------- state -> mask
+let mask = new Uint8Array(bank.n);
+function computeMask() {
+  let cnt = 0;
+  const L = st.loaded;
+  for (let i = 0; i < bank.n; i++) {
+    let ok = st.sessOn[bank.sess[i]] && st.phoneOn[bank.phone[i]] && (st.ffloor === 'all' || bank.floor[i] === parseInt(st.ffloor));
+    if (ok && L >= 0) {
+      if (st.holdout === 'session' && bank.sess[i] === bank.sess[L]) ok = false;
+      else if (st.holdout === 'visit' && bank.visit[i] === bank.visit[L]) ok = false;
+      else if (st.holdout === 'rec' && bank.rec[i] === bank.rec[L]) ok = false;
+    }
+    mask[i] = ok ? 1 : 0; cnt += ok ? 1 : 0;
+  }
+  return cnt;
+}
+
+// ---------- plotting
+function coords(i) {
+  if (st.view === 'pca') return [P.cols.pc1[i], P.cols.pc2[i]];
+  const a = bank[st.xa][i], b = bank[st.ya][i];
+  return [Number.isFinite(a) ? a : null, Number.isFinite(b) ? b : null];
+}
+function qpoint() {
+  const q = qobj();
+  if (st.view === 'pca') return projectPCA(P, q);
+  return [st.q[st.xa], st.q[st.ya]];
+}
+function qobj() {
+  return {B: st.q.B, x: st.q.x, y: st.q.y, z: st.q.z, Bv: st.tiltOn ? st.q.Bv : NaN, Bh: st.tiltOn ? st.q.Bh : NaN, floor: st.floor};
+}
+let plotReady = false, nTrain = 0, res = null;
+function axisRange(vals) {
+  let mn = Infinity, mx = -Infinity;
+  for (const v of vals) if (v !== null && Number.isFinite(v)) { if (v < mn) mn = v; if (v > mx) mx = v; }
+  const pad = (mx - mn) * 0.06 || 1; return [mn - pad, mx + pad];
+}
+function drawPoints() {
+  if (typeof Plotly === 'undefined') { $('plot').innerHTML = '<p class="small">Plotly could not be loaded from cdn.jsdelivr.net (offline?). The numbers on the right still work.</p>'; return; }
+  const byPlace = Array.from({length: NP}, () => []);
+  for (let i = 0; i < bank.n; i++) if (mask[i]) byPlace[bank.place[i]].push(i);
+  const traces = byPlace.map((ix, p) => {
+    const xy = ix.map(coords);
+    return {type: 'scatter', mode: 'markers', name: P.places[p], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
+      marker: {size: 7, color: P.colours[p], symbol: ix.map(i => SYM[bank.sess[i]]), opacity: 0.8, line: {width: 0.5, color: css('--bg')}},
+      text: ix.map(i => `${P.places[p]} (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${P.phones[bank.phone[i]]}<br>${P.recs[bank.rec[i]]}`),
+      hovertemplate: '%{text}<extra></extra>'};
+  });
+  traces.push({type: 'scatter', mode: 'lines', name: 'neighbour lines', x: [], y: [], line: {color: css('--ink'), width: 1}, hoverinfo: 'skip', showlegend: false});
+  traces.push({type: 'scatter', mode: 'markers', name: 'neighbours', x: [], y: [], marker: {size: 13, symbol: 'circle-open', color: css('--ink'), line: {width: 1.6, color: css('--ink')}}, hoverinfo: 'skip', showlegend: false});
+  traces.push({type: 'scatter', mode: 'markers', name: 'query', x: [], y: [], marker: {size: 24, symbol: 'star', color: '#f5c518', line: {width: 2, color: css('--ink')}}, hoverinfo: 'skip', showlegend: false});
+  const all = Array.from({length: bank.n}, (_, i) => i).map(coords);
+  const narrow = window.innerWidth < 860;
+  const lay = {paper_bgcolor: css('--card'), plot_bgcolor: css('--card'), font: {color: css('--ink'), size: 12}, margin: {l: 48, r: 8, t: 8, b: 42},
+    xaxis: {title: st.view === 'pca' ? `PC1 (${(P.pca.explained[0] * 100).toFixed(0)}% of variance)` : P.labels[st.xa], range: axisRange(all.map(a => a[0])), gridcolor: css('--line'), zeroline: false},
+    yaxis: {title: st.view === 'pca' ? `PC2 (${(P.pca.explained[1] * 100).toFixed(0)}% of variance)` : P.labels[st.ya], range: axisRange(all.map(a => a[1])), gridcolor: css('--line'), zeroline: false},
+    showlegend: !narrow, legend: {font: {size: 10}, itemsizing: 'constant'}, hovermode: 'closest'};
+  Plotly.react('plot', traces, lay, {responsive: true, displaylogo: false}).then(() => { plotReady = true; updateOverlay(); });
+  $('plotnote').textContent = (st.view === 'pca'
+    ? 'Linear PCA of the standardised, weighted features (fixed at the default weights; groups with weight 0 get 0.05 so every slider moves the star). The star is projected with the same components.'
+    : 'Raw features on the axes; tilt axes only show windows that have tilt (not 23 Nov).')
+    + ' Colour = place, shape = session (circle 23 Nov, square 24 s1, triangle 24 s2). Lines go to the k nearest in the FULL space, so in a 2-D picture a neighbour can look far away.';
+}
+let overlayPending = false;
+function updateOverlay() {
+  if (!plotReady || !res || typeof Plotly === 'undefined') return;
+  const qp = qpoint(), lx = [], ly = [], nx = [], ny = [];
+  for (const i of res.order) {
+    const c = coords(i); if (c[0] === null || c[1] === null) continue;
+    lx.push(qp[0], c[0], null); ly.push(qp[1], c[1], null); nx.push(c[0]); ny.push(c[1]);
+  }
+  const col = res.pred >= 0 ? P.colours[res.pred] : '#f5c518';
+  Plotly.restyle('plot', {x: [lx, nx, [qp[0]]], y: [ly, ny, [qp[1]]], 'marker.color': [css('--ink'), css('--ink'), col]}, [NP, NP + 1, NP + 2]);
+}
+
+// ---------- live compute + render
+function live() {
+  if (nTrain === 0) { res = null; render(); return; }
+  const D = distances(bank, qobj(), st.w, mask);
+  st.D = D; res = knn(bank, D, Math.min(st.k, nTrain), NP);
+  render();
+  if (!overlayPending) { overlayPending = true; requestAnimationFrame(() => { overlayPending = false; updateOverlay(); }); }
+}
+function chip(p) { return `<span class="chip" style="background:${P.colours[p]}"></span>`; }
+function render() {
+  FE.forEach(f => { $('v_' + f).textContent = (f === 'Bv' || f === 'Bh') && !st.tiltOn ? 'n/a' : fmt(st.q[f]); });
+  $('kv').textContent = st.k;
+  const L = st.loaded, kk = Math.min(st.k, nTrain);
+  $('fnote').textContent = `${nTrain} of ${bank.n} windows are used for training and drawn` + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + '.';
+  if (!res || res.pred < 0) {
+    $('pred').textContent = nTrain === 0 ? 'No training windows' : 'No distance (all weights 0?)';
+    $('truth').textContent = ''; $('predsub').textContent = ''; $('votes').innerHTML = ''; $('nn').innerHTML = ''; $('distsum').textContent = ''; $('votenote').textContent = ''; return;
+  }
+  $('pred').innerHTML = `${chip(res.pred)}${P.places[res.pred]}`;
+  $('predsub').textContent = `vote share ${(res.shares[res.pred] * 100).toFixed(0)}% · ${res.counts[res.pred]}/${kk} neighbours`;
+  if (L >= 0) {
+    const t = bank.place[L], ok = t === res.pred;
+    $('truth').innerHTML = `true place: ${chip(t)}<b>${P.places[t]}</b> <span class="${ok ? 'ok' : 'no'}">${ok ? '✓ match' : '✗ miss'}</span>` + (st.moved ? ' <span class="small">(sliders moved since loading)</span>' : '');
+  } else $('truth').textContent = 'free query: no true place';
+  const rows = [];
+  for (let p = 0; p < NP; p++) if (res.counts[p] > 0) rows.push(p);
+  rows.sort((a, b) => res.shares[b] - res.shares[a]);
+  $('votes').innerHTML = rows.slice(0, 10).map((p, j) => `<div class="vr ${j === 0 ? 'top' : ''}"><span>${chip(p)}${P.places[p]}</span><div class="bar"><i style="width:${(res.shares[p] * 100).toFixed(1)}%"></i></div><span>${res.counts[p]}/${kk} · ${(res.shares[p] * 100).toFixed(0)}%</span></div>`).join('')
+    + (rows.length > 10 ? `<div class="small">+ ${rows.length - 10} more places with fewer votes</div>` : '');
+  $('votenote').textContent = 'count = neighbours in that place; % = share of the 1/dist-weighted vote (the prediction is the largest %).';
+  const dd = res.order.map(i => st.D[i]);
+  $('distsum').textContent = `nearest ${fmt(dd[0], 3)} · median ${fmt(dd[dd.length >> 1], 3)} · k-th ${fmt(dd[dd.length - 1], 3)}`;
+  $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.places[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${P.phones[bank.phone[i]]}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
+}
+function refresh() { nTrain = computeMask(); drawPoints(); live(); }
+
+$('k').value = st.k; syncWeights(); syncSliders();
+window.__pg = {st, bank, P, refresh, live, loadWindow, getRes: () => res, qobj};
+refresh();
+window.addEventListener('resize', () => { if (plotReady) drawPoints(); });
+})();
+</script>
+</body></html>

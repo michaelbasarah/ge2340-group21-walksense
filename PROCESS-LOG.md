@@ -38,6 +38,7 @@ Contents:
 27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
 28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
 29. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
+30. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
 - Lessons learned
 - Open questions / next steps
 
@@ -418,6 +419,18 @@ Contents:
 
 ---
 
+## 30. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
+
+- **What we tried:** a single HTML page where sliders position a query point on the stop-window scatter and the page shows the k nearest windows and the predicted place, as a demo for the video and for the team to build intuition. Internal team tool, not report text.
+- **Why:** the user wanted "a k-nearest-neighbour graph where you slide certain variables to position a point and see which cluster (place) it belongs to".
+- **How:** `phase2/new/day3/playground.py` embeds the 2425 five-second windows of `fused_knn.py` (26 places, sessions 23nov/24s1/24s2, all phones) into `playground_template.html` and writes `out/knn_playground.html` (0.23 MB; plotly.js 2.35.2 from jsDelivr with the same integrity hash as `explore.html`). Sliders: |B| mean, B_x/B_y/B_z mean, B_vertical, B_horizontal (range = data min..max, default median) plus a floor selector. The kNN runs live in JS in the full standardised space with the gknn.py recipe (standardise, mean squared difference per group divided by the group's median pair distance, weights, availability masks, votes weighted 1/(D+1e-6)); weights default to `out/fused_model.json` (B 0.1, xyz 0.7, tilt 0, baro 0.1, k 25). Wi-Fi is left out (cannot be slid). Differences from `fused_knn.py`, stated in the page: the |B| group is the window mean only (fused_knn.py also uses sd, p10, p90), scaling constants use all windows (not the training part only), floor is the true floor (not the step-tracked one), one query is one window (no per-recording aggregation). The 2-D view is a linear PCA computed in Python on the standardised weighted features (default weights; weight-0 groups get 0.05 so every slider moves the star), explained variance 34% and 25%; an "axes" option plots any two raw features. A "load a real window" control sets the sliders from a window of a chosen session/place and shows its true place; by default it holds that window's whole session out of training. Filters: floor, session, phone. `playground_check.py` + `playground_check.js` compare the JS with sklearn.
+- **Result:** check (720 cases: 6 settings x 60 random windows x tilt on/off, including held-out session, held-out stop, one phone only, floor-5 only): the JS prediction equals sklearn `KNeighborsClassifier(metric='precomputed', weights=1/(d+1e-6))` on an independently built (scipy) distance matrix in 720/720 cases, same neighbour set in all 720, largest vote-share difference 1.3e-15; the JS PCA projection of a window equals the embedded pc1/pc2 to 0.0005 (3-decimal rounding). A first run showed 712/720 only because the Python reference treated a missing tilt of the query as zero (23-Nov windows have none); the page drops the tilt group in that case and the reference was fixed to match, so that was a bug in the check, not in the page. Rendered in headless Chromium (playwright-core, because the `mcp__browser__*` tools could not connect to Chrome): desktop, phone width (390 px, no horizontal scroll) and dark mode, no console errors except a favicon 404 from the test server.
+- **Outcome:** success. Limits: single-window predictions are far noisier than the per-recording numbers in the README (do not quote the page's hits as accuracy); the 2-D projection cannot show why a neighbour is near in the full space; pressure is not a slider.
+- **What changed because of it:** `run_all.sh` builds the page after `visualise.py`; README table row added.
+- **Links:** `phase2/new/day3/playground.py`, `playground_template.html`, `playground_check.py`, `playground_check.js`, `out/knn_playground.html`; the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -434,6 +447,7 @@ Contents:
 - **Check the device ID, not the phone's nickname.** "iphone" was two handsets on 24 Nov; the same handset across days gave 13/26 and 18/42, a different one less (entry 25). Pooling all phones in one kNN was worse than one model per phone (entry 27).
 - **Step tracking on the barometer breaks over long pauses.** Weather moved the pressure 0.833 hPa during a break and four stops went to the wrong floor (entry 25).
 - **A same-day win can vanish across days.** Tilt correction helped on 23-Nov walk endpoints (39% vs 0%) but added nothing across days or at stops (entry 25).
+- **Check the check.** The first sklearn comparison of the playground disagreed in 8 of 720 cases because the reference mishandled a missing feature (entry 30); compare the missing-data rules, not only the maths.
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps

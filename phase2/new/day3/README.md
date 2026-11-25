@@ -20,6 +20,7 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | weighted fused kNN, nested CV | `fused_knn.py` | `out/fused_knn.json`, `out/fused_model.json`, `out/fused_window_predictions.csv` |
 | tracker on 24 Nov + UI replay | `track24.py` | `out/track24_results.json`, `out/track24_visits.csv`, `out/replay_24nov_s2.json` |
 | figures + data explorer | `visualise.py` | `out/*.png`, `out/explore.html` |
+| kNN playground (sliders -> neighbours -> place; internal) | `playground.py` (template `playground_template.html`; check `playground_check.py`) | `out/knn_playground.html` |
 
 ## Adding a session collected later
 
