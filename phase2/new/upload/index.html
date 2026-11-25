@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WalkSense upload</title>
+<style>
+  :root { --bg:#f4f5f7; --card:#fff; --ink:#111; --ink2:#555; --line:#dde0e4; --accent:#1f6fd1; --ok:#1d7a3a; --bad:#b3261e; --on-accent:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --card:#1b1e24; --ink:#eee; --ink2:#a9adb5; --line:#2e333b; --accent:#6aa8ff; --ok:#5cc47e; --bad:#ff8a80; --on-accent:#0b1a2e; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.45 system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:520px; margin:0 auto; padding:16px; }
+  h1 { font-size:20px; margin:4px 0 12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; }
+  label { display:block; font-size:14px; color:var(--ink2); margin:10px 0 4px; }
+  select, input[type=file], button { width:100%; font:inherit; padding:10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); }
+  button { background:var(--accent); color:var(--on-accent); border:none; font-weight:600; margin-top:14px; min-height:44px; }
+  button.secondary { background:transparent; color:var(--accent); border:1px solid var(--line); }
+  button:disabled { opacity:.5; }
+  .row { display:flex; gap:8px; } .row > * { flex:1; }
+  .big { font-size:28px; font-weight:700; }
+  .muted { color:var(--ink2); font-size:14px; }
+  .ok { color:var(--ok); font-weight:600; } .bad { color:var(--bad); font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  td { padding:6px 0; border-bottom:1px solid var(--line); } td:last-child { text-align:right; }
+  .bar { height:6px; background:var(--line); border-radius:3px; margin-top:3px; }
+  .bar > div { height:100%; background:var(--accent); border-radius:3px; }
+  #err { color:var(--bad); font-weight:600; }
+  .tabs { display:flex; gap:6px; margin:10px 0 8px; } .tabs button { margin:0; min-height:36px; padding:6px; background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .tabs button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+  #map { width:100%; height:auto; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
+  #map .lit { fill:#ff2020; stroke:#ffd400; stroke-width:5; }
+  #map .halo { fill:none; stroke:#ff2020; stroke-width:4; transform-box:fill-box; transform-origin:center; animation:pulse 1.4s ease-out infinite; }
+  #map .dot { fill:#0a84ff; stroke:#fff; stroke-width:4; }
+  #map .maybe { fill:none; stroke:#555; stroke-width:3; stroke-dasharray:6 5; }
+  #map text { font:700 22px system-ui, sans-serif; fill:#111; paint-order:stroke; stroke:#fff; stroke-width:6px; stroke-linejoin:round; }
+  @keyframes pulse { from { transform:scale(1); opacity:.9; } to { transform:scale(3.2); opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { #map .halo { animation:none; opacity:.5; transform:scale(1.8); } }
+  #mapnote { margin-top:6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>WalkSense · upload a recording</h1>
+
+  <div class="card">
+    <div class="muted">You are on</div>
+    <div class="big" id="floor">-</div>
+    <div class="muted" id="tally"></div>
+    <div class="tabs" role="group" aria-label="Show floor"><button data-show="5">5F map</button><button data-show="4">4F map</button></div>
+    <svg id="map" role="img" aria-label="Floor map"></svg>
+    <div class="muted" id="mapnote">Send a stop to see where you are.</div>
+    <div id="live" hidden><div class="muted" style="margin-top:8px">LIVE from phyphox</div><div class="big" id="livemode" style="font-size:20px"></div><div class="muted" id="livestatus"></div><div class="muted" id="livesaved"></div></div>
+  </div>
+
+  <div class="card">
+    <label for="file">phyphox export (CSV, ZIP)</label>
+    <input id="file" type="file" accept=".zip,application/zip">
+    <label for="kind">This recording is</label>
+    <select id="kind"><option value="auto">detect automatically</option><option value="stop">a stop (60 s standing, phone flat, facing the door)</option><option value="walk">a walk</option></select>
+    <label for="truth">Where you really are (optional, for scoring)</label>
+    <select id="truth"><option value="">don't know / skip</option></select>
+    <button id="send">Send</button>
+    <div id="err" role="alert"></div>
+  </div>
+
+  <div class="card" id="result" hidden aria-live="polite"></div>
+
+  <div class="card">
+    <div class="muted">Floor wrong? Set it (the next uploads track from here)</div>
+    <div class="row"><button class="secondary" data-floor="5">I'm on 5F</button><button class="secondary" data-floor="4">I'm on 4F</button></div>
+    <button class="secondary" id="reset">New session (clear the score)</button>
+  </div>
+
+  <div class="card"><div class="muted" id="eval"></div></div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+const nice = s => (state && state.labels && state.labels[s]) || (s || '').replace(/_/g, ' ');
+let state = null, maps = null, shown = 5, last = null;
+const SVGNS = 'http://www.w3.org/2000/svg';
+const sv = (tag, attrs) => { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); return e; };
+
+function drawMap() {
+  if (!maps) return;
+  const m = maps[shown], svg = $('map');
+  svg.setAttribute('viewBox', `0 0 ${m.width} ${m.height}`);
+  svg.replaceChildren(sv('image', { href: '/map/' + m.image, x: 0, y: 0, width: m.width, height: m.height }));
+  document.querySelectorAll('[data-show]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.show === shown)));
+  for (const [id, p] of Object.entries(m.places)) if (p.inferred) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 9, fill: '#ff3b30', opacity: .55 }));
+  const r = last && last.kind === 'stop' && last.floor === shown ? last : null;
+  let note = 'Send a stop to see where you are.';
+  if (r && r.top3.length) {
+    const id = r.lit || r.top3[0][0], p = m.places[id];
+    if (p) {
+      if (r.lit) {
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 15, class: 'halo' }), sv('circle', { cx: p.x, cy: p.y, r: 15, class: 'lit' }));
+        note = `You are at ${nice(id)} (${Math.round(r.top3[0][1] * 100)}% sure).`;
+      } else {
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 22, class: 'maybe' }));
+        note = `Not sure: maybe ${nice(id)} (${Math.round(r.top3[0][1] * 100)}%). Stand still, phone flat, facing the door, and try again.`;
+      }
+      const t = sv('text', { x: p.x, y: p.y - 26, 'text-anchor': 'middle' }); t.textContent = nice(id); svg.append(t);
+    }
+  } else if (last && last.kind === 'walk' && last.dot && last.dot.floor === shown) {
+    svg.append(sv('circle', { cx: last.dot.x, cy: last.dot.y, r: 13, class: 'dot' }));
+    note = `Walking: about here, from ${nice(last.dot.from)} toward ${nice(last.dot.to)}. Stop 3 s to check the place.`;
+  } else if (last && last.kind === 'walk') note = last.live ? 'Walking… stand still facing the door for 3 s to light up where you are.' : 'Walking: send the next stop to light up where you are.';
+  else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
+  $('mapnote').textContent = note;
+  svg.setAttribute('aria-label', `${shown}F floor map. ${note}`);
+}
+
+function render(s) {
+  state = s;
+  $('floor').textContent = s.floor + 'F';
+  if (!last) shown = s.floor;
+  drawMap();                                   // redraw: labels may have just arrived
+  const t = s.tally || {};
+  $('tally').textContent = t.stops ? `Score this session: ${t.correct || 0}/${t.stops} right, ${t.top3 || 0}/${t.stops} in top 3` : 'No scored stops yet';
+  const sel = $('truth'), keep = sel.value;
+  sel.replaceChildren(el('option', "don't know / skip"));
+  sel.firstChild.value = '';
+  for (const p of (s.places[s.floor] || [])) { const o = el('option', nice(p)); o.value = p; sel.append(o); }
+  sel.value = [...sel.options].some(o => o.value === keep) ? keep : '';
+  const ev = s.eval, box = $('eval');
+  box.replaceChildren(el('div', ev ? 'Tested before the demo (train on one 24-Nov session, test the other):' : 'Run "python walksense.py evaluate" to show the tested accuracy here.'));
+  for (const v of Object.values(ev || {})) box.append(el('div', `${v.devices}: ${v.top1} right, ${v.top3} in top 3`));
+}
+
+function showResult(r) {
+  last = r; shown = r.floor; drawMap();
+  const box = $('result'); box.hidden = false; box.replaceChildren();
+  box.append(el('div', r.kind === 'stop' ? 'Stop' : 'Walk', 'muted'));
+  const tb = el('table');
+  const row = (a, b, cls) => { const tr = el('tr'); tr.append(el('td', a), el('td', b, cls)); tb.append(tr); };
+  row('Floor', r.floor + 'F' + (r.floor !== r.floor_before ? ` (was ${r.floor_before}F)` : ''));
+  if (r.floor_note) row('', r.floor_note, 'muted');
+  row('Steps', `${r.steps} in ${r.duration_s} s` + (r.kind === 'walk' ? ` (about ${r.distance_m} m)` : ''));
+  if (r.kind === 'walk' && r.net_turn_deg != null) row('Turns', r.turns.length ? r.turns.map(x => `${x.side} ${Math.abs(x.deg)}°`).join(', ') : 'straight');
+  box.append(tb);
+  if (r.kind === 'stop') {
+    box.append(el('label', 'Where you probably are'));
+    r.top3.forEach(([p, prob], i) => {
+      const d = el('div'); d.append(el('div', `${i + 1}. ${nice(p)}  ${Math.round(prob * 100)}%`));
+      const bar = el('div', null, 'bar'), fill = el('div'); fill.style.width = Math.round(prob * 100) + '%'; bar.append(fill); d.append(bar); box.append(d);
+    });
+    if (!r.top3.length) box.append(el('div', 'No place guess (no training data for this floor)', 'muted'));
+    if (r.correct != null) box.append(el('p', r.correct ? `✓ Right (${nice(r.truth)})` : `✗ Wrong, you were at ${nice(r.truth)}`, r.correct ? 'ok' : 'bad'));
+    if (r.model_note) box.append(el('p', r.model_note, 'muted'));
+  }
+  if (r.device) box.append(el('p', 'Phone: ' + r.device, 'muted'));
+}
+
+async function call(url, opts) {
+  const res = await fetch(url, opts);
+  const body = await res.json().catch(() => ({ error: 'server error' }));
+  if (!res.ok) throw new Error(body.error || res.statusText);
+  return body;
+}
+
+$('send').onclick = async () => {
+  $('err').textContent = '';
+  const f = $('file').files[0];
+  if (!f) { $('err').textContent = 'Pick the phyphox ZIP first.'; return; }
+  $('send').disabled = true; $('send').textContent = 'Sending…';
+  try {
+    const q = new URLSearchParams({ kind: $('kind').value, truth: $('truth').value });
+    const body = await call('/api/upload?' + q, { method: 'POST', body: f, headers: { 'Content-Type': 'application/zip' } });
+    render(body); showResult(body.result);
+    $('file').value = ''; $('truth').value = '';
+  } catch (e) { $('err').textContent = e.message; }
+  $('send').disabled = false; $('send').textContent = 'Send';
+};
+document.querySelectorAll('[data-show]').forEach(b => b.onclick = () => { shown = +b.dataset.show; drawMap(); });
+fetch('/map/places.json').then(r => r.json()).then(j => { maps = j; drawMap(); }).catch(() => { $('mapnote').textContent = 'Map not available.'; });
+document.querySelectorAll('[data-floor]').forEach(b => b.onclick = async () => render(await call('/api/floor?floor=' + b.dataset.floor, { method: 'POST' })));
+$('reset').onclick = async () => { render(await call('/api/reset?floor=' + state.floor, { method: 'POST' })); $('result').hidden = true; last = null; drawMap(); };
+// Live mode (server started with --live): poll once a second and drive the same map.
+let liveKey = '';
+async function pollLive() {
+  let L;
+  try { L = await call('/api/live'); } catch (e) { $('livestatus').textContent = 'Server not reachable'; return setTimeout(pollLive, 2000); }
+  if (!L.enabled) return;                       // upload-only mode: nothing to do
+  $('live').hidden = false;
+  const st = L.state || {};
+  $('livestatus').textContent = !L.connected ? `Not connected to the phone. ${L.error || ''}` :
+    !L.measuring ? 'Connected. Press ▶ in phyphox to start measuring.' : `Connected · ${L.device} · recording · phone time ${st.now ?? '-'} s`;
+  $('livesaved').textContent = L.last_recording ? `Last recording saved: ${L.last_recording.file} (${L.last_recording.seconds} s)` : 'Pause phyphox to save the recording.';
+  const mode = st.mode || 'waiting';
+  $('livemode').textContent = mode === 'walking' ? `Walking · ${st.steps} steps` :
+    mode === 'standing' ? `Standing ${st.still_s} s… (place at 3 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
+  if (st.floor) $('floor').textContent = st.floor + 'F';
+  const r = mode === 'stop' ? { kind: 'stop', floor: st.floor, top3: st.top3, lit: st.lit, live: true }
+          : mode === 'walking' ? { kind: 'walk', floor: st.floor, dot: st.dot, live: true } : null;
+  const key = JSON.stringify(r);
+  if (r && key !== liveKey) { liveKey = key; last = r; if (shown !== r.floor) shown = r.floor; drawMap(); }
+  setTimeout(pollLive, 1000);
+}
+pollLive();
+call('/api/state').then(s => { render(s); if (s.history.length) showResult(s.history[s.history.length - 1]); }).catch(e => $('err').textContent = 'Cannot reach the server: ' + e.message);
+</script>
+</body>
+</html>

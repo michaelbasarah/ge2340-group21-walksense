@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>WalkSense - floor 5 map</title>
+<style>
+ :root{--ink:#18212b;--mut:#6b7684;--line:#e3e8ee}
+ *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:#f6f8fa}
+ header{padding:16px 22px;background:#fff;border-bottom:1px solid var(--line)}
+ h1{margin:0;font-size:19px} .sub{color:var(--mut);font-size:13px;margin-top:3px}
+ .wrap{max-width:900px;margin:16px auto;padding:0 14px}
+ .directions{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-bottom:12px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:10px}
+ .directions label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--mut)}
+ select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff}
+ button{border:0;background:#126782;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;cursor:pointer}
+ .readout{align-self:center;font-size:14px;font-weight:600;color:#c62a63}
+ svg{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#eef1f6;display:block}
+ .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--mut)}
+ .legend span{display:flex;align-items:center;gap:6px} .legend i{width:13px;height:13px;border-radius:3px;display:inline-block}
+ .foot{color:var(--mut);font-size:12px;margin-top:10px;line-height:1.5}
+</style></head><body>
+<header><h1>WalkSense - floor 5 map (standalone)</h1>
+<div class="sub">Schematic layout from your measured coordinates. Some distances are placeholders until the Google numbers land.</div></header>
+<div class="wrap">
+ <div class="directions">
+  <label>Start<select id="rfrom"></select></label>
+  <label>Destination<select id="rto"></select></label>
+  <button id="rgo">Get directions</button>
+  <span id="rdist" class="readout"></span>
+ </div>
+ <svg id="floormap" viewBox="0 0 760 620" role="img" aria-label="Floor 5 map"></svg>
+ <div class="legend">
+  <span><i style="background:#e0a43b"></i>Food</span>
+  <span><i style="background:#4a63b0"></i>Study/rooms</span>
+  <span><i style="background:#2f9c8f"></i>Toilet</span>
+  <span><i style="background:#3a9d6a"></i>Exit</span>
+  <span><i style="background:#8e6bb0"></i>Escalator</span>
+  <span><i style="background:#e8306b"></i>Route</span>
+ </div>
+ <div class="foot">Corridors = your recorded walks. Routing sums consecutive segments (e.g. Exit 10 to Esc down goes via the canteen). Edit <code>map/edges_floor5.csv</code> to update distances, then re-generate.</div>
+</div>
+<script>
+const D={"pts": [{"name": "Exit 5", "x": -14.77, "y": -1.38, "floor": 5, "wide": false, "short": "Exit 5", "cat": "exit"}, {"name": "Exit 10", "x": 0.56, "y": 15.33, "floor": 5, "wide": false, "short": "Exit 10", "cat": "exit"}, {"name": "Canteen (entrance)", "x": -7.86, "y": 7.3, "floor": 5, "wide": true, "short": "Canteen", "cat": "food"}, {"name": "Male toilet", "x": -12.5, "y": -4.17, "floor": 5, "wide": false, "short": "Men", "cat": "wc"}, {"name": "Female toilet", "x": 3.98, "y": 12.54, "floor": 5, "wide": false, "short": "Women", "cat": "wc"}, {"name": "Y5-202", "x": 11.4, "y": 4.85, "floor": 5, "wide": false, "short": "Y5-202", "cat": "study"}, {"name": "Y5-302", "x": -4.28, "y": -12.38, "floor": 5, "wide": false, "short": "Y5-302", "cat": "study"}, {"name": "Study Room 9 (Y5-512)", "x": 6.74, "y": -4.48, "floor": 5, "wide": false, "short": "SR9", "cat": "study"}, {"name": "Escalator up", "x": -9.0, "y": 3.5, "floor": 5, "wide": false, "short": "Esc up", "cat": "stairs"}, {"name": "Escalator down", "x": -6.0, "y": 3.0, "floor": 5, "wide": false, "short": "Esc down", "cat": "stairs"}], "edges": [["Exit 5", "Canteen (entrance)", 11.1], ["Exit 5", "Male toilet", 3.6], ["Male toilet", "Y5-302", 11.6], ["Y5-302", "Study Room 9 (Y5-512)", 13.6], ["Study Room 9 (Y5-512)", "Y5-202", 10.4], ["Y5-202", "Female toilet", 10.7], ["Female toilet", "Exit 10", 4.4], ["Exit 10", "Canteen (entrance)", 11.6], ["Canteen (entrance)", "Escalator down", 4.5], ["Canteen (entrance)", "Escalator up", 4.5], ["Escalator up", "Escalator down", 3.2]]}, F5=D.pts, EDGES=D.edges;
+const NS='http://www.w3.org/2000/svg', fm=document.getElementById('floormap');
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+const W=760,H=620,pad=72;
+const xs=F5.map(p=>p.x),ys=F5.map(p=>p.y);
+const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+const spanx=(maxx-minx)||1,spany=(maxy-miny)||1,s=Math.min((W-2*pad)/spanx,(H-2*pad)/spany);
+const ox=(W-s*spanx)/2,oy=(H-s*spany)/2;
+const sx=v=>ox+(v-minx)*s, sy=v=>H-(oy+(v-miny)*s);
+const CAT={food:'#e0a43b',study:'#4a63b0',room:'#8893a6',wc:'#2f9c8f',exit:'#3a9d6a',stairs:'#8e6bb0'};
+const SIZE={food:[92,54],study:[62,42],room:[60,40],wc:[56,36],exit:[52,34],stairs:[60,36]};
+const byName={}; F5.forEach(p=>byName[p.name]=p);
+
+fm.appendChild(el('rect',{x:0,y:0,width:W,height:H,fill:'#eef1f6'}));
+EDGES.forEach(([a,b])=>{const pa=byName[a],pb=byName[b];if(!pa||!pb)return;
+ fm.appendChild(el('line',{x1:sx(pa.x),y1:sy(pa.y),x2:sx(pb.x),y2:sy(pb.y),stroke:'#dbe2ea','stroke-width':19,'stroke-linecap':'round'}));});
+EDGES.forEach(([a,b])=>{const pa=byName[a],pb=byName[b];if(!pa||!pb)return;
+ fm.appendChild(el('line',{x1:sx(pa.x),y1:sy(pa.y),x2:sx(pb.x),y2:sy(pb.y),stroke:'#fff','stroke-width':14,'stroke-linecap':'round'}));});
+const routeLayer=el('g',{}); fm.appendChild(routeLayer);
+F5.forEach(p=>{const sz=SIZE[p.cat]||[60,40],w=sz[0],h=sz[1],cx=sx(p.x),cy=sy(p.y);
+ fm.appendChild(el('rect',{x:cx-w/2,y:cy-h/2,width:w,height:h,rx:4,fill:CAT[p.cat]||'#8893a6',stroke:'rgba(0,0,0,0.14)'}));
+ const t=el('text',{x:cx,y:cy+4,'text-anchor':'middle','font-size':11,'font-weight':700,fill:'#fff'});t.textContent=p.short;fm.appendChild(t);});
+const markerLayer=el('g',{}); fm.appendChild(markerLayer);
+
+const rf=document.getElementById('rfrom'),rt=document.getElementById('rto');
+F5.forEach(p=>{rf.add(new Option(p.short+' - '+p.name,p.name));rt.add(new Option(p.short+' - '+p.name,p.name));});
+rf.selectedIndex=0; rt.selectedIndex=Math.min(7,F5.length-1);
+
+// dijkstra
+const ADJ={}; F5.forEach(p=>ADJ[p.name]={});
+EDGES.forEach(([a,b,d])=>{if(ADJ[a]&&ADJ[b]){ADJ[a][b]=d;ADJ[b][a]=d;}});
+function route(src,dst){const dist={},prev={},seen={};F5.forEach(p=>dist[p.name]=Infinity);dist[src]=0;
+ while(true){let u=null,best=Infinity;for(const n in dist){if(!seen[n]&&dist[n]<best){best=dist[n];u=n;}}
+  if(u===null||u===dst)break;seen[u]=1;
+  for(const v in ADJ[u]){const nd=dist[u]+ADJ[u][v];if(nd<dist[v]){dist[v]=nd;prev[v]=u;}}}
+ if(dist[dst]===Infinity)return null;const path=[];let c=dst;while(c!==undefined){path.unshift(c);if(c===src)break;c=prev[c];}
+ return {path,dist:dist[dst]};}
+
+function pin(cx,cy,color){const g=el('g',{});
+ g.appendChild(el('polygon',{points:(cx-8)+','+(cy-23)+' '+(cx+8)+','+(cy-23)+' '+cx+','+cy,fill:color}));
+ g.appendChild(el('circle',{cx,cy:cy-26,r:11,fill:color,stroke:'#fff','stroke-width':2}));
+ g.appendChild(el('circle',{cx,cy:cy-26,r:4,fill:'#fff'}));return g;}
+function youHere(cx,cy){const g=el('g',{});
+ g.appendChild(el('circle',{cx,cy,r:15,fill:'#1c6dd0','fill-opacity':0.18}));
+ g.appendChild(el('circle',{cx,cy,r:6.5,fill:'#1c6dd0',stroke:'#fff','stroke-width':2}));return g;}
+
+document.getElementById('rgo').onclick=()=>{
+ while(routeLayer.firstChild)routeLayer.removeChild(routeLayer.firstChild);
+ while(markerLayer.firstChild)markerLayer.removeChild(markerLayer.firstChild);
+ const out=document.getElementById('rdist');
+ const r=route(rf.value,rt.value);
+ if(!r||r.path.length<2){out.textContent='no route';return;}
+ const pts=r.path.map(n=>byName[n]);
+ let dd='M '+sx(pts[0].x)+' '+sy(pts[0].y);
+ for(let i=1;i<pts.length;i++)dd+=' L '+sx(pts[i].x)+' '+sy(pts[i].y);
+ const path=el('path',{d:dd,fill:'none',stroke:'#e8306b','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'});
+ routeLayer.appendChild(path);
+ const len=path.getTotalLength?path.getTotalLength():0;
+ if(len){path.setAttribute('stroke-dasharray',len);path.setAttribute('stroke-dashoffset',len);
+  path.animate([{strokeDashoffset:len},{strokeDashoffset:0}],{duration:650,easing:'ease-out',fill:'forwards'});}
+ markerLayer.appendChild(youHere(sx(pts[0].x),sy(pts[0].y)));
+ markerLayer.appendChild(pin(sx(pts[pts.length-1].x),sy(pts[pts.length-1].y),'#e8306b'));
+ out.textContent=r.dist.toFixed(1)+' m - '+r.path.length+' stops';
+};
+</script></body></html>

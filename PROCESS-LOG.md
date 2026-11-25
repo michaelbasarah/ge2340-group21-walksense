@@ -32,16 +32,20 @@ Contents:
 21. 24 Nov: circle navigator UI prototype (circles on lines)
 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
-24. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
-25. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
-26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
-27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
-28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
-29. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
-30. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
-31. 25 Nov: per-phone filtering and colouring in the playground and the explorer
-32. 25 Nov: the phone is the real handset (ip16 / ip18), all-sessions option, phone x session panel
-33. 25 Nov: place filter and a "where does the variance come from" panel (playground and explorer)
+24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
+25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
+26. 25 Nov: live mode, phyphox remote access read by the laptop while walking
+27. 25 Nov: live mode: place after 3 s, walking dot, play/pause recordings
+28. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
+29. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
+30. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
+31. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
+32. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
+33. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
+34. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
+35. 25 Nov: per-phone filtering and colouring in the playground and the explorer
+36. 25 Nov: the phone is the real handset (ip16 / ip18), all-sessions option, phone x session panel
+37. 25 Nov: place filter and a "where does the variance come from" panel (playground and explorer)
 - Lessons learned
 - Open questions / next steps
 
@@ -317,7 +321,79 @@ Contents:
 
 ---
 
-## 24. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
+## 24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
+
+- **What we tried:** a small system where the phone records a stop or walk with phyphox, the ZIP is uploaded from the phone's browser to a laptop, and the laptop answers with the floor, steps/turns and the top-3 places. Built for the iPhone first. Before using it, tested it honestly: train on one 24-Nov session, test every stop of the other.
+- **Why:** the team asked for a way to collect on the phone and send it to the system for processing, instead of WhatsApp + running scripts by hand. The 24-Nov data (entry 23) is the first with two independent passes, so it gives a real held-out number.
+- **How:** `phase2/new/upload/walksense.py` (reads the ZIP, features, models, floor tracker, `evaluate`), `server.py` (stdlib HTTP server + `index.html`), `test_walksense.py` (starts the server and uploads real 24-Nov ZIPs, including bad ones). Reused unchanged: `count_steps` (pilot), `turns` (`tracking/pdr.py`), `make_model` (`cross-day/crossday.py`). Place model: kNN on 2 s windows of the stop (first/last 5 s skipped), per floor, trained only on stops from the same phone model (from `meta/device.csv`). Visit answer = mean kNN probability over the windows. Floor: start floor set once; a change = pressure more than 0.40 hPa away from the median of the last 6 readings on the current floor; after a gap of more than 15 min the floor is kept.
+- **Result** (`phase2/new/upload/out/eval.json`):
+  - The two sessions used **different iPhones**: session 1 iPhone19,2, session 2 iPhone17,4 (`manifest.csv`). The S24 (SM-S9280) is the only phone in both.
+  - Place, true floor given, chance 0.077: iPhone19,2 -> iPhone17,4 raw x/y/z top-1 **17/26**, top-3 24/26; reverse **17/27**, top-3 22/27. Tilt-corrected (B along / across gravity) 11/26 and 13/27; |B| only 5/26 and 6/27. S24 -> S24 x/y/z 11/26 and 10/27; tilt 6/26 and 4/27; |B| 1/26 and 2/27.
+  - Floor tracking over each session's iPhone recordings in time order: **27/27** (session 1) and **26/26** (session 2), and the same for every threshold 0.30, 0.35, 0.40, 0.45, 0.50.
+  - `test_walksense.py`: 3 tests pass (stop -> walk -> 5F stairs -> 4F landing switches the floor to 4; a non-ZIP, a ZIP without a magnetometer, an injected place name, a bad kind and an empty upload are refused).
+- **Outcome:** success, with two changes after seeing results, both recorded here.
+  - FAILURE (floor v1): comparing each reading only with the previous one at 0.30 hPa got 25/27 on session 1. The walk to Y5401 read about 0.25 hPa lower than the stops around it, so the next stop looked like a +0.32 hPa jump and the floor flipped to 4F for three recordings. Comparing with the median of recent readings fixed it, and the result no longer depends on the threshold.
+  - Place features: tilt correction was the planned choice (entry 15), but raw x/y/z won in both directions (17 vs 11, 17 vs 13), so the server uses x/y/z. Likely reason: on 24 Nov the phone faced the door at every stop, so the heading was the same each time and x/y/z keeps that information; on 17 vs 23 Nov it was not, and x/y/z failed (18 to 24%). So x/y/z only works if the phone is held the same way.
+  - The iPhone result is across two different iPhones, which is harder than the protocol intends. The S24 (same phone both sessions) did worse than the iPhones, so its magnetometer looks weaker for this.
+  - n is small (26 and 27 stops, one visit is about 4%).
+- **What changed because of it:** the upload page shows these tested numbers. The rule "phone flat, facing the door" is now required for the place guess, not just nice to have. Uploading any 24-Nov stop to the server scores near 100% because it was trained on it; only new recordings count.
+- **Links:** `phase2/new/upload/` (`README.md`, `walksense.py`, `server.py`, `index.html`, `test_walksense.py`, `out/eval.json`); data `phase2/clean-data/2026-11-24/sesi1/`, `sesi2/` (entry 23).
+
+---
+
+## 25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
+
+- **What we tried:** show the collector's floor sketch on the upload page and light up the red dot of the place the system thinks you are at.
+- **Why:** the user asked for the map in the page, with the red circle lighting up after a scan when the system knows where it is.
+- **How:** `phase2/new/upload/map/make_map.py` renders `phase2/clean-data/2026-11-24/floor-sketch-v1.pdf` (identical to the copy the user sent, `Teks paragraf Anda_20261124_222646_0000.pdf`), finds the red dots by colour (14 on 5F, 11 on 4F) and writes `floor5.png`, `floor4.png`, `places.json`. Dot -> place: route order and metre marks of the 24-Nov walks; on 5F checked against `phase2/map/coordinates_meters.csv` (Exit 5, male toilet, Y5-302 to the south-west; Exit 10, female toilet to the north-east; Y5-202 east; study rooms south-east), which also showed that Google's "Female Bathroom" label sits by the stop the team calls the male toilet. 5F escalator up vs down: compass heading of the three escalator walks (canteen -> down, up -> canteen, up -> down) relative to each other, compared with the two possible layouts. 4F: the 9-dot loop and the escalator/Y4502 triangle match the 4F walks, and the lift landing sits under the 5F lift. Light rule: top-1 probability of at least 0.8 (`LIGHT_P` in `walksense.py`). Server serves only the three map files; readable names come from the manifests.
+- **Result:** every place the model can guess has a dot (14 on 5F, 12 on 4F), checked in `test_walksense.py` (4 tests pass). Escalators: all 6 walk recordings (session 1 iPhone, S24, A55, A56; session 2 iPhone, S24) give the pattern of "down = the south dot of the triangle" (relative headings +78 to +154 and +35 to +87 degrees; predicted +128 and +71; the other layout predicts -127 and -56). Cut-off on the held-out iPhone visits (`out/eval.json`, both directions, 53 visits): at 0.8, 44 lit with 33 right; 9 not lit with 1 right; 34/53 right with no cut-off. Screenshots in `phase2/new/upload/screenshots/` (lit on 5F and 4F, "not sure" ring for a walk sent as a stop at 50%).
+- **Outcome:** success as a UI. Three things are not measured: the dot -> place matching is our reading of the sketch (not confirmed by the collector); the 4F disabled toilet has no dot and is placed by the 5F offset (`inferred`); the 0.8 cut-off was picked on the same test data it is judged on. The model's probabilities are over-confident (52 of 53 held-out visits had a top-1 of at least 0.6, right or wrong).
+- **What changed because of it:** the page now shows where you are on the map instead of only a list. The collector should confirm the dot names in `phase2/new/upload/map/make_map.py` (`REF`).
+- **Links:** `phase2/new/upload/map/` (`make_map.py`, `places.json`, `floor5.png`, `floor4.png`), `index.html`, `server.py`, `walksense.py` (`LIGHT_P`, `place_labels`), `test_walksense.py`, `screenshots/`, `README.md`.
+
+---
+
+## 26. 25 Nov: live mode, phyphox remote access read by the laptop while walking
+
+- **What we tried:** instead of export + upload, the laptop reads the iPhone's phyphox measurement live over the network (phyphox "Allow remote access"), detects walking vs standing, and lights up the place on the map after 10 s standing. Built for the user's iPhone 16 Plus (model iPhone17,4, the session-2 phone; the session-2 README calls it a 16 Pro, but iPhone17,4 is the 16 Plus).
+- **Why:** the user asked for the data to be analysed while it is being collected. Using phyphox (the app the training data was recorded with) keeps the live readings in the same form as the training data; another streaming app might process the magnetometer differently.
+- **How:** `phase2/new/upload/live.py` (`Phyphox` client, `LiveTracker`, `probe`, `check`), `server.py --live <phone url>`, live panel in `index.html`, `test_live.py`. phyphox calls taken from the official web interface's code (`phyphox-webinterface/index.html`): `/get?<buf>=<last>%7C<timebuf>&<timebuf>=<last>` for new samples only, response `buffer` + `status`. The phyphox wiki refused connections, so the `/config` format used to find buffer names is an assumption with fallbacks (export sets, inputs, then common names); `probe` checks it on the real phone. Rules, all from recorded data before any live use: standing = |acc| std over 3 s below 0.4 m/s^2; a place guess after 10 s standing (using up to the last 60 s); floor updated once per stop from its median pressure; a gap of over 5 s in the data ends the current stop.
+- **Result** (`phase2/new/upload/out/live_checks.json`):
+  - |acc| std in 10 s windows: stops p95 0.292 (session 1, 270 windows) and 0.168 (session 2, 260); walks p5 0.82 (session 1, only 4 walk windows are 10 s long) and 1.824 (session 2, 1 window).
+  - Top-1 from only the first N s of each held-out stop: 10 s 16/26 and 17/27; 20 s 16/26 and 17/27; 30 s 17/26 and 17/27; 60 s 17/26 and 17/27.
+  - Held-out live replay (a whole session streamed through `LiveTracker` in 0.5 s steps on its real clock, model from the other iPhone): session 1 with the iPhone17,4 model: 27/27 stops found, 0 extra, floor 27/27, top-1 17/27, top-3 21/27, lit 22 (16 right). Session 2 with the iPhone19,2 model: 26/26, 0 extra, floor 26/26, top-1 17/26, top-3 24/26, lit 22 (16 right).
+  - Tests: `test_walksense.py` 4 pass, `test_live.py` 1 pass (fake phyphox replaying session-2 recordings 20x faster: buffers found through `/config`, 4/4 stops named, floor 5, 5, 4, 4, walking/standing/stop states, steps counted, saved stream readable by `read_folder`).
+- **Outcome:** works on recorded data; not yet tried with a real phone. Failures on the way, all fixed before the numbers above:
+  - FAILURE: the first replay joined the recordings end to end without the real 80-minute break; pressure rose about 1 hPa in that break and flipped the floor (floor 22/27, one stop missed). On the real clock the long-gap rule applies (27/27).
+  - FAILURE: two stops with no recorded walk between them (the stairs were not recorded) merged into one stand; a data gap of over 5 s now ends a stop.
+  - FAILURE: a check meant for gaps reset every stand after 6 s, so no stop was found (0/27); removed.
+  - The step counter crashed on walk segments shorter than its smoothing window; steps are now counted only after 2 s of walking.
+  - Screenshot set-up: when the server joined a fake phone mid-route it missed the stops before the stairs and kept 5F; in real use the server starts first (or tap "I'm on 4F").
+- **What changed because of it:** for the demo a stop needs only 10 s standing, not 60 s. Every live walk is saved under `live_runs/`, so live use also collects data.
+- **Links:** `phase2/new/upload/live.py`, `server.py`, `index.html`, `test_live.py`, `out/live_checks.json`, `README.md` (Live mode), `screenshots/live-walking-5F.png`, `screenshots/live-stop-4F.png`.
+
+---
+
+## 27. 25 Nov: live mode: place after 3 s, walking dot, play/pause recordings
+
+- **What we tried:** (1) name the place after 3 s of standing instead of 10 s; (2) a dot that moves along the corridors while walking, so the position is shown without stopping; (3) save every phyphox play..pause from live mode as a ZIP in `recordings/`. All three asked for by the user.
+- **Why:** 10 s at every stop is slow for a user; the stops-only answer leaves the map empty while walking; live walks should also become data.
+- **How:**
+  - `live.py`: `NAME_AFTER_S` 10 -> 3, counted from the start of the still 3 s (so about 3 s after stopping); `save_recording()` and the play/pause logic in `run()`; `check()` now also tests 3 s and 6 s stands and the walking dot. A phone that cannot be reached now says so (before, it said "no buffers").
+  - `route.py` (new): the corridors are the recorded walks (both directions). Each gets a tilt-compensated compass heading (middle 60 % of the walk, so the local magnetic distortion of that corridor is included) and a step count from training walks. While walking, the dot takes the corridor out of the current place whose heading is closest to the last 2 s, can still switch during the first 30 % (turning out of a door), and moves by steps walked / corridor steps; past the end it takes the next corridor. It starts from the last named stop.
+  - `server.py`: the old `live_runs/` stream folder is replaced by `recordings/` (gitignored). `index.html`: blue dot, "last recording saved" line.
+- **Result** (`phase2/new/upload/out/live_checks.json`):
+  - Top-1 from the first 3 s of each held-out stop: 16/26 and 16/27 (6 s: 16/26 and 16/27; 10 s: 16/26 and 17/27; 60 s: 17/26 and 17/27).
+  - Held-out live replay with the 3 s rule: stops found 27/27 and 26/26, extra stops 2 and 0 (10 s rule: 0 and 0), floor 27/27 and 26/26, top-1 17/27 and 17/26, top-3 21/27 and 24/26, lit 22 (16 right) both ways.
+  - Walking dot, held out (corridors from one session, the other session's 28 walks, each started at its true start place): right first corridor 28/28 (sesi1 -> sesi2) and 26/28 (sesi2 -> sesi1); end within 3 m of the true end 23/28 and 25/28; median end error 0.6 m and 0.8 m, p90 3.3 m and 2.9 m. Map scale from the corridors: 0.0617 and 0.0571 m per pixel.
+  - Tests: 5 pass. `test_live.py` now also checks that the dot appears on the first walk starting from the canteen, and that pausing the fake phone saves exactly one ZIP in `recordings` that `read_zip` reads as iPhone17,4.
+- **Outcome:** success on recorded data, not yet on a real phone. The walking dot is only as good as the stop it starts from (top-1 about 17/27): a wrongly named stop sends the dot down the wrong corridors. Each walk was tested alone from its true start, not a whole route. FAILURE on the way: the replay scorer matched stops only from 1 s before a recorded stop; with the 3 s rule a stop is stamped about 2 s earlier, so it first scored 3/27 found and 29 extra. Widened to 5 s; the tracker itself did not change.
+- **What changed because of it:** a stop now takes about 3 s. With the shorter rule a pause of 3 s during a walk also counts as a stop (2 extra on session 1).
+- **Links:** `phase2/new/upload/live.py`, `route.py`, `server.py`, `index.html`, `test_live.py`, `out/live_checks.json`, `screenshots/live-walking-dot-5F.png`.
+
+---
+
+## 28. 25 Nov: cross-day rerun on graph-v2 merged places (v1 kept)
 
 - **What we tried:** the open item from entry 22: score `crossday.py` on the graph-v2 merged places (study rooms -> `sr9`, lift+stairs -> `lift_stairs` / `lift_stairs_4F`) and compare exact and area accuracy with v1.
 - **Why:** to see whether merging places that a fingerprint can't separate changes the numbers before anyone uses v2 for the map/UI or quotes it.
@@ -330,12 +406,12 @@ Contents:
   - Wi-Fi (9 core visits only), baro floor + RSSI RF: v1 2/9 -> v2 6/9 (chance 11% -> 17%). Four of the 9 Wi-Fi test visits are study rooms, so merging them decides most of this jump.
   - Floor results are unchanged (42/42 and 26/26 step tracking).
 - **Outcome:** success as a check; the merge is cosmetic for the magnetometer. It gains exactly one exact visit (17-Nov BM04, sr11 predicted sr9) and cannot change area accuracy, because the merged spots were already in one area. The Wi-Fi jump rests on 9 visits and mostly on the study rooms becoming one class, so it is not evidence that Wi-Fi works.
-- **What changed because of it:** v2 is fine for the map/UI (one study-room circle, one lift/stairs circle per floor) and costs nothing in accuracy. When quoting accuracy, say which place list was used; area accuracy is the same either way. The day-3 (24-Nov) evaluation (entry 25) uses the graph-v2 names.
+- **What changed because of it:** v2 is fine for the map/UI (one study-room circle, one lift/stairs circle per floor) and costs nothing in accuracy. When quoting accuracy, say which place list was used; area accuracy is the same either way. The day-3 (24-Nov) evaluation (entry 29) uses the graph-v2 names.
 - **Links:** `phase2/new/cross-day/crossday.py` (`--v2`), `phase2/new/cross-day/compare_v1_v2.py`, `phase2/new/cross-day/out-v2/` (`results.json`, `v1_vs_v2.json`, `v1_vs_v2.csv`, `summary_table.csv`, figures), `phase2/new/cross-day/README.md` (graph-v2 section), `.gitignore` (`.venv/`).
 
 ---
 
-## 25. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
+## 29. 25 Nov: 24-Nov evaluation without leakage: cross-session, cross-day, walk endpoints, barometer floor
 
 - **What we tried:** honest place accuracy on the new 24-Nov two-session data (entry 23): train one session, test the other, per phone; train 23 Nov, test 24 Nov with the same handset; tilt-corrected features (now possible at stops, the accelerometer was logged); barometer floor per session.
 - **Why:** 23-Nov same-visit numbers were inflated by leakage and the 17-Nov cross-day test was weak (18 to 24%). Session 2 is an independent second pass, so it gives a real train/test split.
@@ -358,11 +434,11 @@ Contents:
 
 ---
 
-## 26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
+## 30. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
 
 - **What we tried:** check whether the 24-Nov WiGLE logs fixed the problem of entry 12 (each access point logged about once), and whether Wi-Fi can locate across sessions.
 - **Why:** session 1's `summary.json` shows 1789 rows inside the stop dwell vs 11808 "approach" rows, which looked like the same logging limit.
-- **How:** `phase2/new/day3/wifi_check.py` on all 9 WiGLE logs (23 Nov, 24 s1, 24 s2): rows per BSSID per log; whether a repeat row is stronger than every earlier row of that BSSID; rows per BSSID inside one 60 s stop; how many stops a BSSID is heard at; overlap (Jaccard) of BSSID sets between sessions for the same place vs other places. Each row is assigned to the nearest stop in time (in the dwell = in-window, else within 120 s). Classification with Wi-Fi is in `evaluate.py` (entry 25), using the S24 scanner only (the same scanner phone in every session).
+- **How:** `phase2/new/day3/wifi_check.py` on all 9 WiGLE logs (23 Nov, 24 s1, 24 s2): rows per BSSID per log; whether a repeat row is stronger than every earlier row of that BSSID; rows per BSSID inside one 60 s stop; how many stops a BSSID is heard at; overlap (Jaccard) of BSSID sets between sessions for the same place vs other places. Each row is assigned to the nearest stop in time (in the dwell = in-window, else within 120 s). Classification with Wi-Fi is in `evaluate.py` (entry 29), using the S24 scanner only (the same scanner phone in every session).
 - **Result** (`phase2/new/day3/out/wifi_diagnosis.json`, `results.json`):
   - Inside one stop, each BSSID appears a median of 1.04 (23 Nov), 1.02 (24 s1) and 1.08 (24 s2) times, while the scanner logged a median of 8, 6 and 12.5 distinct scan times per stop.
   - Repeat rows that are stronger than all earlier rows of that BSSID: 0.898 to 1.000 across the 9 logs.
@@ -376,7 +452,7 @@ Contents:
 
 ---
 
-## 27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
+## 31. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
 
 - **What we tried:** the user's design: one kNN over every stop recording of every session and phone (23 Nov, 24 s1, 24 s2), where each sensor group has its own learned weight in the distance (w_B for |B|, w_xyz, w_tilt, w_wifi, w_baro), with the weights and k tuned by cross-validation. Scored four ways on purpose, to show the leakage gap next to the honest numbers.
 - **Why:** to see how far fusing everything gets, and to make the leakage visible: random row/window splits are exactly what produced the old 94%.
@@ -387,13 +463,13 @@ Contents:
   - Whole stops, grouped CV: **58/202 = 28.7%** [22.9 to 35.3]; equal weights 54/202; x/y/z only 52/202.
   - Leave one session out: **74/202 = 36.6%** [30.3 to 43.5]; equal weights 71/202; x/y/z only 64/202; Wi-Fi only 29/202; baro only 16/202. Per fold: test 23 Nov 9/42 (weights B 0.1, xyz 0.5, tilt 0, wifi 0.3, baro 0.1, k 3), test 24 s1 42/108 (0.1, 0.6, 0, 0.2, 0.1, k 3), test 24 s2 23/52 (0, 0.2, 0, 0.3, 0.5, k 25).
   - Deployable weights: **w_B 0.1, w_xyz 0.7, w_tilt 0, w_wifi 0.1, w_baro 0.1, k 25** (inner leave-one-session-out accuracy 0.46).
-- **Outcome:** the leakage demonstration worked: 99.7% (random) -> 55.4% (by recording) -> 28.7% / 36.6% (honest). The second step is a leak we had not named before: Wi-Fi and the floor belong to the stop, not the phone, so holding out one phone of a 4-phone stop still leaves its Wi-Fi vector in training, and the tuner puts 0.7 of the weight on Wi-Fi. Under honest splits Wi-Fi gets 0 to 0.3 and x/y/z carries the result. Learned weights beat equal weights by 3 to 4 recordings, inside the interval. FAILURE: pooling all phones is worse than a per-phone model: the pooled model gets 9/42 on 23 Nov, the same-handset per-phone kNN gets 18/42 on the same stops (entry 25), because the phones' magnetometers disagree.
+- **Outcome:** the leakage demonstration worked: 99.7% (random) -> 55.4% (by recording) -> 28.7% / 36.6% (honest). The second step is a leak we had not named before: Wi-Fi and the floor belong to the stop, not the phone, so holding out one phone of a 4-phone stop still leaves its Wi-Fi vector in training, and the tuner puts 0.7 of the weight on Wi-Fi. Under honest splits Wi-Fi gets 0 to 0.3 and x/y/z carries the result. Learned weights beat equal weights by 3 to 4 recordings, inside the interval. FAILURE: pooling all phones is worse than a per-phone model: the pooled model gets 9/42 on 23 Nov, the same-handset per-phone kNN gets 18/42 on the same stops (entry 29), because the phones' magnetometers disagree.
 - **What changed because of it:** report the honest splits only, with the leaky ones labelled as illustrations. For a deployable model, train per phone (or calibrate each phone's magnetometer) instead of pooling. New sessions are one line in `config.json` and add one leave-one-session-out fold automatically.
 - **Links:** `phase2/new/day3/fused_knn.py`, `phase2/new/day3/gknn.py`, `phase2/new/day3/out/fused_knn.json`, `.../fused_model.json`, `.../fused_window_predictions.csv`; previous commit `1a28a48`.
 
 ---
 
-## 28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
+## 32. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
 
 - **What we tried:** the tracker of entry 20 (v2 parameters, `tracking/tracker.py` reused unchanged) on 24 Nov with graph-v2, and a replay file the circle UI can load.
 - **Why:** the 23-Nov tracker test had no fingerprint for half its stops; on 24 Nov every place has a fingerprint from an independent session.
@@ -402,27 +478,27 @@ Contents:
   - Tracker: exact **20/26** [58 to 89%], area 20/26, within one neighbour 22/26, top-3 21/26, floor 24/26.
   - Snapshot kNN (crossday.py recipe): exact 15/26, area 18/26, floor 26/26. Emission only: 15/26. Tracker on arrival (graph + steps only): 13/26.
   - Floor tracking on session 2: 26/26 (threshold 0.243 hPa). 28 test walks, 401 steps, none flagged unreliable; every walked line exists in graph-v2.
-  - The tracker's two floor errors are the two 4F escalator stops, both put on the 5F `escalator_up` with probability 1.0: the very strong field there in session 2 (entry 29, `magnetic_check`) looks most like the strongest floor-5 fingerprint, and the magnetic evidence over 60 s outweighs the 0.99 floor weight.
+  - The tracker's two floor errors are the two 4F escalator stops, both put on the 5F `escalator_up` with probability 1.0: the very strong field there in session 2 (entry 33, `magnetic_check`) looks most like the strongest floor-5 fingerprint, and the magnetic evidence over 60 s outweighs the 0.99 floor weight.
   - "Confirmed" frames: 2095 of 3122 stop frames, 1830 of them on the right circle. Replay: `out/replay_24nov_s2.json`, 3560 frames, same keys as `tracking/out/replay_23nov.json` (checked in Python against the UI's id/zone rules; no browser was available in this session to open it).
-- **Outcome:** success with the entry-20 caveats: the graph and the walk order come from the route both sessions walked, and every walk is one recorded line, so 20/26 is optimistic. The snapshot here (15/26, 2 s windows, sklearn per-floor kNN) differs from entry 25's 12/26 for the same split (5 s windows, `gknn.py`), so window length matters by a few stops.
+- **Outcome:** success with the entry-20 caveats: the graph and the walk order come from the route both sessions walked, and every walk is one recorded line, so 20/26 is optimistic. The snapshot here (15/26, 2 s windows, sklearn per-floor kNN) differs from entry 29's 12/26 for the same split (5 s windows, `gknn.py`), so window length matters by a few stops.
 - **What changed because of it:** the circle UI can show a 24-Nov replay without code changes: `phase2/new/circle-ui/index.html?data=../day3/out/replay_24nov_s2.json` over http. The 23-Nov replay and the UI are untouched. A test walk that leaves the recorded route is still needed to measure the tracker without the optimistic parts.
 - **Links:** `phase2/new/day3/track24.py`, `phase2/new/day3/out/track24_results.json`, `.../track24_visits.csv`, `.../replay_24nov_s2.json`; `phase2/new/tracking/tracker.py` (unchanged); previous commits `1a28a48`, `3b9292c`.
 
 ---
 
-## 29. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
+## 33. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
 
 - **What we tried:** figures for the report/video and a way for the team to "see the data": feature-space embeddings per sensor group and for the fused space, per-place |B| and pressure, a nearest-neighbour "confusion as a graph" on the graph-v2 layout, and an interactive HTML explorer. Replaces the leaky pilot's `phase2/old/positioning-pilot/out/magnetic_pca.png` (left untouched in `old/`).
 - **Why:** the user asked to see clusters and drift between sessions, not only accuracy numbers.
 - **How:** `phase2/new/day3/visualise.py` (matplotlib PNGs; at most three categorical colours per static chart with places as text labels; `explore.html` uses plotly.js 2.35.2 from a CDN, pinned with an integrity hash, data embedded). Embeddings: PCA and t-SNE of |B|+xyz (all windows) and |B|+tilt (24 Nov), t-SNE on the fused distance with the deployable weights, MDS of the Wi-Fi distance (one dot per stop). `run_all.sh` reruns everything in order. `evaluate.py` now also writes `magnetic_check` and the stops that floor tracking got wrong (`step_tracking_wrong_stops`) so the README's data notes come from a file. The explorer was checked by running its script in Node with a stub plot library (8 views, 26 place traces, 2425 points); no browser was available in this session.
-- **Result:** `phase2/new/day3/out/`: `fig_accuracy_vs_chance.png`, `fig_leaky_vs_honest.png`, `fig_confusion.png`, `fig_floor_detection.png`, `fig_per_place_B_pressure.png`, `fig_knn_neighbour_graph.png`, `fig_embed_*.png` (6), `explore.html`. Data issues found while plotting (`results.json` `magnetic_check`): place medians above 100 uT at the 4F down-escalator in session 2 on both phones (iPhone 147.9, S24 127.7 uT) and at the 4F up-escalator (iPhone 142.5), while the 23-Nov iPhone ranges 32.9 to 58.9 uT. The Wi-Fi MDS shows no grouping of the same place across sessions, matching entry 26. `run_all.sh` reran the whole pipeline from the repo root (5 min 32 s): every file in `out/`, figures included, came out identical except the per-fold run times (`seconds`) in `fused_knn.json`, which were left at the committed values.
+- **Result:** `phase2/new/day3/out/`: `fig_accuracy_vs_chance.png`, `fig_leaky_vs_honest.png`, `fig_confusion.png`, `fig_floor_detection.png`, `fig_per_place_B_pressure.png`, `fig_knn_neighbour_graph.png`, `fig_embed_*.png` (6), `explore.html`. Data issues found while plotting (`results.json` `magnetic_check`): place medians above 100 uT at the 4F down-escalator in session 2 on both phones (iPhone 147.9, S24 127.7 uT) and at the 4F up-escalator (iPhone 142.5), while the 23-Nov iPhone ranges 32.9 to 58.9 uT. The Wi-Fi MDS shows no grouping of the same place across sessions, matching entry 30. `run_all.sh` reran the whole pipeline from the repo root (5 min 32 s): every file in `out/`, figures included, came out identical except the per-fold run times (`seconds`) in `fused_knn.json`, which were left at the committed values.
 - **Outcome:** success.
 - **What changed because of it:** `phase2/new/day3/README.md` documents the run, how to add a session (one `config.json` entry), the name map, the phone/handset table, all results and the data issues. Internal notes only, no report text.
-- **Links:** `phase2/new/day3/visualise.py`, `run_all.sh`, `README.md`, `out/*.png`, `out/explore.html`; commits `643737d` (entry 24), `1a28a48` (entries 25, 26), `3b9292c` (entry 27), `113d90c` (entry 28).
+- **Links:** `phase2/new/day3/visualise.py`, `run_all.sh`, `README.md`, `out/*.png`, `out/explore.html`; commits `643737d` (entry 28), `1a28a48` (entries 29, 30), `3b9292c` (entry 31), `113d90c` (entry 32).
 
 ---
 
-## 30. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
+## 34. 25 Nov: interactive kNN playground (slide features, see the neighbours and the predicted place)
 
 - **What we tried:** a single HTML page where sliders position a query point on the stop-window scatter and the page shows the k nearest windows and the predicted place, as a demo for the video and for the team to build intuition. Internal team tool, not report text.
 - **Why:** the user wanted "a k-nearest-neighbour graph where you slide certain variables to position a point and see which cluster (place) it belongs to".
@@ -434,10 +510,10 @@ Contents:
 
 ---
 
-## 31. 25 Nov: per-phone filtering and colouring in the playground and the explorer
+## 35. 25 Nov: per-phone filtering and colouring in the playground and the explorer
 
 - **What we tried:** make the data viewable per phone (iphone, s24, a55, a56) in both interactive pages. The playground already had phone checkboxes, but unlabelled in the last card, and the user did not find them. Internal team tool, not report text.
-- **Why:** the phones' magnetometers disagree (entries 14, 27) and the README recommends a same-phone test, so the team wants to see each phone's windows on their own and test "train on the same phone only".
+- **Why:** the phones' magnetometers disagree (entries 14, 31) and the README recommends a same-phone test, so the team wants to see each phone's windows on their own and test "train on the same phone only".
 - **How:** edited the generators, not only the HTML: `phase2/new/day3/playground_template.html` (+ `playground.py`, unchanged) and `visualise.py`, then reran `visualise.py` and `playground.py`. Playground: a labelled **Phone** dropdown at the top next to Colour/View (all phones plus each phone, with window counts); the filter card now has labelled "Sessions:" and "Phones:" rows; dropdown and checkboxes are two views of the same state (several ticked phones show "custom (several)"); **Colour by place / phone** toggle (shape stays session, place goes first in the hover); "Try it" has a Phone dropdown for the random window and a "train on same phone only" checkbox (with the note that "iphone" is two handsets). The training-mask rule moved into the CORE block as `buildMask()` so the Node check runs the page's own filtering. Explorer: Phone dropdown (counts per phone for the current view), Colour by place/phone toggle, every point now carries a phone key (the Wi-Fi view counts as s24, the barometer view as iphone). `playground_check.py`/`.js`: new cases that go through `buildMask` (single-phone s24 with own session held out, single-phone iphone with whole stop held out, a55 only, "same phone only"), plus a check that the page's mask equals an independent numpy mask.
 - **Result:** windows per phone (from `data.load()`, shown in the page labels): iphone 1140, s24 636, a56 325, a55 324 (total 2425); per phone and session: iphone 504 (23 Nov) / 324 (24 s1) / 312 (24 s2), s24 324 (24 s1) / 312 (24 s2), a55 324 and a56 325 (24 s1 only). `playground_check.py`: JS prediction equals sklearn in 960/960 cases (the earlier 720 plus 240 new single-phone and same-phone cases, 60 per setting), same neighbour set in all, largest vote-share difference 1.3e-15, and the page's training mask equals the numpy mask in 960/960. Rendered headless in Chromium (playwright-core), desktop 1280 and 390 px, no horizontal scroll, no console errors; selecting s24 in the dropdown ticks only s24 in the filter card (636 of 2425 windows used), "random window + s24 + same phone only" trained on 324 windows, all nearest neighbours s24. Screenshots: `phone_*.png` in the session scratchpad (not committed).
 - **Outcome:** success. A first run of the new check gave 932/960 only because my numpy mask did not implement the "whole stop" hold-out (the page was right); fixed in the check, so that is a bug in the check, not in the page.
@@ -446,10 +522,10 @@ Contents:
 
 ---
 
-## 32. 25 Nov: the phone is the real handset (ip16 / ip18), all-sessions option, phone x session panel
+## 36. 25 Nov: the phone is the real handset (ip16 / ip18), all-sessions option, phone x session panel
 
 - **What we tried:** make the phone identity in the whole day-3 pipeline the real handset, read per recording from the source data, instead of one lumped "iphone". Internal team tool, not report text.
-- **Why:** two different iPhones were used (entries 14, 25), and the user confirmed it and named them: an iPhone 16 and an iPhone 18, labels `ip16` (iPhone17,4) and `ip18` (iPhone19,2). The per-phone filters/colours in `out/knn_playground.html` and `out/explore.html`, the "same phone only" playground test and the per-phone counts all still treated both as one phone (entry 31: "iphone 1140 windows").
+- **Why:** two different iPhones were used (entries 14, 29), and the user confirmed it and named them: an iPhone 16 and an iPhone 18, labels `ip16` (iPhone17,4) and `ip18` (iPhone19,2). The per-phone filters/colours in `out/knn_playground.html` and `out/explore.html`, the "same phone only" playground test and the per-phone counts all still treated both as one phone (entry 35: "iphone 1140 windows").
 - **The assumption that was wrong:** until now the code keyed everything on the sensor slot ("iphone", "s24", "a55", "a56"), and the handset behind the iPhone slot was only noted by hand in READMEs and result notes. That was never wrong inside one session (each session has one iPhone for stops), but (a) the playground's "same phone only" for the iPhone mixed ip16 (23 Nov, 24 s2) with ip18 (24 s1), (b) the 23-Nov walk endpoints were hard-coded as iPhone19,2, (c) `track24.py` hard-coded its device text, (d) the explorer's Phone filter and counts merged both handsets.
 - **How:** (1) new `phone_map.py`: reads `meta/device.csv` (`deviceModel`) of every raw ZIP (outer and nested) for 23 Nov, 24 s1, 24 s2, joins it to the cleaned manifests / `sessions.csv` by source ZIP name, writes `phase2/new/day3/phone_map.csv` (one row per recording: session, recording, type, sensor slot, source ZIP, device model, phone label, manifest model, status) and `out/phone_map_summary.json`, and exits non-zero on an unknown model, a raw/manifest mismatch or an unfound ZIP; it is the first step of `run_all.sh`. (2) `config.json` gets a `phones` map: model id -> `id` (stable key) and `display` (shown in the HTML pages and figures; rename it there, e.g. to "Michael's iPhone", rerun, no code change). The model-to-"iPhone 16/18" step is the user's statement (25 Nov), not something in the data. (3) `data.py`: the `phone` column is now the handset id, a new `slot` column keeps the sensor slot; visits get `handsets` and `iphone_handset`; the 23-Nov walk endpoints take their handset per walk from `sessions.csv`. `evaluate.py`, `track24.py`, `visualise.py`, `playground.py` use the handset; result keys keep the slot name and every split states its handsets. (4) `track24.py` also runs a same-handset variant. (5) Playground and explorer pages show the handset display name + model id in labels and hovers. (6) The two additions the user asked for: an "any session" option in the Try-it Session dropdown (the hold-out still applies to the loaded window's own session/stop/recording) and a top-level Session dropdown next to Phone, synced with the session checkboxes; and a "How each phone performs across sessions" panel (heatmap of correct/total per recording and per window, same-phone or all-phones training, live in the page's k and weights, grey cells where a phone has no data, cross-handset marker, hover lists places with hits and misses), exported from Python by `phone_matrix.py` to `out/phone_session_matrix.csv/.json`.
 - **Result (mapping):** 407 recordings (79 on 23 Nov, 220 on 24 s1, 108 on 24 s2), all matched to a raw ZIP, 0 undetermined, raw model equals manifest model everywhere (`out/phone_map_summary.json`). 23 Nov iPhone slot: 42 stops ip16, 37 walks ip18 (so that session mixes both, by recording type); 24 s1: ip18 on all 55 iPhone recordings (plus s24 55, a55 55, a56 55); 24 s2: ip16 on all 54 (plus s24 54). The raw 14 and 17 Nov ZIPs (not used by day 3) also hold both iPhones (23 iPhone19,2 and 26 iPhone17,4 each). No model id other than the five in `config.json`. Windows per phone: ip16 816 (504 on 23 Nov + 312 on 24 s2), ip18 324 (24 s1), s24 636, a55 324, a56 325 (total 2425; before: iphone 1140).
@@ -460,10 +536,10 @@ Contents:
 - **What changed because of it:** README Phones section and tables relabelled (ip16 / ip18), per-phone window counts, section f (same-handset variant) and new section g; `phone_map.csv` is the audit trail; `run_all.sh` runs `phone_map.py` first. Unchanged: `prep/*`, the raw ZIPs, the cleaned data.
 - **Links:** `phase2/new/day3/phone_map.py`, `phone_map.csv`, `phone_matrix.py`, `config.json`, `data.py`, `evaluate.py`, `track24.py`, `visualise.py`, `playground.py`, `playground_template.html`, `playground_check.py`, `out/phone_map_summary.json`, `out/phone_session_matrix.csv`, `out/knn_playground.html`, `out/explore.html`; the commit that adds this entry.
 
-## 33. 25 Nov: place filter and a "where does the variance come from" panel (playground and explorer)
+## 37. 25 Nov: place filter and a "where does the variance come from" panel (playground and explorer)
 
 - **What we tried:** add a place filter next to the phone and session filters, and a panel that splits the spread of the window values into within-recording noise, between-phone, between-session and between-place parts, so the team can see where the variance comes from. Internal team tool, not report text.
-- **Why:** the user asked to "filter place as well, so I know where the variance comes from". The phone and session filters (entries 31, 32) show that the same place looks different on different handsets and days, but not how much, or at which places.
+- **Why:** the user asked to "filter place as well, so I know where the variance comes from". The phone and session filters (entries 35, 36) show that the same place looks different on different handsets and days, but not how much, or at which places.
 - **How:** (1) Place filter in `out/knn_playground.html` (template `playground_template.html`): a top Place dropdown (all, all floor 5, all floor 4, one place) next to Phone and Session, a checklist with all/none in the filters card kept in sync with it, and a "filter training too" tickbox (default on; off = hide points only, the kNN keeps the full bank). `buildMask` in the checked CORE block got the place rule and a draw/train distinction. Colour by got a third option, session (shape = phone then); selecting a single place switches place colouring to phone; axes zoom to the drawn windows when places are filtered. The same dropdown, checklist and colour-by-session are in `out/explore.html` (`visualise.py`). (2) Variance panel in the playground: `varianceDecomp` / `varianceFeature` / `placeCells` in the CORE block, `variance.py` as the python reference. Five exactly nested sums of squares per feature (between places, between sessions, between phones, between recordings of one place+session+phone, within recording), window-weighted, in two nestings (session first: place > session > phone; phone first: place > phone > session), for |B|, B_x, B_y, B_z, x/y/z pooled, B_vertical, B_horizontal and pressure. Stacked bar per feature plus a context bar with all places, a table of shares and sd, a "Method" fold-out, and a per-place table (mean +- sd of |B| and B_vertical per phone x session, the furthest cell shaded). (3) `playground.py` calls `variance.export` and writes `out/variance_by_place.csv/.json` and `out/variance_cells_by_place.csv`; the embedded `hpa` column is now the pressure of the window's own handset (it was the iPhone's pressure for every window, unused until now; A55/A56 have none). (4) `playground_check.py` + `playground_check.js` extended.
 - **Result (checks, `playground_check.py` exit 0):** all earlier checks unchanged (1320/1320 predicted places agree with sklearn, 0 of 1320 mask differences, 70/70 matrix cells equal the python reference). New: the page's training mask and drawn mask equal independent numpy masks in 40/40 random place-filter cases (place subsets x filter-training on/off x floor x session x hold-out); the page's variance decomposition equals `variance.py` (and `out/variance_by_place.json`) in 16/16 feature x nesting results at the default settings, at 3 single places (canteen, escalator_down_4F, disabled_toilet), at all floor 5 and at a combined phone/session/place filter, the five pieces add to the total in every case, and the per-place cell tables equal in 182/182 cells (default) and in every cell of the other cases.
 - **Result (default settings, all 2425 windows, share of total variance, session-first nesting, `out/variance_by_place.csv`):** |B|: within recording 0.9%, between recordings 2.3%, between phones 51.5%, between sessions 31.4%, between places 13.8% (phone-first nesting: phones 44.4%, sessions 38.5%). x/y/z pooled: 0.7%, 2.3%, 31.2%, 10.4%, 55.2% (phone-first: 23.9% and 17.8%). B_vertical: places 22.7%, phones 64.5%; B_horizontal: places 10.9%, phones 78.0%; pressure: places 3.4%, phones 81.7%, sessions 14.9%, no window noise. Largest between-session + between-phone drift for |B| (sd in uT): escalator_down_4F 42.1, escalator_up_4F 39.5, disabled_toilet 29.9, escalator_down 21.1, y5401 20.6; for x/y/z pooled escalator_down_4F 71.0, escalator_up_4F 65.1, disabled_toilet 41.0, escalator_down 37.0, lt1a 31.0.
@@ -485,30 +561,38 @@ Contents:
 - **Small n.** 9 revisit visits and 17 cross-day visits: one visit is 6 to 11%. Present them as first estimates.
 - **A tracker needs a way back.** Limiting moves to neighbouring circles without a small "could be anywhere" share meant one wrong stop was never corrected (entry 20, v1).
 - **A map can't replace a fingerprint.** Where a place had no fingerprint in training, the graph did not find it (0/22 on 23 Nov); it helps most when every place has a fingerprint and the magnetometer is weak (cross-day, area 12/17 vs 7/17).
-- **Merging places only renames errors inside an area.** graph-v2 gained one exact cross-day visit and no area visits (entry 24); a merge can't fix a weak fingerprint, and "revisits" created by merging different spots are not real revisits.
-- **Group by the thing that is shared, not by the file.** Wi-Fi and the floor belong to a stop, not to a phone: holding out one phone of a 4-phone stop gave 55% instead of 29% (entry 27). Random window splits gave 99.7%.
-- **Check the device ID, not the phone's nickname.** "iphone" was two handsets on 24 Nov; the same handset across days gave 13/26 and 18/42, a different one less (entry 25). Pooling all phones in one kNN was worse than one model per phone (entry 27).
-- **Step tracking on the barometer breaks over long pauses.** Weather moved the pressure 0.833 hPa during a break and four stops went to the wrong floor (entry 25).
-- **A same-day win can vanish across days.** Tilt correction helped on 23-Nov walk endpoints (39% vs 0%) but added nothing across days or at stops (entry 25).
-- **Check the check.** The first sklearn comparison of the playground disagreed in 8 of 720 cases because the reference mishandled a missing feature (entry 30); compare the missing-data rules, not only the maths.
-- **Put the filter rule in the code that is tested.** The playground's training-mask rule now lives in the checked block and the check compares it with an independent mask (entry 31); a mask bug would otherwise hide behind a correct kNN.
-- **A device ID in the metadata beats a label in a README.** The phone is now read per recording from each ZIP's `device.csv` and checked against the manifests (entry 32); the numbers did not change because each session had one iPhone, but the interactive pages and the "same phone" tests had been mixing two handsets.
-- **Most of the |B| spread is the handset and the day, not the place.** At the default settings the place explains 13.8% of |B| and 55.2% of x/y/z, while phone plus session explain 82.9% of |B| (entry 33); the per-place table shows which places drift most (the escalators, the disabled toilet).
+- **Merging places only renames errors inside an area.** graph-v2 gained one exact cross-day visit and no area visits (entry 28); a merge can't fix a weak fingerprint, and "revisits" created by merging different spots are not real revisits.
+- **Group by the thing that is shared, not by the file.** Wi-Fi and the floor belong to a stop, not to a phone: holding out one phone of a 4-phone stop gave 55% instead of 29% (entry 31). Random window splits gave 99.7%.
+- **Check the device ID, not the phone's nickname.** "iphone" was two handsets on 24 Nov; the same handset across days gave 13/26 and 18/42, a different one less (entry 29). Pooling all phones in one kNN was worse than one model per phone (entry 31).
+- **Step tracking on the barometer breaks over long pauses.** Weather moved the pressure 0.833 hPa during a break and four stops went to the wrong floor (entry 29).
+- **A same-day win can vanish across days.** Tilt correction helped on 23-Nov walk endpoints (39% vs 0%) but added nothing across days or at stops (entry 29).
+- **Check the check.** The first sklearn comparison of the playground disagreed in 8 of 720 cases because the reference mishandled a missing feature (entry 34); compare the missing-data rules, not only the maths.
+- **Put the filter rule in the code that is tested.** The playground's training-mask rule now lives in the checked block and the check compares it with an independent mask (entry 35); a mask bug would otherwise hide behind a correct kNN.
+- **A device ID in the metadata beats a label in a README.** The phone is now read per recording from each ZIP's `device.csv` and checked against the manifests (entry 36); the numbers did not change because each session had one iPhone, but the interactive pages and the "same phone" tests had been mixing two handsets.
+- **Most of the |B| spread is the handset and the day, not the place.** At the default settings the place explains 13.8% of |B| and 55.2% of x/y/z, while phone plus session explain 82.9% of |B| (entry 37); the per-place table shows which places drift most (the escalators, the disabled toilet).
+- **Hold the phone the same way and raw x/y/z works.** With the phone facing the door at every stop, x/y/z got 17/26 and 17/27 across sessions (entry 24) where it got 18 to 24% across days without that rule.
+- **Compare pressure with a few recent readings, not one.** A single odd reading near a vent flipped the floor; the median of the last 6 did not (entry 24).
+- **Replay recorded data on its real clock.** Squeezing out the breaks made weather drift look like a floor change (entry 26).
+- **A few seconds of standing hold almost all the place information.** 3 s gave the same top-1 as 10 s (entry 27); the field at a spot does not change.
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
 
-- **Day-3 data (24 Nov) is in and evaluated (entries 25 to 29).** Still worth collecting if time allows (deadline 30 Nov): (1) a test walk that leaves the recorded route, with "I'm here" taps, to measure the tracker without the optimistic parts; (2) one handset for every session (the 24-Nov "iphone" was two devices, now labelled ip16 and ip18; ip18 has stops in 24 s1 only, so it has no same-handset cross-session test); (3) a Wi-Fi logger that saves every scan. A further fingerprint session with the same handset would add a fourth leave-one-session-out fold (one line in `phase2/new/day3/config.json`).
-- **Cross-day with the new protocol (entry 25):** same handset 23 Nov -> 24 Nov s2 13/26 and the reverse 18/42 (chance 3.8%, 26 places), up from 18 to 24% on 17 Nov, still below the 23-Nov 78% revisit number. Only one same-handset day pair exists, so this is one estimate.
-- **Open question: does a scan-every-time Wi-Fi logger make Wi-Fi usable?** Still untested; the 24-Nov WiGLE logs are again new-or-stronger only (entry 26).
-- **Tilt at stops (entry 25):** answered for this protocol: no clear gain over raw x/y/z when the phone is held the same way. It might still matter for a user who holds the phone differently; untested.
+- **Day-3 data (24 Nov) is in and evaluated (entries 29 to 33).** Still worth collecting if time allows (deadline 30 Nov): (1) a test walk that leaves the recorded route, with "I'm here" taps, to measure the tracker without the optimistic parts; (2) one handset for every session (the 24-Nov "iphone" was two devices, now labelled ip16 and ip18; ip18 has stops in 24 s1 only, so it has no same-handset cross-session test); (3) a Wi-Fi logger that saves every scan. A further fingerprint session with the same handset would add a fourth leave-one-session-out fold (one line in `phase2/new/day3/config.json`).
+- **Cross-day with the new protocol (entry 29):** same handset 23 Nov -> 24 Nov s2 13/26 and the reverse 18/42 (chance 3.8%, 26 places), up from 18 to 24% on 17 Nov, still below the 23-Nov 78% revisit number. Only one same-handset day pair exists, so this is one estimate.
+- **Open question: does a scan-every-time Wi-Fi logger make Wi-Fi usable?** Still untested; the 24-Nov WiGLE logs are again new-or-stronger only (entry 30).
+- **Tilt at stops (entry 29):** answered for this protocol: no clear gain over raw x/y/z when the phone is held the same way. It might still matter for a user who holds the phone differently; untested.
 - **17-Nov labels:** 8 of 23 place matches rest on route order. Anyone who remembers that walk can help (see section f of the team summary).
 - **Floor-4 Google Maps pins** are still missing, so the map and routing stop at floor 5.
 - **Unmerged branches** `prep/training`, `prep/map`, `prep/ready` are still local and unmerged; decide later whether any of it is wanted.
 - **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
-- **graph-v2 (entries 22, 24):** done: the merge changes cross-day exact by one visit and area not at all (entry 24). Still open: decide whether v2 replaces v1 for the map/UI; the collector should confirm the two merges match the hand-drawn maps.
-- **Collector to confirm (entry 25, `phase2/new/day3/names_24nov.csv`):** 24-Nov `male_disabled_toilet` = 23-Nov `disabled_toilet`; `y5302_point2` = `y5302_back`; `gate` = `entrance_exit`; which study room the 24-Nov `sr9` stop was at.
-- **24-Nov data questions (entries 28, 29):** what made the field above 100 uT at the 4F escalators in session 2 (both phones); the out-of-order walks in session 2 (floor-5 escalators, and gate -> exit 5 recorded before the gate stop); `sesi2/clean/ROUTE.md` says no Wi-Fi but the session has a WiGLE log; the session READMEs call both iPhones "iPhone 16 Pro" but the device IDs differ (iPhone19,2 and iPhone17,4); the user says they are an iPhone 16 (ip16, iPhone17,4) and an iPhone 18 (ip18, iPhone19,2), so the READMEs are wrong for the second phone. The handsets can be renamed (e.g. to owners) in `phase2/new/day3/config.json` `phones.display`.
-- **Barometer floor rule:** add a guard for long pauses (entry 25) and pre-register it before testing it on new data.
+- **graph-v2 (entries 22, 28):** done: the merge changes cross-day exact by one visit and area not at all (entry 28). Still open: decide whether v2 replaces v1 for the map/UI; the collector should confirm the two merges match the hand-drawn maps.
+- **Collector to confirm (entry 29, `phase2/new/day3/names_24nov.csv`):** 24-Nov `male_disabled_toilet` = 23-Nov `disabled_toilet`; `y5302_point2` = `y5302_back`; `gate` = `entrance_exit`; which study room the 24-Nov `sr9` stop was at.
+- **24-Nov data questions (entries 32, 33):** what made the field above 100 uT at the 4F escalators in session 2 (both phones); the out-of-order walks in session 2 (floor-5 escalators, and gate -> exit 5 recorded before the gate stop); `sesi2/clean/ROUTE.md` says no Wi-Fi but the session has a WiGLE log; the session READMEs call both iPhones "iPhone 16 Pro" but the device IDs differ (iPhone19,2 and iPhone17,4); the user says they are an iPhone 16 (ip16, iPhone17,4) and an iPhone 18 (ip18, iPhone19,2), so the READMEs are wrong for the second phone. The handsets can be renamed (e.g. to owners) in `phase2/new/day3/config.json` `phones.display`.
+- **Barometer floor rule:** add a guard for long pauses (entry 29) and pre-register it before testing it on new data.
+- **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
+- **Walking dot (entry 27):** test a whole route on a real walk (not single corridors from the true start); the dot needs the stop it starts from to be right.
+- **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`.
+- **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
