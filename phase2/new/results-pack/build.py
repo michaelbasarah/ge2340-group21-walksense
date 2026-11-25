@@ -349,7 +349,8 @@ def read_upload():
     for name, r in d["place"].items():
         k, n = parse_frac(r["top1"])
         add(Fact(f"up.{name}.top1", f"upload eval {name} top-1", k, n, r["chance_top1"], "honest", [rel],
-                 f"upload/walksense.py PlaceModel: train on one 24-Nov session's stops, test every stop of the other ({r['devices']}); true floor GIVEN so chance is 1/13 per floor, "
+                 f"upload/walksense.py PlaceModel, leave one session out: key = training sessions -> held-out session; {r['mode']} ({'same phone model' if r['mode'] == 'same_model' else 'another handset of the same phone'}), "
+                 f"{r['devices']}, {r['n_train_stops']} training stops, {r['n_test_stops']} test stops; true floor GIVEN so chance is 1/13 per floor, "
                  f"2 s windows, first/last 5 s skipped", "stop visits", chance_note="per-floor model, floor given"))
         k3, n3 = parse_frac(r["top3"])
         add(Fact(f"up.{name}.top3", f"upload eval {name} top-3", k3, n3, None, "descriptive", [rel], "true place is among the 3 best guesses"))
@@ -361,7 +362,7 @@ def read_upload():
     lc = loadj(rl)
     for key, r in lc["walking_dot"].items():
         add(Fact(f"up.dot.{key}.first", f"walking dot {key}: right first corridor", r["first_corridor_right"], r["walks"], None, "honest", [rl],
-                 "corridors learned from one 24-Nov session, the other session's walks, each started at its TRUE start place (optimistic)", "walks"))
+                 "key = corridors learned from the session before the arrow, walks of the session after it; each started at its TRUE start place (optimistic)", "walks"))
         add(Fact(f"up.dot.{key}.end3m", f"walking dot {key}: end within 3 m", r["end_within_3m"], r["walks"], None, "honest", [rl],
                  "same test; end position on the sketch map within 3 m of the true end", "walks"))
         add(Fact(f"up.dot.{key}.err", f"walking dot {key}: end error median / p90", value=f"{r['end_error_m_median']} m / {r['end_error_m_p90']} m", kind="descriptive", src=[rl],
@@ -374,6 +375,15 @@ def read_upload():
     for k, v in lc["top1_by_standing_time"].items():
         kk, nn = parse_frac(v)
         add(Fact(f"up.standing.{k}", f"top-1 from first N s only, {k}", kk, nn, None, "honest", [rl], "first N seconds of each held-out stop only", "stop visits"))
+
+
+def read_upload_before():
+    rel = CFG["upload_before_eval"]
+    d = loadj(rel)
+    for name, r in d["place"].items():
+        k, n = parse_frac(r["top1"])
+        add(Fact(f"up24.{name}.top1", f"upload app BEFORE the 3-session retrain (24 Nov only) {name} top-1", k, n, r["chance_top1"], "honest", [rel],
+                 "old eval.json (PROCESS-LOG 66): train one 24-Nov session, test the other; true floor GIVEN, 2 s windows", "stop visits", chance_note="per-floor model, floor given"))
 
 
 def read_compare(variant, rel_dir):
@@ -390,7 +400,7 @@ def read_upload_split20(rel_dir):
     for name, r in d["place"].items():
         k, n = parse_frac(r["top1"])
         add(Fact(f"up20.{name}.top1", f"upload eval on 20 s pieces {name} top-1", k, n, r["chance_top1"], "honest", [rel],
-                 f"walksense PlaceModel trained on whole takes, tested on kept 20 s pieces ({r['devices']}); floor given", "20 s pieces"))
+                 f"OLD 24-Nov-only model (computed before the 3-session retrain, PROCESS-LOG 66; not rerun): train on whole takes of one 24-Nov session, test kept 20 s pieces of the other ({r['devices']}); floor given", "20 s pieces"))
 
 
 def read_wifi():
@@ -485,6 +495,7 @@ guard("tilt results", read_tilt, CFG["crossday_dir"])
 guard("tracker results", read_tracker)
 guard("track24 results", read_track24)
 guard("upload eval/live checks", read_upload)
+guard("upload eval before the 3-session retrain", read_upload_before)
 for var, rel_dir in CFG["day3_variants"].items():
     if var != PRIMARY:
         guard(f"upload eval on pieces ({var})", read_upload_split20, rel_dir)
@@ -1069,7 +1080,7 @@ def positioning_rows(variant=PRIMARY, only_fused=False):
             tdef="train 24 s1 (ip18), replay 24 s2 (ip16), graph-v2, per stop visit")
         row("A  Dead reckoning", "walking dot: right first corridor, other session", F("up.dot.sesi1->sesi2.first"),
             note="start place given; chance not defined in file; second direction and end error in numbers.md",
-            tdef="corridors from one 24-Nov session, other session's 28 walks, true start place given",
+            tdef="corridors from the session before the arrow, the other session's 28 walks, true start place given",
             extra=[F("up.dot.sesi2->sesi1.first")])
     row("B  Wi-Fi kNN", "Wi-Fi only (S24 scanner, rows within 120 s)", fz("wifi", "leave_one_session_out"), fz("wifi", "random_LEAKY"), fz("wifi", "by_recording_partly_leaky"),
         note="WiGLE logs a BSSID only when new or stronger: not a fingerprint (entries 12, 30)")
@@ -1198,7 +1209,7 @@ def other_tables():
 
 KNOWN_ISSUES = [
     ("Chance is not one number.", "Stop tests in day3 use chance 1/26 (26 graph-v2 places); upload/out/eval.json uses 1/13 because the true floor is given; cross-day/ uses 1/31 (23-Nov places), 1/15 and 1/12 for core sets; the tracker tests use 1/31 or 1/26. Always quote chance together with n."),
-    ("iPhone 'xyz' cross-session 17/26 vs 12/26.", "upload/out/eval.json gives iPhone s1 to s2 17/26 (floor given, 2 s windows per floor model); day3/out/results.json gives 12/26 for |B|+xyz + floor (floor from step tracking, 5 s windows). Same data, different recipe and chance (1/13 vs 1/26). They are not the same test."),
+    ("iPhone 'xyz' cross-session: upload app vs day3 are different tests.", "upload/out/eval.json (leave one session out; iPhone trained on sesi1 + 25 Nov, tested on sesi2, cross-handset; fact up.iphone sesi1+25nov->sesi2 xyz) gives the true floor and a 2 s window per-floor model, chance 1/13. day3/out/results.json (fact d3.xsession_24s1_to_24s2_iphone) uses floor from step tracking and 5 s windows, chance 1/26. Same data, different recipe and chance. They are not the same test."),
     ("Snapshot kNN differs between files.", "track24 snapshot kNN exact 15/26 (2 s windows, sklearn per floor) vs day3 results.json 12/26 for the same s1 to s2 split (5 s windows, gknn.py); the log (entry 32) states this. In the tracking/ cross-day test the snapshot is 2/17 exact while crossday.py gives 3/17 or 4/17 for the same 23 to 17 test (tracker_results.json reference block)."),
     ("Floor tracking 24 s1: 23/27 vs 27/27.", "day3/out/results.json (jump threshold rule) 23/27 and a fixed threshold 27/27; upload/out/eval.json (median of last 6 readings, long-gap rule) 27/27 for the same session. Different rules."),
     ("Wi-Fi coverage claims.", "PROCESS-LOG entry 12 says the 23-Nov Wi-Fi covers 41/42 stops (counted rows), day3/out/wifi_diagnosis.json says 42/42 (stops_with_any_wifi, all scanners, within 120 s); neither says the data is usable (rows per BSSID per stop is about 1)."),
@@ -1232,8 +1243,8 @@ def write_numbers_md(rows_fig):
         ("7. Tilt (23-Nov walk endpoints) and phone disagreement", lambda f: f.id.startswith("tilt.")),
         ("8. Tracker (HMM) vs snapshot", lambda f: f.id.startswith("trk")),
         ("9. Dead reckoning: steps, stride, walking dot, live replay (upload/, tracking/)", lambda f: f.id.startswith(("pdr.", "up.dot", "up.live", "up.standing"))),
-        ("10. Tian's upload app: held-out test (take level, floor given)", lambda f: f.id.startswith("up.") and (".top1" in f.id or ".top3" in f.id or f.id.startswith("up.floor")) and not f.id.startswith(("up.dot", "up.live", "up.standing", "up20"))),
-        ("11. Tian's app on 20 s pieces", lambda f: f.id.startswith("up20")),
+        ("10. Tian's upload app: leave one session out (take level, floor given; up24 = before the 3-session retrain)", lambda f: f.id.startswith(("up.", "up24.")) and (".top1" in f.id or ".top3" in f.id or f.id.startswith("up.floor")) and not f.id.startswith(("up.dot", "up.live", "up.standing", "up20"))),
+        ("11. Tian's app on 20 s pieces (OLD 24-Nov-only model, not rerun)", lambda f: f.id.startswith("up20")),
         ("12. Wi-Fi diagnosis", lambda f: f.id.startswith("wifi.")),
         ("13. Variance decomposition (all places, session-first)", lambda f: f.id.startswith("var.session_first")),
         ("14. Old pilot (superseded, leaky) and request matching", lambda f: f.id.startswith(("pilot", "rm."))),

@@ -15,6 +15,7 @@
   "crossday_dir": "phase2/new/cross-day/out",
   "tracking_dir": "phase2/new/tracking/out",
   "upload_dir": "phase2/new/upload/out",
+  "upload_before_eval": "phase2/new/upload/out/eval_2026-11-24.json",
   "pilot_results": "phase2/old/positioning-pilot/out/results.json",
   "request_matching_results": "phase2/request-matching/results.csv",
   "clean_data_dir": "phase2/clean-data",

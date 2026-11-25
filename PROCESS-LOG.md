@@ -75,6 +75,7 @@ Contents:
 64. 25 Nov: request matching, hybrid (keyword -> fuzzy -> LLM) and fuzzy keyword scored from the cached LLM answers
 65. 25 Nov: results pack rebuilt with the complete 25 Nov and the new request-matching methods
 66. 25 Nov: Tian's upload app retrained on 24 s1, 24 s2 and 25 Nov; leave-one-session-out evaluation over 3 sessions
+67. 26 Nov: results pack rebuilt on the 3-session upload eval (new `up.*` keys, before-retrain facts `up24.*`)
 - Lessons learned
 - Open questions / next steps
 
@@ -1037,6 +1038,18 @@ Contents:
 
 ---
 
+## 67. 26 Nov: results pack rebuilt on the 3-session upload eval (entry 66); old wording and keys removed
+
+- **What we tried:** make `phase2/new/results-pack/` read the new `upload/out/eval.json` and `live_checks.json` (commit 670ab0a) correctly, reword the upload labels, keep the old 24-Nov eval as a "before", and rebuild.
+- **Why:** the pack still said "train on one 24-Nov session" and its milestone and known-issue text used `iphone sesi1->sesi2`, a key that the new `eval.json` no longer has (its iPhone held-out test is now `iphone sesi1+25nov->sesi2`, trained on 53 stops, cross-handset). Entry 66 asked for this rebuild.
+- **How:** `build.py` `read_upload()`: the fact text now says "leave one session out", reads the mode (`same_model` / `cross_handset`), devices and training/test stop counts from each key; new `read_upload_before()` reads `out/eval_2026-11-24.json` as `up24.*` facts (path from the new `upload_before_eval` key in `config.json`); the 20 s-piece facts (`up20.*`) are labelled as the old 24-Nov-only model, not rerun; section 10 includes `up24.*`; the walking-dot wording is "the session before the arrow, the session after it". `KNOWN_ISSUES` entry 2 rewritten without typed numbers (it named the old 17/26 and 12/26). `timeline_facts.json` 25-Nov milestone now cites `up.iphone sesi1+25nov->sesi2 xyz.top1` and `up24.iphone sesi1->sesi2 xyz.top1` ([24, 66]). `README.md` gets one bullet on the upload keys. Then `.venv/bin/python phase2/new/results-pack/build.py` from the repo root.
+- **Result:** the build printed `done: 1521 facts, 10 figures, 0 missing items`. Spot-check against `out/eval.json` in `numbers.md`: `up.iphone sesi1+25nov->sesi2 xyz` 18/26 (top-3 25/26); `up.iphone sesi2->sesi1 xyz` 17/27 (top-3 22/27); `up.s24 sesi1->sesi2 xyz` 11/26 (top-3 13/26); `up.iphone 25nov->sesi1 xyz` 18/27 (top-3 23/27). All four match the file. Before (`up24.iphone sesi1->sesi2 xyz`, 24 Nov only): 17/26, matching the entry 66 "before" figure. Floor tracking `up.floor.25nov iphone` 26/26. Changed in `out/`: the SVG figures (timestamp and regenerated data only), `numbers.md`, `timeline.md`, `index.html`, `positioning_table.*`.
+- **Outcome:** success for the 3-session upload numbers. Not mapped: no key in the new `eval.json` for the old `iphone sesi1->sesi2` (24 Nov only); it is only available as `up24.*`. The 20 s-piece upload number (`up20.*`, `day3/out-split20_only/upload_eval_split20.json`) was made by the old 24-Nov-only model and was not rerun, so the pack now labels it "OLD 24-Nov-only model". Pre-existing: the top-3 facts in `numbers.md` use the unit "recordings" (a label only; the count is stop visits).
+- **What changed because of it:** the results pack quotes the 3-session leave-one-session-out upload numbers; the 24-Nov-only numbers appear only as "before". The team should decide whether the split20 upload number is rerun with the new app (`day3/upload_eval_split20.py`) before the report quotes it.
+- **Links:** `phase2/new/results-pack/build.py`, `config.json`, `timeline_facts.json`, `README.md`, `out/numbers.md`, `out/timeline.md`; `phase2/new/upload/out/eval.json`, `eval_2026-11-24.json`, `live_checks.json`; commit 670ab0a (entry 66).
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1110,4 +1123,4 @@ Contents:
 - **Request matching (entries 57 to 59):** the team must read and correct the 105 `agent_draft` hard queries in `phase2/request-matching/test_queries.csv` (and the aliases/tags in `destinations.csv`), then rerun `evaluate.py` (dev, then final); the numbers are provisional until then. Open readings: no printer / charging / clinic / computer lab in our list, which exit leads to the MTR, whether the lift is step-free, whether "pintu keluar" means the gate or any exit. Repeat the LLM run once to see its variation (about 128 calls, about 11 min).
 - **Continuous estimate (entries 60, 61):** retune with the 25-Nov data once it is in main (same handset in more sessions would show whether smoothing helps when the errors are not cross-handset); test arrival latency on a real continuous walk (the 24-Nov recordings have gaps before each stop). Not wired into the app (user decision).
 - **Results pack (entries 62, 65):** rebuilt with the complete 25 Nov (entry 65); rerun `build.py` after every day-3 rerun; decide which chance level and which place list (v1 31 places, graph-v2 26) the report quotes, since the source files differ (list at the end of `phase2/new/results-pack/out/numbers.md`).
-- **Upload app (entry 66):** rebuild the results pack so it quotes the 3-session eval; iPhone17,4 still has no same-handset test; the live-mode default device is still iPhone17,4 (24 s2 only), so pass `--device iPhone19,2` for the handset with two sessions.
+- **Upload app (entries 66, 67):** the results pack now quotes the 3-session eval (entry 67). Still open: the 20 s-piece upload number is the old 24-Nov-only model (rerun with `day3/upload_eval_split20.py` if the report quotes it); iPhone17,4 still has no same-handset test; the live-mode default device is still iPhone17,4 (24 s2 only), so pass `--device iPhone19,2` for the handset with two sessions.
