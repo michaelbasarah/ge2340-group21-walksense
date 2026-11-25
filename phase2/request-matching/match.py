@@ -19,6 +19,7 @@ The place list is destinations.csv (built by build_destinations.py from graph-v2
 Evaluation: evaluate.py. To plug into the app: copy match.py + destinations.csv + tuned.json (+ llm cache).
 """
 import csv
+import difflib
 import json
 import math
 import re
@@ -32,6 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 METHODS = ('keyword', 'embed', 'llm')
 EXTRA_METHODS = ('embed_doc', 'keyword_v1', 'tokens')
+HYBRID_METHODS = ('fuzzy_keyword', 'hybrid')     # keyword -> difflib fuzzy (no LLM); keyword -> fuzzy -> LLM
 EMBED_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
 LLM_MODEL = 'haiku'
 LLM_PROMPT_VERSION = 'v1'
@@ -254,6 +256,63 @@ def llm_match(query, places, allow_call=True):
     return r['parsed'], 1.0
 
 
+# ---------------------------------------------------------------- fuzzy keyword and hybrid (keyword -> fuzzy -> LLM)
+FUZZY_MIN_ALIAS = 4          # aliases shorter than this (wc, lt, sr, ...) are never fuzzy-matched: too many false hits
+
+
+def _fuzzy_cutoff():
+    return _tuned().get('fuzzy', {}).get('cutoff', 0.85)
+
+
+def fuzzy_match(query, places, cutoff=None):
+    """Typo-tolerant alias match (stdlib difflib): every alias of >= FUZZY_MIN_ALIAS characters is compared with the
+    query n-grams of the same number of words; best SequenceMatcher ratio >= cutoff wins (ties: longer alias, then the
+    hinted floor). Returns (place_id | None, ratio)."""
+    cutoff = _fuzzy_cutoff() if cutoff is None else cutoff
+    toks = norm(query)
+    hint = floor_hint(' '.join(toks))
+    grams = {}
+    for n in (1, 2, 3):
+        grams[n] = [' '.join(toks[i:i + n]) for i in range(len(toks) - n + 1)]
+    best, best_key = None, (0.0, 0, 0)
+    for d in places:
+        for a in d['alias_list']:
+            an = ' '.join(norm(a))
+            if len(an) < FUZZY_MIN_ALIAS:
+                continue
+            n = len(an.split())
+            for g in grams.get(n, []):
+                if n == 1 and g in STOP:
+                    continue
+                r = difflib.SequenceMatcher(None, an, g).ratio()
+                key = (round(r, 6), len(an), int(hint is not None and d['floor_n'] == hint))
+                if r >= cutoff and key > best_key:
+                    best_key, best = key, d['place_id']
+    return best, float(best_key[0])
+
+
+def fuzzy_keyword_match(query, places, cutoff=None):
+    """Keyword first (whole word + aliases); only if it finds nothing, the fuzzy alias match. No LLM."""
+    pid, sc = keyword_match(query, places)
+    if pid is not None:
+        return pid, sc, 'keyword'
+    pid, sc = fuzzy_match(query, places, cutoff)
+    return pid, sc, ('fuzzy' if pid is not None else 'none')
+
+
+def hybrid_match(query, places, allow_call=False):
+    """Keyword -> fuzzy -> LLM, the LLM only when neither finds a place. Returns (place_id | None, score, stage, llm_reply).
+    stage: 'keyword', 'fuzzy', 'llm' (the LLM was asked) or 'llm_missing' (no cached answer and calls not allowed)."""
+    pid, sc, stage = fuzzy_keyword_match(query, places)
+    if pid is not None:
+        return pid, sc, stage, None
+    r = llm_answer(query, places, allow_call=allow_call)
+    if r is None:
+        return None, 0.0, 'llm_missing', None
+    pid = r['parsed'] if r['valid'] and r['parsed'] != 'NONE' else None
+    return pid, (1.0 if pid else 0.0), 'llm', r
+
+
 # ---------------------------------------------------------------- one entry point
 _PLACES = []
 
@@ -274,13 +333,17 @@ def match(query, method='keyword'):
         return embed_match(query, places, method)
     if method == 'llm':
         return llm_match(query, places)
+    if method == 'fuzzy_keyword':
+        return fuzzy_keyword_match(query, places)[:2]
+    if method == 'hybrid':
+        return hybrid_match(query, places, allow_call=True)[:2]
     raise ValueError('unknown method ' + method)
 
 
 if __name__ == '__main__':
     import sys
     if len(sys.argv) < 2:
-        sys.exit('usage: python match.py "where can I eat" [keyword|embed|llm|all]')
+        sys.exit('usage: python match.py "where can I eat" [keyword|embed|llm|fuzzy_keyword|hybrid|all]')
     q = sys.argv[1]
     names = {d['place_id']: d['name'] for d in load_places()}
     for m in (METHODS if len(sys.argv) < 3 or sys.argv[2] == 'all' else sys.argv[2:]):

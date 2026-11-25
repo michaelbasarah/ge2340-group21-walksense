@@ -5,6 +5,10 @@
                                      LLM answers for dev rows (cached); writes out/dev_results.json
   python evaluate.py --phase final   run everything on dev + test with the frozen settings; writes
                                      results.json, results.csv, failures.csv, confusion_pairs.csv, results.png
+  python evaluate.py --phase tune-fuzzy   tune ONLY the difflib cut-off of fuzzy_keyword on the DEV rows (no LLM, no
+                                     embeddings); adds the key "fuzzy" to tuned.json and leaves the other keys as they are
+Hybrid = keyword (whole word + aliases) -> difflib fuzzy alias match -> LLM only if neither finds a place. With
+--no-llm-calls it is scored from llm_cache_<version>.json only; a query whose LLM answer is not cached is reported.
 Needs: sentence-transformers, matplotlib (see README). LLM answers come from llm_cache_<version>.json;
 missing ones are fetched with the Claude CLI (internet) unless --no-llm-calls.
 """
@@ -23,7 +27,9 @@ import match as M
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / 'out'
 MAIN = ['keyword', 'embed', 'llm']
-ALL = MAIN + ['embed_doc', 'keyword_v1', 'tokens']
+HYB = ['fuzzy_keyword', 'hybrid']
+ALL = MAIN + HYB + ['embed_doc', 'keyword_v1', 'tokens']
+FIG = MAIN + HYB
 
 
 def is_ok(pred, expected, by_id):
@@ -50,6 +56,21 @@ def run_method(method, queries, places, allow_calls):
     if method.startswith('embed'):
         M.match('warm up', method)                       # load model + place vectors outside the timing
     for q in queries:
+        if method in HYB:
+            t0 = time.perf_counter()
+            pid, sc, stage = M.fuzzy_keyword_match(q['query'], places)
+            local_ms = (time.perf_counter() - t0) * 1000
+            row = {'pred': pid, 'score': float(sc), 'ms': local_ms, 'local_ms': local_ms, 'invalid': False, 'stage': stage}
+            if method == 'hybrid' and pid is None:
+                r = M.llm_answer(q['query'], places, allow_call=allow_calls)
+                if r is None:
+                    rows.append({'pred': None, 'score': 0.0, 'ms': None, 'invalid': False, 'missing': True, 'stage': 'llm_missing',
+                                 'query': q['query']}); continue
+                pred = r['parsed'] if r['valid'] and r['parsed'] != 'NONE' else None
+                row = {'pred': pred, 'score': 1.0 if pred else 0.0, 'ms': local_ms + r['latency_s'] * 1000, 'local_ms': local_ms,
+                       'llm_ms': r['latency_s'] * 1000, 'invalid': not r['valid'], 'raw': r['raw'], 'cost': r['cost_usd'], 'stage': 'llm'}
+            rows.append(row)
+            continue
         if method == 'llm':
             r = M.llm_answer(q['query'], places, allow_call=allow_calls)
             if r is None:
@@ -82,9 +103,23 @@ def metrics(idx, queries, res, by_id):
     out['invalid'] = sum(1 for i in idx if res[i]['invalid'])
     ms = sorted(res[i]['ms'] for i in idx if res[i].get('ms') is not None)
     if ms:
-        out['latency_ms'] = {'mean': round(statistics.mean(ms), 3), 'median': round(statistics.median(ms), 3),
-                             'p95': round(ms[min(len(ms) - 1, int(0.95 * len(ms)))], 3), 'max': round(ms[-1], 3)}
+        out['latency_ms'] = lat(ms)
+    if 'stage' in res[idx[0]]:
+        st = Counter(res[i]['stage'] for i in idx)
+        out['stages'] = dict(st)
+        out['llm_share'] = round(st.get('llm', 0) / n, 4)
+        out['offline_coverage'] = round((st.get('keyword', 0) + st.get('fuzzy', 0)) / n, 4)   # answered without the LLM
+        for name, key, sel in (('local_ms_keyword_or_fuzzy', 'local_ms', lambda r: r['stage'] in ('keyword', 'fuzzy')),
+                               ('ms_when_llm_called', 'ms', lambda r: r['stage'] == 'llm')):
+            v = sorted(res[i][key] for i in idx if sel(res[i]) and res[i].get(key) is not None)
+            if v:
+                out[name] = lat(v)
     return out
+
+
+def lat(ms):
+    return {'n': len(ms), 'mean': round(statistics.mean(ms), 3), 'median': round(statistics.median(ms), 3),
+            'p95': round(ms[min(len(ms) - 1, int(0.95 * len(ms)))], 3), 'max': round(ms[-1], 3)}
 
 
 def slices(queries):
@@ -119,31 +154,47 @@ def tune_threshold(variant, queries, places, by_id):
             'dev_accuracy_at_0': round(curve[0][1], 4), 'n_dev': len(queries)}
 
 
+def tune_fuzzy(queries, places, by_id):
+    """difflib cut-off of fuzzy_keyword that maximises DEV accuracy (queries = dev rows only; no LLM). Ties: median."""
+    curve = []
+    for k in range(60, 100):
+        th = k / 100
+        acc = sum(is_ok(M.fuzzy_keyword_match(q['query'], places, th)[0], q['expected'], by_id) for q in queries) / len(queries)
+        curve.append((th, round(acc, 6)))
+    best = max(a for _, a in curve)
+    ths = [t for t, a in curve if a == best]
+    return {'cutoff': round(statistics.median(ths), 3), 'dev_accuracy': round(best, 4), 'best_range': [min(ths), max(ths)],
+            'grid': [0.60, 0.99, 0.01], 'min_alias_chars': M.FUZZY_MIN_ALIAS, 'n_dev': len(queries),
+            'note': 'tuned on dev rows only for fuzzy_keyword (no LLM); hybrid uses the same cut-off'}
+
+
 def figure(results, path):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    cols = {'keyword': '#0072B2', 'embed': '#E69F00', 'llm': '#009E73'}
-    fig, ax = plt.subplots(1, 2, figsize=(10, 3.8), gridspec_kw={'width_ratios': [3, 2]})
+    cols = {'keyword': '#0072B2', 'embed': '#E69F00', 'llm': '#009E73', 'fuzzy_keyword': '#56B4E9', 'hybrid': '#D55E00'}
+    meths = [m for m in FIG if m in results]
+    fig, ax = plt.subplots(1, 2, figsize=(12, 4.2), gridspec_kw={'width_ratios': [3, 2]})
     groups = [('easy', 'easy (23)'), ('hard_dev', 'hard dev'), ('hard_test', 'hard test'), ('test', 'all test')]
-    w = 0.26
-    for j, m in enumerate(MAIN):
+    w = 0.8 / len(meths)
+    for j, m in enumerate(meths):
         vals = [results[m]['slices'][g]['accuracy'] for g, _ in groups]
-        b = ax[0].bar([i + (j - 1) * w for i in range(len(groups))], vals, w, label=m, color=cols[m])
+        lab = m if m != 'hybrid' else f"hybrid (LLM on {results[m]['slices']['all']['llm_share']:.0%} of queries)"
+        b = ax[0].bar([i + (j - (len(meths) - 1) / 2) * w for i in range(len(groups))], vals, w, label=lab, color=cols[m])
         for r, v in zip(b, vals):
-            ax[0].text(r.get_x() + r.get_width() / 2, v + 0.01, f'{v:.0%}', ha='center', fontsize=7)
+            ax[0].text(r.get_x() + r.get_width() / 2, v + 0.01, f'{v:.0%}', ha='center', fontsize=6)
     ax[0].set_xticks(range(len(groups)))
     ax[0].set_xticklabels([n.replace('(23)', f"({results['keyword']['slices']['easy']['n']})") if g == 'easy' else
                            f"{n} ({results['keyword']['slices'][g]['n']})" for g, n in groups], fontsize=8)
     ax[0].set_ylim(0, 1.12); ax[0].set_ylabel('top-1 accuracy'); ax[0].set_title('Accuracy per split')
-    ax[0].legend(fontsize=8, frameon=False, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.12))
+    ax[0].legend(fontsize=7, frameon=False, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.12))
     w2 = 0.35
     for j, key in enumerate(('precision', 'recall')):
-        vals = [(results[m]['slices']['hard']['reject'][key] or 0) for m in MAIN]
-        b = ax[1].bar([i + (j - 0.5) * w2 for i in range(3)], vals, w2, label=f'rejection {key}', color=['#56B4E9', '#CC79A7'][j])
+        vals = [(results[m]['slices']['hard']['reject'][key] or 0) for m in meths]
+        b = ax[1].bar([i + (j - 0.5) * w2 for i in range(len(meths))], vals, w2, label=f'rejection {key}', color=['#56B4E9', '#CC79A7'][j])
         for r, v in zip(b, vals):
-            ax[1].text(r.get_x() + r.get_width() / 2, v + 0.01, f'{v:.0%}', ha='center', fontsize=7)
-    ax[1].set_xticks(range(3)); ax[1].set_xticklabels(MAIN, fontsize=8); ax[1].set_ylim(0, 1.12)
+            ax[1].text(r.get_x() + r.get_width() / 2, v + 0.01, f'{v:.0%}', ha='center', fontsize=6)
+    ax[1].set_xticks(range(len(meths))); ax[1].set_xticklabels([m.replace('_', ' ') for m in meths], fontsize=7); ax[1].set_ylim(0, 1.12)
     ax[1].set_title('"none" handling, hard set'); ax[1].legend(fontsize=8, frameon=False, ncol=2, loc='upper center', bbox_to_anchor=(0.5, -0.12))
     for a in ax:
         a.spines[['top', 'right']].set_visible(False)
@@ -152,7 +203,7 @@ def figure(results, path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--phase', choices=['dev', 'final'], required=True)
+    ap.add_argument('--phase', choices=['dev', 'final', 'tune-fuzzy'], required=True)
     ap.add_argument('--no-llm-calls', action='store_true')
     ap.add_argument('--methods', default=','.join(ALL))
     a = ap.parse_args()
@@ -161,6 +212,13 @@ def main():
     queries = load_queries()
     methods = a.methods.split(',')
     OUT.mkdir(exist_ok=True)
+    if a.phase == 'tune-fuzzy':
+        dev = [q for q in queries if q['split'] == 'dev']           # test rows are not used
+        t = json.loads((ROOT / 'tuned.json').read_text(encoding='utf-8'))
+        t['fuzzy'] = {**tune_fuzzy(dev, places, by_id), 'date': str(date.today())}
+        (ROOT / 'tuned.json').write_text(json.dumps(t, indent=1), encoding='utf-8')
+        print('tuned.json fuzzy:', t['fuzzy'])
+        return
     if a.phase == 'dev':
         queries = [q for q in queries if q['split'] == 'dev']      # test rows are not even loaded
         tuned = {}
@@ -176,7 +234,8 @@ def main():
     for m in methods:
         res = run_method(m, queries, places, not a.no_llm_calls)
         if any(r.get('missing') for r in res):
-            print(f'{m}: {sum(1 for r in res if r.get("missing"))} queries have no cached answer'); continue
+            miss = [r.get('query', '') for r in res if r.get('missing')]
+            print(f'{m}: {len(miss)} queries need an LLM answer that is not cached: {miss}'); continue
         per_query[m] = res
         results[m] = {'slices': {k: metrics(v, queries, res, by_id) for k, v in slices(queries).items()}}
         s = results[m]['slices']
@@ -200,7 +259,11 @@ def main():
                     'prompt_version': M.LLM_PROMPT_VERSION, 'cache_file': M.llm_cache_path().name,
                     'cached_responses': len(llm_rows), 'total_cost_usd': round(sum(r['cost_usd'] or 0 for r in llm_rows), 5),
                     'note': 'latency = wall clock of the whole claude -p call (process start included)'},
-            'offline': {'keyword': True, 'embed': True, 'embed_doc': True, 'keyword_v1': True, 'tokens': True, 'llm': False},
+            'offline': {'keyword': True, 'embed': True, 'embed_doc': True, 'keyword_v1': True, 'tokens': True, 'llm': False,
+                        'fuzzy_keyword': True, 'hybrid': 'partly: offline for the queries keyword or fuzzy answer (offline_coverage); the rest need the LLM'},
+            'hybrid_note': ('hybrid = keyword (whole word + aliases) -> difflib fuzzy alias match (cut-off in thresholds.fuzzy, '
+                            'tuned on dev for fuzzy_keyword) -> LLM only when neither finds a place; LLM answers from the cache '
+                            'only (no new call); latency = local keyword+fuzzy ms, plus the cached wall-clock LLM latency when it falls through'),
             'offline_note': 'embed needs the one-off model download (about 90 MB), then runs without internet'}
     for m in results:
         results[m]['offline'] = meta['offline'][m]
@@ -226,7 +289,7 @@ def main():
                 if not (is_ok(r['pred'], q['expected'], by_id) and not r['invalid']):
                     got = 'INVALID' if r['invalid'] else (r['pred'] or 'none')
                     w.writerow([m, q['id'], q['split'], q['set'], q['category'], q['query'], q['expected'], got,
-                                round(r['score'], 4), r.get('raw', '') if m == 'llm' else ''])
+                                round(r['score'], 4), r.get('raw', '') if m in ('llm', 'hybrid') else ''])
                     pairs[(m, q['expected'], got)] += 1
     with (ROOT / 'confusion_pairs.csv').open('w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)

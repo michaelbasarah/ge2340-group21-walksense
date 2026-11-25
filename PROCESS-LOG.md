@@ -72,6 +72,7 @@ Contents:
 61. 25 Nov: continuous place estimate results: smoothing does not raise stop accuracy; gating stops the jumps while walking; per-phone offset FAILED
 62. 25 Nov: results pack (figures, tables, fact sheets) built from the committed outputs, rerunnable
 63. 25 Nov: four feature branches landed on main (routing, request matching, live smoothing, results pack), entries renumbered
+64. 25 Nov: request matching, hybrid (keyword -> fuzzy -> LLM) and fuzzy keyword scored from the cached LLM answers
 - Lessons learned
 - Open questions / next steps
 
@@ -991,6 +992,24 @@ Contents:
 
 ---
 
+## 64. 25 Nov: request matching, hybrid (keyword -> fuzzy -> LLM) and fuzzy keyword scored from the cached LLM answers
+
+- **What we tried:** two more request-matching methods on the same dev/test queries: `fuzzy_keyword` (the whole-word keyword rules, then a difflib fuzzy match on the aliases) and `hybrid` (keyword, then fuzzy, then the LLM only when neither finds a place).
+- **Why:** the user wants an app that answers most requests offline and fast and calls the LLM only when it must; entry 59 showed keyword fast but weak on typos and indirect requests, the LLM accurate but about 5 s per request and online.
+- **How:** `phase2/request-matching/match.py`: `fuzzy_match` compares every 1- to 3-word piece of the request with every alias of at least 4 characters (`difflib.SequenceMatcher` ratio >= the cut-off); `fuzzy_keyword_match` and `hybrid_match` return the stage that answered. `evaluate.py`: new `--phase tune-fuzzy` (grid 0.60 to 0.99 in 0.01 steps, dev rows only, no LLM; keeps the other `tuned.json` keys), per-method `stages`, `llm_share`, `offline_coverage`, `local_ms_keyword_or_fuzzy` and `ms_when_llm_called` in `results.json`, five methods in `results.png`. The hybrid's LLM step reads `llm_cache_v1.json` only; with `--no-llm-calls` a request whose answer is not cached is counted as missing and listed. Built and checked first in a scratch copy, then ported to main after entry 63. Ran `evaluate.py --phase tune-fuzzy`, then `evaluate.py --phase final --no-llm-calls` (`HF_HUB_OFFLINE=1`, the matching venv with sentence-transformers).
+- **Result** (`results.json`, `tuned.json`):
+  - Fuzzy cut-off 0.825 (dev 0.697 for `fuzzy_keyword`; best range 0.63 to 0.88), fixed before the final run.
+  - Accuracy, easy 23 / hard dev 54 / hard test 51 / all test 62 / all 128: fuzzy_keyword 22/23, 34/54, 39/51, 49/62, 95/128; hybrid 22/23, 47/54, 46/51, 56/62, 115/128 (keyword 44/62 and llm 60/62 on test, unchanged). "None" on the hard set (precision, recall): fuzzy_keyword 22/42, 22/26; hybrid 22/22, 22/26. Supported hard requests wrongly rejected (of 79): fuzzy_keyword 20, hybrid 0.
+  - Hybrid stages, all 128: keyword 75, fuzzy 11, LLM 42 (LLM share 0.3281, offline coverage 0.6719); test: 38, 5, 19 (share 0.3065). Latency: median 0.585 ms over all rows (mean 1813.466 ms, p95 6614.252 ms), 0.531 ms when answered locally, 5285.323 ms when the LLM is called (test 5938.766 ms; the cached wall clock of `claude -p`).
+  - No new LLM call; no cached answer was missing.
+  - The 13 hybrid misses are all right in the LLM alone: 11 answered wrongly by the keyword stage (e.g. `lecture theatre 3a` -> lt2a, `toilet on floor 6` -> male_toilet, `exit 10 on floor 4` -> exit_10) and 2 by the fuzzy stage (`lecure theater 2b` -> lt2a, `washrom femail` -> male_toilet).
+  - Old methods: all 128 predictions of keyword, embed, llm, embed_doc, keyword_v1 and tokens identical to the committed `results.csv`; only the latency columns moved (keyword median 1.121 -> 0.474 ms, embed 9.297 -> 5.024 ms; the README quotes the new values).
+- **Outcome:** success. The hybrid keeps two thirds of the requests offline at under 1 ms and reaches 56/62 on test against 60/62 for the LLM alone; its errors come from confident wrong local matches, not from the LLM.
+- **What changed because of it:** `README.md` has both methods in the table and the hybrid section. No app work (by request).
+- **Links:** `phase2/request-matching/match.py`, `evaluate.py`, `tuned.json`, `results.json`, `results.csv`, `failures.csv`, `confusion_pairs.csv`, `results.png`, `README.md`; the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1033,6 +1052,7 @@ Contents:
 - **A cut-off tuned on a small dev split may not carry over.** The embedding "none" threshold gave 52/66 on dev and 44/62 on test (entry 59).
 - **Smoothing fixes jitter, not bias.** A 1 s kNN averaged over the last ticks scored the same as no averaging (entry 61): the wrong answers at a stop were steady, not jumpy. The jumps were on walks, and the fix was to feed the model only when the phone is still. A constant per-phone offset made things worse.
 - **Generate the numbers sheet from the files.** `phase2/new/results-pack/build.py` keeps every quoted number tied to a source file, a commit and a test definition (entry 62); quote chance and n together, because the chance level differs between files.
+- **A cascade is only as good as its first confident answer.** The hybrid's 13 misses were all wrong local matches that never reached the LLM (entry 64).
 
 ## Open questions / next steps
 

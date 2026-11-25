@@ -21,5 +21,22 @@
  },
  "tuned_on": "dev split only",
  "date": "2026-11-25",
- "embed_model": "sentence-transformers/all-MiniLM-L6-v2"
+ "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+ "fuzzy": {
+  "cutoff": 0.825,
+  "dev_accuracy": 0.697,
+  "best_range": [
+   0.63,
+   0.88
+  ],
+  "grid": [
+   0.6,
+   0.99,
+   0.01
+  ],
+  "min_alias_chars": 4,
+  "n_dev": 66,
+  "note": "tuned on dev rows only for fuzzy_keyword (no LLM); hybrid uses the same cut-off",
+  "date": "2026-11-25"
+ }
 }
