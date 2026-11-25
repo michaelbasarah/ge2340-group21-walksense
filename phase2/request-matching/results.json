@@ -1,0 +1,2396 @@
+{
+ "meta": {
+  "date": "2026-11-25",
+  "python": "3.14.4",
+  "n_queries": 128,
+  "n_places": 26,
+  "split_counts": {
+   "easy/dev": 12,
+   "easy/test": 11,
+   "hard/test": 51,
+   "hard/dev": 54
+  },
+  "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "thresholds": {
+   "embed": {
+    "threshold": 0.38,
+    "dev_accuracy": 0.7879,
+    "best_range": [
+     0.37,
+     0.39
+    ],
+    "dev_accuracy_at_0": 0.6667,
+    "n_dev": 66
+   },
+   "embed_doc": {
+    "threshold": 0.205,
+    "dev_accuracy": 0.6667,
+    "best_range": [
+     0.19,
+     0.23
+    ],
+    "dev_accuracy_at_0": 0.5909,
+    "n_dev": 66
+   },
+   "tuned_on": "dev split only",
+   "date": "2026-11-25",
+   "embed_model": "sentence-transformers/all-MiniLM-L6-v2"
+  },
+  "llm": {
+   "cli_model_flag": "haiku",
+   "models_reported": [
+    "claude-haiku-5-5"
+   ],
+   "prompt_version": "v1",
+   "cache_file": "llm_cache_v1.json",
+   "cached_responses": 128,
+   "total_cost_usd": 0.09649,
+   "note": "latency = wall clock of the whole claude -p call (process start included)"
+  },
+  "offline": {
+   "keyword": true,
+   "embed": true,
+   "embed_doc": true,
+   "keyword_v1": true,
+   "tokens": true,
+   "llm": false
+  },
+  "offline_note": "embed needs the one-off model download (about 90 MB), then runs without internet"
+ },
+ "methods": {
+  "keyword": {
+   "slices": {
+    "all": {
+     "n": 128,
+     "correct": 86,
+     "accuracy": 0.6719,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 53,
+      "true_none": 22,
+      "precision": 0.4151,
+      "recall": 0.8462
+     },
+     "supported_only": {
+      "n": 102,
+      "correct": 64,
+      "wrongly_rejected": 31
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.793,
+      "median": 1.121,
+      "p95": 3.751,
+      "max": 22.682
+     }
+    },
+    "easy": {
+     "n": 23,
+     "correct": 22,
+     "accuracy": 0.9565,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 22,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 2.079,
+      "median": 0.976,
+      "p95": 2.947,
+      "max": 22.682
+     }
+    },
+    "hard": {
+     "n": 105,
+     "correct": 64,
+     "accuracy": 0.6095,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 53,
+      "true_none": 22,
+      "precision": 0.4151,
+      "recall": 0.8462
+     },
+     "supported_only": {
+      "n": 79,
+      "correct": 42,
+      "wrongly_rejected": 31
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.73,
+      "median": 1.195,
+      "p95": 3.751,
+      "max": 6.812
+     }
+    },
+    "dev": {
+     "n": 66,
+     "correct": 42,
+     "accuracy": 0.6364,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 29,
+      "true_none": 10,
+      "precision": 0.3448,
+      "recall": 0.7692
+     },
+     "supported_only": {
+      "n": 53,
+      "correct": 32,
+      "wrongly_rejected": 19
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.825,
+      "median": 1.106,
+      "p95": 3.198,
+      "max": 22.682
+     }
+    },
+    "test": {
+     "n": 62,
+     "correct": 44,
+     "accuracy": 0.7097,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 24,
+      "true_none": 12,
+      "precision": 0.5,
+      "recall": 0.9231
+     },
+     "supported_only": {
+      "n": 49,
+      "correct": 32,
+      "wrongly_rejected": 12
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.758,
+      "median": 1.153,
+      "p95": 4.309,
+      "max": 4.85
+     }
+    },
+    "easy_dev": {
+     "n": 12,
+     "correct": 12,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 12,
+      "correct": 12,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 3.076,
+      "median": 1.073,
+      "p95": 22.682,
+      "max": 22.682
+     }
+    },
+    "easy_test": {
+     "n": 11,
+     "correct": 10,
+     "accuracy": 0.9091,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 11,
+      "correct": 10,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.991,
+      "median": 0.934,
+      "p95": 1.488,
+      "max": 1.488
+     }
+    },
+    "hard_dev": {
+     "n": 54,
+     "correct": 30,
+     "accuracy": 0.5556,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 29,
+      "true_none": 10,
+      "precision": 0.3448,
+      "recall": 0.7692
+     },
+     "supported_only": {
+      "n": 41,
+      "correct": 20,
+      "wrongly_rejected": 19
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.548,
+      "median": 1.121,
+      "p95": 3.198,
+      "max": 6.812
+     }
+    },
+    "hard_test": {
+     "n": 51,
+     "correct": 34,
+     "accuracy": 0.6667,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 24,
+      "true_none": 12,
+      "precision": 0.5,
+      "recall": 0.9231
+     },
+     "supported_only": {
+      "n": 38,
+      "correct": 22,
+      "wrongly_rejected": 12
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.924,
+      "median": 1.534,
+      "p95": 4.533,
+      "max": 4.85
+     }
+    },
+    "hard:access": {
+     "n": 8,
+     "correct": 6,
+     "accuracy": 0.75,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 1,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 6,
+      "wrongly_rejected": 1
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 2.08,
+      "median": 1.114,
+      "p95": 4.85,
+      "max": 4.85
+     }
+    },
+    "hard:floor": {
+     "n": 8,
+     "correct": 5,
+     "accuracy": 0.625,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 1,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 5,
+      "wrongly_rejected": 1
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.786,
+      "median": 1.254,
+      "p95": 3.661,
+      "max": 3.661
+     }
+    },
+    "hard:indirect": {
+     "n": 5,
+     "correct": 3,
+     "accuracy": 0.6,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 5,
+      "correct": 3,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.991,
+      "median": 0.989,
+      "p95": 1.055,
+      "max": 1.055
+     }
+    },
+    "hard:mixed": {
+     "n": 23,
+     "correct": 15,
+     "accuracy": 0.6522,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 8,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 15,
+      "wrongly_rejected": 8
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.908,
+      "median": 1.781,
+      "p95": 2.83,
+      "max": 4.827
+     }
+    },
+    "hard:typo": {
+     "n": 18,
+     "correct": 4,
+     "accuracy": 0.2222,
+     "reject": {
+      "expected_none": 1,
+      "predicted_none": 14,
+      "true_none": 1,
+      "precision": 0.0714,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 17,
+      "correct": 3,
+      "wrongly_rejected": 13
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 2.512,
+      "median": 2.427,
+      "p95": 6.812,
+      "max": 6.812
+     }
+    },
+    "hard:unsupported": {
+     "n": 23,
+     "correct": 19,
+     "accuracy": 0.8261,
+     "reject": {
+      "expected_none": 23,
+      "predicted_none": 19,
+      "true_none": 19,
+      "precision": 1.0,
+      "recall": 0.8261
+     },
+     "supported_only": {
+      "n": 0,
+      "correct": 0,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.383,
+      "median": 1.058,
+      "p95": 2.771,
+      "max": 3.218
+     }
+    },
+    "hard:vague": {
+     "n": 20,
+     "correct": 12,
+     "accuracy": 0.6,
+     "reject": {
+      "expected_none": 2,
+      "predicted_none": 10,
+      "true_none": 2,
+      "precision": 0.2,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 18,
+      "correct": 10,
+      "wrongly_rejected": 8
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 1.245,
+      "median": 1.106,
+      "p95": 2.448,
+      "max": 2.448
+     }
+    }
+   },
+   "offline": true
+  },
+  "embed": {
+   "slices": {
+    "all": {
+     "n": 128,
+     "correct": 96,
+     "accuracy": 0.75,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 25,
+      "true_none": 15,
+      "precision": 0.6,
+      "recall": 0.5769
+     },
+     "supported_only": {
+      "n": 102,
+      "correct": 81,
+      "wrongly_rejected": 10
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.379,
+      "median": 9.297,
+      "p95": 12.072,
+      "max": 13.352
+     }
+    },
+    "easy": {
+     "n": 23,
+     "correct": 22,
+     "accuracy": 0.9565,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 22,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.498,
+      "median": 9.131,
+      "p95": 12.072,
+      "max": 12.979
+     }
+    },
+    "hard": {
+     "n": 105,
+     "correct": 74,
+     "accuracy": 0.7048,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 25,
+      "true_none": 15,
+      "precision": 0.6,
+      "recall": 0.5769
+     },
+     "supported_only": {
+      "n": 79,
+      "correct": 59,
+      "wrongly_rejected": 10
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.353,
+      "median": 9.31,
+      "p95": 11.956,
+      "max": 13.352
+     }
+    },
+    "dev": {
+     "n": 66,
+     "correct": 52,
+     "accuracy": 0.7879,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 14,
+      "true_none": 8,
+      "precision": 0.5714,
+      "recall": 0.6154
+     },
+     "supported_only": {
+      "n": 53,
+      "correct": 44,
+      "wrongly_rejected": 6
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.452,
+      "median": 9.274,
+      "p95": 12.31,
+      "max": 12.979
+     }
+    },
+    "test": {
+     "n": 62,
+     "correct": 44,
+     "accuracy": 0.7097,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 11,
+      "true_none": 7,
+      "precision": 0.6364,
+      "recall": 0.5385
+     },
+     "supported_only": {
+      "n": 49,
+      "correct": 37,
+      "wrongly_rejected": 4
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.301,
+      "median": 9.333,
+      "p95": 11.901,
+      "max": 13.352
+     }
+    },
+    "easy_dev": {
+     "n": 12,
+     "correct": 12,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 12,
+      "correct": 12,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.459,
+      "median": 8.969,
+      "p95": 12.979,
+      "max": 12.979
+     }
+    },
+    "easy_test": {
+     "n": 11,
+     "correct": 10,
+     "accuracy": 0.9091,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 11,
+      "correct": 10,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.54,
+      "median": 9.372,
+      "p95": 12.072,
+      "max": 12.072
+     }
+    },
+    "hard_dev": {
+     "n": 54,
+     "correct": 40,
+     "accuracy": 0.7407,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 14,
+      "true_none": 8,
+      "precision": 0.5714,
+      "recall": 0.6154
+     },
+     "supported_only": {
+      "n": 41,
+      "correct": 32,
+      "wrongly_rejected": 6
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.451,
+      "median": 9.297,
+      "p95": 12.31,
+      "max": 12.897
+     }
+    },
+    "hard_test": {
+     "n": 51,
+     "correct": 34,
+     "accuracy": 0.6667,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 11,
+      "true_none": 7,
+      "precision": 0.6364,
+      "recall": 0.5385
+     },
+     "supported_only": {
+      "n": 38,
+      "correct": 27,
+      "wrongly_rejected": 4
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.25,
+      "median": 9.325,
+      "p95": 11.597,
+      "max": 13.352
+     }
+    },
+    "hard:access": {
+     "n": 8,
+     "correct": 6,
+     "accuracy": 0.75,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 6,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 7.751,
+      "median": 7.706,
+      "p95": 8.18,
+      "max": 8.18
+     }
+    },
+    "hard:floor": {
+     "n": 8,
+     "correct": 5,
+     "accuracy": 0.625,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 5,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.872,
+      "median": 10.128,
+      "p95": 10.73,
+      "max": 10.73
+     }
+    },
+    "hard:indirect": {
+     "n": 5,
+     "correct": 5,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 5,
+      "correct": 5,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.068,
+      "median": 9.606,
+      "p95": 11.597,
+      "max": 11.597
+     }
+    },
+    "hard:mixed": {
+     "n": 23,
+     "correct": 17,
+     "accuracy": 0.7391,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 5,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 17,
+      "wrongly_rejected": 5
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.654,
+      "median": 9.615,
+      "p95": 12.31,
+      "max": 12.897
+     }
+    },
+    "hard:typo": {
+     "n": 18,
+     "correct": 10,
+     "accuracy": 0.5556,
+     "reject": {
+      "expected_none": 1,
+      "predicted_none": 6,
+      "true_none": 1,
+      "precision": 0.1667,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 17,
+      "correct": 9,
+      "wrongly_rejected": 5
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.693,
+      "median": 9.274,
+      "p95": 13.352,
+      "max": 13.352
+     }
+    },
+    "hard:unsupported": {
+     "n": 23,
+     "correct": 12,
+     "accuracy": 0.5217,
+     "reject": {
+      "expected_none": 23,
+      "predicted_none": 12,
+      "true_none": 12,
+      "precision": 1.0,
+      "recall": 0.5217
+     },
+     "supported_only": {
+      "n": 0,
+      "correct": 0,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.804,
+      "median": 9.61,
+      "p95": 12.185,
+      "max": 12.38
+     }
+    },
+    "hard:vague": {
+     "n": 20,
+     "correct": 19,
+     "accuracy": 0.95,
+     "reject": {
+      "expected_none": 2,
+      "predicted_none": 2,
+      "true_none": 2,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 18,
+      "correct": 17,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 8.437,
+      "median": 7.741,
+      "p95": 11.538,
+      "max": 11.538
+     }
+    }
+   },
+   "offline": true
+  },
+  "llm": {
+   "slices": {
+    "all": {
+     "n": 128,
+     "correct": 125,
+     "accuracy": 0.9766,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 29,
+      "true_none": 26,
+      "precision": 0.8966,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 102,
+      "correct": 99,
+      "wrongly_rejected": 3
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5552.977,
+      "median": 5309.5,
+      "p95": 7442.0,
+      "max": 10960.0
+     }
+    },
+    "easy": {
+     "n": 23,
+     "correct": 23,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 23,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 6257.913,
+      "median": 6255.0,
+      "p95": 7915.0,
+      "max": 8083.0
+     }
+    },
+    "hard": {
+     "n": 105,
+     "correct": 102,
+     "accuracy": 0.9714,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 29,
+      "true_none": 26,
+      "precision": 0.8966,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 79,
+      "correct": 76,
+      "wrongly_rejected": 3
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5398.562,
+      "median": 5143.0,
+      "p95": 7030.0,
+      "max": 10960.0
+     }
+    },
+    "dev": {
+     "n": 66,
+     "correct": 65,
+     "accuracy": 0.9848,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 14,
+      "true_none": 13,
+      "precision": 0.9286,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 53,
+      "correct": 52,
+      "wrongly_rejected": 1
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5332.879,
+      "median": 5178.5,
+      "p95": 6521.0,
+      "max": 10960.0
+     }
+    },
+    "test": {
+     "n": 62,
+     "correct": 60,
+     "accuracy": 0.9677,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 15,
+      "true_none": 13,
+      "precision": 0.8667,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 49,
+      "correct": 47,
+      "wrongly_rejected": 2
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5787.274,
+      "median": 6004.0,
+      "p95": 7915.0,
+      "max": 8308.0
+     }
+    },
+    "easy_dev": {
+     "n": 12,
+     "correct": 12,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 12,
+      "correct": 12,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5494.833,
+      "median": 5452.5,
+      "p95": 6464.0,
+      "max": 6464.0
+     }
+    },
+    "easy_test": {
+     "n": 11,
+     "correct": 11,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 11,
+      "correct": 11,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 7090.364,
+      "median": 7150.0,
+      "p95": 8083.0,
+      "max": 8083.0
+     }
+    },
+    "hard_dev": {
+     "n": 54,
+     "correct": 53,
+     "accuracy": 0.9815,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 14,
+      "true_none": 13,
+      "precision": 0.9286,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 41,
+      "correct": 40,
+      "wrongly_rejected": 1
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5296.889,
+      "median": 5135.0,
+      "p95": 6613.0,
+      "max": 10960.0
+     }
+    },
+    "hard_test": {
+     "n": 51,
+     "correct": 49,
+     "accuracy": 0.9608,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 15,
+      "true_none": 13,
+      "precision": 0.8667,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 38,
+      "correct": 36,
+      "wrongly_rejected": 2
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5506.216,
+      "median": 5328.0,
+      "p95": 7809.0,
+      "max": 8308.0
+     }
+    },
+    "hard:access": {
+     "n": 8,
+     "correct": 8,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 8,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5487.125,
+      "median": 5365.0,
+      "p95": 6983.0,
+      "max": 6983.0
+     }
+    },
+    "hard:floor": {
+     "n": 8,
+     "correct": 8,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 8,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5319.875,
+      "median": 5037.0,
+      "p95": 6369.0,
+      "max": 6369.0
+     }
+    },
+    "hard:indirect": {
+     "n": 5,
+     "correct": 5,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 5,
+      "correct": 5,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5601.0,
+      "median": 6047.0,
+      "p95": 6423.0,
+      "max": 6423.0
+     }
+    },
+    "hard:mixed": {
+     "n": 23,
+     "correct": 23,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 23,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5064.0,
+      "median": 4708.0,
+      "p95": 6613.0,
+      "max": 6698.0
+     }
+    },
+    "hard:typo": {
+     "n": 18,
+     "correct": 18,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 1,
+      "predicted_none": 1,
+      "true_none": 1,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 17,
+      "correct": 17,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 4845.167,
+      "median": 4635.0,
+      "p95": 6258.0,
+      "max": 6258.0
+     }
+    },
+    "hard:unsupported": {
+     "n": 23,
+     "correct": 23,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 23,
+      "predicted_none": 23,
+      "true_none": 23,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 0,
+      "correct": 0,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 5446.783,
+      "median": 5181.0,
+      "p95": 7030.0,
+      "max": 10960.0
+     }
+    },
+    "hard:vague": {
+     "n": 20,
+     "correct": 17,
+     "accuracy": 0.85,
+     "reject": {
+      "expected_none": 2,
+      "predicted_none": 5,
+      "true_none": 2,
+      "precision": 0.4,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 18,
+      "correct": 15,
+      "wrongly_rejected": 3
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 6171.35,
+      "median": 6002.0,
+      "p95": 8308.0,
+      "max": 8308.0
+     }
+    }
+   },
+   "offline": false
+  },
+  "embed_doc": {
+   "slices": {
+    "all": {
+     "n": 128,
+     "correct": 84,
+     "accuracy": 0.6562,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 17,
+      "true_none": 10,
+      "precision": 0.5882,
+      "recall": 0.3846
+     },
+     "supported_only": {
+      "n": 102,
+      "correct": 74,
+      "wrongly_rejected": 7
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.792,
+      "median": 9.777,
+      "p95": 12.733,
+      "max": 15.684
+     }
+    },
+    "easy": {
+     "n": 23,
+     "correct": 21,
+     "accuracy": 0.913,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 21,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.546,
+      "median": 10.466,
+      "p95": 12.828,
+      "max": 14.629
+     }
+    },
+    "hard": {
+     "n": 105,
+     "correct": 63,
+     "accuracy": 0.6,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 17,
+      "true_none": 10,
+      "precision": 0.5882,
+      "recall": 0.3846
+     },
+     "supported_only": {
+      "n": 79,
+      "correct": 53,
+      "wrongly_rejected": 7
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.626,
+      "median": 9.459,
+      "p95": 12.685,
+      "max": 15.684
+     }
+    },
+    "dev": {
+     "n": 66,
+     "correct": 44,
+     "accuracy": 0.6667,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 11,
+      "true_none": 6,
+      "precision": 0.5455,
+      "recall": 0.4615
+     },
+     "supported_only": {
+      "n": 53,
+      "correct": 38,
+      "wrongly_rejected": 5
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.011,
+      "median": 10.011,
+      "p95": 12.733,
+      "max": 15.684
+     }
+    },
+    "test": {
+     "n": 62,
+     "correct": 40,
+     "accuracy": 0.6452,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 6,
+      "true_none": 4,
+      "precision": 0.6667,
+      "recall": 0.3077
+     },
+     "supported_only": {
+      "n": 49,
+      "correct": 36,
+      "wrongly_rejected": 2
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.558,
+      "median": 9.463,
+      "p95": 12.685,
+      "max": 13.633
+     }
+    },
+    "easy_dev": {
+     "n": 12,
+     "correct": 11,
+     "accuracy": 0.9167,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 12,
+      "correct": 11,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.742,
+      "median": 10.513,
+      "p95": 14.629,
+      "max": 14.629
+     }
+    },
+    "easy_test": {
+     "n": 11,
+     "correct": 10,
+     "accuracy": 0.9091,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 11,
+      "correct": 10,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.332,
+      "median": 10.428,
+      "p95": 12.828,
+      "max": 12.828
+     }
+    },
+    "hard_dev": {
+     "n": 54,
+     "correct": 33,
+     "accuracy": 0.6111,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 11,
+      "true_none": 6,
+      "precision": 0.5455,
+      "recall": 0.4615
+     },
+     "supported_only": {
+      "n": 41,
+      "correct": 27,
+      "wrongly_rejected": 5
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.849,
+      "median": 9.756,
+      "p95": 12.733,
+      "max": 15.684
+     }
+    },
+    "hard_test": {
+     "n": 51,
+     "correct": 30,
+     "accuracy": 0.5882,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 6,
+      "true_none": 4,
+      "precision": 0.6667,
+      "recall": 0.3077
+     },
+     "supported_only": {
+      "n": 38,
+      "correct": 26,
+      "wrongly_rejected": 2
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.391,
+      "median": 9.292,
+      "p95": 12.685,
+      "max": 13.633
+     }
+    },
+    "hard:access": {
+     "n": 8,
+     "correct": 8,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 8,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.493,
+      "median": 9.452,
+      "p95": 11.993,
+      "max": 11.993
+     }
+    },
+    "hard:floor": {
+     "n": 8,
+     "correct": 3,
+     "accuracy": 0.375,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 3,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 7.735,
+      "median": 7.43,
+      "p95": 9.13,
+      "max": 9.13
+     }
+    },
+    "hard:indirect": {
+     "n": 5,
+     "correct": 5,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 5,
+      "correct": 5,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.012,
+      "median": 8.562,
+      "p95": 15.684,
+      "max": 15.684
+     }
+    },
+    "hard:mixed": {
+     "n": 23,
+     "correct": 14,
+     "accuracy": 0.6087,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 2,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 14,
+      "wrongly_rejected": 2
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.519,
+      "median": 9.647,
+      "p95": 11.991,
+      "max": 12.624
+     }
+    },
+    "hard:typo": {
+     "n": 18,
+     "correct": 10,
+     "accuracy": 0.5556,
+     "reject": {
+      "expected_none": 1,
+      "predicted_none": 2,
+      "true_none": 1,
+      "precision": 0.5,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 17,
+      "correct": 9,
+      "wrongly_rejected": 1
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.979,
+      "median": 9.952,
+      "p95": 13.044,
+      "max": 13.044
+     }
+    },
+    "hard:unsupported": {
+     "n": 23,
+     "correct": 8,
+     "accuracy": 0.3478,
+     "reject": {
+      "expected_none": 23,
+      "predicted_none": 8,
+      "true_none": 8,
+      "precision": 1.0,
+      "recall": 0.3478
+     },
+     "supported_only": {
+      "n": 0,
+      "correct": 0,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 10.067,
+      "median": 9.594,
+      "p95": 12.864,
+      "max": 13.633
+     }
+    },
+    "hard:vague": {
+     "n": 20,
+     "correct": 15,
+     "accuracy": 0.75,
+     "reject": {
+      "expected_none": 2,
+      "predicted_none": 5,
+      "true_none": 1,
+      "precision": 0.2,
+      "recall": 0.5
+     },
+     "supported_only": {
+      "n": 18,
+      "correct": 14,
+      "wrongly_rejected": 4
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 9.639,
+      "median": 9.781,
+      "p95": 11.395,
+      "max": 11.395
+     }
+    }
+   },
+   "offline": true
+  },
+  "keyword_v1": {
+   "slices": {
+    "all": {
+     "n": 128,
+     "correct": 79,
+     "accuracy": 0.6172,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 47,
+      "true_none": 19,
+      "precision": 0.4043,
+      "recall": 0.7308
+     },
+     "supported_only": {
+      "n": 102,
+      "correct": 60,
+      "wrongly_rejected": 28
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.03,
+      "median": 0.029,
+      "p95": 0.042,
+      "max": 0.139
+     }
+    },
+    "easy": {
+     "n": 23,
+     "correct": 22,
+     "accuracy": 0.9565,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 22,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.034,
+      "median": 0.03,
+      "p95": 0.052,
+      "max": 0.139
+     }
+    },
+    "hard": {
+     "n": 105,
+     "correct": 57,
+     "accuracy": 0.5429,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 47,
+      "true_none": 19,
+      "precision": 0.4043,
+      "recall": 0.7308
+     },
+     "supported_only": {
+      "n": 79,
+      "correct": 38,
+      "wrongly_rejected": 28
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.029,
+      "median": 0.029,
+      "p95": 0.039,
+      "max": 0.071
+     }
+    },
+    "dev": {
+     "n": 66,
+     "correct": 36,
+     "accuracy": 0.5455,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 24,
+      "true_none": 7,
+      "precision": 0.2917,
+      "recall": 0.5385
+     },
+     "supported_only": {
+      "n": 53,
+      "correct": 29,
+      "wrongly_rejected": 17
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.029,
+      "median": 0.029,
+      "p95": 0.037,
+      "max": 0.139
+     }
+    },
+    "test": {
+     "n": 62,
+     "correct": 43,
+     "accuracy": 0.6935,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 23,
+      "true_none": 12,
+      "precision": 0.5217,
+      "recall": 0.9231
+     },
+     "supported_only": {
+      "n": 49,
+      "correct": 31,
+      "wrongly_rejected": 11
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.031,
+      "median": 0.03,
+      "p95": 0.046,
+      "max": 0.071
+     }
+    },
+    "easy_dev": {
+     "n": 12,
+     "correct": 12,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 12,
+      "correct": 12,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.037,
+      "median": 0.03,
+      "p95": 0.139,
+      "max": 0.139
+     }
+    },
+    "easy_test": {
+     "n": 11,
+     "correct": 10,
+     "accuracy": 0.9091,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 11,
+      "correct": 10,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.031,
+      "median": 0.03,
+      "p95": 0.052,
+      "max": 0.052
+     }
+    },
+    "hard_dev": {
+     "n": 54,
+     "correct": 24,
+     "accuracy": 0.4444,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 24,
+      "true_none": 7,
+      "precision": 0.2917,
+      "recall": 0.5385
+     },
+     "supported_only": {
+      "n": 41,
+      "correct": 17,
+      "wrongly_rejected": 17
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.027,
+      "median": 0.028,
+      "p95": 0.037,
+      "max": 0.039
+     }
+    },
+    "hard_test": {
+     "n": 51,
+     "correct": 33,
+     "accuracy": 0.6471,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 23,
+      "true_none": 12,
+      "precision": 0.5217,
+      "recall": 0.9231
+     },
+     "supported_only": {
+      "n": 38,
+      "correct": 21,
+      "wrongly_rejected": 11
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.031,
+      "median": 0.03,
+      "p95": 0.046,
+      "max": 0.071
+     }
+    },
+    "hard:access": {
+     "n": 8,
+     "correct": 5,
+     "accuracy": 0.625,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 5,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.034,
+      "median": 0.034,
+      "p95": 0.043,
+      "max": 0.043
+     }
+    },
+    "hard:floor": {
+     "n": 8,
+     "correct": 3,
+     "accuracy": 0.375,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 1,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 3,
+      "wrongly_rejected": 1
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.03,
+      "median": 0.03,
+      "p95": 0.037,
+      "max": 0.037
+     }
+    },
+    "hard:indirect": {
+     "n": 5,
+     "correct": 2,
+     "accuracy": 0.4,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 5,
+      "correct": 2,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.029,
+      "median": 0.029,
+      "p95": 0.031,
+      "max": 0.031
+     }
+    },
+    "hard:mixed": {
+     "n": 23,
+     "correct": 15,
+     "accuracy": 0.6522,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 8,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 15,
+      "wrongly_rejected": 8
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.026,
+      "median": 0.027,
+      "p95": 0.031,
+      "max": 0.046
+     }
+    },
+    "hard:typo": {
+     "n": 18,
+     "correct": 4,
+     "accuracy": 0.2222,
+     "reject": {
+      "expected_none": 1,
+      "predicted_none": 13,
+      "true_none": 1,
+      "precision": 0.0769,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 17,
+      "correct": 3,
+      "wrongly_rejected": 12
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.025,
+      "median": 0.025,
+      "p95": 0.03,
+      "max": 0.03
+     }
+    },
+    "hard:unsupported": {
+     "n": 23,
+     "correct": 16,
+     "accuracy": 0.6957,
+     "reject": {
+      "expected_none": 23,
+      "predicted_none": 16,
+      "true_none": 16,
+      "precision": 1.0,
+      "recall": 0.6957
+     },
+     "supported_only": {
+      "n": 0,
+      "correct": 0,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.029,
+      "median": 0.029,
+      "p95": 0.034,
+      "max": 0.042
+     }
+    },
+    "hard:vague": {
+     "n": 20,
+     "correct": 12,
+     "accuracy": 0.6,
+     "reject": {
+      "expected_none": 2,
+      "predicted_none": 9,
+      "true_none": 2,
+      "precision": 0.2222,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 18,
+      "correct": 10,
+      "wrongly_rejected": 7
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.035,
+      "median": 0.032,
+      "p95": 0.071,
+      "max": 0.071
+     }
+    }
+   },
+   "offline": true
+  },
+  "tokens": {
+   "slices": {
+    "all": {
+     "n": 128,
+     "correct": 91,
+     "accuracy": 0.7109,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 43,
+      "true_none": 21,
+      "precision": 0.4884,
+      "recall": 0.8077
+     },
+     "supported_only": {
+      "n": 102,
+      "correct": 70,
+      "wrongly_rejected": 22
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.018,
+      "median": 0.013,
+      "p95": 0.02,
+      "max": 0.6
+     }
+    },
+    "easy": {
+     "n": 23,
+     "correct": 22,
+     "accuracy": 0.9565,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 22,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.038,
+      "median": 0.012,
+      "p95": 0.016,
+      "max": 0.6
+     }
+    },
+    "hard": {
+     "n": 105,
+     "correct": 69,
+     "accuracy": 0.6571,
+     "reject": {
+      "expected_none": 26,
+      "predicted_none": 43,
+      "true_none": 21,
+      "precision": 0.4884,
+      "recall": 0.8077
+     },
+     "supported_only": {
+      "n": 79,
+      "correct": 48,
+      "wrongly_rejected": 22
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.014,
+      "median": 0.013,
+      "p95": 0.02,
+      "max": 0.043
+     }
+    },
+    "dev": {
+     "n": 66,
+     "correct": 43,
+     "accuracy": 0.6515,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 25,
+      "true_none": 10,
+      "precision": 0.4,
+      "recall": 0.7692
+     },
+     "supported_only": {
+      "n": 53,
+      "correct": 33,
+      "wrongly_rejected": 15
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.022,
+      "median": 0.012,
+      "p95": 0.02,
+      "max": 0.6
+     }
+    },
+    "test": {
+     "n": 62,
+     "correct": 48,
+     "accuracy": 0.7742,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 18,
+      "true_none": 11,
+      "precision": 0.6111,
+      "recall": 0.8462
+     },
+     "supported_only": {
+      "n": 49,
+      "correct": 37,
+      "wrongly_rejected": 7
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.014,
+      "median": 0.014,
+      "p95": 0.019,
+      "max": 0.043
+     }
+    },
+    "easy_dev": {
+     "n": 12,
+     "correct": 12,
+     "accuracy": 1.0,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 12,
+      "correct": 12,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.061,
+      "median": 0.012,
+      "p95": 0.6,
+      "max": 0.6
+     }
+    },
+    "easy_test": {
+     "n": 11,
+     "correct": 10,
+     "accuracy": 0.9091,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 11,
+      "correct": 10,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.012,
+      "median": 0.012,
+      "p95": 0.015,
+      "max": 0.015
+     }
+    },
+    "hard_dev": {
+     "n": 54,
+     "correct": 31,
+     "accuracy": 0.5741,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 25,
+      "true_none": 10,
+      "precision": 0.4,
+      "recall": 0.7692
+     },
+     "supported_only": {
+      "n": 41,
+      "correct": 21,
+      "wrongly_rejected": 15
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.013,
+      "median": 0.013,
+      "p95": 0.02,
+      "max": 0.04
+     }
+    },
+    "hard_test": {
+     "n": 51,
+     "correct": 38,
+     "accuracy": 0.7451,
+     "reject": {
+      "expected_none": 13,
+      "predicted_none": 18,
+      "true_none": 11,
+      "precision": 0.6111,
+      "recall": 0.8462
+     },
+     "supported_only": {
+      "n": 38,
+      "correct": 27,
+      "wrongly_rejected": 7
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.014,
+      "median": 0.014,
+      "p95": 0.025,
+      "max": 0.043
+     }
+    },
+    "hard:access": {
+     "n": 8,
+     "correct": 4,
+     "accuracy": 0.5,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 4,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.02,
+      "median": 0.016,
+      "p95": 0.043,
+      "max": 0.043
+     }
+    },
+    "hard:floor": {
+     "n": 8,
+     "correct": 6,
+     "accuracy": 0.75,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 8,
+      "correct": 6,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.021,
+      "median": 0.017,
+      "p95": 0.04,
+      "max": 0.04
+     }
+    },
+    "hard:indirect": {
+     "n": 5,
+     "correct": 4,
+     "accuracy": 0.8,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 0,
+      "true_none": 0,
+      "precision": null,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 5,
+      "correct": 4,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.016,
+      "median": 0.016,
+      "p95": 0.017,
+      "max": 0.017
+     }
+    },
+    "hard:mixed": {
+     "n": 23,
+     "correct": 15,
+     "accuracy": 0.6522,
+     "reject": {
+      "expected_none": 0,
+      "predicted_none": 7,
+      "true_none": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "supported_only": {
+      "n": 23,
+      "correct": 15,
+      "wrongly_rejected": 7
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.013,
+      "median": 0.013,
+      "p95": 0.016,
+      "max": 0.017
+     }
+    },
+    "hard:typo": {
+     "n": 18,
+     "correct": 6,
+     "accuracy": 0.3333,
+     "reject": {
+      "expected_none": 1,
+      "predicted_none": 12,
+      "true_none": 1,
+      "precision": 0.0833,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 17,
+      "correct": 5,
+      "wrongly_rejected": 11
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.011,
+      "median": 0.011,
+      "p95": 0.019,
+      "max": 0.019
+     }
+    },
+    "hard:unsupported": {
+     "n": 23,
+     "correct": 18,
+     "accuracy": 0.7826,
+     "reject": {
+      "expected_none": 23,
+      "predicted_none": 18,
+      "true_none": 18,
+      "precision": 1.0,
+      "recall": 0.7826
+     },
+     "supported_only": {
+      "n": 0,
+      "correct": 0,
+      "wrongly_rejected": 0
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.012,
+      "median": 0.011,
+      "p95": 0.016,
+      "max": 0.016
+     }
+    },
+    "hard:vague": {
+     "n": 20,
+     "correct": 16,
+     "accuracy": 0.8,
+     "reject": {
+      "expected_none": 2,
+      "predicted_none": 6,
+      "true_none": 2,
+      "precision": 0.3333,
+      "recall": 1.0
+     },
+     "supported_only": {
+      "n": 18,
+      "correct": 14,
+      "wrongly_rejected": 4
+     },
+     "invalid": 0,
+     "latency_ms": {
+      "mean": 0.014,
+      "median": 0.014,
+      "p95": 0.02,
+      "max": 0.02
+     }
+    }
+   },
+   "offline": true
+  }
+ }
+}

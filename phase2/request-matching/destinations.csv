@@ -1,16 +1,27 @@
-place_id,name,floor,tags,aliases
-GATE,Exit gate (leave building),lower,exit,leave the building;leave;way out;get out;exit the building;exit door;exit gate;pintu keluar;go home;go outside;main exit;main entrance;turnstile;exit building
-EXIT5,Emergency exit,upper,emergency,emergency exit;emergency;emergency case;fire exit;fire;evacuate;alarm;emergency stairs;exit 5
-TOILET,Toilet,upper,toilet,toilet;bathroom;washroom;restroom;wc;lavatory;mens;womens;loo;pee;poo
-Y5,Y5 studio,upper,room,y5;year 5;studio 5;y5 302;y5 202
-SR8,Study room 8 (book first),upper,bookable,study room 8;sr8;room 8
-SR9,Study room 9 (book first),upper,bookable,study room 9;sr9;room 9
-SR10,Study room 10 (book first),upper,bookable,study room 10;sr10;room 10
-SR11,Study room 11 (book first),upper,bookable,study room 11;sr11;room 11
-CANTEEN,Canteen,upper,food,canteen;cafeteria;food;eat;hungry;lunch;dinner;breakfast;meal;rice;noodles;siu mei;roast meat;char siu;dim sum;drink;coffee;snack;city express
-Y4,Y4 studio,lower,room,y4;year 4;studio 4;y4052
-LT1A,Lecture theatre 1A,lower,lecture,lt1a;lt 1a;lecture theatre 1a;lecture 1a;theatre 1a;class;lesson
-LT1B,Lecture theatre 1B,lower,lecture,lt1b;lt 1b;lecture theatre 1b;lecture 1b;theatre 1b;class;lesson
-LT2A,Lecture theatre 2A,lower,lecture,lt2a;lt 2a;lecture theatre 2a;lecture 2a;theatre 2a;class;lesson
-LT2B,Lecture theatre 2B,lower,lecture,lt2b;lt 2b;lecture theatre 2b;lecture 2b;theatre 2b;class;lesson
-ESCALATOR,Escalator,both,transit,escalator;escalators;lift;elevator;stairs;go up;go down;upstairs;downstairs;change floor
+place_id,name,floor,kind,map_key,tags,aliases
+canteen,Canteen (5F),5,room,canteen,food;drink,canteen;kantin;cafeteria;food court;food;eat;hungry;lunch;dinner;breakfast;meal;rice;noodles;siu mei;roast meat;char siu;dim sum;drink;coffee;snack;city express;makan;lapar;makan siang
+exit_5,Exit 5 (5F),5,exit,exit5_door,exit;emergency,exit 5;exit5;emergency exit;emergency;emergency case;fire exit;fire;evacuate;alarm;emergency stairs;exit;exits;way out;get out;pintu keluar;keluar
+male_toilet,Male toilet (5F),5,toilet,male_toilet,toilet;male,male toilet;mens toilet;mens;mens bathroom;men toilet;gents;toilet cowo;toilet laki;wc cowo;cowo;toilet;bathroom;washroom;restroom;wc;lavatory;loo;pee;poo;toilets;kamar kecil;kamar mandi
+y5302,Y5-302 (5F),5,room,y5302,room;studio,y5302;y5 302;y5-302;y5 studio;y5;year 5;studio 5
+sr9,"Study rooms SR8 to SR11 (merged as SR9, book first)",5,room,sr9,study;quiet;bookable;room,sr9;study room 9;room 9;sr8;sr10;sr11;study room 8;study room 10;study room 11;study room;study rooms;quiet study;ruang belajar;belajar;revise;revision;study;quiet place
+y5202,Y5-202 (5F),5,room,y5202,room;studio,y5202;y5 202;y5-202;y5;year 5;studio 5
+female_toilet,Female toilet (5F),5,toilet,female_toilet,toilet;female,female toilet;womens toilet;womens;ladies;toilet cewe;toilet perempuan;wc cewe;cewe;toilet;bathroom;washroom;restroom;wc;lavatory;loo;pee;poo;toilets;kamar kecil;kamar mandi
+exit_10,Exit 10 (5F),5,exit,exit10_door,exit,exit 10;exit10;exit;exits;way out;get out;pintu keluar;keluar
+escalator_up,Escalator up (5F),5,escalator,esca_up,escalator;vertical;floor_change,escalator up;esca up;esca naik;eska naik;eskalator naik;up escalator;go up;going up;upstairs;naik;escalator;escalators;eskalator;esca;eska;moving stairs;change floor;ganti lantai
+escalator_down,Escalator down (5F),5,escalator,esca_down,escalator;vertical;floor_change,escalator down;esca down;esca turun;eska turun;eskalator turun;down escalator;go down;going down;downstairs;turun;escalator;escalators;eskalator;esca;eska;moving stairs;change floor;ganti lantai
+disabled_toilet,Disabled toilet (5F),5,toilet,male_disabled_toilet,toilet;accessible;wheelchair,disabled toilet;male disabled toilet;accessible toilet;wheelchair toilet;handicap toilet;toilet disabilitas;toilet difabel;toilet;bathroom;washroom;restroom;wc;lavatory;loo;pee;poo;toilets;kamar kecil;kamar mandi
+y5401,Y5-401 (5F),5,room,y5401,room;studio,y5401;y5 401;y5-401;y5;year 5;studio 5
+y5302_back,"Y5-302 back, point 2 (5F)",5,room,y5302_point2,room;studio,y5302 back;y5302 point 2;back of y5302;y5 302 back;y5;year 5;studio 5
+disabled_toilet_4F,Disabled toilet (4F),4,toilet,disabled_toilet,toilet;accessible;wheelchair,disabled toilet 4f;toilet 4f;4f toilet;disabled toilet bawah;toilet bawah;toilet;bathroom;washroom;restroom;wc;lavatory;loo;pee;poo;toilets;kamar kecil;kamar mandi
+exit_5_4F,Exit 5 (4F),4,exit,exit5_door,exit;emergency,exit 5 4f;exit 5 bawah;exit 5 lantai 4;emergency exit 4f;exit;exits;way out;get out;pintu keluar;keluar
+lt2a,Lecture theatre 2A (4F),4,room,lt2a,lecture,lt2a;lt 2a;lecture theatre 2a;lecture 2a;theatre 2a;kelas 2a;lecture theatre;lecture theater;lecture hall;lecture;class;lesson;kuliah;ruang kuliah;kelas
+lt2b,Lecture theatre 2B (4F),4,room,lt2b,lecture,lt2b;lt 2b;lecture theatre 2b;lecture 2b;theatre 2b;kelas 2b;lecture theatre;lecture theater;lecture hall;lecture;class;lesson;kuliah;ruang kuliah;kelas
+escalator_down_4F,Escalator down (4F),4,escalator,esca_down,escalator;vertical;floor_change,escalator down 4f;esca turun bawah;eska turun bawah;down escalator 4f;go down;going down;downstairs;turun;escalator;escalators;eskalator;esca;eska;moving stairs;change floor;ganti lantai
+y4502,Y4-502 (4F),4,room,y4502,room;studio,y4502;y4 502;y4-502;y4;year 4;studio 4;y4 studio
+escalator_up_4F,Escalator up (4F),4,escalator,esca_up,escalator;vertical;floor_change,escalator up 4f;esca naik bawah;eska naik bawah;up escalator 4f;go up;going up;upstairs;naik;escalator;escalators;eskalator;esca;eska;moving stairs;change floor;ganti lantai
+lt1b,Lecture theatre 1B (4F),4,room,lt1b,lecture,lt1b;lt 1b;lecture theatre 1b;lecture 1b;theatre 1b;kelas 1b;lecture theatre;lecture theater;lecture hall;lecture;class;lesson;kuliah;ruang kuliah;kelas
+lt1a,Lecture theatre 1A (4F),4,room,lt1a,lecture,lt1a;lt 1a;lecture theatre 1a;lecture 1a;theatre 1a;kelas 1a;lecture theatre;lecture theater;lecture hall;lecture;class;lesson;kuliah;ruang kuliah;kelas
+exit_10_4F,Exit 10 (4F),4,exit,exit10_door,exit,exit 10 4f;exit 10 bawah;exit 10 lantai 4;exit;exits;way out;get out;pintu keluar;keluar
+entrance_exit,Entrance / exit gate (4F),4,exit,gate,exit;gate;entrance,gate;exit gate;main exit;main entrance;entrance;turnstile;pintu keluar;pintu masuk;leave the building;leave building;exit the building;exit building;way out of the building;go home;go outside;outside;exit;exits;way out;get out;keluar
+lift_stairs,Lift and stairs (5F),5,lift_stairs,lift_stairs5,lift;stairs;vertical;floor_change;accessible,lift;elevator;lift and stairs;stairs;staircase;tangga;lift naik;go up;upstairs;downstairs;change floor;ganti lantai
+lift_stairs_4F,Lift and stairs (4F),4,lift_stairs,lift_stairs5,lift;stairs;vertical;floor_change;accessible,lift 4f;lift bawah;stairs 4f;lift and stairs 4f;lift;elevator;stairs;staircase;tangga;go up;upstairs;downstairs;change floor
