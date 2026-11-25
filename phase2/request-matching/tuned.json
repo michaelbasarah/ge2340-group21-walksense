@@ -1,0 +1,25 @@
+{
+ "embed": {
+  "threshold": 0.38,
+  "dev_accuracy": 0.7879,
+  "best_range": [
+   0.37,
+   0.39
+  ],
+  "dev_accuracy_at_0": 0.6667,
+  "n_dev": 66
+ },
+ "embed_doc": {
+  "threshold": 0.205,
+  "dev_accuracy": 0.6667,
+  "best_range": [
+   0.19,
+   0.23
+  ],
+  "dev_accuracy_at_0": 0.5909,
+  "n_dev": 66
+ },
+ "tuned_on": "dev split only",
+ "date": "2026-11-25",
+ "embed_model": "sentence-transformers/all-MiniLM-L6-v2"
+}
