@@ -1,0 +1,5084 @@
+{
+ "what": "Live-demo recipe of knn_playground.html (not evaluation results): phone x train->test session, window and recording accuracy. Computed by phone_matrix.py at the default weights and k.",
+ "weights": {
+  "B": 0.1,
+  "xyz": 0.5,
+  "tilt": 0.0,
+  "baro": 0.2
+ },
+ "k": 25,
+ "phones": {
+  "ip16": {
+   "display": "ip16",
+   "model": "iPhone17,4"
+  },
+  "ip18": {
+   "display": "ip18",
+   "model": "iPhone19,2"
+  },
+  "s24": {
+   "display": "s24",
+   "model": "SM-S9280"
+  },
+  "a55": {
+   "display": "a55",
+   "model": "SM-A556E"
+  },
+  "a56": {
+   "display": "a56",
+   "model": "SM-A566B"
+  }
+ },
+ "cells": [
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "23nov->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "23nov->24s2",
+   "n_train_windows": 412,
+   "n_test_windows": 312,
+   "win_hit": 160,
+   "win_n": 312,
+   "rec_hit": 39,
+   "rec_n": 78,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     9,
+     12,
+     2,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     8,
+     12,
+     2,
+     3
+    ],
+    "y5202": [
+     8,
+     12,
+     2,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     2,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     6,
+     12,
+     1,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     7,
+     12,
+     2,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "24s2->23nov",
+   "n_train_windows": 312,
+   "n_test_windows": 412,
+   "win_hit": 218,
+   "win_n": 412,
+   "rec_hit": 55,
+   "rec_n": 103,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     36,
+     36,
+     9,
+     9
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     14,
+     24,
+     3,
+     6
+    ],
+    "escalator_up": [
+     20,
+     24,
+     6,
+     6
+    ],
+    "exit_10": [
+     0,
+     16,
+     0,
+     4
+    ],
+    "exit_5": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "female_toilet": [
+     9,
+     12,
+     2,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5202": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "exit_10_4F": [
+     6,
+     12,
+     2,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "24s2->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip16",
+   "col": "leave one session out",
+   "n_train_windows": 724,
+   "n_test_windows": 724,
+   "win_hit": 378,
+   "win_n": 724,
+   "rec_hit": 94,
+   "rec_n": 181,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     48,
+     48,
+     12,
+     12
+    ],
+    "disabled_toilet": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "escalator_down": [
+     26,
+     36,
+     6,
+     9
+    ],
+    "escalator_up": [
+     20,
+     36,
+     6,
+     9
+    ],
+    "exit_10": [
+     9,
+     28,
+     2,
+     7
+    ],
+    "exit_5": [
+     36,
+     36,
+     9,
+     9
+    ],
+    "female_toilet": [
+     21,
+     24,
+     5,
+     6
+    ],
+    "lift_stairs": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "male_toilet": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "sr9": [
+     20,
+     24,
+     5,
+     6
+    ],
+    "y5202": [
+     20,
+     24,
+     5,
+     6
+    ],
+    "y5302": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5302_back": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5401": [
+     13,
+     24,
+     3,
+     6
+    ],
+    "disabled_toilet_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "entrance_exit": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "escalator_down_4F": [
+     0,
+     36,
+     0,
+     9
+    ],
+    "escalator_up_4F": [
+     0,
+     36,
+     0,
+     9
+    ],
+    "exit_10_4F": [
+     18,
+     24,
+     5,
+     6
+    ],
+    "exit_5_4F": [
+     24,
+     36,
+     6,
+     9
+    ],
+    "lift_stairs_4F": [
+     2,
+     24,
+     0,
+     6
+    ],
+    "lt1a": [
+     18,
+     24,
+     4,
+     6
+    ],
+    "lt1b": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lt2a": [
+     19,
+     24,
+     5,
+     6
+    ],
+    "lt2b": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y4502": [
+     12,
+     24,
+     3,
+     6
+    ]
+   }
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "23nov->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "24s2->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "ip18",
+   "col": "leave one session out",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "23nov->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "24s1->24s2",
+   "n_train_windows": 324,
+   "n_test_windows": 312,
+   "win_hit": 94,
+   "win_n": 312,
+   "rec_hit": 23,
+   "rec_n": 78,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "s24"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     10,
+     12,
+     2,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "24s2->24s1",
+   "n_train_windows": 312,
+   "n_test_windows": 324,
+   "win_hit": 131,
+   "win_n": 324,
+   "rec_hit": 33,
+   "rec_n": 81,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "s24"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "same",
+   "phone": "s24",
+   "col": "leave one session out",
+   "n_train_windows": 636,
+   "n_test_windows": 636,
+   "win_hit": 225,
+   "win_n": 636,
+   "rec_hit": 56,
+   "rec_n": 159,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "s24"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     36,
+     36,
+     9,
+     9
+    ],
+    "disabled_toilet": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_down": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "exit_10": [
+     23,
+     24,
+     6,
+     6
+    ],
+    "exit_5": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "female_toilet": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lift_stairs": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "male_toilet": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "sr9": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5202": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "y5302": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5302_back": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "y5401": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "entrance_exit": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "escalator_down_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "exit_10_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "exit_5_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lift_stairs_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lt1a": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lt1b": [
+     22,
+     24,
+     5,
+     6
+    ],
+    "lt2a": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lt2b": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "y4502": [
+     12,
+     24,
+     3,
+     6
+    ]
+   }
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "23nov->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "24s2->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a55",
+   "col": "leave one session out",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "23nov->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "24s2->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "same",
+   "phone": "a56",
+   "col": "leave one session out",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "23nov->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "23nov->24s2",
+   "n_train_windows": 412,
+   "n_test_windows": 312,
+   "win_hit": 160,
+   "win_n": 312,
+   "rec_hit": 39,
+   "rec_n": 78,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": false,
+   "per_place": {
+    "canteen": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     9,
+     12,
+     2,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     8,
+     12,
+     2,
+     3
+    ],
+    "y5202": [
+     8,
+     12,
+     2,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     2,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     6,
+     12,
+     1,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     7,
+     12,
+     2,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "24s1->23nov",
+   "n_train_windows": 1272,
+   "n_test_windows": 412,
+   "win_hit": 217,
+   "win_n": 412,
+   "rec_hit": 54,
+   "rec_n": 103,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "a55",
+    "a56",
+    "ip18",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     36,
+     36,
+     9,
+     9
+    ],
+    "disabled_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "exit_10": [
+     2,
+     16,
+     1,
+     4
+    ],
+    "exit_5": [
+     15,
+     24,
+     4,
+     6
+    ],
+    "female_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     10,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     9,
+     12,
+     2,
+     3
+    ],
+    "y5202": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     3,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up_4F": [
+     8,
+     24,
+     2,
+     6
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     2,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "24s1->24s2",
+   "n_train_windows": 1272,
+   "n_test_windows": 312,
+   "win_hit": 176,
+   "win_n": 312,
+   "rec_hit": 44,
+   "rec_n": 78,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "a55",
+    "a56",
+    "ip18",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     9,
+     12,
+     2,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     6,
+     12,
+     2,
+     3
+    ],
+    "lift_stairs": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "male_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     7,
+     12,
+     1,
+     3
+    ],
+    "y5202": [
+     3,
+     12,
+     1,
+     3
+    ],
+    "y5302": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302_back": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     3,
+     12,
+     1,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     5,
+     12,
+     1,
+     3
+    ],
+    "lt2b": [
+     10,
+     12,
+     2,
+     3
+    ],
+    "y4502": [
+     2,
+     12,
+     1,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "24s2->23nov",
+   "n_train_windows": 624,
+   "n_test_windows": 412,
+   "win_hit": 209,
+   "win_n": 412,
+   "rec_hit": 53,
+   "rec_n": 103,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     36,
+     36,
+     9,
+     9
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     23,
+     24,
+     6,
+     6
+    ],
+    "escalator_up": [
+     20,
+     24,
+     6,
+     6
+    ],
+    "exit_10": [
+     0,
+     16,
+     0,
+     4
+    ],
+    "exit_5": [
+     22,
+     24,
+     6,
+     6
+    ],
+    "female_toilet": [
+     8,
+     12,
+     2,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     2,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     2,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "24s2->24s1",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip16",
+   "col": "leave one session out",
+   "n_train_windows": 3580,
+   "n_test_windows": 724,
+   "win_hit": 433,
+   "win_n": 724,
+   "rec_hit": 110,
+   "rec_n": 181,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "a55",
+    "a56",
+    "ip16",
+    "ip18",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     48,
+     48,
+     12,
+     12
+    ],
+    "disabled_toilet": [
+     19,
+     24,
+     5,
+     6
+    ],
+    "escalator_down": [
+     23,
+     36,
+     6,
+     9
+    ],
+    "escalator_up": [
+     24,
+     36,
+     6,
+     9
+    ],
+    "exit_10": [
+     12,
+     28,
+     4,
+     7
+    ],
+    "exit_5": [
+     29,
+     36,
+     8,
+     9
+    ],
+    "female_toilet": [
+     18,
+     24,
+     5,
+     6
+    ],
+    "lift_stairs": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "male_toilet": [
+     22,
+     24,
+     6,
+     6
+    ],
+    "sr9": [
+     20,
+     24,
+     5,
+     6
+    ],
+    "y5202": [
+     17,
+     24,
+     4,
+     6
+    ],
+    "y5302": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "y5302_back": [
+     11,
+     24,
+     3,
+     6
+    ],
+    "y5401": [
+     3,
+     24,
+     0,
+     6
+    ],
+    "disabled_toilet_4F": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "entrance_exit": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "escalator_down_4F": [
+     0,
+     36,
+     0,
+     9
+    ],
+    "escalator_up_4F": [
+     8,
+     36,
+     2,
+     9
+    ],
+    "exit_10_4F": [
+     7,
+     24,
+     2,
+     6
+    ],
+    "exit_5_4F": [
+     17,
+     36,
+     4,
+     9
+    ],
+    "lift_stairs_4F": [
+     3,
+     24,
+     1,
+     6
+    ],
+    "lt1a": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "lt1b": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "lt2a": [
+     18,
+     24,
+     4,
+     6
+    ],
+    "lt2b": [
+     10,
+     24,
+     2,
+     6
+    ],
+    "y4502": [
+     4,
+     24,
+     1,
+     6
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "23nov->24s1",
+   "n_train_windows": 412,
+   "n_test_windows": 324,
+   "win_hit": 170,
+   "win_n": 324,
+   "rec_hit": 42,
+   "rec_n": 81,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     7,
+     12,
+     2,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     6,
+     12,
+     1,
+     3
+    ],
+    "lt1a": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "24s2->24s1",
+   "n_train_windows": 624,
+   "n_test_windows": 324,
+   "win_hit": 177,
+   "win_n": 324,
+   "rec_hit": 45,
+   "rec_n": 81,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     6,
+     12,
+     2,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     4,
+     12,
+     1,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs": [
+     5,
+     12,
+     1,
+     3
+    ],
+    "male_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302_back": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     6,
+     12,
+     2,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "ip18",
+   "col": "leave one session out",
+   "n_train_windows": 1036,
+   "n_test_windows": 324,
+   "win_hit": 210,
+   "win_n": 324,
+   "rec_hit": 53,
+   "rec_n": 81,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     10,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs": [
+     5,
+     12,
+     1,
+     3
+    ],
+    "male_toilet": [
+     10,
+     12,
+     2,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302_back": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10_4F": [
+     3,
+     12,
+     1,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     10,
+     12,
+     3,
+     3
+    ],
+    "lt1a": [
+     5,
+     12,
+     1,
+     3
+    ],
+    "lt1b": [
+     7,
+     12,
+     2,
+     3
+    ],
+    "lt2a": [
+     4,
+     12,
+     1,
+     3
+    ],
+    "lt2b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "23nov->24s1",
+   "n_train_windows": 412,
+   "n_test_windows": 324,
+   "win_hit": 84,
+   "win_n": 324,
+   "rec_hit": 21,
+   "rec_n": 81,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "23nov->24s2",
+   "n_train_windows": 412,
+   "n_test_windows": 312,
+   "win_hit": 113,
+   "win_n": 312,
+   "rec_hit": 29,
+   "rec_n": 78,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     5,
+     12,
+     2,
+     3
+    ],
+    "lift_stairs": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "24s1->24s2",
+   "n_train_windows": 1272,
+   "n_test_windows": 312,
+   "win_hit": 96,
+   "win_n": 312,
+   "rec_hit": 24,
+   "rec_n": 78,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "a55",
+    "a56",
+    "ip18",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "sr9": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5202": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "24s2->24s1",
+   "n_train_windows": 624,
+   "n_test_windows": 324,
+   "win_hit": 132,
+   "win_n": 324,
+   "rec_hit": 33,
+   "rec_n": 81,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "s24",
+   "col": "leave one session out",
+   "n_train_windows": 2720,
+   "n_test_windows": 636,
+   "win_hit": 188,
+   "win_n": 636,
+   "rec_hit": 46,
+   "rec_n": 159,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "a55",
+    "a56",
+    "ip16",
+    "ip18",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     36,
+     36,
+     9,
+     9
+    ],
+    "disabled_toilet": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_down": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "escalator_up": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "exit_10": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "exit_5": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "female_toilet": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lift_stairs": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "male_toilet": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "sr9": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5202": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "y5302": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5302_back": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "y5401": [
+     7,
+     24,
+     1,
+     6
+    ],
+    "disabled_toilet_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "entrance_exit": [
+     13,
+     24,
+     3,
+     6
+    ],
+    "escalator_down_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "escalator_up_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "exit_10_4F": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "exit_5_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lift_stairs_4F": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lt1a": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "lt1b": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lt2a": [
+     0,
+     24,
+     0,
+     6
+    ],
+    "lt2b": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "y4502": [
+     24,
+     24,
+     6,
+     6
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "23nov->24s1",
+   "n_train_windows": 412,
+   "n_test_windows": 304,
+   "win_hit": 53,
+   "win_n": 304,
+   "rec_hit": 13,
+   "rec_n": 76,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     5,
+     8,
+     1,
+     2
+    ],
+    "sr9": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5202": [
+     0,
+     4,
+     0,
+     1
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     0,
+     4,
+     0,
+     1
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "24s2->24s1",
+   "n_train_windows": 624,
+   "n_test_windows": 304,
+   "win_hit": 48,
+   "win_n": 304,
+   "rec_hit": 12,
+   "rec_n": 76,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     7,
+     24,
+     2,
+     6
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     4,
+     8,
+     1,
+     2
+    ],
+    "sr9": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     0,
+     4,
+     0,
+     1
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     0,
+     4,
+     0,
+     1
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "a55",
+   "col": "leave one session out",
+   "n_train_windows": 1036,
+   "n_test_windows": 304,
+   "win_hit": 54,
+   "win_n": 304,
+   "rec_hit": 13,
+   "rec_n": 76,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     12,
+     24,
+     3,
+     6
+    ],
+    "disabled_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "male_toilet": [
+     5,
+     8,
+     1,
+     2
+    ],
+    "sr9": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5202": [
+     0,
+     4,
+     0,
+     1
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5_4F": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     0,
+     4,
+     0,
+     1
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     0,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "23nov->24s1",
+   "n_train_windows": 412,
+   "n_test_windows": 320,
+   "win_hit": 110,
+   "win_n": 320,
+   "rec_hit": 27,
+   "rec_n": 80,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     3,
+     24,
+     1,
+     6
+    ],
+    "disabled_toilet": [
+     5,
+     12,
+     1,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     8,
+     8,
+     2,
+     2
+    ],
+    "exit_10": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     7,
+     12,
+     1,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_5_4F": [
+     4,
+     12,
+     1,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     12,
+     12,
+     3,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "23nov->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "24s1->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "24s1->24s2",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "24s2->23nov",
+   "n_train_windows": 0,
+   "n_test_windows": 0,
+   "win_hit": 0,
+   "win_n": 0,
+   "rec_hit": 0,
+   "rec_n": 0,
+   "chance": null,
+   "train_handsets": [],
+   "cross_handset": false,
+   "per_place": {}
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "24s2->24s1",
+   "n_train_windows": 624,
+   "n_test_windows": 320,
+   "win_hit": 155,
+   "win_n": 320,
+   "rec_hit": 39,
+   "rec_n": 80,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     8,
+     8,
+     2,
+     2
+    ],
+    "exit_10": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5": [
+     2,
+     12,
+     0,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5401": [
+     11,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_10_4F": [
+     3,
+     12,
+     1,
+     3
+    ],
+    "exit_5_4F": [
+     6,
+     12,
+     2,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt1b": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     4,
+     12,
+     1,
+     3
+    ],
+    "y4502": [
+     1,
+     12,
+     0,
+     3
+    ]
+   }
+  },
+  {
+   "mode": "all",
+   "phone": "a56",
+   "col": "leave one session out",
+   "n_train_windows": 1036,
+   "n_test_windows": 320,
+   "win_hit": 149,
+   "win_n": 320,
+   "rec_hit": 37,
+   "rec_n": 80,
+   "chance": 0.038461538461538464,
+   "train_handsets": [
+    "ip16",
+    "s24"
+   ],
+   "cross_handset": true,
+   "per_place": {
+    "canteen": [
+     24,
+     24,
+     6,
+     6
+    ],
+    "disabled_toilet": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up": [
+     8,
+     8,
+     2,
+     2
+    ],
+    "exit_10": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "exit_5": [
+     4,
+     12,
+     1,
+     3
+    ],
+    "female_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lift_stairs": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "male_toilet": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "sr9": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5202": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5302": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "y5302_back": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "y5401": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "disabled_toilet_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "entrance_exit": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "escalator_down_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "escalator_up_4F": [
+     12,
+     12,
+     3,
+     3
+    ],
+    "exit_10_4F": [
+     3,
+     12,
+     1,
+     3
+    ],
+    "exit_5_4F": [
+     4,
+     12,
+     1,
+     3
+    ],
+    "lift_stairs_4F": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt1b": [
+     8,
+     12,
+     2,
+     3
+    ],
+    "lt2a": [
+     0,
+     12,
+     0,
+     3
+    ],
+    "lt2b": [
+     1,
+     12,
+     0,
+     3
+    ],
+    "y4502": [
+     1,
+     12,
+     0,
+     3
+    ]
+   }
+  }
+ ]
+}

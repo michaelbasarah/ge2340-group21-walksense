@@ -5,9 +5,9 @@ with the same standardisation, weights, k and 1/(D+1e-6) vote weights. INTERNAL 
 Python side builds the distance matrix independently (scipy cdist per group, availability masks as gknn.combine) from
 the embedded data and feeds it to KNeighborsClassifier(metric='precomputed', weights=callable).
 Also checks the PCA projection of a window equals the embedded pc1/pc2 of that window.
-Run:  python phase2/new/day3/playground_check.py   (needs node)
+Run:  python phase2/new/day3/playground_check.py   (needs node; DAY3_VARIANT=split20 checks out-split20/ instead of out/)
 """
-import json, re, subprocess, tempfile, sys
+import json, os, re, subprocess, tempfile, sys
 from pathlib import Path
 import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -18,7 +18,8 @@ from scipy.spatial.distance import cdist
 from sklearn.neighbors import KNeighborsClassifier
 
 HERE = Path(__file__).resolve().parent
-HTML = HERE / 'out' / 'knn_playground.html'
+OUTDIR = HERE / (f"out-{os.environ['DAY3_VARIANT']}" if os.environ.get('DAY3_VARIANT', '').strip() else 'out')
+HTML = OUTDIR / 'knn_playground.html'
 P = json.loads(re.search(r'<script type="application/json" id="data">(.*?)</script>', HTML.read_text(), re.S).group(1))
 c = P['cols']; n = P['n']; NP = len(P['places'])
 F = {f: np.array([np.nan if v is None else v for v in c[f]], float) for f in P['feats']}
@@ -133,7 +134,7 @@ print(f'training masks built by the page differ from the numpy masks in {mask_ba
 subprocess.run(['node', str(HERE / 'playground_check.js'), str(HTML), '-', str(tmp / 'mx.json'), 'matrix'], check=True)
 js = json.loads((tmp / 'mx.json').read_text())
 py = phone_matrix.compute(P)
-exp = json.loads((HERE / 'out' / 'phone_session_matrix.json').read_text())['cells']
+exp = json.loads((OUTDIR / 'phone_session_matrix.json').read_text())['cells']
 bad, nna, ncell = 0, 0, 0
 assert len(js) == len(py) == len(exp), (len(js), len(py), len(exp))
 for j, p_, e in zip(js, py, exp):
@@ -178,7 +179,7 @@ mbad = sum(int(not (np.array_equal(np.array(o['train'], bool), e[0]) and np.arra
 print(f'place filter: the page\'s training mask and drawn mask equal the numpy masks in {len(mo) - mbad}/{len(mo)} random cases (place subsets x filter-training on/off x floor x session x hold-out)')
 
 # ---- variance decomposition: the page's JS == variance.py (pandas) == out/variance_by_place.json, at the default 'all' settings, 3 single places, a floor, and combined filters
-exp_v = json.loads((HERE / 'out' / 'variance_by_place.json').read_text())
+exp_v = json.loads((OUTDIR / 'variance_by_place.json').read_text())
 df = variance.frame(P)
 cells_per_place = df.groupby('place').apply(lambda d: d.groupby(['phone', 'sess']).ngroups)
 fl_of = np.array(P['place_floor'])

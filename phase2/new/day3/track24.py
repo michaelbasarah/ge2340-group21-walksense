@@ -14,6 +14,10 @@ Run after data.py:  python phase2/new/day3/track24.py
 Writes out/track24_results.json, out/track24_visits.csv and out/replay_24nov_s2.json (the circle-UI format;
 open phase2/new/circle-ui/index.html?data=../day3/out/replay_24nov_s2.json over http). The 23-Nov replay
 in ../tracking/out/ is not touched.
+
+With DAY3_VARIANT=split20 (data.py) the TRAINING fingerprints keep only the 2 s windows inside kept 20 s pieces
+(out-split20/pieces.csv: excluded 23-Nov stairs/study-room stops, outlier and incomplete pieces dropped). The test
+replay is a time-ordered stream scored per stop and is not cut into pieces; its windows get the same filter.
 """
 from __future__ import annotations
 
@@ -78,7 +82,7 @@ def session_inputs(sid):
     pw['from_stop'] = [st[st['start_epoch_s'] <= s0]['stop_id'].iloc[-1] if (st['start_epoch_s'] <= s0).any() else None
                        for s0 in pw['start']]
     pw = pw[pw['from_stop'].notna()].reset_index(drop=True)
-    return st, pw, pd.DataFrame(W_rows), V, hs[0]
+    return st, pw, keep_pieces(pd.DataFrame(W_rows)), V, hs[0]
 
 
 def windows_23nov():
@@ -98,7 +102,19 @@ def windows_23nov():
     place = {f'23nov:{v.split(":", 1)[1]}': pl for v, pl in zip(V23['visit'], V23['place'])}
     vt = V23.sort_values('start')
     p, f = vt['hpa_iphone'].to_numpy(), vt['floor'].to_numpy()
-    return pd.DataFrame(rows), place, float(np.median(np.abs(np.diff(p))[np.diff(f) != 0])) / 2
+    return keep_pieces(pd.DataFrame(rows)), place, float(np.median(np.abs(np.diff(p))[np.diff(f) != 0])) / 2
+
+
+def keep_pieces(Wt, slot=PHONE):
+    """split20: keep only the 2 s windows that fall inside a kept 20 s piece of their take (no-op without a variant)."""
+    if not data.VARIANT:
+        return Wt
+    D = data.load()
+    P = D['pieces']
+    kept = set(zip(P.loc[P['status'] == 'kept', 'take'], P.loc[P['status'] == 'kept', 'piece']))
+    per = int(round(D['variant']['piece_s'] / WIN))
+    ok = [(f'{k}:{slot}', int(w) // per) in kept for k, w in zip(Wt['key'], Wt['window'])]
+    return Wt[ok].reset_index(drop=True)
 
 
 def mu_from_walks(g, pw_train):

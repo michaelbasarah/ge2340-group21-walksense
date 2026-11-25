@@ -16,6 +16,9 @@ Three ways of splitting, reported side by side on purpose:
              over the remaining sessions.
 Then the deployable model: weights and k tuned by leave-one-session-out on all sessions.
 
+With DAY3_VARIANT=split20 (data.py) a "recording" is a 20 s piece of a take; by_recording then groups by the parent
+take (column `take`), so the pieces of one take are never on both sides; grouped and loso already group by stop/session.
+
 Run:  python phase2/new/day3/fused_knn.py      (about 5-10 min) writes out/fused_knn.json, out/fused_model.json,
       out/fused_window_predictions.csv
 """
@@ -175,8 +178,11 @@ def main():
                        'per_session_phone': {f'{s}/{p}': int(c) for (s, p), c in bank.W.groupby(['session', 'phone']).size().items()}},
            'wifi': 'nearest stop within 120 s, s24 scanner only; Wi-Fi and baro are per physical stop (shared by all its windows)',
            'schemes': {}}
+    if data.VARIANT:
+        out['variant'] = data.VARIANT
+        out['samples']['takes'] = int(bank.W['take'].nunique())
     wins = []
-    rec_groups = bank.rec
+    rec_groups = bank.W['take'].to_numpy() if 'take' in bank.W else bank.rec     # split20: group pieces by their take
     vis_groups = bank.vis
     kf = KFold(5, shuffle=True, random_state=SEED)
     outer_random = [(idx[a], idx[b], allsess, None, f'random fold {i + 1}') for i, (a, b) in enumerate(kf.split(idx))]
@@ -189,6 +195,7 @@ def main():
         for tr, te, *_ in outer:
             if name != 'random_LEAKY':
                 assert not set(bank.rec[tr]) & set(bank.rec[te])
+                assert not set(rec_groups[tr]) & set(rec_groups[te]), 'pieces of one take on both sides'
             if name in ('grouped_by_stop', 'leave_one_session_out'):
                 assert not set(bank.vis[tr]) & set(bank.vis[te])
         res, w = run_scheme(bank, name, outer, inner, area)

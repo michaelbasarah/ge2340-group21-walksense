@@ -1,0 +1,12 @@
+session,take,piece,key,phone,slot,place,floor,take_span_s,n_windows,B_median_uT,dev_B_uT,angle_deg,status,rule,rule_value
+23nov,23nov:BM11:iphone,0,23nov:BM11:iphone#p0,ip16,iphone,exit_10,5,59.99,4,31.895,-1.081,26.356,outlier,field direction > 20.0 deg from the take median,26.356
+23nov,23nov:BM11:iphone,2,23nov:BM11:iphone#p2,ip16,iphone,exit_10,5,59.99,4,34.836,1.861,30.482,outlier,field direction > 20.0 deg from the take median,30.482
+23nov,23nov:BM14:iphone,0,23nov:BM14:iphone#p0,ip16,iphone,exit_5,5,59.99,4,46.941,11.272,124.457,outlier,|piece |B| median - take median| > 5.0 uT,11.272
+23nov,23nov:BM14:iphone,1,23nov:BM14:iphone#p1,ip16,iphone,exit_5,5,59.99,4,21.522,-14.148,55.411,outlier,|piece |B| median - take median| > 5.0 uT,-14.148
+23nov,23nov:BM14:iphone,2,23nov:BM14:iphone#p2,ip16,iphone,exit_5,5,59.99,4,35.67,0.0,36.772,outlier,field direction > 20.0 deg from the take median,36.772
+24s1,24s1:floor4/stops/s04_lt2a:a55,0,24s1:floor4/stops/s04_lt2a:a55#p0,a55,a55,lt2a,4,59.99,4,54.378,-16.51,12.867,outlier,|piece |B| median - take median| > 5.0 uT,-16.51
+24s1,24s1:floor4/stops/s04_lt2a:a55,1,24s1:floor4/stops/s04_lt2a:a55#p1,a55,a55,lt2a,4,59.99,4,77.915,7.027,1.778,outlier,|piece |B| median - take median| > 5.0 uT,7.027
+24s1,24s1:floor5/stops/s03_male_toilet:a55,0,24s1:floor5/stops/s03_male_toilet:a55#p0,a55,a55,male_toilet,5,60.0,4,39.995,-6.299,52.013,outlier,|piece |B| median - take median| > 5.0 uT,-6.299
+24s1,24s1:floor5/stops/s06_y5202:a55,0,24s1:floor5/stops/s06_y5202:a55#p0,a55,a55,y5202,5,60.01,4,87.172,-10.512,5.501,outlier,|piece |B| median - take median| > 5.0 uT,-10.512
+24s1,24s1:floor5/stops/s06_y5202:a55,2,24s1:floor5/stops/s06_y5202:a55#p2,a55,a55,y5202,5,60.01,4,103.272,5.588,1.044,outlier,|piece |B| median - take median| > 5.0 uT,5.588
+24s1,24s1:floor5/stops/s11_esca_up:a56,2,24s1:floor5/stops/s11_esca_up:a56#p2,a56,a56,escalator_up,5,60.01,4,76.013,17.447,7.174,outlier,|piece |B| median - take median| > 5.0 uT,17.447

@@ -12,11 +12,19 @@ Builds, for every session in config.json:
 
 The big CSVs are parsed once and cached under ./cache/ (gitignored). Nothing outside ./cache and
 ./out is written. Rebuild everything with:  python phase2/new/day3/data.py --rebuild
+
+Variants (config.json `variants`, chosen with the environment variable DAY3_VARIANT, e.g. `run_all.sh --split20`):
+the default (no variant) is the original pipeline, writing to ./out. A variant writes to ./out-<name> and changes
+only the stop windows, after loading (see apply_variant): split20 cuts every stop take into 20 s pieces (each piece
+= one sample, key '<take>#p<j>', its parent take in column `take`; `visit` stays the physical stop, so every
+grouped split keeps the pieces of one take together), drops the stops in the exclusion list and removes obvious
+outlier pieces by pre-set rules. Every piece and its status is written to out-<name>/pieces.csv.
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 import pickle
 import sys
 from datetime import datetime, timedelta, timezone
@@ -28,7 +36,8 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent
 NEW = HERE.parent
 CACHE = HERE / 'cache'
-OUT = HERE / 'out'
+VARIANT = os.environ.get('DAY3_VARIANT', '').strip()      # '' = original pipeline
+OUT = HERE / (f'out-{VARIANT}' if VARIANT else 'out')
 HK = timezone(timedelta(hours=8))
 PRESSURE_FILE = {'iphone': 'Barometer', 's24': 'Pressure'}
 ENDPOINT_S, MIN_WALK_S = 2.0, 5.0          # same as cross-day/tilt.py
@@ -171,7 +180,7 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
                                      None if acc is None else acc[:, 1:4], win):
                 W.append({'session': s['id'], 'day': s['day'], 'visit': r['visit'], 'key': f"{r['visit']}:{r['phone']}",
                           'phone': handset(r['device']), 'slot': r['phone'], 'device': r['device'], 'place': place,
-                          'floor': int(r['floor']), **w})
+                          'floor': int(r['floor']), 'rec_span_s': float(mag[-1, 0] - mag[0, 0]), **w})
         else:
             fp, tp = nm.get((r['floor'], r['from_node']), ''), nm.get((r['floor'], r['to_node']), '')
             for nd, p in [(r['from_node'], fp), (r['to_node'], tp)]:
@@ -229,9 +238,10 @@ def load_crossday_23nov(s: dict, win: float, max_gap: float):
         g = g.sort_values('timestamp_epoch_s')
         visit = f"{s['id']}:{sid}"
         dev = stops.set_index('stop_id').loc[sid, 'device_model']
-        for w in window_features(g['timestamp_epoch_s'].to_numpy(), g[['x', 'y', 'z']].to_numpy(), win=win):
+        ts = g['timestamp_epoch_s'].to_numpy()
+        for w in window_features(ts, g[['x', 'y', 'z']].to_numpy(), win=win):
             W.append({'session': s['id'], 'day': s['day'], 'visit': visit, 'key': f'{visit}:iphone', 'phone': handset(dev), 'slot': 'iphone',
-                      'device': dev, 'place': place[sid], 'floor': floor[sid], **w})
+                      'device': dev, 'place': place[sid], 'floor': floor[sid], 'rec_span_s': float(ts[-1] - ts[0]), **w})
     hpa = baro.groupby('stop_id')['hpa'].agg(['median', 'std'])
     for _, r in stops.iterrows():
         sid = r['stop_id']
@@ -257,7 +267,7 @@ def load_crossday_23nov(s: dict, win: float, max_gap: float):
                           'phone': t['walk'].map(lambda w: handset(walk_dev[w])), 'slot': 'iphone',
                           'device': t['walk'].map(walk_dev), 'endpoint': t['endpoint'], 'place': t['place'].map(lambda p: V2_MERGE.get(p, p)),
                           'floor': np.nan, 'walk_start': t['time'], 'B': t['B'], 'x': t['x'], 'y': t['y'], 'z': t['z'],
-                          'Bv': t['Bv_lp'], 'Bh': t['Bh_lp']})
+                          'Bv': t['Bv_lp'], 'Bh': t['Bh_lp'], 'stop_v1': t['pass_stop']})
     return pd.DataFrame(W), V, obs, E, [], o.assign(session=s['id'])
 
 
@@ -272,7 +282,7 @@ def load(rebuild=False):
     pk = CACHE / f'features_{key}.pkl'
     # The pickle is this script's own local cache (written below, gitignored), never downloaded data.
     if pk.exists() and not rebuild:
-        return pickle.loads(pk.read_bytes())
+        return _finish(pickle.loads(pk.read_bytes()))
     parts = {k: [] for k in ['W', 'V', 'O', 'E', 'unmapped', 'A']}
     for s in cfg['sessions']:
         print('loading', s['id'], '...', flush=True)
@@ -284,11 +294,135 @@ def load(rebuild=False):
     D['config'] = cfg
     CACHE.mkdir(exist_ok=True)
     pk.write_bytes(pickle.dumps(D))
+    return _finish(D)
+
+
+def _finish(D):
+    """Default: the original tables (helper columns rec_span_s / stop_v1 dropped). With DAY3_VARIANT: apply_variant."""
+    if VARIANT:
+        return apply_variant(D, D['config']['variants'][VARIANT])
+    D = dict(D)
+    D['W'] = D['W'].drop(columns=['rec_span_s'], errors='ignore')
+    D['E'] = D['E'].drop(columns=['stop_v1'], errors='ignore')
     return D
+
+
+# ----------------------------------------------------------------------------- variants (split20)
+def apply_variant(D: dict, vc: dict) -> dict:
+    """Pieces, exclusions and outlier removal on the stop windows (rules fixed in config.json before any accuracy was seen).
+
+    1. piece j of a take = its windows j*P .. j*P+P-1 (P = piece_s / window_s), i.e. [j*piece_s, (j+1)*piece_s) from the
+       take's first magnetometer sample. A piece is 'incomplete' if the take is shorter than (j+1)*piece_s - span_tolerance_s
+       or the piece lacks one of its P windows (sensor dropout).
+    2. 'excluded': the take's stop is in the exclusion list (session, stop_id); walk endpoints at those stops are dropped too.
+    3. 'flat': every window of the piece has an |B| standard deviation below flat_B_std_uT (stuck magnetometer).
+    4. outliers, among the complete pieces of one take (needs >= 2): reference = median over the take's pieces of the
+       piece |B| median, and the component-wise median of the piece mean field vector.
+         'outlier_B'   | piece |B| median - reference | > outlier_B_uT
+         'outlier_dir' angle between the piece mean field vector and the reference vector > outlier_angle_deg
+    The barometer floor sequence (V) and Wi-Fi are per physical stop and are not changed.
+    """
+    cfg = D['config']
+    win, ps = cfg['window_s'], vc['piece_s']
+    per = int(round(ps / win))
+    assert abs(per * win - ps) < 1e-9, 'piece_s must be a multiple of window_s'
+    W = D['W'].copy()
+    W['take'] = W['key']
+    W['piece'] = (W['window'] // per).astype(int)
+    ex_visits = set()
+    if vc.get('exclude'):
+        ex = pd.read_csv(HERE / vc['exclude'], dtype=str)
+        ex_visits = set(ex['session'] + ':' + ex['stop_id'])
+    rows = []
+    for (take, j), g in W.groupby(['take', 'piece'], sort=True):
+        b = g['B_mean'].to_numpy()
+        rows.append({'take': take, 'piece': int(j), 'key': f'{take}#p{j}', 'session': g['session'].iloc[0], 'visit': g['visit'].iloc[0],
+                     'phone': g['phone'].iloc[0], 'slot': g['slot'].iloc[0], 'place': g['place'].iloc[0], 'floor': int(g['floor'].iloc[0]),
+                     'take_span_s': round(float(g['rec_span_s'].iloc[0]), 2), 'n_windows': len(g),
+                     'B_median_uT': float(np.median(b)), 'x': float(g['x_mean'].mean()), 'y': float(g['y_mean'].mean()),
+                     'z': float(g['z_mean'].mean()), 'max_window_B_std_uT': float(g['B_std'].max())})
+    P = pd.DataFrame(rows)
+    P['status'], P['rule_value'], P['rule'] = 'kept', np.nan, ''
+
+    def mark(mask, status, rule, value=None):
+        m = mask & (P['status'] == 'kept')
+        P.loc[m, 'status'] = status
+        P.loc[m, 'rule'] = rule
+        if value is not None:
+            P.loc[m, 'rule_value'] = np.asarray(value)[m.to_numpy()]
+
+    mark(P['visit'].isin(ex_visits), 'excluded', f"stop in {vc['exclude']}")
+    short = (P['piece'] + 1) * ps > P['take_span_s'] + vc['span_tolerance_s']
+    mark(short, 'incomplete', f"take shorter than (piece+1)*{ps:g} s - {vc['span_tolerance_s']} s", P['take_span_s'])
+    mark(P['n_windows'] < per, 'incomplete', f'dropout: fewer than {per} windows of {win:g} s', P['n_windows'])
+    if vc.get('flat_B_std_uT') is not None:
+        mark(P['max_window_B_std_uT'] < vc['flat_B_std_uT'], 'flat', f"every window |B| sd < {vc['flat_B_std_uT']} uT", P['max_window_B_std_uT'])
+    ok = P['status'] == 'kept'
+    P['dev_B_uT'], P['angle_deg'] = np.nan, np.nan
+    for take, g in P[ok].groupby('take'):
+        if len(g) < 2:
+            continue
+        v = g[['x', 'y', 'z']].to_numpy()
+        ref = np.median(v, 0)
+        cos = (v @ ref) / (np.linalg.norm(v, axis=1) * np.linalg.norm(ref))
+        P.loc[g.index, 'dev_B_uT'] = g['B_median_uT'] - g['B_median_uT'].median()
+        P.loc[g.index, 'angle_deg'] = np.degrees(np.arccos(np.clip(cos, -1, 1)))
+    if vc.get('outlier_B_uT') is not None:
+        mark(P['dev_B_uT'].abs() > vc['outlier_B_uT'], 'outlier', f"|piece |B| median - take median| > {vc['outlier_B_uT']} uT", P['dev_B_uT'])
+    if vc.get('outlier_angle_deg') is not None:
+        mark(P['angle_deg'] > vc['outlier_angle_deg'], 'outlier', f"field direction > {vc['outlier_angle_deg']} deg from the take median", P['angle_deg'])
+    keep = set(P.loc[P['status'] == 'kept', 'key'])
+    W['key'] = W['take'] + '#p' + W['piece'].astype(str)
+    W = W[W['key'].isin(keep)].drop(columns=['rec_span_s']).reset_index(drop=True)
+    E = D['E']
+    if 'stop_v1' in E:
+        drop = E['stop_v1'].notna() & (E['session'] + ':' + E['stop_v1'].astype(str)).isin(ex_visits)
+        E = E[~drop].drop(columns=['stop_v1']).reset_index(drop=True)
+    else:
+        drop = pd.Series(False, index=E.index)
+    out = dict(D)
+    out.update({'W': W, 'E': E, 'pieces': P, 'variant': {'name': VARIANT, **vc, 'walk_endpoints_dropped': int(drop.sum())}})
+    return out
+
+
+def _spread(P):
+    """Noise scale the outlier thresholds were set against: deviations of piece |B| medians from their take median
+    (pieces that are not the take median itself) and direction changes, over all complete, non-excluded pieces."""
+    Q = P[P['dev_B_uT'].notna()]
+    d = Q.loc[Q['dev_B_uT'] != 0, 'dev_B_uT'].to_numpy()
+    a = Q['angle_deg'].to_numpy()
+    q = lambda x, p: round(float(np.quantile(x, p)), 3)
+    return {'n_pieces': len(Q), 'dev_B_uT_mad': round(float(np.median(np.abs(d - np.median(d)))), 3),
+            'abs_dev_B_uT_quantiles': {'0.5': q(np.abs(d), .5), '0.9': q(np.abs(d), .9), '0.95': q(np.abs(d), .95), '0.99': q(np.abs(d), .99), 'max': q(np.abs(d), 1)},
+            'angle_deg_quantiles': {'0.5': q(a, .5), '0.9': q(a, .9), '0.95': q(a, .95), '0.99': q(a, .99), 'max': q(a, 1)}}
+
+
+def write_variant_report(D):
+    """out-<variant>/pieces.csv (every piece, its status and rule value) and variant_summary.json (counts per dataset)."""
+    P = D['pieces']
+    OUT.mkdir(exist_ok=True)
+    cols = ['session', 'take', 'piece', 'key', 'phone', 'slot', 'place', 'floor', 'take_span_s', 'n_windows', 'B_median_uT',
+            'dev_B_uT', 'angle_deg', 'status', 'rule', 'rule_value']
+    P[cols].round(3).to_csv(OUT / 'pieces.csv', index=False)
+    P[P['status'] == 'outlier'][cols].round(3).to_csv(OUT / 'outliers.csv', index=False)
+    cnt = lambda g: {k: int(v) for k, v in g['status'].value_counts().items()}
+    summ = {'variant': {k: v for k, v in D['variant'].items()},
+            'takes': int(P['take'].nunique()), 'pieces_total': len(P), 'pieces_by_status': cnt(P),
+            'by_session': {s: {'takes': int(g['take'].nunique()), **cnt(g)} for s, g in P.groupby('session')},
+            'by_session_phone': {f'{s}/{ph}': {'takes': int(g['take'].nunique()), **cnt(g)} for (s, ph), g in P.groupby(['session', 'phone'])},
+            'take_span_s': {s: [round(float(g['take_span_s'].min()), 2), round(float(g['take_span_s'].max()), 2)] for s, g in P.groupby('session')},
+            'kept_pieces_per_take': {str(k): int(v) for k, v in P[P['status'] == 'kept'].groupby('take').size().value_counts().sort_index().items()},
+            'takes_with_no_kept_piece': sorted(set(P['take']) - set(P.loc[P['status'] == 'kept', 'take'])),
+            'windows_kept': int(len(D['W'])), 'places_kept': int(D['W']['place'].nunique()),
+            'within_take_spread': _spread(P)}
+    (OUT / 'variant_summary.json').write_text(json.dumps(summ, indent=1))
+    return summ
 
 
 if __name__ == '__main__':
     D = load(rebuild='--rebuild' in sys.argv)
+    if VARIANT:
+        print(json.dumps(write_variant_report(D), indent=1))
     for k in ['W', 'V', 'O', 'E', 'A']:
         print(k, D[k].shape)
     print(D['W'].groupby(['session', 'phone', 'device']).agg(windows=('key', 'size'), recordings=('key', 'nunique'), tilt=('Bv', lambda x: x.notna().mean())))

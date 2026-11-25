@@ -1,0 +1,584 @@
+{
+ "what": "Tracker on 24 Nov: train session 1, replay session 2 (track24.py). Per stop visit.",
+ "graph": "graph-v2",
+ "n_places": 26,
+ "train": "24s1",
+ "test": "24s2",
+ "phone": "iphone",
+ "handsets": {
+  "train": "ip18",
+  "test": "ip16",
+  "same_handset": false
+ },
+ "devices": {
+  "train": "iPhone19,2",
+  "test": "iPhone17,4 (different handset)"
+ },
+ "same_handset_variant": {
+  "train_fingerprints": "23 Nov stops (ip16 = iPhone17,4, same handset as the test)",
+  "floor_jump_threshold_hpa": 0.342,
+  "floor_tracking_test": "26/26",
+  "line_lengths_from": "session 1 walks (step counts; the walker is the same, the handset differs)",
+  "results": {
+   "all_26_stops": {
+    "n_visits": 26,
+    "tracker": {
+     "exact": {
+      "k": 20,
+      "n": 26,
+      "rate": 0.769,
+      "wilson95": [
+       0.579,
+       0.89
+      ]
+     },
+     "area": {
+      "k": 21,
+      "n": 26,
+      "rate": 0.808,
+      "wilson95": [
+       0.621,
+       0.915
+      ]
+     },
+     "within_one_neighbour": {
+      "k": 23,
+      "n": 26,
+      "rate": 0.885,
+      "wilson95": [
+       0.71,
+       0.96
+      ]
+     },
+     "top3": {
+      "k": 24,
+      "n": 26,
+      "rate": 0.923,
+      "wilson95": [
+       0.759,
+       0.979
+      ]
+     },
+     "floor": {
+      "k": 25,
+      "n": 26,
+      "rate": 0.962,
+      "wilson95": [
+       0.811,
+       0.993
+      ]
+     },
+     "within_5m_floor5": {
+      "k": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+       0.529,
+       0.978
+      ]
+     }
+    },
+    "snapshot_knn_crossday_recipe": {
+     "exact": {
+      "k": 12,
+      "n": 26,
+      "rate": 0.462,
+      "wilson95": [
+       0.288,
+       0.645
+      ]
+     },
+     "area": {
+      "k": 13,
+      "n": 26,
+      "rate": 0.5,
+      "wilson95": [
+       0.321,
+       0.679
+      ]
+     },
+     "within_one_neighbour": {
+      "k": 14,
+      "n": 26,
+      "rate": 0.538,
+      "wilson95": [
+       0.355,
+       0.712
+      ]
+     },
+     "top3": {
+      "k": 19,
+      "n": 26,
+      "rate": 0.731,
+      "wilson95": [
+       0.539,
+       0.863
+      ]
+     },
+     "floor": {
+      "k": 26,
+      "n": 26,
+      "rate": 1.0,
+      "wilson95": [
+       0.871,
+       1.0
+      ]
+     },
+     "within_5m_floor5": {
+      "k": 4,
+      "n": 8,
+      "rate": 0.5,
+      "wilson95": [
+       0.215,
+       0.785
+      ]
+     }
+    },
+    "emission_only_no_graph": {
+     "exact": {
+      "k": 12,
+      "n": 26,
+      "rate": 0.462,
+      "wilson95": [
+       0.288,
+       0.645
+      ]
+     },
+     "area": {
+      "k": 13,
+      "n": 26,
+      "rate": 0.5,
+      "wilson95": [
+       0.321,
+       0.679
+      ]
+     },
+     "within_one_neighbour": {
+      "k": 15,
+      "n": 26,
+      "rate": 0.577,
+      "wilson95": [
+       0.389,
+       0.745
+      ]
+     },
+     "top3": {
+      "k": 22,
+      "n": 26,
+      "rate": 0.846,
+      "wilson95": [
+       0.665,
+       0.939
+      ]
+     },
+     "floor": {
+      "k": 24,
+      "n": 26,
+      "rate": 0.923,
+      "wilson95": [
+       0.759,
+       0.979
+      ]
+     },
+     "within_5m_floor5": {
+      "k": 4,
+      "n": 8,
+      "rate": 0.5,
+      "wilson95": [
+       0.215,
+       0.785
+      ]
+     }
+    },
+    "tracker_arrival_before_stop_data": {
+     "exact": {
+      "k": 11,
+      "n": 26,
+      "rate": 0.423,
+      "wilson95": [
+       0.255,
+       0.611
+      ]
+     },
+     "area": {
+      "k": 16,
+      "n": 26,
+      "rate": 0.615,
+      "wilson95": [
+       0.425,
+       0.776
+      ]
+     },
+     "within_one_neighbour": {
+      "k": 15,
+      "n": 26,
+      "rate": 0.577,
+      "wilson95": [
+       0.389,
+       0.745
+      ]
+     },
+     "top3": {
+      "k": 19,
+      "n": 26,
+      "rate": 0.731,
+      "wilson95": [
+       0.539,
+       0.863
+      ]
+     },
+     "floor": {
+      "k": 23,
+      "n": 26,
+      "rate": 0.885,
+      "wilson95": [
+       0.71,
+       0.96
+      ]
+     },
+     "within_5m_floor5": {
+      "k": 4,
+      "n": 8,
+      "rate": 0.5,
+      "wilson95": [
+       0.215,
+       0.785
+      ]
+     }
+    }
+   }
+  }
+ },
+ "floor_jump_threshold_hpa": 0.243,
+ "floor_tracking_test": "26/26",
+ "expected_steps_per_line_from_train_walks": {
+  "canteen|exit_5": [
+   25
+  ],
+  "exit_5|male_toilet": [
+   7
+  ],
+  "male_toilet|y5302": [
+   16
+  ],
+  "sr9|y5302": [
+   26
+  ],
+  "sr9|y5202": [
+   17
+  ],
+  "female_toilet|y5202": [
+   13
+  ],
+  "exit_10|female_toilet": [
+   11
+  ],
+  "canteen|exit_10": [
+   20
+  ],
+  "canteen|escalator_down": [
+   12
+  ],
+  "canteen|escalator_up": [
+   14
+  ],
+  "escalator_down|escalator_up": [
+   15
+  ],
+  "disabled_toilet|exit_5": [
+   6
+  ],
+  "disabled_toilet|lift_stairs": [
+   17
+  ],
+  "lift_stairs|y5401": [
+   17
+  ],
+  "y5302_back|y5401": [
+   10
+  ],
+  "disabled_toilet_4F|lift_stairs_4F": [
+   16
+  ],
+  "disabled_toilet_4F|exit_5_4F": [
+   6
+  ],
+  "exit_5_4F|lt2a": [
+   8
+  ],
+  "lt2a|lt2b": [
+   27
+  ],
+  "escalator_down_4F|lt2b": [
+   9
+  ],
+  "escalator_down_4F|y4502": [
+   16
+  ],
+  "escalator_up_4F|y4502": [
+   16
+  ],
+  "escalator_up_4F|lt1b": [
+   12
+  ],
+  "lt1a|lt1b": [
+   29
+  ],
+  "exit_10_4F|lt1a": [
+   10
+  ],
+  "entrance_exit|exit_10_4F": [
+   18
+  ],
+  "entrance_exit|exit_5_4F": [
+   23
+  ],
+  "escalator_down_4F|escalator_up_4F": [
+   20
+  ]
+ },
+ "typical_steps_fallback": 16.0,
+ "test_walks": 28,
+ "test_walks_on_a_line_missing_from_graph_v2": [],
+ "test_walk_steps_total": 401,
+ "test_walks_steps_unreliable": 0,
+ "results": {
+  "all_26_stops": {
+   "n_visits": 26,
+   "tracker": {
+    "exact": {
+     "k": 20,
+     "n": 26,
+     "rate": 0.769,
+     "wilson95": [
+      0.579,
+      0.89
+     ]
+    },
+    "area": {
+     "k": 20,
+     "n": 26,
+     "rate": 0.769,
+     "wilson95": [
+      0.579,
+      0.89
+     ]
+    },
+    "within_one_neighbour": {
+     "k": 22,
+     "n": 26,
+     "rate": 0.846,
+     "wilson95": [
+      0.665,
+      0.939
+     ]
+    },
+    "top3": {
+     "k": 21,
+     "n": 26,
+     "rate": 0.808,
+     "wilson95": [
+      0.621,
+      0.915
+     ]
+    },
+    "floor": {
+     "k": 24,
+     "n": 26,
+     "rate": 0.923,
+     "wilson95": [
+      0.759,
+      0.979
+     ]
+    },
+    "within_5m_floor5": {
+     "k": 8,
+     "n": 8,
+     "rate": 1.0,
+     "wilson95": [
+      0.676,
+      1.0
+     ]
+    }
+   },
+   "snapshot_knn_crossday_recipe": {
+    "exact": {
+     "k": 15,
+     "n": 26,
+     "rate": 0.577,
+     "wilson95": [
+      0.389,
+      0.745
+     ]
+    },
+    "area": {
+     "k": 18,
+     "n": 26,
+     "rate": 0.692,
+     "wilson95": [
+      0.5,
+      0.835
+     ]
+    },
+    "within_one_neighbour": {
+     "k": 19,
+     "n": 26,
+     "rate": 0.731,
+     "wilson95": [
+      0.539,
+      0.863
+     ]
+    },
+    "top3": {
+     "k": 21,
+     "n": 26,
+     "rate": 0.808,
+     "wilson95": [
+      0.621,
+      0.915
+     ]
+    },
+    "floor": {
+     "k": 26,
+     "n": 26,
+     "rate": 1.0,
+     "wilson95": [
+      0.871,
+      1.0
+     ]
+    },
+    "within_5m_floor5": {
+     "k": 4,
+     "n": 8,
+     "rate": 0.5,
+     "wilson95": [
+      0.215,
+      0.785
+     ]
+    }
+   },
+   "emission_only_no_graph": {
+    "exact": {
+     "k": 15,
+     "n": 26,
+     "rate": 0.577,
+     "wilson95": [
+      0.389,
+      0.745
+     ]
+    },
+    "area": {
+     "k": 15,
+     "n": 26,
+     "rate": 0.577,
+     "wilson95": [
+      0.389,
+      0.745
+     ]
+    },
+    "within_one_neighbour": {
+     "k": 18,
+     "n": 26,
+     "rate": 0.692,
+     "wilson95": [
+      0.5,
+      0.835
+     ]
+    },
+    "top3": {
+     "k": 19,
+     "n": 26,
+     "rate": 0.731,
+     "wilson95": [
+      0.539,
+      0.863
+     ]
+    },
+    "floor": {
+     "k": 24,
+     "n": 26,
+     "rate": 0.923,
+     "wilson95": [
+      0.759,
+      0.979
+     ]
+    },
+    "within_5m_floor5": {
+     "k": 4,
+     "n": 8,
+     "rate": 0.5,
+     "wilson95": [
+      0.215,
+      0.785
+     ]
+    }
+   },
+   "tracker_arrival_before_stop_data": {
+    "exact": {
+     "k": 13,
+     "n": 26,
+     "rate": 0.5,
+     "wilson95": [
+      0.321,
+      0.679
+     ]
+    },
+    "area": {
+     "k": 18,
+     "n": 26,
+     "rate": 0.692,
+     "wilson95": [
+      0.5,
+      0.835
+     ]
+    },
+    "within_one_neighbour": {
+     "k": 18,
+     "n": 26,
+     "rate": 0.692,
+     "wilson95": [
+      0.5,
+      0.835
+     ]
+    },
+    "top3": {
+     "k": 19,
+     "n": 26,
+     "rate": 0.731,
+     "wilson95": [
+      0.539,
+      0.863
+     ]
+    },
+    "floor": {
+     "k": 23,
+     "n": 26,
+     "rate": 0.885,
+     "wilson95": [
+      0.71,
+      0.96
+     ]
+    },
+    "within_5m_floor5": {
+     "k": 4,
+     "n": 8,
+     "rate": 0.5,
+     "wilson95": [
+      0.215,
+      0.785
+     ]
+    }
+   }
+  }
+ },
+ "replay_frames": 3560,
+ "confirmed_frames": {
+  "stop_frames": 3122,
+  "confirmed": 2095,
+  "confirmed_and_correct": 1830
+ },
+ "caveats": [
+  "the graph and the walk order come from the same route that both sessions walked",
+  "session 2 walks were matched to the last stop that started before them; a few walks in session 2 are out of route order (see README)"
+ ]
+}

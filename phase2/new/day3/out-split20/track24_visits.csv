@@ -1,0 +1,27 @@
+stop_id,true,floor_obs,tracker,tracker_p,tracker_top3,arrival,snapshot_knn,emission_only
+floor5/stops/s01_canteen,canteen,5,canteen,0.987,canteen female_toilet male_toilet,canteen,canteen,canteen
+floor5/stops/s02_exit5_door,exit_5,5,exit_5,0.988,exit_5 male_toilet y5302,exit_10,exit_5,exit_5
+floor5/stops/s03_male_toilet,male_toilet,5,male_toilet,0.992,male_toilet disabled_toilet y5302,escalator_down,male_toilet,male_toilet
+floor5/stops/s04_y5302,y5302,5,y5302,0.997,y5302 male_toilet disabled_toilet,y5302,y5302,y5302
+floor5/stops/s05_sr9,sr9,5,sr9,0.973,sr9 lift_stairs exit_10,male_toilet,lift_stairs,lift_stairs
+floor5/stops/s06_y5202,y5202,5,y5202,0.462,y5202 female_toilet lift_stairs,y5202,female_toilet,female_toilet
+floor5/stops/s07_female_toilet,female_toilet,5,female_toilet,0.817,female_toilet sr9 y5202,sr9,lift_stairs,lift_stairs
+floor5/stops/s08_exit10_door,exit_10,5,exit_10,0.775,exit_10 y5202 female_toilet,exit_10,lift_stairs,lift_stairs
+floor5/stops/s09_esca_up,escalator_up,5,disabled_toilet,0.701,disabled_toilet sr9 female_toilet,canteen,disabled_toilet,disabled_toilet
+floor5/stops/s10_esca_down,escalator_down,5,disabled_toilet,0.584,disabled_toilet lift_stairs sr9,lift_stairs,disabled_toilet,disabled_toilet
+floor5/stops/s11_male_disabled_toilet,disabled_toilet,5,disabled_toilet,0.95,disabled_toilet exit_5 lift_stairs,exit_5,disabled_toilet,disabled_toilet
+floor5/stops/s12_lift_stairs5,lift_stairs,5,lift_stairs,0.981,lift_stairs sr9 female_toilet,exit_5,lift_stairs,lift_stairs
+floor5/stops/s13_y5401,y5401,5,y5401,0.982,y5401 disabled_toilet y5302,y5401,y5401,y5401
+floor5/stops/s14_y5302_point2,y5302_back,5,lift_stairs,0.933,lift_stairs y5302_back female_toilet,y5302_back,lift_stairs,lift_stairs
+floor4/stops/s01_lift_stairs5,lift_stairs_4F,4,lift_stairs_4F,0.923,lift_stairs_4F lift_stairs lt1a,lift_stairs,lift_stairs_4F,lift_stairs_4F
+floor4/stops/s02_disabled_toilet,disabled_toilet_4F,4,y4502,0.47,y4502 exit_10_4F exit_5_4F,disabled_toilet_4F,lt2a,y4502
+floor4/stops/s03_exit5_door,exit_5_4F,4,exit_5_4F,0.944,exit_5_4F lt2a lt1a,exit_5_4F,exit_5_4F,exit_5_4F
+floor4/stops/s04_lt2a,lt2a,4,lt2a,0.939,lt2a exit_5_4F y4502,lt2a,exit_5_4F,lt2a
+floor4/stops/s05_lt2b,lt2b,4,lt2b,0.998,lt2b exit_5_4F entrance_exit,lt2b,lt2b,lt2b
+floor4/stops/s06_esca_down,escalator_down_4F,4,escalator_up,1.0,escalator_up y4502 lt2a,escalator_down_4F,y4502,escalator_up
+floor4/stops/s07_y4502,y4502,4,y4502,0.617,y4502 lt2a exit_10_4F,escalator_down,y4502,lt2a
+floor4/stops/s08_esca_up,escalator_up_4F,4,escalator_up,1.0,escalator_up y4502 lt2b,y4502,exit_5_4F,escalator_up
+floor4/stops/s09_lt1b,lt1b,4,lt1b,0.961,lt1b exit_10_4F lt1a,canteen,lt1b,lt1b
+floor4/stops/s10_lt1a,lt1a,4,lt1a,0.992,lt1a escalator_down_4F exit_10_4F,lt1a,lt1a,lt1a
+floor4/stops/s11_exit10_door,exit_10_4F,4,exit_10_4F,0.997,exit_10_4F lt1b lift_stairs_4F,exit_10_4F,exit_10_4F,exit_10_4F
+floor4/stops/s12_gate,entrance_exit,4,entrance_exit,0.966,entrance_exit exit_5_4F exit_10_4F,exit_10_4F,entrance_exit,entrance_exit

@@ -21,6 +21,7 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | weighted fused kNN, nested CV | `fused_knn.py` | `out/fused_knn.json`, `out/fused_model.json`, `out/fused_window_predictions.csv` |
 | tracker on 24 Nov + UI replay | `track24.py` | `out/track24_results.json`, `out/track24_visits.csv`, `out/replay_24nov_s2.json` |
 | figures + data explorer | `visualise.py` | `out/*.png`, `out/explore.html` |
+| split20 variant (`--split20`): pieces, exclusions, outliers; before/after table | `data.py` (`apply_variant`), `upload_eval_split20.py`, `compare_split20.py`, `exclude_23nov.csv` | `out-split20/` (same files as `out/` plus `pieces.csv`, `outliers.csv`, `variant_summary.json`, `upload_eval_split20.json`, `compare_before_after.csv`, `compare_same_pieces.json`); control `out-split20_only/` |
 | kNN playground (sliders -> neighbours -> place; phone x session panel; place filter; variance panel; internal) | `playground.py` (template `playground_template.html`; python references `phone_matrix.py`, `variance.py`; check `playground_check.py`) | `out/knn_playground.html`, `out/phone_session_matrix.csv/.json`, `out/variance_by_place.csv/.json`, `out/variance_cells_by_place.csv` |
 
 ## Adding a session collected later
@@ -193,6 +194,42 @@ Headline at the default settings (all 2425 windows, 26 places; `out/variance_by_
 | pressure | 0.0% | 0.0% | 81.7% | 14.9% | 3.4% |
 
 Reading it: window noise is negligible (<= 1%); for |B| the handset and the day explain about 83% of the spread and the place only 14%, which is why |B| alone cannot name a place; the three axes keep 55% in the place (they carry direction), but a third of their spread is still the phone. Places with the largest drift (|B|, sd of the between-session + between-phone pieces in uT, session-first): escalator_down_4F 42.1 (almost all between sessions: the ip16 cell in 24 s2 has a |B| mean of 147.8 uT, see Data issues), escalator_up_4F 39.5 (phones 32.9, sessions 22.0), disabled_toilet 29.9 (phones 28.4), escalator_down 21.1 (phones 18.1) and y5401 20.6 (phones 19.7). For x/y/z pooled: escalator_down_4F 71.0, escalator_up_4F 65.1, disabled_toilet 41.0, escalator_down 37.0, lt1a 31.0.
+
+### i. split20 variant: 20 s pieces, 23-Nov stairs and study rooms excluded, obvious outliers removed (`out-split20/`)
+
+User request (25 Nov): every take becomes three 20 s samples; on 23 Nov the stairs stops are dropped (stairs = lift) and only sr9 is kept of the study rooms ("do s8 10 11"); obvious outliers removed. Run: `sh phase2/new/day3/run_all.sh --split20` (writes `out-split20/`; `out/` is not touched). Control without exclusions and outlier removal: `sh phase2/new/day3/run_all.sh --variant split20_only` (`out-split20_only/`). Settings: `config.json` `variants`; code: `data.py` `apply_variant`.
+
+- **Pieces:** piece j of a take = its 5 s windows 4j..4j+3 = [20j, 20j+20) s from the take's first magnetometer sample. Each piece is one sample (key `<take>#p<j>`, parent in column `take`). The physical stop (`visit`) is unchanged, so grouped CV and leave-one-session-out keep the three pieces of a take (and all phones of a stop) on one side; `fused_knn.py` groups its "by recording" split by take; every split asserts this. Take lengths (`variant_summary.json` `take_span_s`): 23 Nov 59.98-60.0 s, 24 s1 59.98-63.74 s, 24 s2 59.96-61.01 s, so every take gives 3 pieces (one A56 take of 63.74 s has a partial 4th piece, dropped as incomplete). Wi-Fi and the barometer floor stay per stop (a piece uses its stop's Wi-Fi vector and tracked floor).
+- **Exclusions** (`exclude_23nov.csv`): 23-Nov BM23 and BM26 ("exit 5 stairs"), BM27 ("exit 5 stairs bawah"), BM05 sr11, BM06 sr10, BM08 sr8 = 18 pieces; lift_stairs keeps BM22 (lift), lift_stairs_4F keeps BM28 (lift), sr9 keeps BM07. 8 walk endpoints at those stops are dropped from the walk-endpoint test. The barometer floor sequence still uses every stop (the stairs stops are where the floor changes).
+- **Outliers** (rules and thresholds fixed in `config.json` before any split20 accuracy was computed, from the within-take spread of the pieces, `variant_summary.json` `within_take_spread`: |B| deviation MAD 0.308 uT, 99th percentile 10.58 uT; direction change 99th percentile 16.0 deg): a piece is removed if its |B| median is more than 5 uT from the median of its take's pieces, or its mean field direction is more than 20 deg from the take's median vector. Also checked: missing windows (dropout) 0, flat magnetometer 0. Removed 11 pieces (`out-split20/outliers.csv`): 23 Nov 5 (all 3 pieces of BM14 exit_5, |B| 46.9 / 21.5 / 35.7 uT with a 124 deg turn, so the whole take is gone; 2 pieces of BM11 exit_10, direction 26 and 30 deg), 24 s1 6 (A55: lt2a 2, y5202 2, male_toilet 1; A56: escalator_up 1), 24 s2 0. The >100 uT 4F-escalator readings of 24 s2 are not removed: all pieces of those takes agree and both phones see them, so they are not glitches by this rule.
+- **Counts** (`variant_summary.json`): 607 pieces from 202 takes; kept 577 (23 Nov 103, 24 s1 318, 24 s2 156), excluded 18, outlier 11, incomplete 1; 195 takes keep at least one piece, 88 of 95 stops; 2308 windows, 26 places.
+
+Before / after (`out-split20/compare_before_after.csv`, `out-split20_only/compare_before_after.csv`, written by `compare_split20.py`). Correct / samples; a sample is a whole take before and a 20 s piece after (tracker: per stop visit). Chance 3.8% everywhere (1/26; 4.0% mean over the split20 GroupKFold folds).
+
+| test | before (out/) | split20 only (control) | split20 (+ exclusions, outliers) |
+|---|---|---|---|
+| fused weighted kNN, leave one session out | 74/202 = 36.6% | 193/606 = 31.8% | 222/577 = 38.5% |
+| fused weighted kNN, GroupKFold(5) by stop | 58/202 = 28.7% | 182/606 = 30.0% | 187/577 = 32.4% |
+| fused, by take (partly leaky: other phones of the stop train) | 112/202 = 55.4% | 361/606 = 59.6% | 330/577 = 57.2% |
+| fused, random windows (LEAKY) | 932/935 = 99.7% | 1779/1785 = 99.7% | 1689/1698 = 99.5% |
+| same iPhone ip16, 23 Nov -> 24 s2, \|B\|+xyz + floor | 13/26 = 50.0% | 40/78 = 51.3% | 40/78 = 51.3% |
+| same iPhone ip16, 24 s2 -> 23 Nov, \|B\|+xyz + floor | 18/42 = 42.9% | 47/126 = 37.3% | 45/103 = 43.7% |
+| cross-session iPhone s1 -> s2 (ip18 -> ip16) | 12/26 = 46.2% | 34/78 = 43.6% | 34/78 = 43.6% |
+| cross-session iPhone s2 -> s1 (ip16 -> ip18) | 14/27 = 51.9% | 41/81 = 50.6% | 41/81 = 50.6% |
+| cross-session S24 s1 -> s2 | 8/26 = 30.8% | 22/78 = 28.2% | 22/78 = 28.2% |
+| cross-session S24 s2 -> s1 | 10/27 = 37.0% | 30/81 = 37.0% | 30/81 = 37.0% |
+| tracker s1 -> s2 (per stop) | 20/26 | 20/26 | 20/26 |
+| tracker, same-handset variant (23 Nov fingerprints) | 19/26 | 19/26 | 20/26 |
+| playground recipe, same phone only, ip16 leave one session out | 32/68 = 47.1% | 96/204 = 47.1% | 94/181 = 51.9% |
+| playground recipe, same phone only, s24 leave one session out | 18/53 = 34.0% | 55/159 = 34.6% | 56/159 = 35.2% |
+
+Leave-one-session-out per fold (`fused_knn.json`): before 9/42, 42/108, 23/52; split20 only 24/126, 105/324, 64/156; split20 28/103, 128/318, 66/156 (test 23 Nov, 24 s1, 24 s2). Deployable weights (`fused_model.json`): before and split20 only B 0.1, xyz 0.7, tilt 0, Wi-Fi 0.1, baro 0.1, k 25; split20 B 0.1, xyz 0.5, Wi-Fi 0.2, baro 0.2, k 25 (inner accuracy 0.478); the playground default uses these, so its matrix changes with the weights as well as the data.
+
+Reading it:
+- Splitting alone changes little per sample: the named splits stay within 3 points of the take-level number except 24 s2 -> 23 Nov (42.9% -> 37.3%), and leave-one-session-out drops from 36.6% to 31.8% while GroupKFold rises from 28.7% to 30.0%. Three pieces of a take are not three independent samples (they share the stop, the phone and the day), so the larger n narrows the interval only on paper; the intervals in the JSON assume independence.
+- The gain of the full split20 over the control comes from removing data, and partly from removing hard test pieces. Same test pieces check (`out-split20/compare_same_pieces.json`): 24 s2 -> 23 Nov, the control scores 45/103 on exactly the pieces split20 keeps, the same as split20 (45/103); its 47/126 includes the 23 excluded or removed 23-Nov pieces, of which it got 2 right. Where no test piece was removed (23 Nov -> 24 s2 and all 24-Nov cross-session splits) split20 and the control are identical.
+- Leaky stays leaky: random windows 99.5%, and a same-take time split (`LEAKY_same_recording_time_split_24s2_iphone`, \|B\|+xyz) 72/78.
+- Upload pipeline (`../upload/walksense.py` unchanged, scored on 20 s pieces by `upload_eval_split20.py`, `out-split20/upload_eval_split20.json`): raw x/y/z top-1 iPhone s1 -> s2 51/78 (65%; take level in `../upload/out/eval.json`: 17/26 = 65%), s2 -> s1 51/81 (63%; 17/27 = 63%); S24 34/78 and 28/81 (11/26 and 10/27); chance 7.7% (true floor given). No 24-Nov iPhone or S24 piece was removed, so the control gives the same numbers.
 
 ## Data issues found
 

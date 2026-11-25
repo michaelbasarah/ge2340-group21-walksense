@@ -1,0 +1,2374 @@
+{
+ "what": "walksense.py PlaceModel (unchanged): train on whole takes of one 24-Nov session, test every kept 20 s piece of the other session (top-1/top-3 among places on the true floor). Computed by upload_eval_split20.py.",
+ "piece_s": 20,
+ "trim_inside_piece_s": 0,
+ "training": "whole takes, walksense TRIM_S = 5 s, unchanged",
+ "place": {
+  "iphone sesi1->sesi2 tilt": {
+   "devices": "iPhone19,2 -> iPhone17,4",
+   "n_test_pieces": 78,
+   "n_test_takes": 26,
+   "pieces_skipped_removed": 0,
+   "top1": "32/78",
+   "top1_acc": 0.41,
+   "top3": "47/78",
+   "top3_acc": 0.603,
+   "chance_top1": 0.077
+  },
+  "iphone sesi1->sesi2 xyz": {
+   "devices": "iPhone19,2 -> iPhone17,4",
+   "n_test_pieces": 78,
+   "n_test_takes": 26,
+   "pieces_skipped_removed": 0,
+   "top1": "51/78",
+   "top1_acc": 0.654,
+   "top3": "71/78",
+   "top3_acc": 0.91,
+   "chance_top1": 0.077,
+   "pieces": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 0,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 1,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 2,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 0,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 1,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 2,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 0,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 1,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 2,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 0.735
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 0.753
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 0.592
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 0.681
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 1,
+     "guess": "y5202",
+     "p": 0.725
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 2,
+     "guess": "y5202",
+     "p": 0.93
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 0.962
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "sr9",
+     "p": 0.601
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "sr9",
+     "p": 0.534
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 0,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 1,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 2,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 0,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 1,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 2,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 0,
+     "guess": "y5202",
+     "p": 0.914
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 1,
+     "guess": "y5202",
+     "p": 0.524
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 2,
+     "guess": "y5202",
+     "p": 0.77
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 0,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 1,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 2,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 0,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 1,
+     "guess": "y4502",
+     "p": 0.889
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 2,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 0,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 1,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 2,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 0,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 1,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 2,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 0,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 1,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 2,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 0,
+     "guess": "lt1a",
+     "p": 0.977
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 1,
+     "guess": "lt1a",
+     "p": 0.801
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 0.956
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 0,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 1,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 2,
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "iphone sesi1->sesi2 magnitude": {
+   "devices": "iPhone19,2 -> iPhone17,4",
+   "n_test_pieces": 78,
+   "n_test_takes": 26,
+   "pieces_skipped_removed": 0,
+   "top1": "16/78",
+   "top1_acc": 0.205,
+   "top3": "32/78",
+   "top3_acc": 0.41,
+   "chance_top1": 0.077
+  },
+  "iphone sesi2->sesi1 tilt": {
+   "devices": "iPhone17,4 -> iPhone19,2",
+   "n_test_pieces": 81,
+   "n_test_takes": 27,
+   "pieces_skipped_removed": 0,
+   "top1": "35/81",
+   "top1_acc": 0.432,
+   "top3": "55/81",
+   "top3_acc": 0.679,
+   "chance_top1": 0.077
+  },
+  "iphone sesi2->sesi1 xyz": {
+   "devices": "iPhone17,4 -> iPhone19,2",
+   "n_test_pieces": 81,
+   "n_test_takes": 27,
+   "pieces_skipped_removed": 0,
+   "top1": "51/81",
+   "top1_acc": 0.63,
+   "top3": "62/81",
+   "top3_acc": 0.765,
+   "chance_top1": 0.077,
+   "pieces": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 0,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 1,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 2,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 0,
+     "guess": "y5302",
+     "p": 0.931
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 1,
+     "guess": "y5302",
+     "p": 0.935
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 2,
+     "guess": "male_toilet",
+     "p": 0.799
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 0,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 1,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 2,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 0.509
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 0.934
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 0.732
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 0,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 1,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 0.745
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 0.98
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 0,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 1,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 2,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "sr9",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "sr9",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "sr9",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "esca_up",
+     "p": 0.8
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "esca_up",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "esca_up",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 0,
+     "guess": "esca_up",
+     "p": 0.735
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 1,
+     "guess": "esca_up",
+     "p": 0.734
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 2,
+     "guess": "esca_up",
+     "p": 0.978
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 0,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 1,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 2,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 0,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 1,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 2,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 0.667
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 0,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 1,
+     "guess": "disabled_toilet",
+     "p": 0.911
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 0.578
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 0,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 1,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 2,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 0,
+     "guess": "lt2b",
+     "p": 0.911
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 1,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 2,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "lt1a",
+     "p": 0.578
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 0,
+     "guess": "disabled_toilet",
+     "p": 0.978
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 1,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 2,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "exit5_door",
+     "p": 0.778
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 0,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 1,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 2,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 0,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 1,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 0,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 1,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 2,
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "iphone sesi2->sesi1 magnitude": {
+   "devices": "iPhone17,4 -> iPhone19,2",
+   "n_test_pieces": 81,
+   "n_test_takes": 27,
+   "pieces_skipped_removed": 0,
+   "top1": "18/81",
+   "top1_acc": 0.222,
+   "top3": "37/81",
+   "top3_acc": 0.457,
+   "chance_top1": 0.077
+  },
+  "s24 sesi1->sesi2 tilt": {
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_test_pieces": 78,
+   "n_test_takes": 26,
+   "pieces_skipped_removed": 0,
+   "top1": "16/78",
+   "top1_acc": 0.205,
+   "top3": "27/78",
+   "top3_acc": 0.346,
+   "chance_top1": 0.077
+  },
+  "s24 sesi1->sesi2 xyz": {
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_test_pieces": 78,
+   "n_test_takes": 26,
+   "pieces_skipped_removed": 0,
+   "top1": "34/78",
+   "top1_acc": 0.436,
+   "top3": "40/78",
+   "top3_acc": 0.513,
+   "chance_top1": 0.077,
+   "pieces": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 0,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 1,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 2,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "exit5_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 0,
+     "guess": "y5302",
+     "p": 0.978
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 1,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 2,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 0,
+     "guess": "y5302",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 1,
+     "guess": "y5302",
+     "p": 0.956
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 2,
+     "guess": "y5302",
+     "p": 0.978
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 0,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 1,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 2,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "esca_up",
+     "p": 0.589
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 0.591
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 0.504
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 0,
+     "guess": "esca_up",
+     "p": 0.551
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 1,
+     "guess": "esca_up",
+     "p": 0.64
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 2,
+     "guess": "esca_up",
+     "p": 0.664
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 0,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 1,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 2,
+     "guess": "y5401",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 0,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 1,
+     "guess": "y5302_point2",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 2,
+     "guess": "y5302_point2",
+     "p": 0.956
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "exit10_door",
+     "p": 0.509
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "exit10_door",
+     "p": 0.537
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "exit10_door",
+     "p": 0.509
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 0,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 1,
+     "guess": "disabled_toilet",
+     "p": 0.978
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 2,
+     "guess": "disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 0,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 1,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 2,
+     "guess": "esca_down",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 0,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 1,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 2,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 0,
+     "guess": "y4502",
+     "p": 0.978
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 1,
+     "guess": "y4502",
+     "p": 0.91
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 2,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "exit10_door",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 0,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 1,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 2,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 0,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 1,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 2,
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "s24 sesi1->sesi2 magnitude": {
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_test_pieces": 78,
+   "n_test_takes": 26,
+   "pieces_skipped_removed": 0,
+   "top1": "4/78",
+   "top1_acc": 0.051,
+   "top3": "16/78",
+   "top3_acc": 0.205,
+   "chance_top1": 0.077
+  },
+  "s24 sesi2->sesi1 tilt": {
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_test_pieces": 81,
+   "n_test_takes": 27,
+   "pieces_skipped_removed": 0,
+   "top1": "12/81",
+   "top1_acc": 0.148,
+   "top3": "29/81",
+   "top3_acc": 0.358,
+   "chance_top1": 0.077
+  },
+  "s24 sesi2->sesi1 xyz": {
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_test_pieces": 81,
+   "n_test_takes": 27,
+   "pieces_skipped_removed": 0,
+   "top1": "28/81",
+   "top1_acc": 0.346,
+   "top3": "46/81",
+   "top3_acc": 0.568,
+   "chance_top1": 0.077,
+   "pieces": [
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 0,
+     "guess": "y5401",
+     "p": 0.956
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 1,
+     "guess": "y5401",
+     "p": 0.912
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 2,
+     "guess": "y5401",
+     "p": 0.576
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 0,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 1,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_toilet",
+     "piece": 2,
+     "guess": "male_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 0,
+     "guess": "male_toilet",
+     "p": 0.65
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 1,
+     "guess": "male_toilet",
+     "p": 0.672
+    },
+    {
+     "floor": 5,
+     "truth": "y5302",
+     "piece": 2,
+     "guess": "male_toilet",
+     "p": 0.628
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 0,
+     "guess": "y5401",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 1,
+     "guess": "y5401",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "sr9",
+     "piece": 2,
+     "guess": "y5401",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 0,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 1,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "y5202",
+     "piece": 2,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 0,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 1,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "female_toilet",
+     "piece": 2,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "y5202",
+     "p": 0.957
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "y5202",
+     "p": 0.956
+    },
+    {
+     "floor": 5,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "y5202",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 0,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 1,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "canteen",
+     "piece": 2,
+     "guess": "canteen",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 0.6
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 0.6
+    },
+    {
+     "floor": 5,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 0.6
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "male_disabled_toilet",
+     "p": 0.867
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "male_disabled_toilet",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 0,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 1,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "male_disabled_toilet",
+     "piece": 2,
+     "guess": "lift_stairs5",
+     "p": 1.0
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 0.823
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 0.891
+    },
+    {
+     "floor": 5,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 0.803
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 0,
+     "guess": "y5401",
+     "p": 0.8
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 1,
+     "guess": "y5401",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "y5401",
+     "piece": 2,
+     "guess": "y5401",
+     "p": 0.801
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 0,
+     "guess": "female_toilet",
+     "p": 0.713
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 1,
+     "guess": "female_toilet",
+     "p": 0.796
+    },
+    {
+     "floor": 5,
+     "truth": "y5302_point2",
+     "piece": 2,
+     "guess": "female_toilet",
+     "p": 0.609
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 0,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 1,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lift_stairs5",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 0,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 1,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "disabled_toilet",
+     "piece": 2,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 0,
+     "guess": "lt2a",
+     "p": 0.911
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 1,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit5_door",
+     "piece": 2,
+     "guess": "lt2a",
+     "p": 0.932
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 0,
+     "guess": "lt2a",
+     "p": 0.844
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 1,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2a",
+     "piece": 2,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 0,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 1,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt2b",
+     "piece": 2,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 0,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 1,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_down",
+     "piece": 2,
+     "guess": "lt2a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 0,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 1,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "y4502",
+     "piece": 2,
+     "guess": "y4502",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 0,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 1,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "esca_up",
+     "piece": 2,
+     "guess": "lt2b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 0,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 1,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1b",
+     "piece": 2,
+     "guess": "lt1b",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 0,
+     "guess": "gate",
+     "p": 0.8
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 1,
+     "guess": "gate",
+     "p": 0.556
+    },
+    {
+     "floor": 4,
+     "truth": "lt1a",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 0,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 1,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "exit10_door",
+     "piece": 2,
+     "guess": "lt1a",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 0,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 1,
+     "guess": "gate",
+     "p": 1.0
+    },
+    {
+     "floor": 4,
+     "truth": "gate",
+     "piece": 2,
+     "guess": "gate",
+     "p": 1.0
+    }
+   ]
+  },
+  "s24 sesi2->sesi1 magnitude": {
+   "devices": "SM-S9280 -> SM-S9280",
+   "n_test_pieces": 81,
+   "n_test_takes": 27,
+   "pieces_skipped_removed": 0,
+   "top1": "9/81",
+   "top1_acc": 0.111,
+   "top3": "24/81",
+   "top3_acc": 0.296,
+   "chance_top1": 0.077
+  }
+ }
+}

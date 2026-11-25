@@ -1,0 +1,7 @@
+session,stop_id,source_label,label_v1,label_v2,reason
+23nov,BM23,exit 5 stairs,exit_5_stairs,lift_stairs,"user 2026-11-25: stairs data = lift data, keep only the lift stop (BM22) for lift_stairs"
+23nov,BM26,exit 5 stairs,exit_5_stairs,lift_stairs,"user 2026-11-25: stairs data = lift data, keep only the lift stop (BM22) for lift_stairs"
+23nov,BM27,exit 5 stairs bawah,exit_5_stairs_4F,lift_stairs_4F,"user 2026-11-25: stairs data = lift data, keep only the lift stop (BM28) for lift_stairs_4F"
+23nov,BM05,sr11,sr11,sr9,"user 2026-11-25 ('do s8 10 11'): keep only the sr9 stop (BM07) for the merged study-room place, as on 24 Nov"
+23nov,BM06,sr10,sr10,sr9,"user 2026-11-25 ('do s8 10 11'): keep only the sr9 stop (BM07) for the merged study-room place, as on 24 Nov"
+23nov,BM08,sr8,sr8,sr9,"user 2026-11-25 ('do s8 10 11'): keep only the sr9 stop (BM07) for the merged study-room place, as on 24 Nov"

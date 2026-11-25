@@ -1,0 +1,103 @@
+{
+ "variant": {
+  "name": "split20_only",
+  "_comment": "Control for split20: the same 20 s pieces, but no exclusions and no outlier removal (only incomplete pieces dropped), to separate the effect of the split from the effect of removing data.",
+  "piece_s": 20,
+  "span_tolerance_s": 0.5,
+  "exclude": null,
+  "flat_B_std_uT": null,
+  "outlier_B_uT": null,
+  "outlier_angle_deg": null,
+  "walk_endpoints_dropped": 0
+ },
+ "takes": 202,
+ "pieces_total": 607,
+ "pieces_by_status": {
+  "kept": 606,
+  "incomplete": 1
+ },
+ "by_session": {
+  "23nov": {
+   "takes": 42,
+   "kept": 126
+  },
+  "24s1": {
+   "takes": 108,
+   "kept": 324,
+   "incomplete": 1
+  },
+  "24s2": {
+   "takes": 52,
+   "kept": 156
+  }
+ },
+ "by_session_phone": {
+  "23nov/ip16": {
+   "takes": 42,
+   "kept": 126
+  },
+  "24s1/a55": {
+   "takes": 27,
+   "kept": 81
+  },
+  "24s1/a56": {
+   "takes": 27,
+   "kept": 81,
+   "incomplete": 1
+  },
+  "24s1/ip18": {
+   "takes": 27,
+   "kept": 81
+  },
+  "24s1/s24": {
+   "takes": 27,
+   "kept": 81
+  },
+  "24s2/ip16": {
+   "takes": 26,
+   "kept": 78
+  },
+  "24s2/s24": {
+   "takes": 26,
+   "kept": 78
+  }
+ },
+ "take_span_s": {
+  "23nov": [
+   59.98,
+   60.0
+  ],
+  "24s1": [
+   59.98,
+   63.74
+  ],
+  "24s2": [
+   59.96,
+   61.01
+  ]
+ },
+ "kept_pieces_per_take": {
+  "3": 202
+ },
+ "takes_with_no_kept_piece": [],
+ "windows_kept": 2424,
+ "places_kept": 26,
+ "within_take_spread": {
+  "n_pieces": 606,
+  "dev_B_uT_mad": 0.309,
+  "abs_dev_B_uT_quantiles": {
+   "0.5": 0.308,
+   "0.9": 1.105,
+   "0.95": 2.129,
+   "0.99": 10.407,
+   "max": 17.447
+  },
+  "angle_deg_quantiles": {
+   "0.5": 1.01,
+   "0.9": 3.661,
+   "0.95": 5.735,
+   "0.99": 14.422,
+   "max": 124.457
+  }
+ }
+}

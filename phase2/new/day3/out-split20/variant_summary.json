@@ -1,0 +1,122 @@
+{
+ "variant": {
+  "name": "split20",
+  "_comment": "User 2026-11-25: every stop take -> consecutive 20 s pieces (each its own sample, pieces of one take always on the same side of a split); 23-Nov stairs stops and sr8/sr10/sr11 excluded; obvious outlier pieces removed. Outlier thresholds chosen from the within-take spread of the pieces (|B| and field direction; the spread is in out-split20/variant_summary.json within_take_spread), not from accuracy.",
+  "piece_s": 20,
+  "span_tolerance_s": 0.5,
+  "exclude": "exclude_23nov.csv",
+  "flat_B_std_uT": 0.01,
+  "outlier_B_uT": 5.0,
+  "outlier_angle_deg": 20.0,
+  "walk_endpoints_dropped": 8
+ },
+ "takes": 202,
+ "pieces_total": 607,
+ "pieces_by_status": {
+  "kept": 577,
+  "excluded": 18,
+  "outlier": 11,
+  "incomplete": 1
+ },
+ "by_session": {
+  "23nov": {
+   "takes": 42,
+   "kept": 103,
+   "excluded": 18,
+   "outlier": 5
+  },
+  "24s1": {
+   "takes": 108,
+   "kept": 318,
+   "outlier": 6,
+   "incomplete": 1
+  },
+  "24s2": {
+   "takes": 52,
+   "kept": 156
+  }
+ },
+ "by_session_phone": {
+  "23nov/ip16": {
+   "takes": 42,
+   "kept": 103,
+   "excluded": 18,
+   "outlier": 5
+  },
+  "24s1/a55": {
+   "takes": 27,
+   "kept": 76,
+   "outlier": 5
+  },
+  "24s1/a56": {
+   "takes": 27,
+   "kept": 80,
+   "incomplete": 1,
+   "outlier": 1
+  },
+  "24s1/ip18": {
+   "takes": 27,
+   "kept": 81
+  },
+  "24s1/s24": {
+   "takes": 27,
+   "kept": 81
+  },
+  "24s2/ip16": {
+   "takes": 26,
+   "kept": 78
+  },
+  "24s2/s24": {
+   "takes": 26,
+   "kept": 78
+  }
+ },
+ "take_span_s": {
+  "23nov": [
+   59.98,
+   60.0
+  ],
+  "24s1": [
+   59.98,
+   63.74
+  ],
+  "24s2": [
+   59.96,
+   61.01
+  ]
+ },
+ "kept_pieces_per_take": {
+  "1": 3,
+  "2": 2,
+  "3": 190
+ },
+ "takes_with_no_kept_piece": [
+  "23nov:BM05:iphone",
+  "23nov:BM06:iphone",
+  "23nov:BM08:iphone",
+  "23nov:BM14:iphone",
+  "23nov:BM23:iphone",
+  "23nov:BM26:iphone",
+  "23nov:BM27:iphone"
+ ],
+ "windows_kept": 2308,
+ "places_kept": 26,
+ "within_take_spread": {
+  "n_pieces": 588,
+  "dev_B_uT_mad": 0.308,
+  "abs_dev_B_uT_quantiles": {
+   "0.5": 0.307,
+   "0.9": 1.109,
+   "0.95": 2.164,
+   "0.99": 10.58,
+   "max": 17.447
+  },
+  "angle_deg_quantiles": {
+   "0.5": 0.997,
+   "0.9": 3.653,
+   "0.95": 5.729,
+   "0.99": 16.021,
+   "max": 124.457
+  }
+ }
+}

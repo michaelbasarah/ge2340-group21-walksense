@@ -1,0 +1,15 @@
+variant,test,before_correct,before_n,before_acc,before_chance,after_correct,after_n,after_acc,after_chance
+split20,"fused weighted kNN, leave one session out",74,202,0.366,0.038,222,577,0.385,0.038
+split20,"fused weighted kNN, GroupKFold(5) by stop",58,202,0.287,0.038,187,577,0.324,0.04
+split20,"fused weighted kNN, by recording/take (partly leaky)",112,202,0.554,0.038,330,577,0.572,0.038
+split20,"fused weighted kNN, random windows (LEAKY)",932,935,0.997,0.038,1689,1698,0.995,0.038
+split20,"same iPhone ip16, 23 Nov -> 24 s2, |B|+xyz + floor",13,26,0.5,0.038,40,78,0.513,0.038
+split20,"same iPhone ip16, 24 s2 -> 23 Nov, |B|+xyz + floor",18,42,0.429,0.038,45,103,0.437,0.038
+split20,"cross-session iPhone s1 -> s2 (ip18 -> ip16), |B|+xyz + floor",12,26,0.462,0.038,34,78,0.436,0.038
+split20,"cross-session iPhone s2 -> s1 (ip16 -> ip18), |B|+xyz + floor",14,27,0.519,0.038,41,81,0.506,0.038
+split20,"cross-session S24 s1 -> s2, |B|+xyz + floor",8,26,0.308,0.038,22,78,0.282,0.038
+split20,"cross-session S24 s2 -> s1, |B|+xyz + floor",10,27,0.37,0.038,30,81,0.37,0.038
+split20,"tracker s1 -> s2 (per stop visit), exact",20,26,0.769,0.038,20,26,0.769,0.038
+split20,"tracker, same-handset variant (23 Nov -> 24 s2), exact",19,26,0.731,0.038,20,26,0.769,0.038
+split20,"playground recipe, same phone only, ip16 leave one session out",32,68,0.471,0.038,94,181,0.519,0.038
+split20,"playground recipe, same phone only, s24 leave one session out",18,53,0.34,0.038,56,159,0.352,0.038
