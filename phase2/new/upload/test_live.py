@@ -41,7 +41,7 @@ def build_stream():
 
 
 class FakePhone(BaseHTTPRequestHandler):
-    stream, t_start = None, None
+    stream, t_start, end = None, None, 1e9
 
     def do_GET(self):
         u = urlparse(self.path)
@@ -58,7 +58,7 @@ class FakePhone(BaseHTTPRequestHandler):
                     thr = float(value.split('|')[0])
                     a = a[a[:, 0] > thr]
                 out[name] = {'size': 0, 'updateMode': 'partial', 'buffer': a[:, col].tolist()}
-            body = {'buffer': out, 'status': {'session': 'test1', 'measuring': True, 'timedRun': False, 'countDown': 0}}
+            body = {'buffer': out, 'status': {'session': 'test1', 'measuring': bool(now < FakePhone.end), 'timedRun': False, 'countDown': 0}}
         else:
             self.send_response(404); self.end_headers(); return
         data = json.dumps(body).encode()
@@ -71,19 +71,20 @@ class FakePhone(BaseHTTPRequestHandler):
 class LiveTest(unittest.TestCase):
     def test_replayed_walk(self):
         stream, truth, end = build_stream()
-        FakePhone.stream, FakePhone.t_start = stream, time.time()
+        FakePhone.stream, FakePhone.t_start, FakePhone.end = stream, time.time(), end
         srv = ThreadingHTTPServer(('127.0.0.1', 0), FakePhone)
         threading.Thread(target=srv.serve_forever, daemon=True).start()
         live.POLL_S = 0.1
         with tempfile.TemporaryDirectory() as tmp:
-            tracker = live.LiveTracker(ws.build_models(), 'iPhone17,4', 5, Path(tmp))
+            tracker = live.LiveTracker(ws.build_models(), 'iPhone17,4', 5)
             status, stop = {}, threading.Event()
-            th = threading.Thread(target=live.run, args=(live.Phyphox(f'http://127.0.0.1:{srv.server_address[1]}'), tracker, status, stop))
+            th = threading.Thread(target=live.run, args=(live.Phyphox(f'http://127.0.0.1:{srv.server_address[1]}'), tracker, status, stop, Path(tmp)))
             FakePhone.t_start = time.time()
             th.start()
-            modes, steps = set(), 0
-            while (time.time() - FakePhone.t_start) * SPEED < end + 2:
+            modes, steps, dots = set(), 0, []
+            while (time.time() - FakePhone.t_start) * SPEED < end + 4:
                 st = status.get('state') or {}
+                if st.get('dot'): dots.append(st['dot'])
                 modes.add(st.get('mode')); steps = max(steps, st.get('steps', 0) if st.get('mode') == 'walking' else 0)
                 time.sleep(0.1)
             stop.set(); th.join(); srv.shutdown()
@@ -94,9 +95,14 @@ class LiveTest(unittest.TestCase):
             for got, (floor, node, _) in zip(stops, truth):
                 self.assertEqual(got['floor'], floor, (got, node))                 # 5F, 5F, then 4F after the stairs
                 self.assertEqual(got['top3'][0][0], node)                           # trained on this data, so must be right
-            self.assertTrue({'walking', 'standing', 'stop'} <= modes, modes)
+            self.assertTrue({'walking', 'stop'} <= modes, modes)                 # 3 s still = named at once
             self.assertGreater(steps, 5)
-            saved = ws.read_folder(Path(tmp), 'iPhone17,4')                         # the saved stream is readable data
+            self.assertTrue(dots and dots[0]['from'] == 'canteen', dots[:1])        # walking dot starts at the named stop
+            self.assertEqual(status['last_recording']['file'].split('/')[0], 'recordings')
+            zips = list(Path(tmp).glob('*.zip'))                                     # play..pause saved once
+            self.assertEqual(len(zips), 1)
+            saved = ws.read_zip(zips[0].read_bytes())                                # and it uploads like a phyphox export
+            self.assertEqual(saved['device'], 'iPhone17,4')
             self.assertTrue(all(len(saved[s]) > 1000 for s in ('acc', 'mag')))
 
 

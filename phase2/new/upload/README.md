@@ -23,15 +23,17 @@ python -m unittest test_walksense.py test_live.py   # end-to-end checks with rea
 At the start, press "I'm on 5F" or "I'm on 4F" once.
 
 ## Live mode (phyphox remote access, no export/upload)
-The laptop reads the iPhone's sensors **while you walk** and the map updates every second: walking shows the step count, and after **10 s standing still** (phone flat, facing the door) the place circle lights up. The floor is updated once at each stop. The whole stream is also saved to `live_runs/<time>/` as phyphox-style CSVs (gitignored), so every live walk is new data.
+The laptop reads the iPhone's sensors **while you walk** and the map updates every second. While walking, a **blue dot** moves along the corridors from the last named stop (steps + compass heading, `route.py`). After **3 s standing still** (phone flat, facing the door) the place circle lights up and the dot restarts from there. The floor is updated once at each stop.
+
+**Recordings:** every phyphox ▶ (play) to ⏸ (pause) is saved as `recordings/<date-time>.zip`, laid out like a phyphox export (Accelerometer.csv, Gyroscope.csv, Magnetometer.csv, Barometer.csv, meta/device.csv), so it can be uploaded on the page or added to the dataset. The page shows the last saved file. `recordings/` is gitignored; copy files into `phase2/clean-data/` only on purpose.
 
 1. **Network:** turn on the laptop's **Windows Mobile Hotspot** (Settings > Network > Mobile hotspot) and join it from the iPhone. Turn off the VPN. (The phone's own hotspot may also work.)
 2. **iPhone:** open the phyphox experiment that records accelerometer, gyroscope, magnetometer and pressure (the one used on 24 Nov), tap the menu > **Allow remote access**. phyphox shows an address like `http://192.168.137.23:8080`. Keep phyphox open and the screen on.
 3. **Laptop, check first:** `python live.py probe http://192.168.137.23:8080` must list buffers for acc, gyr, mag and baro and show samples. If something says NOT FOUND, open `http://<phone>:8080/config` in the laptop browser and send its text so the names can be added.
 4. **Start:** `python server.py --live http://192.168.137.23:8080 --floor 5` (start floor; `--device` defaults to `iPhone17,4` = iPhone 16 Plus). Open the printed address on the laptop (or on the phone in a second tab). Press play in phyphox.
-5. Walk; stop 10 s at each place. If the floor is wrong, tap "I'm on 5F/4F".
+5. Walk; stop 3 s at each place. If the floor is wrong, tap "I'm on 5F/4F". Pause phyphox to save the recording.
 
-Checked on recorded data (`python live.py check` > `out/live_checks.json`): each 24-Nov session streamed through the live code in 0.5 s steps on its real clock, with the other iPhone's model (held out): stops found 27/27 and 26/26 with no extra stops, floor 27/27 and 26/26, top-1 17/27 and 17/26, top-3 21/27 and 24/26, lit 22 (16 right) both ways. Top-1 from only the first 10 s of a stop: 16/26 and 17/27 (60 s: 17/26 and 17/27). `test_live.py` runs the real live code against a fake phyphox that replays session-2 recordings 20x faster through the same `/get` calls.
+Checked on recorded data (`python live.py check` > `out/live_checks.json`): each 24-Nov session streamed through the live code in 0.5 s steps on its real clock, with the other iPhone's model (held out): stops found 27/27 and 26/26 (extra stops: 2 and 0), floor 27/27 and 26/26, top-1 17/27 and 17/26, top-3 21/27 and 24/26, lit 22 (16 right) both ways. Top-1 from only the first 3 s of a stop: 16/26 and 16/27 (10 s: 16/26 and 17/27; 60 s: 17/26 and 17/27). Walking dot on held-out walks (corridors learned from one session, walks of the other, starting at the true start place): right corridor 28/28 and 26/28, end within 3 m 23/28 and 25/28 (median 0.6 and 0.8 m). `test_live.py` runs the real live code against a fake phyphox that replays session-2 recordings 20x faster through the same `/get` calls.
 
 Not confirmed against a real phone yet: the phyphox `/config` format (buffer discovery; `probe` falls back to common names) and whether iOS keeps serving with the screen on but the phone in a pocket.
 

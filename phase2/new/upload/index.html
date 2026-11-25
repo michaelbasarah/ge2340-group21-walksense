@@ -31,6 +31,7 @@
   #map { width:100%; height:auto; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
   #map .lit { fill:#ff2020; stroke:#ffd400; stroke-width:5; }
   #map .halo { fill:none; stroke:#ff2020; stroke-width:4; transform-box:fill-box; transform-origin:center; animation:pulse 1.4s ease-out infinite; }
+  #map .dot { fill:#0a84ff; stroke:#fff; stroke-width:4; }
   #map .maybe { fill:none; stroke:#555; stroke-width:3; stroke-dasharray:6 5; }
   #map text { font:700 22px system-ui, sans-serif; fill:#111; paint-order:stroke; stroke:#fff; stroke-width:6px; stroke-linejoin:round; }
   @keyframes pulse { from { transform:scale(1); opacity:.9; } to { transform:scale(3.2); opacity:0; } }
@@ -49,7 +50,7 @@
     <div class="tabs" role="group" aria-label="Show floor"><button data-show="5">5F map</button><button data-show="4">4F map</button></div>
     <svg id="map" role="img" aria-label="Floor map"></svg>
     <div class="muted" id="mapnote">Send a stop to see where you are.</div>
-    <div id="live" hidden><div class="muted" style="margin-top:8px">LIVE from phyphox</div><div class="big" id="livemode" style="font-size:20px"></div><div class="muted" id="livestatus"></div></div>
+    <div id="live" hidden><div class="muted" style="margin-top:8px">LIVE from phyphox</div><div class="big" id="livemode" style="font-size:20px"></div><div class="muted" id="livestatus"></div><div class="muted" id="livesaved"></div></div>
   </div>
 
   <div class="card">
@@ -102,7 +103,10 @@ function drawMap() {
       }
       const t = sv('text', { x: p.x, y: p.y - 26, 'text-anchor': 'middle' }); t.textContent = nice(id); svg.append(t);
     }
-  } else if (last && last.kind === 'walk') note = last.live ? 'Walking… stand still facing the door for 10 s to light up where you are.' : 'Walking: send the next stop to light up where you are.';
+  } else if (last && last.kind === 'walk' && last.dot && last.dot.floor === shown) {
+    svg.append(sv('circle', { cx: last.dot.x, cy: last.dot.y, r: 13, class: 'dot' }));
+    note = `Walking: about here, from ${nice(last.dot.from)} toward ${nice(last.dot.to)}. Stop 3 s to check the place.`;
+  } else if (last && last.kind === 'walk') note = last.live ? 'Walking… stand still facing the door for 3 s to light up where you are.' : 'Walking: send the next stop to light up where you are.';
   else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
   $('mapnote').textContent = note;
   svg.setAttribute('aria-label', `${shown}F floor map. ${note}`);
@@ -182,13 +186,14 @@ async function pollLive() {
   $('live').hidden = false;
   const st = L.state || {};
   $('livestatus').textContent = !L.connected ? `Not connected to the phone. ${L.error || ''}` :
-    !L.measuring ? 'Connected. Press ▶ in phyphox to start measuring.' : `Connected · ${L.device} · phone time ${st.now ?? '-'} s`;
+    !L.measuring ? 'Connected. Press ▶ in phyphox to start measuring.' : `Connected · ${L.device} · recording · phone time ${st.now ?? '-'} s`;
+  $('livesaved').textContent = L.last_recording ? `Last recording saved: ${L.last_recording.file} (${L.last_recording.seconds} s)` : 'Pause phyphox to save the recording.';
   const mode = st.mode || 'waiting';
   $('livemode').textContent = mode === 'walking' ? `Walking · ${st.steps} steps` :
-    mode === 'standing' ? `Standing ${st.still_s} s… (place at 10 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
+    mode === 'standing' ? `Standing ${st.still_s} s… (place at 3 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
   if (st.floor) $('floor').textContent = st.floor + 'F';
   const r = mode === 'stop' ? { kind: 'stop', floor: st.floor, top3: st.top3, lit: st.lit, live: true }
-          : mode === 'walking' ? { kind: 'walk', floor: st.floor, live: true } : null;
+          : mode === 'walking' ? { kind: 'walk', floor: st.floor, dot: st.dot, live: true } : null;
   const key = JSON.stringify(r);
   if (r && key !== liveKey) { liveKey = key; last = r; if (shown !== r.floor) shown = r.floor; drawMap(); }
   setTimeout(pollLive, 1000);

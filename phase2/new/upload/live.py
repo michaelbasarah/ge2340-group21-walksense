@@ -12,31 +12,38 @@ reach), otherwise common names are tried; `probe` shows what was found.
 
 Rules (all checked on the 24-Nov iPhone data, PROCESS-LOG entry 26):
   standing = |acc| std over the last 3 s < 0.4 m/s^2 (stops 95% <= 0.29, walks >= 0.8)
-  a stop is named after 10 s standing (top-1 16/26 and 17/27 with 10 s, vs 17/26 and 17/27 with 60 s)
+  a stop is named once the last 3 s are still (3 s of stop gives the same top-1 as 10 s; entry 27)
   the floor is updated once per stop from its median pressure (27/27 and 26/26)
+  while walking, a dot moves along the recorded corridors from the last named stop (route.py)
+  phyphox play -> pause is saved as a phyphox-style ZIP in recordings/ (uploadable on the page)
 """
 from __future__ import annotations
 
+import io
 import json
 import sys
 import threading
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
+import zipfile
 from pathlib import Path
 
 import numpy as np
 
+import route
 import walksense as ws
 from pdr import count_steps
 
 STILL_STD = 0.4        # m/s^2
 MOTION_S = 3.0         # window for the still/moving test
-NAME_AFTER_S = 10.0    # seconds standing before the first place guess
+NAME_AFTER_S = 3.0     # seconds of stillness before the first place guess (counted from the start of the still 3 s)
 MAX_STOP_S = 60.0      # use at most the last 60 s of a stop (what the model was trained on)
 POLL_S = 0.5
 GAP_S = 5.0            # a break in the data (phyphox paused) ends the current stop or walk
-KEEP_S = 180.0         # samples kept in memory (everything is also written to disk)
+KEEP_S = 180.0         # samples kept in memory
+RECORDINGS = Path(__file__).resolve().parent / 'recordings'
 SENSORS = ('acc', 'gyr', 'mag', 'baro')
 CSV = {'acc': ('Accelerometer.csv', '"Time (s)","X (m/s^2)","Y (m/s^2)","Z (m/s^2)"'),
        'gyr': ('Gyroscope.csv', '"Time (s)","X (rad/s)","Y (rad/s)","Z (rad/s)"'),
@@ -65,8 +72,10 @@ class Phyphox:
         found = {}
         try:
             cfg = self._json('/config')
-        except Exception:
+        except (urllib.error.HTTPError, ValueError):
             cfg = {}
+        except OSError as e:                            # cannot reach the phone at all
+            raise ConnectionError(f'cannot reach {self.base} ({getattr(e, "reason", e)}): same network? VPN off? phyphox remote access on?')
         for s in cfg.get('export', []) if isinstance(cfg, dict) else []:      # sets named like the ZIP's CSVs
             name = str(s.get('set', '')).lower()
             bufs = [str(x.get('buffer', '')) for x in s.get('sources', []) if isinstance(x, dict)]
@@ -128,12 +137,14 @@ class Phyphox:
 
 # ============================================================================ tracker
 class LiveTracker:
-    def __init__(self, models, device='iPhone17,4', floor=5, save_dir: Path | None = None):
+    def __init__(self, models, device='iPhone17,4', floor=5, graph=None):
         self.models, self.device = models, device
         self.model, self.model_note = ws.pick_model(models, device)
         self.session = ws.Session(floor)
         self.data = {s: np.empty((0, 2 if s == 'baro' else 4)) for s in SENSORS}
-        self.save_dir = save_dir
+        self.graph = route.build() if graph is None else graph
+        self.anchor = None            # last named place (floor, place): where the walking dot starts
+        self.dot = None
         self.still_since = None       # phone time the current stand started
         self.walk_since = None
         self.stop = None              # current stop: {'start', 'floor_done', 'top3', 'lit'}
@@ -152,22 +163,10 @@ class LiveTracker:
                 self.still_since = self.walk_since = self.stop = None
             for s, a in chunk.items():
                 self.data[s] = np.vstack([self.data[s], a])
-                self._save(s, a)
             now = max((self.data[s][-1, 0] for s in SENSORS if len(self.data[s])), default=None)
             if now is not None:
                 for s in SENSORS:
                     self.data[s] = self.data[s][self.data[s][:, 0] >= now - KEEP_S]
-
-    def _save(self, sensor, a):
-        if self.save_dir is None:
-            return
-        self.save_dir.mkdir(parents=True, exist_ok=True)
-        f = self.save_dir / CSV[sensor][0]
-        new = not f.exists()
-        with open(f, 'a', encoding='utf-8') as fh:
-            if new:
-                fh.write(CSV[sensor][1] + '\n')
-            np.savetxt(fh, a, delimiter=',', fmt='%.9E')
 
     def _window(self, t0, t1):
         return {s: self.data[s][(self.data[s][:, 0] >= t0) & (self.data[s][:, 0] <= t1)] for s in SENSORS}
@@ -185,13 +184,21 @@ class LiveTracker:
             if moving:
                 if self.stop is not None or self.walk_since is None:
                     self.walk_since, self.stop = now, None
+                    self.dot = route.Dot(self.graph, *self.anchor) if self.anchor and self.anchor[0] == self.session.floor else None
                 self.still_since = None
                 w = acc[acc[:, 0] >= self.walk_since]
                 steps = int(count_steps(w[:, 0], np.linalg.norm(w[:, 1:4], axis=1))[0]) if len(w) > 200 else 0   # < 2 s: too short to count
-                st.update(mode='walking', still_s=0.0, steps=steps)
+                dot = None
+                if self.dot is not None:
+                    h = route.heading(acc[acc[:, 0] > now - route.HEAD_S], self.data['mag'][self.data['mag'][:, 0] > now - route.HEAD_S])
+                    pos = self.dot.update(steps, h)
+                    xy = self.dot.xy(pos) if pos else None
+                    if xy:
+                        dot = {'x': round(xy[0], 1), 'y': round(xy[1], 1), 'floor': self.dot.floor, 'from': pos[0], 'to': pos[1]}
+                st.update(mode='walking', still_s=0.0, steps=steps, dot=dot)
                 return dict(st)
             if self.still_since is None:
-                self.still_since = now
+                self.still_since = now - MOTION_S               # the whole last 3 s were already still
             st['still_s'] = round(now - self.still_since, 1)
             if now - self.still_since < NAME_AFTER_S:
                 st['mode'] = 'standing'
@@ -206,7 +213,8 @@ class LiveTracker:
             top3 = self.model.top3(win, self.session.floor, trim=0.0) if len(win['mag']) >= 20 and len(win['acc']) >= 20 else []
             if top3:
                 lit = top3[0][0] if top3 and top3[0][1] >= ws.LIGHT_P else None
-                st.update(mode='stop', top3=top3, lit=lit)
+                st.update(mode='stop', top3=top3, lit=lit, dot=None)
+                self.anchor = (self.session.floor, top3[0][0])
                 rec = {'t': round(self.still_since, 1), 'floor': self.session.floor, 'top3': top3, 'lit': lit}
                 if st['stops'] and st['stops'][-1]['t'] == rec['t']:
                     st['stops'][-1] = rec
@@ -215,9 +223,36 @@ class LiveTracker:
             return dict(st)
 
 
-def run(phone: Phyphox, tracker: LiveTracker, status: dict, stop_event: threading.Event):
-    """Poll loop for a background thread. status gets 'connected', 'measuring', 'error', 'buffers'."""
-    session = None
+def save_recording(parts, device, started, folder=RECORDINGS):
+    """Samples from one phyphox play..pause -> folder/<time>.zip, laid out like a phyphox export."""
+    data = {s: np.vstack(v) for s, v in parts.items() if v}
+    if 'acc' not in data or len(data['acc']) < 50:
+        return None
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / (time.strftime('%Y%m%d-%H%M%S', time.localtime(started)) + '.zip')
+    t0 = min(a[0, 0] for a in data.values())
+    with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as z:
+        for s, a in data.items():
+            buf = io.StringIO(); buf.write(CSV[s][1] + '\n'); np.savetxt(buf, a, delimiter=',', fmt='%.9E')
+            z.writestr(CSV[s][0], buf.getvalue())
+        z.writestr('meta/device.csv', f'"property","value"\n"deviceModel","{device}"\n')
+        z.writestr('meta/time.csv', f'"event","experiment time","system time"\n"START",{t0!r},{started!r}\n')
+    return {'file': f'recordings/{path.name}', 'seconds': round(float(data['acc'][-1, 0] - data['acc'][0, 0]), 1)}
+
+
+def run(phone: Phyphox, tracker: LiveTracker, status: dict, stop_event: threading.Event, record_to=RECORDINGS):
+    """Poll loop for a background thread. status gets 'connected', 'measuring', 'error', 'buffers',
+    'recording' and 'last_recording' (each phyphox play..pause is saved to record_to)."""
+    session, rec, started = None, None, None
+
+    def flush():
+        nonlocal rec
+        if rec is not None:
+            saved = save_recording(rec, tracker.device, started, record_to)
+            if saved:
+                status['last_recording'] = saved
+        rec = None
+
     while not stop_event.is_set():
         try:
             if not phone.bufs:
@@ -227,13 +262,22 @@ def run(phone: Phyphox, tracker: LiveTracker, status: dict, stop_event: threadin
             chunk, s = phone.fetch()
             if s.get('session') not in (None, session):         # measurement cleared/restarted on the phone
                 if session is not None:
-                    phone.restart()
+                    phone.restart(); flush()
                 session = s.get('session')
+            measuring = bool(s.get('measuring'))
+            if measuring and rec is None:
+                rec, started = {k: [] for k in SENSORS}, time.time()
+            if rec is not None:
+                for k, a in chunk.items():
+                    rec[k].append(a)
+            if not measuring:
+                flush()
             tracker.add(chunk)
-            status.update(connected=True, measuring=bool(s.get('measuring')), error='', state=tracker.update())
+            status.update(connected=True, measuring=measuring, recording=rec is not None, error='', state=tracker.update())
         except Exception as e:
             status.update(connected=False, error=f'{type(e).__name__}: {e}'[:200])
         stop_event.wait(POLL_S)
+    flush()                                             # server stopping mid-measurement: keep what we have
 
 
 def probe(url):
@@ -270,7 +314,7 @@ def _stream(session):
 def replay(session, device, models):
     """Stream a recorded session through LiveTracker in 0.5 s steps and score every recorded stop."""
     stream, truth, floor = _stream(session)
-    tr = LiveTracker(models, device, floor, None)
+    tr = LiveTracker(models, device, floor, graph={})
     end = max(a[-1, 0] for a in stream.values())
     for t in np.arange(0, end + 1, POLL_S):
         tr.add({s: a[(a[:, 0] > t - POLL_S) & (a[:, 0] <= t)] for s, a in stream.items()
@@ -278,14 +322,14 @@ def replay(session, device, models):
         tr.update()
     stops, res = tr.state['stops'], dict(found=0, floor=0, top1=0, top3=0, lit=0, lit_right=0)
     for f, node, ts in truth:
-        d = next((s for s in stops if ts - 1 <= s['t'] <= ts + 50), None)
+        d = next((s for s in stops if ts - 5 <= s['t'] <= ts + 50), None)
         if d is None:
             continue
         res['found'] += 1; res['floor'] += d['floor'] == f; res['top1'] += d['top3'][0][0] == node
         res['top3'] += node in [p for p, _ in d['top3']]
         if d['lit']:
             res['lit'] += 1; res['lit_right'] += d['lit'] == node
-    res['extra_stops'] = sum(not any(ts - 1 <= s['t'] <= ts + 50 for *_, ts in truth) for s in stops)
+    res['extra_stops'] = sum(not any(ts - 5 <= s['t'] <= ts + 50 for *_, ts in truth) for s in stops)
     return {'n_stops': len(truth), **res}
 
 
@@ -311,7 +355,7 @@ def check():
     st = {s: ws.training_stops(sessions=(s,), phone='iphone') for s in ws.SESSIONS}
     for tr, te in (('sesi1', 'sesi2'), ('sesi2', 'sesi1')):
         m = ws.PlaceModel(st[tr])
-        for secs in (10, 20, 30, 60):             # place guess from the first N s of each held-out stop
+        for secs in (3, 6, 10, 60):               # place guess from the first N s of each held-out stop
             ok = 0
             for s in st[te]:
                 t0 = s['rec']['mag'][0, 0] + ws.TRIM_S
@@ -319,6 +363,7 @@ def check():
                 ok += m.top3(win, s['floor'], trim=0.0)[0][0] == s['place']
             standing[f'{tr}->{te} {secs}s'] = f'{ok}/{len(st[te])}'
     out['top1_by_standing_time'] = standing
+    out['walking_dot'] = {f'{tr}->{te}': route.evaluate(tr, te) for tr, te in (('sesi1', 'sesi2'), ('sesi2', 'sesi1'))}
     out['live_replay'] = {f'{s} streamed, model {d}': replay(s, d, models)
                           for s, d in (('sesi1', 'iPhone17,4'), ('sesi2', 'iPhone19,2'))}
     ws.OUT.mkdir(exist_ok=True)

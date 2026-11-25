@@ -150,10 +150,9 @@ def main(argv):
     STATE['session'] = ws.Session(a.floor)
     if a.live:
         phone = live.Phyphox(a.live)
-        run_dir = HERE / 'live_runs' / time.strftime('%Y%m%d-%H%M%S')
-        LIVE['tracker'] = live.LiveTracker(STATE['models'], a.device, a.floor, run_dir)
+        LIVE['tracker'] = live.LiveTracker(STATE['models'], a.device, a.floor)
         threading.Thread(target=live.run, args=(phone, LIVE['tracker'], LIVE['status'], threading.Event()), daemon=True).start()
-        print(f'Live: reading {phone.base} as {a.device}; {LIVE["tracker"].model_note}. Saving the stream to {run_dir}')
+        print(f'Live: reading {phone.base} as {a.device}; {LIVE["tracker"].model_note}. Each phyphox play..pause is saved to {live.RECORDINGS}')
     srv = ThreadingHTTPServer(('0.0.0.0', port), Handler)
     print('Open one of these on the phone (same network):')
     for ip in lan_ips():

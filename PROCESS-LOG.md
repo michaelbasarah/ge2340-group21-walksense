@@ -35,6 +35,7 @@ Contents:
 24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
 25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
 26. 25 Nov: live mode, phyphox remote access read by the laptop while walking
+27. 25 Nov: live mode: place after 3 s, walking dot, play/pause recordings
 - Lessons learned
 - Open questions / next steps
 
@@ -363,6 +364,25 @@ Contents:
 
 ---
 
+## 27. 25 Nov: live mode: place after 3 s, walking dot, play/pause recordings
+
+- **What we tried:** (1) name the place after 3 s of standing instead of 10 s; (2) a dot that moves along the corridors while walking, so the position is shown without stopping; (3) save every phyphox play..pause from live mode as a ZIP in `recordings/`. All three asked for by the user.
+- **Why:** 10 s at every stop is slow for a user; the stops-only answer leaves the map empty while walking; live walks should also become data.
+- **How:**
+  - `live.py`: `NAME_AFTER_S` 10 -> 3, counted from the start of the still 3 s (so about 3 s after stopping); `save_recording()` and the play/pause logic in `run()`; `check()` now also tests 3 s and 6 s stands and the walking dot. A phone that cannot be reached now says so (before, it said "no buffers").
+  - `route.py` (new): the corridors are the recorded walks (both directions). Each gets a tilt-compensated compass heading (middle 60 % of the walk, so the local magnetic distortion of that corridor is included) and a step count from training walks. While walking, the dot takes the corridor out of the current place whose heading is closest to the last 2 s, can still switch during the first 30 % (turning out of a door), and moves by steps walked / corridor steps; past the end it takes the next corridor. It starts from the last named stop.
+  - `server.py`: the old `live_runs/` stream folder is replaced by `recordings/` (gitignored). `index.html`: blue dot, "last recording saved" line.
+- **Result** (`phase2/new/upload/out/live_checks.json`):
+  - Top-1 from the first 3 s of each held-out stop: 16/26 and 16/27 (6 s: 16/26 and 16/27; 10 s: 16/26 and 17/27; 60 s: 17/26 and 17/27).
+  - Held-out live replay with the 3 s rule: stops found 27/27 and 26/26, extra stops 2 and 0 (10 s rule: 0 and 0), floor 27/27 and 26/26, top-1 17/27 and 17/26, top-3 21/27 and 24/26, lit 22 (16 right) both ways.
+  - Walking dot, held out (corridors from one session, the other session's 28 walks, each started at its true start place): right first corridor 28/28 (sesi1 -> sesi2) and 26/28 (sesi2 -> sesi1); end within 3 m of the true end 23/28 and 25/28; median end error 0.6 m and 0.8 m, p90 3.3 m and 2.9 m. Map scale from the corridors: 0.0617 and 0.0571 m per pixel.
+  - Tests: 5 pass. `test_live.py` now also checks that the dot appears on the first walk starting from the canteen, and that pausing the fake phone saves exactly one ZIP in `recordings` that `read_zip` reads as iPhone17,4.
+- **Outcome:** success on recorded data, not yet on a real phone. The walking dot is only as good as the stop it starts from (top-1 about 17/27): a wrongly named stop sends the dot down the wrong corridors. Each walk was tested alone from its true start, not a whole route. FAILURE on the way: the replay scorer matched stops only from 1 s before a recorded stop; with the 3 s rule a stop is stamped about 2 s earlier, so it first scored 3/27 found and 29 extra. Widened to 5 s; the tracker itself did not change.
+- **What changed because of it:** a stop now takes about 3 s. With the shorter rule a pause of 3 s during a walk also counts as a stop (2 extra on session 1).
+- **Links:** `phase2/new/upload/live.py`, `route.py`, `server.py`, `index.html`, `test_live.py`, `out/live_checks.json`, `screenshots/live-walking-dot-5F.png`.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -377,6 +397,7 @@ Contents:
 - **Hold the phone the same way and raw x/y/z works.** With the phone facing the door at every stop, x/y/z got 17/26 and 17/27 across sessions (entry 24) where it got 18 to 24% across days without that rule.
 - **Compare pressure with a few recent readings, not one.** A single odd reading near a vent flipped the floor; the median of the last 6 did not (entry 24).
 - **Replay recorded data on its real clock.** Squeezing out the breaks made weather drift look like a floor change (entry 26).
+- **A few seconds of standing hold almost all the place information.** 3 s gave the same top-1 as 10 s (entry 27); the field at a spot does not change.
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
@@ -392,6 +413,7 @@ Contents:
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
 - **graph-v2 (entry 22):** rerun `crossday.py` against `phase2/new/graph-v2/labels_23nov_merged.csv` to see whether merging the study rooms and lift/stairs changes the exact/area numbers, and decide whether v2 replaces v1 for the map/UI. The collector should confirm the two merges match the hand-drawn maps.
 - **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
+- **Walking dot (entry 27):** test a whole route on a real walk (not single corridors from the true start); the dot needs the stop it starts from to be right.
 - **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`.
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
