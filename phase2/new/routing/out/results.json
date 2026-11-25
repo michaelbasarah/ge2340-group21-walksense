@@ -1,0 +1,295 @@
+{
+ "model_requested": "haiku",
+ "models_that_answered": [
+  "claude-haiku-5-5"
+ ],
+ "cli_versions": [
+  "2.1.332 (Claude Code)"
+ ],
+ "dates_utc": [
+  "2026-11-25"
+ ],
+ "llm_calls_cached": 150,
+ "llm_calls_total_attempts": 150,
+ "pairs": 50,
+ "graph": {
+  "nodes": 26,
+  "edges": 34,
+  "edge_length_status": {
+   "measured": 8,
+   "guess": 3,
+   "steps": 23
+  },
+  "speed_mps": 1.3,
+  "stride_m": 0.54,
+  "escalator_ride_s_guess": 20.0
+ },
+ "astar": {
+  "ordered_pairs_checked": 650,
+  "cost_mismatches_vs_dijkstra": 0,
+  "success_rate": 1.0,
+  "optimal_rate": 1.0,
+  "cost_ratio": 1.0,
+  "invented_edge_rate_per_hop": 0.0,
+  "time_per_query_ms": 0.0155,
+  "expansions_mean_astar": 7.54,
+  "expansions_mean_dijkstra": 14.0
+ },
+ "llm": {
+  "dist": {
+   "n_answers": 50,
+   "parsed": 50,
+   "success_valid_and_reaches_goal": 50,
+   "success_rate": 1.0,
+   "success_ci95": [
+    0.929,
+    1.0
+   ],
+   "answers_with_a_bad_hop": 0,
+   "bad_hop_answer_rate": 0.0,
+   "hops_total": 203,
+   "bad_hops_total": 0,
+   "invented_edge_rate_per_hop": 0.0,
+   "unknown_id_hops": 0,
+   "wrong_direction_hops": 0,
+   "no_such_corridor_hops": 0,
+   "reaches_goal_rate": 1.0,
+   "optimal_count": 49,
+   "optimal_rate": 0.98,
+   "optimal_ci95": [
+    0.895,
+    0.996
+   ],
+   "cost_ratio_successful_mean": 1.0018,
+   "cost_ratio_successful_median": 1.0,
+   "cost_ratio_successful_max": 1.0914,
+   "latency_s_mean": 7.79,
+   "latency_s_median": 7.04,
+   "latency_s_p90": 10.7,
+   "api_ms_median": 4312.0
+  },
+  "adj": {
+   "n_answers": 50,
+   "parsed": 50,
+   "success_valid_and_reaches_goal": 50,
+   "success_rate": 1.0,
+   "success_ci95": [
+    0.929,
+    1.0
+   ],
+   "answers_with_a_bad_hop": 0,
+   "bad_hop_answer_rate": 0.0,
+   "hops_total": 204,
+   "bad_hops_total": 0,
+   "invented_edge_rate_per_hop": 0.0,
+   "unknown_id_hops": 0,
+   "wrong_direction_hops": 0,
+   "no_such_corridor_hops": 0,
+   "reaches_goal_rate": 1.0,
+   "optimal_count": 41,
+   "optimal_rate": 0.82,
+   "optimal_ci95": [
+    0.692,
+    0.902
+   ],
+   "cost_ratio_successful_mean": 1.0198,
+   "cost_ratio_successful_median": 1.0,
+   "cost_ratio_successful_max": 1.5756,
+   "latency_s_mean": 6.39,
+   "latency_s_median": 6.56,
+   "latency_s_p90": 7.22,
+   "api_ms_median": 2739.5
+  },
+  "names": {
+   "n_answers": 50,
+   "parsed": 50,
+   "success_valid_and_reaches_goal": 2,
+   "success_rate": 0.04,
+   "success_ci95": [
+    0.011,
+    0.135
+   ],
+   "answers_with_a_bad_hop": 47,
+   "bad_hop_answer_rate": 0.94,
+   "hops_total": 93,
+   "bad_hops_total": 59,
+   "invented_edge_rate_per_hop": 0.6344,
+   "unknown_id_hops": 0,
+   "wrong_direction_hops": 0,
+   "no_such_corridor_hops": 59,
+   "reaches_goal_rate": 0.98,
+   "optimal_count": 2,
+   "optimal_rate": 0.04,
+   "optimal_ci95": [
+    0.011,
+    0.135
+   ],
+   "cost_ratio_successful_mean": 1.0,
+   "cost_ratio_successful_median": 1.0,
+   "cost_ratio_successful_max": 1.0,
+   "latency_s_mean": 6.94,
+   "latency_s_median": 6.83,
+   "latency_s_p90": 7.83,
+   "api_ms_median": 3014.5
+  }
+ },
+ "llm_by_stratum": {
+  "dist": {
+   "4F_same_floor": {
+    "n": 8,
+    "success": 8,
+    "optimal": 8
+   },
+   "5F_same_floor": {
+    "n": 20,
+    "success": 20,
+    "optimal": 20
+   },
+   "cross_4F_to_5F": {
+    "n": 11,
+    "success": 11,
+    "optimal": 11
+   },
+   "cross_5F_to_4F": {
+    "n": 11,
+    "success": 11,
+    "optimal": 10
+   }
+  },
+  "adj": {
+   "4F_same_floor": {
+    "n": 8,
+    "success": 8,
+    "optimal": 8
+   },
+   "5F_same_floor": {
+    "n": 20,
+    "success": 20,
+    "optimal": 17
+   },
+   "cross_4F_to_5F": {
+    "n": 11,
+    "success": 11,
+    "optimal": 8
+   },
+   "cross_5F_to_4F": {
+    "n": 11,
+    "success": 11,
+    "optimal": 8
+   }
+  },
+  "names": {
+   "4F_same_floor": {
+    "n": 8,
+    "success": 0,
+    "optimal": 0
+   },
+   "5F_same_floor": {
+    "n": 20,
+    "success": 0,
+    "optimal": 0
+   },
+   "cross_4F_to_5F": {
+    "n": 11,
+    "success": 2,
+    "optimal": 2
+   },
+   "cross_5F_to_4F": {
+    "n": 11,
+    "success": 0,
+    "optimal": 0
+   }
+  }
+ },
+ "failure_examples": {
+  "dist": [],
+  "adj": [],
+  "names": [
+   {
+    "start": "escalator_down_4F",
+    "goal": "exit_10_4F",
+    "stratum": "4F_same_floor",
+    "answer": "escalator_down_4F > exit_10_4F",
+    "bad_hop_list": "escalator_down_4F>exit_10_4F (no such corridor)",
+    "reaches_goal": true
+   },
+   {
+    "start": "exit_5_4F",
+    "goal": "escalator_up_4F",
+    "stratum": "4F_same_floor",
+    "answer": "exit_5_4F > escalator_up_4F",
+    "bad_hop_list": "exit_5_4F>escalator_up_4F (no such corridor)",
+    "reaches_goal": true
+   },
+   {
+    "start": "lift_stairs_4F",
+    "goal": "escalator_up_4F",
+    "stratum": "4F_same_floor",
+    "answer": "lift_stairs_4F > escalator_up_4F",
+    "bad_hop_list": "lift_stairs_4F>escalator_up_4F (no such corridor)",
+    "reaches_goal": true
+   },
+   {
+    "start": "lt1a",
+    "goal": "y4502",
+    "stratum": "4F_same_floor",
+    "answer": "lt1a > lt1b > lift_stairs_4F > y4502",
+    "bad_hop_list": "lt1b>lift_stairs_4F (no such corridor); lift_stairs_4F>y4502 (no such corridor)",
+    "reaches_goal": true
+   },
+   {
+    "start": "lt2a",
+    "goal": "lift_stairs_4F",
+    "stratum": "4F_same_floor",
+    "answer": "lt2a > lift_stairs_4F",
+    "bad_hop_list": "lt2a>lift_stairs_4F (no such corridor)",
+    "reaches_goal": true
+   },
+   {
+    "start": "lt2b",
+    "goal": "escalator_up_4F",
+    "stratum": "4F_same_floor",
+    "answer": "lt2b > lt2a > escalator_up_4F",
+    "bad_hop_list": "lt2a>escalator_up_4F (no such corridor)",
+    "reaches_goal": true
+   }
+  ]
+ },
+ "suboptimal_examples": {
+  "dist": [
+   {
+    "start": "y5302_back",
+    "goal": "lt1a",
+    "answer": "y5302_back > lift_stairs > lift_stairs_4F > disabled_toilet_4F > exit_5_4F > entrance_exit > exit_10_4F > lt1a",
+    "ratio": 1.0914
+   }
+  ],
+  "adj": [
+   {
+    "start": "lift_stairs",
+    "goal": "escalator_up_4F",
+    "answer": "lift_stairs > lift_stairs_4F > disabled_toilet_4F > exit_5_4F > lt2a > lt2b > escalator_down_4F > escalator_up_4F",
+    "ratio": 1.5756
+   },
+   {
+    "start": "y5302_back",
+    "goal": "lt1a",
+    "answer": "y5302_back > lift_stairs > lift_stairs_4F > disabled_toilet_4F > exit_5_4F > entrance_exit > exit_10_4F > lt1a",
+    "ratio": 1.0914
+   },
+   {
+    "start": "lt1a",
+    "goal": "lift_stairs",
+    "answer": "lt1a > exit_10_4F > entrance_exit > exit_5_4F > disabled_toilet_4F > lift_stairs_4F > lift_stairs",
+    "ratio": 1.0866
+   },
+   {
+    "start": "female_toilet",
+    "goal": "y4502",
+    "answer": "female_toilet > exit_10 > canteen > escalator_down > escalator_down_4F > y4502",
+    "ratio": 1.0814
+   }
+  ],
+  "names": []
+ }
+}

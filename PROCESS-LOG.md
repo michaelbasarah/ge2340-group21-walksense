@@ -51,6 +51,10 @@ Contents:
 40. 25 Nov: places never classified correctly so far (named before adding the 25-Nov data)
 41. 25 Nov: 25-Nov data ingested from a partial WhatsApp export and labelled per recording
 42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
+80. 25 Nov: one routing graph (graph-v2 + measured / step-count lengths), guesses marked
+81. 25 Nov: A* vs Dijkstra on all ordered pairs, admissible heuristic (first run failed)
+82. 25 Nov: LLM directions baseline, 150 cached Haiku calls
+83. 25 Nov: scoring and figure: A* vs LLM routing
 - Lessons learned
 - Open questions / next steps
 
@@ -633,6 +637,46 @@ Contents:
 - **What changed because of it:** the pipeline can take a session with several tracks; `fused_sample_predictions.csv` exists in `out/` and `out-split20/`.
 - **Links:** `phase2/new/day3/data.py`, `gknn.py`, `evaluate.py`, `fused_knn.py`, `phone_map.py`, `visualise.py`, `run_all.sh`, `README.md`; `out*/fused_sample_predictions.csv`, `out*/knn_playground_2026-11-25a.html`; the commit that adds this entry.
 
+## 80. 25 Nov: one routing graph (graph-v2 + measured / step-count lengths), guesses marked
+
+- **What we tried:** build a single routing graph for the proposal objective "A* vs an LLM given a text floor plan", from `phase2/new/graph-v2` plus the best edge lengths we have.
+- **Why:** four routing pieces existed (graph-v2, the app's corridors, `map-ui` Dijkstra on an illustrative schematic, `viz/floor5_map.html` Dijkstra on measured 5F metres) with different numbers; the comparison needs one graph with the source of every length visible.
+- **How:** `phase2/new/routing/build_graph.py` -> `graph.json`. Lengths: measured pin-to-pin metres from `phase2/map/edges_floor5.csv`; else the 23-Nov median step count (`graph-v2/edges.csv`) x 0.54 m (`tracking/out/pdr_summary.json`); else marked guess. The two study-room edges use the sum of the measured legs through `sr11/sr10/sr9` and `sr9/sr8` (graph-v2 kept boundary distances after merging). Seconds = metres / 1.3 m/s (given); the lift/stairs edge uses the timed stairs walk ACC23 (30.0 s), escalator rides are one-way with a 20 s guess. Virtual midpoints are dropped.
+- **Result** (`graph.json`, `out/results.json`): 26 nodes, 34 edges: 8 measured, 23 steps, 3 guess. The guesses: the two escalator rides (20 s each, never timed) and `exit_10`-`escalator_up` (4.9 m, straight line between schematic positions, no usable step count). Lift/stairs 30.0 s timed once, 5F -> 4F only. m per step where both exist: 1.59, 0.45, 0.61, 0.56, 0.55, 0.72 (stored as `m_per_step_check`).
+- **Outcome:** success; the team must confirm the guesses and the step-based lengths (listed in `phase2/new/routing/README.md`).
+- **What changed because of it:** one graph file for routing; nothing in `graph-v2`, `map`, `map-ui`, `viz` or `upload` was edited.
+- **Links:** `phase2/new/routing/build_graph.py`, `graph.json`, `README.md`; commit that adds this entry.
+
+## 81. 25 Nov: A* vs Dijkstra on all ordered pairs, admissible heuristic (first run failed)
+
+- **What we tried:** A* with a straight-line heuristic on the same floor plus the cheapest transfer edge across floors; compare with Dijkstra on every ordered pair; turn-by-turn instructions.
+- **Why:** the proposal says A* finds the fastest route; the heuristic must not over-estimate or the cost could be wrong.
+- **How:** `phase2/new/routing/route.py`, `check_astar.py` -> `out/astar_check.json`, `test_route.py`. Coordinates are scaled per floor so that no edge is shorter than its straight line (floor-4 and several floor-5 coordinates are schematic).
+- **Result:** **first run failed the admissibility check**: 4 pairs (the two floor-5 escalators and their cross-floor neighbours) had h larger than the true cost by under 0.01 s, because the scale used edge metres while the edge seconds are rounded to 2 decimals (printed output of the first `check_astar.py` run, not kept in a file). Fixed by computing the scale from edge seconds. Rerun (`out/astar_check.json`): 650 ordered pairs, 0 cost mismatches against Dijkstra (max difference 0.0 s), 0 inadmissible pairs, 0 inconsistent edges, scale 0.8506 (5F) and 0.6543 (4F), mean nodes expanded 7.54 (A*) vs 14.0 (Dijkstra). Speed sensitivity: 12 pairs change their fastest path at 0.84 and at 1.0 m/s, 2 pairs at 1.5 m/s (vs 1.3). 4 unit tests pass.
+- **Outcome:** success after the fix; A* is exact on this graph.
+- **What changed because of it:** the heuristic scale uses seconds.
+- **Links:** `phase2/new/routing/route.py`, `check_astar.py`, `test_route.py`, `out/astar_check.json`.
+
+## 82. 25 Nov: LLM directions baseline, 150 cached Haiku calls
+
+- **What we tried:** give Claude Haiku a text floor plan generated from `graph.json` and ask for the fastest route as a list of place IDs.
+- **Why:** the proposal's comparison: an LLM given a text floor plan "may invent corridors".
+- **How:** `phase2/new/routing/llm_baseline.py run`: `claude -p --model haiku --tools "" --no-session-persistence --setting-sources "" --system-prompt <one line> --output-format json`, from an empty temporary folder (so this repo's CLAUDE.md is not read; the user's global settings are still on the account). 50 ordered pairs (seed 2340, at least 2 hops: 20 in 5F, 8 in 4F, 11 5F -> 4F, 11 4F -> 5F) x 3 conditions: `dist` (plan with metres and seconds), `adj` (same plan, no numbers), `names` (places only, no corridors). Each answer cached in `out/llm_cache/` with prompt, raw response, model, date, CLI version, latency. 2 test calls first, then the rest 4 in parallel.
+- **Result** (`out/results.json`): 150 calls, 150 attempts (no retries), answering model `claude-haiku-5-5`, Claude Code 2.1.332, date 2026-11-25; cost reported by the CLI about 0.10 USD in total. All 150 answers parsed (one `[]`). The first answer of the test call came back inside a ``` fence, so the parser accepts a fenced array.
+- **Outcome:** success (the calls ran); scoring in entry 83.
+- **What changed because of it:** raw answers are committed for citation.
+- **Links:** `phase2/new/routing/llm_baseline.py`, `out/llm_cache/`, `out/llm_run.log`.
+
+## 83. 25 Nov: scoring and figure: A* vs LLM routing
+
+- **What we tried:** score each answer: valid (every hop a directed edge, escalators one way), reaches the goal, cost ratio vs A*, bad-hop rate, latency.
+- **Why:** to see whether the LLM invents corridors and how far from optimal it is.
+- **How:** `phase2/new/routing/evaluate.py` -> `out/results.json`, `results_table.csv`, `llm_answers.csv`, `routing_results.png`.
+- **Result** (`out/results.json`, 50 pairs per condition): with distances: 50/50 valid and at the goal, 49/50 fastest, cost ratio mean 1.0018 (max 1.0914), 0 bad hops of 203, latency median 7.04 s. Adjacency only: 50/50 valid, 41/50 fastest, ratio mean 1.0198 (max 1.5756), 0 bad hops of 204, median 6.56 s. Places only: 2/50 valid, 2/50 fastest, 59 bad hops of 93 (63.4%), 47/50 answers with at least one bad hop, median 6.83 s. A*: 50/50, ratio 1.0, 0.0155 ms per query.
+- **Outcome:** partly the opposite of the proposal's expectation: given a correct plan of this small graph the LLM did not invent corridors; it invents them only when no corridor list is given. Limits: one sample per prompt, one model, a plan made by machine from the same graph (including guessed edges), sparse 26-place graph.
+- **What changed because of it:** no change to the app or the graph; the team decides how to word this in the report (course rule).
+- **Links:** `phase2/new/routing/README.md`, `out/routing_results.png`, `out/results.json`.
+
 ---
 
 ## Lessons learned
@@ -663,6 +707,9 @@ Contents:
 - **Number log entries only when they land on the shared branch.** Two people adding "entry 24" on different machines collided; the public numbers won and ours moved by +4 (entry 38).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
+- **Check the heuristic on rounded data.** The first A* admissibility check failed by under 0.01 s because the scale used metres while edges store rounded seconds (entry 81); a test over every pair caught it.
+- **An LLM given a correct corridor list does not invent corridors; without one it does.** Haiku: 0 bad hops of 203 with distances, 59 of 93 with only a place list (entry 83).
+
 ## Open questions / next steps
 
 - **Day-3 data (24 Nov) is in and evaluated (entries 29 to 33).** Still worth collecting if time allows (deadline 30 Nov): (1) a test walk that leaves the recorded route, with "I'm here" taps, to measure the tracker without the optimistic parts; (2) one handset for every session (the 24-Nov "iphone" was two devices, now labelled ip16 and ip18; ip18 has stops in 24 s1 only, so it has no same-handset cross-session test); (3) a Wi-Fi logger that saves every scan. A further fingerprint session with the same handset would add a fourth leave-one-session-out fold (one line in `phase2/new/day3/config.json`).
@@ -684,3 +731,4 @@ Contents:
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **split20 (entry 39):** confirm with the user that "do s8 10 11" means dropping the 23-Nov sr8/sr10/sr11 stops (that is how it was done) and whether "for each dataset" was meant to include 14 Nov (10 s stops, no full 20 s piece) and 17 Nov (30 s stops, one piece), which only `cross-day/` uses. Decide which numbers the team quotes: take level (`out/`) or pieces (`out-split20/`, with the control); if pieces, say that pieces of one take are not independent. BM14 (23 Nov exit_5) was removed whole by the outlier rule; the collector may know what happened there.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
+- **Routing (entries 80 to 83):** the team must confirm the guessed edge values: escalator ride 20 s (both directions, never timed), `exit_10`-`escalator_up` 4.9 m, lift/stairs 30.0 s timed 5F -> 4F only (the lift is not timed), and the 23 step-based lengths (step x 0.54 m; floor-4 has no Google pins). List in `phase2/new/routing/README.md`.

@@ -1,0 +1,55 @@
+{
+ "condition": "names",
+ "start": "female_toilet",
+ "goal": "y4502",
+ "stratum": "cross_5F_to_4F",
+ "model_requested": "haiku",
+ "date_utc": "2026-11-25T12:51:53+00:00",
+ "prompt": "FLOOR PLAN of a university building (floors 5 and 4). Each place has an ID, a name and a floor.\n\nPLACES\n- canteen: Canteen entrance, floor 5\n- disabled_toilet: Disabled toilet (5F), floor 5\n- escalator_down: Down escalator (5F), floor 5\n- escalator_up: Up escalator (5F), floor 5\n- exit_10: Exit 10 (by the toilets), floor 5\n- exit_5: Exit 5 (emergency exit), floor 5\n- female_toilet: Female toilet, floor 5\n- lift_stairs: Lift and stairs (5F), floor 5\n- male_toilet: Male toilet, floor 5\n- sr9: Study rooms (Y5-511 to Y5-514), floor 5\n- y5202: Room Y5-202, floor 5\n- y5302: Room Y5-302 (front door), floor 5\n- y5302_back: Room Y5-302 (back door), floor 5\n- y5401: Room Y5-401, floor 5\n- disabled_toilet_4F: Disabled toilet (4F), floor 4\n- entrance_exit: Entrance gate (4F), floor 4\n- escalator_down_4F: Down escalator (4F), floor 4\n- escalator_up_4F: Up escalator (4F), floor 4\n- exit_10_4F: Exit 10 (4F), floor 4\n- exit_5_4F: Exit 5 (4F), floor 4\n- lift_stairs_4F: Lift and stairs (4F), floor 4\n- lt1a: LT1a, floor 4\n- lt1b: LT1b, floor 4\n- lt2a: LT2a, floor 4\n- lt2b: LT2b, floor 4\n- y4502: Room Y4-502, floor 4\n\nNo list of corridors is available for this building.\n\nTASK: Give the quickest route from \"female_toilet\" (Female toilet) to \"y4502\" (Room Y4-502).\nUse only the place IDs listed above. Answer with ONLY a JSON array of place IDs in order, starting with female_toilet and ending with y4502, nothing else.",
+ "cli_command": "claude -p --model haiku --tools \"\" --no-session-persistence --setting-sources \"\" --system-prompt <SYSTEM> --output-format json <prompt>",
+ "system_prompt": "You are a careful navigation assistant. Follow the requested output format exactly.",
+ "latency_s": 6.66,
+ "attempt": 1,
+ "response": "[\"female_toilet\",\"lift_stairs\",\"lift_stairs_4F\",\"y4502\"]",
+ "api_ms": 3688,
+ "is_error": false,
+ "model_used": [
+  "claude-haiku-5-5"
+ ],
+ "usage": {
+  "input_tokens": 2,
+  "cache_creation_input_tokens": 1319,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 518,
+  "output_tokens_details": {
+   "thinking_tokens": 487
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 1319,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 518,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 1319,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1319
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "cost_usd": 0.000523,
+ "cli_version": "2.1.332 (Claude Code)"
+}

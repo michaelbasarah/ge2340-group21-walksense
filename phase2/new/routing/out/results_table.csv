@@ -1,0 +1,5 @@
+method,n,success_valid_and_reaches_goal,success_rate,optimal_count,optimal_rate,cost_ratio_mean_successful,cost_ratio_median_successful,invented_edge_rate_per_hop,answers_with_bad_hop,latency_s_median,latency_s_mean
+A* (graph.json),50,50,1.0,50,1.0,1.0,1.0,0.0,0,1.6e-05,1.6e-05
+LLM + plan with distances,50,50,1.0,49,0.98,1.0018,1.0,0.0,0,7.04,7.79
+"LLM + plan, adjacency only",50,50,1.0,41,0.82,1.0198,1.0,0.0,0,6.56,6.39
+LLM + place list only,50,2,0.04,2,0.04,1.0,1.0,0.6344,47,6.83,6.94
