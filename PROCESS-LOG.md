@@ -51,6 +51,7 @@ Contents:
 40. 25 Nov: places never classified correctly so far (named before adding the 25-Nov data)
 41. 25 Nov: 25-Nov data ingested from a partial WhatsApp export and labelled per recording
 42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
+90. 25 Nov: results pack (figures, tables, fact sheets) built from the committed outputs, rerunnable (provisional number)
 - Lessons learned
 - Open questions / next steps
 
@@ -635,6 +636,18 @@ Contents:
 
 ---
 
+## 90. 25 Nov: results pack (figures, tables, fact sheets) built from the committed outputs, rerunnable (provisional number)
+
+- **What we tried:** one script that turns the existing outputs into the figures and tables the report and slides need, and two internal fact sheets, so that the numbers can be regenerated when the 25-Nov data changes them. It writes no report or slide prose (course rule); `numbers.md` and `timeline.md` are internal notes.
+- **Why:** the team writes the report and slides by hand and needs honest held-out numbers with n, chance and the leaky number labelled as leaky, each traceable to a file and a commit. Another worker is adding 25-Nov data to `main`, so nothing may be typed in by hand.
+- **How:** `phase2/new/results-pack/build.py` + `config.json` (paths) + `timeline_facts.json` (hand-kept wording of failures/lessons, numbers read from files). Sources read: `day3/out/` and `out-split20/` (`fused_knn.json`, `results.json`, `fused_sample_predictions_2026-11-25a.csv`, `track24_results.json`, `wifi_diagnosis.json`, `variance_by_place.csv`, `compare_before_after.csv`), `cross-day/out/`, `tracking/out/`, `upload/out/eval.json` and `live_checks.json`, `phase2/old/positioning-pilot/out/results.json`, `request-matching/results.csv`, `clean-data/*/summary.json` and manifests. Every number goes into a fact registry with its source file, the last git commit of that file, n, chance and the test definition; tables, figures, `numbers.md` and `timeline.md` are drawn from the registry. Wilson 95% intervals, the 1/2 chance of floor tests and the pilot's hit count are computed (marked derived). Run: `.venv/bin/python phase2/new/results-pack/build.py`.
+- **Result:** `phase2/new/results-pack/out/`: 10 figures, each as slide size (16:9, 300 dpi PNG + SVG) and report size (5.5 in wide): honest vs leaky, accuracy vs chance (every test), per-place accuracy, phone x place, phone x session, cross-session/cross-day bars, barometer floor timeline, variance decomposition, tracker vs snapshot, Wi-Fi diagnosis; positioning table for methods A to D (`positioning_table.md/.csv`, plus a 20 s-piece version), five `table_*.csv`, `numbers.md`, `timeline.md`, `index.html`. The build's own check: per-sample leave-one-session-out count equals `fused_knn.json` (74/202). No source was missing in this build.
+- **Outcome:** success. Not found in any file: a chance level for the walking-dot corridor test; the pilot's hit count (only the rate is stored, so 147/156 is derived); no 25-Nov results exist yet (the day-3 config still lists 23 Nov, 24 s1, 24 s2), so the figures show three sessions. Inconsistencies between source files are listed at the end of `numbers.md` and not fixed: different chance levels (1/26, 1/13 when the floor is given, 1/31), iPhone s1 to s2 17/26 (upload, floor given) vs 12/26 (day3), snapshot kNN 15/26 vs 12/26 and 2/17 vs 3/17, floor tracking on 24 s1 23/27 vs 27/27, Wi-Fi coverage 41/42 vs 42/42, cross-day Wi-Fi 11 to 22% in entry 12 vs 11 to 44% in `summary_table.csv`.
+- **What changed because of it:** after the 25-Nov data is merged and the day-3 pipeline rerun, rerunning `build.py` refreshes every figure, table and number sheet; failures and lessons in `timeline_facts.json` must be updated by hand.
+- **Links:** `phase2/new/results-pack/` (`build.py`, `config.json`, `timeline_facts.json`, `README.md`, `out/`); the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -662,6 +675,7 @@ Contents:
 - **More pieces of the same take are not more evidence.** Splitting 60 s takes into three 20 s samples tripled n but not the information; removing pieces raised accuracy mostly by removing hard test pieces (entry 39). Run a control and compare on the same test pieces before calling a cleaning step an improvement.
 - **Number log entries only when they land on the shared branch.** Two people adding "entry 24" on different machines collided; the public numbers won and ours moved by +4 (entry 38).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
+- **Generate the numbers sheet from the files.** `phase2/new/results-pack/build.py` keeps every quoted number tied to a source file, a commit and a test definition (entry 90); quote chance and n together, because the chance level differs between files.
 
 ## Open questions / next steps
 
@@ -684,3 +698,4 @@ Contents:
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **split20 (entry 39):** confirm with the user that "do s8 10 11" means dropping the 23-Nov sr8/sr10/sr11 stops (that is how it was done) and whether "for each dataset" was meant to include 14 Nov (10 s stops, no full 20 s piece) and 17 Nov (30 s stops, one piece), which only `cross-day/` uses. Decide which numbers the team quotes: take level (`out/`) or pieces (`out-split20/`, with the control); if pieces, say that pieces of one take are not independent. BM14 (23 Nov exit_5) was removed whole by the outlier rule; the collector may know what happened there.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
+- **Results pack (entry 90):** rerun `build.py` after the 25-Nov data is merged and the day-3 pipeline rerun; decide which chance level and which place list (v1 31 places, graph-v2 26) the report quotes, since the source files differ (list at the end of `phase2/new/results-pack/out/numbers.md`).

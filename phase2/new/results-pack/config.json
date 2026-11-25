@@ -1,0 +1,27 @@
+{
+  "_comment": "Results pack config. Every path is relative to repo_root (itself relative to this file) unless --repo-root is given on the command line. To pick up new data after a merge, rerun build.py; to point at another checkout: python build.py --repo-root /path/to/ge2340-team",
+  "repo_root": "../../..",
+  "primary_variant": "take",
+  "day3_variants": {
+    "take": "phase2/new/day3/out",
+    "split20": "phase2/new/day3/out-split20"
+  },
+  "variant_units": {"take": "recordings", "split20": "20 s pieces"},
+  "day3_config": "phase2/new/day3/config.json",
+  "sample_predictions_candidates": [
+    "fused_sample_predictions.csv",
+    "fused_sample_predictions_2026-11-25a.csv"
+  ],
+  "crossday_dir": "phase2/new/cross-day/out",
+  "tracking_dir": "phase2/new/tracking/out",
+  "upload_dir": "phase2/new/upload/out",
+  "pilot_results": "phase2/old/positioning-pilot/out/results.json",
+  "request_matching_results": "phase2/request-matching/results.csv",
+  "clean_data_dir": "phase2/clean-data",
+  "process_log": "PROCESS-LOG.md",
+  "timeline_facts": "timeline_facts.json",
+  "phone_order": ["ip16", "ip18", "s24", "a55", "a56"],
+  "dpi": 300,
+  "report_width_in": 5.5,
+  "slide_size_in": [13.333, 7.5]
+}

@@ -1,0 +1,3 @@
+method,correct,n,definition
+"request matching, keyword rules",23,23,"starter test set (test_queries.csv), place ID must equal expected; the README says the set is too easy; chance not defined (places per query vary)"
+"request matching, token-overlap (embedding stand-in)",23,23,"starter test set (test_queries.csv), place ID must equal expected; the README says the set is too easy; chance not defined (places per query vary)"
