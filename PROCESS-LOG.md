@@ -1095,6 +1095,7 @@ Contents:
 - **Outcome:** success as a UI and as a single metric map; the geometry is only as good as its sources. 4F has no surveyed point. The sketch's metre marks and the step lengths disagree on the 5F escalator triangle (sketch 3.9 / 4.9 m, steps 10.3 / 8.1 m) and on Lift - Y5-401 - Y5-302 back (sketch 4 + 9 m, steps 10.3 + 5.9 m); the fit splits the difference. Room-to-place matches are our reading of the Google map.
 - **What changed because of it:** the upload/live page shows distances, room blocks and the floor links on a scaled plan; the old picture is one tap away. The team can fix a point or a length by editing `floorplan.json` (README explains the fields) or rebuild from the sources.
 - **Links:** `phase2/new/upload/map/make_floorplan.py`, `floorplan.json`, `floorplan.js`, `sketch_trace.json`; `phase2/new/upload/index.html`, `server.py`, `test_walksense.py`, `README.md` ("The map v2"); `phase2/new/upload/screenshots/v2-*.png`; entries 25, 52; the commit that adds this entry.
+- **Landed:** branch `feat/vector-map` (916d231) merged into main with merge commit ad62427 on 26 Nov (renumbered from the provisional 90 to 70; the only conflict was this log). The plan's place names already match `day3/config.json` `place_display` ("Male disabled toilet (5F)", "Mixed disabled toilet (4F)"); no code change was needed.
 
 ---
 
