@@ -46,6 +46,7 @@ Contents:
 35. 25 Nov: per-phone filtering and colouring in the playground and the explorer
 36. 25 Nov: the phone is the real handset (ip16 / ip18), all-sessions option, phone x session panel
 37. 25 Nov: place filter and a "where does the variance come from" panel (playground and explorer)
+38. 25 Nov: GitHub main (teammates' entries 24 to 27) merged into our local main; our entries renumbered 28 to 37
 - Lessons learned
 - Open questions / next steps
 
@@ -550,6 +551,18 @@ Contents:
 
 ---
 
+## 38. 25 Nov: GitHub main (teammates' entries 24 to 27) merged into our local main; our entries renumbered 28 to 37
+
+- **What we tried:** bring the five teammate commits on `origin/main` (`9f338b8` viz explorers + prototype labels; `3571549`, `0475f9f`, `a93e296`, `b75504b` upload pipeline, map, live mode) into the local `main`, which was 9 commits ahead with our day-3 work, without rebasing either side.
+- **Why:** both sides had added log entries numbered 24 onwards on top of `d9c4a60`; the teammates' are already public on GitHub, so their numbers must stay.
+- **How:** `git merge origin/main` (merge commit `e68704b`). Conflicts only in `.gitignore` and `PROCESS-LOG.md`. `.gitignore`: union of both sides (the upload folders `uploads/`, `out/test_uploads/`, `recordings/` and our `.venv/`). `PROCESS-LOG.md`: the teammates' entries 24 to 27 kept their numbers; our entries (were 24 to 33) renumbered to 28 to 37 in the same order after theirs, with every "entry N" cross-reference inside them, the contents list, Lessons learned and Open questions updated by the same +4 mapping; both sides' Lessons and Open questions kept (our updated graph-v2 item replaces the older one it superseded). No other file of ours cites an entry number above 23 (checked with grep). Then: the teammates' tests with the repo venv (`.venv/bin/python -m unittest test_walksense.py test_live.py` in `phase2/new/upload/`) and our one-command rerun `PYTHON=.venv/bin/python sh phase2/new/day3/run_all.sh`.
+- **Result:** upload tests: `Ran 5 tests in 92.476s, OK` (only ResourceWarnings about unclosed sockets in the test harness). Day-3 rerun: exit 0 in 6 min 13 s; every file in `phase2/new/day3/out/` byte-identical to the committed one except the per-fold `seconds` timings in `out/fused_knn.json` (17 lines, no number of a result changed; the timing diff was not committed).
+- **Outcome:** success. Both pipelines run side by side on the merged tree.
+- **What changed because of it:** entry numbers 24 to 27 now refer to the upload pipeline work and 28 to 37 to the day-3 work. Commit messages before the merge still say "log entry 24" to "33" for our old numbers (`643737d` = 28, `1a28a48` = 29-30, `3b9292c` = 31, `113d90c` = 32, `8d95725` = 33, `7d70259` = 34, `39fdf20` = 35, `5a1cdf2` = 36, `3508e78` = 37). Nothing pushed.
+- **Links:** merge commit `e68704b`; `.gitignore`; `phase2/new/upload/` (teammates); `phase2/new/day3/run_all.sh`.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -574,6 +587,7 @@ Contents:
 - **Compare pressure with a few recent readings, not one.** A single odd reading near a vent flipped the floor; the median of the last 6 did not (entry 24).
 - **Replay recorded data on its real clock.** Squeezing out the breaks made weather drift look like a floor change (entry 26).
 - **A few seconds of standing hold almost all the place information.** 3 s gave the same top-1 as 10 s (entry 27); the field at a spot does not change.
+- **Number log entries only when they land on the shared branch.** Two people adding "entry 24" on different machines collided; the public numbers won and ours moved by +4 (entry 38).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
