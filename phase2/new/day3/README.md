@@ -236,9 +236,9 @@ Reading it:
 - Leaky stays leaky: random windows 99.5%, and a same-take time split (`LEAKY_same_recording_time_split_24s2_iphone`, \|B\|+xyz) 72/78.
 - Upload pipeline (`../upload/walksense.py` unchanged, scored on 20 s pieces by `upload_eval_split20.py`, `out-split20/upload_eval_split20.json`): raw x/y/z top-1 iPhone s1 -> s2 51/78 (65%; take level in `../upload/out/eval.json`: 17/26 = 65%), s2 -> s1 51/81 (63%; 17/27 = 63%); S24 34/78 and 28/81 (11/26 and 10/27); chance 7.7% (true floor given). No 24-Nov iPhone or S24 piece was removed, so the control gives the same numbers.
 
-### j. 25 Nov added as a fourth session (`config.json` session `25nov`; PROCESS-LOG entries 40 to 44)
+### j. 25 Nov added as a fourth session (`config.json` session `25nov`; PROCESS-LOG entries 41 to 45)
 
-25 Nov is a partial WhatsApp export (`../../clean-data/2026-11-25-spots/README.md`): the floor-5 round by ip18 and a56 (9 stops) and spot recordings by ip16 and s24 (2 stops on floor 5, 2 on floor 4); 23 stop takes, 66 kept 20 s pieces (3 removed as outliers, all ip16 at the 4F escalators: `out-split20/outliers.csv`). Before = the entry-39 state, rerun with the track-aware code (identical numbers, entry 42); after = the same code with `25nov` in `config.json`. Chance 3.8% (26 places).
+25 Nov is a partial WhatsApp export (`../../clean-data/2026-11-25-spots/README.md`): the floor-5 round by ip18 and a56 (9 stops) and spot recordings by ip16 and s24 (2 stops on floor 5, 2 on floor 4); 23 stop takes, 66 kept 20 s pieces (3 removed as outliers, all ip16 at the 4F escalators: `out-split20/outliers.csv`). Before = the entry-40 state, rerun with the track-aware code (identical numbers, entry 43); after = the same code with `25nov` in `config.json`. Chance 3.8% (26 places).
 
 | test (learned-weight fused kNN) | default before | default after | split20 before | split20 after |
 |---|---|---|---|---|
@@ -253,7 +253,7 @@ Per phone, leave one session out (`out/phone_place_performance.xlsx`, `out/perf_
 
 Leave 25 Nov out (`results.json` `leave25nov_out_*`, kNN k=5, \|B\|+xyz + baro floor; train on 23/24 Nov, all phones or the same handset only), per take (default) and per piece (split20): ip18 8/9 and 7/9 (24/27 and 21/27); a56 1/7 and 2/7 (3/21 and 6/21); ip16 1/4 and 1/4 (2/9 and 0/9); s24 0/3 and 0/3 (0/9 and 0/9). Barometer floor on 25 Nov per track (step tracking): iPhone round 9/9, iPhone spots 4/4, S24 spots 3/4.
 
-Places never correct before (entry 40), leave one session out, correct / samples (`out/perf_csv/hard_places_before_25nov_rerun.csv` -> `hard_places_after_25nov.csv`):
+Places never correct before (entry 41), leave one session out, correct / samples (`out/perf_csv/hard_places_before_25nov_rerun.csv` -> `hard_places_after_25nov.csv`):
 
 | place | 25-Nov takes | default before -> after | split20 before -> after |
 |---|---|---|---|
@@ -273,7 +273,7 @@ Places with zero correct after (leave one session out, per sample): default lift
 - Session 1 has S24 Wi-Fi rows at only 14 of 27 stops; two S24 logs are empty (`sesi1/clean/summary.json`).
 - 25 Nov (`../../clean-data/2026-11-25-spots/`): 73 media messages are missing from the WhatsApp export (the rest of the 5F round from 18:13, the whole 4F round, Tian's ranking xlsx); 8 of Michael's 11 spot files have no name and are not used; 3 of his are labelled by co-recording with Tian (medium confidence). The 4F escalator pieces of ip16 on 25 Nov disagree within the take (\|B\| 6.6 to 32.3 uT from the take median), so the outlier rule removed 3 of its 6 pieces there.
 
-### k. Playground: top-bar checkboxes and the "Compare phones side by side" panel (live demo, not evaluation results; PROCESS-LOG entry 45)
+### k. Playground: top-bar checkboxes and the "Compare phones side by side" panel (live demo, not evaluation results; PROCESS-LOG entry 46)
 
 The Phone, Session and Place dropdowns of the top bar are now multi-select checkbox groups with an all / none toggle each; places are grouped by floor (5F, 4F) inside a pop-up with a toggle per floor. They are views of the same state as the checklists in the filters card (one source of truth: `st.phoneOn`, `st.sessOn`, `st.placeOn`). The Try-it selectors (Session / Place / Phone) only pick one recording to load and stay selects.
 

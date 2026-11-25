@@ -26,7 +26,7 @@
      "note": "partial WhatsApp export: floor-5 round (track 'round': ip18 = iPhone19,2 + a56) and spot recordings (track 'spots': ip16 = iPhone17,4 + s24); labels per recording in clean-data/2026-11-25-spots/clean/labels_used.csv"}
   ],
   "variants": {
-    "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 39).",
+    "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 40).",
     "split20": {
       "_comment": "User 2026-11-25: every stop take -> consecutive 20 s pieces (each its own sample, pieces of one take always on the same side of a split); 23-Nov stairs stops and sr8/sr10/sr11 excluded; obvious outlier pieces removed. Outlier thresholds chosen from the within-take spread of the pieces (|B| and field direction; the spread is in out-split20/variant_summary.json within_take_spread), not from accuracy.",
       "piece_s": 20,

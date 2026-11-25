@@ -1,0 +1,38 @@
+{
+  "dataset": "2026-11-25 (floor 5 + floor 4)",
+  "phones": [
+    "a55",
+    "a56",
+    "iphone"
+  ],
+  "recordings_raw": 164,
+  "recordings_unique": 162,
+  "recordings_written": 161,
+  "stops": 26,
+  "walks": 28,
+  "stops_floor5": 14,
+  "stops_floor4": 12,
+  "walks_floor5": 15,
+  "walks_floor4": 13,
+  "wifi": {
+    "logs": 2,
+    "empty_logs": [
+      "WigleWifi_20261125191546.csv.gz"
+    ],
+    "source_rows": 7211,
+    "wifi_clean": 7178,
+    "unique_bssids": 2760,
+    "associations": 6916,
+    "in_window": 1032,
+    "approach": 5884,
+    "stops_with_wifi": 26,
+    "stops_total": 26,
+    "infra_obs": 5428
+  },
+  "warnings": [
+    "Only ONE floor/barometer sensor this session (iphone, iPhone19,2) - no s24, no cross-phone floor redundancy. iPhone barometer verified clean (~0.005 hPa within-stop std; +0.9 hPa floor-5->floor-4 step).",
+    "a56 missing 1 recording: floor4 w06 esca_down->y4502 (walk) - covered by iphone+a55. (The a56 y5202 stop was uploaded later and added.)",
+    "2 byte-identical a55 duplicates dropped (sr9->y5202 walk, gate stop). 1 a56 double-take of exit5_door->lt2a walk: kept the in-lockstep take.",
+    "y5302 visited twice = two different doors (y5302 + y5302_point2), not a revisit. No canteen revisit stop this session."
+  ]
+}
