@@ -30,6 +30,7 @@ Figures: `honest_vs_leaky` (99.7% to 36.6%), `accuracy_vs_chance` (every test, c
 ## Conventions
 
 - Primary variant = take level (`phase2/new/day3/out/`); the 20 s-piece variant (`out-split20/`) is shown in `numbers.md` section 3 and the `_split20` table. Change `primary_variant` in `config.json` to switch the figures.
-- Heat maps use `fused_sample_predictions.csv` (learned-weight fused kNN, leave one session out, per recording); until the day-3 rerun writes that file, the dated `..._2026-11-25a.csv` copy is used (`config.json`).
+- Heat maps use `fused_sample_predictions.csv` (learned-weight fused kNN, leave one session out, per recording; written by the day-3 pipeline since entry 43); the dated `..._2026-11-25a.csv` copy is only a fallback (`config.json`).
+- Request matching (`table_request_matching.csv`, facts `rm.<method>.test` / `.all`): keyword, embeddings, LLM (cached answers), fuzzy keyword, hybrid and the starter token overlap from `phase2/request-matching/results.csv`; the test split is the honest number, "all" includes the dev rows used for tuning.
 - Wilson intervals, the 1/2 chance of the floor tests and the pilot's hit count (stored only as a rate) are computed by `build.py`; they are marked "derived" in `numbers.md`.
 - The failure and lesson bullets in `timeline_facts.json` are hand-kept text copied from PROCESS-LOG; update them when the log changes.

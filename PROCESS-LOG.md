@@ -73,6 +73,7 @@ Contents:
 62. 25 Nov: results pack (figures, tables, fact sheets) built from the committed outputs, rerunnable
 63. 25 Nov: four feature branches landed on main (routing, request matching, live smoothing, results pack), entries renumbered
 64. 25 Nov: request matching, hybrid (keyword -> fuzzy -> LLM) and fuzzy keyword scored from the cached LLM answers
+65. 25 Nov: results pack rebuilt with the complete 25 Nov and the new request-matching methods
 - Lessons learned
 - Open questions / next steps
 
@@ -1010,6 +1011,21 @@ Contents:
 
 ---
 
+## 65. 25 Nov: results pack rebuilt with the complete 25 Nov and the new request-matching methods
+
+- **What we tried:** rerun `phase2/new/results-pack/build.py` on main after entries 49 to 64, so the figures, tables and number sheets use the complete 25-Nov data and the request-matching results.
+- **Why:** the pack (entry 62) was built before the 25-Nov data and before the request-matching branch landed; entry 62 asked for this rerun.
+- **How:**
+  - First run: exit 0 but 4 missing items, all in `timeline_facts.json` placeholders that pointed at our old partial-export summary under `phase2/clean-data/2026-11-25/` (now Dicta's folder, whose `summary.json` has other keys). The 25-Nov block of `timeline_facts.json` now reads Dicta's `2026-11-25/clean/summary.json` (recordings, stops per floor, walks) and our `2026-11-25-spots/clean/summary.json`, counts the duplicates from `duplicates_vs_2026-11-25.csv`, and quotes the after-rerun LOSO and never-correct facts with entry 50; the two milestones that quoted `derived.never_correct` and the starter request-matching numbers were reworded so a fact is not attributed to the wrong entry.
+  - `build.py` `read_reqmatch`: it read only `keyword_ok` and `tokens_ok` and described the set as the 23-query starter set; it now writes `rm.<method>.test` (honest, test split 62) and `rm.<method>.all` (partly leaky, 128 with the tuning rows) for keyword, embed, llm, fuzzy_keyword, hybrid and tokens. A first try used the kind label `partly leaky` instead of `partly_leaky` and stopped with a KeyError; fixed.
+  - `.venv/bin/python phase2/new/results-pack/build.py`.
+- **Result** (`phase2/new/results-pack/out/`): exit 0, 1429 facts, 10 figures, 0 missing items; check "per-sample LOSO 123/287 equals fused_knn.json 123/287: True". `positioning_table.md` (leave one session out, all phones) now on n = 287 instead of 202: fused kNN 74/202 = 36.6% -> 123/287 = 42.9% [37 to 49]; Wi-Fi only 29/202 -> 39/287 = 13.6%; |B| x/y/z 64/202 -> 106/287 = 36.9%; |B| only 17/202 -> 37/287 = 12.9%; tilt 28/202 -> 43/287 = 15.0%. `table_request_matching.csv` test split: keyword 44/62, embed 44/62, llm 60/62, fuzzy keyword 49/62, hybrid 56/62, tokens 48/62.
+- **Outcome:** success after one failed run (KeyError) and one run with missing placeholders.
+- **What changed because of it:** every figure and table in the pack includes the complete 25 Nov; `timeline.md` has the 25-Nov block for both folders.
+- **Links:** `phase2/new/results-pack/build.py`, `timeline_facts.json`, `README.md`, `out/numbers.md`, `out/timeline.md`, `out/positioning_table.md`, `out/table_request_matching.csv`, `out/fig_*`; the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1081,4 +1097,4 @@ Contents:
 - **Routing (entries 52 to 55):** the team must confirm the guessed edge values: escalator ride 20 s (both directions, never timed), `exit_10`-`escalator_up` 4.9 m, lift/stairs 30.0 s timed 5F -> 4F only (the lift is not timed), and the 23 step-based lengths (step x 0.54 m; floor-4 has no Google pins). List in `phase2/new/routing/README.md`.
 - **Request matching (entries 57 to 59):** the team must read and correct the 105 `agent_draft` hard queries in `phase2/request-matching/test_queries.csv` (and the aliases/tags in `destinations.csv`), then rerun `evaluate.py` (dev, then final); the numbers are provisional until then. Open readings: no printer / charging / clinic / computer lab in our list, which exit leads to the MTR, whether the lift is step-free, whether "pintu keluar" means the gate or any exit. Repeat the LLM run once to see its variation (about 128 calls, about 11 min).
 - **Continuous estimate (entries 60, 61):** retune with the 25-Nov data once it is in main (same handset in more sessions would show whether smoothing helps when the errors are not cross-handset); test arrival latency on a real continuous walk (the 24-Nov recordings have gaps before each stop). Not wired into the app (user decision).
-- **Results pack (entry 62):** rerun `build.py` after the 25-Nov data is merged and the day-3 pipeline rerun; decide which chance level and which place list (v1 31 places, graph-v2 26) the report quotes, since the source files differ (list at the end of `phase2/new/results-pack/out/numbers.md`).
+- **Results pack (entries 62, 65):** rebuilt with the complete 25 Nov (entry 65); rerun `build.py` after every day-3 rerun; decide which chance level and which place list (v1 31 places, graph-v2 26) the report quotes, since the source files differ (list at the end of `phase2/new/results-pack/out/numbers.md`).

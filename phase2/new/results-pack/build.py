@@ -443,9 +443,18 @@ def read_pilot():
 def read_reqmatch():
     rel = CFG["request_matching_results"]
     d = pd.read_csv(P(rel))
-    for col, lab in (("keyword_ok", "keyword rules"), ("tokens_ok", "token-overlap (embedding stand-in)")):
-        add(Fact(f"rm.{col}", f"request matching, {lab}", int(d[col].sum()), len(d), None, "honest", [rel],
-                 "starter test set (test_queries.csv), place ID must equal expected; the README says the set is too easy; chance not defined (places per query vary)", "queries"))
+    labels = {"keyword": "keyword rules", "embed": "sentence embeddings (MiniLM)", "llm": "LLM (cached Claude answers)",
+              "fuzzy_keyword": "keyword then fuzzy alias match", "hybrid": "keyword, fuzzy, then LLM only if neither answers",
+              "tokens": "starter token overlap"}
+    for m, lab in labels.items():
+        if f"{m}_ok" not in d.columns:
+            note_missing(f"request matching column {m}_ok in {rel}")
+            continue
+        ok = d[f"{m}_ok"].astype(str) == "True"
+        for sl, mask, what in (("test", d["split"] == "test", "test split (62 queries: easy + agent-drafted hard, fixed before any method ran)"),
+                               ("all", d["split"].notna(), "all 128 queries (dev rows were used to tune thresholds)")):
+            add(Fact(f"rm.{m}.{sl}", f"request matching, {lab}, {sl}", int(ok[mask].sum()), int(mask.sum()), None, "honest" if sl == "test" else "partly_leaky", [rel],
+                     f"{what}; top-1 place ID (or NONE) must match expected; hard queries are agent drafts not yet reviewed by the team; chance not defined", "queries"))
 
 
 def read_sample_predictions(variant, rel_dir):
@@ -1179,8 +1188,9 @@ def other_tables():
     if recs:
         pd.DataFrame(recs, columns=["test", "method", "metric", "correct", "n", "accuracy", "definition"]).to_csv(OUT / "table_tracker_vs_snapshot.csv", index=False)
     # 4. request matching
-    if F("rm.keyword_ok"):
-        recs = [[F(i).label, F(i).k, F(i).n, F(i).test] for i in ("rm.keyword_ok", "rm.tokens_ok")]
+    ids = [f"rm.{m}.{sl}" for sl in ("test", "all") for m in ("keyword", "embed", "llm", "fuzzy_keyword", "hybrid", "tokens")]
+    if any(F(i) for i in ids):
+        recs = [[F(i).label, F(i).k, F(i).n, F(i).test] for i in ids if F(i)]
         pd.DataFrame(recs, columns=["method", "correct", "n", "definition"]).to_csv(OUT / "table_request_matching.csv", index=False)
 
 

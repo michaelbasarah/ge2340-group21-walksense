@@ -95,24 +95,26 @@
     },
     {
       "date": "25 Nov 2026",
-      "title": "route round on floor 5 plus spot recordings at hard places (partial WhatsApp export)",
+      "title": "complete route on both floors (Dicta: ip18, a55, a56) plus spot recordings at hard places (our partial WhatsApp export)",
       "added": [
-        "{{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_found}} recordings found, {{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_labelled}} labelled; {{json:phase2/clean-data/2026-11-25/clean/summary.json#stops}} stops and {{json:phase2/clean-data/2026-11-25/clean/summary.json#walks}} walks (per track and device: {{json:phase2/clean-data/2026-11-25/clean/summary.json#per_track_device}}) [42]",
-        "spot recordings aimed at the places never classified correctly before (list fixed beforehand): {{f:derived.never_correct}} [41]",
+        "complete set (Dicta, 2026-11-25/): {{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_unique}} unique recordings, {{json:phase2/clean-data/2026-11-25/clean/summary.json#stops}} stops ({{json:phase2/clean-data/2026-11-25/clean/summary.json#stops_floor5}} on 5F, {{json:phase2/clean-data/2026-11-25/clean/summary.json#stops_floor4}} on 4F) and {{json:phase2/clean-data/2026-11-25/clean/summary.json#walks}} walks [28]",
+        "our partial export (2026-11-25-spots/): {{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#recordings_found}} recordings found, {{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#recordings_labelled}} labelled (per track and device: {{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#per_track_device}}); {{csvcount:phase2/clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv|status|byte_identical}} of its files byte-identical to Dicta's and left out, the spot takes of ip16 and s24 kept as session 25spots [42, 49]",
+        "spot recordings aimed at the places never classified correctly before (list fixed beforehand in entry 41) [41]",
         "upload pipeline and live mode built the same day: floor tracking {{f:up.floor.sesi1 iphone}} and {{f:up.floor.sesi2 iphone}}; live replay stops found {{f:up.live.sesi1 streamed, model iPhone17,4.found}} [24 to 27]"
       ],
       "failures": [
-        "the WhatsApp export wrote '<Media omitted>' for 73 media messages after 17:30; the rest of the floor-5 round and the whole 4F round are missing [42]",
-        "{{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_unlabelled|len}} recordings unlabelled (names stripped) and not used [42]",
-        "Wi-Fi from one scanner only (S24, spots track): 4 of 13 stops have Wi-Fi [42]",
-        "no lift_stairs, disabled toilet, y5401 or y5302_back data for 25 Nov in this export [42]"
+        "the WhatsApp export wrote '<Media omitted>' for 73 media messages after 17:30; the rest of the floor-5 round and the whole 4F round were missing from it (covered by Dicta's complete set) [42, 49]",
+        "{{json:phase2/clean-data/2026-11-25-spots/clean/summary.json#recordings_unlabelled|len}} recordings of our export unlabelled (names stripped) and not used [42]",
+        "Wi-Fi from one scanner only (S24, spots track): 4 of 13 stops have Wi-Fi [42]; Dicta's Wi-Fi log was scanned on a56, which the fused kNN does not use (s24 scanner only) [49]",
+        "no lift_stairs, disabled toilet, y5401 or y5302_back data for 25 Nov in our export [42] (Dicta's set has all 26 places [49])"
       ],
       "lessons": [
-        "rebuild the clean tree from the raw ZIPs and rerun the day-3 pipeline once the missing files are added (steps in phase2/clean-data/2026-11-25/README.md) [42]",
+        "hash a second export before adding it: duplicates would put the same take in training and test [49]",
+        "after the complete 25 Nov: leave one session out {{f:fused.take.leave_one_session_out.fused}} on takes, {{f:fused.split20.leave_one_session_out.fused}} on 20 s pieces; places with no correct take: {{f:derived.never_correct}} [50]",
         "pipeline made track-aware (round and spots interleave in time, different iPhones); rerun reproduced the 20 s-piece numbers exactly [43]"
       ],
-      "log": "24 to 27, 41 to 43",
-      "data": "phase2/clean-data/2026-11-25/"
+      "log": "24 to 28, 41 to 51",
+      "data": "phase2/clean-data/2026-11-25/ (Dicta) and phase2/clean-data/2026-11-25-spots/ (our export)"
     }
   ],
   "milestones": [
@@ -123,7 +125,7 @@
     "25 Nov: upload app held-out test, iPhone s1 to s2 top-1 {{f:up.iphone sesi1->sesi2 xyz.top1}}, S24 {{f:up.s24 sesi1->sesi2 xyz.top1}} (floor given) [24]",
     "25 Nov: walking dot, first corridor right {{f:up.dot.sesi1->sesi2.first}} and {{f:up.dot.sesi2->sesi1.first}}, end error median/p90 {{f:up.dot.sesi1->sesi2.err}} [27]",
     "25 Nov: leakage demonstration: random windows {{f:fused.take.random_LEAKY.fused}}, by recording {{f:fused.take.by_recording_partly_leaky.fused}}, by stop {{f:fused.take.grouped_by_stop.fused}}, leave one session out {{f:fused.take.leave_one_session_out.fused}} [32]",
-    "25 Nov: places never classified correctly under leave one session out: {{f:derived.never_correct}} [41]",
-    "25 Nov: request matching on the starter set: keyword {{f:rm.keyword_ok}}, token overlap {{f:rm.tokens_ok}} (test set too easy, see its README) [6]"
+    "25 Nov: places never classified correctly under leave one session out were named before the 25-Nov data [41]; after the complete 25 Nov: {{f:derived.never_correct}} [50]",
+    "25 Nov: request matching on 128 queries (hard ones agent-drafted), test split: keyword {{f:rm.keyword.test}}, embeddings {{f:rm.embed.test}}, LLM {{f:rm.llm.test}}, fuzzy keyword {{f:rm.fuzzy_keyword.test}}, hybrid {{f:rm.hybrid.test}} [56 to 59, 64]"
   ]
 }
