@@ -23,12 +23,17 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | figures + data explorer | `visualise.py` | `out/*.png`, `out/explore.html` |
 | split20 variant (`--split20`): pieces, exclusions, outliers; before/after table | `data.py` (`apply_variant`), `upload_eval_split20.py`, `compare_split20.py`, `exclude_23nov.csv` | `out-split20/` (same files as `out/` plus `pieces.csv`, `outliers.csv`, `variant_summary.json`, `upload_eval_split20.json`, `compare_before_after.csv`, `compare_same_pieces.json`); control `out-split20_only/` |
 | kNN playground (sliders -> neighbours -> place; phone x session panel; place filter; variance panel; internal) | `playground.py` (template `playground_template.html`; python references `phone_matrix.py`, `variance.py`; check `playground_check.py`) | `out/knn_playground.html`, `out/phone_session_matrix.csv/.json`, `out/variance_by_place.csv/.json`, `out/variance_cells_by_place.csv` |
+| per-sample predictions with top-3 (learned-weight fused kNN, every scheme) | `fused_knn.py` | `out/fused_sample_predictions.csv` |
+| per-phone x per-place sheet (append one run; not run by `run_all.sh`) | `perf_sheet.py` | `out/phone_place_performance.xlsx` (README, Ranking, Progress, one tab per run), `out/perf_csv/` |
+| places never / rarely correct (before vs after new data) | `hard_places.py` | `out/perf_csv/hard_places_<label>.csv` |
+| 25-Nov clean tree (rebuilt first by `run_all.sh`) | `../../clean-data/2026-11-25/scripts/build_clean.py` | `clean-data/2026-11-25/clean/` |
 
 ## Adding a session collected later
 
-1. Clean it with `phase2/clean-data/2026-11-24/scripts/build_clean.py` (same `clean/` layout: `manifest.csv`, `floor*/stops|walks/<folder>/<phone>/<Sensor>.csv`, `wifi/observations.csv`).
-2. Add one entry to `config.json` under `sessions` (`"loader": "clean_tree"`, `path`, `day`, `names`). If the new session uses node names that `names_24nov.csv` does not know, add rows there (or point `names` at a new CSV with the same columns). Unknown names are listed in `data.py`'s output and are never silently dropped from the log.
-3. `sh phase2/new/day3/run_all.sh`. The fused kNN automatically adds the new session as one more leave-one-session-out fold. `evaluate.py` and `track24.py` have named splits for the current three sessions; add a line there for a new named split.
+1. Clean it into the `clean/` layout (`manifest.csv`, `floor*/stops|walks/<folder>/<phone>/<Sensor>.csv`, `wifi/observations.csv`): 24 Nov used `phase2/clean-data/2026-11-24/scripts/build_clean.py` (fixed route order); 25 Nov uses `phase2/clean-data/2026-11-25/scripts/build_clean.py` (labels from each file name, with confidence; see its README). A manifest may carry a `track` column (the stops one group walked in order): barometer floor tracking and Wi-Fi assignment then run per track; without it the session is one track.
+2. Add one entry to `config.json` under `sessions` (`"loader": "clean_tree"`, `path`, `day`, `names`, and `raw` so `phone_map.py` checks the handset of every recording against the raw ZIP). If the new session uses node names that `names_24nov.csv` does not know, add rows there (or point `names` at a new CSV with the same columns; 25 Nov uses graph-v2 names directly, `names_25nov.csv` is the identity map). Unknown names are listed in `data.py`'s output and are never silently dropped from the log.
+3. `sh phase2/new/day3/run_all.sh` (and `--split20`). The fused kNN automatically adds the new session as one more leave-one-session-out fold. `evaluate.py` has named splits for 23/24 Nov and the leave-25-Nov-out splits; `track24.py` is 24 Nov only.
+4. Append the run to the sheet: `python phase2/new/day3/perf_sheet.py --run-dir out-split20 --tab "<date> split20 <what>" --data "<sessions>"` (a new tab and a Progress row; nothing earlier is changed), and `python phase2/new/day3/hard_places.py --label <name> out out-split20`. Keep the old playground as a dated copy (`knn_playground_<date><letter>.html`) before the rerun overwrites it.
 
 ## Names (24 Nov -> graph-v2)
 
@@ -231,9 +236,39 @@ Reading it:
 - Leaky stays leaky: random windows 99.5%, and a same-take time split (`LEAKY_same_recording_time_split_24s2_iphone`, \|B\|+xyz) 72/78.
 - Upload pipeline (`../upload/walksense.py` unchanged, scored on 20 s pieces by `upload_eval_split20.py`, `out-split20/upload_eval_split20.json`): raw x/y/z top-1 iPhone s1 -> s2 51/78 (65%; take level in `../upload/out/eval.json`: 17/26 = 65%), s2 -> s1 51/81 (63%; 17/27 = 63%); S24 34/78 and 28/81 (11/26 and 10/27); chance 7.7% (true floor given). No 24-Nov iPhone or S24 piece was removed, so the control gives the same numbers.
 
+### j. 25 Nov added as a fourth session (`config.json` session `25nov`; PROCESS-LOG entries 40 to 44)
+
+25 Nov is a partial WhatsApp export (`../../clean-data/2026-11-25/README.md`): the floor-5 round by ip18 and a56 (9 stops) and spot recordings by ip16 and s24 (2 stops on floor 5, 2 on floor 4); 23 stop takes, 66 kept 20 s pieces (3 removed as outliers, all ip16 at the 4F escalators: `out-split20/outliers.csv`). Before = the entry-39 state, rerun with the track-aware code (identical numbers, entry 42); after = the same code with `25nov` in `config.json`. Chance 3.8% (26 places).
+
+| test (learned-weight fused kNN) | default before | default after | split20 before | split20 after |
+|---|---|---|---|---|
+| leave one session out | 74/202 = 36.6% | 91/225 = 40.4% | 222/577 = 38.5% | 248/643 = 38.6% |
+| GroupKFold(5) by stop | 58/202 = 28.7% | 81/225 = 36.0% | 187/577 = 32.4% | 239/643 = 37.2% |
+| by take (partly leaky) | 112/202 = 55.4% | 123/225 = 54.7% | 330/577 = 57.2% | 373/643 = 58.0% |
+| random windows (LEAKY) | 932/935 | 1040/1047 | 1689/1698 | 1852/1868 |
+
+Leave one session out per held-out session (`fused_knn.json`): default 23 Nov 9/42 -> 16/42, 24 s1 42/108 -> 45/108, 24 s2 23/52 -> 20/52, 25 Nov 10/23 (new); split20 28/103 -> 42/103, 128/318 -> 119/318, 66/156 -> 55/156, 32/66 (new). Deployable model (`fused_model.json`) after: default B 0, xyz 0.25, tilt 0.5, Wi-Fi 0, baro 0.25, k 25 (inner 0.436); split20 B 0.1, xyz 0.4, tilt 0.1, Wi-Fi 0, baro 0.4, k 9 (inner 0.47).
+
+Per phone, leave one session out (`out/phone_place_performance.xlsx`, `out/perf_csv/*_phone_summary.csv`; accuracy, macro precision): split20 after ip18 0.583 / 0.466, ip16 0.416 / 0.308, a56 0.386 / 0.345, s24 0.298 / 0.312, a55 0.224 / 0.154 (before: ip18 0.506, ip16 0.381, a56 0.450, s24 0.358, a55 0.250 accuracy). Default after: ip18 0.667, ip16 0.444, a56 0.412, s24 0.286, a55 0.185.
+
+Leave 25 Nov out (`results.json` `leave25nov_out_*`, kNN k=5, \|B\|+xyz + baro floor; train on 23/24 Nov, all phones or the same handset only), per take (default) and per piece (split20): ip18 8/9 and 7/9 (24/27 and 21/27); a56 1/7 and 2/7 (3/21 and 6/21); ip16 1/4 and 1/4 (2/9 and 0/9); s24 0/3 and 0/3 (0/9 and 0/9). Barometer floor on 25 Nov per track (step tracking): iPhone round 9/9, iPhone spots 4/4, S24 spots 3/4.
+
+Places never correct before (entry 40), leave one session out, correct / samples (`out/perf_csv/hard_places_before_25nov_rerun.csv` -> `hard_places_after_25nov.csv`):
+
+| place | 25-Nov takes | default before -> after | split20 before -> after |
+|---|---|---|---|
+| escalator_down_4F | 2 (ip16, s24) | 0/8 -> 1/10 | 3/24 -> 3/28 |
+| escalator_up_4F | 2 (ip16, s24) | 0/8 -> 3/10 | 5/24 -> 8/29 |
+| female_toilet | 2 (ip18, a56) | 0/7 -> 5/9 | 0/21 -> 14/27 |
+| lift_stairs | 0 | 0/9 -> 0/9 | 0/21 -> 0/21 |
+| y5302_back | 0 | 0/7 -> 0/7 | 0/21 -> 0/21 |
+
+Places with zero correct after (leave one session out, per sample): default lift_stairs, y5302_back, y5401; split20 disabled_toilet, escalator_down, lift_stairs, y5302_back, y5401 (before: y5401 4/7 and 5/21, disabled_toilet 3/7 and 6/21, escalator_down 2/8 and 6/24). The playgrounds before the rerun are kept as `out*/knn_playground_2026-11-25a.html` and the per-sample predictions as `out*/fused_sample_predictions_2026-11-25a.csv`.
+
 ## Data issues found
 
 - Very strong fields (place median \|B\| above 100 uT, `results.json` `magnetic_check`): 24 s2 iPhone at escalator_down_4F 147.9 and escalator_up_4F 142.5 uT, 24 s2 S24 at escalator_down_4F 127.7, 24 s1 S24 at disabled_toilet 121.6 and escalator_down 101.3. The iPhone on 23 Nov ranges 32.9 to 58.9 uT. Both phones see the 4F down-escalator in session 2, so it is more likely something physical there that night (running escalator machinery?) than one sensor. Worth asking the collector; see `fig_per_place_B_pressure.png`.
 - `sesi2/clean/ROUTE.md` says "Sensors-only (no Wi-Fi logged)", but the same session has a WiGLE log (`sesi2/clean/README.md`, `summary.json`).
 - Session 2 has walks out of route order (floor 5: exit10 -> canteen, then the escalator-up stop, then three walks esca_up -> canteen, canteen -> esca_down, esca_up -> esca_down; floor 4: the walk gate -> exit 5 was recorded before the gate stop). The tracker attaches each walk to the last stop before it.
 - Session 1 has S24 Wi-Fi rows at only 14 of 27 stops; two S24 logs are empty (`sesi1/clean/summary.json`).
+- 25 Nov (`../../clean-data/2026-11-25/`): 73 media messages are missing from the WhatsApp export (the rest of the 5F round from 18:13, the whole 4F round, Tian's ranking xlsx); 8 of Michael's 11 spot files have no name and are not used; 3 of his are labelled by co-recording with Tian (medium confidence). The 4F escalator pieces of ip16 on 25 Nov disagree within the take (\|B\| 6.6 to 32.3 uT from the take median), so the outlier rule removed 3 of its 6 pieces there.

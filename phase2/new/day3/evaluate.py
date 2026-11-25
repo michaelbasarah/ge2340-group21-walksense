@@ -127,7 +127,7 @@ def floor_eval(V):
                 pp, ff = w[col].to_numpy(), w['floor'].to_numpy()
                 steps += list(np.abs(np.diff(pp))[np.diff(ff) != 0])
                 f5s.append(w[w['floor'] == 5][col].median()); f4s.append(w[w['floor'] == 4][col].median())
-            T = float(np.median(steps)) / 2
+            T = float(np.nanmedian(steps)) / 2          # nan-safe: a track can miss a phone's pressure at a stop (25 Nov spots, s24)
             p, f = v[col].to_numpy(), v['floor'].to_numpy()
             trk = data.track_floor(p, T)
             thr = (np.nanmean(f5s) + np.nanmean(f4s)) / 2

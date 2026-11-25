@@ -20,7 +20,10 @@
      "note": "4 phones; iPhone slot = ip18 (iPhone19,2), not the same handset as 24s2"},
     {"id": "24s2", "day": "2026-11-24", "loader": "clean_tree",
      "path": "../../clean-data/2026-11-24/sesi2/clean", "names": "names_24nov.csv",
-     "note": "2 phones; iPhone slot = ip16 (iPhone17,4, the 23-Nov stop handset)"}
+     "note": "2 phones; iPhone slot = ip16 (iPhone17,4, the 23-Nov stop handset)"},
+    {"id": "25nov", "day": "2026-11-25", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-25/clean", "raw": "../../clean-data/2026-11-25/raw/attachments", "names": "names_25nov.csv",
+     "note": "partial WhatsApp export: floor-5 round (track 'round': ip18 = iPhone19,2 + a56) and spot recordings (track 'spots': ip16 = iPhone17,4 + s24); labels per recording in clean-data/2026-11-25/clean/labels_used.csv"}
   ],
   "variants": {
     "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 39).",
