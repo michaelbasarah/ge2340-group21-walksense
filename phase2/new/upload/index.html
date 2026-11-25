@@ -28,12 +28,39 @@
   #err { color:var(--bad); font-weight:600; }
   .tabs { display:flex; gap:6px; margin:10px 0 8px; } .tabs button { margin:0; min-height:36px; padding:6px; background:transparent; color:var(--ink); border:1px solid var(--line); }
   .tabs button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
-  #map { width:100%; height:auto; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
+  /* floor plan colours (map/floorplan.js) */
+  :root { --fp-out:#e9e7e3; --fp-walk:#ffffff; --fp-ctx:#f5f0e6; --fp-ctx-edge:#e2dbcc; --fp-room:#f4e2bf; --fp-room-edge:#c4ab7c; --fp-toilet:#dde3fb; --fp-toilet-edge:#93a2dc;
+          --fp-esc:#dde2e8; --fp-esc-edge:#9ba6b3; --fp-lift:#e4ddf0; --fp-lift-edge:#a397c4; --fp-core:#e4e6e9; --fp-edge:#7d8794; --fp-text:#1d232b; --fp-halo:#ffffff; --fp-len:#4f5966; --fp-link:#1f6fd1; }
+  @media (prefers-color-scheme: dark) { :root { --fp-out:#121418; --fp-walk:#2b3038; --fp-ctx:#1d2026; --fp-ctx-edge:#2c3139; --fp-room:#3b3426; --fp-room-edge:#7d6c4c; --fp-toilet:#272e48; --fp-toilet-edge:#5d6aa6;
+          --fp-esc:#2c323b; --fp-esc-edge:#6b7684; --fp-lift:#322c42; --fp-lift-edge:#7c6fa3; --fp-core:#23272e; --fp-edge:#8f9aa8; --fp-text:#e8ebf0; --fp-halo:#121418; --fp-len:#b4bcc7; --fp-link:#6aa8ff; } }
+  .mapwrap { position:relative; }
+  #map { width:100%; height:auto; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; touch-action:pan-y pinch-zoom; }
+  #map.plan { background:var(--fp-out); }
   #map .lit { fill:#ff2020; stroke:#ffd400; stroke-width:5; }
   #map .halo { fill:none; stroke:#ff2020; stroke-width:4; transform-box:fill-box; transform-origin:center; animation:pulse 1.4s ease-out infinite; }
   #map .dot { fill:#0a84ff; stroke:#fff; stroke-width:4; }
   #map .maybe { fill:none; stroke:#555; stroke-width:3; stroke-dasharray:6 5; }
   #map text { font:700 22px system-ui, sans-serif; fill:#111; paint-order:stroke; stroke:#fff; stroke-width:6px; stroke-linejoin:round; }
+  #map.plan .lit { stroke-width:calc(var(--u) * .3px); } #map.plan .halo { stroke-width:calc(var(--u) * .25px); } #map.plan .dot { stroke-width:calc(var(--u) * .25px); }
+  #map.plan .maybe { stroke:var(--fp-text); stroke-width:calc(var(--u) * .2px); stroke-dasharray:calc(var(--u) * .45px) calc(var(--u) * .35px); }
+  #map.plan text { font-family:system-ui, sans-serif; font-weight:600; fill:var(--fp-text); stroke:var(--fp-halo); stroke-width:calc(var(--u) * .3px); }
+  #map.plan text.ovl { font-weight:800; stroke-width:calc(var(--u) * .4px); }
+  #map .fp-out { fill:var(--fp-out); } #map .fp-walk { fill:var(--fp-walk); }
+  #map .fp-corridor { fill:none; stroke:var(--fp-walk); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  #map .fp-ctx { fill:var(--fp-ctx); stroke:var(--fp-ctx-edge); stroke-width:.08; } #map .fp-ctx.fp-toilet { fill:var(--fp-toilet); } #map .fp-ctx.fp-core, #map .fp-ctx.fp-service { fill:var(--fp-core); }
+  #map .fp-room { fill:var(--fp-room); stroke:var(--fp-room-edge); stroke-width:.12; } #map .fp-room.fp-k-toilet { fill:var(--fp-toilet); stroke:var(--fp-toilet-edge); }
+  #map .fp-room.fp-k-escalator { fill:var(--fp-esc); stroke:var(--fp-esc-edge); } #map .fp-room.fp-k-lift_stairs { fill:var(--fp-lift); stroke:var(--fp-lift-edge); }
+  #map .fp-edge { fill:none; stroke:var(--fp-edge); stroke-width:calc(var(--u) * .12px); stroke-linecap:round; stroke-linejoin:round; }
+  #map .fp-edge.fp-src-steps { stroke-dasharray:calc(var(--u) * .5px) calc(var(--u) * .35px); } #map .fp-edge.fp-src-guess { stroke-dasharray:calc(var(--u) * .1px) calc(var(--u) * .35px); }
+  #map.plan text.fp-len { font-weight:500; fill:var(--fp-len); stroke:var(--fp-walk); stroke-width:calc(var(--u) * .45px); } #map.plan text.fp-blocklabel { font-weight:500; font-style:italic; fill:var(--fp-len); }
+  #map .fp-place { fill:var(--fp-walk); stroke:var(--fp-text); stroke-width:calc(var(--u) * .14px); } #map .fp-place.fp-k-exit { fill:#2e9d55; } #map .fp-place.fp-k-toilet { fill:#5b74d6; }
+  #map .fp-place.fp-k-escalator { fill:#8a95a3; } #map .fp-place.fp-k-lift_stairs { fill:#8b74c4; } #map .fp-place.fp-inferred { stroke-dasharray:calc(var(--u) * .2px) calc(var(--u) * .15px); }
+  #map .fp-link { cursor:pointer; } #map .fp-linkbg { fill:var(--fp-link); } #map.plan text.fp-linktext { fill:#fff; stroke:none; font-weight:700; }
+  #map .fp-link:focus { outline:none; } #map .fp-link:focus .fp-linkbg, #map .fp-link:hover .fp-linkbg { stroke:var(--fp-text); stroke-width:calc(var(--u) * .15px); }
+  #map .fp-scaleline { fill:none; stroke:var(--fp-text); stroke-width:calc(var(--u) * .15px); } #map .fp-north path { fill:var(--fp-text); }
+  .zoom { position:absolute; top:8px; left:8px; display:flex; gap:6px; } .zoom[hidden] { display:none; }
+  .zoom button { width:36px; min-height:36px; height:36px; margin:0; padding:0; border-radius:18px; background:var(--card); color:var(--ink); border:1px solid var(--line); font-size:18px; opacity:.92; }
+  #legend { margin-top:6px; font-size:12.5px; line-height:1.5; }
   @keyframes pulse { from { transform:scale(1); opacity:.9; } to { transform:scale(3.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { #map .halo { animation:none; opacity:.5; transform:scale(1.8); } }
   #mapnote { margin-top:6px; }
@@ -47,9 +74,13 @@
     <div class="muted">You are on</div>
     <div class="big" id="floor">-</div>
     <div class="muted" id="tally"></div>
-    <div class="tabs" role="group" aria-label="Show floor"><button data-show="5">5F map</button><button data-show="4">4F map</button></div>
-    <svg id="map" role="img" aria-label="Floor map"></svg>
+    <div class="tabs" role="group" aria-label="Show floor"><button data-show="5">5F map</button><button data-show="4">4F map</button><button id="mapmode" aria-pressed="false" title="Switch between the vector floor plan and the original sketch picture">Picture</button></div>
+    <div class="mapwrap">
+      <svg id="map" role="img" aria-label="Floor map"></svg>
+      <div class="zoom" id="zoom" hidden><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zfit" aria-label="Show the whole floor">&#x2922;</button></div>
+    </div>
     <div class="muted" id="mapnote">Send a stop to see where you are.</div>
+    <div class="muted" id="legend" hidden>Lines are corridors: solid = measured, dashed with "~" = steps &times; 0.54 m, dotted with "?" = guess. * = inferred place. Blocks are traced from the Google indoor map. Tap a blue badge to change floor.</div>
     <div id="live" hidden><div class="muted" style="margin-top:8px">LIVE from phyphox</div><div class="big" id="livemode" style="font-size:20px"></div><div class="muted" id="livestatus"></div><div class="muted" id="livesaved"></div></div>
   </div>
 
@@ -74,42 +105,77 @@
 
   <div class="card"><div class="muted" id="eval"></div></div>
 </main>
+<script src="/map/floorplan.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
-const nice = s => (state && state.labels && state.labels[s]) || (s || '').replace(/_/g, ' ');
+const nice = (s, f) => (f && window.FloorPlan && FloorPlan.name(f, s)) || (state && state.labels && state.labels[s]) || (s || '').replace(/_/g, ' ');
 let state = null, maps = null, shown = 5, last = null;
+let mapMode = 'plan';                         // 'plan' = vector floor plan (map/floorplan.json), 'picture' = the sketch PNG
+try { if (localStorage.getItem('walksense-map') === 'picture') mapMode = 'picture'; } catch (e) {}
 const SVGNS = 'http://www.w3.org/2000/svg';
 const sv = (tag, attrs) => { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); return e; };
 
 function drawMap() {
-  if (!maps) return;
-  const m = maps[shown], svg = $('map');
-  svg.setAttribute('viewBox', `0 0 ${m.width} ${m.height}`);
-  svg.replaceChildren(sv('image', { href: '/map/' + m.image, x: 0, y: 0, width: m.width, height: m.height }));
+  const plan = mapMode === 'plan' && window.FloorPlan && FloorPlan.plan && FloorPlan.plan.floors[shown];
+  if (!plan && !maps) return;
+  const svg = $('map');
   document.querySelectorAll('[data-show]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.show === shown)));
-  for (const [id, p] of Object.entries(m.places)) if (p.inferred) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 9, fill: '#ff3b30', opacity: .55 }));
+  $('mapmode').setAttribute('aria-pressed', String(!plan));
+  $('mapmode').textContent = plan ? 'Picture' : 'Floor plan';
+  $('zoom').hidden = !plan; $('legend').hidden = !plan;
+  svg.style.touchAction = plan && FloorPlan.zoomed(shown) ? 'none' : '';   // zoomed in: a drag pans the plan
+  // where things go: plan = metres (y flipped for SVG), picture = places.json pixels
   const r = last && last.kind === 'stop' && last.floor === shown ? last : null;
+  let dotAt = null;
+  if (!r && last && last.kind === 'walk' && last.dot && last.dot.floor === shown) {
+    if (plan) { const d = FloorPlan.dotXY(shown, last.dot, maps); if (d) { FloorPlan.center(shown, d[0], d[1]); dotAt = { x: d[0], y: -d[1] }; } }
+    else dotAt = { x: last.dot.x, y: last.dot.y };
+  }
+  let pos, k;
+  if (plan) {
+    FloorPlan.draw(svg, shown, { onFloor: f => { shown = f; drawMap(); } });
+    const u = FloorPlan.unit(shown);
+    svg.style.setProperty('--u', u);
+    pos = id => { const p = FloorPlan.xy(shown, id); return p && { x: p[0], y: -p[1] }; };
+    k = u / 15;                                  // the picture map's pixel sizes below, in metres
+  } else {
+    const m = maps[shown];
+    svg.setAttribute('class', 'png');
+    svg.setAttribute('viewBox', `0 0 ${m.width} ${m.height}`);
+    svg.replaceChildren(sv('image', { href: '/map/' + m.image, x: 0, y: 0, width: m.width, height: m.height }));
+    for (const [id, p] of Object.entries(m.places)) if (p.inferred) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 9, fill: '#ff3b30', opacity: .55 }));
+    pos = id => m.places[id];
+    k = 1;
+  }
+  const label = (p, text) => {
+    const t = sv('text', { x: p.x, y: p.y - 26 * k, 'text-anchor': 'middle', class: 'ovl' }); if (plan) t.style.fontSize = (1.5 * FloorPlan.unit(shown)) + 'px'; t.textContent = text; svg.append(t);
+    if (plan) {                                  // keep the big label inside the view
+      const vb = svg.viewBox.baseVal, half = t.getComputedTextLength() / 2 + 0.3 * FloorPlan.unit(shown);
+      t.setAttribute('x', Math.min(Math.max(p.x, vb.x + half), vb.x + vb.width - half));
+    }
+  };
   let note = 'Send a stop to see where you are.';
   if (r && r.top3.length) {
-    const id = r.lit || r.top3[0][0], p = m.places[id];
+    const id = r.lit || r.top3[0][0], p = pos(id);
     if (p) {
       if (r.lit) {
-        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 15, class: 'halo' }), sv('circle', { cx: p.x, cy: p.y, r: 15, class: 'lit' }));
-        note = `You are at ${nice(id)} (${Math.round(r.top3[0][1] * 100)}% sure).`;
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 15 * k, class: 'halo' }), sv('circle', { cx: p.x, cy: p.y, r: 15 * k, class: 'lit' }));
+        note = `You are at ${nice(id, shown)} (${Math.round(r.top3[0][1] * 100)}% sure).`;
       } else {
-        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 22, class: 'maybe' }));
-        note = `Not sure: maybe ${nice(id)} (${Math.round(r.top3[0][1] * 100)}%). Stand still, phone flat, facing the door, and try again.`;
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 22 * k, class: 'maybe' }));
+        note = `Not sure: maybe ${nice(id, shown)} (${Math.round(r.top3[0][1] * 100)}%). Stand still, phone flat, facing the door, and try again.`;
       }
-      const t = sv('text', { x: p.x, y: p.y - 26, 'text-anchor': 'middle' }); t.textContent = nice(id); svg.append(t);
+      if (plan) svg.querySelectorAll('text.fp-label').forEach(t => { if (t.dataset.place === id) t.remove(); });   // the big label replaces it
+      label(p, nice(id, shown));
     }
-  } else if (last && last.kind === 'walk' && last.dot && last.dot.floor === shown) {
-    svg.append(sv('circle', { cx: last.dot.x, cy: last.dot.y, r: 13, class: 'dot' }));
-    note = `Walking: about here, from ${nice(last.dot.from)} toward ${nice(last.dot.to)}. Stop 3 s to check the place.`;
+  } else if (dotAt) {
+    svg.append(sv('circle', { cx: dotAt.x, cy: dotAt.y, r: 13 * k, class: 'dot' }));
+    note = `Walking: about here, from ${nice(last.dot.from, shown)} toward ${nice(last.dot.to, shown)}. Stop 3 s to check the place.`;
   } else if (last && last.kind === 'walk') note = last.live ? 'Walking… stand still facing the door for 3 s to light up where you are.' : 'Walking: send the next stop to light up where you are.';
   else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
   $('mapnote').textContent = note;
-  svg.setAttribute('aria-label', `${shown}F floor map. ${note}`);
+  svg.setAttribute('aria-label', `${shown}F ${plan ? 'floor plan' : 'floor map'}. ${note}`);
 }
 
 function render(s) {
@@ -122,7 +188,7 @@ function render(s) {
   const sel = $('truth'), keep = sel.value;
   sel.replaceChildren(el('option', "don't know / skip"));
   sel.firstChild.value = '';
-  for (const p of (s.places[s.floor] || [])) { const o = el('option', nice(p)); o.value = p; sel.append(o); }
+  for (const p of (s.places[s.floor] || [])) { const o = el('option', nice(p, s.floor)); o.value = p; sel.append(o); }
   sel.value = [...sel.options].some(o => o.value === keep) ? keep : '';
   const ev = s.eval, box = $('eval');
   box.replaceChildren(el('div', ev ? 'Tested before the demo (train on one 24-Nov session, test the other):' : 'Run "python walksense.py evaluate" to show the tested accuracy here.'));
@@ -143,11 +209,11 @@ function showResult(r) {
   if (r.kind === 'stop') {
     box.append(el('label', 'Where you probably are'));
     r.top3.forEach(([p, prob], i) => {
-      const d = el('div'); d.append(el('div', `${i + 1}. ${nice(p)}  ${Math.round(prob * 100)}%`));
+      const d = el('div'); d.append(el('div', `${i + 1}. ${nice(p, r.floor)}  ${Math.round(prob * 100)}%`));
       const bar = el('div', null, 'bar'), fill = el('div'); fill.style.width = Math.round(prob * 100) + '%'; bar.append(fill); d.append(bar); box.append(d);
     });
     if (!r.top3.length) box.append(el('div', 'No place guess (no training data for this floor)', 'muted'));
-    if (r.correct != null) box.append(el('p', r.correct ? `✓ Right (${nice(r.truth)})` : `✗ Wrong, you were at ${nice(r.truth)}`, r.correct ? 'ok' : 'bad'));
+    if (r.correct != null) box.append(el('p', r.correct ? `✓ Right (${nice(r.truth, r.floor)})` : `✗ Wrong, you were at ${nice(r.truth, r.floor)}`, r.correct ? 'ok' : 'bad'));
     if (r.model_note) box.append(el('p', r.model_note, 'muted'));
   }
   if (r.device) box.append(el('p', 'Phone: ' + r.device, 'muted'));
@@ -174,7 +240,29 @@ $('send').onclick = async () => {
   $('send').disabled = false; $('send').textContent = 'Send';
 };
 document.querySelectorAll('[data-show]').forEach(b => b.onclick = () => { shown = +b.dataset.show; drawMap(); });
-fetch('/map/places.json').then(r => r.json()).then(j => { maps = j; drawMap(); }).catch(() => { $('mapnote').textContent = 'Map not available.'; });
+fetch('/map/places.json').then(r => r.json()).then(j => { maps = j; drawMap(); }).catch(() => { if (!(window.FloorPlan && FloorPlan.plan)) $('mapnote').textContent = 'Map not available.'; });
+if (window.FloorPlan) FloorPlan.load('/map/floorplan.json').then(() => { if (state) render(state); else drawMap(); }).catch(() => { mapMode = 'picture'; drawMap(); });
+$('mapmode').onclick = () => {
+  mapMode = mapMode === 'plan' ? 'picture' : 'plan';
+  try { localStorage.setItem('walksense-map', mapMode); } catch (e) {}
+  drawMap();
+};
+$('zin').onclick = () => { FloorPlan.zoom(shown, 1 / 1.6); drawMap(); };
+$('zout').onclick = () => { FloorPlan.zoom(shown, 1.6); drawMap(); };
+$('zfit').onclick = () => { FloorPlan.reset(shown); drawMap(); };
+{ // drag to pan the floor plan once zoomed in
+  let drag = null;
+  $('map').addEventListener('pointerdown', e => { if (mapMode === 'plan' && window.FloorPlan && FloorPlan.zoomed(shown)) drag = { x: e.clientX, y: e.clientY, moved: false }; });
+  $('map').addEventListener('pointermove', e => {
+    if (!drag) return;
+    const svg = $('map'), vb = svg.viewBox.baseVal, f = vb.width / svg.clientWidth, dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) < 4) return;
+    if (!drag.moved) { drag.moved = true; try { svg.setPointerCapture(e.pointerId); } catch (err) {} }
+    FloorPlan.pan(shown, dx * f, dy * f); drag.x = e.clientX; drag.y = e.clientY; drawMap(); e.preventDefault();
+  });
+  const end = () => { drag = null; };
+  $('map').addEventListener('pointerup', end); $('map').addEventListener('pointercancel', end);
+}
 document.querySelectorAll('[data-floor]').forEach(b => b.onclick = async () => render(await call('/api/floor?floor=' + b.dataset.floor, { method: 'POST' })));
 $('reset').onclick = async () => { render(await call('/api/reset?floor=' + state.floor, { method: 'POST' })); $('result').hidden = true; last = null; drawMap(); };
 // Live mode (server started with --live): poll once a second and drive the same map.
