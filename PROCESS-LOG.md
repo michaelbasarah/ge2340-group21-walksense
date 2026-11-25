@@ -52,6 +52,7 @@ Contents:
 41. 25 Nov: 25-Nov data ingested from a partial WhatsApp export and labelled per recording
 42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
 43. 25 Nov: 25 Nov added as a fourth session: before/after, leave 25 Nov out, the never-correct places again
+44. 25 Nov: per-phone x per-place performance sheet (xlsx) and the regenerated playgrounds
 - Lessons learned
 - Open questions / next steps
 
@@ -652,6 +653,20 @@ Contents:
 - **Outcome:** partial. Default leave one session out rises from 36.6% to 40.4%; split20 stays at 38.6%. female_toilet goes from never to 5/9 and 14/27, escalator_up_4F from 0/8 to 3/10; escalator_down_4F stays almost never; lift_stairs and y5302_back stay never correct (this export has no 25-Nov recording of them). Three places without new data lost their correct predictions, and two 24-Nov folds dropped in split20 (128 -> 119, 66 -> 55). ip18 is the best phone on 25 Nov (8/9 trained on the old data only); s24 gets none of its 25-Nov takes.
 - **What changed because of it:** 25 Nov is the fourth leave-one-session-out fold in `out/` and `out-split20/`; `evaluate.py` has a nan-safe floor threshold; day3 README section j.
 - **Links:** `phase2/new/day3/config.json`, `names_25nov.csv`, `evaluate.py`, `README.md` (section j); `out/fused_knn.json`, `out-split20/fused_knn.json`, `out*/results.json`, `out*/fused_sample_predictions.csv`, `out/perf_csv/hard_places_before_25nov_rerun.csv`, `out/perf_csv/hard_places_after_25nov.csv`; the commit that adds this entry.
+
+## 44. 25 Nov: per-phone x per-place performance sheet (xlsx) and the regenerated playgrounds
+
+- **What we tried:** one spreadsheet with accuracy, precision, recall and F1 per phone and per place, one dated tab per run, a Ranking tab and a Progress tab that is only ever appended to; and the playground and explorer regenerated with 25 Nov.
+- **Why:** the team asked which phone and which place work (Tian's "ranking by phone" sheet), and the numbers were spread over JSON files. Progress over time must stay readable, so old rows are never rewritten.
+- **How:** new `phase2/new/day3/perf_sheet.py`. Source: `<run>/fused_sample_predictions.csv` (learned-weight fused kNN, leave one session out, one row per test sample = take, or 20 s piece in split20); it asserts the sample and correct counts equal `fused_knn.json`. Per phone x place: n, correct, recall, precision, F1, top-3; per phone: accuracy, macro precision / recall / F1, top-3; held-out session x phone. Each call appends a new tab (it stops if the name exists), appends one Progress row, rebuilds Ranking from that run and rewrites the README tab; the same tables go to `out/perf_csv/`. Four runs appended in order: `2026-11-25 default pre-25Nov` and `2026-11-25 split20 pre-25Nov` (the entry-42 regression outputs), `2026-11-25 default +25Nov`, `2026-11-25 split20 +25Nov`. Playgrounds: `playground.py` in both runs (the pre-25-Nov ones kept as `knn_playground_2026-11-25a.html`); `playground_check.py` on `out/` and with `DAY3_VARIANT=split20`; the explorer script run in node with a stub page (session list, points drawn per session).
+- **Result:**
+  - `out/phone_place_performance.xlsx`: tabs README, Ranking, Progress, then the four run tabs. Progress (overall accuracy, macro precision, macro F1, top-3): default pre 0.366, 0.408, 0.369, 0.510; split20 pre 0.385, 0.428, 0.384, 0.504; default +25Nov 0.404, 0.366, 0.365, 0.533; split20 +25Nov 0.386, 0.340, 0.344, 0.493.
+  - Ranking (latest run = split20 +25Nov; accuracy, macro precision, pieces): 1 ip18 0.583, 0.466, 108; 2 ip16 0.416, 0.308, 190; 3 a56 0.386, 0.345, 101; 4 s24 0.298, 0.312, 168; 5 a55 0.224, 0.154, 76. Default +25Nov tab: ip18 0.667, 0.484; ip16 0.444, 0.444; a56 0.412, 0.285; s24 0.286, 0.281; a55 0.185, 0.093. Places by recall: canteen 39/45 (precision 0.929) first; disabled_toilet, escalator_down, lift_stairs, y5302_back, y5401 at 0.
+  - Playgrounds: `out/knn_playground.html` 2701 windows; `out-split20/knn_playground.html` 2572 windows, 643 pieces; 26 places. `playground_check.py` exit 0 for both (`out/`: predicted place agrees 1320/1320, phone x session matrix 130/130 cells, variance panel equal in all cases). Explorer: sessions 23nov, 24s1, 24s2, 25nov; points 504, 1297, 624, 276 (2701 together). Teammates' tests (`.venv/bin/python -m unittest test_walksense.py test_live.py` in `phase2/new/upload/`): 5 pass.
+  - **FAILURE / missing:** Tian's `WalkSense ranking by phone.xlsx` was not in the export (entry 41), so the columns could not be matched to it; the README tab says so. A real-browser check was not possible (no Chrome here); the node stub run checks the script, not the drawing.
+- **Outcome:** success for the sheet and the pages; the layout still has to be compared with Tian's file.
+- **What changed because of it:** after each new run: `perf_sheet.py --run-dir <out dir> --tab "<date> <variant> <what>" --data "<sessions>"` (day3 README "Adding a session", step 4).
+- **Links:** `phase2/new/day3/perf_sheet.py`, `out/phone_place_performance.xlsx`, `out/perf_csv/`, `out/knn_playground.html`, `out-split20/knn_playground.html`, `out*/knn_playground_2026-11-25a.html`, `out/explore.html`, `out-split20/explore.html`; the commit that adds this entry.
 
 ---
 
