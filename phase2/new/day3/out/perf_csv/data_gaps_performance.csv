@@ -1,313 +1,313 @@
 variant,place,floor,phone,n,correct,acc,prec,confused_with,confused_n,status
-default,canteen,5,ip16,4,4,1.0,0.8,,0,GOOD
-default,canteen,5,ip18,3,3,1.0,1.0,,0,GOOD
-default,canteen,5,s24,3,2,0.6667,0.6667,y5302,1,GOOD
-default,canteen,5,a55,3,1,0.3333,0.5,escalator_up,1,FAIR
-default,canteen,5,a56,3,2,0.6667,1.0,exit_10,1,GOOD
-default,canteen,5,all phones,16,12,0.75,0.8,y5302,1,GOOD
-default,disabled_toilet,5,ip16,2,1,0.5,0.3333,escalator_up,1,WEAK
-default,disabled_toilet,5,ip18,2,0,0.0,,escalator_up_4F,1,WEAK
-default,disabled_toilet,5,s24,3,0,0.0,0.0,y5202,1,WEAK
-default,disabled_toilet,5,a55,2,0,0.0,0.0,escalator_up,1,WEAK
-default,disabled_toilet,5,a56,2,0,0.0,,escalator_up_4F,1,WEAK
-default,disabled_toilet,5,all phones,11,1,0.0909,0.1667,escalator_down,3,WEAK
-default,escalator_down,5,ip16,4,3,0.75,0.5,sr9,1,GOOD
-default,escalator_down,5,ip18,2,0,0.0,0.0,lift_stairs,1,WEAK
-default,escalator_down,5,s24,3,0,0.0,0.0,escalator_down_4F,1,WEAK
-default,escalator_down,5,a55,2,1,0.5,0.25,lift_stairs,1,WEAK
-default,escalator_down,5,a56,2,0,0.0,,lift_stairs,1,WEAK
-default,escalator_down,5,all phones,13,4,0.3077,0.2857,lift_stairs,4,FAIR
-default,escalator_up,5,ip16,3,1,0.3333,0.25,y5401,1,FAIR
-default,escalator_up,5,ip18,2,2,1.0,0.6667,,0,WEAK
-default,escalator_up,5,s24,3,0,0.0,0.0,exit_5,1,WEAK
-default,escalator_up,5,a55,2,1,0.5,0.2,y5401,1,WEAK
-default,escalator_up,5,a56,2,2,1.0,1.0,,0,WEAK
-default,escalator_up,5,all phones,12,6,0.5,0.4,y5401,3,FAIR
-default,exit_10,5,ip16,3,0,0.0,,sr9,1,WEAK
-default,exit_10,5,ip18,2,1,0.5,1.0,y5302_back,1,WEAK
-default,exit_10,5,s24,2,1,0.5,1.0,lift_stairs,1,WEAK
-default,exit_10,5,a55,2,1,0.5,0.3333,canteen,1,WEAK
-default,exit_10,5,a56,2,0,0.0,0.0,lift_stairs,1,WEAK
-default,exit_10,5,all phones,11,3,0.2727,0.3333,lift_stairs,3,WEAK
-default,exit_5,5,ip16,4,3,0.75,0.6,canteen,1,GOOD
-default,exit_5,5,ip18,2,2,1.0,0.6667,,0,WEAK
-default,exit_5,5,s24,2,1,0.5,0.25,y5302,1,WEAK
+default,canteen,5,ip16,5,5,1.0,1.0,,0,GOOD
+default,canteen,5,ip18,4,4,1.0,0.8,,0,GOOD
+default,canteen,5,s24,3,3,1.0,0.75,,0,GOOD
+default,canteen,5,a55,3,1,0.3333,0.5,exit_10,1,FAIR
+default,canteen,5,a56,4,2,0.5,1.0,escalator_down,1,FAIR
+default,canteen,5,all phones,19,15,0.7895,0.8333,exit_10,2,GOOD
+default,disabled_toilet,5,ip16,3,2,0.6667,0.25,escalator_up,1,GOOD
+default,disabled_toilet,5,ip18,4,1,0.25,0.5,escalator_up,2,WEAK
+default,disabled_toilet,5,s24,3,0,0.0,0.0,exit_10_4F,1,WEAK
+default,disabled_toilet,5,a55,2,0,0.0,0.0,lift_stairs_4F,1,WEAK
+default,disabled_toilet,5,a56,4,1,0.25,0.3333,y5202,1,WEAK
+default,disabled_toilet,5,all phones,16,4,0.25,0.2667,escalator_up,4,WEAK
+default,escalator_down,5,ip16,5,2,0.4,0.5,sr9,2,FAIR
+default,escalator_down,5,ip18,2,0,0.0,0.0,exit_10,1,WEAK
+default,escalator_down,5,s24,4,0,0.0,0.0,female_toilet,1,WEAK
+default,escalator_down,5,a55,2,1,0.5,0.3333,lift_stairs,1,WEAK
+default,escalator_down,5,a56,2,0,0.0,0.0,lift_stairs,1,WEAK
+default,escalator_down,5,all phones,15,3,0.2,0.2727,sr9,3,WEAK
+default,escalator_up,5,ip16,4,1,0.25,0.25,disabled_toilet,2,WEAK
+default,escalator_up,5,ip18,2,2,1.0,0.4,,0,WEAK
+default,escalator_up,5,s24,3,0,0.0,,male_toilet,1,WEAK
+default,escalator_up,5,a55,2,0,0.0,,y5401,2,WEAK
+default,escalator_up,5,a56,2,1,0.5,0.2,escalator_up_4F,1,WEAK
+default,escalator_up,5,all phones,13,4,0.3077,0.2857,y5401,3,FAIR
+default,exit_10,5,ip16,4,0,0.0,,sr9,1,WEAK
+default,exit_10,5,ip18,4,4,1.0,0.6667,,0,GOOD
+default,exit_10,5,s24,2,2,1.0,0.5,,0,WEAK
+default,exit_10,5,a55,2,1,0.5,0.2,canteen,1,WEAK
+default,exit_10,5,a56,4,0,0.0,0.0,sr9,2,WEAK
+default,exit_10,5,all phones,16,7,0.4375,0.4118,sr9,3,FAIR
+default,exit_5,5,ip16,5,3,0.6,1.0,y5401,1,GOOD
+default,exit_5,5,ip18,3,3,1.0,1.0,,0,GOOD
+default,exit_5,5,s24,2,2,1.0,0.3333,,0,WEAK
 default,exit_5,5,a55,2,0,0.0,0.0,disabled_toilet,1,WEAK
-default,exit_5,5,a56,2,0,0.0,,male_toilet,2,WEAK
-default,exit_5,5,all phones,12,6,0.5,0.4615,male_toilet,2,FAIR
-default,female_toilet,5,ip16,2,1,0.5,0.3333,y5202,1,WEAK
-default,female_toilet,5,ip18,2,2,1.0,0.4,,0,WEAK
-default,female_toilet,5,s24,3,1,0.3333,0.5,lift_stairs,1,FAIR
-default,female_toilet,5,a55,2,1,0.5,0.5,y5302_back,1,WEAK
-default,female_toilet,5,a56,2,1,0.5,0.5,lift_stairs,1,WEAK
-default,female_toilet,5,all phones,11,6,0.5455,0.4286,lift_stairs,2,FAIR
-default,lift_stairs,5,ip16,4,1,0.25,0.3333,female_toilet,1,WEAK
-default,lift_stairs,5,ip18,2,0,0.0,0.0,lift_stairs_4F,1,WEAK
-default,lift_stairs,5,s24,3,0,0.0,0.0,escalator_up,1,WEAK
-default,lift_stairs,5,a55,2,0,0.0,0.0,escalator_up,1,WEAK
-default,lift_stairs,5,a56,2,0,0.0,0.0,exit_10_4F,1,WEAK
-default,lift_stairs,5,all phones,13,1,0.0769,0.0625,exit_5,2,WEAK
-default,male_toilet,5,ip16,2,2,1.0,0.6667,,0,WEAK
-default,male_toilet,5,ip18,2,2,1.0,1.0,,0,WEAK
-default,male_toilet,5,s24,2,1,0.5,0.5,exit_5,1,WEAK
-default,male_toilet,5,a55,2,2,1.0,0.6667,,0,WEAK
-default,male_toilet,5,a56,2,1,0.5,0.25,sr9,1,WEAK
-default,male_toilet,5,all phones,10,8,0.8,0.5714,exit_5,1,GOOD
-default,sr9,5,ip16,6,1,0.1667,0.3333,escalator_down,3,WEAK
-default,sr9,5,ip18,2,1,0.5,0.5,escalator_down,1,WEAK
-default,sr9,5,s24,3,0,0.0,,y5302,1,WEAK
-default,sr9,5,a55,2,1,0.5,0.5,escalator_down,1,WEAK
-default,sr9,5,a56,2,1,0.5,0.3333,exit_10,1,WEAK
-default,sr9,5,all phones,15,4,0.2667,0.4,escalator_down,5,WEAK
-default,y5202,5,ip16,2,0,0.0,0.0,lift_stairs,1,WEAK
-default,y5202,5,ip18,2,0,0.0,,female_toilet,2,WEAK
-default,y5202,5,s24,2,0,0.0,0.0,lift_stairs,2,WEAK
-default,y5202,5,a55,2,0,0.0,,sr9,1,WEAK
-default,y5202,5,a56,2,1,0.5,0.5,lift_stairs,1,WEAK
-default,y5202,5,all phones,10,1,0.1,0.2,lift_stairs,4,WEAK
-default,y5302,5,ip16,2,1,0.5,0.3333,male_toilet,1,WEAK
-default,y5302,5,ip18,2,2,1.0,1.0,,0,WEAK
-default,y5302,5,s24,2,0,0.0,0.0,exit_5,1,WEAK
-default,y5302,5,a55,2,0,0.0,,exit_5,1,WEAK
-default,y5302,5,a56,2,0,0.0,,y5401,1,WEAK
-default,y5302,5,all phones,10,3,0.3,0.3333,male_toilet,2,FAIR
-default,y5302_back,5,ip16,2,1,0.5,0.5,y5202,1,WEAK
-default,y5302_back,5,ip18,2,0,0.0,0.0,lift_stairs_4F,1,WEAK
+default,exit_5,5,a56,3,0,0.0,0.0,y5401,1,WEAK
+default,exit_5,5,all phones,15,8,0.5333,0.5714,y5401,3,FAIR
+default,female_toilet,5,ip16,3,3,1.0,0.6,,0,GOOD
+default,female_toilet,5,ip18,3,2,0.6667,0.6667,lift_stairs_4F,1,GOOD
+default,female_toilet,5,s24,3,0,0.0,0.0,y5202,1,WEAK
+default,female_toilet,5,a55,2,0,0.0,0.0,y5302_back,2,WEAK
+default,female_toilet,5,a56,3,0,0.0,0.0,lift_stairs,1,WEAK
+default,female_toilet,5,all phones,14,5,0.3571,0.4545,y5302_back,2,FAIR
+default,lift_stairs,5,ip16,5,0,0.0,0.0,y5202,2,WEAK
+default,lift_stairs,5,ip18,4,2,0.5,0.6667,exit_10_4F,1,FAIR
+default,lift_stairs,5,s24,3,0,0.0,0.0,escalator_down_4F,1,WEAK
+default,lift_stairs,5,a55,2,0,0.0,0.0,y5302_back,1,WEAK
+default,lift_stairs,5,a56,4,1,0.25,0.25,exit_10_4F,1,WEAK
+default,lift_stairs,5,all phones,18,3,0.1667,0.2,y5202,3,WEAK
+default,male_toilet,5,ip16,3,3,1.0,0.75,,0,GOOD
+default,male_toilet,5,ip18,3,3,1.0,1.0,,0,GOOD
+default,male_toilet,5,s24,3,0,0.0,0.0,exit_5,2,WEAK
+default,male_toilet,5,a55,2,1,0.5,1.0,y5401,1,WEAK
+default,male_toilet,5,a56,3,1,0.3333,0.3333,escalator_up,1,FAIR
+default,male_toilet,5,all phones,14,8,0.5714,0.6667,exit_5,2,FAIR
+default,sr9,5,ip16,7,1,0.1429,0.25,disabled_toilet,3,WEAK
+default,sr9,5,ip18,4,2,0.5,0.5,escalator_down,1,FAIR
+default,sr9,5,s24,3,1,0.3333,1.0,y5302,1,FAIR
+default,sr9,5,a55,2,2,1.0,1.0,,0,WEAK
+default,sr9,5,a56,4,2,0.5,0.2857,y5202,1,FAIR
+default,sr9,5,all phones,20,8,0.4,0.4444,disabled_toilet,3,FAIR
+default,y5202,5,ip16,3,1,0.3333,0.1429,y5302_back,1,FAIR
+default,y5202,5,ip18,4,2,0.5,1.0,y5302_back,1,FAIR
+default,y5202,5,s24,2,1,0.5,0.3333,lift_stairs,1,WEAK
+default,y5202,5,a55,2,0,0.0,,exit_10,2,WEAK
+default,y5202,5,a56,4,1,0.25,0.2,lt2a,1,WEAK
+default,y5202,5,all phones,15,5,0.3333,0.2941,y5302_back,2,FAIR
+default,y5302,5,ip16,3,1,0.3333,0.3333,male_toilet,1,FAIR
+default,y5302,5,ip18,3,2,0.6667,1.0,y5401,1,GOOD
+default,y5302,5,s24,2,0,0.0,0.0,exit_5,2,WEAK
+default,y5302,5,a55,2,0,0.0,0.0,exit_5,1,WEAK
+default,y5302,5,a56,3,1,0.3333,0.5,male_toilet,1,FAIR
+default,y5302,5,all phones,13,4,0.3077,0.4,exit_5,3,FAIR
+default,y5302_back,5,ip16,4,2,0.5,0.5,y5202,1,FAIR
+default,y5302_back,5,ip18,4,3,0.75,0.75,canteen,1,GOOD
 default,y5302_back,5,s24,2,0,0.0,,lift_stairs_4F,1,WEAK
 default,y5302_back,5,a55,2,0,0.0,0.0,lt1b,1,WEAK
-default,y5302_back,5,a56,2,0,0.0,,lift_stairs_4F,1,WEAK
-default,y5302_back,5,all phones,10,1,0.1,0.25,lift_stairs_4F,3,WEAK
-default,y5401,5,ip16,2,1,0.5,0.5,y5302,1,WEAK
-default,y5401,5,ip18,2,0,0.0,,escalator_up_4F,1,WEAK
-default,y5401,5,s24,2,0,0.0,0.0,exit_5_4F,1,WEAK
-default,y5401,5,a55,2,0,0.0,0.0,escalator_up_4F,1,WEAK
-default,y5401,5,a56,2,1,0.5,0.5,escalator_up_4F,1,WEAK
-default,y5401,5,all phones,10,2,0.2,0.2857,escalator_up_4F,3,WEAK
-default,disabled_toilet_4F,4,ip16,2,2,1.0,0.5,,0,WEAK
-default,disabled_toilet_4F,4,ip18,2,0,0.0,,escalator_up_4F,1,WEAK
-default,disabled_toilet_4F,4,s24,2,0,0.0,,y4502,1,WEAK
+default,y5302_back,5,a56,4,0,0.0,0.0,lt1a,1,WEAK
+default,y5302_back,5,all phones,16,5,0.3125,0.4167,y5202,2,FAIR
+default,y5401,5,ip16,4,2,0.5,0.2857,y5302,1,FAIR
+default,y5401,5,ip18,4,2,0.5,0.6667,escalator_up_4F,1,FAIR
+default,y5401,5,s24,2,0,0.0,,exit_5_4F,1,WEAK
+default,y5401,5,a55,2,0,0.0,0.0,lt2b,1,WEAK
+default,y5401,5,a56,4,1,0.25,0.5,escalator_up_4F,1,WEAK
+default,y5401,5,all phones,16,5,0.3125,0.2941,y5302,3,FAIR
+default,disabled_toilet_4F,4,ip16,3,2,0.6667,0.6667,y4502,1,GOOD
+default,disabled_toilet_4F,4,ip18,3,2,0.6667,0.6667,escalator_up_4F,1,GOOD
+default,disabled_toilet_4F,4,s24,2,1,0.5,1.0,lt2a,1,WEAK
 default,disabled_toilet_4F,4,a55,2,1,0.5,1.0,y4502,1,WEAK
-default,disabled_toilet_4F,4,a56,2,2,1.0,0.6667,,0,WEAK
-default,disabled_toilet_4F,4,all phones,10,5,0.5,0.625,y4502,3,FAIR
-default,entrance_exit,4,ip16,2,2,1.0,1.0,,0,WEAK
-default,entrance_exit,4,ip18,2,2,1.0,1.0,,0,WEAK
-default,entrance_exit,4,s24,2,2,1.0,1.0,,0,WEAK
+default,disabled_toilet_4F,4,a56,3,2,0.6667,0.5,lt2a,1,GOOD
+default,disabled_toilet_4F,4,all phones,13,8,0.6154,0.6667,y4502,2,GOOD
+default,entrance_exit,4,ip16,3,3,1.0,1.0,,0,GOOD
+default,entrance_exit,4,ip18,3,3,1.0,1.0,,0,GOOD
+default,entrance_exit,4,s24,2,1,0.5,0.5,escalator_up_4F,1,WEAK
 default,entrance_exit,4,a55,2,1,0.5,1.0,lt2b,1,WEAK
-default,entrance_exit,4,a56,2,2,1.0,0.6667,,0,WEAK
-default,entrance_exit,4,all phones,10,9,0.9,0.9,lt2b,1,GOOD
-default,escalator_down_4F,4,ip16,4,1,0.25,1.0,lt1b,1,WEAK
-default,escalator_down_4F,4,ip18,2,1,0.5,1.0,lt1a,1,WEAK
-default,escalator_down_4F,4,s24,3,0,0.0,0.0,exit_5_4F,1,WEAK
+default,entrance_exit,4,a56,3,2,0.6667,1.0,disabled_toilet_4F,1,GOOD
+default,entrance_exit,4,all phones,13,10,0.7692,0.9091,lt2b,1,GOOD
+default,escalator_down_4F,4,ip16,5,1,0.2,0.3333,lt1b,1,WEAK
+default,escalator_down_4F,4,ip18,3,1,0.3333,1.0,lt1a,2,FAIR
+default,escalator_down_4F,4,s24,3,1,0.3333,0.1667,exit_5_4F,1,FAIR
 default,escalator_down_4F,4,a55,2,0,0.0,0.0,lt1a,1,WEAK
-default,escalator_down_4F,4,a56,2,1,0.5,1.0,lt1b,1,WEAK
-default,escalator_down_4F,4,all phones,13,3,0.2308,0.4286,lt1b,4,WEAK
-default,escalator_up_4F,4,ip16,4,0,0.0,,exit_5_4F,3,WEAK
-default,escalator_up_4F,4,ip18,2,2,1.0,0.3333,,0,WEAK
-default,escalator_up_4F,4,s24,3,1,0.3333,0.5,lift_stairs_4F,1,FAIR
+default,escalator_down_4F,4,a56,3,2,0.6667,0.2222,lt2a,1,GOOD
+default,escalator_down_4F,4,all phones,16,5,0.3125,0.25,lt1a,3,FAIR
+default,escalator_up_4F,4,ip16,5,3,0.6,0.6,escalator_up,1,GOOD
+default,escalator_up_4F,4,ip18,3,3,1.0,0.6,,0,GOOD
+default,escalator_up_4F,4,s24,3,1,0.3333,0.25,entrance_exit,1,FAIR
 default,escalator_up_4F,4,a55,2,0,0.0,0.0,lt2b,1,WEAK
-default,escalator_up_4F,4,a56,2,2,1.0,0.5,,0,WEAK
-default,escalator_up_4F,4,all phones,13,5,0.3846,0.3333,exit_5_4F,5,FAIR
-default,exit_10_4F,4,ip16,2,1,0.5,1.0,lift_stairs_4F,1,WEAK
-default,exit_10_4F,4,ip18,2,1,0.5,1.0,lift_stairs_4F,1,WEAK
-default,exit_10_4F,4,s24,3,2,0.6667,0.5,lift_stairs_4F,1,GOOD
-default,exit_10_4F,4,a55,2,0,0.0,,escalator_down_4F,1,WEAK
-default,exit_10_4F,4,a56,2,2,1.0,0.5,,0,WEAK
-default,exit_10_4F,4,all phones,11,6,0.5455,0.6,lift_stairs_4F,4,FAIR
-default,exit_5_4F,4,ip16,3,2,0.6667,0.3333,lt2a,1,GOOD
-default,exit_5_4F,4,ip18,2,1,0.5,1.0,lt2b,1,WEAK
+default,escalator_up_4F,4,a56,3,2,0.6667,0.4,lt2a,1,GOOD
+default,escalator_up_4F,4,all phones,16,9,0.5625,0.4286,lt2b,2,FAIR
+default,exit_10_4F,4,ip16,3,1,0.3333,1.0,lift_stairs_4F,1,FAIR
+default,exit_10_4F,4,ip18,3,2,0.6667,0.6667,lift_stairs_4F,1,GOOD
+default,exit_10_4F,4,s24,3,1,0.3333,0.1429,lift_stairs_4F,1,FAIR
+default,exit_10_4F,4,a55,2,1,0.5,1.0,lt1b,1,WEAK
+default,exit_10_4F,4,a56,3,2,0.6667,0.5,disabled_toilet,1,GOOD
+default,exit_10_4F,4,all phones,14,7,0.5,0.4375,lift_stairs_4F,3,FAIR
+default,exit_5_4F,4,ip16,3,2,0.6667,0.5,lt2a,1,GOOD
+default,exit_5_4F,4,ip18,3,2,0.6667,0.6667,lt2b,1,GOOD
 default,exit_5_4F,4,s24,3,0,0.0,0.0,lt2b,2,WEAK
 default,exit_5_4F,4,a55,2,0,0.0,0.0,escalator_up_4F,1,WEAK
-default,exit_5_4F,4,a56,2,1,0.5,1.0,lt2a,1,WEAK
-default,exit_5_4F,4,all phones,12,4,0.3333,0.2353,lt2b,3,FAIR
-default,lift_stairs_4F,4,ip16,3,1,0.3333,0.3333,lt2b,1,FAIR
-default,lift_stairs_4F,4,ip18,2,2,1.0,0.3333,,0,WEAK
-default,lift_stairs_4F,4,s24,3,0,0.0,0.0,lt1a,1,WEAK
+default,exit_5_4F,4,a56,3,1,0.3333,1.0,escalator_down_4F,2,FAIR
+default,exit_5_4F,4,all phones,14,5,0.3571,0.3571,lt2b,3,FAIR
+default,lift_stairs_4F,4,ip16,4,2,0.5,0.4,lt2b,1,FAIR
+default,lift_stairs_4F,4,ip18,4,3,0.75,0.5,sr9,1,GOOD
+default,lift_stairs_4F,4,s24,3,0,0.0,0.0,exit_10_4F,2,WEAK
 default,lift_stairs_4F,4,a55,2,0,0.0,0.0,lt1b,1,WEAK
-default,lift_stairs_4F,4,a56,2,1,0.5,0.25,exit_10_4F,1,WEAK
-default,lift_stairs_4F,4,all phones,12,4,0.3333,0.1905,lt1a,2,FAIR
-default,lt1a,4,ip16,2,1,0.5,0.5,lift_stairs_4F,1,WEAK
-default,lt1a,4,ip18,2,1,0.5,0.5,lift_stairs_4F,1,WEAK
-default,lt1a,4,s24,2,0,0.0,0.0,lift_stairs_4F,2,WEAK
+default,lift_stairs_4F,4,a56,4,0,0.0,0.0,lt1a,1,WEAK
+default,lift_stairs_4F,4,all phones,17,5,0.2941,0.3333,lt1a,3,WEAK
+default,lt1a,4,ip16,2,0,0.0,0.0,escalator_down_4F,2,WEAK
+default,lt1a,4,ip18,3,2,0.6667,0.5,lift_stairs_4F,1,GOOD
+default,lt1a,4,s24,2,0,0.0,0.0,escalator_down_4F,1,WEAK
 default,lt1a,4,a55,2,0,0.0,0.0,lt1b,1,WEAK
-default,lt1a,4,a56,2,0,0.0,,lift_stairs_4F,2,WEAK
-default,lt1a,4,all phones,10,2,0.2,0.3333,lift_stairs_4F,7,WEAK
+default,lt1a,4,a56,3,0,0.0,0.0,lift_stairs_4F,1,WEAK
+default,lt1a,4,all phones,12,2,0.1667,0.2222,escalator_down_4F,4,WEAK
 default,lt1b,4,ip16,2,2,1.0,0.6667,,0,WEAK
-default,lt1b,4,ip18,2,2,1.0,1.0,,0,WEAK
-default,lt1b,4,s24,2,1,0.5,0.25,escalator_down_4F,1,WEAK
-default,lt1b,4,a55,2,1,0.5,0.1667,escalator_up_4F,1,WEAK
-default,lt1b,4,a56,2,2,1.0,0.6667,,0,WEAK
-default,lt1b,4,all phones,10,8,0.8,0.4444,escalator_up_4F,1,GOOD
-default,lt2a,4,ip16,2,2,1.0,0.5,,0,WEAK
-default,lt2a,4,ip18,2,2,1.0,1.0,,0,WEAK
+default,lt1b,4,ip18,3,3,1.0,1.0,,0,GOOD
+default,lt1b,4,s24,2,0,0.0,,escalator_down_4F,1,WEAK
+default,lt1b,4,a55,2,2,1.0,0.25,,0,WEAK
+default,lt1b,4,a56,3,2,0.6667,1.0,y4502,1,GOOD
+default,lt1b,4,all phones,12,9,0.75,0.5625,escalator_down_4F,1,GOOD
+default,lt2a,4,ip16,3,3,1.0,0.75,,0,GOOD
+default,lt2a,4,ip18,3,3,1.0,1.0,,0,GOOD
 default,lt2a,4,s24,2,0,0.0,0.0,exit_5_4F,2,WEAK
-default,lt2a,4,a55,2,1,0.5,1.0,lift_stairs_4F,1,WEAK
-default,lt2a,4,a56,2,1,0.5,0.5,disabled_toilet_4F,1,WEAK
-default,lt2a,4,all phones,10,6,0.6,0.6,exit_5_4F,2,GOOD
-default,lt2b,4,ip16,2,1,0.5,0.5,exit_5_4F,1,WEAK
-default,lt2b,4,ip18,2,1,0.5,0.5,escalator_up_4F,1,WEAK
-default,lt2b,4,s24,2,1,0.5,0.3333,exit_5_4F,1,WEAK
-default,lt2b,4,a55,2,1,0.5,0.3333,exit_5_4F,1,WEAK
-default,lt2b,4,a56,2,1,0.5,1.0,entrance_exit,1,WEAK
-default,lt2b,4,all phones,10,5,0.5,0.4545,exit_5_4F,3,FAIR
-default,y4502,4,ip16,2,0,0.0,,disabled_toilet_4F,2,WEAK
-default,y4502,4,ip18,2,2,1.0,0.6667,,0,WEAK
-default,y4502,4,s24,2,2,1.0,0.6667,,0,WEAK
-default,y4502,4,a55,2,1,0.5,0.3333,lt1b,1,WEAK
-default,y4502,4,a56,2,2,1.0,1.0,,0,WEAK
-default,y4502,4,all phones,10,7,0.7,0.6364,disabled_toilet_4F,2,GOOD
-split20,canteen,5,ip16,12,12,1.0,1.0,,0,GOOD
-split20,canteen,5,ip18,9,9,1.0,1.0,,0,GOOD
-split20,canteen,5,s24,9,6,0.6667,1.0,y5401,2,GOOD
-split20,canteen,5,a55,7,3,0.4286,0.5,escalator_up,3,FAIR
-split20,canteen,5,a56,9,6,0.6667,1.0,exit_10,3,GOOD
-split20,canteen,5,all phones,46,36,0.7826,0.9231,escalator_up,3,GOOD
-split20,disabled_toilet,5,ip16,6,3,0.5,0.3,escalator_up,3,FAIR
-split20,disabled_toilet,5,ip18,6,1,0.1667,1.0,disabled_toilet_4F,3,WEAK
-split20,disabled_toilet,5,s24,9,3,0.3333,0.3333,y5202,3,FAIR
-split20,disabled_toilet,5,a55,6,0,0.0,,escalator_up,3,WEAK
-split20,disabled_toilet,5,a56,5,0,0.0,0.0,escalator_up_4F,3,WEAK
-split20,disabled_toilet,5,all phones,32,7,0.2188,0.3333,escalator_down,7,WEAK
-split20,escalator_down,5,ip16,12,9,0.75,0.5294,sr9,3,GOOD
-split20,escalator_down,5,ip18,6,2,0.3333,0.2857,lift_stairs,2,FAIR
-split20,escalator_down,5,s24,9,0,0.0,0.0,escalator_down_4F,3,WEAK
-split20,escalator_down,5,a55,6,3,0.5,0.2727,lift_stairs,3,FAIR
+default,lt2a,4,a55,2,1,0.5,0.5,escalator_up_4F,1,WEAK
+default,lt2a,4,a56,3,2,0.6667,0.2222,y4502,1,GOOD
+default,lt2a,4,all phones,13,9,0.6923,0.4737,exit_5_4F,2,GOOD
+default,lt2b,4,ip16,3,1,0.3333,0.3333,exit_5_4F,2,FAIR
+default,lt2b,4,ip18,3,2,0.6667,0.6667,exit_5_4F,1,GOOD
+default,lt2b,4,s24,2,2,1.0,0.4,,0,WEAK
+default,lt2b,4,a55,2,1,0.5,0.25,lt2a,1,WEAK
+default,lt2b,4,a56,3,1,0.3333,1.0,y4502,1,FAIR
+default,lt2b,4,all phones,13,7,0.5385,0.4375,exit_5_4F,3,FAIR
+default,y4502,4,ip16,3,2,0.6667,0.6667,disabled_toilet_4F,1,GOOD
+default,y4502,4,ip18,3,2,0.6667,1.0,disabled_toilet_4F,1,GOOD
+default,y4502,4,s24,2,2,1.0,1.0,,0,WEAK
+default,y4502,4,a55,2,1,0.5,0.25,lt1b,1,WEAK
+default,y4502,4,a56,3,2,0.6667,0.4,lt2a,1,GOOD
+default,y4502,4,all phones,13,9,0.6923,0.5625,disabled_toilet_4F,2,GOOD
+split20,canteen,5,ip16,15,15,1.0,1.0,,0,GOOD
+split20,canteen,5,ip18,12,12,1.0,1.0,,0,GOOD
+split20,canteen,5,s24,9,9,1.0,1.0,,0,GOOD
+split20,canteen,5,a55,7,3,0.4286,0.5,exit_10,3,FAIR
+split20,canteen,5,a56,12,6,0.5,0.75,escalator_down,3,FAIR
+split20,canteen,5,all phones,55,45,0.8182,0.9,exit_10,6,GOOD
+split20,disabled_toilet,5,ip16,9,4,0.4444,0.4444,escalator_up,4,FAIR
+split20,disabled_toilet,5,ip18,12,3,0.25,0.5,escalator_up,5,WEAK
+split20,disabled_toilet,5,s24,9,0,0.0,0.0,lift_stairs,4,WEAK
+split20,disabled_toilet,5,a55,6,0,0.0,0.0,lift_stairs_4F,3,WEAK
+split20,disabled_toilet,5,a56,11,1,0.0909,0.2,y5202,3,WEAK
+split20,disabled_toilet,5,all phones,47,8,0.1702,0.2857,escalator_up,12,WEAK
+split20,escalator_down,5,ip16,15,12,0.8,0.6667,sr9,3,GOOD
+split20,escalator_down,5,ip18,6,0,0.0,0.0,exit_10,3,WEAK
+split20,escalator_down,5,s24,12,3,0.25,0.375,female_toilet,3,WEAK
+split20,escalator_down,5,a55,6,3,0.5,0.4286,lift_stairs,3,FAIR
 split20,escalator_down,5,a56,6,0,0.0,0.0,lift_stairs,3,WEAK
-split20,escalator_down,5,all phones,39,14,0.359,0.3043,lift_stairs,11,FAIR
-split20,escalator_up,5,ip16,9,3,0.3333,0.3,y5401,3,FAIR
-split20,escalator_up,5,ip18,6,6,1.0,0.6667,,0,GOOD
-split20,escalator_up,5,s24,9,3,0.3333,0.3333,exit_5,3,FAIR
-split20,escalator_up,5,a55,6,5,0.8333,0.2941,escalator_down_4F,1,GOOD
-split20,escalator_up,5,a56,5,2,0.4,0.6667,escalator_up_4F,3,FAIR
-split20,escalator_up,5,all phones,35,19,0.5429,0.3958,y5401,3,FAIR
-split20,exit_10,5,ip16,7,0,0.0,,lift_stairs,3,WEAK
-split20,exit_10,5,ip18,6,6,1.0,0.6,,0,GOOD
-split20,exit_10,5,s24,6,3,0.5,1.0,lift_stairs,3,FAIR
-split20,exit_10,5,a55,6,3,0.5,0.4286,canteen,3,FAIR
-split20,exit_10,5,a56,6,0,0.0,0.0,lift_stairs,3,WEAK
-split20,exit_10,5,all phones,31,12,0.3871,0.48,lift_stairs,9,FAIR
-split20,exit_5,5,ip16,9,4,0.4444,1.0,y5302,4,FAIR
-split20,exit_5,5,ip18,6,6,1.0,1.0,,0,GOOD
-split20,exit_5,5,s24,6,3,0.5,0.1667,y5302,3,FAIR
-split20,exit_5,5,a55,6,0,0.0,0.0,escalator_down,3,WEAK
-split20,exit_5,5,a56,6,3,0.5,1.0,male_toilet,2,FAIR
-split20,exit_5,5,all phones,33,16,0.4848,0.4571,y5302,7,FAIR
-split20,female_toilet,5,ip16,6,5,0.8333,0.625,y5202,1,GOOD
-split20,female_toilet,5,ip18,6,5,0.8333,0.4545,y5202,1,GOOD
-split20,female_toilet,5,s24,9,0,0.0,,lift_stairs,5,WEAK
-split20,female_toilet,5,a55,6,3,0.5,0.3,y5302_back,3,FAIR
-split20,female_toilet,5,a56,6,2,0.3333,0.4,lift_stairs,3,FAIR
-split20,female_toilet,5,all phones,33,15,0.4545,0.4412,lift_stairs,8,FAIR
-split20,lift_stairs,5,ip16,6,0,0.0,0.0,female_toilet,3,WEAK
-split20,lift_stairs,5,ip18,6,3,0.5,0.6,exit_10_4F,3,FAIR
-split20,lift_stairs,5,s24,9,0,0.0,0.0,disabled_toilet,3,WEAK
-split20,lift_stairs,5,a55,6,0,0.0,0.0,escalator_up,3,WEAK
-split20,lift_stairs,5,a56,6,1,0.1667,0.0833,exit_10_4F,3,WEAK
-split20,lift_stairs,5,all phones,33,4,0.1212,0.08,female_toilet,6,WEAK
-split20,male_toilet,5,ip16,6,6,1.0,0.6,,0,GOOD
-split20,male_toilet,5,ip18,6,6,1.0,1.0,,0,GOOD
-split20,male_toilet,5,s24,6,0,0.0,,exit_5,6,WEAK
-split20,male_toilet,5,a55,5,4,0.8,0.5714,y5401,1,GOOD
-split20,male_toilet,5,a56,6,6,1.0,0.75,,0,GOOD
-split20,male_toilet,5,all phones,29,22,0.7586,0.7097,exit_5,6,GOOD
-split20,sr9,5,ip16,9,3,0.3333,0.4286,escalator_down,5,FAIR
-split20,sr9,5,ip18,6,3,0.5,0.75,escalator_down,3,FAIR
-split20,sr9,5,s24,9,4,0.4444,1.0,escalator_down,3,FAIR
-split20,sr9,5,a55,5,1,0.2,0.25,escalator_down,2,WEAK
-split20,sr9,5,a56,6,0,0.0,0.0,escalator_down,3,WEAK
-split20,sr9,5,all phones,35,11,0.3143,0.5,escalator_down,16,FAIR
-split20,y5202,5,ip16,6,6,1.0,0.4286,,0,GOOD
-split20,y5202,5,ip18,6,0,0.0,0.0,female_toilet,6,WEAK
-split20,y5202,5,s24,6,3,0.5,0.4286,lift_stairs,3,FAIR
-split20,y5202,5,a55,4,0,0.0,,exit_10,3,WEAK
-split20,y5202,5,a56,5,2,0.4,0.6667,lift_stairs,2,FAIR
-split20,y5202,5,all phones,27,11,0.4074,0.44,female_toilet,6,FAIR
-split20,y5302,5,ip16,6,3,0.5,0.3,male_toilet,3,FAIR
-split20,y5302,5,ip18,6,6,1.0,1.0,,0,GOOD
-split20,y5302,5,s24,6,0,0.0,0.0,exit_5,6,WEAK
+split20,escalator_down,5,all phones,45,18,0.4,0.4091,lift_stairs,9,FAIR
+split20,escalator_up,5,ip16,12,4,0.3333,0.2667,disabled_toilet,5,FAIR
+split20,escalator_up,5,ip18,6,6,1.0,0.4286,,0,GOOD
+split20,escalator_up,5,s24,9,0,0.0,0.0,male_toilet,3,WEAK
+split20,escalator_up,5,a55,6,0,0.0,0.0,y5401,6,WEAK
+split20,escalator_up,5,a56,5,2,0.4,0.0909,escalator_up_4F,3,FAIR
+split20,escalator_up,5,all phones,38,12,0.3158,0.2264,y5401,9,FAIR
+split20,exit_10,5,ip16,10,0,0.0,,y5202,4,WEAK
+split20,exit_10,5,ip18,12,10,0.8333,0.7143,y5302_back,2,GOOD
+split20,exit_10,5,s24,6,6,1.0,0.75,,0,GOOD
+split20,exit_10,5,a55,6,3,0.5,0.375,canteen,3,FAIR
+split20,exit_10,5,a56,12,0,0.0,0.0,sr9,6,WEAK
+split20,exit_10,5,all phones,46,19,0.413,0.5588,sr9,7,FAIR
+split20,exit_5,5,ip16,12,10,0.8333,0.8333,male_toilet,1,GOOD
+split20,exit_5,5,ip18,9,9,1.0,1.0,,0,GOOD
+split20,exit_5,5,s24,6,6,1.0,0.375,,0,GOOD
+split20,exit_5,5,a55,6,0,0.0,0.0,disabled_toilet,3,WEAK
+split20,exit_5,5,a56,9,3,0.3333,0.5,escalator_up,4,FAIR
+split20,exit_5,5,all phones,42,28,0.6667,0.6087,escalator_up,5,GOOD
+split20,female_toilet,5,ip16,9,7,0.7778,0.5385,y5302_back,1,GOOD
+split20,female_toilet,5,ip18,9,6,0.6667,0.6,lift_stairs_4F,3,GOOD
+split20,female_toilet,5,s24,9,0,0.0,0.0,y5202,3,WEAK
+split20,female_toilet,5,a55,6,3,0.5,0.2727,y5302_back,3,FAIR
+split20,female_toilet,5,a56,9,0,0.0,0.0,y5202,7,WEAK
+split20,female_toilet,5,all phones,42,16,0.381,0.381,y5202,10,FAIR
+split20,lift_stairs,5,ip16,9,0,0.0,0.0,female_toilet,3,WEAK
+split20,lift_stairs,5,ip18,12,6,0.5,0.75,disabled_toilet,3,FAIR
+split20,lift_stairs,5,s24,9,0,0.0,0.0,escalator_down_4F,3,WEAK
+split20,lift_stairs,5,a55,6,0,0.0,0.0,y5302_back,3,WEAK
+split20,lift_stairs,5,a56,11,1,0.0909,0.0909,escalator_up,3,WEAK
+split20,lift_stairs,5,all phones,47,7,0.1489,0.14,female_toilet,7,WEAK
+split20,male_toilet,5,ip16,9,7,0.7778,0.5,y5401,2,GOOD
+split20,male_toilet,5,ip18,9,9,1.0,1.0,,0,GOOD
+split20,male_toilet,5,s24,9,2,0.2222,0.4,exit_5,4,WEAK
+split20,male_toilet,5,a55,5,5,1.0,0.625,,0,GOOD
+split20,male_toilet,5,a56,8,3,0.375,0.5,y5302,3,FAIR
+split20,male_toilet,5,all phones,40,26,0.65,0.619,exit_5,4,GOOD
+split20,sr9,5,ip16,12,6,0.5,0.6,escalator_down,3,FAIR
+split20,sr9,5,ip18,12,9,0.75,0.6,escalator_down,3,GOOD
+split20,sr9,5,s24,9,3,0.3333,0.5,y5302,3,FAIR
+split20,sr9,5,a55,5,5,1.0,1.0,,0,GOOD
+split20,sr9,5,a56,12,7,0.5833,0.28,y5202,3,FAIR
+split20,sr9,5,all phones,50,30,0.6,0.4918,escalator_down,7,GOOD
+split20,y5202,5,ip16,9,3,0.3333,0.1579,y5302_back,3,FAIR
+split20,y5202,5,ip18,12,6,0.5,1.0,female_toilet,3,FAIR
+split20,y5202,5,s24,6,3,0.5,0.5,lift_stairs,3,FAIR
+split20,y5202,5,a55,4,0,0.0,,exit_10,2,WEAK
+split20,y5202,5,a56,11,3,0.2727,0.1875,sr9,6,WEAK
+split20,y5202,5,all phones,42,15,0.3571,0.3191,lift_stairs,8,FAIR
+split20,y5302,5,ip16,9,3,0.3333,0.4286,male_toilet,3,FAIR
+split20,y5302,5,ip18,9,6,0.6667,1.0,y5401,3,GOOD
+split20,y5302,5,s24,6,3,0.5,0.3333,exit_5,3,FAIR
 split20,y5302,5,a55,6,0,0.0,,exit_5,3,WEAK
-split20,y5302,5,a56,6,3,0.5,1.0,y5401,3,FAIR
-split20,y5302,5,all phones,30,12,0.4,0.4286,exit_5,9,FAIR
-split20,y5302_back,5,ip16,6,2,0.3333,0.3333,y5202,4,FAIR
-split20,y5302_back,5,ip18,6,0,0.0,,lift_stairs_4F,3,WEAK
-split20,y5302_back,5,s24,6,0,0.0,,lift_stairs_4F,3,WEAK
+split20,y5302,5,a56,9,3,0.3333,0.4286,escalator_up,3,FAIR
+split20,y5302,5,all phones,39,15,0.3846,0.5172,exit_5,8,FAIR
+split20,y5302_back,5,ip16,12,3,0.25,0.3333,y5202,4,WEAK
+split20,y5302_back,5,ip18,10,8,0.8,0.6667,lift_stairs_4F,1,GOOD
+split20,y5302_back,5,s24,6,0,0.0,0.0,lift_stairs_4F,3,WEAK
 split20,y5302_back,5,a55,6,0,0.0,0.0,lt1b,3,WEAK
-split20,y5302_back,5,a56,6,3,0.5,0.75,lift_stairs_4F,3,FAIR
-split20,y5302_back,5,all phones,30,5,0.1667,0.3846,lift_stairs_4F,9,WEAK
-split20,y5401,5,ip16,6,3,0.5,0.5,y5302,3,FAIR
-split20,y5401,5,ip18,6,0,0.0,,escalator_up_4F,3,WEAK
-split20,y5401,5,s24,6,0,0.0,0.0,exit_5_4F,3,WEAK
-split20,y5401,5,a55,6,0,0.0,0.0,male_toilet,3,WEAK
-split20,y5401,5,a56,6,3,0.5,0.5,escalator_up_4F,3,FAIR
-split20,y5401,5,all phones,30,6,0.2,0.3333,escalator_up_4F,8,WEAK
-split20,disabled_toilet_4F,4,ip16,6,6,1.0,0.5455,,0,GOOD
-split20,disabled_toilet_4F,4,ip18,6,3,0.5,0.5,escalator_up_4F,3,FAIR
-split20,disabled_toilet_4F,4,s24,6,0,0.0,,y4502,3,WEAK
-split20,disabled_toilet_4F,4,a55,6,3,0.5,0.6,y4502,3,FAIR
-split20,disabled_toilet_4F,4,a56,6,3,0.5,0.5,y4502,3,FAIR
-split20,disabled_toilet_4F,4,all phones,30,15,0.5,0.5357,y4502,9,FAIR
-split20,entrance_exit,4,ip16,6,6,1.0,1.0,,0,GOOD
-split20,entrance_exit,4,ip18,6,6,1.0,1.0,,0,GOOD
-split20,entrance_exit,4,s24,6,6,1.0,1.0,,0,GOOD
+split20,y5302_back,5,a56,10,3,0.3,0.4286,lt1a,3,FAIR
+split20,y5302_back,5,all phones,44,14,0.3182,0.4,lift_stairs_4F,6,FAIR
+split20,y5401,5,ip16,12,3,0.25,0.3333,y5302,3,WEAK
+split20,y5401,5,ip18,12,6,0.5,0.6667,escalator_up_4F,3,FAIR
+split20,y5401,5,s24,6,0,0.0,,y5302,3,WEAK
+split20,y5401,5,a55,6,0,0.0,0.0,lt2b,3,WEAK
+split20,y5401,5,a56,12,3,0.25,0.6,escalator_up_4F,3,WEAK
+split20,y5401,5,all phones,48,12,0.25,0.3529,escalator_up_4F,10,WEAK
+split20,disabled_toilet_4F,4,ip16,9,6,0.6667,0.75,y4502,3,GOOD
+split20,disabled_toilet_4F,4,ip18,9,4,0.4444,0.5714,escalator_up_4F,3,FAIR
+split20,disabled_toilet_4F,4,s24,6,2,0.3333,1.0,y4502,3,FAIR
+split20,disabled_toilet_4F,4,a55,6,3,0.5,1.0,y4502,3,FAIR
+split20,disabled_toilet_4F,4,a56,9,5,0.5556,0.5,lt2a,3,FAIR
+split20,disabled_toilet_4F,4,all phones,39,20,0.5128,0.6667,y4502,12,FAIR
+split20,entrance_exit,4,ip16,9,9,1.0,1.0,,0,GOOD
+split20,entrance_exit,4,ip18,9,9,1.0,0.9,,0,GOOD
+split20,entrance_exit,4,s24,6,3,0.5,1.0,escalator_up_4F,3,FAIR
 split20,entrance_exit,4,a55,6,3,0.5,1.0,lt2b,3,FAIR
-split20,entrance_exit,4,a56,6,6,1.0,0.6667,,0,GOOD
-split20,entrance_exit,4,all phones,30,27,0.9,0.9,lt2b,3,GOOD
-split20,escalator_down_4F,4,ip16,10,1,0.1,1.0,lt1b,5,WEAK
-split20,escalator_down_4F,4,ip18,6,1,0.1667,1.0,lt1a,5,WEAK
-split20,escalator_down_4F,4,s24,9,2,0.2222,0.1667,exit_5_4F,3,WEAK
-split20,escalator_down_4F,4,a55,6,2,0.3333,0.25,lt1b,3,FAIR
-split20,escalator_down_4F,4,a56,6,6,1.0,0.8571,,0,GOOD
-split20,escalator_down_4F,4,all phones,37,12,0.3243,0.4138,lt1b,9,FAIR
-split20,escalator_up_4F,4,ip16,11,2,0.1818,1.0,exit_5_4F,6,WEAK
-split20,escalator_up_4F,4,ip18,6,6,1.0,0.5,,0,GOOD
-split20,escalator_up_4F,4,s24,9,3,0.3333,0.5,lift_stairs,3,FAIR
-split20,escalator_up_4F,4,a55,6,0,0.0,0.0,exit_5_4F,4,WEAK
-split20,escalator_up_4F,4,a56,6,6,1.0,0.4,,0,GOOD
-split20,escalator_up_4F,4,all phones,38,17,0.4474,0.3953,exit_5_4F,13,FAIR
-split20,exit_10_4F,4,ip16,6,0,0.0,,y5302_back,3,WEAK
-split20,exit_10_4F,4,ip18,6,6,1.0,0.6667,,0,GOOD
-split20,exit_10_4F,4,s24,9,3,0.3333,0.2727,escalator_up,3,FAIR
+split20,entrance_exit,4,a56,9,6,0.6667,0.5455,disabled_toilet_4F,3,GOOD
+split20,entrance_exit,4,all phones,39,30,0.7692,0.8333,lt2b,3,GOOD
+split20,escalator_down_4F,4,ip16,13,1,0.0769,1.0,lt1b,5,WEAK
+split20,escalator_down_4F,4,ip18,9,2,0.2222,0.3333,lt1a,6,WEAK
+split20,escalator_down_4F,4,s24,9,0,0.0,0.0,exit_5_4F,3,WEAK
+split20,escalator_down_4F,4,a55,6,1,0.1667,0.2,lt1a,3,WEAK
+split20,escalator_down_4F,4,a56,9,6,0.6667,0.8571,lt2a,3,GOOD
+split20,escalator_down_4F,4,all phones,46,10,0.2174,0.3704,lt1b,9,WEAK
+split20,escalator_up_4F,4,ip16,14,11,0.7857,0.6111,escalator_up,3,GOOD
+split20,escalator_up_4F,4,ip18,9,9,1.0,0.6,,0,GOOD
+split20,escalator_up_4F,4,s24,9,0,0.0,0.0,lt2b,3,WEAK
+split20,escalator_up_4F,4,a55,6,0,0.0,0.0,lt2b,3,WEAK
+split20,escalator_up_4F,4,a56,9,5,0.5556,0.4545,lt2a,3,FAIR
+split20,escalator_up_4F,4,all phones,47,25,0.5319,0.4237,lt2b,6,FAIR
+split20,exit_10_4F,4,ip16,9,4,0.4444,1.0,lift_stairs_4F,3,FAIR
+split20,exit_10_4F,4,ip18,9,6,0.6667,0.6,lift_stairs_4F,3,GOOD
+split20,exit_10_4F,4,s24,9,3,0.3333,0.1875,lift_stairs_4F,3,FAIR
 split20,exit_10_4F,4,a55,6,0,0.0,,lt1b,3,WEAK
-split20,exit_10_4F,4,a56,6,6,1.0,0.5,,0,GOOD
-split20,exit_10_4F,4,all phones,33,15,0.4545,0.4688,lift_stairs_4F,5,FAIR
-split20,exit_5_4F,4,ip16,9,6,0.6667,0.4,lt2a,3,GOOD
-split20,exit_5_4F,4,ip18,6,3,0.5,0.5,lt2b,3,FAIR
-split20,exit_5_4F,4,s24,9,1,0.1111,0.0625,lt2b,5,WEAK
+split20,exit_10_4F,4,a56,9,5,0.5556,0.7143,disabled_toilet,3,FAIR
+split20,exit_10_4F,4,all phones,42,18,0.4286,0.4865,lift_stairs_4F,13,FAIR
+split20,exit_5_4F,4,ip16,9,5,0.5556,0.4545,lt2a,3,FAIR
+split20,exit_5_4F,4,ip18,9,6,0.6667,0.6,lt2b,3,GOOD
+split20,exit_5_4F,4,s24,9,3,0.3333,0.1765,lt2b,3,FAIR
 split20,exit_5_4F,4,a55,6,0,0.0,0.0,escalator_up_4F,3,WEAK
-split20,exit_5_4F,4,a56,5,4,0.8,1.0,lt2a,1,GOOD
-split20,exit_5_4F,4,all phones,35,14,0.4,0.2917,lt2b,8,FAIR
-split20,lift_stairs_4F,4,ip16,6,2,0.3333,0.2857,lt1a,3,FAIR
-split20,lift_stairs_4F,4,ip18,6,6,1.0,0.5,,0,GOOD
-split20,lift_stairs_4F,4,s24,9,3,0.3333,0.3,lt1a,3,FAIR
+split20,exit_5_4F,4,a56,7,4,0.5714,1.0,escalator_up,2,FAIR
+split20,exit_5_4F,4,all phones,40,18,0.45,0.4,escalator_up_4F,7,FAIR
+split20,lift_stairs_4F,4,ip16,9,5,0.5556,0.3571,lt1a,3,FAIR
+split20,lift_stairs_4F,4,ip18,12,8,0.6667,0.4444,sr9,3,GOOD
+split20,lift_stairs_4F,4,s24,9,3,0.3333,0.3,exit_10_4F,4,FAIR
 split20,lift_stairs_4F,4,a55,4,0,0.0,0.0,lt1b,3,WEAK
-split20,lift_stairs_4F,4,a56,6,1,0.1667,0.1111,exit_10_4F,3,WEAK
-split20,lift_stairs_4F,4,all phones,31,12,0.3871,0.2927,lt1a,7,FAIR
-split20,lt1a,4,ip16,6,3,0.5,0.4286,lift_stairs_4F,3,FAIR
-split20,lt1a,4,ip18,6,3,0.5,0.375,lift_stairs_4F,3,FAIR
-split20,lt1a,4,s24,6,0,0.0,0.0,escalator_up,3,WEAK
+split20,lift_stairs_4F,4,a56,12,0,0.0,0.0,lt1a,5,WEAK
+split20,lift_stairs_4F,4,all phones,46,16,0.3478,0.2909,lt1a,10,FAIR
+split20,lt1a,4,ip16,6,3,0.5,0.5,lift_stairs_4F,3,FAIR
+split20,lt1a,4,ip18,9,4,0.4444,0.4,escalator_down_4F,3,FAIR
+split20,lt1a,4,s24,6,0,0.0,0.0,escalator_down_4F,2,WEAK
 split20,lt1a,4,a55,6,0,0.0,0.0,lt1b,3,WEAK
-split20,lt1a,4,a56,6,0,0.0,0.0,lift_stairs_4F,5,WEAK
-split20,lt1a,4,all phones,30,6,0.2,0.3,lift_stairs_4F,12,WEAK
+split20,lt1a,4,a56,9,0,0.0,0.0,lift_stairs_4F,5,WEAK
+split20,lt1a,4,all phones,36,7,0.1944,0.2414,lift_stairs_4F,11,WEAK
 split20,lt1b,4,ip16,6,6,1.0,0.5455,,0,GOOD
-split20,lt1b,4,ip18,6,6,1.0,1.0,,0,GOOD
+split20,lt1b,4,ip18,9,8,0.8889,1.0,escalator_down_4F,1,GOOD
 split20,lt1b,4,s24,6,0,0.0,0.0,escalator_down_4F,3,WEAK
-split20,lt1b,4,a55,4,3,0.75,0.1667,female_toilet,1,GOOD
-split20,lt1b,4,a56,6,6,1.0,1.0,,0,GOOD
-split20,lt1b,4,all phones,28,21,0.75,0.4468,escalator_down_4F,3,GOOD
-split20,lt2a,4,ip16,6,6,1.0,0.6,,0,GOOD
-split20,lt2a,4,ip18,6,6,1.0,1.0,,0,GOOD
-split20,lt2a,4,s24,6,0,0.0,0.0,exit_5_4F,3,WEAK
-split20,lt2a,4,a55,3,0,0.0,,sr9,2,WEAK
-split20,lt2a,4,a56,6,3,0.5,0.75,disabled_toilet_4F,3,FAIR
-split20,lt2a,4,all phones,27,15,0.5556,0.6522,disabled_toilet_4F,3,FAIR
-split20,lt2b,4,ip16,6,3,0.5,1.0,exit_5_4F,3,FAIR
-split20,lt2b,4,ip18,6,3,0.5,0.5,exit_5_4F,3,FAIR
-split20,lt2b,4,s24,6,3,0.5,0.375,exit_5_4F,3,FAIR
-split20,lt2b,4,a55,6,0,0.0,0.0,exit_5_4F,3,WEAK
-split20,lt2b,4,a56,6,3,0.5,1.0,entrance_exit,3,FAIR
-split20,lt2b,4,all phones,30,12,0.4,0.4444,exit_5_4F,12,FAIR
-split20,y4502,4,ip16,6,0,0.0,,disabled_toilet_4F,5,WEAK
-split20,y4502,4,ip18,6,6,1.0,1.0,,0,GOOD
-split20,y4502,4,s24,6,6,1.0,0.5,,0,GOOD
-split20,y4502,4,a55,6,1,0.1667,0.1111,escalator_down_4F,2,WEAK
-split20,y4502,4,a56,6,6,1.0,0.5,,0,GOOD
-split20,y4502,4,all phones,30,19,0.6333,0.4872,disabled_toilet_4F,7,GOOD
+split20,lt1b,4,a55,4,4,1.0,0.1739,,0,GOOD
+split20,lt1b,4,a56,9,6,0.6667,1.0,y4502,3,GOOD
+split20,lt1b,4,all phones,34,24,0.7059,0.4286,escalator_down_4F,4,GOOD
+split20,lt2a,4,ip16,9,9,1.0,0.6923,,0,GOOD
+split20,lt2a,4,ip18,9,9,1.0,1.0,,0,GOOD
+split20,lt2a,4,s24,6,0,0.0,0.0,exit_5_4F,6,WEAK
+split20,lt2a,4,a55,3,2,0.6667,0.5,escalator_up_4F,1,GOOD
+split20,lt2a,4,a56,9,6,0.6667,0.24,y4502,2,GOOD
+split20,lt2a,4,all phones,36,26,0.7222,0.4815,exit_5_4F,6,GOOD
+split20,lt2b,4,ip16,9,3,0.3333,1.0,exit_5_4F,6,FAIR
+split20,lt2b,4,ip18,9,5,0.5556,0.625,exit_5_4F,4,FAIR
+split20,lt2b,4,s24,6,6,1.0,0.4286,,0,GOOD
+split20,lt2b,4,a55,6,0,0.0,0.0,escalator_up_4F,4,WEAK
+split20,lt2b,4,a56,9,3,0.3333,1.0,entrance_exit,3,FAIR
+split20,lt2b,4,all phones,39,17,0.4359,0.4595,exit_5_4F,10,FAIR
+split20,y4502,4,ip16,9,6,0.6667,0.6667,disabled_toilet_4F,2,GOOD
+split20,y4502,4,ip18,9,6,0.6667,0.75,disabled_toilet_4F,3,GOOD
+split20,y4502,4,s24,6,6,1.0,0.6,,0,GOOD
+split20,y4502,4,a55,6,1,0.1667,0.1429,lt1b,5,WEAK
+split20,y4502,4,a56,9,6,0.6667,0.4286,lt2a,3,GOOD
+split20,y4502,4,all phones,39,25,0.641,0.5208,lt1b,5,GOOD

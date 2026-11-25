@@ -10,6 +10,13 @@ session,take,piece,key,phone,slot,place,floor,take_span_s,n_windows,B_median_uT,
 24s1,24s1:floor5/stops/s06_y5202:a55,0,24s1:floor5/stops/s06_y5202:a55#p0,a55,a55,y5202,5,60.01,4,87.172,-10.512,5.501,outlier,|piece |B| median - take median| > 5.0 uT,-10.512
 24s1,24s1:floor5/stops/s06_y5202:a55,2,24s1:floor5/stops/s06_y5202:a55#p2,a55,a55,y5202,5,60.01,4,103.272,5.588,1.044,outlier,|piece |B| median - take median| > 5.0 uT,5.588
 24s1,24s1:floor5/stops/s11_esca_up:a56,2,24s1:floor5/stops/s11_esca_up:a56#p2,a56,a56,escalator_up,5,60.01,4,76.013,17.447,7.174,outlier,|piece |B| median - take median| > 5.0 uT,17.447
+25night,25night:floor4/stops/s03_exit5_door:a56,2,25night:floor4/stops/s03_exit5_door:a56#p2,a56,a56,exit_5_4F,4,60.0,4,124.952,6.19,0.929,outlier,|piece |B| median - take median| > 5.0 uT,6.19
+25night,25night:floor5/stops/s03_male_toilet:a56,0,25night:floor5/stops/s03_male_toilet:a56#p0,a56,a56,male_toilet,5,60.0,4,159.734,15.203,1.937,outlier,|piece |B| median - take median| > 5.0 uT,15.203
+25night,25night:floor5/stops/s12_y5302_point2:a56,0,25night:floor5/stops/s12_y5302_point2:a56#p0,a56,a56,y5302_back,5,60.0,4,121.988,-42.473,34.093,outlier,|piece |B| median - take median| > 5.0 uT,-42.473
+25night,25night:floor5/stops/s12_y5302_point2:a56,2,25night:floor5/stops/s12_y5302_point2:a56#p2,a56,a56,y5302_back,5,60.0,4,171.07,6.609,1.736,outlier,|piece |B| median - take median| > 5.0 uT,6.609
+25night,25night:floor5/stops/s12_y5302_point2:iphone,0,25night:floor5/stops/s12_y5302_point2:iphone#p0,ip18,iphone,y5302_back,5,59.99,4,260.318,179.668,116.053,outlier,|piece |B| median - take median| > 5.0 uT,179.668
+25night,25night:floor5/stops/s12_y5302_point2:iphone,2,25night:floor5/stops/s12_y5302_point2:iphone#p2,ip18,iphone,y5302_back,5,59.99,4,59.117,-21.534,19.295,outlier,|piece |B| median - take median| > 5.0 uT,-21.534
+25night,25night:floor5/stops/s17_lift_stairs5:a56,0,25night:floor5/stops/s17_lift_stairs5:a56#p0,a56,a56,lift_stairs,5,60.0,4,118.327,8.628,13.962,outlier,|piece |B| median - take median| > 5.0 uT,8.628
 25nov,25nov:floor4/stops/s01_lift_stairs5:a55,0,25nov:floor4/stops/s01_lift_stairs5:a55#p0,a55,a55,lift_stairs_4F,4,59.99,4,69.202,13.31,3.942,outlier,|piece |B| median - take median| > 5.0 uT,13.31
 25nov,25nov:floor4/stops/s01_lift_stairs5:a55,2,25nov:floor4/stops/s01_lift_stairs5:a55#p2,a55,a55,lift_stairs_4F,4,59.99,4,37.839,-18.053,38.502,outlier,|piece |B| median - take median| > 5.0 uT,-18.053
 25nov,25nov:floor4/stops/s03_exit5_door:a56,0,25nov:floor4/stops/s03_exit5_door:a56#p0,a56,a56,exit_5_4F,4,59.99,4,37.459,-9.336,10.671,outlier,|piece |B| median - take median| > 5.0 uT,-9.336

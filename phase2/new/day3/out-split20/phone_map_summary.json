@@ -1,5 +1,5 @@
 {
- "recordings": 583,
+ "recordings": 752,
  "per_session": {
   "23nov": {
    "ip16 (iPhone17,4)": 42,
@@ -21,8 +21,15 @@
    "ip18 (iPhone19,2)": 54
   },
   "25spots": {
-   "ip16 (iPhone17,4)": 4,
-   "s24 (SM-S9280)": 11
+   "ip16 (iPhone17,4)": 8,
+   "s24 (SM-S9280)": 13
+  },
+  "25night": {
+   "a56 (SM-A566B)": 58,
+   "ip18 (iPhone19,2)": 59
+  },
+  "25night_tian": {
+   "ip16 (iPhone17,4)": 46
   }
  },
  "per_session_type": {
@@ -51,9 +58,23 @@
    "ip18": 28
   },
   "25spots/stop/iphone slot": {
-   "ip16": 4
+   "ip16": 6
   },
-  "25spots/walk/iphone slot": {}
+  "25spots/walk/iphone slot": {
+   "ip16": 2
+  },
+  "25night/stop/iphone slot": {
+   "ip18": 32
+  },
+  "25night/walk/iphone slot": {
+   "ip18": 27
+  },
+  "25night_tian/stop/iphone slot": {
+   "ip16": 23
+  },
+  "25night_tian/walk/iphone slot": {
+   "ip16": 23
+  }
  },
  "mixed_sessions": [
   {
