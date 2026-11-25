@@ -48,6 +48,7 @@ Contents:
 37. 25 Nov: place filter and a "where does the variance come from" panel (playground and explorer)
 38. 25 Nov: GitHub main (teammates' entries 24 to 27) merged into our local main; our entries renumbered 28 to 37
 39. 25 Nov: 20 s pieces, 23-Nov stairs and sr8/sr10/sr11 excluded, obvious outliers removed (split20 variant), before/after
+60. 25 Nov: continuous place estimate (kNN every tick, smoothed): design and selection rule fixed before any result (number provisional)
 - Lessons learned
 - Open questions / next steps
 
@@ -583,6 +584,30 @@ Contents:
 - **Outcome:** success as a pipeline; as a result, mixed. Cutting takes into 20 s pieces triples n but barely changes accuracy per sample (leave-one-session-out goes down, GroupKFold slightly up), and the three pieces of a take are not independent (same stop, phone, day), so the narrower intervals are optimistic. The rise of the full split20 over the take level (36.6% -> 38.5% LOSO, 28.7% -> 32.4% grouped) comes from removing data, and where it can be checked (24 s2 -> 23 Nov) it is entirely from removing hard test pieces, not from a better model. Nothing was tuned on accuracy; the thresholds were set before the first split20 number.
 - **What changed because of it:** `out/` and its numbers stay the reference; `out-split20/` is the user's requested variant with a control next to it. README section i. The kNN playground on the new data is `out-split20/knn_playground.html` (the old one in `out/` kept).
 - **Links:** `phase2/new/day3/config.json` (`variants`), `exclude_23nov.csv`, `data.py`, `fused_knn.py`, `track24.py`, `playground_check.py`, `run_all.sh`, `upload_eval_split20.py`, `compare_split20.py`, `README.md` section i, `out-split20/`, `out-split20_only/`; the commit that adds this entry.
+
+---
+
+## 60. 25 Nov: continuous place estimate (kNN every tick, smoothed): design and selection rule fixed before any result
+
+*Number provisional (written on branch `feat/live-smoothing` while main was at 41+); renumber at landing.*
+
+- **What we tried:** an offline study of the user's idea for live mode: instead of naming a place once after 3 s standing (Tian's live rule, entry 27), run the place kNN every tick (0.5 s or 1 s) on the last W s of magnetometer and combine the answers over time, s_t = a p_t + b p_(t-1) + c p_(t-2) + ... (a >= b >= c, sum 1), so a misreading cannot flip the place from west to east. Candidates from the advisor added: an HMM forward filter on the recorded corridors, motion gating, abstaining ("not sure"), and a per-phone magnetic offset.
+- **Why:** the user wants the place to keep updating at 1 s or faster, without jumps. The user then cut the scope to an offline evaluation only: no app changes (`upload/` stays exactly as Tian left it).
+- **How (all fixed in code before the first full run; this entry is committed before `out/live_smoothing.json` exists):**
+  - Code in `phase2/new/smoothing/`: `smooth.py` (estimators), `replay.py` (a subclass of Tian's `LiveTracker` that calls his `update()` unchanged and logs a continuous estimate each tick), `tune.py` (search, nested selection, figures). Tian's `upload/` files are imported, not modified.
+  - Replay: each 24-Nov session's iPhone recordings on their real clock, streamed in 0.5 s steps (same as `live.py check`), with the place model of the other session's iPhone (session 1 stream: model iPhone17,4 trained on session 2; session 2 stream: model iPhone19,2 trained on session 1). Two different handsets, so every number here is cross-handset. 23 Nov is not used: its stops logged no accelerometer (entry 13), and the still/moving test needs it.
+  - Per tick: kNN probabilities (Tian's per-floor `crossday.make_model` kNN, k = 5, distance weights) from the mean x/y/z of the last W s, on the floor Tian's tracker is on. Grid: tick 0.5 / 1.0 s; W 1 / 2 / 3 s; estimators: none (control), FIR with non-increasing weights in steps of 0.1 and 2 to 6 taps (41 weight vectors), EMA alpha 0.1 to 0.9, either of those with a corridor jump guard (the shown place may only move to a neighbour unless the new place leads M = 2 / 3 / 4 ticks in a row), and the HMM (belief ~ (p + 0.001)^beta x transition; stay 1 - m, move to a corridor neighbour m = (1 - p_stay) + steps since the last tick / steps of that corridor, teleport eps; beta 0.25 / 0.5 / 1 / 2, eps 0.001 / 0.01 / 0.05, p_stay 0.9 / 0.98 / 0.995). The corridors are the training session's recorded walks (`route.build`, 24-Nov place names; the `graph/` graph-v2 uses 23-Nov node ids that do not match the 24-Nov places).
+  - Gating: none / still (1 s |acc| std < 0.4 m/s^2) / still and flat (tilt <= 20 deg). Thresholds set from the stop and walk seconds of 24 Nov before any accuracy was computed: 1 s std < 0.4 holds for 98.6% / 99.8% of stop seconds and 0% of walk seconds; stop tilt p99 12.3 / 11.8 deg (scratch check, recomputed into `gate_stats` of the output).
+  - Pre-filter (on / off): drop magnetometer samples whose |B| is more than 5 uT from the rolling median of the previous 0.3 s (5 uT is about the top 0.2% of samples on 24 Nov; scratch check: 336 of 187,048 samples in session 1, 329 of 177,250 in session 2).
+  - Calibration (per-phone offset): none / start (the first stop's place is known: shift = training mean at that place - 10 s of the first stop) / median (training median - running median of the still-and-flat ticks so far, after 20 of them). Also a visit-level check like `walksense.py evaluate`.
+  - Abstain: threshold 0 to 0.9 on the shown probability; coverage and precision on standing ticks.
+  - Metrics: the standing part of a stop = 5 s after the stop recording starts to 5 s before it ends; the first stop of each stream is never scored (the start calibration uses it). Per-tick top-1 and top-3 while standing; flips per minute while standing; lock time = from the stop's start until the shown place is right and stays right for 5 s (never = infinite); time to first correct; lit events (shown probability >= 0.8 while Tian's 3 s test says still) and wrong ones; on walks: share of ticks showing the walk's start or end place, flips per minute, wrong lights. Tian's rule is scored on the same ticks (shown = his latest top-1).
+  - **Selection rule, fixed now:** best = highest standing per-tick top-1 among settings with standing flips <= 1.0 per minute AND median lock time <= 5.0 s; ties (top-1 equal to 0.1 percentage point) -> lower median lock time -> fewer flips -> simpler (none < EMA < FIR < guard < HMM, fewer taps) -> tick 0.5 before 1.0; if nothing is feasible, the fewest flips. Nested leave-one-session-out: choose on one stream, score on the other, both directions, for each family (none, FIR, EMA, guard, HMM, overall) and for each gate / pre-filter / calibration value. The deploy suggestion is the same rule on both sessions pooled. Abstain threshold: on the chosen setting, the highest coverage with precision >= 0.80 on the tune stream (if none reaches it, the highest precision); scored on the other.
+  - Check: the chosen setting is rerun end to end through the `LiveTracker` subclass; its scores must equal the search's.
+- **Result:** none yet (next entry).
+- **Outcome:** design only.
+- **What changed because of it:** nothing in the app.
+- **Links:** `phase2/new/smoothing/smooth.py`, `replay.py`, `tune.py`; the commit that adds this entry.
 
 ---
 
