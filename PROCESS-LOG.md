@@ -37,6 +37,7 @@ Contents:
 26. 25 Nov: FAILURE, Wi-Fi is still not a fingerprint on 24 Nov (WiGLE still logs new-or-stronger only)
 27. 25 Nov: weighted fused kNN on all stop data, leaky vs grouped vs leave-one-session-out
 28. 25 Nov: route-aware tracker on 24 Nov (train session 1, replay session 2) and a replay for the circle UI
+29. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
 - Lessons learned
 - Open questions / next steps
 
@@ -405,6 +406,18 @@ Contents:
 
 ---
 
+## 29. 25 Nov: figures, an interactive data explorer, the day3 README and one-command rerun
+
+- **What we tried:** figures for the report/video and a way for the team to "see the data": feature-space embeddings per sensor group and for the fused space, per-place |B| and pressure, a nearest-neighbour "confusion as a graph" on the graph-v2 layout, and an interactive HTML explorer. Replaces the leaky pilot's `phase2/old/positioning-pilot/out/magnetic_pca.png` (left untouched in `old/`).
+- **Why:** the user asked to see clusters and drift between sessions, not only accuracy numbers.
+- **How:** `phase2/new/day3/visualise.py` (matplotlib PNGs; at most three categorical colours per static chart with places as text labels; `explore.html` uses plotly.js 2.35.2 from a CDN, pinned with an integrity hash, data embedded). Embeddings: PCA and t-SNE of |B|+xyz (all windows) and |B|+tilt (24 Nov), t-SNE on the fused distance with the deployable weights, MDS of the Wi-Fi distance (one dot per stop). `run_all.sh` reruns everything in order. `evaluate.py` now also writes `magnetic_check` and the stops that floor tracking got wrong (`step_tracking_wrong_stops`) so the README's data notes come from a file. The explorer was checked by running its script in Node with a stub plot library (8 views, 26 place traces, 2425 points); no browser was available in this session.
+- **Result:** `phase2/new/day3/out/`: `fig_accuracy_vs_chance.png`, `fig_leaky_vs_honest.png`, `fig_confusion.png`, `fig_floor_detection.png`, `fig_per_place_B_pressure.png`, `fig_knn_neighbour_graph.png`, `fig_embed_*.png` (6), `explore.html`. Data issues found while plotting (`results.json` `magnetic_check`): place medians above 100 uT at the 4F down-escalator in session 2 on both phones (iPhone 147.9, S24 127.7 uT) and at the 4F up-escalator (iPhone 142.5), while the 23-Nov iPhone ranges 32.9 to 58.9 uT. The Wi-Fi MDS shows no grouping of the same place across sessions, matching entry 26. `run_all.sh` reran the whole pipeline from the repo root (5 min 32 s): every file in `out/`, figures included, came out identical except the per-fold run times (`seconds`) in `fused_knn.json`, which were left at the committed values.
+- **Outcome:** success.
+- **What changed because of it:** `phase2/new/day3/README.md` documents the run, how to add a session (one `config.json` entry), the name map, the phone/handset table, all results and the data issues. Internal notes only, no report text.
+- **Links:** `phase2/new/day3/visualise.py`, `run_all.sh`, `README.md`, `out/*.png`, `out/explore.html`; commits `643737d` (entry 24), `1a28a48` (entries 25, 26), `3b9292c` (entry 27), `113d90c` (entry 28).
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -417,18 +430,25 @@ Contents:
 - **A tracker needs a way back.** Limiting moves to neighbouring circles without a small "could be anywhere" share meant one wrong stop was never corrected (entry 20, v1).
 - **A map can't replace a fingerprint.** Where a place had no fingerprint in training, the graph did not find it (0/22 on 23 Nov); it helps most when every place has a fingerprint and the magnetometer is weak (cross-day, area 12/17 vs 7/17).
 - **Merging places only renames errors inside an area.** graph-v2 gained one exact cross-day visit and no area visits (entry 24); a merge can't fix a weak fingerprint, and "revisits" created by merging different spots are not real revisits.
+- **Group by the thing that is shared, not by the file.** Wi-Fi and the floor belong to a stop, not to a phone: holding out one phone of a 4-phone stop gave 55% instead of 29% (entry 27). Random window splits gave 99.7%.
+- **Check the device ID, not the phone's nickname.** "iphone" was two handsets on 24 Nov; the same handset across days gave 13/26 and 18/42, a different one less (entry 25). Pooling all phones in one kNN was worse than one model per phone (entry 27).
+- **Step tracking on the barometer breaks over long pauses.** Weather moved the pressure 0.833 hPa during a break and four stops went to the wrong floor (entry 25).
+- **A same-day win can vanish across days.** Tilt correction helped on 23-Nov walk endpoints (39% vs 0%) but added nothing across days or at stops (entry 25).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
 
-- **Day 3 collection by Thu 26 Nov (deadline 30 Nov):** follow `phase2/new/DAY3-CHECKLIST.md`. A new independent session would give a real "train on days 1 and 2, test on day 3" number.
-- **Open question: does the new protocol really lift the cross-day number?** We expect it to land closer to 78% than to 18 to 24%, but that is an expectation to test, not a result.
-- **Open question: does a scan-every-time Wi-Fi logger make Wi-Fi usable?** Untested; check WiGLE's database export first.
-- **Open question: how much does tilt correction help at stops?** The 39% is on walk endpoints only.
+- **Day-3 data (24 Nov) is in and evaluated (entries 25 to 29).** Still worth collecting if time allows (deadline 30 Nov): (1) a test walk that leaves the recorded route, with "I'm here" taps, to measure the tracker without the optimistic parts; (2) one handset for every session (the 24-Nov "iphone" was two devices); (3) a Wi-Fi logger that saves every scan. A further fingerprint session with the same handset would add a fourth leave-one-session-out fold (one line in `phase2/new/day3/config.json`).
+- **Cross-day with the new protocol (entry 25):** same handset 23 Nov -> 24 Nov s2 13/26 and the reverse 18/42 (chance 3.8%, 26 places), up from 18 to 24% on 17 Nov, still below the 23-Nov 78% revisit number. Only one same-handset day pair exists, so this is one estimate.
+- **Open question: does a scan-every-time Wi-Fi logger make Wi-Fi usable?** Still untested; the 24-Nov WiGLE logs are again new-or-stronger only (entry 26).
+- **Tilt at stops (entry 25):** answered for this protocol: no clear gain over raw x/y/z when the phone is held the same way. It might still matter for a user who holds the phone differently; untested.
 - **17-Nov labels:** 8 of 23 place matches rest on route order. Anyone who remembers that walk can help (see section f of the team summary).
 - **Floor-4 Google Maps pins** are still missing, so the map and routing stop at floor 5.
 - **Unmerged branches** `prep/training`, `prep/map`, `prep/ready` are still local and unmerged; decide later whether any of it is wanted.
 - **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
 - **graph-v2 (entries 22, 24):** done: the merge changes cross-day exact by one visit and area not at all (entry 24). Still open: decide whether v2 replaces v1 for the map/UI; the collector should confirm the two merges match the hand-drawn maps.
+- **Collector to confirm (entry 25, `phase2/new/day3/names_24nov.csv`):** 24-Nov `male_disabled_toilet` = 23-Nov `disabled_toilet`; `y5302_point2` = `y5302_back`; `gate` = `entrance_exit`; which study room the 24-Nov `sr9` stop was at.
+- **24-Nov data questions (entries 28, 29):** what made the field above 100 uT at the 4F escalators in session 2 (both phones); the out-of-order walks in session 2 (floor-5 escalators, and gate -> exit 5 recorded before the gate stop); `sesi2/clean/ROUTE.md` says no Wi-Fi but the session has a WiGLE log; the session READMEs call both iPhones "iPhone 16 Pro" but the device IDs differ (iPhone19,2 and iPhone17,4).
+- **Barometer floor rule:** add a guard for long pauses (entry 25) and pre-register it before testing it on new data.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
