@@ -2,11 +2,3 @@ device,from,to,hpa_from,hpa_to,jump_hpa,label_floors,agrees
 "iPhone17,4",escalator_down 17:41:47,sr9 17:46:37,1016.28,1016.29,0.011,5->5,True
 "iPhone17,4",sr9 17:46:37,escalator_down_4F 17:49:21,1016.29,1016.87,0.584,5->4,True
 "iPhone17,4",escalator_down_4F 17:49:21,escalator_up_4F 17:51:44,1016.87,1016.87,-0.002,4->4,True
-"iPhone19,2",canteen 17:35:56,exit_5 17:39:20,1016.06,1016.04,-0.022,5->5,True
-"iPhone19,2",exit_5 17:39:20,male_toilet 17:43:31,1016.04,1016.01,-0.032,5->5,True
-"iPhone19,2",male_toilet 17:43:31,y5302 17:47:00,1016.01,1016.03,0.023,5->5,True
-"iPhone19,2",y5302 17:47:00,sr9 17:50:33,1016.03,1016.02,-0.01,5->5,True
-"iPhone19,2",sr9 17:50:33,y5202 17:53:54,1016.02,1015.99,-0.029,5->5,True
-"iPhone19,2",y5202 17:53:54,female_toilet 17:57:50,1015.99,1016.05,0.053,5->5,True
-"iPhone19,2",female_toilet 17:57:50,exit_10 18:01:14,1016.05,1016.06,0.018,5->5,True
-"iPhone19,2",exit_10 18:01:14,escalator_up 18:06:57,1016.06,1016.03,-0.032,5->5,True

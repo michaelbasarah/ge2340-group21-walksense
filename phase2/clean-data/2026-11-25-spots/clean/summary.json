@@ -1,9 +1,6 @@
 {
  "dataset": "2026-11-25 (route round on floor 5 by two collectors + spot recordings by two others)",
  "raw_files": [
-  "Canteen 2026-11-25 17-37-05.zip",
-  "Canteen ke esca down 2026-11-25 18-10-56.zip",
-  "Canteen ke exit 5 door 2026-11-25 17-38-21.zip",
   "DOC-20261125-WA0051.zip",
   "DOC-20261125-WA0052.zip",
   "DOC-20261125-WA0053.zip",
@@ -16,49 +13,16 @@
   "DOC-20261125-WA0060.zip",
   "DOC-20261125-WA0061.zip",
   "DOC-20261125-WA0062.gz",
-  "Esca up 2026-11-25 18-08-14.zip",
-  "Esca up ke kantin 2026-11-25 18-09-41.zip",
-  "Exit 10 door 2026-11-25 18-02-18.zip",
-  "Exit 10 door ke kantin 2026-11-25 18-03-42.zip",
-  "Exit 5 door 2026-11-25 17-40-32.zip",
-  "Exit 5 door ke toilet cowo 2026-11-25 17-41-24.zip",
-  "Sr9 2026-11-25 17-51-54.zip",
-  "Sr9 ke y5202 2026-11-25 17-52-59.zip",
-  "Toilet cewe 2026-11-25 17-58-59.zip",
-  "Toilet cewe ke exit 10 door 2026-11-25 18-00-32.zip",
-  "Toilet cowo 2026-11-25 17-44-43.zip",
-  "Toilet cowo ke y5302 2026-11-25 17-46-09.zip",
-  "Y5202 2026-11-25 17-55-10.zip",
-  "Y5202 ke toilet cewe 2026-11-25 17-56-17.zip",
-  "Y5302 2026-11-25 17-48-05.zip",
-  "Y5302 ke sr9 2026-11-25 17-49-32.zip",
-  "esca naik 2026-11-25 18-07-50.zip",
-  "esca naik to kantin 2026-11-25 18-09-54.zip",
   "eska naik bawah 2026-11-25 17-52-49.zip",
   "eska turun atas 2026-11-25 17-42-52.zip",
   "eska turun bawah 2026-11-25 17-50-26.zip",
-  "exit 10 door ke kantin 2026-11-25 18-03-36.zip",
-  "exit 5 2026-11-25 17-40-19.zip",
-  "ext 10 2026-11-25 18-02-16.zip",
-  "ext 5 to toilet cwk 2026-11-25 17-41-14.zip",
-  "kantin 2026-11-25 17-36-50.zip",
-  "kantin exit 5 2026-11-25 17-38-36.zip",
-  "kantin to esca turun 2026-11-25 18-10-48.zip",
-  "sr9 2026-11-25 17-47-43.zip",
-  "study room 2026-11-25 17-51-27.zip",
-  "studyroom to y5 202 2026-11-25 17-52-58.zip",
-  "toilet cewe 2026-11-25 17-59-01.zip",
-  "toilet cewe to ext 10 2026-11-25 18-00-08.zip",
-  "tolet cowo to y5302 2026-11-25 17-46-02.zip",
-  "y5202 to toilet cewe 2026-11-25 17-56-08.zip",
-  "y5302 2026-11-25 17-47-42.zip",
-  "y5302 to study room 2026-11-25 17-49-14.zip"
+  "sr9 2026-11-25 17-47-43.zip"
  ],
- "recordings_found": 51,
+ "recordings_found": 15,
  "recordings_unreadable": [],
  "duplicates_dropped": 0,
- "recordings_unique": 51,
- "recordings_labelled": 43,
+ "recordings_unique": 15,
+ "recordings_labelled": 7,
  "recordings_unlabelled": [
   "DOC-20261125-WA0051.zip (SM-S9280, 17:40:24, 60 s): Michael's S24 spot, START 17:40:24 (60 s). WhatsApp stripped the file name; no labelled recording at the same time. Needs the name from the phone (re-export) or from Michael",
   "DOC-20261125-WA0053.zip (SM-S9280, 17:45:43, 60 s): Michael's S24 spot, START 17:45:43 (60 s). Name stripped by WhatsApp; no labelled recording at the same time",
@@ -69,51 +33,37 @@
   "DOC-20261125-WA0060.zip (SM-S9280, 18:02:10, 68 s): Michael's S24 spot, START 18:02:10 (68 s, 4 time events = paused and resumed). Name stripped by WhatsApp; needs the name",
   "DOC-20261125-WA0061.zip (SM-S9280, 18:04:01, 61 s): Michael's S24 spot, START 18:04:01 (61 s). Name stripped by WhatsApp; needs the name"
  ],
- "recordings_written": 43,
+ "recordings_written": 7,
  "per_track_device": {
-  "round/SM-A566B": 17,
-  "round/iPhone19,2": 19,
   "spots/SM-S9280": 3,
   "spots/iPhone17,4": 4
  },
- "stops": 13,
- "walks": 10,
+ "stops": 4,
+ "walks": 0,
  "stops_per_track_floor": {
-  "round/floor5": 9,
   "spots/floor4": 2,
   "spots/floor5": 2
  },
  "places_with_a_stop": [
-  "canteen",
   "escalator_down",
   "escalator_down_4F",
-  "escalator_up",
   "escalator_up_4F",
-  "exit_10",
-  "exit_5",
-  "female_toilet",
-  "male_toilet",
-  "sr9",
-  "y5202",
-  "y5302"
+  "sr9"
  ],
  "confidence": {
-  "high": 34,
-  "medium": 9
+  "high": 4,
+  "medium": 3
  },
  "stop_durations_s": [
   60.0,
   68.3
  ],
- "walk_durations_s": [
-  4.2,
-  12.3
- ],
+ "walk_durations_s": [],
  "recordings_with_more_than_2_time_events": [
   "DOC-20261125-WA0060.zip (4 events)"
  ],
  "floor_check_disagreements": [],
- "floor_check_pairs": 11,
+ "floor_check_pairs": 3,
  "wifi": {
   "logs": [
    {
@@ -129,6 +79,6 @@
   "rows_assigned_within_120s": 2871,
   "rows_in_window": 537,
   "stops_with_wifi": 4,
-  "stops_total": 13
+  "stops_total": 4
  }
 }

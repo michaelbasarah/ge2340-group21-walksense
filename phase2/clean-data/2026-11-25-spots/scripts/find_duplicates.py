@@ -11,6 +11,10 @@ and writes duplicates_vs_2026-11-25.csv (folder root, next to labels_override.cs
 'same_recording' or 'unique', the matching file of hers and her clean-tree folder (from her clean/manifest.csv).
 The day-3 session `25spots` (phase2/new/day3/config.json, `exclude_sources`) leaves every non-unique recording out of
 the training set. Nothing is deleted or modified: both raw folders are only read.
+
+NOTE 26 Nov: the 36 byte_identical ZIPs were deleted from raw/attachments/ (PROCESS-LOG entry 68). Do not rerun this script
+now: it would see only the 16 files left and overwrite the CSV, losing the 36 rows day3 `exclude_sources` reads and the
+column `deleted_2026-11-26`. The CSV is the record.
 """
 from __future__ import annotations
 
