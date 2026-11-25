@@ -70,6 +70,8 @@ Contents:
 59. 25 Nov: request matching, final comparison on dev + test, with failures
 60. 25 Nov: continuous place estimate (kNN every tick, smoothed): design and selection rule fixed before any result
 61. 25 Nov: continuous place estimate results: smoothing does not raise stop accuracy; gating stops the jumps while walking; per-phone offset FAILED
+62. 25 Nov: results pack (figures, tables, fact sheets) built from the committed outputs, rerunnable
+63. 25 Nov: four feature branches landed on main (routing, request matching, live smoothing, results pack), entries renumbered
 - Lessons learned
 - Open questions / next steps
 
@@ -960,6 +962,35 @@ Contents:
 
 ---
 
+## 62. 25 Nov: results pack (figures, tables, fact sheets) built from the committed outputs, rerunnable
+
+- **What we tried:** one script that turns the existing outputs into the figures and tables the report and slides need, and two internal fact sheets, so that the numbers can be regenerated when the 25-Nov data changes them. It writes no report or slide prose (course rule); `numbers.md` and `timeline.md` are internal notes.
+- **Why:** the team writes the report and slides by hand and needs honest held-out numbers with n, chance and the leaky number labelled as leaky, each traceable to a file and a commit. Another worker is adding 25-Nov data to `main`, so nothing may be typed in by hand.
+- **How:** `phase2/new/results-pack/build.py` + `config.json` (paths) + `timeline_facts.json` (hand-kept wording of failures/lessons, numbers read from files). Sources read: `day3/out/` and `out-split20/` (`fused_knn.json`, `results.json`, `fused_sample_predictions_2026-11-25a.csv`, `track24_results.json`, `wifi_diagnosis.json`, `variance_by_place.csv`, `compare_before_after.csv`), `cross-day/out/`, `tracking/out/`, `upload/out/eval.json` and `live_checks.json`, `phase2/old/positioning-pilot/out/results.json`, `request-matching/results.csv`, `clean-data/*/summary.json` and manifests. Every number goes into a fact registry with its source file, the last git commit of that file, n, chance and the test definition; tables, figures, `numbers.md` and `timeline.md` are drawn from the registry. Wilson 95% intervals, the 1/2 chance of floor tests and the pilot's hit count are computed (marked derived). Run: `.venv/bin/python phase2/new/results-pack/build.py`.
+- **Result:** `phase2/new/results-pack/out/`: 10 figures, each as slide size (16:9, 300 dpi PNG + SVG) and report size (5.5 in wide): honest vs leaky, accuracy vs chance (every test), per-place accuracy, phone x place, phone x session, cross-session/cross-day bars, barometer floor timeline, variance decomposition, tracker vs snapshot, Wi-Fi diagnosis; positioning table for methods A to D (`positioning_table.md/.csv`, plus a 20 s-piece version), five `table_*.csv`, `numbers.md`, `timeline.md`, `index.html`. The build's own check: per-sample leave-one-session-out count equals `fused_knn.json` (74/202). No source was missing in this build.
+- **Outcome:** success. Not found in any file: a chance level for the walking-dot corridor test; the pilot's hit count (only the rate is stored, so 147/156 is derived); no 25-Nov results exist yet (the day-3 config still lists 23 Nov, 24 s1, 24 s2), so the figures show three sessions. Inconsistencies between source files are listed at the end of `numbers.md` and not fixed: different chance levels (1/26, 1/13 when the floor is given, 1/31), iPhone s1 to s2 17/26 (upload, floor given) vs 12/26 (day3), snapshot kNN 15/26 vs 12/26 and 2/17 vs 3/17, floor tracking on 24 s1 23/27 vs 27/27, Wi-Fi coverage 41/42 vs 42/42, cross-day Wi-Fi 11 to 22% in entry 12 vs 11 to 44% in `summary_table.csv`.
+- **What changed because of it:** after the 25-Nov data is merged and the day-3 pipeline rerun, rerunning `build.py` refreshes every figure, table and number sheet; failures and lessons in `timeline_facts.json` must be updated by hand.
+- **Links:** `phase2/new/results-pack/` (`build.py`, `config.json`, `timeline_facts.json`, `README.md`, `out/`); the commit that adds this entry.
+
+---
+
+## 63. 25 Nov: four feature branches landed on main (routing, request matching, live smoothing, results pack), entries renumbered
+
+- **What we tried:** merge the finished branches `feat/routing` (`c5507ad`), `feat/request-matching` (`a80a489`), `feat/live-smoothing` (`a51bc99`) and `feat/results-pack` (`dadd0ee`) into main with merge commits, in that order, and give their provisional log entries the next free numbers.
+- **Why:** the user asked for them to land after the full 25-Nov rerun (entries 49 to 51). `feat/user-test` stays unmerged (the user dropped it).
+- **How:** `git merge --no-ff` each branch. Every branch touched only its own folder plus `PROCESS-LOG.md`, so only the log conflicted. The log was rebuilt from main's version plus each branch's new contents lines, entries, Lessons and Open-question lines (scratch script, not committed), with the numbers mapped: routing 80 to 83 -> 52 to 55, matching 70 to 73 -> 56 to 59, smoothing 60 and 61 unchanged, results pack 90 -> 62; references in those entries to main's entries 28 to 47 (numbered before Dicta's entry 28 landed) moved by +1. Same mapping in the branch files that quote entry numbers: `phase2/request-matching/README.md` and `build_test_set.py` (70 -> 56, 71 -> 57), `phase2/new/smoothing/README.md` (provisional note dropped), `phase2/new/results-pack/timeline_facts.json` (61 bracketed references and the `log` fields: >= 28 moved by +1) and the entry-number note in `phase2/new/results-pack/build.py`. No `.venv`, `cache/` or new LLM cache files were added beyond what the branches had committed (routing's 150 files in `out/llm_cache/`).
+- **Result:**
+  - Merge commits: routing `372f918`, request matching `121a1d7`, live smoothing `625a69e`, results pack = the commit that adds this entry.
+  - Routing: `python -m unittest test_route` in `phase2/new/routing`: 4 tests, OK.
+  - Request matching: `evaluate.py --phase final --no-llm-calls` (`HF_HUB_OFFLINE=1`): exit 0; keyword test 44/62, embed 44/62, llm 60/62 (all from the cache); all 128 predictions identical to the committed `results.csv`, only the latency columns changed, so the committed outputs were kept.
+  - Live smoothing: no test suite on the branch; `py_compile` of its three scripts passes.
+  - Results pack: merged as built on its branch (before the 25-Nov data); rebuilt in entry 65.
+- **Outcome:** success.
+- **What changed because of it:** entries 52 to 62 are on main; the provisional numbers 60 to 90 in the branch commit messages map as above.
+- **Links:** `372f918`, `121a1d7`, `625a69e`, the commit that adds this entry; `phase2/new/routing/`, `phase2/request-matching/`, `phase2/new/smoothing/`, `phase2/new/results-pack/`.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1001,6 +1032,7 @@ Contents:
 - **Substring alias rules hide bugs.** "eat" matched inside "theatre"; whole-word matching fixed it (entry 58). Typos and non-English words are where keyword rules fall (typo 4/18 hard queries, entry 59).
 - **A cut-off tuned on a small dev split may not carry over.** The embedding "none" threshold gave 52/66 on dev and 44/62 on test (entry 59).
 - **Smoothing fixes jitter, not bias.** A 1 s kNN averaged over the last ticks scored the same as no averaging (entry 61): the wrong answers at a stop were steady, not jumpy. The jumps were on walks, and the fix was to feed the model only when the phone is still. A constant per-phone offset made things worse.
+- **Generate the numbers sheet from the files.** `phase2/new/results-pack/build.py` keeps every quoted number tied to a source file, a commit and a test definition (entry 62); quote chance and n together, because the chance level differs between files.
 
 ## Open questions / next steps
 
@@ -1029,3 +1061,4 @@ Contents:
 - **Routing (entries 52 to 55):** the team must confirm the guessed edge values: escalator ride 20 s (both directions, never timed), `exit_10`-`escalator_up` 4.9 m, lift/stairs 30.0 s timed 5F -> 4F only (the lift is not timed), and the 23 step-based lengths (step x 0.54 m; floor-4 has no Google pins). List in `phase2/new/routing/README.md`.
 - **Request matching (entries 57 to 59):** the team must read and correct the 105 `agent_draft` hard queries in `phase2/request-matching/test_queries.csv` (and the aliases/tags in `destinations.csv`), then rerun `evaluate.py` (dev, then final); the numbers are provisional until then. Open readings: no printer / charging / clinic / computer lab in our list, which exit leads to the MTR, whether the lift is step-free, whether "pintu keluar" means the gate or any exit. Repeat the LLM run once to see its variation (about 128 calls, about 11 min).
 - **Continuous estimate (entries 60, 61):** retune with the 25-Nov data once it is in main (same handset in more sessions would show whether smoothing helps when the errors are not cross-handset); test arrival latency on a real continuous walk (the 24-Nov recordings have gaps before each stop). Not wired into the app (user decision).
+- **Results pack (entry 62):** rerun `build.py` after the 25-Nov data is merged and the day-3 pipeline rerun; decide which chance level and which place list (v1 31 places, graph-v2 26) the report quotes, since the source files differ (list at the end of `phase2/new/results-pack/out/numbers.md`).

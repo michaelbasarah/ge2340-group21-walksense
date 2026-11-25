@@ -1,0 +1,129 @@
+{
+  "_comment": "Internal team notes, not report text. Bullet facts only. {{json:file#a.b}} reads a value from a repo file, {{csvrows:file}} counts rows, {{f:fact_id}} reads the fact registry built by build.py. Failure and lesson wording is copied from PROCESS-LOG.md (entry numbers in brackets); rewrite it here if the log changes.",
+  "sessions": [
+    {
+      "date": "14 Nov 2026",
+      "title": "first recordings and cleaning",
+      "added": [
+        "{{json:phase2/clean-data/2026-11-14/summary.json#barometer_magnetometer_stops}} stationary recordings (barometer + magnetometer) and {{json:phase2/clean-data/2026-11-14/summary.json#accelerometer_segments}} walking recordings (accelerometer); stops on iPhone17,4, walks on iPhone19,2 [1]",
+        "one Wi-Fi log: {{json:phase2/clean-data/2026-11-14/summary.json#wifi.wifi_rows_clean}} clean Wi-Fi rows [1]",
+        "{{json:phase2/clean-data/2026-11-14/summary.json#sensor_rows_clean}} clean sensor readings of {{json:phase2/clean-data/2026-11-14/summary.json#sensor_rows_source}} source readings, {{json:phase2/clean-data/2026-11-14/summary.json#sensor_rows_excluded}} quarantined [1]"
+      ],
+      "failures": [
+        "location labels unreliable: every old name untrusted [1]",
+        "26 stop files vs 25 numbered location descriptions, cause never found; BM04 unmatched [1]",
+        "labelling workflow (assignments, submissions) set up but no submissions came back through it [2]"
+      ],
+      "lessons": [
+        "from 17 Nov the file names carry the route, which is what later made relabelling possible [2]"
+      ],
+      "log": "1, 2, 3",
+      "data": "phase2/clean-data/2026-11-14/"
+    },
+    {
+      "date": "17 Nov 2026",
+      "title": "trial session, 30 s stops",
+      "added": [
+        "{{json:phase2/clean-data/2026-11-17/summary.json#barometer_magnetometer_stops}} stops (30 s) and {{json:phase2/clean-data/2026-11-17/summary.json#accelerometer_movements}} walks, floors 5 and 4; stops iPhone17,4, walks iPhone19,2, Wi-Fi on a Samsung SM-A556E [4]",
+        "{{json:phase2/clean-data/2026-11-17/summary.json#wifi.wifi_rows_clean}} Wi-Fi rows [4]",
+        "Dicta's positioning pilot on this data: {{f:pilot.knn}} kNN on 2 s slices, train and test slices from the same recordings [5]"
+      ],
+      "failures": [
+        "pilot accuracy was leakage (neighbouring 2 s slices of one visit are near copies); marked superseded and moved to phase2/old [5, 17]",
+        "Wi-Fi: only part of the stops have rows (Android scan throttling); 12 stops with none [4]",
+        "one stop exported twice: {{json:phase2/clean-data/2026-11-17/summary.json#exclusion_reason_counts.duplicate_reexport_interval_superseded_by_BM19}} duplicate rows quarantined [4]",
+        "labels only route-inferred: {{json:phase2/clean-data/2026-11-17/summary.json#stop_label_confidence_counts.route_confirmed_both_sides}} of 26 confirmed on both sides [4]"
+      ],
+      "lessons": [
+        "next session used longer stops (about 60 s) and added the gyroscope [4]",
+        "a different day is needed as test set; same-recording splits are only an upper bound [5]"
+      ],
+      "log": "4, 5",
+      "data": "phase2/clean-data/2026-11-17/"
+    },
+    {
+      "date": "23 Nov 2026",
+      "title": "two-floor session, 60 s stops, gyroscope",
+      "added": [
+        "{{json:phase2/clean-data/2026-11-23/summary.json#stops_unique}} stops ({{json:phase2/clean-data/2026-11-23/summary.json#floor_counts.5}} on floor 5, {{json:phase2/clean-data/2026-11-23/summary.json#floor_counts.4}} on floor 4) and {{json:phase2/clean-data/2026-11-23/summary.json#movements}} walks [7]",
+        "{{json:phase2/clean-data/2026-11-23/summary.json#sensor_rows_clean}} accepted readings of {{json:phase2/clean-data/2026-11-23/summary.json#sensor_rows_source}}; {{json:phase2/clean-data/2026-11-23/summary.json#wifi.logs}} Wi-Fi logs [7]",
+        "relabelled from the collector's route on 24 Nov: {{csvcount:phase2/new/cross-day/out/label_changes_vs_provisional.csv|labels_agree|False}} of {{csvrows:phase2/new/cross-day/out/label_changes_vs_provisional.csv}} labels changed, none of the floors [9]",
+        "steps counted on all walks: {{f:pdr.23Nov.steps}} [19]"
+      ],
+      "failures": [
+        "pause/resume produced duplicate recordings: {{json:phase2/clean-data/2026-11-23/summary.json#duplicate_reexport_intervals}} duplicate intervals quarantined [7]",
+        "labelling rule 'stop = origin of next walk' mislabelled stops with no walk after them [7, 9]",
+        "no accelerometer logged at stops, so stops cannot be tilt-corrected [13]",
+        "stop phone and walk phone are different iPhones; mean |B| per place correlates only {{f:tilt.device_corr}} [14]",
+        "fixed barometer threshold failed (weather drift): {{f:d3.floor.iphone_test_23nov.abs}} on 23 Nov in the day-3 rerun; step tracking {{f:d3.floor.iphone_test_23nov.step}} [11]",
+        "WiGLE Wi-Fi near useless: logs an access point only when new or stronger [12]"
+      ],
+      "lessons": [
+        "revisit test (same day, later visit): {{f:cd.revisit_23.magnitude_xyz_knn_baro_floor}}; cross-day 23 to 17 Nov: {{f:cd.cross_core.magnitude_xyz_knn_baro_floor}} (|B|+xyz with floor) [10]",
+        "start a NEW recording at each stop (no pause/resume); log accelerometer + gyroscope at stops; one phone for the whole protocol [13, 14]",
+        "tilt correction on 23-Nov walk endpoints: {{f:tilt.lopo.tilt-corrected (low-pass gravity)}} vs {{f:tilt.lopo.raw x/y/z}} raw x/y/z, same day only [15]"
+      ],
+      "log": "7 to 15",
+      "data": "phase2/clean-data/2026-11-23/"
+    },
+    {
+      "date": "24 Nov 2026",
+      "title": "two sessions (sesi 1: four phones, sesi 2: two phones)",
+      "added": [
+        "sesi 1: {{json:phase2/clean-data/2026-11-24/sesi1/clean/summary.json#recordings_unique}} unique recordings ({{json:phase2/clean-data/2026-11-24/sesi1/clean/summary.json#stops}} stops + {{json:phase2/clean-data/2026-11-24/sesi1/clean/summary.json#walks}} walks), phones {{json:phase2/clean-data/2026-11-24/sesi1/clean/summary.json#phones}} [23]",
+        "sesi 2: {{json:phase2/clean-data/2026-11-24/sesi2/clean/summary.json#recordings_unique}} recordings ({{json:phase2/clean-data/2026-11-24/sesi2/clean/summary.json#stops}} stops + {{json:phase2/clean-data/2026-11-24/sesi2/clean/summary.json#walks}} walks), phones {{json:phase2/clean-data/2026-11-24/sesi2/clean/summary.json#phones}} [23]",
+        "first independent second pass: train one session, test the other (no same-day leakage) [23, 30]",
+        "accelerometer logged at stops, so tilt features are possible at stops [30]",
+        "same-handset cross-day (ip16, 23 Nov to 24 s2): {{f:d3.xday_23nov_to_24s2_iphone.|B|+xyz + baro floor}}, reverse {{f:d3.xday_24s2_to_23nov_iphone.|B|+xyz + baro floor}} [30]",
+        "weighted fused kNN, honest: {{f:fused.take.leave_one_session_out.fused}} leave one session out, {{f:fused.take.grouped_by_stop.fused}} by stop; leaky random windows {{f:fused.take.random_LEAKY.fused}} [32]"
+      ],
+      "failures": [
+        "the 'iphone' slot was two different handsets (iPhone19,2 in s1, iPhone17,4 in s2) [30, 37]",
+        "S24 barometer unusable for floors: largest same-floor consecutive change {{f:d3.floorstats.24s1_s24.jump}} in s1 [23, 30]",
+        "floor step tracking broke after a long break in s1: {{f:d3.floor.iphone_test_24s1.step}}; largest same-floor change {{f:d3.floorstats.24s1_iphone.jump}} [30]",
+        "Wi-Fi still not a fingerprint: each BSSID about once per stop ({{f:wifi.rows_per_bssid.24s2}} rows per BSSID in s2) [31]",
+        "pooling all phones in one kNN worse than per-phone model [32]",
+        "very strong field (above 100 uT) at the 4F escalators in s2 on both phones, cause unknown [34]"
+      ],
+      "lessons": [
+        "most of the |B| spread is handset and day, not place: place share of |B| variance {{f:var.session_first.B.place}}, phones {{f:var.session_first.B.phone}}, sessions {{f:var.session_first.B.session}} [38]",
+        "phone held the same way (flat, facing the door) makes raw x/y/z work; tilt adds nothing on top [24, 30]",
+        "20 s pieces triple n but not the information; removing pieces raised accuracy by removing hard test pieces: LOSO {{f:fused.split20.leave_one_session_out.fused}} on pieces [40]"
+      ],
+      "log": "23, 30 to 38, 40",
+      "data": "phase2/clean-data/2026-11-24/"
+    },
+    {
+      "date": "25 Nov 2026",
+      "title": "route round on floor 5 plus spot recordings at hard places (partial WhatsApp export)",
+      "added": [
+        "{{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_found}} recordings found, {{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_labelled}} labelled; {{json:phase2/clean-data/2026-11-25/clean/summary.json#stops}} stops and {{json:phase2/clean-data/2026-11-25/clean/summary.json#walks}} walks (per track and device: {{json:phase2/clean-data/2026-11-25/clean/summary.json#per_track_device}}) [42]",
+        "spot recordings aimed at the places never classified correctly before (list fixed beforehand): {{f:derived.never_correct}} [41]",
+        "upload pipeline and live mode built the same day: floor tracking {{f:up.floor.sesi1 iphone}} and {{f:up.floor.sesi2 iphone}}; live replay stops found {{f:up.live.sesi1 streamed, model iPhone17,4.found}} [24 to 27]"
+      ],
+      "failures": [
+        "the WhatsApp export wrote '<Media omitted>' for 73 media messages after 17:30; the rest of the floor-5 round and the whole 4F round are missing [42]",
+        "{{json:phase2/clean-data/2026-11-25/clean/summary.json#recordings_unlabelled|len}} recordings unlabelled (names stripped) and not used [42]",
+        "Wi-Fi from one scanner only (S24, spots track): 4 of 13 stops have Wi-Fi [42]",
+        "no lift_stairs, disabled toilet, y5401 or y5302_back data for 25 Nov in this export [42]"
+      ],
+      "lessons": [
+        "rebuild the clean tree from the raw ZIPs and rerun the day-3 pipeline once the missing files are added (steps in phase2/clean-data/2026-11-25/README.md) [42]",
+        "pipeline made track-aware (round and spots interleave in time, different iPhones); rerun reproduced the 20 s-piece numbers exactly [43]"
+      ],
+      "log": "24 to 27, 41 to 43",
+      "data": "phase2/clean-data/2026-11-25/"
+    }
+  ],
+  "milestones": [
+    "24 Nov: first cross-day run; honest numbers replace the pilot's leaky number [8, 10]",
+    "24 Nov: floor solved by step tracking on 17 and 23 Nov: {{f:d3.floor.iphone_test_23nov.step}} on 23 Nov (day-3 rerun) [11]",
+    "24 Nov: route-aware tracker (HMM on the circles-on-lines graph): 23 Nov leave one visit out tracker {{f:trk.lovo23.tracker.exact}} vs snapshot {{f:trk.lovo23.snapshot_knn_crossday_recipe.exact}}; cross-day 23 to 17 core tracker {{f:trk.x2317.tracker.exact}} vs snapshot {{f:trk.x2317.snapshot_knn_crossday_recipe.exact}}; tracker v1 failed to recover from a wrong belief [20]",
+    "25 Nov: tracker on 24 Nov (s1 to s2): tracker {{f:trk24.x.tracker.exact}} vs snapshot {{f:trk24.x.snapshot_knn_crossday_recipe.exact}}; same-handset variant {{f:trk24.same.tracker.exact}} vs {{f:trk24.same.snapshot_knn_crossday_recipe.exact}} [33]",
+    "25 Nov: upload app held-out test, iPhone s1 to s2 top-1 {{f:up.iphone sesi1->sesi2 xyz.top1}}, S24 {{f:up.s24 sesi1->sesi2 xyz.top1}} (floor given) [24]",
+    "25 Nov: walking dot, first corridor right {{f:up.dot.sesi1->sesi2.first}} and {{f:up.dot.sesi2->sesi1.first}}, end error median/p90 {{f:up.dot.sesi1->sesi2.err}} [27]",
+    "25 Nov: leakage demonstration: random windows {{f:fused.take.random_LEAKY.fused}}, by recording {{f:fused.take.by_recording_partly_leaky.fused}}, by stop {{f:fused.take.grouped_by_stop.fused}}, leave one session out {{f:fused.take.leave_one_session_out.fused}} [32]",
+    "25 Nov: places never classified correctly under leave one session out: {{f:derived.never_correct}} [41]",
+    "25 Nov: request matching on the starter set: keyword {{f:rm.keyword_ok}}, token overlap {{f:rm.tokens_ok}} (test set too easy, see its README) [6]"
+  ]
+}
