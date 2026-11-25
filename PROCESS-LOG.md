@@ -36,6 +36,7 @@ Contents:
 25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
 26. 25 Nov: live mode, phyphox remote access read by the laptop while walking
 27. 25 Nov: live mode: place after 3 s, walking dot, play/pause recordings
+28. 25 Nov: day-3 clean dataset published (one 3-phone pass, floor 5 + floor 4)
 - Lessons learned
 - Open questions / next steps
 
@@ -383,6 +384,18 @@ Contents:
 
 ---
 
+## 28. 25 Nov: day-3 clean dataset published (one 3-phone pass, floor 5 + floor 4)
+
+- **What we tried:** cleaned and published the 25-Nov day-3 collection (one continuous ~17:35–19:15 pass of the two-floor loop), raw and organized, under `phase2/clean-data/2026-11-25/` (`README.md`, `raw/`, `clean/`, `scripts/`, `floor-sketch-v1.pdf`). Same browsable layout as the 24-Nov folder; single session so no `sesi1/sesi2` split.
+- **Why:** a third independent full pass of the same loop → a clean cross-session train/test split (e.g. train 24-Nov, test 25-Nov) without the same-day leakage that inflated earlier numbers.
+- **How:** `scripts/build25.py` groups each physical stop/walk across phones by **timestamp** (raw labels are noisy — three languages + typos), anchoring to the complete iphone sequence then matching a55/a56 by nearest start time; assigns a canonical node + floor, de-duplicates (including the nested `attachments.zip` bundle of 51 recordings), and copies each sensor CSV verbatim. `wifi_docs25.py` associates WiGLE first-sightings to the **nearest** stop (`in_window` inside the 60 s dwell, else `approach` within 120 s). `gendocs25.py` writes ROUTE/README + the per-phone table. Paths are relative, so `python scripts/build25.py && scripts/wifi_docs25.py && scripts/gendocs25.py` rebuilds `clean/` from `raw/` (verified: 537 sensor CSVs, identical stats). Floor split is by route: floor 4 begins at the "lift stair 5 lantai 4" landing.
+- **Result:** 164 raw archives → 162 unique → **161 recordings written** (3 phones; iphone 54, a55 54, a56 53), **26 stops + 28 walks** (14+15 floor 5, 12+13 floor 4), Wi-Fi **7,178 obs / 2,760 BSSIDs, 26/26 stops covered** (1,032 in_window + 5,884 approach), 5,428 CityU-infra obs (`clean/summary.json`). Verified: no empty sensor files; iphone barometer present at every stop. Two byte-identical a55 duplicates dropped (sr9→y5202 walk, gate stop); a56 missed one walk (`floor4/walks/w06_esca_down__y4502`, later-uploaded a56 y5202 stop was added).
+- **Outcome:** success — one complete day-3 session, organized and reproducible from `raw/` with `scripts/`.
+- **What changed because of it:** a third same-protocol day is now available for a train-on-earlier/test-on-later split. **Only one floor sensor this session** — the iphone (`iPhone19,2`) `Barometer.csv`; no s24. Measured clean: ~0.005 hPa within-stop std and a +0.9 hPa floor-5→floor-4 step (`clean/summary.json` warnings), consistent with the 24-Nov finding that the iPhone barometer is the one to trust. Route notes: **no canteen-revisit stop** this time (canteen is a walk-through); floor-5 escalators visited up→down; `y5302` again at two doors (`y5302` + `y5302_point2`).
+- **Links:** `phase2/clean-data/2026-11-25/` (`README.md`, `raw/`, `clean/`, `scripts/build25.py`, `floor-sketch-v1.pdf`); summary `clean/summary.json`.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -402,7 +415,7 @@ Contents:
 
 ## Open questions / next steps
 
-- **Day 3 collection by Thu 26 Nov (deadline 30 Nov):** follow `phase2/new/DAY3-CHECKLIST.md`. A new independent session would give a real "train on days 1 and 2, test on day 3" number.
+- **Day 3 collection: done (25 Nov, entry 28).** `phase2/clean-data/2026-11-25/` is a third independent pass (3 phones, 26 stops + 28 walks, Wi-Fi 26/26). Still to run: the actual "train on earlier days, test on 25-Nov" cross-session number. Note only the iphone logged pressure this session (no s24).
 - **Open question: does the new protocol really lift the cross-day number?** We expect it to land closer to 78% than to 18 to 24%, but that is an expectation to test, not a result.
 - **Open question: does a scan-every-time Wi-Fi logger make Wi-Fi usable?** Untested; check WiGLE's database export first.
 - **Open question: how much does tilt correction help at stops?** The 39% is on walk endpoints only.
