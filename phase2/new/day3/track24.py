@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Route-aware HMM tracker (../tracking/tracker.py, v2 parameters, code reused unchanged) on 24 Nov.
 
-Test = 24-Nov session 2 (iPhone17,4), replayed in time order. Everything the tracker learns comes from
-session 1 only: the magnetic fingerprints (iPhone19,2 stops, |B|+xyz 2 s windows as in crossday.py),
+Test = 24-Nov session 2 (ip16 = iPhone17,4), replayed in time order. Everything the tracker learns comes from
+session 1 only: the magnetic fingerprints (ip18 = iPhone19,2 stops, |B|+xyz 2 s windows as in crossday.py),
 the expected steps per line (session-1 iPhone walks, same step detector as pdr.py) and the barometer
 floor-jump threshold. Graph = graph-v2 (merged study rooms and lift/stairs). Compared on the same stops
 with the snapshot kNN and the emission-only model, exactly as tracker.py does.
+
+This main run is CROSS-HANDSET (fingerprints from ip18, test on ip16). A SAME-handset variant (fingerprints and
+floor threshold from the 23-Nov ip16 stops, line lengths still from session 1 walks) is written next to it.
 
 Run after data.py:  python phase2/new/day3/track24.py
 Writes out/track24_results.json, out/track24_visits.csv and out/replay_24nov_s2.json (the circle-UI format;
@@ -41,6 +44,8 @@ def session_inputs(sid):
     nm = names.set_index(['floor', 'node_24nov'])['place_v2'].to_dict()
     m = pd.read_csv(root / 'manifest.csv', dtype=str).fillna('')
     m = m[m['phone'] == PHONE].copy()
+    hs = sorted({data.handset(d) for d in m['device']})
+    assert len(hs) == 1, f'{sid}: the {PHONE} slot has several handsets {hs}'
     m['floor'] = m['floor'].astype(int)
     D = data.load()
     V = D['V'][D['V']['session'] == sid].set_index('visit')
@@ -73,7 +78,27 @@ def session_inputs(sid):
     pw['from_stop'] = [st[st['start_epoch_s'] <= s0]['stop_id'].iloc[-1] if (st['start_epoch_s'] <= s0).any() else None
                        for s0 in pw['start']]
     pw = pw[pw['from_stop'].notna()].reset_index(drop=True)
-    return st, pw, pd.DataFrame(W_rows), V
+    return st, pw, pd.DataFrame(W_rows), V, hs[0]
+
+
+def windows_23nov():
+    """2 s windows of the 23-Nov stops (all ip16, checked), keyed '23nov:<stop>', and the stop -> place map."""
+    D = data.load()
+    V23 = D['V'][D['V']['session'] == '23nov']
+    assert set(V23['iphone_handset']) == {'ip16'}, set(V23['iphone_handset'])
+    sys.path.insert(0, str(data.NEW / 'cross-day'))
+    import crossday as cd
+    mag, _ = cd.load_sensors(cd.D_23)
+    rows = []
+    for sid, g in mag.groupby('stop_id'):
+        g = g.sort_values('timestamp_epoch_s')
+        for w in data.window_features(g['timestamp_epoch_s'].to_numpy(), g[['x', 'y', 'z']].to_numpy(), win=WIN):
+            rows.append({'key': f'23nov:{sid}', 'window': w['window'],
+                         **{COL.get(c, c): w[c] for c in ['B_mean', 'B_std', 'B_p10', 'B_p90', 'x_mean', 'y_mean', 'z_mean']}})
+    place = {f'23nov:{v.split(":", 1)[1]}': pl for v, pl in zip(V23['visit'], V23['place'])}
+    vt = V23.sort_values('start')
+    p, f = vt['hpa_iphone'].to_numpy(), vt['floor'].to_numpy()
+    return pd.DataFrame(rows), place, float(np.median(np.abs(np.diff(p))[np.diff(f) != 0])) / 2
 
 
 def mu_from_walks(g, pw_train):
@@ -96,8 +121,9 @@ def main():
     tk.GRAPH = data.NEW / 'graph-v2'
     tk.set_variant('v2_relocalise_and_firm_floor')
     g = tk.load_graph()
-    st_tr, pw_tr, W_tr, V_tr = session_inputs(TRAIN)
-    st, pw, W, V = session_inputs(TEST)
+    st_tr, pw_tr, W_tr, V_tr, h_tr = session_inputs(TRAIN)
+    st, pw, W, V, h_te = session_inputs(TEST)
+    D_tr, D_te = data.display_names()[h_tr], data.display_names()[h_te]
     unknown = sorted((set(st['place']) | set(st_tr['place'])) - set(g['ids']))
     assert not unknown, unknown
     edges_missing = sorted({f'{a}|{b}' for a, b in zip(pw['from_place'], pw['to_place'])
@@ -121,13 +147,28 @@ def main():
     replay = {'graph': tk.export_graph(g), 'destination': st['place'].iloc[-1], 'frames': frames,
               'meta': {'day': '2026-11-24 session 2', 't0_epoch_s': float(t0), 'frame_dt_s': tk.FRAME_DT,
                        'method': 'route-aware HMM tracker v2 (tracking/tracker.py unchanged) on graph-v2; magnetic fingerprints, '
-                                 'line lengths and floor threshold from 24-Nov session 1 only (iPhone19,2); replayed on session 2 (iPhone17,4)',
+                                 f'line lengths and floor threshold from 24-Nov session 1 only ({D_tr} = iPhone19,2); replayed on session 2 ({D_te} = iPhone17,4)',
                        'note': 'frames exist only while a stop or walk was recording; t jumps over the gaps. '
                                'Stop frames: edge_from/edge_to/progress are null. Walk frames: true_node is null.'}}
     (data.OUT / 'replay_24nov_s2.json').write_text(json.dumps(replay, separators=(',', ':')))
+    # ---- SAME-handset variant: fingerprints + floor threshold from the 23-Nov stops (ip16, like the test), line lengths from s1 walks
+    W23, place23, thr23 = windows_23nov()
+    model23 = tk.MagModel(W23, place23, g['ids'])
+    trk23 = data.track_floor(vs['hpa_iphone'].to_numpy(), thr23)
+    floor23 = {f'{TEST}:{s}': int(f) for s, f in zip([v.split(':', 1)[1] for v in vs.index], trk23)}
+    visits23, _ = tk.run(TEST, g, st, pw, W, lambda sid: model23, floor23, mu, export=False)
+    tk.snapshots(g, W, place23, lambda sid: W23, visits23, TEST, floor23, lambda sid: model23)
+    res23 = tk.table(g, visits23, {'all_26_stops': lambda v: True})
+    variant = {'train_fingerprints': f'23 Nov stops ({data.display_names()["ip16"]} = iPhone17,4, same handset as the test)',
+               'floor_jump_threshold_hpa': round(thr23, 3),
+               'floor_tracking_test': f"{int((trk23 == vs['floor'].to_numpy()).sum())}/{len(trk23)}",
+               'line_lengths_from': 'session 1 walks (step counts; the walker is the same, the handset differs)',
+               'results': res23}
     out = {'what': 'Tracker on 24 Nov: train session 1, replay session 2 (track24.py). Per stop visit.',
            'graph': 'graph-v2', 'n_places': len(g['ids']), 'train': TRAIN, 'test': TEST, 'phone': PHONE,
+           'handsets': {'train': h_tr, 'test': h_te, 'same_handset': h_tr == h_te},
            'devices': {'train': 'iPhone19,2', 'test': 'iPhone17,4 (different handset)'},
+           'same_handset_variant': variant,
            'floor_jump_threshold_hpa': round(thr, 3),
            'floor_tracking_test': f"{int((trk == vs['floor'].to_numpy()).sum())}/{len(trk)}",
            'expected_steps_per_line_from_train_walks': mu_table, 'typical_steps_fallback': typical,
@@ -144,7 +185,10 @@ def main():
     blk = res['all_26_stops']
     for meth in ['tracker', 'snapshot_knn_crossday_recipe', 'emission_only_no_graph', 'tracker_arrival_before_stop_data']:
         print(f'{meth:34s}', ' '.join(f"{m}={blk[meth][m]['k']}/{blk[meth][m]['n']}" for m in blk[meth]))
-    print({k: v for k, v in out.items() if k not in ('results', 'expected_steps_per_line_from_train_walks')})
+    b2 = res23['all_26_stops']
+    for meth in ['tracker', 'snapshot_knn_crossday_recipe', 'emission_only_no_graph']:
+        print('SAME-handset variant', f'{meth:30s}', ' '.join(f"{m}={b2[meth][m]['k']}/{b2[meth][m]['n']}" for m in b2[meth]))
+    print({k: v for k, v in out.items() if k not in ('results', 'expected_steps_per_line_from_train_walks', 'same_handset_variant')})
 
 
 if __name__ == '__main__':

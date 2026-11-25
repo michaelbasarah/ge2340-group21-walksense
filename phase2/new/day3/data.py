@@ -43,6 +43,19 @@ def config() -> dict:
     return json.loads((HERE / 'config.json').read_text())
 
 
+def handset(model: str) -> str:
+    """Handset id (config.json `phones`) of a phyphox deviceModel. An unknown model stops the pipeline (never guessed)."""
+    ph = config()['phones']
+    if model not in ph:
+        raise KeyError(f'device model {model!r} is not in config.json "phones": add it there (id + display)')
+    return ph[model]['id']
+
+
+def display_names() -> dict:
+    """handset id -> display name used in the HTML pages, figures and tables (rename `display` in config.json)."""
+    return {v['id']: v['display'] for k, v in config()['phones'].items() if not k.startswith('_')}
+
+
 def places() -> pd.DataFrame:
     n = pd.read_csv((HERE / config()['places_graph']).resolve())
     return n[n['virtual'] == 0].set_index('node_id')
@@ -157,7 +170,8 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
             for w in window_features(mag[:, 0], mag[:, 1:4], None if acc is None else acc[:, 0],
                                      None if acc is None else acc[:, 1:4], win):
                 W.append({'session': s['id'], 'day': s['day'], 'visit': r['visit'], 'key': f"{r['visit']}:{r['phone']}",
-                          'phone': r['phone'], 'device': r['device'], 'place': place, 'floor': int(r['floor']), **w})
+                          'phone': handset(r['device']), 'slot': r['phone'], 'device': r['device'], 'place': place,
+                          'floor': int(r['floor']), **w})
         else:
             fp, tp = nm.get((r['floor'], r['from_node']), ''), nm.get((r['floor'], r['to_node']), '')
             for nd, p in [(r['from_node'], fp), (r['to_node'], tp)]:
@@ -167,7 +181,7 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
                 continue
             ep = endpoint_features(mag[:, 0], mag[:, 1:4], acc[:, 0], acc[:, 1:4])
             for end, f in ep.items():
-                E.append({'session': s['id'], 'day': s['day'], 'walk': r['visit'], 'phone': r['phone'], 'device': r['device'],
+                E.append({'session': s['id'], 'day': s['day'], 'walk': r['visit'], 'phone': handset(r['device']), 'slot': r['phone'], 'device': r['device'],
                           'endpoint': end, 'place': fp if end == 'start' else tp, 'floor': int(r['floor']),
                           'walk_start': r['start'], **f})
     stops = m[m['type'] == 'stop']
@@ -182,6 +196,8 @@ def load_clean_tree(s: dict, win: float, max_gap: float):
             row[f'hpa_{ph}'] = float(np.median(p[:, 1])) if p is not None and len(p) else np.nan
             row[f'hpa_sd_{ph}'] = float(np.std(p[:, 1])) if p is not None and len(p) else np.nan
         row['devices'] = ' '.join(sorted(set(g['device'])))
+        row['handsets'] = ' '.join(sorted(handset(d) for d in set(g['device'])))
+        row['iphone_handset'] = ' '.join(sorted({handset(d) for d, sl in zip(g['device'], g['phone']) if sl == 'iphone'}))
         vrows.append(row)
     V = pd.DataFrame(vrows).sort_values('start').reset_index(drop=True)
     wf = root / 'wifi' / 'observations.csv'
@@ -205,6 +221,7 @@ def load_crossday_23nov(s: dict, win: float, max_gap: float):
     place = dict(zip(lab['stop_id'], lab['label'].str.strip()))
     floor = dict(zip(lab['stop_id'], lab['floor'].astype(int)))
     sess = cd.load_sessions(cd.D_23)
+    sessions = sess
     stops = sess[sess['stop_id'].str.startswith('BM')]
     mag, baro = cd.load_sensors(cd.D_23)
     W, vrows = [], []
@@ -213,7 +230,7 @@ def load_crossday_23nov(s: dict, win: float, max_gap: float):
         visit = f"{s['id']}:{sid}"
         dev = stops.set_index('stop_id').loc[sid, 'device_model']
         for w in window_features(g['timestamp_epoch_s'].to_numpy(), g[['x', 'y', 'z']].to_numpy(), win=win):
-            W.append({'session': s['id'], 'day': s['day'], 'visit': visit, 'key': f'{visit}:iphone', 'phone': 'iphone',
+            W.append({'session': s['id'], 'day': s['day'], 'visit': visit, 'key': f'{visit}:iphone', 'phone': handset(dev), 'slot': 'iphone',
                       'device': dev, 'place': place[sid], 'floor': floor[sid], **w})
     hpa = baro.groupby('stop_id')['hpa'].agg(['median', 'std'])
     for _, r in stops.iterrows():
@@ -221,20 +238,24 @@ def load_crossday_23nov(s: dict, win: float, max_gap: float):
         vrows.append({'session': s['id'], 'day': s['day'], 'visit': f"{s['id']}:{sid}", 'place': place[sid], 'floor': floor[sid],
                       'start': r['start_epoch_s'], 'end': r['end_epoch_s'], 'phones': 'iphone',
                       'hpa_iphone': float(hpa.loc[sid, 'median']), 'hpa_sd_iphone': float(hpa.loc[sid, 'std']),
-                      'hpa_s24': np.nan, 'hpa_sd_s24': np.nan, 'devices': r['device_model']})
+                      'hpa_s24': np.nan, 'hpa_sd_s24': np.nan, 'devices': r['device_model'],
+                      'handsets': handset(r['device_model']), 'iphone_handset': handset(r['device_model'])})
     V = pd.DataFrame(vrows).sort_values('start').reset_index(drop=True)
     o = pd.read_csv(cd.CACHE23 / 'wifi' / 'observations.csv', usecols=['source_log', 'MAC', 'RSSI', 'Type', 'observation_epoch_s'])
     o = o[o['Type'] == 'WIFI'].rename(columns={'MAC': 'bssid', 'RSSI': 'rssi', 'observation_epoch_s': 'epoch'}).drop(columns='Type')
     o['scanner'] = 's24'          # 23 Nov: one WiGLE log on a Samsung SM-S9280 (crossday.py results.json 'devices')
     obs = assign_wifi(o, V, max_gap)
     obs['session'] = s['id']
-    # Walk endpoints from tilt.py (23-Nov walks, iPhone19,2), v1 labels merged to graph-v2 names.
+    # Walk endpoints from tilt.py (23-Nov walks), v1 labels merged to graph-v2 names. The handset of each walk is read
+    # per recording (sessions.csv device_model), not assumed.
+    walk_dev = dict(zip(sessions['stop_id'], sessions['device_model']))
     E = pd.DataFrame()
     te = NEW / 'cross-day' / 'out' / 'tilt_endpoints.csv'
     if te.exists():
         t = pd.read_csv(te)
-        E = pd.DataFrame({'session': s['id'], 'day': s['day'], 'walk': s['id'] + ':' + t['walk'], 'phone': 'iphone',
-                          'device': 'iPhone19,2', 'endpoint': t['endpoint'], 'place': t['place'].map(lambda p: V2_MERGE.get(p, p)),
+        E = pd.DataFrame({'session': s['id'], 'day': s['day'], 'walk': s['id'] + ':' + t['walk'],
+                          'phone': t['walk'].map(lambda w: handset(walk_dev[w])), 'slot': 'iphone',
+                          'device': t['walk'].map(walk_dev), 'endpoint': t['endpoint'], 'place': t['place'].map(lambda p: V2_MERGE.get(p, p)),
                           'floor': np.nan, 'walk_start': t['time'], 'B': t['B'], 'x': t['x'], 'y': t['y'], 'z': t['z'],
                           'Bv': t['Bv_lp'], 'Bh': t['Bh_lp']})
     return pd.DataFrame(W), V, obs, E, [], o.assign(session=s['id'])

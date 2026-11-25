@@ -14,13 +14,14 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 
 | step | script | writes |
 |---|---|---|
+| handset per recording (raw ZIP metadata) | `phone_map.py` | `phone_map.csv`, `out/phone_map_summary.json` |
 | data tables | `data.py` | `cache/` only |
 | Wi-Fi diagnosis | `wifi_check.py` | `out/wifi_diagnosis.json` |
 | cross-session, cross-day, walk endpoints, floor | `evaluate.py` | `out/results.json`, `out/summary_table.csv` |
 | weighted fused kNN, nested CV | `fused_knn.py` | `out/fused_knn.json`, `out/fused_model.json`, `out/fused_window_predictions.csv` |
 | tracker on 24 Nov + UI replay | `track24.py` | `out/track24_results.json`, `out/track24_visits.csv`, `out/replay_24nov_s2.json` |
 | figures + data explorer | `visualise.py` | `out/*.png`, `out/explore.html` |
-| kNN playground (sliders -> neighbours -> place; internal) | `playground.py` (template `playground_template.html`; check `playground_check.py`) | `out/knn_playground.html` |
+| kNN playground (sliders -> neighbours -> place; phone x session panel; internal) | `playground.py` (template `playground_template.html`; python reference `phone_matrix.py`; check `playground_check.py`) | `out/knn_playground.html`, `out/phone_session_matrix.csv`, `out/phone_session_matrix.json` |
 
 ## Adding a session collected later
 
@@ -39,18 +40,21 @@ Needs confirmation from the collector (mapped by route position, `confidence = m
 
 No v1 name exists for `sr9` (the 24-Nov study-room stop: which of the four rooms it was is not recorded) and `lift_stairs5` (one stop on 24 Nov, two v1 places), so v1 (31-place) scoring is not possible on 24 Nov.
 
-## Phones: the "iphone" is two different handsets
+## Phones: the phone is the real handset (ip16, ip18, s24, a55, a56)
 
-From `manifest.csv` (`device` column), summarised in `out/results.json` `devices`:
+Two different iPhones were used (the user confirmed it on 25 Nov: an iPhone 16 and an iPhone 18). The phone of every recording is read from the phyphox metadata inside the raw ZIP (`meta/device.csv`, `deviceModel`) by `phone_map.py`, which writes `phone_map.csv` (one row per recording: session, recording, type, sensor slot, source ZIP, model id, phone label, status) and `out/phone_map_summary.json`, and stops the pipeline if a model id is not in `config.json` `phones` or the raw ZIP disagrees with the cleaned manifest. `config.json` `phones` maps model id -> `id` (stable label in files and results) and `display` (the name shown in the HTML pages and figures; rename it, e.g. to "Michael's iPhone", and rerun, no code change).
 
-| session | iphone | s24 |
-|---|---|---|
-| 23 Nov stops | iPhone17,4 | (Wi-Fi scanner SM-S9280) |
-| 23 Nov walks | iPhone19,2 | |
-| 24 Nov session 1 | **iPhone19,2** | SM-S9280 |
-| 24 Nov session 2 | **iPhone17,4** | SM-S9280 |
+| phone (`id`) | model id | recordings (stop + walk) | windows (5 s stops) |
+|---|---|---|---|
+| ip16 | iPhone17,4 | 23 Nov stops 42; 24 s2 stops 26 + walks 28 | 504 (23 Nov) + 312 (24 s2) = **816** |
+| ip18 | iPhone19,2 | 23 Nov walks 37; 24 s1 stops 27 + walks 28 | **324** (24 s1) |
+| s24 | SM-S9280 | 24 s1 (55 recordings) and 24 s2 (54) | 324 + 312 = **636** |
+| a55 | SM-A556E | 24 s1 only | **324** |
+| a56 | SM-A566B | 24 s1 only | **325** |
 
-So "iPhone, session 1 -> session 2" is a different-handset test; the S24 is the only same-handset cross-session pair on 24 Nov. The true same-handset cross-day pair is 23-Nov stops -> 24-Nov session 2 (iPhone17,4 both). Both session READMEs call the iPhone "iPhone 16 Pro"; the device IDs differ.
+Per recording the mapping is consistent per session: 24 s1 has only ip18 on the iPhone slot, 24 s2 only ip16, 23 Nov mixes both but by recording type (all 42 stops ip16, all 37 walks ip18). No recording is undetermined (407 of 407 recordings matched to a raw ZIP, raw model = manifest model). The 14 and 17 Nov raw ZIPs (not used by day 3) also contain both iPhones (23 ip18-model and 26 ip16-model recordings each). Both session READMEs call the iPhone "iPhone 16 Pro"; the device IDs differ, and the user says ip16 + ip18.
+
+Consequences: "iPhone, session 1 -> session 2" (ip18 -> ip16) is a different-handset test; the S24 is the only same-handset cross-session pair on 24 Nov; the true same-handset cross-day pair is 23-Nov stops -> 24-Nov session 2 (ip16 both). ip18 has data in one session only, so no same-handset cross-session test exists for it. Result keys keep the sensor-slot name (`..._iphone`, `..._s24`) and every split states its handsets in `_split.note`.
 
 ## Results
 
@@ -58,7 +62,7 @@ Chance is 1/26 = 3.8% for every stop task below (26 graph-v2 places in training)
 
 ### a. Cross-session on 24 Nov (train one session, test the other, same phone role)
 
-| features | iPhone s1->s2 | iPhone s2->s1 | S24 s1->s2 | S24 s2->s1 |
+| features | iPhone s1->s2 (ip18 -> ip16) | iPhone s2->s1 (ip16 -> ip18) | S24 s1->s2 | S24 s2->s1 |
 |---|---|---|---|---|
 | \|B\| + floor | 4/26 (8) | 5/27 (6) | 4/26 (9) | 5/27 (12) |
 | \|B\|+xyz + floor | 12/26 (14) | 14/27 (16) | 8/26 (12) | 10/27 (16) |
@@ -68,7 +72,7 @@ Chance is 1/26 = 3.8% for every stop task below (26 graph-v2 places in training)
 | \|B\|+xyz+Wi-Fi + floor | 12/26 (12) | 14/27 (16) | 7/26 (12) | 9/27 (15) |
 | Wi-Fi, in-window rows only (no floor) | 2/26 (3) | 2/27 (3) | 2/26 (3) | 2/27 (3) |
 
-The iPhone columns are two different handsets (iPhone19,2 vs iPhone17,4); the S24 is one handset. Without the floor the numbers are in the JSON (e.g. iPhone \|B\|+xyz+tilt 13/26 and 15/27).
+The iPhone columns are two different handsets (ip18 = iPhone19,2 vs ip16 = iPhone17,4); the S24 is one handset. Without the floor the numbers are in the JSON (e.g. iPhone \|B\|+xyz+tilt 13/26 and 15/27).
 
 **Leaky reference** (same recording split in time, first 60% trains): \|B\|+xyz 26/26 on both phones (24 s2). That is the gap between "same recording" and "another session".
 
@@ -78,10 +82,10 @@ Tilt: B_vertical/B_horizontal alone beat \|B\| alone (iPhone 8/26 and 8/27 vs 1/
 
 | split | \|B\| + floor | \|B\|+xyz + floor | Wi-Fi + floor | \|B\|+xyz+Wi-Fi + floor |
 |---|---|---|---|---|
-| 23 Nov -> 24 s2, same handset iPhone17,4 | 5/26 (12) | **13/26** (14) | 4/26 (8) | 14/26 (16) |
-| 24 s2 -> 23 Nov, same handset | 6/42 (9) | **18/42** (19) | 5/42 (9) | 14/42 (20) |
-| 23 Nov -> 24 s1, different handsets | 6/27 (10) | 11/27 (14) | 5/27 (8) | 11/27 (14) |
-| 23 Nov + 24 s1 -> 24 s2 (two training sessions) | 5/26 (9) | 15/26 (15) | 8/26 (11) | 12/26 (13) |
+| 23 Nov -> 24 s2, same handset ip16 (iPhone17,4) | 5/26 (12) | **13/26** (14) | 4/26 (8) | 14/26 (16) |
+| 24 s2 -> 23 Nov, same handset ip16 | 6/42 (9) | **18/42** (19) | 5/42 (9) | 14/42 (20) |
+| 23 Nov -> 24 s1, different handsets (ip16 -> ip18) | 6/27 (10) | 11/27 (14) | 5/27 (8) | 11/27 (14) |
+| 23 Nov + 24 s1 -> 24 s2 (two training sessions, ip16 + ip18 -> ip16) | 5/26 (9) | 15/26 (15) | 8/26 (11) | 12/26 (13) |
 
 23-Nov stops have no accelerometer, so no tilt features in the first three rows; in the last row \|B\|+xyz+tilt + floor gives 16/26 (tilt from the 24 s1 part only). Compare: the 17-Nov cross-day test (23 -> 17, 15 places, chance 6.7%) gave 18 to 24% (`cross-day/README.md`); here the same handset and the same stop protocol on both days gives 13/26 and 18/42 with 26 places.
 
@@ -89,8 +93,8 @@ Tilt: B_vertical/B_horizontal alone beat \|B\| alone (iPhone 8/26 and 8/27 vs 1/
 
 | split | \|B\| | raw x/y/z | tilt | chance |
 |---|---|---|---|---|
-| 23 Nov -> 24 s1, iPhone19,2 both days | 6/54 | 15/54 | 13/54 | 3.8% |
-| 24 s1 -> 23 Nov, iPhone19,2 both days | 5/66 | 21/66 | 19/66 | 3.8% |
+| 23 Nov -> 24 s1, ip18 (iPhone19,2) both days | 6/54 | 15/54 | 13/54 | 3.8% |
+| 24 s1 -> 23 Nov, ip18 (iPhone19,2) both days | 5/66 | 21/66 | 19/66 | 3.8% |
 | 24 s1 -> 24 s2, S24 same handset | 4/50 | 7/50 | 6/50 | 4.0% |
 | 24 s2 -> 24 s1, S24 same handset | 2/50 | 8/50 | 8/50 | 4.0% |
 
@@ -120,7 +124,7 @@ FAILURE in 24 s1: the 4 floor-5 stops after the break (disabled_toilet 18:12, li
 
 ### e. Weighted fused kNN (`fused_knn.py`, `out/fused_knn.json`)
 
-One kNN over every stop window of every phone and session (2425 windows, 202 recordings, 95 stops, 26 places). Five feature groups with their own distance and weight: \|B\|, magnetic x/y/z, tilt, Wi-Fi (S24, 120 s rows), barometer floor. Weights on the simplex (step 0.25, then step 0.1 near the best) and k in {1, 3, 5, 9, 15, 25} are chosen by inner cross-validation on the training part only, then scored once on the held-out part.
+One kNN over every stop window of every phone and session (2425 windows = ip16 816 + ip18 324 + s24 636 + a55 324 + a56 325; 202 recordings, 95 stops, 26 places). Five feature groups with their own distance and weight: \|B\|, magnetic x/y/z, tilt, Wi-Fi (S24, 120 s rows), barometer floor. Weights on the simplex (step 0.25, then step 0.1 near the best) and k in {1, 3, 5, 9, 15, 25} are chosen by inner cross-validation on the training part only, then scored once on the held-out part.
 
 | split (outer) | fused, learned weights | equal weights | best single group | chance |
 |---|---|---|---|---|
@@ -138,7 +142,7 @@ One kNN over every stop window of every phone and session (2425 windows, 202 rec
 
 ### f. Tracker on 24 Nov (`track24.py`, `out/track24_results.json`)
 
-`tracking/tracker.py` v2, unchanged, on graph-v2. Train session 1 (fingerprints iPhone19,2, line lengths from session-1 walks, floor threshold 0.243 hPa), replay session 2 (iPhone17,4). 26 stops:
+`tracking/tracker.py` v2, unchanged, on graph-v2. Train session 1 (fingerprints ip18 = iPhone19,2, line lengths from session-1 walks, floor threshold 0.243 hPa), replay session 2 (ip16 = iPhone17,4). So this run is **cross-handset** (`out/track24_results.json` `handsets`). 26 stops:
 
 | method | exact | area | within one neighbour | top-3 | floor |
 |---|---|---|---|---|---|
@@ -147,10 +151,13 @@ One kNN over every stop window of every phone and session (2425 windows, 202 rec
 | emission only (no graph) | 15/26 | 15/26 | 18/26 | 19/26 | 24/26 |
 | tracker on arrival (before the stop's data) | 13/26 | 18/26 | 18/26 | 19/26 | 23/26 |
 
+**Same-handset variant** (`same_handset_variant` in the JSON): the fingerprints and the floor threshold (0.342 hPa) come from the 23-Nov stops (ip16, the test handset; one visit per place, a different day), the line lengths still from session-1 walks. Same 26 test stops: tracker 19/26 exact, 21/26 area, 22/26 within one neighbour, 24/26 top-3, floor 25/26; snapshot kNN 13/26, emission only 13/26 (cross-handset run: 20, 15, 15). So the same handset trained a day earlier is not better than a different handset trained the same evening: the day (drift) matters at least as much as the handset here, and the two runs differ in training size and day, so this is not a clean handset comparison.
+
 Optimistic in the same ways as entry 20: the graph and the walk order are the route both sessions walked, and every walk is one recorded line. "Confirmed" frames: 2095 of 3122 stop frames, 1830 of them correct. Replay: `out/replay_24nov_s2.json` (3560 frames, same format as `tracking/out/replay_23nov.json`, graph-v2 nodes). Open it with `phase2/new/circle-ui/index.html?data=../day3/out/replay_24nov_s2.json` over http (e.g. `python -m http.server` in `phase2/new`). The 23-Nov replay and the UI are unchanged.
 
 ## Figures (`out/`)
 
+- `out/phone_session_matrix.csv` / `.json`: the playground's live "how each phone performs across sessions" panel computed in Python at the default weights and k (not evaluation results; see section g).
 - `fig_accuracy_vs_chance.png`: accuracy per feature set vs chance (cross-session iPhone and S24, cross-day same iPhone).
 - `fig_leaky_vs_honest.png`: the same fused kNN under the four splits.
 - `fig_confusion.png`: confusion matrices, fused kNN leave-one-session-out (windows) and 23 Nov -> 24 s2 (recordings).
@@ -158,7 +165,13 @@ Optimistic in the same ways as entry 20: the graph and the walk order are the ro
 - `fig_per_place_B_pressure.png`: \|B\| and pressure per place and session (strip plot).
 - `fig_knn_neighbour_graph.png`: nearest-neighbour "confusion as a graph" on the graph-v2 layout.
 - `fig_embed_*.png`: PCA and t-SNE of the magnetic features, \|B\|+tilt (24 Nov), the fused space (t-SNE on the learned-weight distance) and Wi-Fi (MDS, one dot per stop).
-- **`explore.html`**: interactive explorer (plotly from a CDN, pinned with an integrity hash). Views: every embedding above, raw \|B\| vs B_vertical, barometer per stop. Hover shows place, session, phone and recording; click legend entries to show or hide places. A **Phone** dropdown shows one handset at a time and **Colour by place / phone** shows per-phone clusters (the playground has the same, plus a "train on same phone only" test).
+- **`explore.html`**: interactive explorer (plotly from a CDN, pinned with an integrity hash). Views: every embedding above, raw \|B\| vs B_vertical, barometer per stop. Hover shows place, session, handset (display name + model id) and recording; click legend entries to show or hide places. A **Phone** dropdown shows one handset at a time and **Colour by place / phone** shows per-phone clusters (the playground has the same, plus a "train on same phone only" test).
+
+### g. kNN playground panel: how each phone performs across sessions (live demo, not evaluation results)
+
+`out/knn_playground.html` has a panel with phones as rows and train -> test session pairs plus one leave-one-session-out column; each cell shows recordings (majority vote of the recording's 5 s windows) and windows as correct/total, and chance (1 / places in training). It uses the page's current k and weights live (default = `fused_model.json`: B 0.1, xyz 0.7, tilt 0, baro 0.1, k 25) and the page's recipe (global scaling, true floor), not the per-fold recipe of `evaluate.py` / `fused_knn.py`, so its numbers differ from the tables above. Two modes: same phone only, or all phones of the training session(s) (cells where the training includes other handsets are marked cross-handset). Grey = that phone has no data in the test or training session. `phone_matrix.py` computes the same matrix in Python (`out/phone_session_matrix.csv/.json`); `playground_check.py` checks that the panel equals it in all 70 cells. The page also has an "any session" option in the Try-it session dropdown and a top-level Session dropdown synced with the session checkboxes.
+
+Default settings, same phone only (recordings, windows; chance 3.8%): ip16 23 Nov -> 24 s2 14/26, 158/312; ip16 24 s2 -> 23 Nov 18/42, 220/504; ip16 leave-one-session-out 32/68, 378/816; s24 24 s1 -> 24 s2 8/26, 96/312; s24 24 s2 -> 24 s1 10/27, 125/324; s24 leave-one-session-out 18/53, 221/636; ip18, a55 and a56 have data in 24 s1 only, so there is no same-phone cross-session cell. All other cells and the all-phones mode are in the CSV.
 
 ## Data issues found
 

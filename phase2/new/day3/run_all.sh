@@ -5,6 +5,7 @@
 set -e
 cd "$(dirname "$0")/../../.."
 PY=${PYTHON:-python3}
+"$PY" phase2/new/day3/phone_map.py       # raw ZIP metadata -> handset per recording (phone_map.csv); stops if a model is unknown
 "$PY" phase2/new/day3/data.py            # parse every session into window/visit tables (cached in day3/cache/)
 "$PY" phase2/new/day3/wifi_check.py      # out/wifi_diagnosis.json
 "$PY" phase2/new/day3/evaluate.py        # out/results.json, out/summary_table.csv

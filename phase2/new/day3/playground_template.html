@@ -50,6 +50,16 @@ th{position:sticky;top:0;background:var(--card);color:var(--ink2)}
 .seg button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
 .phonepick{font-weight:650;color:var(--ink)}.phonepick select{border:2px solid var(--accent);font-weight:600}
 .fl{font-weight:650;color:var(--ink)}
+.sesspick{font-weight:650;color:var(--ink)}.sesspick select{border:2px solid var(--accent);font-weight:600}
+.mx{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.mx table{width:auto;min-width:100%}
+.mx th,.mx td{white-space:normal;vertical-align:top;border-right:1px solid var(--line)}
+.mx td.c{min-width:112px;font-size:12px;line-height:1.35;cursor:default}
+.mx td.na{background:repeating-linear-gradient(45deg,transparent 0 6px,rgba(128,128,128,.12) 6px 12px);color:var(--ink2)}
+.mx td .xh{display:inline-block;font-size:10.5px;padding:0 4px;border-radius:4px;background:var(--warn);color:var(--warnink)}
+.mx th.ph{position:sticky;left:0;z-index:2;background:var(--card)}
+#mxtip{position:fixed;z-index:20;max-width:360px;max-height:60vh;overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;box-shadow:0 4px 18px rgba(0,0,0,.25);pointer-events:none}
+#mxtip .h{color:var(--good);font-weight:650}#mxtip .m{color:var(--bad);font-weight:650}
 details summary{cursor:pointer;color:var(--ink2);font-size:13px}
 @media (max-width:860px){
   .layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"stage" "controls" "details"}
@@ -74,6 +84,7 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   </div>
   <div class="row tabs small">
     <label class="phonepick">Phone <select id="pphone" title="show and train on one phone only"></select></label>
+    <label class="sesspick">Session <select id="psess" title="show and train on one session, or all (same as the session boxes in the filters card)"></select></label>
     <span class="seg" id="colby"><span>Colour by:</span><span class="btns"><button data-c="place" aria-pressed="true">place</button><button data-c="phone" aria-pressed="false">phone</button></span></span>
     <label>View <select id="view"><option value="pca">PCA projection (linear)</option><option value="raw">Raw features: X vs Y</option></select></label>
     <label id="xw" hidden>X <select id="xa"></select></label>
@@ -100,7 +111,7 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
     <div class="row"><label><input type="checkbox" id="lsame"> train on same phone only (same-handset test)</label></div>
     <div class="row"><button class="primary" id="rand">Random window</button><button id="free">Free query (clear)</button></div>
     <div class="row"><label>Keep out of training <select id="holdout"><option value="session">its whole session</option><option value="visit">its whole stop (all phones)</option><option value="rec">its recording only (leaky)</option><option value="none">nothing (self-match!)</option></select></label></div>
-    <div class="small" id="loadnote">Sets all sliders to a real 5 s window and shows its true place next to the prediction. Default holds its whole session out, the honest cross-session test. "Same phone only" keeps just that phone's windows in training, as the README recommends (one model per phone). Caution: "iphone" is two handsets (iPhone17,4 on 23 Nov and 24 s2, iPhone19,2 on 24 s1), so for the iPhone only 23 Nov vs 24 s2 is a true same-handset test; the S24 is one handset throughout.</div>
+    <div class="small" id="loadnote">Sets all sliders to a real 5 s window and shows its true place next to the prediction. Default holds its whole session out, the honest cross-session test. "Same phone only" keeps just that phone's windows in training, as the README recommends (one model per phone). The phone is the real handset (read from each recording's metadata), so "same phone only" is always a same-handset test: ip16 (iPhone17,4) exists on 23 Nov and 24 s2, ip18 (iPhone19,2) on 24 s1 only, the S24 on 24 s1 and 24 s2, the A55 and A56 on 24 s1 only. "Any session" loads a random window from any session; the hold-out below still applies to that window's own session, stop or recording.</div>
   </div>
 
   <div class="card">
@@ -129,6 +140,20 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   </div>
 </section>
 </div>
+
+<section class="card" id="mxcard">
+  <h2>How each phone performs across sessions</h2>
+  <div class="banner" style="margin:0 0 8px"><b>Live demo, not evaluation results.</b> Same kNN recipe as the page, using the current <b>k</b> and <b>weights</b> above (default = learned). Official numbers are in the day-3 README. Windows are 5 s; a recording's result is the majority vote of its windows.</div>
+  <div class="row">
+    <label>Training <select id="mxmode"><option value="same">same phone only (train and test on that phone)</option><option value="all">all phones in training (test on that phone)</option></select></label>
+    <label>Colour by <select id="mxcol"><option value="rec">recording accuracy</option><option value="win">window accuracy</option></select></label>
+    <label><input type="checkbox" id="mxlive" checked> update while sliding</label>
+    <button id="mxgo" class="primary">Recompute</button><span class="small" id="mxstat"></span>
+  </div>
+  <div class="mx"><table id="mxtab"></table></div>
+  <div class="small" id="mxnote"></div>
+</section>
+<div id="mxtip" hidden></div>
 <p class="small" style="margin-top:6px"><b>What this is not.</b> Wi-Fi is left out (a 100+-dimension vector cannot be slid); the weight normalisation simply ignores it. The |B| group here is the window mean only (fused_knn.py also uses sd, p10, p90 of |B|). Distances and scales use all 2425 windows. Pooling all phones mixes different magnetometers (day-3 README e). One query is one 5 s window, so a single prediction is much noisier than the per-recording numbers in the README.</p>
 
 <script type="application/json" id="data">__DATA__</script>
@@ -165,10 +190,17 @@ function distances(bank, q, w, use) {
 }
 // Returns {order: indices of the k nearest (ascending D), shares: Float64Array over places, counts: Int32Array, pred: place index or -1}
 function knn(bank, D, k, nPlaces) {
-  const idx = [];
-  for (let i = 0; i < bank.n; i++) if (Number.isFinite(D[i])) idx.push(i);
-  idx.sort((a, b) => D[a] - D[b] || a - b);
-  const order = idx.slice(0, k), shares = new Float64Array(nPlaces), counts = new Int32Array(nPlaces);
+  // k smallest finite D, ascending, ties by index (insertion into a sorted list of size k)
+  const od = [], order = [];
+  for (let i = 0; i < bank.n; i++) {
+    const d = D[i];
+    if (!Number.isFinite(d)) continue;
+    if (order.length === k && d >= od[k - 1]) continue;
+    let j = order.length < k ? order.length : k - 1;
+    if (order.length < k) { order.push(i); od.push(d); } else { order[j] = i; od[j] = d; }
+    while (j > 0 && od[j - 1] > d) { od[j] = od[j - 1]; order[j] = order[j - 1]; j--; od[j] = d; order[j] = i; }
+  }
+  const shares = new Float64Array(nPlaces), counts = new Int32Array(nPlaces);
   let tot = 0;
   for (const i of order) { const wt = 1 / (D[i] + 1e-6); shares[bank.place[i]] += wt; counts[bank.place[i]]++; tot += wt; }
   let pred = -1, best = -1;
@@ -190,6 +222,58 @@ function buildMask(bank, f) {
     m[i] = ok ? 1 : 0;
   }
   return m;
+}
+// ---- phone x session matrix (live demo). Columns: every ordered session pair, then leave-one-session-out.
+function matrixColumns(sessions) {
+  const n = sessions.length, cols = [];
+  for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) if (a !== b) cols.push({label: `${sessions[a]}->${sessions[b]}`, train: [a], test: b});
+  cols.push({label: 'leave one session out', loso: true});
+  return cols;
+}
+// One cell: phone ph, mode 'same'|'all', one column. Returns counts and per-place tallies (null if no test or no training windows).
+function matrixCell(bank, P, w, k, mode, ph, col) {
+  const nS = P.sessions.length, nP = P.places.length;
+  const folds = col.loso ? Array.from({length: nS}, (_, t) => ({tr: Array.from({length: nS}, (_, s) => s).filter(s => s !== t), te: t})) : [{tr: col.train, te: col.test}];
+  let wh = 0, wn = 0, rh = 0, rn = 0, ntr = 0, nte = 0, nf = 0, chance = 0;
+  const trh = new Set(), per = {};
+  const tally = t => per[t] || (per[t] = [0, 0, 0, 0]);
+  for (const f of folds) {
+    const use = new Uint8Array(bank.n), te = [], tp = new Set(), fh = new Set();
+    let cnt = 0;
+    for (let i = 0; i < bank.n; i++) {
+      if (f.tr.includes(bank.sess[i]) && (mode === 'all' || bank.phone[i] === ph)) { use[i] = 1; cnt++; tp.add(bank.place[i]); fh.add(bank.phone[i]); }
+      if (bank.sess[i] === f.te && bank.phone[i] === ph) te.push(i);
+    }
+    if (!te.length || !cnt) continue;
+    const votes = new Map(), truth = new Map();
+    let used = 0;
+    for (const i of te) {
+      const q = {B: bank.B[i], x: bank.x[i], y: bank.y[i], z: bank.z[i], Bv: bank.Bv[i], Bh: bank.Bh[i], floor: bank.floor[i]};
+      const r = knn(bank, distances(bank, q, w, use), Math.min(k, cnt), nP);
+      if (r.pred < 0) continue;
+      used++; const hit = r.pred === bank.place[i] ? 1 : 0;
+      wh += hit; wn++;
+      const t = tally(bank.place[i]); t[0] += hit; t[1]++;
+      let v = votes.get(bank.rec[i]); if (!v) { v = new Int32Array(nP); votes.set(bank.rec[i], v); truth.set(bank.rec[i], bank.place[i]); }
+      v[r.pred]++;
+    }
+    if (!used) continue;
+    ntr += cnt; nte += used; nf++; chance += 1 / tp.size; fh.forEach(h => trh.add(h));
+    for (const [rec, v] of votes) {
+      let b = 0; for (let p = 1; p < nP; p++) if (v[p] > v[b]) b = p;
+      const t = tally(truth.get(rec)); const hit = b === truth.get(rec) ? 1 : 0;
+      rh += hit; rn++; t[2] += hit; t[3]++;
+    }
+  }
+  if (!nf) return null;
+  const hs = [...trh].sort((a, b) => a - b);
+  return {win: [wh, wn], rec: [rh, rn], chance: chance / nf, ntr, nte, trainPhones: hs, cross: hs.length > 0 && !(hs.length === 1 && hs[0] === ph), per};
+}
+function phoneSessionMatrix(bank, P, w, k) {
+  const cols = matrixColumns(P.sessions), cells = [];
+  for (const mode of ['same', 'all']) for (let ph = 0; ph < P.phones.length; ph++) for (const col of cols)
+    cells.push({mode, phone: ph, col: col.label, cell: matrixCell(bank, P, w, k, mode, ph, col)});
+  return {cols, cells};
 }
 function projectPCA(P, q) {
   const pc = P.pca, S = P.scale, z = {};
@@ -217,7 +301,10 @@ const st = {q: {}, floor: 5, tiltOn: true, w: Object.assign({}, P.model.weights)
   view: 'pca', xa: 'B', ya: 'Bv', loaded: -1, moved: false, holdout: 'session', theme: 'auto', colorBy: 'place', samePhone: false};
 const PHCOL = ['#2a78d6', '#e8812a', '#17a673', '#9b5de5', '#c2185b'];
 const phoneN = P.phones.map((_, i) => { let c = 0; for (let j = 0; j < bank.n; j++) if (bank.phone[j] === i) c++; return c; });
-const phLab = i => `${P.phones[i]} (${phoneN[i]})`;
+const pName = i => P.phone_info[P.phones[i]].display;                    // display name (config.json phones.display)
+const pFull = i => `${pName(i)} · ${P.phone_info[P.phones[i]].model}`;    // display name + model id
+const phLab = i => `${pFull(i)} (${phoneN[i]})`;
+const sessN = P.sessions.map((_, i) => { let c = 0; for (let j = 0; j < bank.n; j++) if (bank.sess[j] === i) c++; return c; });
 const ranges = {};
 function median(a) { a = a.filter(Number.isFinite).sort((x, y) => x - y); const m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; }
 FE.forEach(f => {
@@ -258,23 +345,38 @@ WG.forEach(([g, lab]) => {
   const d = document.createElement('div'); d.className = 'sl';
   d.innerHTML = `<span>${lab}</span><input type="range" id="w_${g}" min="0" max="1" step="0.05"><span class="v" id="wv_${g}"></span>`;
   $('wsl').appendChild(d);
-  $('w_' + g).addEventListener('input', e => { st.w[g] = parseFloat(e.target.value); syncWeights(); live(); });
+  $('w_' + g).addEventListener('input', e => { st.w[g] = parseFloat(e.target.value); syncWeights(); live(); scheduleMatrix(); });
 });
 function syncWeights() {
   WG.forEach(([g]) => { $('w_' + g).value = st.w[g]; $('wv_' + g).textContent = st.w[g].toFixed(2); });
   const dw = P.model.weights, tot = WG.reduce((a, [g]) => a + st.w[g], 0);
   $('wnote').textContent = `Learned (fused_model.json, leave-one-session-out): B ${dw.B}, xyz ${dw.xyz}, tilt ${dw.tilt}, baro ${dw.baro}, k ${P.model.k}; Wi-Fi ${P.model.wifi_weight_dropped} dropped here. Weights are relative: they are divided by their sum over the groups available for each pair${tot > 0 ? '' : ' (all zero: no distance)'}.`;
 }
-$('wreset').onclick = () => { st.w = Object.assign({}, P.model.weights); syncWeights(); live(); };
-$('weq').onclick = () => { st.w = {B: .25, xyz: .25, tilt: .25, baro: .25}; syncWeights(); live(); };
+$('wreset').onclick = () => { st.w = Object.assign({}, P.model.weights); syncWeights(); live(); scheduleMatrix(); };
+$('weq').onclick = () => { st.w = {B: .25, xyz: .25, tilt: .25, baro: .25}; syncWeights(); live(); scheduleMatrix(); };
 $('k').min = 1; $('k').max = 50;
-$('k').oninput = e => { st.k = parseInt(e.target.value); $('kv').textContent = st.k; live(); };
+$('k').oninput = e => { st.k = parseInt(e.target.value); $('kv').textContent = st.k; live(); scheduleMatrix(); };
 
 P.sessions.forEach((s, i) => {
   const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${s}`; $('fsess').appendChild(l);
-  l.firstChild.onchange = e => { st.sessOn[i] = e.target.checked; refresh(); };
-  $('lsess').add(new Option(s, i, false, s === '24s2'));
+  l.firstChild.onchange = e => { st.sessOn[i] = e.target.checked; syncSess(); refresh(); };
+  $('lsess').add(new Option(`${s} (${sessN[i]})`, i));
 });
+$('lsess').add(new Option(`any session (${bank.n})`, -1), 0); $('lsess').value = '-1';
+// top-level session dropdown and the session checkboxes in the filter card are two views of st.sessOn
+const sessBoxes = [...document.querySelectorAll('#fsess input')];
+$('psess').add(new Option(`all sessions (${bank.n})`, 'all'));
+P.sessions.forEach((s, i) => $('psess').add(new Option(`${s} (${sessN[i]})`, i)));
+$('psess').add(new Option('custom (several)', 'custom')); $('psess').lastChild.hidden = true;
+function syncSess() {
+  sessBoxes.forEach((b, i) => { b.checked = st.sessOn[i]; });
+  const on = st.sessOn.map((v, i) => v ? i : -1).filter(i => i >= 0);
+  $('psess').value = on.length === st.sessOn.length ? 'all' : on.length === 1 ? String(on[0]) : 'custom';
+}
+$('psess').onchange = e => {
+  const v = e.target.value; if (v === 'custom') return;
+  st.sessOn = P.sessions.map((_, i) => v === 'all' || String(i) === v); syncSess(); refresh();
+};
 const phBoxes = [];
 P.phones.forEach((s, i) => {
   const l = document.createElement('label'); l.innerHTML = `<input type="checkbox" checked> ${phLab(i)}`; $('fphone').appendChild(l);
@@ -320,7 +422,7 @@ function loadWindow(i) {
 }
 $('rand').onclick = () => {
   const s = parseInt($('lsess').value), p = parseInt($('lplace').value), ph = parseInt($('lphone').value), c = [];
-  for (let i = 0; i < bank.n; i++) if (bank.sess[i] === s && (p < 0 || bank.place[i] === p) && (ph < 0 || bank.phone[i] === ph)) c.push(i);
+  for (let i = 0; i < bank.n; i++) if ((s < 0 || bank.sess[i] === s) && (p < 0 || bank.place[i] === p) && (ph < 0 || bank.phone[i] === ph)) c.push(i);
   if (!c.length) { $('loadnote').textContent = 'No windows for that session, place and phone.'; return; }
   $('loadnote').textContent = LOADNOTE;
   loadWindow(c[Math.floor(Math.random() * c.length)]);
@@ -366,7 +468,7 @@ function drawPoints() {
     const xy = ix.map(coords);
     return {type: 'scatter', mode: 'markers', name: byPhone ? phLab(g) : P.places[g], x: xy.map(a => a[0]), y: xy.map(a => a[1]),
       marker: {size: 7, color: byPhone ? PHCOL[g % PHCOL.length] : P.colours[g], symbol: ix.map(i => SYM[bank.sess[i]]), opacity: byPhone ? 0.7 : 0.8, line: {width: 0.5, color: css('--bg')}},
-      text: ix.map(i => `<b>${P.places[bank.place[i]]}</b> (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${P.phones[bank.phone[i]]}<br>${P.recs[bank.rec[i]]}`),
+      text: ix.map(i => `<b>${P.places[bank.place[i]]}</b> (F${bank.floor[i]})<br>${P.sessions[bank.sess[i]]} · ${pFull(bank.phone[i])}<br>${P.recs[bank.rec[i]]}`),
       hovertemplate: '%{text}<extra></extra>'};
   });
   nTr = G;
@@ -410,7 +512,7 @@ function render() {
   FE.forEach(f => { $('v_' + f).textContent = (f === 'Bv' || f === 'Bh') && !st.tiltOn ? 'n/a' : fmt(st.q[f]); });
   $('kv').textContent = st.k;
   const L = st.loaded, kk = Math.min(st.k, nTrain);
-  $('fnote').textContent = `${nTrain} of ${bank.n} windows are used for training and drawn` + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + (L >= 0 && st.samePhone ? `, same phone only (${P.phones[bank.phone[L]]})` : '') + '.';
+  $('fnote').textContent = `${nTrain} of ${bank.n} windows are used for training and drawn` + (L >= 0 && st.holdout !== 'none' ? ` (window ${L} held out by "${$('holdout').selectedOptions[0].text}")` : '') + (L >= 0 && st.samePhone ? `, same phone only (${pFull(bank.phone[L])})` : '') + '.';
   if (!res || res.pred < 0) {
     $('pred').textContent = nTrain === 0 ? 'No training windows' : 'No distance (all weights 0?)';
     $('truth').textContent = ''; $('predsub').textContent = ''; $('votes').innerHTML = ''; $('nn').innerHTML = ''; $('distsum').textContent = ''; $('votenote').textContent = ''; return;
@@ -429,14 +531,88 @@ function render() {
   $('votenote').textContent = 'count = neighbours in that place; % = share of the 1/dist-weighted vote (the prediction is the largest %).';
   const dd = res.order.map(i => st.D[i]);
   $('distsum').textContent = `nearest ${fmt(dd[0], 3)} · median ${fmt(dd[dd.length >> 1], 3)} · k-th ${fmt(dd[dd.length - 1], 3)}`;
-  $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.places[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${P.phones[bank.phone[i]]}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
+  $('nn').innerHTML = res.order.map((i, j) => `<tr><td>${j + 1}</td><td>${chip(bank.place[i])}${P.places[bank.place[i]]}</td><td>${P.sessions[bank.sess[i]]}</td><td>${pName(bank.phone[i])}</td><td>${bank.floor[i]}</td><td>${fmt(st.D[i], 3)}</td></tr>`).join('');
 }
 function refresh() { nTrain = computeMask(); drawPoints(); live(); }
 
+// ---------- phone x session matrix (live demo, uses the current k and weights)
+let mxTimer = null, mxData = null;
+function scheduleMatrix() {
+  if (!$('mxlive').checked) { $('mxstat').textContent = mxData ? 'k or weights changed: press Recompute' : ''; return; }
+  clearTimeout(mxTimer); $('mxstat').textContent = 'updating...'; mxTimer = setTimeout(computeMatrix, 350);
+}
+function computeMatrix() {
+  clearTimeout(mxTimer);
+  const t0 = performance.now();
+  mxData = phoneSessionMatrix(bank, P, Object.assign({}, st.w), st.k);
+  mxData.k = st.k; mxData.w = Object.assign({}, st.w);
+  $('mxstat').textContent = `computed in ${Math.round(performance.now() - t0)} ms with k=${st.k}, weights B ${st.w.B.toFixed(2)} xyz ${st.w.xyz.toFixed(2)} tilt ${st.w.tilt.toFixed(2)} baro ${st.w.baro.toFixed(2)}`;
+  renderMatrix();
+}
+const pct = (a, n) => n ? `${Math.round(100 * a / n)}%` : '';
+function shade(v) {          // accuracy 0..1 -> translucent accent, dark-mode safe
+  return `color-mix(in srgb, var(--good) ${Math.round(Math.min(1, v) * 70)}%, transparent)`;
+}
+function renderMatrix() {
+  if (!mxData) return;
+  const mode = $('mxmode').value, by = $('mxcol').value, T = $('mxtab');
+  let h = '<thead><tr><th class="ph">phone</th>' + mxData.cols.map(c => `<th>${c.label.replace('->', ' → ')}</th>`).join('') + '</tr></thead><tbody>';
+  P.phones.forEach((_, ph) => {
+    h += `<tr><th class="ph">${pName(ph)}<div class="small">${P.phone_info[P.phones[ph]].model}</div></th>`;
+    mxData.cols.forEach((c, ci) => {
+      const m = mxData.cells.find(x => x.mode === mode && x.phone === ph && x.col === c.label).cell;
+      if (!m) {
+        h += `<td class="c na" data-ph="${ph}" data-c="${ci}">no data<div class="small">${naReason(mode, ph, c)}</div></td>`; return;
+      }
+      const wv = m.win[0] / m.win[1], rv = m.rec[1] ? m.rec[0] / m.rec[1] : 0;
+      h += `<td class="c" data-ph="${ph}" data-c="${ci}" style="background:${shade(by === 'rec' ? rv : wv)}">`
+        + `<b>rec ${m.rec[0]}/${m.rec[1]}</b> ${pct(m.rec[0], m.rec[1])}<br>win ${m.win[0]}/${m.win[1]} ${pct(m.win[0], m.win[1])}<br>`
+        + `<span class="small">chance ${(m.chance * 100).toFixed(1)}%</span>`
+        + (m.cross ? `<br><span class="xh" title="training included other handsets: ${m.trainPhones.map(pName).join(', ')}">cross-handset</span>` : '') + '</td>';
+    });
+    h += '</tr>';
+  });
+  T.innerHTML = h + '</tbody>';
+  $('mxnote').innerHTML = (mode === 'same'
+    ? 'Same phone only: train and test on the same handset, so every cell is same-handset. Cells need that handset in both sessions: ip16 appears on 23 Nov and 24 s2, ip18 on 24 s1 only, the S24 on 24 s1 and 24 s2, the A55 and A56 on 24 s1 only.'
+    : 'All phones in training: the test is one phone, the training is every phone of the training session(s). <span class="xh">cross-handset</span> = the training windows include handsets other than the test phone (e.g. ip18 tested after training on ip16 and the Samsungs).')
+    + ' The matrix does not depend on the filters, the loaded window or the sliders of the query, only on k and the weights. Grey = no test windows for that phone in the test session, or no training windows. Chance = 1 / places in training. Hover a cell for its places (hits and misses). "leave one session out" pools the folds where the phone has test and training data.';
+}
+function naReason(mode, ph, c) {
+  const has = s => { for (let i = 0; i < bank.n; i++) if (bank.sess[i] === s && bank.phone[i] === ph) return true; return false; };
+  if (c.loso) return 'no fold with data';
+  if (!has(c.test)) return `${pName(ph)} not recorded in ${P.sessions[c.test]}`;
+  if (mode === 'same' && !has(c.train[0])) return `${pName(ph)} not recorded in ${P.sessions[c.train[0]]}`;
+  return 'no training windows';
+}
+const tip = $('mxtip');
+$('mxtab').addEventListener('mousemove', e => {
+  const td = e.target.closest('td.c'); if (!td || !mxData) { tip.hidden = true; return; }
+  const ph = +td.dataset.ph, ci = +td.dataset.c, c = mxData.cols[ci], mode = $('mxmode').value;
+  const m = mxData.cells.find(x => x.mode === mode && x.phone === ph && x.col === c.label).cell;
+  let h = `<b>${pName(ph)}</b> · ${c.label.replace('->', ' → ')} · ${mode === 'same' ? 'same phone only' : 'all phones in training'}<br>`;
+  if (!m) h += naReason(mode, ph, c);
+  else {
+    h += `${m.ntr} training windows${m.cross ? ' (handsets: ' + m.trainPhones.map(pName).join(', ') + ')' : ''}, ${m.nte} test windows<br>`;
+    const rows = Object.keys(m.per).map(Number).sort((a, b) => P.place_floor[b] - P.place_floor[a] || P.places[a].localeCompare(P.places[b]));
+    h += '<table style="margin-top:4px"><thead><tr><th>place</th><th>rec</th><th>win</th></tr></thead><tbody>' + rows.map(p => {
+      const t = m.per[p], ok = t[3] && t[2] === t[3];
+      return `<tr><td>${P.places[p]}</td><td class="${ok ? 'h' : t[2] ? '' : 'm'}">${t[2]}/${t[3]} ${ok ? '✓' : t[2] ? '' : '✗'}</td><td>${t[0]}/${t[1]}</td></tr>`;
+    }).join('') + '</tbody></table>';
+  }
+  tip.innerHTML = h; tip.hidden = false;
+  const r = tip.getBoundingClientRect();
+  tip.style.left = Math.max(4, Math.min(e.clientX + 14, innerWidth - r.width - 8)) + 'px';
+  tip.style.top = Math.max(4, Math.min(e.clientY + 14, innerHeight - r.height - 8)) + 'px';
+});
+$('mxtab').addEventListener('mouseleave', () => { tip.hidden = true; });
+$('mxmode').onchange = renderMatrix; $('mxcol').onchange = renderMatrix; $('mxgo').onclick = computeMatrix;
+
 $('k').value = st.k; syncWeights(); syncSliders();
-syncPhone();
-window.__pg = {st, bank, P, refresh, syncPhone, live, loadWindow, getRes: () => res, qobj};
+syncPhone(); syncSess();
+window.__pg = {st, bank, P, refresh, syncPhone, syncSess, live, loadWindow, getRes: () => res, qobj, computeMatrix, getMatrix: () => mxData};
 refresh();
+computeMatrix();
 window.addEventListener('resize', () => { if (plotReady) drawPoints(); });
 })();
 </script>

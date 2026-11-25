@@ -16,7 +16,10 @@ import json
 
 import numpy as np
 
+import csv
+
 import data
+import phone_matrix
 
 OUT = data.OUT
 TEMPLATE = data.HERE / 'playground_template.html'
@@ -32,6 +35,29 @@ def round_col(a, nd):
     return [None if not np.isfinite(v) else round(float(v), nd) for v in a]
 
 
+def export_matrix(P, cells):
+    flds = ['mode', 'phone', 'phone_model', 'train_session', 'test_session', 'n_train_windows', 'n_test_windows', 'win_hit', 'win_n', 'win_acc',
+            'rec_hit', 'rec_n', 'rec_acc', 'chance', 'cross_handset', 'train_handsets']
+    rows = []
+    for c in cells:
+        tr, _, te = c['col'].partition('->')
+        if c['col'].startswith('leave'):
+            tr, te = 'other two sessions', 'each session in turn'
+        rows.append({'mode': c['mode'], 'phone': c['phone'], 'phone_model': P['phone_info'][c['phone']]['model'], 'train_session': tr,
+                     'test_session': te, 'n_train_windows': c['n_train_windows'], 'n_test_windows': c['n_test_windows'],
+                     'win_hit': c['win_hit'], 'win_n': c['win_n'], 'win_acc': round(c['win_hit'] / c['win_n'], 3) if c['win_n'] else '',
+                     'rec_hit': c['rec_hit'], 'rec_n': c['rec_n'], 'rec_acc': round(c['rec_hit'] / c['rec_n'], 3) if c['rec_n'] else '',
+                     'chance': round(c['chance'], 3) if c['chance'] else '', 'cross_handset': c['cross_handset'],
+                     'train_handsets': ' '.join(c['train_handsets'])})
+    with (OUT / 'phone_session_matrix.csv').open('w', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=flds); w.writeheader(); w.writerows(rows)
+    (OUT / 'phone_session_matrix.json').write_text(json.dumps({
+        'what': 'Live-demo recipe of knn_playground.html (not evaluation results): phone x train->test session, window and recording accuracy. '
+                'Computed by phone_matrix.py at the default weights and k.',
+        'weights': P['model']['weights'], 'k': P['model']['k'], 'phones': P['phone_info'], 'cells': cells}, indent=1))
+    print(f'wrote phone_session_matrix.csv/.json ({len(rows)} cells)')
+
+
 def main():
     D = data.load()
     W = D['W'].reset_index(drop=True)
@@ -43,7 +69,11 @@ def main():
     plist = places['place'].tolist()
     pidx = {p: i for i, p in enumerate(plist)}
     sessions = sorted(W['session'].unique())
-    phones = sorted(W['phone'].unique())
+    cfg_phones = [v for k, v in data.config()['phones'].items() if not k.startswith('_')]
+    present = set(W['phone'])
+    phones = [v['id'] for v in cfg_phones if v['id'] in present]            # config order: ip16, ip18, s24, a55, a56
+    models = W.groupby('phone')['device'].first().to_dict()
+    phone_info = {v['id']: {'display': v['display'], 'model': models[v['id']]} for v in cfg_phones if v['id'] in present}
     recs = sorted(W['key'].unique())
     visits = sorted(W['visit'].unique())
     cols = {
@@ -106,13 +136,16 @@ def main():
 
     payload = {
         'n': n, 'places': plist, 'place_floor': places['floor'].astype(int).tolist(), 'colours': colours,
-        'sessions': sessions, 'phones': phones, 'recs': recs, 'visits': visits, 'cols': cols,
+        'sessions': sessions, 'phones': phones, 'phone_info': phone_info, 'recs': recs, 'visits': visits, 'cols': cols,
         'feats': FEATS, 'labels': LABELS, 'scale': scale, 'med': med,
         'model': {'weights': wdef, 'wifi_weight_dropped': model['weights']['wifi'], 'k': model['k'],
                   'loso_inner_acc': model['loso_inner_acc']},
         'pca': {'names': names, 'scale': [fs[f] for f in names], 'center': center.tolist(),
                 'comps': comps.tolist(), 'explained': expl.tolist(), 'min_weight': PCA_MIN_W},
     }
+    # python reference of the live "phone x session" panel (same recipe, default weights and k)
+    cells = phone_matrix.compute(payload)
+    export_matrix(payload, cells)
     html = TEMPLATE.read_text().replace('__DATA__', json.dumps(payload, separators=(',', ':')))
     (OUT / 'knn_playground.html').write_text(html)
     print(f'wrote knn_playground.html: {n} windows, {len(plist)} places, {len(recs)} recordings, '

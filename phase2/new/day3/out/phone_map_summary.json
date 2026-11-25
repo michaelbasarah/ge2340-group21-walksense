@@ -1,0 +1,75 @@
+{
+ "recordings": 407,
+ "per_session": {
+  "23nov": {
+   "ip16 (iPhone17,4)": 42,
+   "ip18 (iPhone19,2)": 37
+  },
+  "24s1": {
+   "a55 (SM-A556E)": 55,
+   "a56 (SM-A566B)": 55,
+   "ip18 (iPhone19,2)": 55,
+   "s24 (SM-S9280)": 55
+  },
+  "24s2": {
+   "ip16 (iPhone17,4)": 54,
+   "s24 (SM-S9280)": 54
+  }
+ },
+ "per_session_type": {
+  "23nov/stop/iphone slot": {
+   "ip16": 42
+  },
+  "23nov/walk/iphone slot": {
+   "ip18": 37
+  },
+  "24s1/stop/iphone slot": {
+   "ip18": 27
+  },
+  "24s1/walk/iphone slot": {
+   "ip18": 28
+  },
+  "24s2/stop/iphone slot": {
+   "ip16": 26
+  },
+  "24s2/walk/iphone slot": {
+   "ip16": 28
+  }
+ },
+ "mixed_sessions": [
+  {
+   "session": "23nov",
+   "iphone_handsets": [
+    "ip16",
+    "ip18"
+   ]
+  }
+ ],
+ "undetermined": [],
+ "models_per_sensor_slot": {
+  "iphone": [
+   "iPhone17,4",
+   "iPhone19,2"
+  ],
+  "a55": [
+   "SM-A556E"
+  ],
+  "a56": [
+   "SM-A566B"
+  ],
+  "s24": [
+   "SM-S9280"
+  ]
+ },
+ "not_used_by_day3_raw_zip_counts": {
+  "14nov": {
+   "iPhone19,2": 23,
+   "iPhone17,4": 26
+  },
+  "17nov": {
+   "iPhone19,2": 23,
+   "iPhone17,4": 26
+  }
+ },
+ "other_models_in_raw_not_in_config": []
+}

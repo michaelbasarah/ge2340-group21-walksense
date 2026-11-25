@@ -9,13 +9,31 @@
   "area": "graph-v2/nodes.csv area column"
  },
  "devices": {
-  "23nov/iphone": "iPhone17,4",
-  "24s1/a55": "SM-A556E",
-  "24s1/a56": "SM-A566B",
-  "24s1/iphone": "iPhone19,2",
-  "24s1/s24": "SM-S9280",
-  "24s2/iphone": "iPhone17,4",
-  "24s2/s24": "SM-S9280"
+  "23nov/iphone": "ip16 (iPhone17,4)",
+  "24s1/a55": "a55 (SM-A556E)",
+  "24s1/a56": "a56 (SM-A566B)",
+  "24s1/iphone": "ip18 (iPhone19,2)",
+  "24s1/s24": "s24 (SM-S9280)",
+  "24s2/iphone": "ip16 (iPhone17,4)",
+  "24s2/s24": "s24 (SM-S9280)"
+ },
+ "handset_per_session_slot": {
+  "23nov/iphone": "ip16",
+  "24s1/a55": "a55",
+  "24s1/a56": "a56",
+  "24s1/iphone": "ip18",
+  "24s1/s24": "s24",
+  "24s2/iphone": "ip16",
+  "24s2/s24": "s24"
+ },
+ "walk_endpoint_handsets": {
+  "23nov/ip18": 66,
+  "24s1/a55": 52,
+  "24s1/a56": 50,
+  "24s1/ip18": 54,
+  "24s1/s24": 50,
+  "24s2/ip16": 46,
+  "24s2/s24": 50
  },
  "unmapped_names": [],
  "magnetic_check": {
@@ -34,13 +52,13 @@
    },
    {
     "session": "24s2",
-    "phone": "iphone",
+    "phone": "ip16",
     "place": "escalator_down_4F",
     "median_B_uT": 147.9
    },
    {
     "session": "24s2",
-    "phone": "iphone",
+    "phone": "ip16",
     "place": "escalator_up_4F",
     "median_B_uT": 142.5
    },
@@ -52,7 +70,7 @@
    }
   ],
   "per_session_phone_range_of_place_median_B_uT": {
-   "23nov/iphone": [
+   "23nov/ip16": [
     32.9,
     58.9
    ],
@@ -64,7 +82,7 @@
     24.5,
     60.0
    ],
-   "24s1/iphone": [
+   "24s1/ip18": [
     22.8,
     64.1
    ],
@@ -72,7 +90,7 @@
     9.0,
     121.6
    ],
-   "24s2/iphone": [
+   "24s2/ip16": [
     30.8,
     147.9
    ],
@@ -91,7 +109,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.243,
-    "note": "iphone: train iPhone19,2, test iPhone17,4 (DIFFERENT handsets)"
+    "note": "iphone slot: train ip18 (iPhone19,2), test ip16 (iPhone17,4) (DIFFERENT handsets)"
    },
    "|B|": {
     "n_recordings": 26,
@@ -2176,7 +2194,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.288,
-    "note": "iphone: train iPhone17,4, test iPhone19,2 (DIFFERENT handsets)"
+    "note": "iphone slot: train ip16 (iPhone17,4), test ip18 (iPhone19,2) (DIFFERENT handsets)"
    },
    "|B|": {
     "n_recordings": 27,
@@ -4329,7 +4347,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.243,
-    "note": "s24: train SM-S9280, test SM-S9280 (same handset)"
+    "note": "s24 slot: train s24 (SM-S9280), test s24 (SM-S9280) (same handset)"
    },
    "|B|": {
     "n_recordings": 26,
@@ -6414,7 +6432,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.288,
-    "note": "s24: train SM-S9280, test SM-S9280 (same handset)"
+    "note": "s24 slot: train s24 (SM-S9280), test s24 (SM-S9280) (same handset)"
    },
    "|B|": {
     "n_recordings": 27,
@@ -8567,7 +8585,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.342,
-    "note": "same handset iPhone17,4"
+    "note": "same handset ip16"
    },
    "|B|": {
     "n_recordings": 26,
@@ -9566,7 +9584,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.288,
-    "note": "same handset iPhone17,4"
+    "note": "same handset ip16"
    },
    "|B|": {
     "n_recordings": 42,
@@ -11077,7 +11095,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.342,
-    "note": "DIFFERENT handsets: 23nov iPhone17,4, 24s1 iPhone19,2"
+    "note": "DIFFERENT handsets: 23nov ip16, 24s1 ip18"
    },
    "|B|": {
     "n_recordings": 27,
@@ -12108,7 +12126,7 @@
     "chance": 0.038,
     "test_places_not_in_train": [],
     "floor_jump_threshold_hpa": 0.292,
-    "note": "train two earlier sessions (two iPhone handsets), test 24s2 iPhone17,4"
+    "note": "train two earlier sessions (two iPhone handsets: ip16 and ip18), test 24s2 ip16"
    },
    "|B|": {
     "n_recordings": 26,
@@ -14197,7 +14215,7 @@
   }
  },
  "walk_endpoint_results": {
-  "23nov_to_24s1_iphone (iPhone19,2 both days)": {
+  "23nov_to_24s1_ip18 (same handset both days)": {
    "n_train_endpoints": 66,
    "n_test_endpoints": 54,
    "train_places": 26,
@@ -14243,7 +14261,7 @@
     "area_acc": 0.278
    }
   },
-  "24s1_to_23nov_iphone (iPhone19,2 both days)": {
+  "24s1_to_23nov_ip18 (same handset both days)": {
    "n_train_endpoints": 54,
    "n_test_endpoints": 66,
    "train_places": 26,
@@ -14381,7 +14399,7 @@
     "area_acc": 0.38
    }
   },
-  "24s1_to_24s2_iphone (DIFFERENT handsets)": {
+  "24s1_to_24s2_iphone (DIFFERENT handsets: ip18 -> ip16)": {
    "n_train_endpoints": 54,
    "n_test_endpoints": 46,
    "train_places": 26,

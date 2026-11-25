@@ -23,12 +23,12 @@
   "places": 26,
   "window_s": 5.0,
   "per_session_phone": {
-   "23nov/iphone": 504,
+   "23nov/ip16": 504,
    "24s1/a55": 324,
    "24s1/a56": 325,
-   "24s1/iphone": 324,
+   "24s1/ip18": 324,
    "24s1/s24": 324,
-   "24s2/iphone": 312,
+   "24s2/ip16": 312,
    "24s2/s24": 312
   }
  },
@@ -220,7 +220,7 @@
       ],
       "window_acc": 0.07
      },
-     "seconds": 16.2
+     "seconds": 15.6
     },
     {
      "fold": "random fold 2",
@@ -406,7 +406,7 @@
       ],
       "window_acc": 0.06
      },
-     "seconds": 16.0
+     "seconds": 15.0
     },
     {
      "fold": "random fold 3",
@@ -592,7 +592,7 @@
       ],
       "window_acc": 0.101
      },
-     "seconds": 16.8
+     "seconds": 15.0
     },
     {
      "fold": "random fold 4",
@@ -778,7 +778,7 @@
       ],
       "window_acc": 0.07
      },
-     "seconds": 16.2
+     "seconds": 14.9
     },
     {
      "fold": "random fold 5",
@@ -964,7 +964,7 @@
       ],
       "window_acc": 0.099
      },
-     "seconds": 16.6
+     "seconds": 15.0
     }
    ],
    "overall": {
@@ -1248,7 +1248,7 @@
       ],
       "window_acc": 0.1
      },
-     "seconds": 15.8
+     "seconds": 14.6
     },
     {
      "fold": "recording fold 2",
@@ -1434,7 +1434,7 @@
       ],
       "window_acc": 0.049
      },
-     "seconds": 16.2
+     "seconds": 15.4
     },
     {
      "fold": "recording fold 3",
@@ -1620,7 +1620,7 @@
       ],
       "window_acc": 0.073
      },
-     "seconds": 16.1
+     "seconds": 17.9
     },
     {
      "fold": "recording fold 4",
@@ -1806,7 +1806,7 @@
       ],
       "window_acc": 0.075
      },
-     "seconds": 16.4
+     "seconds": 15.3
     },
     {
      "fold": "recording fold 5",
@@ -1992,7 +1992,7 @@
       ],
       "window_acc": 0.15
      },
-     "seconds": 16.2
+     "seconds": 14.9
     }
    ],
    "overall": {
@@ -2276,7 +2276,7 @@
       ],
       "window_acc": 0.0
      },
-     "seconds": 15.7
+     "seconds": 14.6
     },
     {
      "fold": "stop fold 2",
@@ -2462,7 +2462,7 @@
       ],
       "window_acc": 0.146
      },
-     "seconds": 15.4
+     "seconds": 14.7
     },
     {
      "fold": "stop fold 3",
@@ -2648,7 +2648,7 @@
       ],
       "window_acc": 0.0
      },
-     "seconds": 16.0
+     "seconds": 14.8
     },
     {
      "fold": "stop fold 4",
@@ -2834,7 +2834,7 @@
       ],
       "window_acc": 0.025
      },
-     "seconds": 31.2
+     "seconds": 30.6
     },
     {
      "fold": "stop fold 5",
@@ -3020,7 +3020,7 @@
       ],
       "window_acc": 0.125
      },
-     "seconds": 15.5
+     "seconds": 14.6
     }
    ],
    "overall": {
@@ -3304,7 +3304,7 @@
       ],
       "window_acc": 0.095
      },
-     "seconds": 11.7
+     "seconds": 10.7
     },
     {
      "fold": "test 24s1",
@@ -3490,7 +3490,7 @@
       ],
       "window_acc": 0.074
      },
-     "seconds": 5.7
+     "seconds": 5.6
     },
     {
      "fold": "test 24s2",
@@ -3676,7 +3676,7 @@
       ],
       "window_acc": 0.077
      },
-     "seconds": 9.3
+     "seconds": 8.8
     }
    ],
    "overall": {

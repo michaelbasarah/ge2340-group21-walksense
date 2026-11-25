@@ -147,35 +147,40 @@ def main():
     bank = gknn.Bank(D, wifi_rows='near', wifi_scanner='s24')
     bank_in = gknn.Bank(D, wifi_rows='in_window', wifi_scanner='s24')
     W = bank.W
-    sel = lambda s, ph: np.where((W['session'] == s) & (W['phone'] == ph))[0]
-    devices = W.groupby(['session', 'phone'])['device'].first().to_dict()
+    # `slot` = which phone slot of the session (iphone / s24 / a55 / a56); `phone` = the real handset (ip16, ip18, s24, ...).
+    # Result keys keep the slot name (an "iphone" test), and every split states the handsets it really used.
+    sel = lambda s, ph: np.where((W['session'] == s) & (W['slot'] == ph))[0]
+    hs = lambda s, ph: '+'.join(sorted(set(W.loc[sel(s, ph), 'phone'])))
+    devices = W.groupby(['session', 'slot'])['phone'].agg(lambda x: '+'.join(sorted(set(x)))).to_dict()
+    model_of = W.groupby(['session', 'slot'])['device'].agg(lambda x: '+'.join(sorted(set(x)))).to_dict()
     R = {}
-    # ---- 2a cross-session, same phone role
+    # ---- 2a cross-session, same phone slot (the handset is checked, not assumed)
     for ph in ['iphone', 's24']:
         for a, b in [('24s1', '24s2'), ('24s2', '24s1')]:
             same = devices[(a, ph)] == devices[(b, ph)]
-            note = f"{ph}: train {devices[(a, ph)]}, test {devices[(b, ph)]} ({'same handset' if same else 'DIFFERENT handsets'})"
+            note = f"{ph} slot: train {devices[(a, ph)]} ({model_of[(a, ph)]}), test {devices[(b, ph)]} ({model_of[(b, ph)]}) ({'same handset' if same else 'DIFFERENT handsets'})"
             R[f'xsession_{a}_to_{b}_{ph}'] = run_split(bank, sel(a, ph), sel(b, ph), [a], area, note=note)
             R[f'xsession_{a}_to_{b}_{ph}']['Wi-Fi (in-window rows only)'] = run_split(
                 bank_in, sel(a, ph), sel(b, ph), [a], area, {'Wi-Fi': {'wifi': 1}})['Wi-Fi']
     # ---- 2b cross-day, iPhone stops
-    for a, b, tag in [('23nov', '24s2', 'same handset iPhone17,4'), ('24s2', '23nov', 'same handset iPhone17,4'),
-                      ('23nov', '24s1', 'DIFFERENT handsets: 23nov iPhone17,4, 24s1 iPhone19,2')]:
+    for a, b in [('23nov', '24s2'), ('24s2', '23nov'), ('23nov', '24s1')]:
+        ha, hb = hs(a, 'iphone'), hs(b, 'iphone')
+        tag = (f'same handset {ha}' if ha == hb else f'DIFFERENT handsets: {a} {ha}, {b} {hb}')
         R[f'xday_{a}_to_{b}_iphone'] = run_split(bank, sel(a, 'iphone'), sel(b, 'iphone'), [a], area, note=tag)
     tr = np.concatenate([sel('23nov', 'iphone'), sel('24s1', 'iphone')])
     R['xday_23nov+24s1_to_24s2_iphone'] = run_split(bank, tr, sel('24s2', 'iphone'), ['23nov', '24s1'], area,
-                                                    note='train two earlier sessions (two iPhone handsets), test 24s2 iPhone17,4')
+                                                    note=f"train two earlier sessions (two iPhone handsets: {hs('23nov', 'iphone')} and {hs('24s1', 'iphone')}), test 24s2 {hs('24s2', 'iphone')}")
     # ---- leaky reference
     R['LEAKY_same_recording_time_split_24s2_iphone'] = block_split(bank, sorted(set(bank.rec[sel('24s2', 'iphone')])), area)
     R['LEAKY_same_recording_time_split_24s2_s24'] = block_split(bank, sorted(set(bank.rec[sel('24s2', 's24')])), area)
     # ---- walk endpoints (tilt), same handset
     E = D['E']
-    m = lambda s, ph: (E['session'] == s) & (E['phone'] == ph)
-    EP = {'23nov_to_24s1_iphone (iPhone19,2 both days)': (m('23nov', 'iphone'), m('24s1', 'iphone')),
-          '24s1_to_23nov_iphone (iPhone19,2 both days)': (m('24s1', 'iphone'), m('23nov', 'iphone')),
+    m = lambda s, ph: (E['session'] == s) & (E['phone'] == ph)          # ph = handset id
+    EP = {'23nov_to_24s1_ip18 (same handset both days)': (m('23nov', 'ip18'), m('24s1', 'ip18')),
+          '24s1_to_23nov_ip18 (same handset both days)': (m('24s1', 'ip18'), m('23nov', 'ip18')),
           '24s1_to_24s2_s24 (same handset)': (m('24s1', 's24'), m('24s2', 's24')),
           '24s2_to_24s1_s24 (same handset)': (m('24s2', 's24'), m('24s1', 's24')),
-          '24s1_to_24s2_iphone (DIFFERENT handsets)': (m('24s1', 'iphone'), m('24s2', 'iphone'))}
+          '24s1_to_24s2_iphone (DIFFERENT handsets: ip18 -> ip16)': (m('24s1', 'ip18'), m('24s2', 'ip16'))}
     R_ep = {k: endpoint_test(E, a, b, area) for k, (a, b) in EP.items()}
     fl, fstats = floor_eval(D['V'])
     med = D['W'].groupby(['session', 'phone', 'place'])['B_mean'].median()
@@ -185,7 +190,9 @@ def main():
                'settings': {'window_s': D['config']['window_s'], 'k': K, 'weights': 'equal per feature group',
                             'wifi': 'nearest stop within 120 s, s24 scanner only (the same scanner phone in every session)',
                             'places': 'graph-v2 names via names_24nov.csv', 'area': 'graph-v2/nodes.csv area column'},
-               'devices': {f'{s}/{p}': d for (s, p), d in devices.items()},
+               'devices': {f'{s}/{p}': f'{d} ({model_of[(s, p)]})' for (s, p), d in devices.items()},
+               'handset_per_session_slot': {f'{s}/{p}': d for (s, p), d in devices.items()},
+               'walk_endpoint_handsets': {f'{s}/{p}': int(n) for (s, p), n in E.groupby(['session', 'phone']).size().items()},
                'unmapped_names': D['unmapped'],
                'magnetic_check': {'stops_with_median_B_above_100uT': outliers, 'per_session_phone_range_of_place_median_B_uT': rng},
                'stop_results': R, 'walk_endpoint_results': R_ep, 'floor': fl, 'floor_stats': fstats}
