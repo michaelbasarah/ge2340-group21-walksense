@@ -9,6 +9,12 @@
                                      embeddings); adds the key "fuzzy" to tuned.json and leaves the other keys as they are
 Hybrid = keyword (whole word + aliases) -> difflib fuzzy alias match -> LLM only if neither finds a place. With
 --no-llm-calls it is scored from llm_cache_<version>.json only; a query whose LLM answer is not cached is reported.
+
+  python evaluate.py --method hybrid_gemini   (or --method gemini) the Gemini API with the same prompt, on all 128 rows
+                                     (prompt frozen, nothing tuned). Key: GEMINI_API_KEY in the repo-root .env. At most
+                                     --max-calls real calls (default 150); answers cached in llm_cache_gemini_v1.json, so a
+                                     rerun is free. Writes out/gemini_results.json + out/gemini_failures_<method>.csv only (the
+                                     Claude results.json is not touched). No key: prints how to add one and exits 0.
 Needs: sentence-transformers, matplotlib (see README). LLM answers come from llm_cache_<version>.json;
 missing ones are fetched with the Claude CLI (internet) unless --no-llm-calls.
 """
@@ -201,15 +207,94 @@ def figure(results, path):
     fig.tight_layout(); fig.savefig(path, dpi=150)
 
 
+def run_gemini(method, queries, places, allow_calls, max_calls):
+    """Rows like run_method(); stops calling the API after the first error (key, quota, network) or max_calls."""
+    import gemini as G
+    rows, stop = [], None
+    for q in queries:
+        local_ms = None
+        if method == 'hybrid_gemini':
+            t0 = time.perf_counter()
+            pid, sc, stage = M.fuzzy_keyword_match(q['query'], places)
+            local_ms = (time.perf_counter() - t0) * 1000
+            if pid is not None:
+                rows.append({'pred': pid, 'score': float(sc), 'ms': local_ms, 'local_ms': local_ms, 'invalid': False, 'stage': stage})
+                continue
+        allow = allow_calls and stop is None and M.GEMINI_CALLS < max_calls
+        try:
+            r = M.gemini_answer(q['query'], places, allow_call=allow)
+        except G.GeminiError as e:
+            stop, r = str(e), None
+        if r is None:
+            row = {'pred': None, 'score': 0.0, 'ms': None, 'invalid': False, 'missing': True, 'query': q['query']}
+            if method == 'hybrid_gemini':
+                row['stage'] = 'llm_missing'
+            rows.append(row)
+            continue
+        pred = r['parsed'] if r['valid'] and r['parsed'] != 'NONE' else None
+        row = {'pred': pred, 'score': 1.0 if pred else 0.0, 'ms': (local_ms or 0.0) + r['latency_s'] * 1000,
+               'invalid': not r['valid'], 'raw': r['raw']}
+        if method == 'hybrid_gemini':
+            row.update(stage='llm', local_ms=local_ms, llm_ms=r['latency_s'] * 1000)
+        rows.append(row)
+    if stop is None and allow_calls and M.GEMINI_CALLS >= max_calls and any(r.get('missing') for r in rows):
+        stop = f'--max-calls {max_calls} reached'
+    return rows, stop
+
+
+def gemini_eval(method, queries, places, by_id, allow_calls, max_calls):
+    import gemini as G
+    key, model = G.settings()
+    if allow_calls and not key:
+        print(f'No Gemini API key, so nothing was run. Paste your key after GEMINI_API_KEY= in {G.ENV_FILE} '
+              '(get one at aistudio.google.com/apikey), then run this again. '
+              f'(--no-llm-calls scores only what is already cached in {M.gemini_cache_path().name}.)')
+        return
+    res, stop = run_gemini(method, queries, places, allow_calls, max_calls)
+    miss = [r['query'] for r in res if r.get('missing')]
+    print(f'{method}: {M.GEMINI_CALLS} Gemini API calls made in this run (cap {max_calls}), model {model}')
+    if miss:
+        print(f'{method}: {len(miss)} of {len(queries)} queries have no Gemini answer yet' + (f' ({stop})' if stop else '') +
+              '. Answers so far are cached; run again to continue. Nothing written.')
+        return
+    s = {k: metrics(v, queries, res, by_id) for k, v in slices(queries).items()}
+    print(f"{method:13} " + '  '.join(f"{k} {s[k]['correct']}/{s[k]['n']}" for k in ('easy', 'hard', 'dev', 'test') if k in s))
+    out = OUT / 'gemini_results.json'
+    prev = json.loads(out.read_text(encoding='utf-8')) if out.exists() else {'methods': {}}
+    cache = M._load_gemini_cache()
+    prev['meta'] = {'date': str(date.today()), 'python': platform.python_version(), 'n_queries': len(queries),
+                    'n_places': len(places), 'model_setting': model,
+                    'models_reported': sorted({r.get('model_version') or r.get('model') for r in cache['responses'].values()} - {None}),
+                    'prompt_version': M.GEMINI_PROMPT_VERSION, 'cache_file': M.gemini_cache_path().name,
+                    'cached_responses': len(cache['responses']), 'fuzzy_cutoff': M._fuzzy_cutoff(),
+                    'note': 'same system prompt and place list as the Claude llm method; latency = wall clock of the HTTPS call'}
+    prev['methods'][method] = {'slices': s}
+    out.write_text(json.dumps(prev, indent=1, ensure_ascii=False), encoding='utf-8')
+    with (OUT / f'gemini_failures_{method}.csv').open('w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f)
+        w.writerow(['method', 'id', 'split', 'set', 'category', 'query', 'expected', 'predicted', 'raw'])
+        for q, r in zip(queries, res):
+            if not (is_ok(r['pred'], q['expected'], by_id) and not r['invalid']):
+                w.writerow([method, q['id'], q['split'], q['set'], q['category'], q['query'], q['expected'],
+                            'INVALID' if r['invalid'] else (r['pred'] or 'none'), r.get('raw', '')])
+    print('wrote', out.relative_to(ROOT), f'and out/gemini_failures_{method}.csv')
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--phase', choices=['dev', 'final', 'tune-fuzzy'], required=True)
+    ap.add_argument('--phase', choices=['dev', 'final', 'tune-fuzzy'])
     ap.add_argument('--no-llm-calls', action='store_true')
     ap.add_argument('--methods', default=','.join(ALL))
+    ap.add_argument('--method', choices=M.GEMINI_METHODS, help='Gemini evaluation (see the top of this file)')
+    ap.add_argument('--max-calls', type=int, default=150, help='hard cap on real Gemini API calls in this run')
     a = ap.parse_args()
     places = M.load_places()
     by_id = {d['place_id']: d for d in places}
     queries = load_queries()
+    if a.method:
+        return gemini_eval(a.method, queries, places, by_id, not a.no_llm_calls, a.max_calls)
+    if not a.phase:
+        ap.error('--phase is required (or --method gemini / hybrid_gemini)')
     methods = a.methods.split(',')
     OUT.mkdir(exist_ok=True)
     if a.phase == 'tune-fuzzy':

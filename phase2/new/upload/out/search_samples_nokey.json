@@ -1,0 +1,270 @@
+{
+ "about": "GET /api/search on server.py --port 8010 from the feat/gemini-search worktree, 26 Nov 2026, NO Gemini key (.env key empty), no stop uploaded (start = default). Fetched with urllib from that server; see PROCESS-LOG 71.",
+ "samples": [
+  {
+   "query": "y5401",
+   "place_id": "y5401",
+   "name": "Y5-401 (5F)",
+   "floor": 5,
+   "method": "keyword",
+   "answer": "Y5-401 (5F): the route is below.",
+   "route": [
+    {
+     "id": "entrance_exit",
+     "name": "Entrance gate (4F)",
+     "floor": 4,
+     "map_key": "gate"
+    },
+    {
+     "id": "exit_5_4F",
+     "name": "Exit 5 (4F)",
+     "floor": 4,
+     "map_key": "exit5_door",
+     "mode": "walk",
+     "metres": 14.6,
+     "seconds": 11.23
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "name": "Mixed disabled toilet (4F)",
+     "floor": 4,
+     "map_key": "disabled_toilet",
+     "mode": "walk",
+     "metres": 3.2,
+     "seconds": 2.46
+    },
+    {
+     "id": "lift_stairs_4F",
+     "name": "Lift and stairs (4F)",
+     "floor": 4,
+     "map_key": "lift_stairs5",
+     "mode": "walk",
+     "metres": 8.1,
+     "seconds": 6.23
+    },
+    {
+     "id": "lift_stairs",
+     "name": "Lift and stairs (5F)",
+     "floor": 5,
+     "map_key": "lift_stairs5",
+     "mode": "lift_stairs",
+     "metres": 28.6,
+     "seconds": 30.0
+    },
+    {
+     "id": "y5401",
+     "name": "Room Y5-401",
+     "floor": 5,
+     "map_key": "y5401",
+     "mode": "walk",
+     "metres": 10.3,
+     "seconds": 7.92
+    }
+   ],
+   "instructions": [
+    "Start at Entrance gate (4F) (floor 4).",
+    "Walk to Exit 5 (4F) (about 15 m, 11 s).",
+    "Turn right at Exit 5 (4F), then walk to Mixed disabled toilet (4F) (about 3 m, 2 s).",
+    "Turn left at Mixed disabled toilet (4F), then walk to Lift and stairs (4F) (about 8 m, 6 s).",
+    "Take the stairs (or the lift) up to floor 5 (about 30 s).",
+    "Walk to Room Y5-401 (about 10 m, 8 s).",
+    "You have arrived at Room Y5-401."
+   ],
+   "distance_m": 64.8,
+   "seconds": 57.8,
+   "from": {
+    "id": "entrance_exit",
+    "name": "Entrance gate (4F)",
+    "floor": 4,
+    "source": "default"
+   },
+   "gemini": {
+    "configured": false,
+    "model": null,
+    "error": null
+   },
+   "fallback_reason": "no Gemini key in .env",
+   "map_key": "y5401"
+  },
+  {
+   "query": "where can I study",
+   "place_id": "sr9",
+   "name": "Study rooms SR8 to SR11 (merged as SR9, book first)",
+   "floor": 5,
+   "method": "keyword",
+   "answer": "Study rooms SR8 to SR11 (merged as SR9, book first) (5F): the route is below.",
+   "route": [
+    {
+     "id": "entrance_exit",
+     "name": "Entrance gate (4F)",
+     "floor": 4,
+     "map_key": "gate"
+    },
+    {
+     "id": "exit_10_4F",
+     "name": "Exit 10 (4F)",
+     "floor": 4,
+     "map_key": "exit10_door",
+     "mode": "walk",
+     "metres": 10.8,
+     "seconds": 8.31
+    },
+    {
+     "id": "lt1a",
+     "name": "LT1a",
+     "floor": 4,
+     "map_key": "lt1a",
+     "mode": "walk",
+     "metres": 5.9,
+     "seconds": 4.54
+    },
+    {
+     "id": "lt1b",
+     "name": "LT1b",
+     "floor": 4,
+     "map_key": "lt1b",
+     "mode": "walk",
+     "metres": 14.0,
+     "seconds": 10.77
+    },
+    {
+     "id": "escalator_up_4F",
+     "name": "Up escalator (4F)",
+     "floor": 4,
+     "map_key": "esca_up",
+     "mode": "walk",
+     "metres": 5.9,
+     "seconds": 4.54
+    },
+    {
+     "id": "escalator_up",
+     "name": "Up escalator (5F)",
+     "floor": 5,
+     "map_key": "esca_up",
+     "mode": "escalator",
+     "metres": 0.0,
+     "seconds": 20.0
+    },
+    {
+     "id": "exit_10",
+     "name": "Exit 10 (by the toilets)",
+     "floor": 5,
+     "map_key": "exit10_door",
+     "mode": "walk",
+     "metres": 4.9,
+     "seconds": 3.77
+    },
+    {
+     "id": "female_toilet",
+     "name": "Female toilet",
+     "floor": 5,
+     "map_key": "female_toilet",
+     "mode": "walk",
+     "metres": 4.4,
+     "seconds": 3.38
+    },
+    {
+     "id": "y5202",
+     "name": "Room Y5-202",
+     "floor": 5,
+     "map_key": "y5202",
+     "mode": "walk",
+     "metres": 10.7,
+     "seconds": 8.23
+    },
+    {
+     "id": "sr9",
+     "name": "Study rooms (Y5-511 to Y5-514)",
+     "floor": 5,
+     "map_key": "sr9",
+     "mode": "walk",
+     "metres": 10.6,
+     "seconds": 8.15
+    }
+   ],
+   "instructions": [
+    "Start at Entrance gate (4F) (floor 4).",
+    "Walk to Exit 10 (4F) (about 11 m, 8 s).",
+    "Walk to LT1a (about 6 m, 5 s).",
+    "Turn right at LT1a, then walk to LT1b (about 14 m, 11 s).",
+    "Turn right at LT1b, then walk to Up escalator (4F) (about 6 m, 5 s).",
+    "Take the escalator up to floor 5 (about 20 s).",
+    "Walk to Exit 10 (by the toilets) (about 5 m, 4 s).",
+    "Turn right at Exit 10 (by the toilets), then walk to Female toilet (about 4 m, 3 s).",
+    "Walk to Room Y5-202 (about 11 m, 8 s).",
+    "Turn right at Room Y5-202, then walk to Study rooms (Y5-511 to Y5-514) (about 11 m, 8 s).",
+    "You have arrived at Study rooms (Y5-511 to Y5-514)."
+   ],
+   "distance_m": 67.2,
+   "seconds": 71.7,
+   "from": {
+    "id": "entrance_exit",
+    "name": "Entrance gate (4F)",
+    "floor": 4,
+    "source": "default"
+   },
+   "gemini": {
+    "configured": false,
+    "model": null,
+    "error": null
+   },
+   "fallback_reason": "no Gemini key in .env",
+   "map_key": "sr9"
+  },
+  {
+   "query": "toilet on 4th floor",
+   "place_id": "disabled_toilet_4F",
+   "name": "Mixed disabled toilet (4F)",
+   "floor": 4,
+   "method": "keyword",
+   "answer": "Mixed disabled toilet (4F): the route is below.",
+   "route": [
+    {
+     "id": "entrance_exit",
+     "name": "Entrance gate (4F)",
+     "floor": 4,
+     "map_key": "gate"
+    },
+    {
+     "id": "exit_5_4F",
+     "name": "Exit 5 (4F)",
+     "floor": 4,
+     "map_key": "exit5_door",
+     "mode": "walk",
+     "metres": 14.6,
+     "seconds": 11.23
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "name": "Mixed disabled toilet (4F)",
+     "floor": 4,
+     "map_key": "disabled_toilet",
+     "mode": "walk",
+     "metres": 3.2,
+     "seconds": 2.46
+    }
+   ],
+   "instructions": [
+    "Start at Entrance gate (4F) (floor 4).",
+    "Walk to Exit 5 (4F) (about 15 m, 11 s).",
+    "Turn right at Exit 5 (4F), then walk to Mixed disabled toilet (4F) (about 3 m, 2 s).",
+    "You have arrived at Mixed disabled toilet (4F)."
+   ],
+   "distance_m": 17.8,
+   "seconds": 13.7,
+   "from": {
+    "id": "entrance_exit",
+    "name": "Entrance gate (4F)",
+    "floor": 4,
+    "source": "default"
+   },
+   "gemini": {
+    "configured": false,
+    "model": null,
+    "error": null
+   },
+   "fallback_reason": "no Gemini key in .env",
+   "map_key": "disabled_toilet"
+  }
+ ]
+}

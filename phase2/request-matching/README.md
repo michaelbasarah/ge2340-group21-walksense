@@ -17,6 +17,13 @@ python match.py "kantin dimana" all     # try one request; in Python: from match
 ```
 `evaluate.py --no-llm-calls` re-scores from the cached LLM answers without any call.
 
+Gemini (same prompt, REST API, `gemini.py`; key in the repo-root `.env`, see `phase2/new/upload/README.md` "Search with Gemini"):
+```bash
+python evaluate.py --method hybrid_gemini   # keyword -> fuzzy -> Gemini; or --method gemini. At most --max-calls 150 real calls.
+python -m unittest test_gemini              # fake HTTP layer, no key needed
+```
+Writes `out/gemini_results.json` + `out/gemini_failures_<method>.csv` (not `results.json`); answers cached in `llm_cache_gemini_v1.json` (empty until a key is used). No key: prints how to add one and exits 0.
+
 ## Files
 - `destinations.csv`: 26 real places (graph-v2 `nodes.csv`, floors 5 and 4) with `map_key` = the label Tian's app uses (`phase2/new/upload/map/places.json`; every key is checked by the build script), tags and aliases (English, Indonesian: kantin, toilet cowo/cewe, esca naik/turun, lt, sr9, Y5302, ...). Old 15-place file kept as `destinations_v1.csv`. **Names, tags and aliases are an agent draft: the team should check and edit.**
 - `test_queries.csv`: 128 queries. Columns: `set` (easy / hard), `category`, `split` (dev / test), `source`, `expected`, `note`. `expected` is a place ID, several IDs joined by `|` (any is right, e.g. the lift on either floor), `tag:<tag>` (any place with that tag) or `NONE` (no such place in our list: the right answer is to reject).
