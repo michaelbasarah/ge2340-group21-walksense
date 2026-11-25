@@ -64,11 +64,38 @@
   @keyframes pulse { from { transform:scale(1); opacity:.9; } to { transform:scale(3.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { #map .halo { animation:none; opacity:.5; transform:scale(1.8); } }
   #mapnote { margin-top:6px; }
+  /* search bar: fixed to the top edge of the screen (never a popup in the middle) */
+  .searchbar { position:sticky; top:0; z-index:5; background:var(--card); border-bottom:1px solid var(--line); box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  .searchbar form { max-width:520px; margin:0 auto; padding:8px 16px; display:flex; flex-wrap:wrap; gap:6px; }
+  .searchbar input[type=search] { flex:1 1 200px; min-width:0; font:inherit; padding:9px 10px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); }
+  .searchbar button { width:auto; margin:0; min-height:40px; padding:0 16px; }
+  .searchbar select { flex:1 1 100%; width:auto; padding:6px 8px; font-size:14px; }
+  .searchbar .fromrow { flex:1 1 100%; display:flex; gap:6px; align-items:center; font-size:14px; color:var(--ink2); }
+  .searchbar .fromrow select { flex:1; }
+  .searchbar .fromrow button { min-height:32px; padding:0 10px; font-size:14px; }
+  .badge { display:inline-block; font-size:12.5px; font-weight:600; padding:2px 8px; border-radius:10px; border:1px solid var(--line); color:var(--ink2); }
+  .badge.gemini { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+  #found ol { margin:8px 0 0; padding-left:22px; } #found li { margin:2px 0; }
+  #found .answer { font-size:17px; font-weight:600; margin:6px 0; }
+  :root { --route:#e8590c; } @media (prefers-color-scheme: dark) { :root { --route:#ff922b; } }
+  #map .route { fill:none; stroke:var(--route); stroke-width:6; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
+  #map.plan .route { stroke-width:calc(var(--u) * .35px); }
+  #map .route-end { fill:var(--route); stroke:#fff; stroke-width:4; } #map.plan .route-end { stroke-width:calc(var(--u) * .2px); }
+  #map .route-start { fill:#fff; stroke:var(--route); stroke-width:5; } #map.plan .route-start { stroke-width:calc(var(--u) * .25px); }
 </style>
 </head>
 <body>
+<header class="searchbar">
+  <form id="searchform" role="search" autocomplete="off">
+    <input id="q" type="search" placeholder="Search: a room, a place or a question" aria-label="Search for a place" maxlength="200" enterkeyhint="search">
+    <button id="go" type="submit">Go</button>
+    <div class="fromrow"><label for="from" style="margin:0">From</label><select id="from"><option value="">where I am (tracked), else the entrance gate 4F</option></select><button type="button" class="secondary" id="clearroute" hidden>Clear</button></div>
+  </form>
+</header>
 <main>
   <h1>WalkSense · upload a recording</h1>
+
+  <div class="card" id="found" hidden aria-live="polite"></div>
 
   <div class="card">
     <div class="muted">You are on</div>
@@ -110,7 +137,7 @@
 const $ = id => document.getElementById(id);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
 const nice = (s, f) => (f && window.FloorPlan && FloorPlan.name(f, s)) || (state && state.labels && state.labels[s]) || (s || '').replace(/_/g, ' ');
-let state = null, maps = null, shown = 5, last = null;
+let state = null, maps = null, shown = 5, last = null, found = null;   // found = last search result with a route
 let mapMode = 'plan';                         // 'plan' = vector floor plan (map/floorplan.json), 'picture' = the sketch PNG
 try { if (localStorage.getItem('walksense-map') === 'picture') mapMode = 'picture'; } catch (e) {}
 const SVGNS = 'http://www.w3.org/2000/svg';
@@ -148,6 +175,7 @@ function drawMap() {
     pos = id => m.places[id];
     k = 1;
   }
+  drawRoute(svg, pos, k, plan);
   const label = (p, text) => {
     const t = sv('text', { x: p.x, y: p.y - 26 * k, 'text-anchor': 'middle', class: 'ovl' }); if (plan) t.style.fontSize = (1.5 * FloorPlan.unit(shown)) + 'px'; t.textContent = text; svg.append(t);
     if (plan) {                                  // keep the big label inside the view
@@ -174,6 +202,10 @@ function drawMap() {
     note = `Walking: about here, from ${nice(last.dot.from, shown)} toward ${nice(last.dot.to, shown)}. Stop 3 s to check the place.`;
   } else if (last && last.kind === 'walk') note = last.live ? 'Walking… stand still facing the door for 3 s to light up where you are.' : 'Walking: send the next stop to light up where you are.';
   else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
+  if (found && found.route.length) {
+    const other = [...new Set(found.route.map(st => st.floor))].filter(f => f !== shown);
+    note += ` Route to ${found.name}` + (other.length ? ` continues on ${other.join(', ')}F (tap the ${other[0]}F map button).` : ' shown in orange.');
+  }
   $('mapnote').textContent = note;
   svg.setAttribute('aria-label', `${shown}F ${plan ? 'floor plan' : 'floor map'}. ${note}`);
 }
@@ -286,6 +318,59 @@ async function pollLive() {
   if (r && key !== liveKey) { liveKey = key; last = r; if (shown !== r.floor) shown = r.floor; drawMap(); }
   setTimeout(pollLive, 1000);
 }
+// ---------------------------------------------------------------- search + route (GET /api/search; Gemini key stays on the server)
+function drawRoute(svg, pos, k, plan) {
+  if (!found || !found.route.length) return;
+  const R = found.route;
+  let d = '';
+  for (let i = 1; i < R.length; i++) {
+    const a = R[i - 1], b = R[i];
+    if (a.floor !== shown || b.floor !== shown) continue;          // lift / escalator hops are on the floor badges
+    let pts;
+    if (plan) pts = (FloorPlan.corridor(shown, a.map_key, b.map_key) || []).map(([x, y]) => [x, -y]);
+    else { const pa = pos(a.map_key), pb = pos(b.map_key); pts = pa && pb ? [[pa.x, pa.y], [pb.x, pb.y]] : []; }
+    if (pts.length) d += 'M' + pts.map(([x, y]) => `${Math.round(x * 100) / 100},${Math.round(y * 100) / 100}`).join('L');
+  }
+  if (d) svg.append(sv('path', { d, class: 'route' }));
+  const s0 = R[0], s1 = R[R.length - 1];
+  if (s0.floor === shown) { const p = pos(s0.map_key); if (p) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 11 * k, class: 'route-start' })); }
+  if (s1.floor === shown) { const p = pos(s1.map_key); if (p) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 13 * k, class: 'route-end' })); }
+}
+const METHOD = { gemini: 'Answered by Gemini', keyword: 'Answered offline: keyword match', fuzzy: 'Answered offline: typo-tolerant (fuzzy) match', none: 'Not found' };
+function showFound(r) {
+  found = r.place_id ? r : null;
+  const box = $('found'); box.hidden = false; box.replaceChildren();
+  const head = el('div'); head.append(el('span', METHOD[r.method] + (r.method === 'gemini' && r.gemini && r.gemini.model ? ` (${r.gemini.model})` : ''), 'badge' + (r.method === 'gemini' ? ' gemini' : '')));
+  box.append(head, el('div', r.answer, 'answer'));
+  const g = r.gemini || {};
+  if (r.method !== 'gemini') box.append(el('div', g.configured ? `Gemini not used this time: ${r.fallback_reason || g.error || ''}` : 'Gemini is off (no key in .env), so search works offline.', 'muted'));
+  if (r.place_id) {
+    if (r.from) box.append(el('div', `From ${r.from.name} (${r.from.source === 'tracked' ? 'where you are' : r.from.source === 'chosen' ? 'chosen' : 'default start'})` +
+      (r.distance_m != null ? ` · about ${Math.round(r.distance_m)} m walking, ${Math.round(r.seconds)} s` : ''), 'muted'));
+    if (r.instructions.length) { const ol = el('ol'); r.instructions.forEach(t => ol.append(el('li', t))); box.append(ol); }
+    if (r.route_error) box.append(el('div', 'No route: ' + r.route_error, 'bad'));
+    shown = r.route.length ? r.route[0].floor : r.floor;
+  }
+  $('clearroute').hidden = !found;
+  drawMap();
+}
+$('searchform').onsubmit = async e => {
+  e.preventDefault();
+  const q = $('q').value.trim();
+  if (!q) return;
+  $('go').disabled = true; $('go').textContent = '…';
+  try { showFound(await call('/api/search?' + new URLSearchParams({ q, from: $('from').value }))); }
+  catch (err) { const box = $('found'); box.hidden = false; box.replaceChildren(el('div', 'Search failed: ' + err.message, 'bad')); }
+  $('go').disabled = false; $('go').textContent = 'Go';
+};
+$('clearroute').onclick = () => { found = null; $('found').hidden = true; $('clearroute').hidden = true; drawMap(); };
+call('/api/search/places').then(list => {
+  for (const f of [5, 4]) {
+    const grp = document.createElement('optgroup'); grp.label = f + 'F';
+    list.filter(p => p.floor === f).forEach(p => { const o = el('option', p.name); o.value = p.id; grp.append(o); });
+    $('from').append(grp);
+  }
+}).catch(() => {});
 pollLive();
 call('/api/state').then(s => { render(s); if (s.history.length) showResult(s.history[s.history.length - 1]); }).catch(e => $('err').textContent = 'Cannot reach the server: ' + e.message);
 </script>
