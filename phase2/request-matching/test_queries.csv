@@ -1,24 +1,129 @@
-query,expected
-where can I get food,CANTEEN
-im hungry,CANTEEN
-canteen,CANTEEN
-somewhere to eat lunch,CANTEEN
-nearest toilet,TOILET
-mens bathroom,TOILET
-i need the washroom,TOILET
-how do I get out of here,EXIT5
-nearest exit,EXIT5
-way out,EXIT5
-the exit gate,GATE
-pintu keluar,GATE
-lecture theatre 2b,LT2B
-LT 1a,LT1A
-take me to lecture theatre 2a,LT2A
-study room 9,SR9
-sr11,SR11
-a quiet place to study,tag:study
-where can I study quietly,tag:study
-year 5 studio,Y5
-y4,Y4
-escalator,ESCALATOR
-how do I go up a floor,ESCALATOR
+id,query,expected,set,category,split,source,note
+q001,where can I get food,canteen,easy,starter,dev,starter_v1,
+q002,im hungry,canteen,easy,starter,dev,starter_v1,
+q003,canteen,canteen,easy,starter,dev,starter_v1,
+q004,somewhere to eat lunch,canteen,easy,starter,test,starter_v1,
+q005,nearest toilet,tag:toilet,easy,starter,test,starter_v1,
+q006,mens bathroom,male_toilet,easy,starter,test,starter_v1,
+q007,i need the washroom,tag:toilet,easy,starter,dev,starter_v1,
+q008,how do I get out of here,tag:exit,easy,starter,dev,starter_v1,
+q009,nearest exit,tag:exit,easy,starter,dev,starter_v1,
+q010,way out,tag:exit,easy,starter,test,starter_v1,
+q011,the exit gate,entrance_exit,easy,starter,test,starter_v1,
+q012,pintu keluar,entrance_exit,easy,starter,test,starter_v1,
+q013,lecture theatre 2b,lt2b,easy,starter,test,starter_v1,
+q014,LT 1a,lt1a,easy,starter,dev,starter_v1,
+q015,take me to lecture theatre 2a,lt2a,easy,starter,test,starter_v1,
+q016,study room 9,sr9,easy,starter,test,starter_v1,
+q017,sr11,sr9,easy,starter,dev,starter_v1,
+q018,a quiet place to study,tag:study,easy,starter,dev,starter_v1,
+q019,where can I study quietly,tag:study,easy,starter,dev,starter_v1,
+q020,year 5 studio,y5302|y5202|y5401|y5302_back,easy,starter,dev,starter_v1,
+q021,y4,y4502,easy,starter,test,starter_v1,
+q022,escalator,tag:escalator,easy,starter,test,starter_v1,
+q023,how do I go up a floor,tag:vertical,easy,starter,dev,starter_v1,
+q024,I need to print something,NONE,hard,vague,test,agent_draft,no printer in our list; team check
+q025,quiet place to revise before my exam,sr9,hard,vague,test,agent_draft,
+q026,I need somewhere to focus for a few hours,sr9,hard,vague,dev,agent_draft,
+q027,grab a bite,canteen,hard,vague,dev,agent_draft,
+q028,I'm thirsty,canteen,hard,vague,dev,agent_draft,
+q029,somewhere I can get a coffee,canteen,hard,vague,dev,agent_draft,
+q030,where do I go for my class,tag:lecture,hard,vague,dev,agent_draft,
+q031,I'm late for my lecture,tag:lecture,hard,vague,test,agent_draft,
+q032,"emergency, where do I run",tag:emergency,hard,vague,dev,agent_draft,
+q033,I need to wash my hands,tag:toilet,hard,vague,dev,agent_draft,assumes toilets have sinks
+q034,where can I sit and eat my packed lunch,canteen,hard,vague,dev,agent_draft,
+q035,I want to go up to the next floor,tag:vertical,hard,vague,test,agent_draft,
+q036,how do I get to the floor below,tag:vertical,hard,vague,dev,agent_draft,
+q037,somewhere to book for a group discussion,sr9,hard,vague,test,agent_draft,
+q038,I want to leave campus,tag:exit,hard,vague,test,agent_draft,
+q039,which way out to the MTR,tag:exit,hard,vague,test,agent_draft,which exit leads to the MTR is not in our data; any exit accepted
+q040,take me home,tag:exit,hard,vague,test,agent_draft,
+q041,where do students usually have lunch,canteen,hard,vague,test,agent_draft,
+q042,I need to charge my phone,NONE,hard,vague,test,agent_draft,no charging place in our list
+q043,where can I get something cold to drink,canteen,hard,vague,dev,agent_draft,
+q044,wheelchair accessible toilet,disabled_toilet|disabled_toilet_4F,hard,access,dev,agent_draft,
+q045,"I use a wheelchair, where is the toilet",disabled_toilet|disabled_toilet_4F,hard,access,test,agent_draft,
+q046,step-free way to the other floor,lift_stairs|lift_stairs_4F,hard,access,test,agent_draft,assumes the lift is step-free
+q047,where is the lift,lift_stairs|lift_stairs_4F,hard,access,dev,agent_draft,
+q048,elevator please,lift_stairs|lift_stairs_4F,hard,access,dev,agent_draft,
+q049,accessible restroom on the lower floor,disabled_toilet_4F,hard,access,dev,agent_draft,
+q050,"I can't use stairs, how do I get down to the lower floor",lift_stairs|lift_stairs_4F,hard,access,test,agent_draft,
+q051,toilet for people with disabilities,disabled_toilet|disabled_toilet_4F,hard,access,test,agent_draft,
+q052,where is the cantene,canteen,hard,typo,test,agent_draft,
+q053,nearset tolet,tag:toilet,hard,typo,test,agent_draft,
+q054,lecure theater 2b,lt2b,hard,typo,dev,agent_draft,
+q055,escelator,tag:escalator,hard,typo,dev,agent_draft,
+q056,the exti,tag:exit,hard,typo,test,agent_draft,
+q057,study rom 9,sr9,hard,typo,test,agent_draft,
+q058,lecture theatre 1 b,lt1b,hard,typo,dev,agent_draft,
+q059,restrom,tag:toilet,hard,typo,dev,agent_draft,
+q060,canten,canteen,hard,typo,dev,agent_draft,
+q061,wher can i eet,canteen,hard,typo,test,agent_draft,
+q062,lt2 a,lt2a,hard,typo,test,agent_draft,
+q063,washrom femail,female_toilet,hard,typo,dev,agent_draft,
+q064,emrgency exit,tag:emergency,hard,typo,test,agent_draft,
+q065,where is the libary,NONE,hard,typo,dev,agent_draft,typo of an unsupported place
+q066,y 5302,y5302,hard,typo,dev,agent_draft,
+q067,fod,canteen,hard,typo,test,agent_draft,
+q068,sr 9,sr9,hard,typo,dev,agent_draft,
+q069,eskalator naik,escalator_up|escalator_up_4F,hard,typo,test,agent_draft,
+q070,kantin dimana,canteen,hard,mixed,dev,agent_draft,
+q071,mau makan dong,canteen,hard,mixed,dev,agent_draft,
+q072,toilet cowo dimana,male_toilet,hard,mixed,dev,agent_draft,
+q073,toilet cewe di mana,female_toilet,hard,mixed,test,agent_draft,
+q074,esca naik,escalator_up|escalator_up_4F,hard,mixed,test,agent_draft,
+q075,esca turun bawah,escalator_down_4F,hard,mixed,test,agent_draft,"bawah = lower floor (4F), as in the 25-Nov file names"
+q076,eska turun atas,escalator_down,hard,mixed,test,agent_draft,atas = upper floor (5F)
+q077,lt 2b di mana ya,lt2b,hard,mixed,test,agent_draft,
+q078,pintu keluar dong,tag:exit,hard,mixed,test,agent_draft,
+q079,sr9 dimana,sr9,hard,mixed,test,agent_draft,
+q080,mau belajar yang sepi,sr9,hard,mixed,test,agent_draft,
+q081,"lapar banget, ada makanan?",canteen,hard,mixed,dev,agent_draft,
+q082,cari tangga atau lift,lift_stairs|lift_stairs_4F,hard,mixed,test,agent_draft,
+q083,Y5302 dimana,y5302,hard,mixed,dev,agent_draft,
+q084,ke lantai bawah gimana,tag:vertical,hard,mixed,dev,agent_draft,
+q085,我想食嘢,canteen,hard,mixed,dev,agent_draft,Cantonese: I want to eat
+q086,廁所喺邊度,tag:toilet,hard,mixed,dev,agent_draft,Cantonese: where is the toilet
+q087,出口喺邊,tag:exit,hard,mixed,dev,agent_draft,Cantonese: where is the exit
+q088,where got toilet ah,tag:toilet,hard,mixed,test,agent_draft,
+q089,邊度可以讀書,sr9,hard,mixed,test,agent_draft,Cantonese: where can I study
+q090,I wanna sik faan,canteen,hard,mixed,dev,agent_draft,Cantonese sik faan = eat (a meal)
+q091,返屋企點行,tag:exit,hard,mixed,dev,agent_draft,Cantonese: how do I go home
+q092,電梯喺邊,tag:vertical,hard,mixed,dev,agent_draft,Cantonese: where is the lift/escalator
+q093,where is the library,NONE,hard,unsupported,test,agent_draft,
+q094,I need an ATM,NONE,hard,unsupported,test,agent_draft,
+q095,nearest gym,NONE,hard,unsupported,dev,agent_draft,
+q096,where is the president's office,NONE,hard,unsupported,test,agent_draft,
+q097,how do I get to the bus stop,NONE,hard,unsupported,dev,agent_draft,
+q098,lecture theatre 3a,NONE,hard,unsupported,dev,agent_draft,"we have LT1A, 1B, 2A, 2B only"
+q099,study room 12,NONE,hard,unsupported,dev,agent_draft,we have SR8 to SR11 (merged as sr9)
+q100,where can I buy a textbook,NONE,hard,unsupported,test,agent_draft,
+q101,tell me a joke,NONE,hard,unsupported,dev,agent_draft,
+q102,what is the weather today,NONE,hard,unsupported,dev,agent_draft,
+q103,y5501,NONE,hard,unsupported,dev,agent_draft,not in our list
+q104,where is the swimming pool,NONE,hard,unsupported,dev,agent_draft,
+q105,toilet on floor 6,NONE,hard,unsupported,dev,agent_draft,we have floors 4 and 5 only
+q106,perpustakaan dimana,NONE,hard,unsupported,test,agent_draft,Indonesian: where is the library
+q107,圖書館喺邊,NONE,hard,unsupported,dev,agent_draft,Cantonese: where is the library
+q108,take me to Prof Wong's office,NONE,hard,unsupported,dev,agent_draft,
+q109,"I feel sick, where is the clinic",NONE,hard,unsupported,dev,agent_draft,no clinic in our list; team check
+q110,parking lot,NONE,hard,unsupported,test,agent_draft,
+q111,is there a 7-eleven nearby,NONE,hard,unsupported,test,agent_draft,
+q112,where is the computer lab,NONE,hard,unsupported,test,agent_draft,not in our list; team check
+q113,lecture theatre 3b,NONE,hard,unsupported,test,agent_draft,
+q114,how are you,NONE,hard,unsupported,test,agent_draft,
+q115,lt 4a,NONE,hard,unsupported,test,agent_draft,
+q116,toilet on 4F,disabled_toilet_4F,hard,floor,dev,agent_draft,only toilet in our list on 4F
+q117,lift on the lower floor,lift_stairs_4F,hard,floor,test,agent_draft,
+q118,escalator going up from the lower floor,escalator_up_4F,hard,floor,dev,agent_draft,
+q119,esc down on 5F,escalator_down,hard,floor,test,agent_draft,
+q120,exit 10 on floor 4,exit_10_4F,hard,floor,test,agent_draft,
+q121,the lift on the upper floor,lift_stairs,hard,floor,dev,agent_draft,
+q122,exit 5 on 5F,exit_5,hard,floor,dev,agent_draft,
+q123,exit 10 on the 5th floor,exit_10,hard,floor,test,agent_draft,
+q124,where do I find the Y5 rooms,y5302|y5202|y5401|y5302_back,hard,indirect,dev,agent_draft,
+q125,room y5-202,y5202,hard,indirect,dev,agent_draft,
+q126,the Y5 studio ending in 401,y5401,hard,indirect,test,agent_draft,
+q127,the 502 studio on 4F,y4502,hard,indirect,dev,agent_draft,
+q128,point 2 behind Y5302,y5302_back,hard,indirect,test,agent_draft,

@@ -1,0 +1,24 @@
+query,expected
+where can I get food,CANTEEN
+im hungry,CANTEEN
+canteen,CANTEEN
+somewhere to eat lunch,CANTEEN
+nearest toilet,TOILET
+mens bathroom,TOILET
+i need the washroom,TOILET
+how do I get out of here,EXIT5
+nearest exit,EXIT5
+way out,EXIT5
+the exit gate,GATE
+pintu keluar,GATE
+lecture theatre 2b,LT2B
+LT 1a,LT1A
+take me to lecture theatre 2a,LT2A
+study room 9,SR9
+sr11,SR11
+a quiet place to study,tag:study
+where can I study quietly,tag:study
+year 5 studio,Y5
+y4,Y4
+escalator,ESCALATOR
+how do I go up a floor,ESCALATOR

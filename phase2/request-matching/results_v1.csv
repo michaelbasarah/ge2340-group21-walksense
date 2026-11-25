@@ -1,0 +1,24 @@
+query,expected,keyword,keyword_ok,tokens,tokens_ok
+where can I get food,CANTEEN,CANTEEN,True,CANTEEN,True
+im hungry,CANTEEN,CANTEEN,True,CANTEEN,True
+canteen,CANTEEN,CANTEEN,True,CANTEEN,True
+somewhere to eat lunch,CANTEEN,CANTEEN,True,CANTEEN,True
+nearest toilet,TOILET,TOILET,True,TOILET,True
+mens bathroom,TOILET,TOILET,True,TOILET,True
+i need the washroom,TOILET,TOILET,True,TOILET,True
+how do I get out of here,EXIT5,GATE,False,GATE,False
+nearest exit,EXIT5,GATE,False,GATE,False
+way out,EXIT5,GATE,False,GATE,False
+the exit gate,GATE,GATE,True,GATE,True
+pintu keluar,GATE,GATE,True,GATE,True
+lecture theatre 2b,LT2B,LT2B,True,LT2B,True
+LT 1a,LT1A,LT1A,True,LT1A,True
+take me to lecture theatre 2a,LT2A,LT2A,True,LT2A,True
+study room 9,SR9,SR9,True,SR9,True
+sr11,SR11,SR11,True,SR11,True
+a quiet place to study,tag:study,(no match),False,SR8,False
+where can I study quietly,tag:study,(no match),False,SR8,False
+year 5 studio,Y5,Y5,True,Y5,True
+y4,Y4,Y4,True,Y4,True
+escalator,ESCALATOR,ESCALATOR,True,ESCALATOR,True
+how do I go up a floor,ESCALATOR,ESCALATOR,True,ESCALATOR,True
