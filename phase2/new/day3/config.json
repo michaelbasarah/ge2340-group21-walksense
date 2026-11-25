@@ -33,7 +33,10 @@
     {"id": "25spots", "day": "2026-11-25", "loader": "clean_tree",
      "path": "../../clean-data/2026-11-25-spots/clean", "raw": "../../clean-data/2026-11-25-spots/raw/attachments", "names": "names_25spots.csv",
      "exclude_sources": "../../clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv",
-     "note": "our partial WhatsApp export of 25 Nov minus every recording already in 25nov (exclude_sources: the 36 round recordings of ip18 + a56 are byte-identical to Dicta's). Left: the spot stops by ip16 (iPhone17,4, Tian) and s24 (SM-S9280, Michael) with a label in clean/labels_used.csv (track 'spots'); the 8 unlabelled s24 files are not in the clean tree"}
+     "note": "our partial WhatsApp export of 25 Nov minus every recording already in 25nov (exclude_sources: the 36 round recordings of ip18 + a56 are byte-identical to Dicta's). Left: the spot stops by ip16 (iPhone17,4, Tian) and s24 (SM-S9280, Michael) with a label in clean/labels_used.csv (track 'spots'); the 8 unlabelled s24 files are not in the clean tree"},
+    {"id": "25night", "day": "2026-11-25", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-25-night/clean", "raw": "../../clean-data/2026-11-25-night/raw", "names": "names_25night.csv",
+     "note": "Dicta's second pass of the loop, 25 Nov 21:47 to 26 Nov 00:40 (PROCESS-LOG entry 72): 59 recordings of her iPhone19,2 (ip18) from her WhatsApp export, labelled from her own file names in clean-data/2026-11-25-night/labels_night.csv (built by scripts/build_night.py; start_hk after midnight is written 24:mm:ss so the order stays right). 32 stops (19 on 5F incl. 7 extra stops after the loop, 13 on 4F), 27 walks; no Wi-Fi log; 13 stops have no barometer. Other phones of the same run: scripts/ingest_export.py"}
   ],
   "variants": {
     "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 40).",

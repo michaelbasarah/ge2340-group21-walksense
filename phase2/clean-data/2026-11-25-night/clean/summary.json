@@ -1,0 +1,52 @@
+{
+ "dataset": "2026-11-25 night run (floor 5 + floor 4), 21:47 to 00:40 (26 Nov)",
+ "phones": [
+  "iphone"
+ ],
+ "recordings_raw": 59,
+ "recordings_written": 59,
+ "stops": 32,
+ "walks": 27,
+ "stops_floor5": 19,
+ "stops_floor4": 13,
+ "walks_floor5": 14,
+ "walks_floor4": 13,
+ "per_phone": {
+  "iphone": {
+   "stop": 32,
+   "walk": 27
+  }
+ },
+ "confidence": {
+  "high": 58,
+  "medium": 1
+ },
+ "labels_not_built": [],
+ "dropped_second_take_same_slot": [],
+ "raw_without_label_row": [],
+ "iphone_takes_without_barometer": 27,
+ "iphone_stops_without_barometer": [
+  "floor4/stops/s01_lift_stairs5",
+  "floor4/stops/s02_disabled_toilet",
+  "floor4/stops/s03_exit5_door",
+  "floor5/stops/s02_exit5_door",
+  "floor5/stops/s04_y5302",
+  "floor5/stops/s05_sr9",
+  "floor5/stops/s06_y5202",
+  "floor5/stops/s07_female_toilet",
+  "floor5/stops/s08_exit10_door",
+  "floor5/stops/s09_male_disabled_toilet",
+  "floor5/stops/s10_lift_stairs5",
+  "floor5/stops/s11_y5401",
+  "floor5/stops/s12_y5302_point2"
+ ],
+ "wifi": "none: no WiGLE log of the night run in the exports received so far",
+ "warnings": [
+  "Phones in the tree: iphone (Dicta's export has only her iPhone19,2; add the others with ingest_export.py).",
+  "27 of the iPhone takes (13 stops) have no Barometer.csv (phyphox did not log pressure); those stops have no floor reading from the iPhone.",
+  "No 5F walk male_toilet -> y5302 in the export (her first run has it).",
+  "No 5F escalator STOP in the export (the three 5F escalator walks are there; the gaps 22:23-22:31 and 22:33-22:38 would fit the two stops of her first run).",
+  "\"Exit 4 lt4\" (23:17) is read as the exit 5 door on 4F (typo; confidence medium).",
+  "After the loop (00:15 to 00:40) 8 extra stops: sr9, y5202, exit10_door, male disabled toilet, lift/stairs, y5302 point 2, y5401 on 5F, then lift/stairs 4F. They are separate slots (s13 to s19 on 5F, s13 on 4F)."
+ ]
+}

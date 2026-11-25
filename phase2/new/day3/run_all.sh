@@ -9,6 +9,9 @@ cd "$(dirname "$0")/../../.."
 PY=${PYTHON:-python3}
 if [ "$1" = "--split20" ]; then export DAY3_VARIANT=split20; fi
 if [ "$1" = "--variant" ]; then export DAY3_VARIANT="$2"; fi      # e.g. --variant split20_only (control: pieces only)
+if [ -f phase2/clean-data/2026-11-25-night/scripts/build_night.py ]; then
+  "$PY" -I phase2/clean-data/2026-11-25-night/scripts/build_night.py > /dev/null   # 25 Nov night raw/ + labels_night.csv -> clean/
+fi
 if [ -f phase2/clean-data/2026-11-25-spots/scripts/build_clean.py ]; then
   "$PY" -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py > /dev/null   # 25 Nov raw/attachments -> clean/ (labels_used.csv, summary.json)
 fi

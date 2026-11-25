@@ -79,6 +79,7 @@ Contents:
 68. 26 Nov: 36 verified byte-identical duplicate ZIPs deleted from our partial 25-Nov export (SHA-256 recomputed against all of Dicta's files and container members)
 69. 26 Nov: Michael's 11 S24 spot recordings relabelled from his own file names; 3 name mappings confirmed; disabled-toilet display names; day-3 rerun, sheets, results pack
 70. 26 Nov: the upload app's map becomes a vector floor plan in metres (Google screenshot under the sketch + pins + graph.json lengths, least-squares fit), picture kept as fallback
+72. 26 Nov: 25-Nov night run (Dicta, Tian, Chris) added as session `25night`; day-3 rerun, sheets, upload app retrained (in progress)
 - Lessons learned
 - Open questions / next steps
 
@@ -1096,6 +1097,13 @@ Contents:
 - **What changed because of it:** the upload/live page shows distances, room blocks and the floor links on a scaled plan; the old picture is one tap away. The team can fix a point or a length by editing `floorplan.json` (README explains the fields) or rebuild from the sources.
 - **Links:** `phase2/new/upload/map/make_floorplan.py`, `floorplan.json`, `floorplan.js`, `sketch_trace.json`; `phase2/new/upload/index.html`, `server.py`, `test_walksense.py`, `README.md` ("The map v2"); `phase2/new/upload/screenshots/v2-*.png`; entries 25, 52; the commit that adds this entry.
 - **Landed:** branch `feat/vector-map` (916d231) merged into main with merge commit ad62427 on 26 Nov (renumbered from the provisional 90 to 70; the only conflict was this log). The plan's place names already match `day3/config.json` `place_display` ("Male disabled toilet (5F)", "Mixed disabled toilet (4F)"); no code change was needed.
+
+---
+
+## 72. 26 Nov: 25-Nov night run added as session `25night` (IN PROGRESS, work-in-progress commits on `feat/night-run`)
+
+- **What we tried:** add the second collection run of 25 Nov (21:47 to 00:40) to the data as a new session, starting with Dicta's 59 new iPhone19,2 recordings from her WhatsApp export. This entry is completed in the last commit of the branch.
+- **Links:** `phase2/clean-data/2026-11-25-night/`; `phase2/new/day3/config.json`, `names_25night.csv`, `run_all.sh`, `visualise.py`.
 
 ---
 
