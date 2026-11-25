@@ -71,7 +71,7 @@
   .searchbar button { width:auto; margin:0; min-height:40px; padding:0 16px; }
   .searchbar select { flex:1 1 100%; width:auto; padding:6px 8px; font-size:14px; }
   .searchbar .fromrow { flex:1 1 100%; display:flex; gap:6px; align-items:center; font-size:14px; color:var(--ink2); }
-  .searchbar .fromrow select { flex:1; }
+  .searchbar .fromrow select { flex:1; min-width:0; width:0; }
   .searchbar .fromrow button { min-height:32px; padding:0 10px; font-size:14px; }
   .badge { display:inline-block; font-size:12.5px; font-weight:600; padding:2px 8px; border-radius:10px; border:1px solid var(--line); color:var(--ink2); }
   .badge.gemini { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
@@ -89,7 +89,7 @@
   <form id="searchform" role="search" autocomplete="off">
     <input id="q" type="search" placeholder="Search: a room, a place or a question" aria-label="Search for a place" maxlength="200" enterkeyhint="search">
     <button id="go" type="submit">Go</button>
-    <div class="fromrow"><label for="from" style="margin:0">From</label><select id="from"><option value="">where I am (tracked), else the entrance gate 4F</option></select><button type="button" class="secondary" id="clearroute" hidden>Clear</button></div>
+    <div class="fromrow"><label for="from" style="margin:0">From</label><select id="from"><option value="">where I am (else the 4F entrance gate)</option></select><button type="button" class="secondary" id="clearroute" hidden>Clear</button></div>
   </form>
 </header>
 <main>
