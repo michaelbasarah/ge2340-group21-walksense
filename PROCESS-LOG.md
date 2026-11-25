@@ -54,6 +54,7 @@ Contents:
 43. 25 Nov: 25 Nov added as a fourth session: before/after, leave 25 Nov out, the never-correct places again
 44. 25 Nov: per-phone x per-place performance sheet (xlsx) and the regenerated playgrounds
 45. 25 Nov: playground top bar as checkbox groups and a "Compare phones side by side" panel
+46. 25 Nov: our partial 25-Nov folder moved to 2026-11-25-spots before merging Dicta's complete 25-Nov dataset
 - Lessons learned
 - Open questions / next steps
 
@@ -679,6 +680,18 @@ Contents:
 - **Outcome:** success. The numbers are a live demo, not evaluation results.
 - **What changed because of it:** the playground has the compare panel and checkbox groups; day-3 README section k.
 - **Links:** `phase2/new/day3/playground_template.html`, `compare_phones.py`, `playground.py`, `playground_check.py`, `playground_check.js`, `README.md` (section k); `out/knn_playground.html`, `out-split20/knn_playground.html`, `out*/phone_compare_default.csv/.json`, `out*/knn_playground_2026-11-25b.html`; the commit that adds this entry.
+
+---
+
+## 46. 25 Nov: our partial 25-Nov folder moved to `2026-11-25-spots/` before merging Dicta's complete 25-Nov dataset
+
+- **What we tried:** make room for Dicta's complete 25-Nov dataset (GitHub `origin/main` `2cb50d8`, `phase2/clean-data/2026-11-25/`) by moving our own folder of the same name, built from a partial WhatsApp export (entries 41 to 43), to `phase2/clean-data/2026-11-25-spots/`, and check that the day-3 outputs do not change because of the move.
+- **Why:** both sides had added a folder `phase2/clean-data/2026-11-25/`; `git merge-tree --write-tree main origin/main` showed add/add conflicts in its README, `clean/edges.csv`, `locations.csv`, `manifest.csv`, `summary.json`, `wifi/log_summary.csv`, `wifi/stop_coverage.csv` (and in this log). Dicta's folder is public and complete, so it keeps the name; ours keeps its history under a new name.
+- **How:** `git mv phase2/clean-data/2026-11-25 phase2/clean-data/2026-11-25-spots` (all tracked files, and the gitignored rebuilt `clean/floor4/`, `clean/floor5/`, `clean/wifi/observations.csv` moved with the folder). Path updates only: `.gitignore` (the three ignored paths), `phase2/new/day3/config.json` (session `25nov` `path` and `raw`), `names_25nov.csv` (note column), `run_all.sh` (the build step), `phase2/new/day3/README.md`, the folder's own README (a note at the top) and the usage lines of `scripts/build_clean.py` and `scripts/index_sources.py` (both find their folder from their own location, so no code changed). Then the regression rerun: `PYTHON=.venv/bin/python sh phase2/new/day3/run_all.sh` and `... --split20`, and `git status` / `git diff` on `phase2/new/day3/out*/`.
+- **Result:** both runs exit 0 (14 min 36.5 s together, `time`). Every file in `phase2/new/day3/out/` and `out-split20/` (results, figures, playgrounds, explorer, `phone_map.csv`, `pieces.csv`) is byte-identical to the committed one except the per-fold `seconds` timings in the two `fused_knn.json` files (19 lines each, no result changed; the timing diff was not committed).
+- **Outcome:** success. The move changes no result.
+- **What changed because of it:** our partial 25-Nov data lives in `phase2/clean-data/2026-11-25-spots/`; `phase2/clean-data/2026-11-25/` is free for Dicta's folder (next entry). Nothing deleted.
+- **Links:** `phase2/clean-data/2026-11-25-spots/`, `.gitignore`, `phase2/new/day3/config.json`, `run_all.sh`; the commit that adds this entry.
 
 ---
 

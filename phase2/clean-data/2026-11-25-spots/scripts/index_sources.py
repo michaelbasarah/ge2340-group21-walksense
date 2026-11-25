@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Index the raw files of 25 Nov: sha256, size, and who sent each file in the group chat (first name only) and when.
 
-    python -I phase2/clean-data/2026-11-25/scripts/index_sources.py [path/to/WhatsApp Chat with GE2340.txt]
+    python -I phase2/clean-data/2026-11-25-spots/scripts/index_sources.py [path/to/WhatsApp Chat with GE2340.txt]
 
 The chat export is private and is never copied into the repo; only "first name + chat time" per file name is kept
 (raw/source_files.csv). Without the chat path the sender columns stay as they are in the existing CSV (or blank),

@@ -30,8 +30,8 @@ phase2/new/upload/recordings/
 # Local virtual environment.
 .venv/
 
-# 25-Nov regenerable sensor CSVs (rebuild: python -I phase2/clean-data/2026-11-25/scripts/build_clean.py, a few seconds;
+# 25-Nov regenerable sensor CSVs (rebuild: python -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py, a few seconds;
 # run_all.sh does it). Raw ZIPs in raw/attachments/ are committed byte-identical.
-phase2/clean-data/2026-11-25/clean/floor4/
-phase2/clean-data/2026-11-25/clean/floor5/
-phase2/clean-data/2026-11-25/clean/wifi/observations.csv
+phase2/clean-data/2026-11-25-spots/clean/floor4/
+phase2/clean-data/2026-11-25-spots/clean/floor5/
+phase2/clean-data/2026-11-25-spots/clean/wifi/observations.csv

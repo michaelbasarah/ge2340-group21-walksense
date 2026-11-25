@@ -26,11 +26,11 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | per-sample predictions with top-3 (learned-weight fused kNN, every scheme) | `fused_knn.py` | `out/fused_sample_predictions.csv` |
 | per-phone x per-place sheet (append one run; not run by `run_all.sh`) | `perf_sheet.py` | `out/phone_place_performance.xlsx` (README, Ranking, Progress, one tab per run), `out/perf_csv/` |
 | places never / rarely correct (before vs after new data) | `hard_places.py` | `out/perf_csv/hard_places_<label>.csv` |
-| 25-Nov clean tree (rebuilt first by `run_all.sh`) | `../../clean-data/2026-11-25/scripts/build_clean.py` | `clean-data/2026-11-25/clean/` |
+| 25-Nov clean tree (rebuilt first by `run_all.sh`) | `../../clean-data/2026-11-25-spots/scripts/build_clean.py` | `clean-data/2026-11-25-spots/clean/` |
 
 ## Adding a session collected later
 
-1. Clean it into the `clean/` layout (`manifest.csv`, `floor*/stops|walks/<folder>/<phone>/<Sensor>.csv`, `wifi/observations.csv`): 24 Nov used `phase2/clean-data/2026-11-24/scripts/build_clean.py` (fixed route order); 25 Nov uses `phase2/clean-data/2026-11-25/scripts/build_clean.py` (labels from each file name, with confidence; see its README). A manifest may carry a `track` column (the stops one group walked in order): barometer floor tracking and Wi-Fi assignment then run per track; without it the session is one track.
+1. Clean it into the `clean/` layout (`manifest.csv`, `floor*/stops|walks/<folder>/<phone>/<Sensor>.csv`, `wifi/observations.csv`): 24 Nov used `phase2/clean-data/2026-11-24/scripts/build_clean.py` (fixed route order); 25 Nov uses `phase2/clean-data/2026-11-25-spots/scripts/build_clean.py` (labels from each file name, with confidence; see its README). A manifest may carry a `track` column (the stops one group walked in order): barometer floor tracking and Wi-Fi assignment then run per track; without it the session is one track.
 2. Add one entry to `config.json` under `sessions` (`"loader": "clean_tree"`, `path`, `day`, `names`, and `raw` so `phone_map.py` checks the handset of every recording against the raw ZIP). If the new session uses node names that `names_24nov.csv` does not know, add rows there (or point `names` at a new CSV with the same columns; 25 Nov uses graph-v2 names directly, `names_25nov.csv` is the identity map). Unknown names are listed in `data.py`'s output and are never silently dropped from the log.
 3. `sh phase2/new/day3/run_all.sh` (and `--split20`). The fused kNN automatically adds the new session as one more leave-one-session-out fold. `evaluate.py` has named splits for 23/24 Nov and the leave-25-Nov-out splits; `track24.py` is 24 Nov only.
 4. Append the run to the sheet: `python phase2/new/day3/perf_sheet.py --run-dir out-split20 --tab "<date> split20 <what>" --data "<sessions>"` (a new tab and a Progress row; nothing earlier is changed), and `python phase2/new/day3/hard_places.py --label <name> out out-split20`. Keep the old playground as a dated copy (`knn_playground_<date><letter>.html`) before the rerun overwrites it.
@@ -238,7 +238,7 @@ Reading it:
 
 ### j. 25 Nov added as a fourth session (`config.json` session `25nov`; PROCESS-LOG entries 40 to 44)
 
-25 Nov is a partial WhatsApp export (`../../clean-data/2026-11-25/README.md`): the floor-5 round by ip18 and a56 (9 stops) and spot recordings by ip16 and s24 (2 stops on floor 5, 2 on floor 4); 23 stop takes, 66 kept 20 s pieces (3 removed as outliers, all ip16 at the 4F escalators: `out-split20/outliers.csv`). Before = the entry-39 state, rerun with the track-aware code (identical numbers, entry 42); after = the same code with `25nov` in `config.json`. Chance 3.8% (26 places).
+25 Nov is a partial WhatsApp export (`../../clean-data/2026-11-25-spots/README.md`): the floor-5 round by ip18 and a56 (9 stops) and spot recordings by ip16 and s24 (2 stops on floor 5, 2 on floor 4); 23 stop takes, 66 kept 20 s pieces (3 removed as outliers, all ip16 at the 4F escalators: `out-split20/outliers.csv`). Before = the entry-39 state, rerun with the track-aware code (identical numbers, entry 42); after = the same code with `25nov` in `config.json`. Chance 3.8% (26 places).
 
 | test (learned-weight fused kNN) | default before | default after | split20 before | split20 after |
 |---|---|---|---|---|
@@ -271,7 +271,7 @@ Places with zero correct after (leave one session out, per sample): default lift
 - `sesi2/clean/ROUTE.md` says "Sensors-only (no Wi-Fi logged)", but the same session has a WiGLE log (`sesi2/clean/README.md`, `summary.json`).
 - Session 2 has walks out of route order (floor 5: exit10 -> canteen, then the escalator-up stop, then three walks esca_up -> canteen, canteen -> esca_down, esca_up -> esca_down; floor 4: the walk gate -> exit 5 was recorded before the gate stop). The tracker attaches each walk to the last stop before it.
 - Session 1 has S24 Wi-Fi rows at only 14 of 27 stops; two S24 logs are empty (`sesi1/clean/summary.json`).
-- 25 Nov (`../../clean-data/2026-11-25/`): 73 media messages are missing from the WhatsApp export (the rest of the 5F round from 18:13, the whole 4F round, Tian's ranking xlsx); 8 of Michael's 11 spot files have no name and are not used; 3 of his are labelled by co-recording with Tian (medium confidence). The 4F escalator pieces of ip16 on 25 Nov disagree within the take (\|B\| 6.6 to 32.3 uT from the take median), so the outlier rule removed 3 of its 6 pieces there.
+- 25 Nov (`../../clean-data/2026-11-25-spots/`): 73 media messages are missing from the WhatsApp export (the rest of the 5F round from 18:13, the whole 4F round, Tian's ranking xlsx); 8 of Michael's 11 spot files have no name and are not used; 3 of his are labelled by co-recording with Tian (medium confidence). The 4F escalator pieces of ip16 on 25 Nov disagree within the take (\|B\| 6.6 to 32.3 uT from the take median), so the outlier rule removed 3 of its 6 pieces there.
 
 ### k. Playground: top-bar checkboxes and the "Compare phones side by side" panel (live demo, not evaluation results; PROCESS-LOG entry 45)
 

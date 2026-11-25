@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """25 Nov 2026: raw phyphox ZIPs + WiGLE logs -> clean/ tree in the same layout as 2026-11-24 (build_clean.py there).
 
-    python -I phase2/clean-data/2026-11-25/scripts/build_clean.py        (a few seconds; rerun after adding files)
+    python -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py        (a few seconds; rerun after adding files)
 
 Unlike 24 Nov (one fixed route, labels from the route order), 25 Nov mixes a route round by two collectors with spot
 recordings of single places, and the export lacks part of the day. So every recording is labelled from its OWN file

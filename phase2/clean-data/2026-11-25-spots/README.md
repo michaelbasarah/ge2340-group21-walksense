@@ -1,4 +1,10 @@
-# 25 November 2026: floor-5 round + spot recordings (partial export)
+# 25 November 2026: floor-5 round + spot recordings (partial export), now `2026-11-25-spots/`
+
+> **Moved here on 25 Nov** (PROCESS-LOG, the entry "partial 25-Nov folder moved to 2026-11-25-spots"; `git mv`, nothing deleted). This
+> folder was `phase2/clean-data/2026-11-25/`, built from a partial WhatsApp export. Dicta's complete 25-Nov dataset (one
+> continuous 3-phone pass, floor 5 + floor 4) now lives in `../2026-11-25/` and is the authoritative 25-Nov data. What this
+> folder adds on top of hers is the spot recordings (ip16 = Tian's iPhone17,4 and s24 = Michael's SM-S9280); its round
+> recordings (ip18 + a56) are the same recordings as hers.
 
 *Internal team notes, not report text.* Every count below is from `clean/summary.json`, `clean/labels_used.csv`,
 `raw/source_files.csv` or `raw/missing_from_export.csv`.
@@ -6,7 +12,7 @@
 ## What is here
 
 ```
-2026-11-25/
+2026-11-25-spots/
 ├── raw/attachments/        phyphox ZIPs + one WiGLE log, byte-identical from the WhatsApp export (52 files)
 ├── raw/source_files.csv    file, sha256, size, sender (first name), chat time
 ├── raw/missing_from_export.csv   media messages of 25 Nov after 17:30 that the export did not contain (73)
@@ -17,7 +23,7 @@
              (floor4/, floor5/ and wifi/observations.csv are gitignored: rebuild with build_clean.py, a few seconds)
 ```
 
-Rebuild: `python -I phase2/clean-data/2026-11-25/scripts/build_clean.py` (the day-3 `run_all.sh` does it first).
+Rebuild: `python -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py` (the day-3 `run_all.sh` does it first).
 
 ## Who recorded what (device read from each ZIP's `meta/device.csv`)
 
