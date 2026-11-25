@@ -136,7 +136,7 @@ def figure(results, path):
     ax[0].set_xticklabels([n.replace('(23)', f"({results['keyword']['slices']['easy']['n']})") if g == 'easy' else
                            f"{n} ({results['keyword']['slices'][g]['n']})" for g, n in groups], fontsize=8)
     ax[0].set_ylim(0, 1.12); ax[0].set_ylabel('top-1 accuracy'); ax[0].set_title('Accuracy per split')
-    ax[0].legend(fontsize=8, frameon=False, loc='lower left')
+    ax[0].legend(fontsize=8, frameon=False, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.12))
     w2 = 0.35
     for j, key in enumerate(('precision', 'recall')):
         vals = [(results[m]['slices']['hard']['reject'][key] or 0) for m in MAIN]
@@ -144,7 +144,7 @@ def figure(results, path):
         for r, v in zip(b, vals):
             ax[1].text(r.get_x() + r.get_width() / 2, v + 0.01, f'{v:.0%}', ha='center', fontsize=7)
     ax[1].set_xticks(range(3)); ax[1].set_xticklabels(MAIN, fontsize=8); ax[1].set_ylim(0, 1.12)
-    ax[1].set_title('"none" handling, hard set'); ax[1].legend(fontsize=8, frameon=False, loc='lower left')
+    ax[1].set_title('"none" handling, hard set'); ax[1].legend(fontsize=8, frameon=False, ncol=2, loc='upper center', bbox_to_anchor=(0.5, -0.12))
     for a in ax:
         a.spines[['top', 'right']].set_visible(False)
     fig.tight_layout(); fig.savefig(path, dpi=150)
@@ -194,7 +194,7 @@ def main():
     llm_cache = M._load_cache()
     llm_rows = [v for v in llm_cache['responses'].values()]
     meta = {'date': str(date.today()), 'python': platform.python_version(), 'n_queries': len(queries),
-            'n_places': len(places), 'split_counts': dict(Counter((q['set'], q['split']) for q in queries.__iter__())),
+            'n_places': len(places), 'split_counts': dict(Counter(q['set'] + '/' + q['split'] for q in queries)),
             'embed_model': M.EMBED_MODEL, 'thresholds': json.loads((ROOT / 'tuned.json').read_text(encoding='utf-8')),
             'llm': {'cli_model_flag': M.LLM_MODEL, 'models_reported': sorted({r['model'] for r in llm_rows if r.get('model')}),
                     'prompt_version': M.LLM_PROMPT_VERSION, 'cache_file': M.llm_cache_path().name,

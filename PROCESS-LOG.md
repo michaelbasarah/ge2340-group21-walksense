@@ -51,6 +51,10 @@ Contents:
 40. 25 Nov: places never classified correctly so far (named before adding the 25-Nov data)
 41. 25 Nov: 25-Nov data ingested from a partial WhatsApp export and labelled per recording
 42. 25 Nov: day-3 pipeline made track-aware, per-sample top-3 written; rerun reproduces entry 39
+70. 25 Nov: starter request-matching files re-run: the committed 23/23 was stale (18/23)
+71. 25 Nov: request matching, real place list (26 places) and a dev/test set with agent-drafted hard queries
+72. 25 Nov: request matching, three methods built and tuned on dev only (keyword, MiniLM embeddings, Claude CLI LLM)
+73. 25 Nov: request matching, final comparison on dev + test, with failures
 - Lessons learned
 - Open questions / next steps
 
@@ -633,6 +637,64 @@ Contents:
 - **What changed because of it:** the pipeline can take a session with several tracks; `fused_sample_predictions.csv` exists in `out/` and `out-split20/`.
 - **Links:** `phase2/new/day3/data.py`, `gknn.py`, `evaluate.py`, `fused_knn.py`, `phone_map.py`, `visualise.py`, `run_all.sh`, `README.md`; `out*/fused_sample_predictions.csv`, `out*/knn_playground_2026-11-25a.html`; the commit that adds this entry.
 
+## 70. 25 Nov: starter request-matching files re-run: the committed 23/23 was stale (18/23)
+
+- **What we tried:** run the committed starter code (`phase2/request-matching/match.py`, `destinations.csv`, `test_queries.csv`) unchanged before touching anything, to have a baseline.
+- **Why:** the README and the committed `results.csv` said both starter methods score 100%; the new comparison needs an honest "before".
+- **How:** `python3 match.py < /dev/null`, output saved as `results_v1.csv` (the committed `results.csv` restored with `git checkout` first). Old files kept as `destinations_v1.csv` and `test_queries_v1.csv` (`git mv`).
+- **Result** (`results_v1.csv`): keyword 18/23 and tokens 18/23. The committed `results.csv` (HEAD) showed 23/23 for both. Misses of both methods: "how do I get out of here", "nearest exit", "way out" (answered GATE, test expected EXIT5); keyword also missed "a quiet place to study" and "where can I study quietly" (no match), tokens answered SR8 for those two, where the test expects the tag `study` that no old row carried.
+- **Outcome:** failure of the old claim, not of the code: the committed `results.csv` and the README "100%" did not match the committed code and files (why they diverged was not investigated). The starter test set was not "too easy for both methods" as the README said; it contained two expectations that the place list could not satisfy.
+- **What changed because of it:** the 100% claim is gone from the README; the new test set has explicit `tag:` and multi-ID expectations.
+- **Links:** `phase2/request-matching/results_v1.csv`, `destinations_v1.csv`, `test_queries_v1.csv`; the commit that adds this entry.
+
+## 71. 25 Nov: request matching, real place list (26 places) and a dev/test set with agent-drafted hard queries
+
+- **What we tried:** replace the 15-place list by the real places and write a harder test set, split into dev and test before any method is run.
+- **Why:** the proposal promises mapping a typed request to one place ID with three methods; the starter set could not separate methods and had ~15 places.
+- **How:**
+  - `build_destinations.py` reads `phase2/new/graph-v2/nodes.csv` (the 26 real places, virtual midpoints skipped) and checks every place has a label in `phase2/new/upload/map/places.json` (column `map_key`, same floor). Names, tags and aliases (English, Indonesian: kantin, toilet cowo/cewe, esca naik/turun, lt, sr9, Y5302 and so on) are **an agent draft for the team to review**. Assumption to confirm: the lift counts as step-free (tag `accessible`).
+  - `build_test_set.py` writes `test_queries.csv` (128 rows): the 23 starter queries kept with `expected` remapped to graph-v2 IDs (old EXIT5 became `tag:exit` because there are now five exits; old TOILET `tag:toilet`; "mens bathroom" `male_toilet`; "sr11" `sr9` as graph-v2 merges SR8 to SR11; "year 5 studio" any Y5 place), plus 105 hard queries marked `source=agent_draft` in categories vague, access, typo, mixed (Indonesian/Cantonese-English), unsupported (26 rows overall expect `NONE`), floor, indirect. **These 105 are drafts written by an agent for the team to check and edit; the expected answers are my reading of the place list, not field truth** (uncertain ones carry a note: printer, charging, clinic, computer lab, MTR exit, wet sink).
+  - Split made in the same script, seed 2340, stratified by (set, category), committed before any method was run (commit `9af07f9`).
+- **Result** (`build_test_set.py` output, `test_queries.csv`): easy 12 dev / 11 test; hard 54 dev / 51 test; 26 of 128 rows expect NONE.
+- **Outcome:** success as data preparation. Limitation: the same agent wrote aliases and queries, so the keyword and embedding methods may look better than on queries the team writes.
+- **What changed because of it:** `destinations.csv` (26 places), `test_queries.csv` (new format), v1 files kept.
+- **Links:** `phase2/request-matching/build_destinations.py`, `build_test_set.py`, `destinations.csv`, `test_queries.csv`; commit `9af07f9`.
+
+## 72. 25 Nov: request matching, three methods built and tuned on dev only (keyword, MiniLM embeddings, Claude CLI LLM)
+
+- **What we tried:** implement the three proposal methods behind one function `match(query, method) -> (place_id | None, score)` and tune only on the dev rows.
+- **Why:** compare keyword rules, sentence embeddings and a constrained LLM, including rejection of places we do not have.
+- **How:**
+  - `match.py`. keyword: the starter longest-alias rule, changed to whole-word matching (the starter substring rule matched "eat" inside "theatre"), unicode-safe word splitting, and a floor hint (4F / lower / bawah vs 5F / upper / atas) used as a tie-break; the starter rule is kept as `keyword_v1`. embeddings: sentence-transformers `all-MiniLM-L6-v2`, one vector per place name, alias and tag, place score = max cosine, top-1, `none` below a cut-off; variant `embed_doc` = one vector from name+aliases+tags. LLM: `claude -p --model haiku --tools '' --no-session-persistence --disable-slash-commands --setting-sources '' --strict-mcp-config --system-prompt <rules> --output-format json <place list + request>`, run from an empty temp dir so no project instructions are read; the prompt lists every place ID with name, floor, tags and aliases and asks for one ID or NONE; the answer must equal a real ID or NONE exactly after stripping quotes/backticks/trailing dot, otherwise it is INVALID and counts wrong. Every raw reply is cached in `llm_cache_v1.json` with model, UTC time, latency, cost, the system prompt and the CLI version.
+  - `evaluate.py --phase dev` loads only the dev rows. The "none" cut-off is chosen on dev accuracy (grid 0.00 to 0.90, median of the best range). Prompt version v1 was not edited after seeing dev results.
+  - Setup: `python3 -m venv .venv && .venv/bin/pip install sentence-transformers matplotlib` (gitignored; the install pulled a large CUDA build of torch and took far longer than the 90 MB model).
+- **Result** (`tuned.json`, `out/dev_results.json`, terminal output of the dev run): embed cut-off 0.38 (best range 0.37 to 0.39), dev accuracy 0.7879 (52/66) against 0.6667 with no cut-off; `embed_doc` cut-off 0.205, 44/66. Dev: keyword 42/66, LLM 65/66 (one miss: "where can I sit and eat my packed lunch" answered NONE). 66 LLM calls.
+- **Outcome:** success. Failure noted: `embed_doc` (one vector per place) is clearly worse than per-alias vectors on dev; long alias lists dilute the vector.
+- **What changed because of it:** thresholds frozen in `tuned.json` before any test row was scored (commit `53de6c1`).
+- **Links:** `phase2/request-matching/match.py`, `evaluate.py`, `tuned.json`, `llm_cache_v1.json`; commit `53de6c1`.
+
+## 73. 25 Nov: request matching, final comparison on dev + test, with failures
+
+- **What we tried:** run all methods on all 128 queries with the frozen settings.
+- **Why:** accuracy per split, "none" handling, invalid-ID rate, latency, offline or not.
+- **How:** `evaluate.py --phase final` (LLM answers for the 62 test rows fetched now; 128 calls in total, no repeats), then `--no-llm-calls` to rewrite the outputs after two output bugs were fixed (a tuple key that `json` could not write, and legend text hiding bars in `results.png`); the numbers below are from that last write (the LLM rows are cached, so they did not change; keyword and embedding millisecond timings differ a little between runs).
+- **Result** (`results.json`; misses in `failures.csv`, pairs in `confusion_pairs.csv`, chart `results.png`):
+
+| method | easy 23 | hard dev 54 | hard test 51 | all test 62 | all 128 |
+|---|---|---|---|---|---|
+| keyword | 22/23 | 30/54 | 34/51 | 44/62 | 86/128 |
+| embed | 22/23 | 40/54 | 34/51 | 44/62 | 96/128 |
+| llm (claude-haiku-5-5) | 23/23 | 53/54 | 49/51 | 60/62 | 125/128 |
+
+  - By hard category (keyword / embed / llm): typo 4/18, 10/18, 18/18; unsupported 19/23, 12/23, 23/23; mixed 15/23, 17/23, 23/23; vague 12/20, 19/20, 17/20; floor 5/8, 5/8, 8/8; access 6/8, 6/8, 8/8; indirect 3/5, 5/5, 5/5.
+  - "None" on the hard set (26 expected NONE), precision / recall: keyword 22/53 and 22/26; embed 15/25 and 15/26; llm 26/29 and 26/26. Wrongly rejected supported requests (of 79): keyword 31, embed 10, llm 3.
+  - LLM: invalid answers 0/128; latency median 5309.5 ms, p95 7442, max 10960 (wall clock of `claude -p`); total cost 0.09649 USD over 128 calls (CLI-reported); internet needed. Embeddings median 9.297 ms per query after the model download, offline; keyword median 1.121 ms, offline.
+  - Extras: `tokens` 48/62 on test (hard 69/105), `keyword_v1` 43/62, `embed_doc` 40/62.
+  - The three LLM misses (`failures.csv`): "I'm late for my lecture" and "which way out to the MTR" (test) and "where can I sit and eat my packed lunch" (dev), all answered NONE. The one easy miss of keyword and embed is "pintu keluar" (expected `entrance_exit`, both answered `exit_5`: in the new list "pintu keluar" is an alias of all five exits, so the tie is arbitrary and the starter's expectation was one of them).
+- **Outcome:** success for the LLM method; partial for the others. The proposal's preference (LLM first, keywords as offline fallback) is supported by these drafts: the LLM was right on 125/128 and rejected every non-existent place, keyword rules failed mostly on typos and on non-English words, and embeddings tuned on dev lost their dev gain on test (52/66 on dev vs 44/62 on test, equal to keyword). Caveats: queries and aliases are agent drafts, one run, the author model and the answering model are both Claude.
+- **What changed because of it:** `README.md` has the table and the review list; nothing in the app was touched.
+- **Links:** `phase2/request-matching/results.json`, `results.csv`, `failures.csv`, `confusion_pairs.csv`, `results.png`, `llm_cache_v1.json`, `README.md`; the commit that adds this entry.
+
 ---
 
 ## Lessons learned
@@ -662,6 +724,9 @@ Contents:
 - **More pieces of the same take are not more evidence.** Splitting 60 s takes into three 20 s samples tripled n but not the information; removing pieces raised accuracy mostly by removing hard test pieces (entry 39). Run a control and compare on the same test pieces before calling a cleaning step an improvement.
 - **Number log entries only when they land on the shared branch.** Two people adding "entry 24" on different machines collided; the public numbers won and ours moved by +4 (entry 38).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
+- **Re-run the committed results before building on them.** The starter request-matching `results.csv` said 23/23 while the committed code gave 18/23 (entry 70).
+- **Substring alias rules hide bugs.** "eat" matched inside "theatre"; whole-word matching fixed it (entry 72). Typos and non-English words are where keyword rules fall (typo 4/18 hard queries, entry 73).
+- **A cut-off tuned on a small dev split may not carry over.** The embedding "none" threshold gave 52/66 on dev and 44/62 on test (entry 73).
 
 ## Open questions / next steps
 
@@ -684,3 +749,4 @@ Contents:
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **split20 (entry 39):** confirm with the user that "do s8 10 11" means dropping the 23-Nov sr8/sr10/sr11 stops (that is how it was done) and whether "for each dataset" was meant to include 14 Nov (10 s stops, no full 20 s piece) and 17 Nov (30 s stops, one piece), which only `cross-day/` uses. Decide which numbers the team quotes: take level (`out/`) or pieces (`out-split20/`, with the control); if pieces, say that pieces of one take are not independent. BM14 (23 Nov exit_5) was removed whole by the outlier rule; the collector may know what happened there.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
+- **Request matching (entries 71 to 73):** the team must read and correct the 105 `agent_draft` hard queries in `phase2/request-matching/test_queries.csv` (and the aliases/tags in `destinations.csv`), then rerun `evaluate.py` (dev, then final); the numbers are provisional until then. Open readings: no printer / charging / clinic / computer lab in our list, which exit leads to the MTR, whether the lift is step-free, whether "pintu keluar" means the gate or any exit. Repeat the LLM run once to see its variation (about 128 calls, about 11 min).

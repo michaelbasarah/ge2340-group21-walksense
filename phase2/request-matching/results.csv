@@ -1,24 +1,129 @@
-query,expected,keyword,keyword_ok,tokens,tokens_ok
-where can I get food,CANTEEN,CANTEEN,True,CANTEEN,True
-im hungry,CANTEEN,CANTEEN,True,CANTEEN,True
-canteen,CANTEEN,CANTEEN,True,CANTEEN,True
-somewhere to eat lunch,CANTEEN,CANTEEN,True,CANTEEN,True
-nearest toilet,TOILET,TOILET,True,TOILET,True
-mens bathroom,TOILET,TOILET,True,TOILET,True
-i need the washroom,TOILET,TOILET,True,TOILET,True
-how do I get out of here,EXIT5,EXIT5,True,EXIT5,True
-nearest exit,EXIT5,EXIT5,True,EXIT5,True
-way out,EXIT5,EXIT5,True,EXIT5,True
-the exit gate,GATE,GATE,True,GATE,True
-pintu keluar,GATE,GATE,True,GATE,True
-lecture theatre 2b,LT2B,LT2B,True,LT2B,True
-LT 1a,LT1A,LT1A,True,LT1A,True
-take me to lecture theatre 2a,LT2A,LT2A,True,LT2A,True
-study room 9,SR9,SR9,True,SR9,True
-sr11,SR11,SR11,True,SR11,True
-a quiet place to study,tag:study,Y5,True,Y5,True
-where can I study quietly,tag:study,Y5,True,Y5,True
-year 5 studio,Y5,Y5,True,Y5,True
-y4,Y4,Y4,True,Y4,True
-escalator,ESCALATOR,ESCALATOR,True,ESCALATOR,True
-how do I go up a floor,ESCALATOR,ESCALATOR,True,ESCALATOR,True
+id,query,expected,set,category,split,source,keyword_pred,keyword_score,keyword_ok,keyword_ms,embed_pred,embed_score,embed_ok,embed_ms,llm_pred,llm_score,llm_ok,llm_ms,embed_doc_pred,embed_doc_score,embed_doc_ok,embed_doc_ms,keyword_v1_pred,keyword_v1_score,keyword_v1_ok,keyword_v1_ms,tokens_pred,tokens_score,tokens_ok,tokens_ms
+q001,where can I get food,canteen,easy,starter,dev,starter_v1,canteen,4.0,True,22.682,canteen,0.6262,True,10.28,canteen,1.0,True,4974.0,canteen,0.4263,True,10.677,canteen,4.0,True,0.139,canteen,2.8904,True,0.6
+q002,im hungry,canteen,easy,starter,dev,starter_v1,canteen,6.0,True,1.576,canteen,0.7999,True,7.954,canteen,1.0,True,6464.0,canteen,0.3035,True,10.171,canteen,6.0,True,0.031,canteen,2.8904,True,0.015
+q003,canteen,canteen,easy,starter,dev,starter_v1,canteen,7.0,True,1.556,canteen,1.0,True,7.439,canteen,1.0,True,5960.0,canteen,0.4912,True,9.984,canteen,7.0,True,0.025,canteen,2.8904,True,0.009
+q004,somewhere to eat lunch,canteen,easy,starter,test,starter_v1,canteen,5.0,True,1.488,canteen,0.7681,True,8.021,canteen,1.0,True,6415.0,canteen,0.3682,True,9.466,canteen,5.0,True,0.034,canteen,5.7807,True,0.012
+q005,nearest toilet,tag:toilet,easy,starter,test,starter_v1,male_toilet,6.0,True,0.915,male_toilet,0.7181,True,7.372,male_toilet,1.0,True,6255.0,disabled_toilet_4F,0.4171,True,10.819,male_toilet,6.0,True,0.03,male_toilet,1.7918,True,0.01
+q006,mens bathroom,male_toilet,easy,starter,test,starter_v1,male_toilet,13.0,True,0.974,male_toilet,1.0,True,9.736,male_toilet,1.0,True,6239.0,male_toilet,0.5577,True,11.069,male_toilet,13.0,True,0.029,male_toilet,4.6821,True,0.012
+q007,i need the washroom,tag:toilet,easy,starter,dev,starter_v1,male_toilet,8.0,True,1.395,male_toilet,0.8117,True,10.477,male_toilet,1.0,True,5648.0,disabled_toilet_4F,0.3263,True,10.009,male_toilet,8.0,True,0.031,male_toilet,1.7918,True,0.011
+q008,how do I get out of here,tag:exit,easy,starter,dev,starter_v1,exit_5,7.0,True,2.947,exit_5,0.6834,True,8.808,entrance_exit,1.0,True,5329.0,exit_10,0.4028,True,10.559,exit_5,7.0,True,0.032,exit_5,1.5911,True,0.011
+q009,nearest exit,tag:exit,easy,starter,dev,starter_v1,exit_5,4.0,True,0.976,exit_5,0.6864,True,12.979,entrance_exit,1.0,True,6371.0,exit_5_4F,0.4962,True,14.629,exit_5,4.0,True,0.028,exit_5,1.5911,True,0.01
+q010,way out,tag:exit,easy,starter,test,starter_v1,exit_5,7.0,True,0.947,exit_5,1.0,True,12.072,exit_5,1.0,True,7275.0,exit_10,0.3071,True,11.833,exit_5,7.0,True,0.024,exit_5,3.1822,True,0.012
+q011,the exit gate,entrance_exit,easy,starter,test,starter_v1,entrance_exit,9.0,True,0.919,entrance_exit,0.9081,True,9.372,entrance_exit,1.0,True,6879.0,entrance_exit,0.583,True,10.199,entrance_exit,9.0,True,0.052,entrance_exit,4.4815,True,0.013
+q012,pintu keluar,entrance_exit,easy,starter,test,starter_v1,exit_5,12.0,False,0.913,exit_5,1.0,False,9.067,entrance_exit,1.0,True,7416.0,exit_10,0.5085,False,12.828,exit_5,12.0,False,0.03,exit_5,3.1822,False,0.012
+q013,lecture theatre 2b,lt2b,easy,starter,test,starter_v1,lt2b,18.0,True,0.934,lt2b,1.0,True,9.463,lt2b,1.0,True,7915.0,lt2b,0.6909,True,10.428,lt2b,18.0,True,0.033,lt2b,6.4739,True,0.015
+q014,LT 1a,lt1a,easy,starter,dev,starter_v1,lt1a,5.0,True,0.919,lt1a,1.0,True,8.72,lt1a,1.0,True,4893.0,y5302_back,0.3137,False,11.202,lt1a,5.0,True,0.021,lt1a,4.6821,True,0.012
+q015,take me to lecture theatre 2a,lt2a,easy,starter,test,starter_v1,lt2a,18.0,True,1.012,lt2a,0.8599,True,8.883,lt2a,1.0,True,8083.0,lt2a,0.6027,True,8.593,lt2a,18.0,True,0.036,lt2a,6.4739,True,0.015
+q016,study room 9,sr9,easy,starter,test,starter_v1,sr9,12.0,True,0.908,sr9,1.0,True,8.451,sr9,1.0,True,7263.0,sr9,0.6518,True,12.661,sr9,12.0,True,0.027,sr9,7.2048,True,0.015
+q017,sr11,sr9,easy,starter,dev,starter_v1,sr9,4.0,True,0.833,sr9,1.0,True,10.598,sr9,1.0,True,5180.0,sr9,0.4417,True,12.704,sr9,4.0,True,0.019,sr9,2.8904,True,0.009
+q018,a quiet place to study,tag:study,easy,starter,dev,starter_v1,sr9,11.0,True,1.079,sr9,0.8446,True,10.372,sr9,1.0,True,5702.0,sr9,0.3857,True,12.02,sr9,11.0,True,0.032,sr9,5.7807,True,0.012
+q019,where can I study quietly,tag:study,easy,starter,dev,starter_v1,sr9,5.0,True,0.976,sr9,0.7325,True,9.131,sr9,1.0,True,5576.0,sr9,0.2907,True,10.466,sr9,5.0,True,0.031,sr9,2.8904,True,0.012
+q020,year 5 studio,y5302|y5202|y5401|y5302_back,easy,starter,dev,starter_v1,y5302,6.0,True,0.905,y5302,0.8142,True,8.364,y5202,1.0,True,5071.0,y5202,0.6614,True,8.882,y5302,6.0,True,0.027,y5302,4.6062,True,0.016
+q021,y4,y4502,easy,starter,test,starter_v1,y4502,2.0,True,0.876,y4502,1.0,True,11.901,y4502,1.0,True,7150.0,y4502,0.6052,True,8.12,y4502,2.0,True,0.018,y4502,2.8904,True,0.009
+q022,escalator,tag:escalator,easy,starter,test,starter_v1,escalator_up,9.0,True,1.019,escalator_up,1.0,True,10.598,escalator_up,1.0,True,7104.0,escalator_up_4F,0.551,True,7.638,escalator_up,9.0,True,0.024,escalator_up,1.7918,True,0.01
+q023,how do I go up a floor,tag:vertical,easy,starter,dev,starter_v1,escalator_up,5.0,True,1.066,escalator_up,0.6665,True,8.392,escalator_up,1.0,True,4770.0,escalator_up,0.4477,True,7.604,escalator_up,5.0,True,0.03,escalator_up,3.2158,True,0.014
+q024,I need to print something,NONE,hard,vague,test,agent_draft,none,0.0,True,1.691,none,0.2192,True,7.402,none,0.0,True,8298.0,exit_10,0.222,False,8.309,none,0.0,True,0.031,none,0.0,True,0.012
+q025,quiet place to revise before my exam,sr9,hard,vague,test,agent_draft,sr9,11.0,True,1.635,sr9,0.6324,True,7.777,sr9,1.0,True,6137.0,sr9,0.4114,True,9.292,sr9,11.0,True,0.035,sr9,5.7807,True,0.017
+q026,I need somewhere to focus for a few hours,sr9,hard,vague,dev,agent_draft,none,0.0,False,1.195,sr9,0.3898,True,7.706,sr9,1.0,True,5499.0,none,0.2035,False,10.02,none,0.0,False,0.036,none,0.0,False,0.015
+q027,grab a bite,canteen,hard,vague,dev,agent_draft,none,0.0,False,0.86,canteen,0.483,True,7.525,canteen,1.0,True,4587.0,none,0.1279,False,11.395,none,0.0,False,0.025,none,0.0,False,0.011
+q028,I'm thirsty,canteen,hard,vague,dev,agent_draft,none,0.0,False,1.028,canteen,0.5802,True,8.888,canteen,1.0,True,4861.0,none,0.1528,False,9.403,none,0.0,False,0.026,none,0.0,False,0.012
+q029,somewhere I can get a coffee,canteen,hard,vague,dev,agent_draft,canteen,6.0,True,1.125,canteen,0.6885,True,9.574,canteen,1.0,True,4871.0,canteen,0.2155,True,10.102,canteen,6.0,True,0.032,canteen,2.8904,True,0.011
+q030,where do I go for my class,tag:lecture,hard,vague,dev,agent_draft,lt2a,5.0,True,1.273,lt2a,0.5886,True,9.283,lt1a,1.0,True,5774.0,lt1a,0.3285,True,9.307,lt2a,5.0,True,0.03,lt2a,1.7918,True,0.011
+q031,I'm late for my lecture,tag:lecture,hard,vague,test,agent_draft,lt2a,7.0,True,0.961,lt2a,0.6304,True,7.568,none,0.0,False,6977.0,lt1a,0.3248,True,10.364,lt2a,7.0,True,0.031,lt2a,1.7918,True,0.014
+q032,"emergency, where do I run",tag:emergency,hard,vague,dev,agent_draft,exit_5,9.0,True,1.008,exit_5,0.6566,True,7.434,exit_5,1.0,True,5867.0,exit_5,0.4296,True,10.545,exit_5,9.0,True,0.031,exit_5,2.3795,True,0.013
+q033,I need to wash my hands,tag:toilet,hard,vague,dev,agent_draft,none,0.0,False,1.016,male_toilet,0.3943,True,7.377,male_toilet,1.0,True,4766.0,male_toilet,0.2309,True,11.068,none,0.0,False,0.029,none,0.0,False,0.012
+q034,where can I sit and eat my packed lunch,canteen,hard,vague,dev,agent_draft,canteen,5.0,True,1.093,canteen,0.6934,True,7.51,none,0.0,False,5372.0,canteen,0.3925,True,10.681,canteen,5.0,True,0.036,canteen,5.7807,True,0.02
+q035,I want to go up to the next floor,tag:vertical,hard,vague,test,agent_draft,escalator_up,5.0,True,1.041,escalator_up,0.6707,True,9.747,escalator_up,1.0,True,6380.0,lift_stairs_4F,0.4463,True,8.671,escalator_up,5.0,True,0.071,escalator_up,3.2158,True,0.018
+q036,how do I get to the floor below,tag:vertical,hard,vague,dev,agent_draft,none,0.0,False,1.118,escalator_up,0.6106,True,11.538,escalator_down,1.0,True,5765.0,lift_stairs_4F,0.3692,True,10.68,male_toilet,3.0,False,0.037,escalator_up,1.424,True,0.013
+q037,somewhere to book for a group discussion,sr9,hard,vague,test,agent_draft,none,0.0,False,2.448,lt2a,0.3894,False,8.406,sr9,1.0,True,7442.0,sr9,0.3143,True,10.954,none,0.0,False,0.039,sr9,2.8904,True,0.015
+q038,I want to leave campus,tag:exit,hard,vague,test,agent_draft,none,0.0,False,2.03,entrance_exit,0.4942,True,11.416,entrance_exit,1.0,True,7809.0,entrance_exit,0.3078,True,10.025,none,0.0,False,0.031,entrance_exit,2.8904,True,0.014
+q039,which way out to the MTR,tag:exit,hard,vague,test,agent_draft,exit_5,7.0,True,1.09,entrance_exit,0.4348,True,9.341,none,0.0,False,8308.0,exit_5_4F,0.2616,True,9.352,exit_5,7.0,True,0.033,exit_5,3.1822,True,0.016
+q040,take me home,tag:exit,hard,vague,test,agent_draft,none,0.0,False,0.929,entrance_exit,0.7104,True,7.284,entrance_exit,1.0,True,6873.0,none,0.2008,False,7.576,none,0.0,False,0.027,entrance_exit,2.8904,True,0.009
+q041,where do students usually have lunch,canteen,hard,vague,test,agent_draft,canteen,5.0,True,1.165,canteen,0.6839,True,7.605,canteen,1.0,True,6487.0,canteen,0.3498,True,7.917,canteen,5.0,True,0.037,canteen,2.8904,True,0.016
+q042,I need to charge my phone,NONE,hard,vague,test,agent_draft,none,0.0,True,1.044,none,0.2123,True,7.431,none,0.0,True,6596.0,none,0.0743,True,7.577,none,0.0,True,0.048,none,0.0,True,0.011
+q043,where can I get something cold to drink,canteen,hard,vague,dev,agent_draft,canteen,5.0,True,1.145,canteen,0.4526,True,7.937,canteen,1.0,True,4758.0,canteen,0.2345,True,9.543,canteen,5.0,True,0.039,canteen,2.8904,True,0.014
+q044,wheelchair accessible toilet,disabled_toilet|disabled_toilet_4F,hard,access,dev,agent_draft,disabled_toilet,17.0,True,1.02,disabled_toilet,0.938,True,8.019,disabled_toilet,1.0,True,4602.0,disabled_toilet_4F,0.5722,True,10.012,disabled_toilet,17.0,True,0.035,disabled_toilet,5.9631,True,0.014
+q045,"I use a wheelchair, where is the toilet",disabled_toilet|disabled_toilet_4F,hard,access,test,agent_draft,disabled_toilet,6.0,True,1.142,disabled_toilet,0.865,True,8.18,disabled_toilet,1.0,True,6983.0,disabled_toilet_4F,0.4895,True,10.04,disabled_toilet,6.0,True,0.037,disabled_toilet,4.1713,True,0.016
+q046,step-free way to the other floor,lift_stairs|lift_stairs_4F,hard,access,test,agent_draft,none,0.0,False,1.086,escalator_up,0.6258,False,7.416,lift_stairs,1.0,True,5961.0,lift_stairs_4F,0.4102,True,11.993,male_toilet,3.0,False,0.034,exit_5,1.5911,False,0.043
+q047,where is the lift,lift_stairs|lift_stairs_4F,hard,access,dev,agent_draft,lift_stairs,4.0,True,1.029,lift_stairs,0.786,True,7.853,lift_stairs,1.0,True,5339.0,lift_stairs_4F,0.4253,True,8.892,lift_stairs,4.0,True,0.029,lift_stairs,2.3795,True,0.014
+q048,elevator please,lift_stairs|lift_stairs_4F,hard,access,dev,agent_draft,lift_stairs,8.0,True,0.963,lift_stairs,0.8985,True,7.442,lift_stairs,1.0,True,5710.0,lift_stairs,0.4834,True,11.589,lift_stairs,8.0,True,0.027,lift_stairs,2.3795,True,0.01
+q049,accessible restroom on the lower floor,disabled_toilet_4F,hard,access,dev,agent_draft,disabled_toilet_4F,8.0,True,2.014,disabled_toilet,0.7244,False,7.726,disabled_toilet_4F,1.0,True,4990.0,disabled_toilet_4F,0.4953,True,7.863,disabled_toilet,8.0,False,0.035,disabled_toilet,3.5835,False,0.018
+q050,"I can't use stairs, how do I get down to the lower floor",lift_stairs|lift_stairs_4F,hard,access,test,agent_draft,lift_stairs_4F,6.0,True,4.533,lift_stairs,0.6933,True,7.685,lift_stairs_4F,1.0,True,5391.0,lift_stairs_4F,0.4697,True,7.769,lift_stairs,6.0,True,0.043,escalator_down,5.0845,False,0.026
+q051,toilet for people with disabilities,disabled_toilet|disabled_toilet_4F,hard,access,test,agent_draft,male_toilet,6.0,False,4.85,disabled_toilet,0.8269,True,7.685,disabled_toilet,1.0,True,4921.0,disabled_toilet_4F,0.5779,True,7.782,male_toilet,6.0,False,0.033,male_toilet,1.7918,False,0.017
+q052,where is the cantene,canteen,hard,typo,test,agent_draft,none,0.0,False,4.309,none,0.251,False,7.609,canteen,1.0,True,4553.0,none,0.2012,False,7.645,none,0.0,False,0.029,none,0.0,False,0.009
+q053,nearset tolet,tag:toilet,hard,typo,test,agent_draft,none,0.0,False,3.725,none,0.2728,False,7.983,male_toilet,1.0,True,4487.0,exit_5_4F,0.211,False,7.572,none,0.0,False,0.026,none,0.0,False,0.011
+q054,lecure theater 2b,lt2b,hard,typo,dev,agent_draft,none,0.0,False,3.198,lt2b,0.7203,True,11.341,lt2b,1.0,True,4426.0,lt2b,0.4413,True,7.549,canteen,3.0,False,0.029,lt2b,4.6821,True,0.013
+q055,escelator,tag:escalator,hard,typo,dev,agent_draft,none,0.0,False,3.146,escalator_up,0.6805,True,9.223,escalator_up,1.0,True,4449.0,escalator_down,0.329,True,9.586,none,0.0,False,0.023,none,0.0,False,0.009
+q056,the exti,tag:exit,hard,typo,test,agent_draft,none,0.0,False,2.579,escalator_up,0.3811,False,13.352,exit_5,1.0,True,4697.0,y5302,0.2298,False,12.685,none,0.0,False,0.023,none,0.0,False,0.009
+q057,study rom 9,sr9,hard,typo,test,agent_draft,sr9,5.0,True,3.751,sr9,0.57,True,11.043,sr9,1.0,True,4392.0,sr9,0.3938,True,7.741,sr9,5.0,True,0.025,sr9,5.7807,True,0.014
+q058,lecture theatre 1 b,lt1b,hard,typo,dev,agent_draft,lt2a,15.0,False,3.464,lt1b,0.9495,True,8.376,lt1b,1.0,True,5127.0,lt1b,0.7225,True,11.889,lt2a,15.0,False,0.03,lt2a,3.5835,False,0.019
+q059,restrom,tag:toilet,hard,typo,dev,agent_draft,none,0.0,False,6.812,none,0.3449,False,8.063,male_toilet,1.0,True,5015.0,male_toilet,0.2356,True,11.285,none,0.0,False,0.022,none,0.0,False,0.009
+q060,canten,canteen,hard,typo,dev,agent_draft,none,0.0,False,2.275,none,0.3703,False,7.666,canteen,1.0,True,5047.0,exit_10,0.2219,False,10.049,none,0.0,False,0.02,none,0.0,False,0.008
+q061,wher can i eet,canteen,hard,typo,test,agent_draft,none,0.0,False,3.07,none,0.3127,False,8.502,canteen,1.0,True,4285.0,exit_5_4F,0.2602,False,9.459,none,0.0,False,0.028,none,0.0,False,0.012
+q062,lt2 a,lt2a,hard,typo,test,agent_draft,none,0.0,False,1.497,lt2a,0.8489,True,8.94,lt2a,1.0,True,4359.0,y5302_back,0.3468,False,10.581,none,0.0,False,0.021,none,0.0,False,0.008
+q063,washrom femail,female_toilet,hard,typo,dev,agent_draft,none,0.0,False,1.005,male_toilet,0.4283,False,9.362,female_toilet,1.0,True,5177.0,female_toilet,0.2384,True,9.927,none,0.0,False,0.025,none,0.0,False,0.01
+q064,emrgency exit,tag:emergency,hard,typo,test,agent_draft,exit_5,4.0,True,0.933,exit_5,0.6872,True,8.673,exit_5,1.0,True,5482.0,exit_5_4F,0.4727,True,13.044,exit_5,4.0,True,0.026,exit_5,1.5911,True,0.012
+q065,where is the libary,NONE,hard,typo,dev,agent_draft,none,0.0,True,1.024,none,0.251,True,11.747,none,0.0,True,4573.0,none,0.1707,True,8.606,none,0.0,True,0.027,none,0.0,True,0.009
+q066,y 5302,y5302,hard,typo,dev,agent_draft,none,0.0,False,0.867,y5302,0.826,True,11.124,y5302,1.0,True,5370.0,y5401,0.5492,False,9.978,none,0.0,False,0.021,none,0.0,False,0.011
+q067,fod,canteen,hard,typo,test,agent_draft,none,0.0,False,0.835,exit_5,0.4074,False,9.325,canteen,1.0,True,5384.0,y5401,0.2775,False,12.155,none,0.0,False,0.018,none,0.0,False,0.008
+q068,sr 9,sr9,hard,typo,dev,agent_draft,none,0.0,False,1.657,sr9,0.9248,True,10.194,sr9,1.0,True,6258.0,sr9,0.4481,True,9.411,none,0.0,False,0.019,sr9,2.8904,True,0.011
+q069,eskalator naik,escalator_up|escalator_up_4F,hard,typo,test,agent_draft,escalator_up,14.0,True,1.067,escalator_up,1.0,True,11.956,escalator_up,1.0,True,4132.0,escalator_up,0.4023,True,10.464,escalator_up,14.0,True,0.027,escalator_up,3.8348,True,0.012
+q070,kantin dimana,canteen,hard,mixed,dev,agent_draft,canteen,6.0,True,0.92,canteen,0.7454,True,9.054,canteen,1.0,True,5226.0,canteen,0.2655,True,11.092,canteen,6.0,True,0.025,canteen,2.8904,True,0.011
+q071,mau makan dong,canteen,hard,mixed,dev,agent_draft,canteen,5.0,True,1.049,canteen,0.8166,True,11.102,canteen,1.0,True,6232.0,canteen,0.3263,True,10.361,canteen,5.0,True,0.026,canteen,2.8904,True,0.013
+q072,toilet cowo dimana,male_toilet,hard,mixed,dev,agent_draft,male_toilet,11.0,True,2.305,male_toilet,0.767,True,8.75,male_toilet,1.0,True,5491.0,male_toilet,0.315,True,10.323,male_toilet,11.0,True,0.029,male_toilet,4.6821,True,0.014
+q073,toilet cewe di mana,female_toilet,hard,mixed,test,agent_draft,female_toilet,11.0,True,2.49,female_toilet,0.7577,True,9.942,female_toilet,1.0,True,4565.0,female_toilet,0.4571,True,8.91,female_toilet,11.0,True,0.029,female_toilet,4.6821,True,0.016
+q074,esca naik,escalator_up|escalator_up_4F,hard,mixed,test,agent_draft,escalator_up,9.0,True,2.83,escalator_up,1.0,True,11.472,escalator_up,1.0,True,4373.0,escalator_up,0.3452,True,9.053,escalator_up,9.0,True,0.024,escalator_up,3.8348,True,0.012
+q075,esca turun bawah,escalator_down_4F,hard,mixed,test,agent_draft,escalator_down_4F,16.0,True,2.465,escalator_down_4F,1.0,True,9.845,escalator_down_4F,1.0,True,4573.0,escalator_down_4F,0.3347,True,9.647,escalator_down_4F,16.0,True,0.028,escalator_down_4F,5.5953,True,0.015
+q076,eska turun atas,escalator_down,hard,mixed,test,agent_draft,escalator_down,10.0,True,1.095,escalator_down,0.8469,True,10.232,escalator_down,1.0,True,4491.0,escalator_down,0.434,True,9.791,escalator_down,10.0,True,0.027,escalator_down,4.1713,True,0.014
+q077,lt 2b di mana ya,lt2b,hard,mixed,test,agent_draft,lt2b,5.0,True,1.83,lt2b,0.6296,True,10.37,lt2b,1.0,True,4277.0,exit_10_4F,0.3029,False,11.991,lt2b,5.0,True,0.046,lt2b,4.6821,True,0.017
+q078,pintu keluar dong,tag:exit,hard,mixed,test,agent_draft,exit_5,12.0,True,1.781,exit_10,0.8568,True,9.591,entrance_exit,1.0,True,4708.0,exit_10,0.4306,True,9.96,exit_5,12.0,True,0.031,exit_5,3.1822,True,0.014
+q079,sr9 dimana,sr9,hard,mixed,test,agent_draft,sr9,3.0,True,1.72,sr9,0.7284,True,6.918,sr9,1.0,True,4491.0,sr9,0.3599,True,10.456,sr9,3.0,True,0.026,sr9,2.8904,True,0.011
+q080,mau belajar yang sepi,sr9,hard,mixed,test,agent_draft,sr9,7.0,True,1.781,canteen,0.6562,False,7.622,sr9,1.0,True,4297.0,canteen,0.3681,False,10.126,sr9,7.0,True,0.03,sr9,2.8904,True,0.015
+q081,"lapar banget, ada makanan?",canteen,hard,mixed,dev,agent_draft,canteen,5.0,True,2.783,canteen,0.718,True,7.492,canteen,1.0,True,5143.0,canteen,0.3812,True,9.347,canteen,5.0,True,0.031,canteen,2.8904,True,0.016
+q082,cari tangga atau lift,lift_stairs|lift_stairs_4F,hard,mixed,test,agent_draft,lift_stairs,6.0,True,4.827,lift_stairs,0.5752,True,7.894,lift_stairs,1.0,True,4568.0,lift_stairs,0.4366,True,9.763,lift_stairs,6.0,True,0.029,lift_stairs,4.7591,True,0.016
+q083,Y5302 dimana,y5302,hard,mixed,dev,agent_draft,y5302,5.0,True,1.894,y5302,0.8113,True,10.829,y5302,1.0,True,4295.0,y5401,0.4936,False,8.851,y5302,5.0,True,0.026,y5302,2.3795,True,0.011
+q084,ke lantai bawah gimana,tag:vertical,hard,mixed,dev,agent_draft,none,0.0,False,1.893,escalator_down,0.645,True,10.755,escalator_down,1.0,True,6698.0,exit_10_4F,0.4982,False,12.624,none,0.0,False,0.029,exit_5_4F,2.705,False,0.016
+q085,我想食嘢,canteen,hard,mixed,dev,agent_draft,none,0.0,False,1.576,canteen,0.4242,True,12.31,canteen,1.0,True,5271.0,canteen,0.316,True,8.937,none,0.0,False,0.019,none,0.0,False,0.01
+q086,廁所喺邊度,tag:toilet,hard,mixed,dev,agent_draft,none,0.0,False,1.558,none,0.2956,False,10.271,male_toilet,1.0,True,6521.0,none,0.1803,False,7.317,none,0.0,False,0.017,none,0.0,False,0.009
+q087,出口喺邊,tag:exit,hard,mixed,dev,agent_draft,none,0.0,False,1.557,none,0.3376,False,9.615,exit_5,1.0,True,5470.0,exit_5_4F,0.256,True,7.572,none,0.0,False,0.015,none,0.0,False,0.008
+q088,where got toilet ah,tag:toilet,hard,mixed,test,agent_draft,male_toilet,6.0,True,2.526,female_toilet,0.689,True,8.896,male_toilet,1.0,True,4446.0,disabled_toilet_4F,0.3966,True,7.465,male_toilet,6.0,True,0.03,male_toilet,1.7918,True,0.014
+q089,邊度可以讀書,sr9,hard,mixed,test,agent_draft,none,0.0,False,1.529,none,0.2763,False,7.314,sr9,1.0,True,4076.0,lt2b,0.2103,False,7.877,none,0.0,False,0.016,none,0.0,False,0.008
+q090,I wanna sik faan,canteen,hard,mixed,dev,agent_draft,none,0.0,False,1.377,canteen,0.5073,True,9.567,canteen,1.0,True,4836.0,exit_10_4F,0.2939,False,8.12,none,0.0,False,0.027,none,0.0,False,0.013
+q091,返屋企點行,tag:exit,hard,mixed,dev,agent_draft,none,0.0,False,0.963,none,0.3411,False,9.31,entrance_exit,1.0,True,5811.0,lift_stairs_4F,0.2525,False,10.048,none,0.0,False,0.016,none,0.0,False,0.008
+q092,電梯喺邊,tag:vertical,hard,mixed,dev,agent_draft,none,0.0,False,1.133,none,0.2777,False,12.897,lift_stairs,1.0,True,6613.0,none,0.1723,False,9.309,none,0.0,False,0.016,none,0.0,False,0.008
+q093,where is the library,NONE,hard,unsupported,test,agent_draft,none,0.0,True,1.429,none,0.3048,True,10.492,none,0.0,True,4395.0,sr9,0.2254,False,12.02,none,0.0,True,0.028,none,0.0,True,0.009
+q094,I need an ATM,NONE,hard,unsupported,test,agent_draft,none,0.0,True,1.912,none,0.3129,True,10.39,none,0.0,True,3997.0,none,0.1811,True,10.588,none,0.0,True,0.026,none,0.0,True,0.009
+q095,nearest gym,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,1.351,none,0.3616,True,8.442,none,0.0,True,5478.0,lift_stairs_4F,0.23,False,9.424,none,0.0,True,0.024,none,0.0,True,0.008
+q096,where is the president's office,NONE,hard,unsupported,test,agent_draft,none,0.0,True,3.218,none,0.2417,True,8.821,none,0.0,True,5328.0,none,0.15,True,6.825,none,0.0,True,0.034,none,0.0,True,0.015
+q097,how do I get to the bus stop,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,2.771,entrance_exit,0.3811,False,7.69,none,0.0,True,4975.0,exit_5_4F,0.3566,False,7.886,none,0.0,True,0.031,none,0.0,True,0.012
+q098,lecture theatre 3a,NONE,hard,unsupported,dev,agent_draft,lt2a,15.0,False,1.026,lt1a,0.9141,False,7.833,none,0.0,True,5322.0,lt1b,0.6959,False,12.258,lt2a,15.0,False,0.03,lt2a,3.5835,False,0.014
+q099,study room 12,NONE,hard,unsupported,dev,agent_draft,sr9,10.0,False,1.01,sr9,0.9359,False,7.709,none,0.0,True,10960.0,sr9,0.5752,False,8.853,sr9,10.0,False,0.027,sr9,4.3144,False,0.013
+q100,where can I buy a textbook,NONE,hard,unsupported,test,agent_draft,none,0.0,True,1.004,sr9,0.4118,False,10.134,none,0.0,True,4623.0,lt1a,0.2696,False,8.637,none,0.0,True,0.031,none,0.0,True,0.012
+q101,tell me a joke,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,0.962,none,0.3596,True,12.38,none,0.0,True,4664.0,none,0.1559,True,12.864,none,0.0,True,0.025,none,0.0,True,0.01
+q102,what is the weather today,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,1.058,none,0.3247,True,10.553,none,0.0,True,5237.0,none,0.1253,True,9.449,canteen,3.0,False,0.031,none,0.0,True,0.013
+q103,y5501,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,0.918,y5401,0.8893,False,9.374,none,0.0,True,5297.0,y5401,0.5673,False,12.733,y5302,2.0,False,0.021,none,0.0,True,0.008
+q104,where is the swimming pool,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,1.0,none,0.255,True,9.61,none,0.0,True,5025.0,none,0.1334,True,8.217,male_toilet,3.0,False,0.03,none,0.0,True,0.011
+q105,toilet on floor 6,NONE,hard,unsupported,dev,agent_draft,male_toilet,6.0,False,1.004,female_toilet,0.7227,False,9.015,none,0.0,True,4677.0,disabled_toilet_4F,0.4869,False,9.433,male_toilet,6.0,False,0.029,male_toilet,1.7918,False,0.016
+q106,perpustakaan dimana,NONE,hard,unsupported,test,agent_draft,none,0.0,True,0.97,canteen,0.5094,False,10.541,none,0.0,True,4198.0,canteen,0.3361,False,8.261,none,0.0,True,0.028,none,0.0,True,0.01
+q107,圖書館喺邊,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,1.848,none,0.251,True,11.671,none,0.0,True,4406.0,none,0.1869,True,11.372,none,0.0,True,0.017,none,0.0,True,0.008
+q108,take me to Prof Wong's office,NONE,hard,unsupported,dev,agent_draft,none,0.0,True,1.458,none,0.3245,True,12.185,none,0.0,True,4940.0,y5401,0.2369,False,12.172,none,0.0,True,0.032,none,0.0,True,0.016
+q109,"I feel sick, where is the clinic",NONE,hard,unsupported,dev,agent_draft,none,0.0,True,1.934,none,0.3637,True,11.675,none,0.0,True,5181.0,none,0.1708,True,10.643,none,0.0,True,0.032,none,0.0,True,0.014
+q110,parking lot,NONE,hard,unsupported,test,agent_draft,none,0.0,True,1.534,entrance_exit,0.442,False,9.518,none,0.0,True,4692.0,entrance_exit,0.2295,False,7.456,none,0.0,True,0.024,none,0.0,True,0.01
+q111,is there a 7-eleven nearby,NONE,hard,unsupported,test,agent_draft,none,0.0,True,1.543,none,0.3484,True,9.261,none,0.0,True,7030.0,exit_5,0.2823,False,7.656,none,0.0,True,0.031,none,0.0,True,0.014
+q112,where is the computer lab,NONE,hard,unsupported,test,agent_draft,none,0.0,True,1.062,none,0.3464,True,9.616,none,0.0,True,6444.0,y4502,0.2488,False,13.633,none,0.0,True,0.029,none,0.0,True,0.011
+q113,lecture theatre 3b,NONE,hard,unsupported,test,agent_draft,lt2a,15.0,False,1.008,lt2b,0.9444,False,9.158,none,0.0,True,6151.0,lt1b,0.6824,False,10.718,lt2a,15.0,False,0.03,lt2a,3.5835,False,0.014
+q114,how are you,NONE,hard,unsupported,test,agent_draft,none,0.0,True,0.888,sr9,0.442,False,9.171,none,0.0,True,5935.0,none,0.1769,True,10.842,none,0.0,True,0.042,none,0.0,True,0.006
+q115,lt 4a,NONE,hard,unsupported,test,agent_draft,none,0.0,True,0.901,lt2a,0.8665,False,10.244,none,0.0,True,6321.0,y4502,0.429,False,9.594,none,0.0,True,0.023,lt2a,1.7918,False,0.011
+q116,toilet on 4F,disabled_toilet_4F,hard,floor,dev,agent_draft,disabled_toilet_4F,6.0,True,0.907,disabled_toilet_4F,0.9424,True,9.264,disabled_toilet_4F,1.0,True,4685.0,female_toilet,0.4852,False,7.27,male_toilet,6.0,False,0.028,disabled_toilet_4F,2.5619,True,0.013
+q117,lift on the lower floor,lift_stairs_4F,hard,floor,test,agent_draft,lift_stairs_4F,4.0,True,1.065,lift_stairs,0.7232,False,10.135,lift_stairs_4F,1.0,True,6165.0,lift_stairs_4F,0.4547,True,9.13,lift_stairs,4.0,False,0.031,lift_stairs,3.8036,False,0.015
+q118,escalator going up from the lower floor,escalator_up_4F,hard,floor,dev,agent_draft,escalator_down_4F,9.0,False,2.556,escalator_down,0.8307,False,10.73,escalator_up_4F,1.0,True,4424.0,escalator_up_4F,0.4973,True,7.387,escalator_up,9.0,False,0.037,escalator_up,6.7993,False,0.024
+q119,esc down on 5F,escalator_down,hard,floor,test,agent_draft,none,0.0,False,3.661,escalator_down,0.594,True,10.373,escalator_down,1.0,True,5138.0,escalator_down,0.2798,True,7.473,none,0.0,False,0.026,escalator_down,3.0727,True,0.015
+q120,exit 10 on floor 4,exit_10_4F,hard,floor,test,agent_draft,exit_10,7.0,False,2.571,exit_10,0.7932,False,10.163,exit_10_4F,1.0,True,6362.0,exit_5_4F,0.5684,False,8.715,exit_10,7.0,False,0.03,exit_10_4F,5.6772,True,0.019
+q121,the lift on the upper floor,lift_stairs,hard,floor,dev,agent_draft,lift_stairs,4.0,True,1.435,lift_stairs,0.7613,True,10.122,lift_stairs,1.0,True,4480.0,lift_stairs_4F,0.4623,False,7.367,lift_stairs,4.0,True,0.032,lift_stairs,3.8036,True,0.016
+q122,exit 5 on 5F,exit_5,hard,floor,dev,agent_draft,exit_5,6.0,True,1.024,exit_5,0.9299,True,8.098,exit_5,1.0,True,4936.0,exit_10,0.5866,False,6.955,exit_5,6.0,True,0.026,exit_5,3.7083,True,0.04
+q123,exit 10 on the 5th floor,exit_10,hard,floor,test,agent_draft,exit_10,7.0,True,1.072,exit_10,0.7864,True,10.091,exit_10,1.0,True,6369.0,exit_5,0.5713,False,7.585,exit_10,7.0,True,0.031,exit_10,3.6342,True,0.025
+q124,where do I find the Y5 rooms,y5302|y5202|y5401|y5302_back,hard,indirect,dev,agent_draft,y5302,2.0,True,1.055,y5302,0.6051,True,8.432,y5202,1.0,True,6334.0,y5202,0.6515,True,15.684,y5302,2.0,True,0.03,sr9,2.8904,False,0.016
+q125,room y5-202,y5202,hard,indirect,dev,agent_draft,y5202,6.0,True,0.936,y5202,0.7597,True,9.333,y5202,1.0,True,4436.0,y5202,0.7895,True,11.028,y5202,6.0,True,0.026,y5202,6.1062,True,0.016
+q126,the Y5 studio ending in 401,y5401,hard,indirect,test,agent_draft,y5302,9.0,False,0.989,y5401,0.7288,True,9.606,y5401,1.0,True,6423.0,y5401,0.6524,True,8.562,y5302,9.0,False,0.031,y5401,6.2732,True,0.017
+q127,the 502 studio on 4F,y4502,hard,indirect,dev,agent_draft,y4502,1.0,True,0.976,y4502,0.659,True,11.373,y4502,1.0,True,4765.0,y4502,0.6056,True,7.565,y5302,1.0,False,0.029,y4502,5.2516,True,0.016
+q128,point 2 behind Y5302,y5302_back,hard,indirect,test,agent_draft,y5302,5.0,False,0.998,y5302_back,0.9054,True,11.597,y5302_back,1.0,True,6047.0,y5302_back,0.6311,True,7.221,y5302,5.0,False,0.028,y5302_back,8.1603,True,0.016
