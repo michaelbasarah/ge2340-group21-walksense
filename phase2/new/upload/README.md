@@ -103,6 +103,22 @@ On the map the label shows the `graph.json` length: plain = measured (Google pin
 
 **Editing `floorplan.json`:** small fixes can be made by hand; the page reads only this file (reload the page). A place is `floors.<5|4>.places.<id>` with `x`, `y` in metres (east, north) and `name` / `short` (label on the map); `label_dx` / `label_dy` move its label. A corridor is an entry of `edges` with `points` (polyline in metres, first and last point = the two places), `metres` and `source` (`measured` / `steps` / `guess`). Rooms are `rooms[].polys` (polygons in metres); `walkable` is the white corridor area; `links` are the escalators and the lift. Place ids must stay the model's ids (the page and `route.py` use them). A real rebuild (`python map/make_floorplan.py`) overwrites hand edits: put lasting changes in `make_floorplan.py` (`NAMES`, `PATHS`, `FOOTPRINTS`, `LABEL_DIR`, weights) or in `graph.json` / `coordinates_meters.csv`, then rebuild. `test_walksense.py` checks that every place the model can guess and every corridor the walking dot can take is in `floorplan.json`.
 
+## Search with Gemini: setup
+The search bar at the top of the page finds one of our 26 places from a room name or a free question ("where can I study", "toilet on 4th floor", "where is the chemistry lab") and draws the route on the map. Without a key it still works offline (keyword, then fuzzy match); with a Gemini key it also answers free questions in one sentence.
+
+1. Copy `.env.example` to `.env` at the **repo root** (the folder with `PROCESS-LOG.md`). `.env` is gitignored (check: `git check-ignore -v .env`).
+2. Paste the key after `GEMINI_API_KEY=` (no quotes, no spaces). Get a key at **aistudio.google.com/apikey**.
+3. Check it: `python phase2/new/upload/check_gemini.py` prints `OK: ... Model: ...` or what is wrong (no key / key rejected / no internet / quota / unknown model). It makes one tiny call.
+4. Start `server.py` as usual (restart it if it was running). The start-up lines say `Search: Gemini <model>` or that it answers offline.
+
+How it answers (`search.py`, endpoint `GET /api/search?q=...&from=<place id>`):
+- Gemini first (when a key is set). It gets the same place list as the request-matching LLM method and must answer one listed place ID or `NONE` plus one short sentence (JSON); a place we do not cover gets a polite "not in the area WalkSense covers". The key stays on the laptop: the browser only talks to `server.py`.
+- No key, no internet, a timeout (8 s, `GEMINI_TIMEOUT_S` in `.env`), an HTTP error or an unusable reply: keyword, then fuzzy (`phase2/request-matching/match.py`). The page shows which method answered. After no internet / a timeout / a quota error Gemini is skipped for 60 s; a rejected key or unknown model is skipped until the server restarts.
+- Route: A* from `phase2/new/routing/route.py` on `routing/graph.json` (imported, not copied). Start = the place picked in the **From** list, else the place that is lit right now (live mode, else the last uploaded stop), else the 4F entrance gate. The orange line follows the floor-plan corridors on each floor; the steps list names every place, the escalator / lift rides and the metres. Graph ids and map keys differ (the map keys repeat across floors), so `search.GRAPH_TO_MAP` is an explicit 26-row table; `test_search.py` checks it against `floorplan.json`, `destinations.csv` and `places.json`.
+- Model: `gemini-3.5-flash-lite` (stable; Google's docs, checked 26 Nov 2026, call it the fastest and most cost-effective 3.5 model and list a free tier). Change it with `GEMINI_MODEL=` in `.env`.
+- Tests: `python -m unittest test_search.py` (Gemini mocked: good reply, NONE, garbage, timeout, HTTP 400/403/429; `/api/search` through a real server on a free port) and `cd ../../request-matching && python -m unittest test_gemini`.
+- Accuracy on the 128 test queries with Gemini: `cd phase2/request-matching && python evaluate.py --method hybrid_gemini` (keyword -> fuzzy -> Gemini; `--method gemini` = Gemini on every query). At most `--max-calls` real calls (default 150); answers are cached in `llm_cache_gemini_v1.json`; writes `out/gemini_results.json` and `out/gemini_failures_<method>.csv`. Without a key it prints how to add one and stops.
+
 ## What it does
 | Part | How | Tested |
 |---|---|---|
@@ -134,5 +150,5 @@ Before 25 Nov (`out/eval_2026-11-24.json`): iPhone19,2 -> iPhone17,4 17/26 (top-
 
 ## Not done
 - No Wi-Fi (iOS apps cannot scan). Android + WiGLE upload is the next step if Wi-Fi earns its place.
-- No route drawing on the map and no replay export for `circle-ui`.
+- No replay export for `circle-ui`. (Route drawing for a searched place: see "Search with Gemini" above.)
 - No graph prior (neighbouring places) on the place guess.
