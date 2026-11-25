@@ -32,6 +32,7 @@ Contents:
 21. 24 Nov: circle navigator UI prototype (circles on lines)
 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
+24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
 - Lessons learned
 - Open questions / next steps
 
@@ -307,6 +308,26 @@ Contents:
 
 ---
 
+## 24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
+
+- **What we tried:** a small system where the phone records a stop or walk with phyphox, the ZIP is uploaded from the phone's browser to a laptop, and the laptop answers with the floor, steps/turns and the top-3 places. Built for the iPhone first. Before using it, tested it honestly: train on one 24-Nov session, test every stop of the other.
+- **Why:** the team asked for a way to collect on the phone and send it to the system for processing, instead of WhatsApp + running scripts by hand. The 24-Nov data (entry 23) is the first with two independent passes, so it gives a real held-out number.
+- **How:** `phase2/new/upload/walksense.py` (reads the ZIP, features, models, floor tracker, `evaluate`), `server.py` (stdlib HTTP server + `index.html`), `test_walksense.py` (starts the server and uploads real 24-Nov ZIPs, including bad ones). Reused unchanged: `count_steps` (pilot), `turns` (`tracking/pdr.py`), `make_model` (`cross-day/crossday.py`). Place model: kNN on 2 s windows of the stop (first/last 5 s skipped), per floor, trained only on stops from the same phone model (from `meta/device.csv`). Visit answer = mean kNN probability over the windows. Floor: start floor set once; a change = pressure more than 0.40 hPa away from the median of the last 6 readings on the current floor; after a gap of more than 15 min the floor is kept.
+- **Result** (`phase2/new/upload/out/eval.json`):
+  - The two sessions used **different iPhones**: session 1 iPhone19,2, session 2 iPhone17,4 (`manifest.csv`). The S24 (SM-S9280) is the only phone in both.
+  - Place, true floor given, chance 0.077: iPhone19,2 -> iPhone17,4 raw x/y/z top-1 **17/26**, top-3 24/26; reverse **17/27**, top-3 22/27. Tilt-corrected (B along / across gravity) 11/26 and 13/27; |B| only 5/26 and 6/27. S24 -> S24 x/y/z 11/26 and 10/27; tilt 6/26 and 4/27; |B| 1/26 and 2/27.
+  - Floor tracking over each session's iPhone recordings in time order: **27/27** (session 1) and **26/26** (session 2), and the same for every threshold 0.30, 0.35, 0.40, 0.45, 0.50.
+  - `test_walksense.py`: 3 tests pass (stop -> walk -> 5F stairs -> 4F landing switches the floor to 4; a non-ZIP, a ZIP without a magnetometer, an injected place name, a bad kind and an empty upload are refused).
+- **Outcome:** success, with two changes after seeing results, both recorded here.
+  - FAILURE (floor v1): comparing each reading only with the previous one at 0.30 hPa got 25/27 on session 1. The walk to Y5401 read about 0.25 hPa lower than the stops around it, so the next stop looked like a +0.32 hPa jump and the floor flipped to 4F for three recordings. Comparing with the median of recent readings fixed it, and the result no longer depends on the threshold.
+  - Place features: tilt correction was the planned choice (entry 15), but raw x/y/z won in both directions (17 vs 11, 17 vs 13), so the server uses x/y/z. Likely reason: on 24 Nov the phone faced the door at every stop, so the heading was the same each time and x/y/z keeps that information; on 17 vs 23 Nov it was not, and x/y/z failed (18 to 24%). So x/y/z only works if the phone is held the same way.
+  - The iPhone result is across two different iPhones, which is harder than the protocol intends. The S24 (same phone both sessions) did worse than the iPhones, so its magnetometer looks weaker for this.
+  - n is small (26 and 27 stops, one visit is about 4%).
+- **What changed because of it:** the upload page shows these tested numbers. The rule "phone flat, facing the door" is now required for the place guess, not just nice to have. Uploading any 24-Nov stop to the server scores near 100% because it was trained on it; only new recordings count.
+- **Links:** `phase2/new/upload/` (`README.md`, `walksense.py`, `server.py`, `index.html`, `test_walksense.py`, `out/eval.json`); data `phase2/clean-data/2026-11-24/sesi1/`, `sesi2/` (entry 23).
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -318,6 +339,8 @@ Contents:
 - **Small n.** 9 revisit visits and 17 cross-day visits: one visit is 6 to 11%. Present them as first estimates.
 - **A tracker needs a way back.** Limiting moves to neighbouring circles without a small "could be anywhere" share meant one wrong stop was never corrected (entry 20, v1).
 - **A map can't replace a fingerprint.** Where a place had no fingerprint in training, the graph did not find it (0/22 on 23 Nov); it helps most when every place has a fingerprint and the magnetometer is weak (cross-day, area 12/17 vs 7/17).
+- **Hold the phone the same way and raw x/y/z works.** With the phone facing the door at every stop, x/y/z got 17/26 and 17/27 across sessions (entry 24) where it got 18 to 24% across days without that rule.
+- **Compare pressure with a few recent readings, not one.** A single odd reading near a vent flipped the floor; the median of the last 6 did not (entry 24).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
@@ -332,4 +355,5 @@ Contents:
 - **Tracker (entry 20):** collect at least two visits per place on day 3, plus a test walk that leaves the recorded route, to measure the tracker without the optimistic parts. The collector should confirm the area groups, the floor-4 loop order and the escalator pairs in `phase2/new/graph/README.md`. "Confirmed" needs a better rule before the UI relies on it.
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
 - **graph-v2 (entry 22):** rerun `crossday.py` against `phase2/new/graph-v2/labels_23nov_merged.csv` to see whether merging the study rooms and lift/stairs changes the exact/area numbers, and decide whether v2 replaces v1 for the map/UI. The collector should confirm the two merges match the hand-drawn maps.
+- **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.

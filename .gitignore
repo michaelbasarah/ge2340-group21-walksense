@@ -21,3 +21,7 @@ phase2/clean-data/2026-11-23/sensor_samples.csv
 phase2/clean-data/2026-11-23/sensors/
 phase2/clean-data/2026-11-23/excluded_sensor_rows.csv
 phase2/clean-data/2026-11-23/wifi/observations.csv
+
+# Upload pipeline: phone uploads and test uploads stay local.
+phase2/new/upload/uploads/
+phase2/new/upload/out/test_uploads/
