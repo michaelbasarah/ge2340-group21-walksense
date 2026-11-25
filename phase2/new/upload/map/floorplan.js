@@ -1,6 +1,6 @@
 // WalkSense vector floor plan: draws map/floorplan.json (metres, x east, y north) into an <svg>. No libraries.
 // Used by index.html: FloorPlan.load(), FloorPlan.draw(svg, floor, {onFloor}), FloorPlan.xy(floor, place),
-// FloorPlan.dotXY(floor, dot, placesPx) and FloorPlan.name(floor, place). SVG user units are metres;
+// FloorPlan.dotXY(floor, dot, placesPx), FloorPlan.name(floor, place) and FloorPlan.corridor(floor, a, b) (search route). SVG user units are metres;
 // the drawing flips y (SVG y points down), so a point (x, y) is drawn at (x, -y).
 (function () {
   'use strict';
@@ -187,5 +187,5 @@
 
   function unit(floor) { const F = floorOf(floor); return F ? (view[floor] || fullBox(F))[2] / 40 : 1; }
 
-  window.FloorPlan = { load, draw, xy, name, dotXY, zoom, pan, reset, zoomed, center, unit, get plan() { return plan; } };
+  window.FloorPlan = { load, draw, xy, name, dotXY, corridor, zoom, pan, reset, zoomed, center, unit, get plan() { return plan; } };
 })();

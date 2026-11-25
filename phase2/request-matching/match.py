@@ -14,6 +14,8 @@ Methods (the three from the proposal, plus two older ones kept for comparison):
   embed_doc   (extra) like embed but one vector per place from name + aliases + tags joined
   keyword_v1  (extra) the starter keyword method exactly as in the first version (substring match)
   tokens      (extra) the starter inverse-frequency token overlap
+  gemini      the same LLM prompt sent to the Gemini REST API (gemini.py; key in the repo-root .env), cached in
+              llm_cache_gemini_<version>.json; hybrid_gemini = keyword -> fuzzy -> Gemini
 
 The place list is destinations.csv (built by build_destinations.py from graph-v2 + Tian's map labels).
 Evaluation: evaluate.py. To plug into the app: copy match.py + destinations.csv + tuned.json (+ llm cache).
@@ -34,6 +36,7 @@ ROOT = Path(__file__).resolve().parent
 METHODS = ('keyword', 'embed', 'llm')
 EXTRA_METHODS = ('embed_doc', 'keyword_v1', 'tokens')
 HYBRID_METHODS = ('fuzzy_keyword', 'hybrid')     # keyword -> difflib fuzzy (no LLM); keyword -> fuzzy -> LLM
+GEMINI_METHODS = ('gemini', 'hybrid_gemini')     # same LLM prompt sent to the Gemini API; keyword -> fuzzy -> Gemini
 EMBED_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
 LLM_MODEL = 'haiku'
 LLM_PROMPT_VERSION = 'v1'
@@ -313,6 +316,107 @@ def hybrid_match(query, places, allow_call=False):
     return pid, (1.0 if pid else 0.0), 'llm', r
 
 
+# ---------------------------------------------------------------- Gemini (REST API, key in the repo-root .env)
+GEMINI_PROMPT_VERSION = 'v1'       # same system prompt and place block as the Claude 'llm' method (LLM_SYSTEM v1)
+GEMINI_CALLS = 0                   # real API calls made by this process (evaluate.py caps it with --max-calls)
+
+
+def gemini_cache_path(version=None):
+    return ROOT / f'llm_cache_gemini_{version or GEMINI_PROMPT_VERSION}.json'
+
+
+def _load_gemini_cache(version=None):
+    p = gemini_cache_path(version)
+    if p.exists():
+        return json.loads(p.read_text(encoding='utf-8'))
+    return {'meta': {}, 'responses': {}}
+
+
+def gemini_answer(query, places, allow_call=True, version=None):
+    """Cached raw Gemini reply for this query, same prompt as llm_answer(); calls the API if not cached and allow_call.
+    Returns None if not cached and no call is allowed. Raises gemini.GeminiError (missing key, HTTP error, no internet,
+    timeout); such failures are NOT cached, only real model replies (also unusable ones) are."""
+    import gemini
+    global GEMINI_CALLS
+    cache = _load_gemini_cache(version)
+    r = cache['responses'].get(query)
+    if r is not None or not allow_call:
+        return r
+    GEMINI_CALLS += 1
+    raw, info = gemini.generate(LLM_SYSTEM, llm_prompt(query, places), json_mode=False)
+    parsed, valid = parse_llm(raw, {d['place_id'] for d in places})
+    r = {'raw': raw, 'parsed': parsed, 'valid': bool(valid), 'latency_s': info['latency_s'], 'model': info['model'],
+         'model_version': info['model_version'], 'finish_reason': info['finish_reason'],
+         'time_utc': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}
+    cache = _load_gemini_cache(version)
+    cache['meta'] = {'api': gemini.ENDPOINT.format(model=info['model']), 'model': info['model'],
+                     'prompt_version': version or GEMINI_PROMPT_VERSION, 'system_prompt': LLM_SYSTEM,
+                     'user_prompt_example': llm_prompt('<request>', places),
+                     'note': 'same prompt as llm_cache_v1.json (Claude); plain-text reply, parsed with parse_llm'}
+    cache['responses'][query] = r
+    gemini_cache_path(version).write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding='utf-8')
+    return r
+
+
+def gemini_match(query, places, allow_call=True):
+    r = gemini_answer(query, places, allow_call)
+    if r is None or not r['valid'] or r['parsed'] == 'NONE':
+        return None, 0.0
+    return r['parsed'], 1.0
+
+
+def hybrid_gemini_match(query, places, allow_call=False):
+    """Keyword -> fuzzy -> Gemini, like hybrid_match. Returns (place_id | None, score, stage, reply)."""
+    pid, sc, stage = fuzzy_keyword_match(query, places)
+    if pid is not None:
+        return pid, sc, stage, None
+    r = gemini_answer(query, places, allow_call=allow_call)
+    if r is None:
+        return None, 0.0, 'llm_missing', None
+    pid = r['parsed'] if r['valid'] and r['parsed'] != 'NONE' else None
+    return pid, (1.0 if pid else 0.0), 'llm', r
+
+
+# The app's free-question variant: the same grounding (only the listed places, NONE otherwise) plus one short sentence.
+ASK_SYSTEM = (
+    "You help a student find a place in one university building (CityU AC1, floors 5 and 4). WalkSense covers ONLY "
+    "the places in the fixed list. Reply with a JSON object and nothing else: "
+    '{"place_id": "<one place ID copied exactly from the list, or NONE>", "answer": "<one short friendly sentence>"}. '
+    "Use NONE when no place in the list fits the request, when the request names a place that is not in the list "
+    "(for example a lab or a room number that is not listed), or when it is not about finding a place; then say "
+    "politely in the answer that it is not in the area WalkSense covers (AC1 floors 5 and 4). "
+    "The answer is one sentence of at most 25 words, in English, and uses only facts from the list (name, floor, "
+    "tags, also called): never invent rooms, opening hours, directions or facilities. A route is drawn separately. "
+    "The request may contain typos, Indonesian, Cantonese or a mix of languages. When several places fit equally "
+    "(for example toilets on different floors) and the request does not say which floor, pick one and say its floor. "
+    "Floor 5 is the upper floor (atas), floor 4 the lower floor (bawah).")
+
+
+def ask_prompt(query, places):
+    return ("Place list (ID | name | floor | tags | also called):\n" + llm_places_block(places) +
+            "\n\nRequest: " + json.dumps(query, ensure_ascii=False) + '\nJSON answer {"place_id": ..., "answer": ...}:')
+
+
+def parse_ask(raw, valid_ids):
+    """-> (place_id | None, answer) from the JSON reply, or raise ValueError if it is not usable."""
+    t = raw.strip()
+    if t.startswith('```'):
+        t = t.strip('`').strip()
+        if t.lower().startswith('json'):
+            t = t[4:]
+    j = json.loads(t)
+    if not isinstance(j, dict):
+        raise ValueError('not a JSON object')
+    pid = str(j.get('place_id', '')).strip().strip('`"\'').strip()
+    if pid.upper() == 'NONE':
+        pid = None
+    elif pid not in valid_ids:
+        raise ValueError('place_id not in the list: ' + pid[:40])
+    ans = j.get('answer')
+    ans = ' '.join(ans.split())[:300] if isinstance(ans, str) else ''
+    return pid, ans
+
+
 # ---------------------------------------------------------------- one entry point
 _PLACES = []
 
@@ -337,13 +441,17 @@ def match(query, method='keyword'):
         return fuzzy_keyword_match(query, places)[:2]
     if method == 'hybrid':
         return hybrid_match(query, places, allow_call=True)[:2]
+    if method == 'gemini':
+        return gemini_match(query, places)
+    if method == 'hybrid_gemini':
+        return hybrid_gemini_match(query, places, allow_call=True)[:2]
     raise ValueError('unknown method ' + method)
 
 
 if __name__ == '__main__':
     import sys
     if len(sys.argv) < 2:
-        sys.exit('usage: python match.py "where can I eat" [keyword|embed|llm|fuzzy_keyword|hybrid|all]')
+        sys.exit('usage: python match.py "where can I eat" [keyword|embed|llm|fuzzy_keyword|hybrid|gemini|hybrid_gemini|all]')
     q = sys.argv[1]
     names = {d['place_id']: d['name'] for d in load_places()}
     for m in (METHODS if len(sys.argv) < 3 or sys.argv[2] == 'all' else sys.argv[2:]):

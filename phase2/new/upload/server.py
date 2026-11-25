@@ -20,6 +20,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 import live
+import search
 import walksense as ws
 
 HERE = Path(__file__).resolve().parent
@@ -68,6 +69,13 @@ class Handler(BaseHTTPRequestHandler):
         if path == '/api/state':
             with LOCK:
                 return self._send(200, self._state())
+        if path == '/api/search/places':
+            return self._send(200, search.place_options())
+        if path == '/api/search':
+            q = {k: v[0] for k, v in parse_qs(urlparse(self.path).query).items()}
+            with LOCK:
+                here = tracked_place()
+            return self._send(200, search.search(q.get('q', ''), q.get('from') or None, here))   # may call Gemini: outside LOCK
         self._send(404, {'error': 'not found'})
 
     def do_POST(self):
@@ -119,6 +127,20 @@ class Handler(BaseHTTPRequestHandler):
         sys.stderr.write(f'{self.address_string()} {fmt % args}\n')
 
 
+def tracked_place():
+    """(floor, map key) of the place that is lit right now: live tracker first, else the last uploaded stop."""
+    t = LIVE['tracker']
+    if t is not None:
+        with t.lock:
+            st = dict(t.state)
+        if st.get('mode') == 'stop' and st.get('lit'):
+            return st['floor'], st['lit']
+    for r in reversed(STATE['session'].history):
+        if r.get('kind') == 'stop':
+            return (r['floor'], r['lit']) if r.get('lit') else None
+    return None
+
+
 def _eval_summary():
     f = ws.out_file('eval')
     if not f.exists():
@@ -154,6 +176,9 @@ def main(argv):
         LIVE['tracker'] = live.LiveTracker(STATE['models'], a.device, a.floor)
         threading.Thread(target=live.run, args=(phone, LIVE['tracker'], LIVE['status'], threading.Event()), daemon=True).start()
         print(f'Live: reading {phone.base} as {a.device}; {LIVE["tracker"].model_note}. Each phyphox play..pause is saved to {live.RECORDINGS}')
+    g = search.gemini_status()
+    print(f"Search: Gemini {g['model']} (key from .env)" if g['configured'] else
+          'Search: no GEMINI_API_KEY in .env, so search answers offline (keyword, then fuzzy). See README.')
     srv = ThreadingHTTPServer(('0.0.0.0', port), Handler)
     print('Open one of these on the phone (same network):')
     for ip in lan_ips():
