@@ -30,7 +30,8 @@ LABELS = {}
 LIVE = {'tracker': None, 'status': {}}   # set by --live
 STATE = {'session': ws.Session(5), 'models': None}
 NAME_OK = re.compile(r'^[a-z0-9_]{0,40}$')
-STATIC = {'/map/floor5.png': 'image/png', '/map/floor4.png': 'image/png', '/map/places.json': 'application/json'}   # only these files
+STATIC = {'/map/floor5.png': 'image/png', '/map/floor4.png': 'image/png', '/map/places.json': 'application/json',
+          '/map/floorplan.json': 'application/json', '/map/floorplan.js': 'text/javascript; charset=utf-8'}   # only these files
 
 
 def places():

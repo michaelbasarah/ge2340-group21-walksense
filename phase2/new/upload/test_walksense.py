@@ -9,6 +9,7 @@ import urllib.request
 import zipfile
 from http.server import ThreadingHTTPServer
 
+import route
 import server
 import walksense as ws
 
@@ -95,6 +96,22 @@ class UploadTest(unittest.TestCase):
         with urllib.request.urlopen(self.url + '/map/floor5.png') as r:
             self.assertEqual(r.read(8), b'\x89PNG\r\n\x1a\n')
         for bad in ('/map/../server.py', '/map/make_map.py', '/walksense.py'):
+            with self.assertRaises(urllib.error.HTTPError):
+                urllib.request.urlopen(self.url + bad)
+
+    def test_floorplan_has_every_place_and_is_served(self):
+        with urllib.request.urlopen(self.url + '/map/floorplan.json') as r:
+            plan = json.loads(r.read())
+        with urllib.request.urlopen(self.url + '/map/floorplan.js') as r:
+            self.assertIn(b'window.FloorPlan', r.read())
+        for floor, names in server.places().items():
+            fl = plan['floors'][str(floor)]
+            self.assertEqual(set(names), set(fl['places']), floor)                    # every guess has a point in metres
+            edges = {frozenset((e['from'], e['to'])) for e in fl['edges']}
+            for a, nbrs in route.build().get(floor, {}).items():                      # every corridor the dot can walk
+                for b, _, _ in nbrs:
+                    self.assertIn(frozenset((a, b)), edges, (floor, a, b))
+        for bad in ('/map/make_floorplan.py', '/map/sketch_trace.json'):
             with self.assertRaises(urllib.error.HTTPError):
                 urllib.request.urlopen(self.url + bad)
 

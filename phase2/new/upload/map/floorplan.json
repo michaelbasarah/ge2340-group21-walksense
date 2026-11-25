@@ -1,0 +1,7150 @@
+{
+ "about": "WalkSense vector floor plan of CityU AC1 5F and 4F, built by map/make_floorplan.py. Internal team data: metres, x east, y north. Read the \"status\" of every point and edge before trusting it.",
+ "frame": {
+  "units": "m",
+  "x": "east",
+  "y": "north",
+  "north_deg": 0.0,
+  "origin": "centroid of the 11 Google pins in phase2/map/coordinates.csv (phase2/map/build_map.py)",
+  "north_source": "Google lat/long of 8 floor-5 places; the Google screenshot under the sketch is north-up (fitted rotation 1.1 deg)"
+ },
+ "sources": {
+  "sketch": "phase2/clean-data/2026-11-24/floor-sketch-v1.pdf",
+  "graph": "phase2/new/routing/graph.json",
+  "pins": "phase2/map/coordinates_meters.csv"
+ },
+ "fit": {
+  "m_per_screenshot_px": 0.0887,
+  "sketch_vs_pins_m": {
+   "canteen": 0.69,
+   "exit10_door": 0.17,
+   "exit5_door": 1.15,
+   "female_toilet": 0.05,
+   "male_toilet": 0.8,
+   "sr9": 0.99,
+   "y5202": 0.74,
+   "y5302": 0.71
+  },
+  "sketch_vs_pins_rms_m": 0.75,
+  "floor4_to_floor5_px": {
+   "scale": 0.9968,
+   "rot_deg": -0.08,
+   "shift_px": [
+    8.8,
+    3.2
+   ]
+  },
+  "weights": {
+   "pin_sigma_m": 0.25,
+   "sketch_sigma_m": 1.5,
+   "measured_sigma_m": 0.3,
+   "steps_sigma_m": "max(0.5, 15% of length)",
+   "guess_sigma_m": 4.0
+  },
+  "edge_residual_rms_m_5F": 1.04,
+  "edge_residual_rms_m_4F": 0.33
+ },
+ "floors": {
+  "5": {
+   "bounds": [
+    -30.15,
+    -25.84,
+    17.42,
+    21.31
+   ],
+   "places": {
+    "exit10_door": {
+     "graph_id": "exit_10",
+     "name": "Exit 10 (by the toilets)",
+     "short": "Exit 10",
+     "kind": "exit",
+     "x": 0.56,
+     "y": 15.31,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      0.72,
+      15.28
+     ],
+     "moved_by_fit_m": 0.17,
+     "pin_xy": [
+      0.56,
+      15.33
+     ],
+     "off_pin_m": 0.02
+    },
+    "lift_stairs5": {
+     "graph_id": "lift_stairs",
+     "name": "Lift and stairs (5F)",
+     "short": "Lift / stairs",
+     "kind": "lift_stairs",
+     "x": -21.54,
+     "y": -8.0,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -20.58,
+      -9.52
+     ],
+     "moved_by_fit_m": 1.8
+    },
+    "exit5_door": {
+     "graph_id": "exit_5",
+     "name": "Exit 5 (emergency exit)",
+     "short": "Exit 5",
+     "kind": "exit",
+     "x": -14.77,
+     "y": -1.37,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -15.92,
+      -1.35
+     ],
+     "moved_by_fit_m": 1.15,
+     "pin_xy": [
+      -14.77,
+      -1.38
+     ],
+     "off_pin_m": 0.01
+    },
+    "esca_down": {
+     "graph_id": "escalator_down",
+     "name": "Down escalator (5F)",
+     "short": "Esc. down",
+     "kind": "escalator",
+     "x": -6.8,
+     "y": 0.18,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -5.42,
+      2.42
+     ],
+     "moved_by_fit_m": 2.63
+    },
+    "y5202": {
+     "graph_id": "y5202",
+     "name": "Room Y5-202",
+     "short": "Y5-202",
+     "kind": "room",
+     "x": 11.42,
+     "y": 4.86,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      12.05,
+      5.21
+     ],
+     "moved_by_fit_m": 0.72,
+     "pin_xy": [
+      11.4,
+      4.85
+     ],
+     "off_pin_m": 0.02
+    },
+    "canteen": {
+     "graph_id": "canteen",
+     "name": "Canteen entrance",
+     "short": "Canteen",
+     "kind": "room",
+     "x": -7.88,
+     "y": 7.33,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -7.68,
+      6.63
+     ],
+     "moved_by_fit_m": 0.73,
+     "pin_xy": [
+      -7.86,
+      7.3
+     ],
+     "off_pin_m": 0.04
+    },
+    "male_toilet": {
+     "graph_id": "male_toilet",
+     "name": "Male toilet",
+     "short": "Male WC",
+     "kind": "toilet",
+     "x": -12.48,
+     "y": -4.17,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -11.71,
+      -4.3
+     ],
+     "moved_by_fit_m": 0.78,
+     "pin_xy": [
+      -12.5,
+      -4.17
+     ],
+     "off_pin_m": 0.02
+    },
+    "female_toilet": {
+     "graph_id": "female_toilet",
+     "name": "Female toilet",
+     "short": "Female WC",
+     "kind": "toilet",
+     "x": 3.98,
+     "y": 12.54,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      4.02,
+      12.57
+     ],
+     "moved_by_fit_m": 0.05,
+     "pin_xy": [
+      3.98,
+      12.54
+     ],
+     "off_pin_m": 0.0
+    },
+    "sr9": {
+     "graph_id": "sr9",
+     "name": "Study rooms (Y5-511 to Y5-514)",
+     "short": "Study rooms",
+     "kind": "room",
+     "x": 6.74,
+     "y": -4.45,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      5.77,
+      -4.7
+     ],
+     "moved_by_fit_m": 1.0,
+     "pin_xy": [
+      6.74,
+      -4.48
+     ],
+     "off_pin_m": 0.03
+    },
+    "y5302": {
+     "graph_id": "y5302",
+     "name": "Room Y5-302 (front door)",
+     "short": "Y5-302",
+     "kind": "room",
+     "x": -4.31,
+     "y": -12.38,
+     "status": "measured pin (Google lat/long), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -3.98,
+      -11.74
+     ],
+     "moved_by_fit_m": 0.73,
+     "pin_xy": [
+      -4.28,
+      -12.38
+     ],
+     "off_pin_m": 0.03
+    },
+    "y5302_point2": {
+     "graph_id": "y5302_back",
+     "name": "Room Y5-302 (back door)",
+     "short": "Y5-302 back",
+     "kind": "room",
+     "x": -11.44,
+     "y": -19.0,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -11.04,
+      -19.34
+     ],
+     "moved_by_fit_m": 0.53
+    },
+    "esca_up": {
+     "graph_id": "escalator_up",
+     "name": "Up escalator (5F)",
+     "short": "Esc. up",
+     "kind": "escalator",
+     "x": -0.52,
+     "y": 6.91,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -2.39,
+      5.72
+     ],
+     "moved_by_fit_m": 2.22
+    },
+    "y5401": {
+     "graph_id": "y5401",
+     "name": "Room Y5-401",
+     "short": "Y5-401",
+     "kind": "room",
+     "x": -16.17,
+     "y": -14.92,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -17.73,
+      -13.08
+     ],
+     "moved_by_fit_m": 2.42
+    },
+    "male_disabled_toilet": {
+     "graph_id": "disabled_toilet",
+     "name": "Male disabled toilet (5F)",
+     "short": "Disabled WC",
+     "kind": "toilet",
+     "x": -17.54,
+     "y": -2.89,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -17.33,
+      -2.86
+     ],
+     "moved_by_fit_m": 0.2
+    }
+   },
+   "bends": {
+    "b_y5302_sr9": [
+     2.77,
+     -8.85
+    ],
+    "b_sr9_y5202": [
+     9.57,
+     -0.96
+    ],
+    "b_exit5_lift": [
+     -22.39,
+     -8.09
+    ]
+   },
+   "edges": [
+    {
+     "from": "canteen",
+     "to": "exit5_door",
+     "via": [],
+     "points": [
+      [
+       -7.88,
+       7.33
+      ],
+      [
+       -14.77,
+       -1.37
+      ]
+     ],
+     "metres": 11.1,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv",
+     "walk": "ACC01",
+     "steps": 7.0,
+     "drawn_m": 11.1,
+     "residual_m": -0.0,
+     "sketch_mark_m": "11.9",
+     "note": ""
+    },
+    {
+     "from": "exit5_door",
+     "to": "male_toilet",
+     "via": [],
+     "points": [
+      [
+       -14.77,
+       -1.37
+      ],
+      [
+       -12.48,
+       -4.17
+      ]
+     ],
+     "metres": 3.6,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv",
+     "walk": "ACC02",
+     "steps": 8.0,
+     "drawn_m": 3.62,
+     "residual_m": 0.02,
+     "sketch_mark_m": "6",
+     "note": ""
+    },
+    {
+     "from": "male_toilet",
+     "to": "y5302",
+     "via": [],
+     "points": [
+      [
+       -12.48,
+       -4.17
+      ],
+      [
+       -4.31,
+       -12.38
+      ]
+     ],
+     "metres": 11.6,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv",
+     "walk": "ACC03",
+     "steps": 19.0,
+     "drawn_m": 11.58,
+     "residual_m": -0.02,
+     "sketch_mark_m": "10",
+     "note": ""
+    },
+    {
+     "from": "y5302",
+     "to": "sr9",
+     "via": [
+      "b_y5302_sr9"
+     ],
+     "points": [
+      [
+       -4.31,
+       -12.38
+      ],
+      [
+       2.77,
+       -8.85
+      ],
+      [
+       6.74,
+       -4.45
+      ]
+     ],
+     "metres": 13.9,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv (sum of measured legs y5302-sr11, sr11-sr10, sr10-sr9 (8.0 + 2.9 + 3.0))",
+     "walk": "ACC04",
+     "steps": 15.0,
+     "drawn_m": 13.84,
+     "residual_m": -0.06,
+     "sketch_mark_m": "11",
+     "note": ""
+    },
+    {
+     "from": "sr9",
+     "to": "y5202",
+     "via": [
+      "b_sr9_y5202"
+     ],
+     "points": [
+      [
+       6.74,
+       -4.45
+      ],
+      [
+       9.57,
+       -0.96
+      ],
+      [
+       11.42,
+       4.86
+      ]
+     ],
+     "metres": 10.6,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv (sum of measured legs sr9-sr8, sr8-y5202 (3.5 + 7.1))",
+     "walk": "ACC08",
+     "steps": 18.0,
+     "drawn_m": 10.6,
+     "residual_m": 0.0,
+     "sketch_mark_m": "11",
+     "note": ""
+    },
+    {
+     "from": "y5202",
+     "to": "female_toilet",
+     "via": [],
+     "points": [
+      [
+       11.42,
+       4.86
+      ],
+      [
+       3.98,
+       12.54
+      ]
+     ],
+     "metres": 10.7,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv",
+     "walk": "ACC09",
+     "steps": 19.0,
+     "drawn_m": 10.69,
+     "residual_m": -0.01,
+     "sketch_mark_m": "10",
+     "note": ""
+    },
+    {
+     "from": "female_toilet",
+     "to": "exit10_door",
+     "via": [],
+     "points": [
+      [
+       3.98,
+       12.54
+      ],
+      [
+       0.56,
+       15.31
+      ]
+     ],
+     "metres": 4.4,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv",
+     "walk": "ACC10",
+     "steps": 8.0,
+     "drawn_m": 4.4,
+     "residual_m": 0.0,
+     "sketch_mark_m": "6",
+     "note": ""
+    },
+    {
+     "from": "exit10_door",
+     "to": "esca_up",
+     "via": [],
+     "points": [
+      [
+       0.56,
+       15.31
+      ],
+      [
+       -0.52,
+       6.91
+      ]
+     ],
+     "metres": 4.9,
+     "source": "guess",
+     "source_detail": "GUESS: straight line between the schematic positions of the two nodes (no map distance, walk ACC11 has no usable step count)",
+     "walk": "ACC11",
+     "steps": null,
+     "drawn_m": 8.47,
+     "residual_m": 3.57,
+     "sketch_mark_m": null,
+     "note": "not drawn in the sketch: straight line (guess)"
+    },
+    {
+     "from": "esca_up",
+     "to": "esca_down",
+     "via": [],
+     "points": [
+      [
+       -0.52,
+       6.91
+      ],
+      [
+       -6.8,
+       0.18
+      ]
+     ],
+     "metres": 10.3,
+     "source": "steps",
+     "source_detail": "19 steps (23-Nov walk ACC12) x 0.54 m",
+     "walk": "ACC12",
+     "steps": 19.0,
+     "drawn_m": 9.2,
+     "residual_m": -1.1,
+     "sketch_mark_m": "3.9",
+     "note": ""
+    },
+    {
+     "from": "esca_down",
+     "to": "exit5_door",
+     "via": [],
+     "points": [
+      [
+       -6.8,
+       0.18
+      ],
+      [
+       -14.77,
+       -1.37
+      ]
+     ],
+     "metres": 7.6,
+     "source": "steps",
+     "source_detail": "14 steps (23-Nov walk ACC13) x 0.54 m",
+     "walk": "ACC13",
+     "steps": 14.0,
+     "drawn_m": 8.12,
+     "residual_m": 0.52,
+     "sketch_mark_m": null,
+     "note": "not drawn in the sketch: straight line across the open area"
+    },
+    {
+     "from": "exit10_door",
+     "to": "canteen",
+     "via": [],
+     "points": [
+      [
+       0.56,
+       15.31
+      ],
+      [
+       -7.88,
+       7.33
+      ]
+     ],
+     "metres": 11.6,
+     "source": "measured",
+     "source_detail": "phase2/map/edges_floor5.csv",
+     "walk": "ACC14",
+     "steps": 16.0,
+     "drawn_m": 11.62,
+     "residual_m": 0.02,
+     "sketch_mark_m": "11.9",
+     "note": ""
+    },
+    {
+     "from": "canteen",
+     "to": "esca_down",
+     "via": [],
+     "points": [
+      [
+       -7.88,
+       7.33
+      ],
+      [
+       -6.8,
+       0.18
+      ]
+     ],
+     "metres": 8.1,
+     "source": "steps",
+     "source_detail": "15 steps (23-Nov walk ACC15) x 0.54 m",
+     "walk": "ACC15",
+     "steps": 15.0,
+     "drawn_m": 7.23,
+     "residual_m": -0.87,
+     "sketch_mark_m": "4.9",
+     "note": ""
+    },
+    {
+     "from": "esca_up",
+     "to": "canteen",
+     "via": [],
+     "points": [
+      [
+       -0.52,
+       6.91
+      ],
+      [
+       -7.88,
+       7.33
+      ]
+     ],
+     "metres": 8.1,
+     "source": "steps",
+     "source_detail": "15 steps (23-Nov walk ACC16) x 0.54 m",
+     "walk": "ACC16",
+     "steps": 15.0,
+     "drawn_m": 7.37,
+     "residual_m": -0.73,
+     "sketch_mark_m": "4.9",
+     "note": ""
+    },
+    {
+     "from": "exit5_door",
+     "to": "male_disabled_toilet",
+     "via": [],
+     "points": [
+      [
+       -14.77,
+       -1.37
+      ],
+      [
+       -17.54,
+       -2.89
+      ]
+     ],
+     "metres": 3.2,
+     "source": "steps",
+     "source_detail": "6 steps (23-Nov walk ACC17) x 0.54 m",
+     "walk": "ACC17",
+     "steps": 6.0,
+     "drawn_m": 3.16,
+     "residual_m": -0.04,
+     "sketch_mark_m": "1 (handwriting, unclear)",
+     "note": ""
+    },
+    {
+     "from": "male_disabled_toilet",
+     "to": "lift_stairs5",
+     "via": [
+      "b_exit5_lift"
+     ],
+     "points": [
+      [
+       -17.54,
+       -2.89
+      ],
+      [
+       -22.39,
+       -8.09
+      ],
+      [
+       -21.54,
+       -8.0
+      ]
+     ],
+     "metres": 8.1,
+     "source": "steps",
+     "source_detail": "15 steps (23-Nov walk ACC18) x 0.54 m",
+     "walk": "ACC18",
+     "steps": 15.0,
+     "drawn_m": 7.97,
+     "residual_m": -0.13,
+     "sketch_mark_m": "7 + 3",
+     "note": ""
+    },
+    {
+     "from": "lift_stairs5",
+     "to": "y5401",
+     "via": [],
+     "points": [
+      [
+       -21.54,
+       -8.0
+      ],
+      [
+       -16.17,
+       -14.92
+      ]
+     ],
+     "metres": 10.3,
+     "source": "steps",
+     "source_detail": "19 steps (23-Nov walk ACC20) x 0.54 m",
+     "walk": "ACC20",
+     "steps": 19.0,
+     "drawn_m": 8.76,
+     "residual_m": -1.54,
+     "sketch_mark_m": "4",
+     "note": ""
+    },
+    {
+     "from": "y5401",
+     "to": "y5302_point2",
+     "via": [],
+     "points": [
+      [
+       -16.17,
+       -14.92
+      ],
+      [
+       -11.44,
+       -19.0
+      ]
+     ],
+     "metres": 5.9,
+     "source": "steps",
+     "source_detail": "11 steps (23-Nov walk ACC21) x 0.54 m",
+     "walk": "ACC21",
+     "steps": 11.0,
+     "drawn_m": 6.25,
+     "residual_m": 0.35,
+     "sketch_mark_m": "9",
+     "note": ""
+    },
+    {
+     "from": "y5302_point2",
+     "to": "lift_stairs5",
+     "via": [
+      "y5401"
+     ],
+     "points": [
+      [
+       -11.44,
+       -19.0
+      ],
+      [
+       -16.17,
+       -14.92
+      ],
+      [
+       -21.54,
+       -8.0
+      ]
+     ],
+     "metres": 16.2,
+     "source": "steps",
+     "source_detail": "30 steps (23-Nov walk ACC22) x 0.54 m",
+     "walk": "ACC22",
+     "steps": 30.0,
+     "drawn_m": 15.01,
+     "residual_m": -1.19,
+     "sketch_mark_m": null,
+     "note": "not drawn: same corridor as Y5-302 back -> Y5-401 -> lift"
+    }
+   ],
+   "links": [
+    {
+     "place": "lift_stairs5",
+     "to_floor": 4,
+     "to_place": "lift_stairs5",
+     "mode": "lift_stairs",
+     "one_way": false,
+     "direction": "both",
+     "leaves_here": true,
+     "seconds": 30.0,
+     "seconds_status": "measured_one_way",
+     "seconds_source": "timed walk ACC23 (5F -> 4F); same time assumed for 4F -> 5F (guess)"
+    },
+    {
+     "place": "esca_down",
+     "to_floor": 4,
+     "to_place": "esca_down",
+     "mode": "escalator",
+     "one_way": true,
+     "direction": "down",
+     "leaves_here": true,
+     "seconds": 20.0,
+     "seconds_status": "guess",
+     "seconds_source": "GUESS: 20 s ride (no escalator ride was timed)"
+    },
+    {
+     "place": "esca_up",
+     "to_floor": 4,
+     "to_place": "esca_up",
+     "mode": "escalator",
+     "one_way": true,
+     "direction": "up",
+     "leaves_here": false,
+     "seconds": 20.0,
+     "seconds_status": "guess",
+     "seconds_source": "GUESS: 20 s ride (no escalator ride was timed)"
+    }
+   ],
+   "rooms": [
+    {
+     "id": "canteen",
+     "place": "canteen",
+     "label": "Canteen (City Express)",
+     "kind": "room",
+     "note": "",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -30.15,
+        -9.11
+       ],
+       [
+        -26.81,
+        -11.6
+       ],
+       [
+        -9.29,
+        6.93
+       ],
+       [
+        -5.6,
+        10.87
+       ],
+       [
+        0.24,
+        17.13
+       ],
+       [
+        -2.03,
+        19.44
+       ],
+       [
+        -4.06,
+        21.31
+       ],
+       [
+        -30.15,
+        21.31
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "sr9",
+     "place": "sr9",
+     "label": "Study rooms Y5-511..514",
+     "kind": "room",
+     "note": "",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        8.85,
+        -3.37
+       ],
+       [
+        12.11,
+        -6.43
+       ],
+       [
+        14.05,
+        -4.43
+       ],
+       [
+        10.66,
+        -1.39
+       ]
+      ],
+      [
+       [
+        6.83,
+        -5.63
+       ],
+       [
+        10.12,
+        -8.62
+       ],
+       [
+        11.96,
+        -6.6
+       ],
+       [
+        8.66,
+        -3.55
+       ]
+      ],
+      [
+       [
+        4.74,
+        -7.8
+       ],
+       [
+        7.94,
+        -10.86
+       ],
+       [
+        9.89,
+        -8.76
+       ],
+       [
+        7.82,
+        -6.76
+       ],
+       [
+        6.69,
+        -5.77
+       ],
+       [
+        6.56,
+        -5.81
+       ]
+      ],
+      [
+       [
+        2.58,
+        -9.97
+       ],
+       [
+        5.94,
+        -13.04
+       ],
+       [
+        7.78,
+        -11.02
+       ],
+       [
+        4.69,
+        -8.02
+       ],
+       [
+        4.47,
+        -7.98
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "y5302",
+     "place": "y5302",
+     "label": "Y5-302",
+     "kind": "room",
+     "note": "",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -14.35,
+        -14.81
+       ],
+       [
+        -10.09,
+        -18.84
+       ],
+       [
+        -4.32,
+        -12.76
+       ],
+       [
+        -8.62,
+        -8.67
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "y5401",
+     "place": "y5401",
+     "label": "Y5-401",
+     "kind": "room",
+     "note": "",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -23.94,
+        -15.17
+       ],
+       [
+        -13.61,
+        -24.84
+       ],
+       [
+        -10.55,
+        -21.57
+       ],
+       [
+        -20.71,
+        -12.27
+       ],
+       [
+        -22.09,
+        -12.98
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "female_toilet",
+     "place": "female_toilet",
+     "label": "Female toilet",
+     "kind": "toilet",
+     "note": "",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        5.19,
+        15.36
+       ],
+       [
+        9.57,
+        11.08
+       ],
+       [
+        14.28,
+        16.07
+       ],
+       [
+        10.11,
+        20.02
+       ],
+       [
+        9.88,
+        20.06
+       ],
+       [
+        7.44,
+        17.8
+       ]
+      ],
+      [
+       [
+        2.07,
+        16.1
+       ],
+       [
+        3.92,
+        14.34
+       ],
+       [
+        6.46,
+        16.98
+       ],
+       [
+        4.61,
+        18.72
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "male_disabled_toilet",
+     "place": "male_disabled_toilet",
+     "label": "Male disabled toilet",
+     "kind": "toilet",
+     "note": "small toilet block next to the stop; matches the 4F wheelchair toilet above it",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -15.23,
+        -2.5
+       ],
+       [
+        -15.06,
+        -2.49
+       ],
+       [
+        -14.18,
+        -3.36
+       ],
+       [
+        -14.64,
+        -3.43
+       ],
+       [
+        -14.85,
+        -3.64
+       ],
+       [
+        -14.83,
+        -4.62
+       ],
+       [
+        -14.44,
+        -4.73
+       ],
+       [
+        -14.18,
+        -4.3
+       ],
+       [
+        -13.78,
+        -4.86
+       ],
+       [
+        -15.9,
+        -7.14
+       ],
+       [
+        -17.82,
+        -5.3
+       ],
+       [
+        -17.36,
+        -4.81
+       ],
+       [
+        -16.65,
+        -5.23
+       ],
+       [
+        -15.94,
+        -5.21
+       ],
+       [
+        -15.46,
+        -4.81
+       ],
+       [
+        -15.29,
+        -4.54
+       ],
+       [
+        -15.31,
+        -3.74
+       ],
+       [
+        -15.82,
+        -3.13
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "male_toilet",
+     "place": "male_toilet",
+     "label": "Male toilet",
+     "kind": "toilet",
+     "note": "Google labels this block \"Female Bathroom\"; the team stop here is the male toilet. Confirm on site.",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -18.87,
+        -10.55
+       ],
+       [
+        -14.52,
+        -14.65
+       ],
+       [
+        -9.89,
+        -9.76
+       ],
+       [
+        -14.18,
+        -5.58
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "esca",
+     "place": null,
+     "label": "Escalators",
+     "kind": "escalator",
+     "note": "two escalator strips",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -2.14,
+        4.58
+       ],
+       [
+        -0.84,
+        3.34
+       ],
+       [
+        0.13,
+        4.62
+       ],
+       [
+        -1.02,
+        5.75
+       ],
+       [
+        -1.2,
+        5.75
+       ]
+      ],
+      [
+       [
+        -4.06,
+        2.59
+       ],
+       [
+        -0.77,
+        -0.47
+       ],
+       [
+        3.38,
+        -4.31
+       ],
+       [
+        5.07,
+        -2.47
+       ],
+       [
+        -0.79,
+        3.1
+       ],
+       [
+        -2.24,
+        4.4
+       ],
+       [
+        -2.41,
+        4.4
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "lift_stairs5",
+     "place": "lift_stairs5",
+     "label": "Stairs",
+     "kind": "lift_stairs",
+     "note": "grey stair block by the stop (Google stairs icon); the lift is not shown on Google",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -29.15,
+        -16.77
+       ],
+       [
+        -28.29,
+        -17.77
+       ],
+       [
+        -26.79,
+        -17.74
+       ],
+       [
+        -22.25,
+        -12.92
+       ],
+       [
+        -22.11,
+        -10.79
+       ],
+       [
+        -23.35,
+        -9.57
+       ],
+       [
+        -23.53,
+        -9.57
+       ],
+       [
+        -29.08,
+        -15.44
+       ]
+      ]
+     ]
+    }
+   ],
+   "walkable": [
+    [
+     [
+      11.94,
+      21.31
+     ],
+     [
+      17.42,
+      16.07
+     ],
+     [
+      17.42,
+      -23.53
+     ],
+     [
+      16.32,
+      -24.7
+     ],
+     [
+      16.1,
+      -24.74
+     ],
+     [
+      15.29,
+      -24.06
+     ],
+     [
+      14.84,
+      -24.06
+     ],
+     [
+      13.93,
+      -25.01
+     ],
+     [
+      14.03,
+      -25.54
+     ],
+     [
+      14.35,
+      -25.84
+     ],
+     [
+      -5.82,
+      -25.84
+     ],
+     [
+      -5.84,
+      -25.74
+     ],
+     [
+      -19.83,
+      -12.7
+     ],
+     [
+      -20.59,
+      -12.22
+     ],
+     [
+      -20.95,
+      -12.25
+     ],
+     [
+      -21.47,
+      -12.76
+     ],
+     [
+      -21.85,
+      -12.73
+     ],
+     [
+      -21.7,
+      -12.38
+     ],
+     [
+      -21.36,
+      -12.28
+     ],
+     [
+      -21.37,
+      -11.48
+     ],
+     [
+      -23.8,
+      -8.69
+     ],
+     [
+      -7.54,
+      8.2
+     ],
+     [
+      -7.42,
+      8.59
+     ],
+     [
+      -6.5,
+      8.67
+     ],
+     [
+      -6.52,
+      9.73
+     ],
+     [
+      -7.29,
+      9.8
+     ],
+     [
+      -7.2,
+      11.07
+     ],
+     [
+      -6.28,
+      10.8
+     ],
+     [
+      -6.2,
+      10.06
+     ],
+     [
+      -5.58,
+      10.08
+     ],
+     [
+      -5.53,
+      10.55
+     ],
+     [
+      -5.15,
+      10.69
+     ],
+     [
+      5.08,
+      21.31
+     ]
+    ],
+    [
+     [
+      6.83,
+      21.31
+     ],
+     [
+      5.72,
+      20.16
+     ],
+     [
+      5.72,
+      19.72
+     ],
+     [
+      6.31,
+      19.07
+     ],
+     [
+      6.87,
+      19.03
+     ],
+     [
+      6.91,
+      18.5
+     ],
+     [
+      7.43,
+      17.98
+     ],
+     [
+      7.4,
+      17.75
+     ],
+     [
+      6.52,
+      17.13
+     ],
+     [
+      4.9,
+      18.67
+     ],
+     [
+      4.28,
+      18.66
+     ],
+     [
+      2.07,
+      16.37
+     ],
+     [
+      2.08,
+      15.75
+     ],
+     [
+      3.56,
+      14.41
+     ],
+     [
+      4.18,
+      14.42
+     ],
+     [
+      4.79,
+      15.04
+     ],
+     [
+      5.23,
+      15.05
+     ],
+     [
+      6.17,
+      14.14
+     ],
+     [
+      5.5,
+      13.24
+     ],
+     [
+      5.59,
+      12.53
+     ],
+     [
+      12.68,
+      5.8
+     ],
+     [
+      13.21,
+      5.81
+     ],
+     [
+      14.0,
+      6.61
+     ],
+     [
+      14.26,
+      6.53
+     ],
+     [
+      17.42,
+      3.6
+     ],
+     [
+      17.42,
+      13.38
+     ],
+     [
+      10.87,
+      19.55
+     ],
+     [
+      10.19,
+      20.1
+     ],
+     [
+      9.31,
+      20.19
+     ],
+     [
+      8.06,
+      21.31
+     ]
+    ],
+    [
+     [
+      -9.81,
+      11.09
+     ],
+     [
+      -9.06,
+      11.14
+     ],
+     [
+      -8.4,
+      10.67
+     ],
+     [
+      -8.43,
+      10.38
+     ],
+     [
+      -8.98,
+      10.3
+     ],
+     [
+      -8.99,
+      9.95
+     ],
+     [
+      -8.95,
+      9.75
+     ],
+     [
+      -8.41,
+      9.72
+     ],
+     [
+      -8.37,
+      9.52
+     ],
+     [
+      -9.19,
+      8.58
+     ],
+     [
+      -9.59,
+      8.61
+     ],
+     [
+      -10.58,
+      9.83
+     ],
+     [
+      -10.42,
+      10.63
+     ]
+    ],
+    [
+     [
+      -0.55,
+      6.69
+     ],
+     [
+      -5.77,
+      1.19
+     ],
+     [
+      -6.15,
+      0.69
+     ],
+     [
+      -6.14,
+      0.16
+     ],
+     [
+      0.9,
+      -6.54
+     ],
+     [
+      1.56,
+      -6.56
+     ],
+     [
+      7.13,
+      -0.7
+     ],
+     [
+      7.15,
+      0.05
+     ],
+     [
+      0.11,
+      6.66
+     ]
+    ],
+    [
+     [
+      11.78,
+      2.04
+     ],
+     [
+      10.79,
+      1.01
+     ],
+     [
+      10.8,
+      0.48
+     ],
+     [
+      11.32,
+      -0.22
+     ],
+     [
+      8.12,
+      -3.92
+     ],
+     [
+      1.81,
+      -10.55
+     ],
+     [
+      1.29,
+      -10.74
+     ],
+     [
+      0.74,
+      -10.23
+     ],
+     [
+      0.21,
+      -10.24
+     ],
+     [
+      -0.69,
+      -11.27
+     ],
+     [
+      -0.68,
+      -11.8
+     ],
+     [
+      1.03,
+      -13.45
+     ],
+     [
+      1.79,
+      -14.1
+     ],
+     [
+      2.5,
+      -14.1
+     ],
+     [
+      3.68,
+      -15.12
+     ],
+     [
+      4.21,
+      -15.11
+     ],
+     [
+      4.34,
+      -14.37
+     ],
+     [
+      4.9,
+      -14.3
+     ],
+     [
+      5.77,
+      -13.42
+     ],
+     [
+      6.35,
+      -13.71
+     ],
+     [
+      7.07,
+      -14.67
+     ],
+     [
+      5.45,
+      -16.39
+     ],
+     [
+      5.26,
+      -17.1
+     ],
+     [
+      7.03,
+      -18.88
+     ],
+     [
+      7.65,
+      -18.78
+     ],
+     [
+      17.42,
+      -8.27
+     ],
+     [
+      17.42,
+      -5.78
+     ],
+     [
+      17.31,
+      -5.78
+     ],
+     [
+      17.42,
+      -5.57
+     ],
+     [
+      17.42,
+      -3.58
+     ],
+     [
+      15.73,
+      -5.5
+     ],
+     [
+      15.29,
+      -5.42
+     ],
+     [
+      14.35,
+      -4.51
+     ],
+     [
+      14.34,
+      -4.24
+     ],
+     [
+      15.89,
+      -2.62
+     ],
+     [
+      15.88,
+      -2.0
+     ],
+     [
+      15.03,
+      -1.35
+     ],
+     [
+      14.59,
+      -1.37
+     ],
+     [
+      14.51,
+      -1.7
+     ],
+     [
+      13.42,
+      -1.78
+     ],
+     [
+      13.38,
+      -1.51
+     ],
+     [
+      13.05,
+      -1.34
+     ],
+     [
+      13.13,
+      -0.36
+     ],
+     [
+      13.33,
+      -0.33
+     ],
+     [
+      13.4,
+      -0.63
+     ],
+     [
+      13.74,
+      -0.71
+     ],
+     [
+      13.96,
+      -1.08
+     ],
+     [
+      14.5,
+      -1.09
+     ],
+     [
+      14.7,
+      -0.78
+     ],
+     [
+      14.68,
+      -0.16
+     ],
+     [
+      12.31,
+      2.05
+     ]
+    ],
+    [
+     [
+      -25.03,
+      0.78
+     ],
+     [
+      -20.04,
+      0.9
+     ],
+     [
+      -20.25,
+      -0.11
+     ],
+     [
+      -19.91,
+      -0.28
+     ],
+     [
+      -19.79,
+      -1.61
+     ],
+     [
+      -21.33,
+      -1.5
+     ],
+     [
+      -22.21,
+      -1.7
+     ],
+     [
+      -24.78,
+      -1.73
+     ],
+     [
+      -24.77,
+      -0.02
+     ],
+     [
+      -25.04,
+      0.33
+     ]
+    ],
+    [
+     [
+      -15.46,
+      -2.47
+     ],
+     [
+      -17.75,
+      -4.94
+     ],
+     [
+      -17.74,
+      -5.56
+     ],
+     [
+      -16.08,
+      -7.17
+     ],
+     [
+      -16.07,
+      -7.44
+     ],
+     [
+      -16.86,
+      -8.06
+     ],
+     [
+      -17.67,
+      -7.3
+     ],
+     [
+      -17.94,
+      -7.28
+     ],
+     [
+      -18.57,
+      -6.43
+     ],
+     [
+      -19.11,
+      -6.44
+     ],
+     [
+      -20.45,
+      -7.83
+     ],
+     [
+      -20.52,
+      -8.54
+     ],
+     [
+      -18.82,
+      -10.19
+     ],
+     [
+      -18.79,
+      -10.9
+     ],
+     [
+      -17.85,
+      -11.82
+     ],
+     [
+      -3.04,
+      -25.84
+     ],
+     [
+      9.29,
+      -25.84
+     ],
+     [
+      9.3,
+      -25.27
+     ],
+     [
+      4.13,
+      -20.46
+     ],
+     [
+      3.6,
+      -20.47
+     ],
+     [
+      2.82,
+      -21.26
+     ],
+     [
+      2.46,
+      -21.19
+     ],
+     [
+      -0.47,
+      -18.36
+     ],
+     [
+      -0.47,
+      -18.09
+     ],
+     [
+      0.21,
+      -17.37
+     ],
+     [
+      0.16,
+      -16.71
+     ],
+     [
+      -0.38,
+      -16.2
+     ],
+     [
+      -0.92,
+      -16.2
+     ],
+     [
+      -1.79,
+      -17.0
+     ],
+     [
+      -2.06,
+      -16.93
+     ],
+     [
+      -5.07,
+      -14.01
+     ],
+     [
+      -4.31,
+      -12.93
+     ],
+     [
+      -4.33,
+      -12.4
+     ],
+     [
+      -11.49,
+      -5.58
+     ],
+     [
+      -12.12,
+      -5.6
+     ],
+     [
+      -12.9,
+      -6.39
+     ],
+     [
+      -13.21,
+      -6.36
+     ],
+     [
+      -14.03,
+      -5.4
+     ],
+     [
+      -13.46,
+      -4.73
+     ],
+     [
+      -12.99,
+      -4.67
+     ],
+     [
+      -13.01,
+      -3.96
+     ],
+     [
+      -13.35,
+      -3.88
+     ],
+     [
+      -14.84,
+      -2.45
+     ]
+    ]
+   ],
+   "context": [
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -5.33,
+       10.89
+      ],
+      [
+       4.77,
+       21.31
+      ],
+      [
+       4.61,
+       21.31
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       12.14,
+       21.31
+      ],
+      [
+       15.82,
+       17.85
+      ],
+      [
+       17.42,
+       19.5
+      ],
+      [
+       17.42,
+       21.31
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       15.99,
+       17.69
+      ],
+      [
+       17.42,
+       16.34
+      ],
+      [
+       17.42,
+       19.19
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       8.76,
+       9.84
+      ],
+      [
+       12.95,
+       5.81
+      ],
+      [
+       17.42,
+       10.45
+      ],
+      [
+       17.42,
+       13.11
+      ],
+      [
+       16.25,
+       14.28
+      ],
+      [
+       14.49,
+       15.89
+      ],
+      [
+       14.31,
+       15.89
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       5.42,
+       12.88
+      ],
+      [
+       8.61,
+       9.98
+      ],
+      [
+       9.43,
+       11.01
+      ],
+      [
+       6.5,
+       13.83
+      ],
+      [
+       6.28,
+       13.87
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       14.24,
+       6.75
+      ],
+      [
+       17.42,
+       3.8
+      ],
+      [
+       17.42,
+       10.13
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -0.89,
+       5.89
+      ],
+      [
+       0.42,
+       4.63
+      ],
+      [
+       1.46,
+       3.63
+      ],
+      [
+       6.33,
+       -0.98
+      ],
+      [
+       6.56,
+       -1.02
+      ],
+      [
+       7.16,
+       -0.39
+      ],
+      [
+       7.12,
+       -0.17
+      ],
+      [
+       0.61,
+       6.01
+      ],
+      [
+       -0.33,
+       6.65
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       10.74,
+       -1.12
+      ],
+      [
+       11.49,
+       -1.74
+      ],
+      [
+       12.49,
+       -0.73
+      ],
+      [
+       13.62,
+       0.44
+      ],
+      [
+       12.02,
+       2.01
+      ],
+      [
+       10.79,
+       0.74
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -6.06,
+       0.34
+      ],
+      [
+       1.12,
+       -6.49
+      ],
+      [
+       1.34,
+       -6.53
+      ],
+      [
+       2.08,
+       -5.76
+      ],
+      [
+       2.08,
+       -5.58
+      ],
+      [
+       -5.01,
+       0.89
+      ],
+      [
+       -5.55,
+       1.15
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       13.72,
+       0.27
+      ],
+      [
+       14.71,
+       -0.42
+      ],
+      [
+       14.55,
+       -0.96
+      ],
+      [
+       15.97,
+       -2.26
+      ],
+      [
+       14.2,
+       -4.19
+      ],
+      [
+       13.71,
+       -3.9
+      ],
+      [
+       11.66,
+       -1.9
+      ],
+      [
+       12.59,
+       -0.91
+      ],
+      [
+       12.9,
+       -0.86
+      ],
+      [
+       13.05,
+       -1.34
+      ],
+      [
+       13.81,
+       -2.33
+      ],
+      [
+       14.17,
+       -2.33
+      ],
+      [
+       14.47,
+       -2.11
+      ],
+      [
+       14.54,
+       -1.67
+      ],
+      [
+       13.91,
+       -0.79
+      ],
+      [
+       13.31,
+       -0.63
+      ],
+      [
+       13.45,
+       -0.45
+      ],
+      [
+       13.38,
+       -0.09
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       15.72,
+       -5.73
+      ],
+      [
+       16.46,
+       -6.35
+      ],
+      [
+       17.42,
+       -5.52
+      ],
+      [
+       17.42,
+       -3.8
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       12.28,
+       -6.59
+      ],
+      [
+       15.73,
+       -9.82
+      ],
+      [
+       17.42,
+       -7.92
+      ],
+      [
+       17.42,
+       -7.58
+      ],
+      [
+       14.25,
+       -4.6
+      ],
+      [
+       14.08,
+       -4.6
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       16.71,
+       -6.59
+      ],
+      [
+       17.42,
+       -7.29
+      ],
+      [
+       17.42,
+       -6.65
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -12.84,
+       -6.62
+      ],
+      [
+       -9.74,
+       -9.52
+      ],
+      [
+       -8.76,
+       -8.49
+      ],
+      [
+       -11.88,
+       -5.54
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       10.26,
+       -8.84
+      ],
+      [
+       13.73,
+       -12.01
+      ],
+      [
+       15.57,
+       -9.99
+      ],
+      [
+       12.09,
+       -6.77
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -26.67,
+       -11.76
+      ],
+      [
+       -26.38,
+       -12.29
+      ],
+      [
+       -23.63,
+       -9.4
+      ],
+      [
+       -24.05,
+       -8.96
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       8.1,
+       -11.01
+      ],
+      [
+       11.64,
+       -14.26
+      ],
+      [
+       13.5,
+       -12.15
+      ],
+      [
+       10.1,
+       -8.94
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -0.67,
+       -11.54
+      ],
+      [
+       1.07,
+       -13.13
+      ],
+      [
+       3.19,
+       -10.93
+      ],
+      [
+       2.4,
+       -10.15
+      ],
+      [
+       0.48,
+       -10.24
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       2.71,
+       -11.74
+      ],
+      [
+       3.54,
+       -12.83
+      ],
+      [
+       4.9,
+       -14.11
+      ],
+      [
+       5.71,
+       -13.19
+      ],
+      [
+       3.3,
+       -11.02
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       6.09,
+       -13.27
+      ],
+      [
+       7.75,
+       -14.97
+      ],
+      [
+       9.55,
+       -16.43
+      ],
+      [
+       11.41,
+       -14.41
+      ],
+      [
+       7.92,
+       -11.2
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       2.53,
+       -11.92
+      ],
+      [
+       2.45,
+       -12.54
+      ],
+      [
+       2.68,
+       -12.62
+      ],
+      [
+       2.71,
+       -12.89
+      ],
+      [
+       2.93,
+       -13.1
+      ],
+      [
+       3.28,
+       -13.12
+      ],
+      [
+       3.38,
+       -13.54
+      ],
+      [
+       4.05,
+       -14.02
+      ],
+      [
+       4.28,
+       -14.4
+      ],
+      [
+       4.57,
+       -14.45
+      ],
+      [
+       3.94,
+       -15.19
+      ],
+      [
+       2.59,
+       -14.01
+      ],
+      [
+       2.06,
+       -14.09
+      ],
+      [
+       1.21,
+       -13.36
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       17.42,
+       -25.84
+      ],
+      [
+       14.65,
+       -25.84
+      ],
+      [
+       13.96,
+       -25.18
+      ],
+      [
+       15.02,
+       -24.08
+      ],
+      [
+       16.01,
+       -24.91
+      ],
+      [
+       16.37,
+       -24.91
+      ],
+      [
+       17.42,
+       -23.82
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -9.93,
+       -18.98
+      ],
+      [
+       -5.49,
+       -23.17
+      ],
+      [
+       0.27,
+       -17.11
+      ],
+      [
+       -0.74,
+       -16.2
+      ],
+      [
+       -5.24,
+       -14.1
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -26.97,
+       -17.97
+      ],
+      [
+       -17.08,
+       -25.84
+      ],
+      [
+       -12.81,
+       -25.84
+      ],
+      [
+       -24.11,
+       -15.26
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       5.2,
+       -16.92
+      ],
+      [
+       5.94,
+       -17.55
+      ],
+      [
+       7.08,
+       -16.84
+      ],
+      [
+       7.88,
+       -15.36
+      ],
+      [
+       7.19,
+       -14.76
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       6.28,
+       -17.88
+      ],
+      [
+       7.29,
+       -18.85
+      ],
+      [
+       9.33,
+       -16.67
+      ],
+      [
+       8.63,
+       -16.06
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -5.32,
+       -23.33
+      ],
+      [
+       -2.67,
+       -25.84
+      ],
+      [
+       0.7,
+       -25.84
+      ],
+      [
+       4.81,
+       -21.45
+      ],
+      [
+       3.86,
+       -20.46
+      ],
+      [
+       -0.52,
+       -18.49
+      ],
+      [
+       -0.74,
+       -18.45
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -13.45,
+       -24.9
+      ],
+      [
+       -12.45,
+       -25.84
+      ],
+      [
+       -6.01,
+       -25.84
+      ],
+      [
+       -10.42,
+       -21.74
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       1.0,
+       -25.84
+      ],
+      [
+       9.02,
+       -25.84
+      ],
+      [
+       9.3,
+       -25.54
+      ],
+      [
+       5.9,
+       -22.32
+      ],
+      [
+       4.91,
+       -21.63
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       7.11,
+       21.31
+      ],
+      [
+       7.74,
+       21.31
+      ],
+      [
+       9.42,
+       19.88
+      ],
+      [
+       7.57,
+       18.05
+      ],
+      [
+       7.01,
+       18.59
+      ],
+      [
+       7.83,
+       18.66
+      ],
+      [
+       8.38,
+       19.15
+      ],
+      [
+       8.45,
+       20.12
+      ],
+      [
+       8.06,
+       20.6
+      ],
+      [
+       7.7,
+       20.78
+      ],
+      [
+       6.81,
+       20.66
+      ],
+      [
+       6.34,
+       20.08
+      ],
+      [
+       6.31,
+       19.27
+      ],
+      [
+       5.73,
+       19.81
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       0.22,
+       2.41
+      ],
+      [
+       5.3,
+       -2.32
+      ],
+      [
+       6.29,
+       -1.2
+      ],
+      [
+       1.36,
+       3.4
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       -5.24,
+       1.46
+      ],
+      [
+       -5.24,
+       1.28
+      ],
+      [
+       1.76,
+       -5.1
+      ],
+      [
+       2.38,
+       -5.45
+      ],
+      [
+       3.16,
+       -4.54
+      ],
+      [
+       3.16,
+       -4.37
+      ],
+      [
+       -3.88,
+       2.24
+      ],
+      [
+       -4.33,
+       2.41
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       -20.53,
+       -8.27
+      ],
+      [
+       -18.6,
+       -10.05
+      ],
+      [
+       -16.93,
+       -8.21
+      ],
+      [
+       -18.86,
+       -6.38
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       4.7,
+       18.9
+      ],
+      [
+       6.61,
+       17.06
+      ],
+      [
+       7.5,
+       17.89
+      ],
+      [
+       5.48,
+       19.8
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       3.99,
+       14.19
+      ],
+      [
+       5.27,
+       13.02
+      ],
+      [
+       6.14,
+       13.92
+      ],
+      [
+       6.17,
+       14.14
+      ],
+      [
+       4.94,
+       15.18
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -0.46,
+       9.31
+      ],
+      [
+       1.65,
+       7.29
+      ],
+      [
+       5.5,
+       5.66
+      ],
+      [
+       6.75,
+       7.14
+      ],
+      [
+       2.07,
+       11.31
+      ],
+      [
+       1.62,
+       11.48
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       13.09,
+       5.58
+      ],
+      [
+       16.47,
+       2.5
+      ],
+      [
+       17.34,
+       3.4
+      ],
+      [
+       17.37,
+       3.62
+      ],
+      [
+       14.06,
+       6.66
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -10.87,
+       -1.88
+      ],
+      [
+       -8.87,
+       -3.73
+      ],
+      [
+       -7.01,
+       -3.69
+      ],
+      [
+       -6.48,
+       -3.59
+      ],
+      [
+       -6.68,
+       -1.54
+      ],
+      [
+       -8.63,
+       0.29
+      ],
+      [
+       -8.81,
+       0.29
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       9.74,
+       -0.25
+      ],
+      [
+       10.5,
+       -0.98
+      ],
+      [
+       11.33,
+       -0.13
+      ],
+      [
+       10.54,
+       0.65
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       14.9,
+       -0.6
+      ],
+      [
+       17.42,
+       -2.9
+      ],
+      [
+       17.42,
+       -3.58
+      ],
+      [
+       15.65,
+       -5.59
+      ],
+      [
+       15.33,
+       -5.47
+      ],
+      [
+       14.26,
+       -4.42
+      ],
+      [
+       16.07,
+       -2.44
+      ],
+      [
+       16.02,
+       -2.13
+      ],
+      [
+       14.65,
+       -0.87
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -14.11,
+       -5.4
+      ],
+      [
+       -13.07,
+       -6.48
+      ],
+      [
+       -11.92,
+       -5.36
+      ],
+      [
+       -12.95,
+       -4.14
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -7.98,
+       -4.67
+      ],
+      [
+       -6.07,
+       -6.51
+      ],
+      [
+       -4.82,
+       -5.14
+      ],
+      [
+       -5.57,
+       -4.5
+      ],
+      [
+       -6.58,
+       -4.46
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -18.7,
+       -6.29
+      ],
+      [
+       -16.77,
+       -8.13
+      ],
+      [
+       -15.97,
+       -7.3
+      ],
+      [
+       -17.84,
+       -5.47
+      ],
+      [
+       -18.02,
+       -5.48
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       0.62,
+       -10.0
+      ],
+      [
+       1.38,
+       -10.82
+      ],
+      [
+       2.35,
+       -9.97
+      ],
+      [
+       1.57,
+       -9.19
+      ],
+      [
+       1.39,
+       -9.19
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       13.65,
+       -14.37
+      ],
+      [
+       14.68,
+       -15.45
+      ],
+      [
+       16.89,
+       -13.24
+      ],
+      [
+       15.9,
+       -12.2
+      ],
+      [
+       15.73,
+       -12.2
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -5.15,
+       -13.93
+      ],
+      [
+       -1.88,
+       -17.07
+      ],
+      [
+       -0.8,
+       -15.88
+      ],
+      [
+       -4.04,
+       -12.84
+      ],
+      [
+       -4.22,
+       -12.84
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       5.81,
+       -13.36
+      ],
+      [
+       6.04,
+       -13.4
+      ],
+      [
+       7.14,
+       -14.58
+      ],
+      [
+       5.04,
+       -16.86
+      ],
+      [
+       2.21,
+       -14.32
+      ],
+      [
+       2.5,
+       -14.1
+      ],
+      [
+       3.81,
+       -15.26
+      ],
+      [
+       4.03,
+       -15.3
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -0.56,
+       -18.27
+      ],
+      [
+       2.73,
+       -21.35
+      ],
+      [
+       3.72,
+       -20.23
+      ],
+      [
+       0.61,
+       -17.23
+      ],
+      [
+       0.39,
+       -17.19
+      ]
+     ]
+    }
+   ],
+   "fit_cost": 7.778
+  },
+  "4": {
+   "bounds": [
+    -26.49,
+    -26.37,
+    26.8,
+    23.87
+   ],
+   "places": {
+    "lift_stairs5": {
+     "graph_id": "lift_stairs_4F",
+     "name": "Lift and stairs (4F)",
+     "short": "Lift / stairs",
+     "kind": "lift_stairs",
+     "x": -20.49,
+     "y": -9.76,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -20.47,
+      -9.77
+     ],
+     "moved_by_fit_m": 0.02,
+     "label_dx": 0.3,
+     "label_dy": -1.0
+    },
+    "gate": {
+     "graph_id": "entrance_exit",
+     "name": "Entrance gate (4F)",
+     "short": "Gate",
+     "kind": "exit",
+     "x": -6.57,
+     "y": 8.34,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -6.94,
+      7.92
+     ],
+     "moved_by_fit_m": 0.55
+    },
+    "exit5_door": {
+     "graph_id": "exit_5_4F",
+     "name": "Exit 5 (4F)",
+     "short": "Exit 5",
+     "kind": "exit",
+     "x": -15.58,
+     "y": -1.86,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -16.14,
+      -1.88
+     ],
+     "moved_by_fit_m": 0.56
+    },
+    "esca_down": {
+     "graph_id": "escalator_down_4F",
+     "name": "Down escalator (4F)",
+     "short": "Esc. down",
+     "kind": "escalator",
+     "x": 1.88,
+     "y": -7.06,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      2.46,
+      -6.35
+     ],
+     "moved_by_fit_m": 0.92
+    },
+    "lt2a": {
+     "graph_id": "lt2a",
+     "name": "LT2A",
+     "short": "LT2A",
+     "kind": "room",
+     "x": -11.21,
+     "y": -1.96,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      -10.81,
+      -1.99
+     ],
+     "moved_by_fit_m": 0.4
+    },
+    "lt1b": {
+     "graph_id": "lt1b",
+     "name": "LT1B",
+     "short": "LT1B",
+     "kind": "room",
+     "x": 12.8,
+     "y": 1.54,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      12.97,
+      1.49
+     ],
+     "moved_by_fit_m": 0.18
+    },
+    "exit10_door": {
+     "graph_id": "exit_10_4F",
+     "name": "Exit 10 (4F)",
+     "short": "Exit 10",
+     "kind": "exit",
+     "x": 0.47,
+     "y": 16.66,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      0.67,
+      16.32
+     ],
+     "moved_by_fit_m": 0.39
+    },
+    "esca_up": {
+     "graph_id": "escalator_up_4F",
+     "name": "Up escalator (4F)",
+     "short": "Esc. up",
+     "kind": "escalator",
+     "x": 7.49,
+     "y": -1.1,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      7.16,
+      -1.83
+     ],
+     "moved_by_fit_m": 0.8
+    },
+    "lt1a": {
+     "graph_id": "lt1a",
+     "name": "LT1A",
+     "short": "LT1A",
+     "kind": "room",
+     "x": 2.33,
+     "y": 11.22,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      2.09,
+      11.72
+     ],
+     "moved_by_fit_m": 0.55
+    },
+    "y4502": {
+     "graph_id": "y4502",
+     "name": "Room Y4-502",
+     "short": "Y4-502",
+     "kind": "room",
+     "x": 11.07,
+     "y": -9.8,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      10.84,
+      -9.48
+     ],
+     "moved_by_fit_m": 0.39
+    },
+    "lt2b": {
+     "graph_id": "lt2b",
+     "name": "LT2B",
+     "short": "LT2B",
+     "kind": "room",
+     "x": 0.45,
+     "y": -12.37,
+     "status": "sketch dot (Google screenshot scale), adjusted by the fit",
+     "inferred": false,
+     "sketch_xy": [
+      0.34,
+      -12.69
+     ],
+     "moved_by_fit_m": 0.34
+    },
+    "disabled_toilet": {
+     "graph_id": "disabled_toilet_4F",
+     "name": "Mixed disabled toilet (4F)",
+     "short": "Disabled WC",
+     "kind": "toilet",
+     "x": -18.06,
+     "y": -3.78,
+     "status": "inferred: no dot on the sketch; 5F offset from Exit 5, at Google's wheelchair toilet",
+     "inferred": true,
+     "sketch_xy": [
+      -17.56,
+      -3.39
+     ],
+     "moved_by_fit_m": 0.63,
+     "label_dx": 0.2,
+     "label_dy": -1.0
+    }
+   },
+   "bends": {
+    "b_exit5_lift": [
+     -22.01,
+     -8.34
+    ]
+   },
+   "edges": [
+    {
+     "from": "lift_stairs5",
+     "to": "disabled_toilet",
+     "via": [
+      "b_exit5_lift"
+     ],
+     "points": [
+      [
+       -20.49,
+       -9.76
+      ],
+      [
+       -22.01,
+       -8.34
+      ],
+      [
+       -18.06,
+       -3.78
+      ]
+     ],
+     "metres": 8.1,
+     "source": "steps",
+     "source_detail": "15 steps (23-Nov walk ACC25) x 0.54 m",
+     "walk": "ACC25",
+     "steps": 15.0,
+     "drawn_m": 8.11,
+     "residual_m": 0.01,
+     "sketch_mark_m": "9.1 + 1.? (whole Exit 5 -> lift line; handwriting)",
+     "note": ""
+    },
+    {
+     "from": "disabled_toilet",
+     "to": "exit5_door",
+     "via": [],
+     "points": [
+      [
+       -18.06,
+       -3.78
+      ],
+      [
+       -15.58,
+       -1.86
+      ]
+     ],
+     "metres": 3.2,
+     "source": "steps",
+     "source_detail": "6 steps (23-Nov walk ACC26) x 0.54 m",
+     "walk": "ACC26",
+     "steps": 6.0,
+     "drawn_m": 3.14,
+     "residual_m": -0.06,
+     "sketch_mark_m": null,
+     "note": ""
+    },
+    {
+     "from": "exit5_door",
+     "to": "lt2a",
+     "via": [],
+     "points": [
+      [
+       -15.58,
+       -1.86
+      ],
+      [
+       -11.21,
+       -1.96
+      ]
+     ],
+     "metres": 4.3,
+     "source": "steps",
+     "source_detail": "8 steps (23-Nov walk ACC27) x 0.54 m",
+     "walk": "ACC27",
+     "steps": 8.0,
+     "drawn_m": 4.37,
+     "residual_m": 0.07,
+     "sketch_mark_m": "4.7",
+     "note": ""
+    },
+    {
+     "from": "lt2a",
+     "to": "lt2b",
+     "via": [],
+     "points": [
+      [
+       -11.21,
+       -1.96
+      ],
+      [
+       0.45,
+       -12.37
+      ]
+     ],
+     "metres": 15.7,
+     "source": "steps",
+     "source_detail": "29 steps (23-Nov walk ACC28) x 0.54 m",
+     "walk": "ACC28",
+     "steps": 29.0,
+     "drawn_m": 15.63,
+     "residual_m": -0.07,
+     "sketch_mark_m": "15",
+     "note": ""
+    },
+    {
+     "from": "lt2b",
+     "to": "esca_down",
+     "via": [],
+     "points": [
+      [
+       0.45,
+       -12.37
+      ],
+      [
+       1.88,
+       -7.06
+      ]
+     ],
+     "metres": 5.4,
+     "source": "steps",
+     "source_detail": "10 steps (23-Nov walk ACC29) x 0.54 m",
+     "walk": "ACC29",
+     "steps": 10.0,
+     "drawn_m": 5.5,
+     "residual_m": 0.1,
+     "sketch_mark_m": null,
+     "note": ""
+    },
+    {
+     "from": "esca_down",
+     "to": "y4502",
+     "via": [],
+     "points": [
+      [
+       1.88,
+       -7.06
+      ],
+      [
+       11.07,
+       -9.8
+      ]
+     ],
+     "metres": 9.7,
+     "source": "steps",
+     "source_detail": "18 steps (23-Nov walk ACC30) x 0.54 m",
+     "walk": "ACC30",
+     "steps": 18.0,
+     "drawn_m": 9.59,
+     "residual_m": -0.11,
+     "sketch_mark_m": "9.38",
+     "note": ""
+    },
+    {
+     "from": "y4502",
+     "to": "esca_up",
+     "via": [],
+     "points": [
+      [
+       11.07,
+       -9.8
+      ],
+      [
+       7.49,
+       -1.1
+      ]
+     ],
+     "metres": 9.7,
+     "source": "steps",
+     "source_detail": "18 steps (23-Nov walk ACC31) x 0.54 m",
+     "walk": "ACC31",
+     "steps": 18.0,
+     "drawn_m": 9.41,
+     "residual_m": -0.29,
+     "sketch_mark_m": "9.38",
+     "note": ""
+    },
+    {
+     "from": "esca_up",
+     "to": "lt1b",
+     "via": [],
+     "points": [
+      [
+       7.49,
+       -1.1
+      ],
+      [
+       12.8,
+       1.54
+      ]
+     ],
+     "metres": 5.9,
+     "source": "steps",
+     "source_detail": "11 steps (23-Nov walk ACC32) x 0.54 m",
+     "walk": "ACC32",
+     "steps": 11.0,
+     "drawn_m": 5.93,
+     "residual_m": 0.03,
+     "sketch_mark_m": "6.76",
+     "note": ""
+    },
+    {
+     "from": "lt1b",
+     "to": "lt1a",
+     "via": [],
+     "points": [
+      [
+       12.8,
+       1.54
+      ],
+      [
+       2.33,
+       11.22
+      ]
+     ],
+     "metres": 14.0,
+     "source": "steps",
+     "source_detail": "26 steps (23-Nov walk ACC33) x 0.54 m",
+     "walk": "ACC33",
+     "steps": 26.0,
+     "drawn_m": 14.26,
+     "residual_m": 0.26,
+     "sketch_mark_m": "15",
+     "note": ""
+    },
+    {
+     "from": "lt1a",
+     "to": "exit10_door",
+     "via": [],
+     "points": [
+      [
+       2.33,
+       11.22
+      ],
+      [
+       0.47,
+       16.66
+      ]
+     ],
+     "metres": 5.9,
+     "source": "steps",
+     "source_detail": "11 steps (23-Nov walk ACC34) x 0.54 m",
+     "walk": "ACC34",
+     "steps": 11.0,
+     "drawn_m": 5.75,
+     "residual_m": -0.15,
+     "sketch_mark_m": "4.77",
+     "note": ""
+    },
+    {
+     "from": "exit10_door",
+     "to": "gate",
+     "via": [],
+     "points": [
+      [
+       0.47,
+       16.66
+      ],
+      [
+       -6.57,
+       8.34
+      ]
+     ],
+     "metres": 10.8,
+     "source": "steps",
+     "source_detail": "20 steps (23-Nov walk ACC35) x 0.54 m",
+     "walk": "ACC35",
+     "steps": 20.0,
+     "drawn_m": 10.9,
+     "residual_m": 0.1,
+     "sketch_mark_m": "11.43",
+     "note": ""
+    },
+    {
+     "from": "gate",
+     "to": "exit5_door",
+     "via": [],
+     "points": [
+      [
+       -6.57,
+       8.34
+      ],
+      [
+       -15.58,
+       -1.86
+      ]
+     ],
+     "metres": 14.6,
+     "source": "steps",
+     "source_detail": "27 steps (23-Nov walk ACC36) x 0.54 m",
+     "walk": "ACC36",
+     "steps": 27.0,
+     "drawn_m": 13.61,
+     "residual_m": -0.99,
+     "sketch_mark_m": "11.43",
+     "note": ""
+    },
+    {
+     "from": "esca_down",
+     "to": "esca_up",
+     "via": [],
+     "points": [
+      [
+       1.88,
+       -7.06
+      ],
+      [
+       7.49,
+       -1.1
+      ]
+     ],
+     "metres": 8.6,
+     "source": "steps",
+     "source_detail": "16 steps (23-Nov walk ACC37) x 0.54 m",
+     "walk": "ACC37",
+     "steps": 16.0,
+     "drawn_m": 8.18,
+     "residual_m": -0.42,
+     "sketch_mark_m": "6.34",
+     "note": ""
+    }
+   ],
+   "links": [
+    {
+     "place": "lift_stairs5",
+     "to_floor": 5,
+     "to_place": "lift_stairs5",
+     "mode": "lift_stairs",
+     "one_way": false,
+     "direction": "both",
+     "leaves_here": true,
+     "seconds": 30.0,
+     "seconds_status": "measured_one_way",
+     "seconds_source": "timed walk ACC23 (5F -> 4F); same time assumed for 4F -> 5F (guess)"
+    },
+    {
+     "place": "esca_down",
+     "to_floor": 5,
+     "to_place": "esca_down",
+     "mode": "escalator",
+     "one_way": true,
+     "direction": "down",
+     "leaves_here": false,
+     "seconds": 20.0,
+     "seconds_status": "guess",
+     "seconds_source": "GUESS: 20 s ride (no escalator ride was timed)"
+    },
+    {
+     "place": "esca_up",
+     "to_floor": 5,
+     "to_place": "esca_up",
+     "mode": "escalator",
+     "one_way": true,
+     "direction": "up",
+     "leaves_here": true,
+     "seconds": 20.0,
+     "seconds_status": "guess",
+     "seconds_source": "GUESS: 20 s ride (no escalator ride was timed)"
+    }
+   ],
+   "rooms": [
+    {
+     "id": "lt1a",
+     "place": "lt1a",
+     "label": "LT1A",
+     "kind": "room",
+     "note": "nearest Google room: Tin Ka Ping Lecture Theatre (confirm the LT name)",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        6.46,
+        12.03
+       ],
+       [
+        12.81,
+        5.86
+       ],
+       [
+        16.36,
+        7.46
+       ],
+       [
+        24.3,
+        15.84
+       ],
+       [
+        24.63,
+        17.44
+       ],
+       [
+        18.01,
+        22.87
+       ],
+       [
+        12.21,
+        20.28
+       ],
+       [
+        7.89,
+        15.59
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "lt1b",
+     "place": "lt1b",
+     "label": "LT1B",
+     "kind": "room",
+     "note": "nearest Google room: CY Sun Lecture Theatre (confirm the LT name)",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        23.24,
+        0.7
+       ],
+       [
+        26.51,
+        -2.64
+       ],
+       [
+        26.8,
+        -2.84
+       ],
+       [
+        26.8,
+        5.66
+       ],
+       [
+        26.26,
+        5.31
+       ],
+       [
+        24.05,
+        3.1
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "lt2a",
+     "place": "lt2a",
+     "label": "LT2A",
+     "kind": "room",
+     "note": "nearest Google room: Mr and Mrs Sze Chi Ching Lecture Theatre (confirm)",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -20.93,
+        -19.03
+       ],
+       [
+        -16.12,
+        -23.56
+       ],
+       [
+        -10.21,
+        -20.85
+       ],
+       [
+        -5.8,
+        -16.34
+       ],
+       [
+        -4.39,
+        -12.6
+       ],
+       [
+        -9.55,
+        -7.62
+       ],
+       [
+        -10.72,
+        -6.59
+       ],
+       [
+        -10.85,
+        -6.63
+       ],
+       [
+        -14.48,
+        -8.42
+       ],
+       [
+        -19.45,
+        -13.96
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "y4502",
+     "place": "y4502",
+     "label": "Y4-502",
+     "kind": "room",
+     "note": "nearest Google room: Photo Copying Centre; Y4-502 is not named on Google (inferred)",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        13.16,
+        -8.26
+       ],
+       [
+        16.36,
+        -11.2
+       ],
+       [
+        15.22,
+        -12.41
+       ],
+       [
+        14.42,
+        -12.45
+       ],
+       [
+        14.28,
+        -12.92
+       ],
+       [
+        13.91,
+        -13.14
+       ],
+       [
+        13.69,
+        -13.02
+       ],
+       [
+        14.19,
+        -12.31
+       ],
+       [
+        13.88,
+        -11.84
+       ],
+       [
+        13.26,
+        -11.85
+       ],
+       [
+        12.92,
+        -12.46
+       ],
+       [
+        12.48,
+        -12.66
+       ],
+       [
+        12.22,
+        -13.08
+       ],
+       [
+        11.66,
+        -13.51
+       ],
+       [
+        11.59,
+        -13.86
+       ],
+       [
+        11.87,
+        -14.21
+       ],
+       [
+        12.53,
+        -14.37
+       ],
+       [
+        12.13,
+        -14.82
+       ],
+       [
+        12.14,
+        -15.09
+       ],
+       [
+        12.47,
+        -15.44
+       ],
+       [
+        10.54,
+        -17.44
+       ],
+       [
+        8.44,
+        -15.52
+       ],
+       [
+        8.39,
+        -13.4
+       ],
+       [
+        8.51,
+        -13.29
+       ],
+       [
+        9.06,
+        -13.86
+       ],
+       [
+        9.32,
+        -13.85
+       ],
+       [
+        9.36,
+        -13.46
+       ],
+       [
+        9.84,
+        -13.32
+       ],
+       [
+        10.92,
+        -12.2
+       ],
+       [
+        10.96,
+        -11.81
+       ],
+       [
+        11.31,
+        -11.78
+       ],
+       [
+        11.92,
+        -11.09
+       ],
+       [
+        12.18,
+        -11.05
+       ],
+       [
+        12.27,
+        -10.8
+       ],
+       [
+        12.55,
+        -10.66
+       ],
+       [
+        12.58,
+        -10.39
+       ],
+       [
+        13.09,
+        -9.85
+       ],
+       [
+        13.52,
+        -9.67
+       ],
+       [
+        13.6,
+        -9.31
+       ],
+       [
+        13.2,
+        -8.93
+       ],
+       [
+        12.85,
+        -8.95
+       ],
+       [
+        12.33,
+        -9.55
+       ],
+       [
+        12.05,
+        -9.52
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "lt2b",
+     "place": "lt2b",
+     "label": "LT2B",
+     "kind": "room",
+     "note": "nearest Google room: Mr & Mrs David TF Chow Lecture Theatre (confirm)",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -3.0,
+        -26.37
+       ],
+       [
+        5.34,
+        -26.37
+       ],
+       [
+        5.24,
+        -26.24
+       ],
+       [
+        2.99,
+        -24.07
+       ],
+       [
+        1.16,
+        -22.65
+       ],
+       [
+        -0.73,
+        -23.71
+       ],
+       [
+        -2.29,
+        -25.33
+       ],
+       [
+        -2.89,
+        -26.16
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "disabled_toilet",
+     "place": "disabled_toilet",
+     "label": "Mixed disabled toilet",
+     "kind": "toilet",
+     "note": "Google: Wheelchair Accessible Bathroom",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -15.27,
+        -2.47
+       ],
+       [
+        -14.92,
+        -2.64
+       ],
+       [
+        -14.62,
+        -3.87
+       ],
+       [
+        -13.52,
+        -3.83
+       ],
+       [
+        -13.23,
+        -4.2
+       ],
+       [
+        -13.5,
+        -4.59
+       ],
+       [
+        -13.94,
+        -4.76
+       ],
+       [
+        -14.12,
+        -4.37
+       ],
+       [
+        -14.57,
+        -4.45
+       ],
+       [
+        -14.86,
+        -5.29
+       ],
+       [
+        -14.84,
+        -5.56
+       ],
+       [
+        -14.61,
+        -5.73
+       ],
+       [
+        -15.84,
+        -7.1
+       ],
+       [
+        -17.84,
+        -5.18
+       ],
+       [
+        -17.39,
+        -4.71
+       ],
+       [
+        -16.67,
+        -5.2
+       ],
+       [
+        -15.96,
+        -5.17
+       ],
+       [
+        -15.49,
+        -4.78
+       ],
+       [
+        -15.32,
+        -4.51
+       ],
+       [
+        -15.34,
+        -3.71
+       ],
+       [
+        -15.85,
+        -3.1
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "esca",
+     "place": null,
+     "label": "Escalators",
+     "kind": "escalator",
+     "note": "escalator strips",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -5.49,
+        3.92
+       ],
+       [
+        0.5,
+        -1.55
+       ],
+       [
+        1.09,
+        1.13
+       ],
+       [
+        -2.28,
+        4.38
+       ],
+       [
+        -3.76,
+        5.72
+       ],
+       [
+        -3.94,
+        5.72
+       ]
+      ],
+      [
+       [
+        0.75,
+        1.74
+       ],
+       [
+        5.65,
+        -2.77
+       ],
+       [
+        6.55,
+        -1.67
+       ],
+       [
+        2.41,
+        2.22
+       ],
+       [
+        1.51,
+        2.82
+       ]
+      ],
+      [
+       [
+        -0.55,
+        -2.97
+       ],
+       [
+        2.62,
+        -6.02
+       ],
+       [
+        3.67,
+        -4.83
+       ],
+       [
+        0.55,
+        -1.89
+       ],
+       [
+        0.37,
+        -1.89
+       ]
+      ]
+     ]
+    },
+    {
+     "id": "lift_stairs5",
+     "place": "lift_stairs5",
+     "label": "Stairs",
+     "kind": "lift_stairs",
+     "note": "grey stair block by the stop (Google stairs icon); the lift is not shown on Google",
+     "source": "traced from the Google indoor map under the sketch",
+     "polys": [
+      [
+       [
+        -14.21,
+        -5.55
+       ],
+       [
+        -13.48,
+        -5.66
+       ],
+       [
+        -13.04,
+        -5.49
+       ],
+       [
+        -12.68,
+        -5.65
+       ],
+       [
+        -12.33,
+        -5.49
+       ],
+       [
+        -11.71,
+        -5.64
+       ],
+       [
+        -10.95,
+        -6.36
+       ],
+       [
+        -11.04,
+        -6.63
+       ],
+       [
+        -12.19,
+        -8.19
+       ],
+       [
+        -13.35,
+        -7.87
+       ],
+       [
+        -13.78,
+        -8.39
+       ],
+       [
+        -14.62,
+        -8.29
+       ],
+       [
+        -19.51,
+        -13.66
+       ],
+       [
+        -19.84,
+        -14.7
+       ],
+       [
+        -20.56,
+        -14.04
+       ],
+       [
+        -21.35,
+        -14.06
+       ],
+       [
+        -21.62,
+        -14.23
+       ],
+       [
+        -21.99,
+        -14.72
+       ],
+       [
+        -21.98,
+        -15.52
+       ],
+       [
+        -21.31,
+        -16.16
+       ],
+       [
+        -20.34,
+        -16.08
+       ],
+       [
+        -20.38,
+        -16.63
+       ],
+       [
+        -21.17,
+        -18.9
+       ],
+       [
+        -22.68,
+        -18.29
+       ],
+       [
+        -22.24,
+        -16.67
+       ],
+       [
+        -23.37,
+        -15.55
+       ],
+       [
+        -17.21,
+        -8.92
+       ],
+       [
+        -15.95,
+        -7.26
+       ],
+       [
+        -15.7,
+        -7.17
+       ]
+      ]
+     ]
+    }
+   ],
+   "walkable": [
+    [
+     [
+      4.4,
+      23.87
+     ],
+     [
+      9.13,
+      23.87
+     ],
+     [
+      9.13,
+      23.84
+     ],
+     [
+      9.8,
+      23.2
+     ],
+     [
+      10.42,
+      23.21
+     ],
+     [
+      10.94,
+      23.83
+     ],
+     [
+      12.01,
+      23.69
+     ],
+     [
+      12.18,
+      23.87
+     ],
+     [
+      13.24,
+      23.87
+     ],
+     [
+      9.52,
+      20.01
+     ],
+     [
+      9.12,
+      20.13
+     ],
+     [
+      7.54,
+      21.63
+     ],
+     [
+      6.92,
+      21.62
+     ],
+     [
+      5.59,
+      20.23
+     ],
+     [
+      5.59,
+      19.79
+     ],
+     [
+      7.38,
+      17.97
+     ],
+     [
+      7.31,
+      17.62
+     ],
+     [
+      6.75,
+      17.04
+     ],
+     [
+      6.48,
+      17.03
+     ],
+     [
+      4.77,
+      18.65
+     ],
+     [
+      4.15,
+      18.65
+     ],
+     [
+      1.86,
+      16.27
+     ],
+     [
+      1.88,
+      15.65
+     ],
+     [
+      3.67,
+      14.0
+     ],
+     [
+      2.04,
+      12.03
+     ],
+     [
+      2.04,
+      11.5
+     ],
+     [
+      3.67,
+      9.76
+     ],
+     [
+      4.24,
+      9.73
+     ],
+     [
+      6.19,
+      11.76
+     ],
+     [
+      6.5,
+      11.72
+     ],
+     [
+      12.67,
+      5.79
+     ],
+     [
+      10.78,
+      3.54
+     ],
+     [
+      10.8,
+      3.01
+     ],
+     [
+      12.55,
+      1.42
+     ],
+     [
+      13.25,
+      1.51
+     ],
+     [
+      21.0,
+      9.67
+     ],
+     [
+      21.17,
+      10.12
+     ],
+     [
+      25.46,
+      14.4
+     ],
+     [
+      25.94,
+      14.37
+     ],
+     [
+      26.8,
+      13.58
+     ],
+     [
+      26.8,
+      -26.37
+     ],
+     [
+      10.52,
+      -26.37
+     ],
+     [
+      11.37,
+      -25.45
+     ],
+     [
+      11.35,
+      -24.92
+     ],
+     [
+      9.78,
+      -23.4
+     ],
+     [
+      9.16,
+      -23.35
+     ],
+     [
+      8.52,
+      -24.09
+     ],
+     [
+      8.53,
+      -24.62
+     ],
+     [
+      8.79,
+      -24.97
+     ],
+     [
+      7.45,
+      -26.37
+     ],
+     [
+      5.41,
+      -26.37
+     ],
+     [
+      2.4,
+      -23.42
+     ],
+     [
+      2.32,
+      -23.07
+     ],
+     [
+      3.95,
+      -21.44
+     ],
+     [
+      4.43,
+      -21.05
+     ],
+     [
+      5.31,
+      -21.01
+     ],
+     [
+      5.95,
+      -20.34
+     ],
+     [
+      5.94,
+      -19.81
+     ],
+     [
+      4.19,
+      -18.21
+     ],
+     [
+      3.71,
+      -18.27
+     ],
+     [
+      1.76,
+      -20.29
+     ],
+     [
+      1.5,
+      -20.28
+     ],
+     [
+      1.4,
+      -19.97
+     ],
+     [
+      1.05,
+      -19.94
+     ],
+     [
+      0.77,
+      -19.44
+     ],
+     [
+      0.15,
+      -19.45
+     ],
+     [
+      -6.42,
+      -26.37
+     ],
+     [
+      -12.01,
+      -26.37
+     ],
+     [
+      -12.22,
+      -25.93
+     ],
+     [
+      0.06,
+      -12.86
+     ],
+     [
+      0.14,
+      -12.33
+     ],
+     [
+      -1.98,
+      -10.47
+     ],
+     [
+      -2.42,
+      -10.49
+     ],
+     [
+      -4.1,
+      -12.32
+     ],
+     [
+      -4.41,
+      -12.37
+     ],
+     [
+      -10.54,
+      -6.58
+     ],
+     [
+      -10.39,
+      -5.53
+     ],
+     [
+      -11.36,
+      -5.51
+     ],
+     [
+      -11.54,
+      -5.27
+     ],
+     [
+      -12.07,
+      -5.3
+     ],
+     [
+      -12.24,
+      -5.55
+     ],
+     [
+      -13.33,
+      -5.44
+     ],
+     [
+      -13.32,
+      -4.71
+     ],
+     [
+      -13.06,
+      -4.7
+     ],
+     [
+      -12.96,
+      -4.93
+     ],
+     [
+      -12.26,
+      -4.93
+     ],
+     [
+      -12.0,
+      -4.57
+     ],
+     [
+      -9.0,
+      -4.4
+     ],
+     [
+      -8.98,
+      -3.85
+     ],
+     [
+      -9.39,
+      -3.77
+     ],
+     [
+      -9.56,
+      -2.94
+     ],
+     [
+      -10.11,
+      -2.99
+     ],
+     [
+      -10.16,
+      -3.81
+     ],
+     [
+      -13.16,
+      -3.98
+     ],
+     [
+      -13.65,
+      -3.59
+     ],
+     [
+      -13.71,
+      -3.21
+     ],
+     [
+      -14.87,
+      -2.43
+     ],
+     [
+      -15.53,
+      -2.48
+     ],
+     [
+      -17.77,
+      -4.91
+     ],
+     [
+      -17.76,
+      -5.44
+     ],
+     [
+      -16.01,
+      -7.13
+     ],
+     [
+      -16.05,
+      -7.44
+     ],
+     [
+      -16.61,
+      -8.02
+     ],
+     [
+      -16.88,
+      -8.02
+     ],
+     [
+      -18.59,
+      -6.4
+     ],
+     [
+      -19.03,
+      -6.4
+     ],
+     [
+      -20.46,
+      -7.79
+     ],
+     [
+      -20.44,
+      -8.41
+     ],
+     [
+      -18.66,
+      -10.23
+     ],
+     [
+      -23.31,
+      -15.28
+     ],
+     [
+      -23.3,
+      -15.81
+     ],
+     [
+      -22.41,
+      -16.68
+     ],
+     [
+      -22.4,
+      -17.03
+     ],
+     [
+      -23.25,
+      -19.7
+     ],
+     [
+      -23.58,
+      -19.71
+     ],
+     [
+      -26.09,
+      -17.46
+     ],
+     [
+      -26.07,
+      -17.15
+     ],
+     [
+      -22.22,
+      -13.05
+     ],
+     [
+      -22.4,
+      -12.08
+     ],
+     [
+      -21.82,
+      -11.36
+     ],
+     [
+      -21.83,
+      -10.83
+     ],
+     [
+      -22.49,
+      -10.19
+     ],
+     [
+      -23.11,
+      -10.2
+     ],
+     [
+      -24.07,
+      -11.0
+     ],
+     [
+      -24.92,
+      -10.18
+     ],
+     [
+      -24.92,
+      -9.92
+     ],
+     [
+      -7.67,
+      8.42
+     ],
+     [
+      -6.49,
+      8.49
+     ],
+     [
+      -6.57,
+      9.73
+     ],
+     [
+      -5.99,
+      10.01
+     ],
+     [
+      -5.97,
+      10.8
+     ],
+     [
+      -5.33,
+      10.95
+     ],
+     [
+      2.41,
+      19.2
+     ],
+     [
+      2.39,
+      19.81
+     ],
+     [
+      1.6,
+      20.59
+     ],
+     [
+      1.63,
+      20.9
+     ]
+    ],
+    [
+     [
+      -9.89,
+      11.08
+     ],
+     [
+      -9.14,
+      11.13
+     ],
+     [
+      -8.47,
+      10.66
+     ],
+     [
+      -8.5,
+      10.37
+     ],
+     [
+      -9.06,
+      10.3
+     ],
+     [
+      -9.07,
+      9.94
+     ],
+     [
+      -9.02,
+      9.74
+     ],
+     [
+      -8.49,
+      9.72
+     ],
+     [
+      -8.45,
+      9.51
+     ],
+     [
+      -9.26,
+      8.58
+     ],
+     [
+      -9.66,
+      8.61
+     ],
+     [
+      -10.65,
+      9.82
+     ],
+     [
+      -10.49,
+      10.62
+     ]
+    ],
+    [
+     [
+      26.8,
+      9.11
+     ],
+     [
+      19.84,
+      1.69
+     ],
+     [
+      19.86,
+      1.16
+     ],
+     [
+      20.75,
+      0.03
+     ],
+     [
+      18.94,
+      -1.95
+     ],
+     [
+      18.96,
+      -2.39
+     ],
+     [
+      20.48,
+      -3.87
+     ],
+     [
+      21.14,
+      -3.89
+     ],
+     [
+      21.7,
+      -3.31
+     ],
+     [
+      21.65,
+      -2.47
+     ],
+     [
+      23.68,
+      -0.35
+     ],
+     [
+      23.99,
+      -0.31
+     ],
+     [
+      26.47,
+      -2.77
+     ],
+     [
+      26.8,
+      -3.0
+     ],
+     [
+      26.8,
+      -5.8
+     ],
+     [
+      26.61,
+      -6.04
+     ],
+     [
+      26.2,
+      -6.14
+     ],
+     [
+      26.15,
+      -6.61
+     ],
+     [
+      25.0,
+      -6.39
+     ],
+     [
+      24.36,
+      -7.06
+     ],
+     [
+      24.38,
+      -7.59
+     ],
+     [
+      26.29,
+      -9.19
+     ],
+     [
+      26.8,
+      -9.1
+     ]
+    ],
+    [
+     [
+      -4.07,
+      5.75
+     ],
+     [
+      -5.49,
+      4.27
+     ],
+     [
+      -5.48,
+      3.65
+     ],
+     [
+      0.1,
+      -1.45
+     ],
+     [
+      0.79,
+      -1.35
+     ],
+     [
+      1.22,
+      0.78
+     ],
+     [
+      1.51,
+      0.82
+     ],
+     [
+      5.38,
+      -2.79
+     ],
+     [
+      5.91,
+      -2.78
+     ],
+     [
+      6.26,
+      -2.43
+     ],
+     [
+      6.55,
+      -2.03
+     ],
+     [
+      6.54,
+      -1.41
+     ],
+     [
+      1.95,
+      2.83
+     ],
+     [
+      1.29,
+      2.84
+     ],
+     [
+      0.73,
+      2.1
+     ],
+     [
+      0.42,
+      2.06
+     ],
+     [
+      -3.5,
+      5.72
+     ]
+    ],
+    [
+     [
+      0.15,
+      -1.87
+     ],
+     [
+      -0.58,
+      -2.7
+     ],
+     [
+      -0.57,
+      -3.23
+     ],
+     [
+      2.31,
+      -6.0
+     ],
+     [
+      2.89,
+      -6.03
+     ],
+     [
+      3.61,
+      -5.18
+     ],
+     [
+      3.6,
+      -4.56
+     ],
+     [
+      0.81,
+      -1.88
+     ]
+    ],
+    [
+     [
+      14.39,
+      -6.7
+     ],
+     [
+      12.89,
+      -8.27
+     ],
+     [
+      12.88,
+      -9.06
+     ],
+     [
+      12.13,
+      -9.61
+     ],
+     [
+      12.1,
+      -10.05
+     ],
+     [
+      11.19,
+      -10.12
+     ],
+     [
+      10.9,
+      -10.43
+     ],
+     [
+      10.89,
+      -10.96
+     ],
+     [
+      10.39,
+      -11.23
+     ],
+     [
+      10.37,
+      -12.03
+     ],
+     [
+      10.06,
+      -12.12
+     ],
+     [
+      10.03,
+      -12.66
+     ],
+     [
+      8.95,
+      -12.83
+     ],
+     [
+      8.87,
+      -13.24
+     ],
+     [
+      8.22,
+      -13.31
+     ],
+     [
+      8.26,
+      -15.61
+     ],
+     [
+      10.19,
+      -17.37
+     ],
+     [
+      10.81,
+      -17.36
+     ],
+     [
+      12.54,
+      -15.58
+     ],
+     [
+      13.01,
+      -15.51
+     ],
+     [
+      13.03,
+      -14.98
+     ],
+     [
+      13.35,
+      -14.89
+     ],
+     [
+      13.36,
+      -14.44
+     ],
+     [
+      12.65,
+      -13.84
+     ],
+     [
+      12.83,
+      -12.57
+     ],
+     [
+      13.28,
+      -12.81
+     ],
+     [
+      14.07,
+      -12.72
+     ],
+     [
+      14.15,
+      -13.46
+     ],
+     [
+      14.71,
+      -13.47
+     ],
+     [
+      14.76,
+      -12.82
+     ],
+     [
+      15.27,
+      -12.73
+     ],
+     [
+      18.54,
+      -9.12
+     ],
+     [
+      18.53,
+      -8.5
+     ],
+     [
+      16.51,
+      -6.65
+     ]
+    ],
+    [
+     [
+      19.59,
+      -10.04
+     ],
+     [
+      11.85,
+      -18.37
+     ],
+     [
+      11.9,
+      -18.94
+     ],
+     [
+      14.88,
+      -21.7
+     ],
+     [
+      17.08,
+      -21.65
+     ],
+     [
+      23.26,
+      -14.95
+     ],
+     [
+      23.22,
+      -12.92
+     ],
+     [
+      20.25,
+      -10.06
+     ]
+    ]
+   ],
+   "context": [
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -26.49,
+       -11.35
+      ],
+      [
+       -6.76,
+       9.64
+      ],
+      [
+       0.22,
+       17.12
+      ],
+      [
+       -7.01,
+       23.87
+      ],
+      [
+       -26.49,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       12.02,
+       23.87
+      ],
+      [
+       11.79,
+       23.63
+      ],
+      [
+       11.41,
+       23.87
+      ],
+      [
+       10.82,
+       23.87
+      ],
+      [
+       10.16,
+       23.14
+      ],
+      [
+       9.3,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       17.8,
+       23.87
+      ],
+      [
+       17.9,
+       23.58
+      ],
+      [
+       19.36,
+       21.4
+      ],
+      [
+       20.79,
+       19.92
+      ],
+      [
+       23.44,
+       18.09
+      ],
+      [
+       24.77,
+       17.68
+      ],
+      [
+       25.8,
+       20.91
+      ],
+      [
+       22.62,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       24.43,
+       16.02
+      ],
+      [
+       26.8,
+       13.79
+      ],
+      [
+       26.8,
+       17.1
+      ],
+      [
+       25.27,
+       18.51
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       2.05,
+       11.67
+      ],
+      [
+       4.07,
+       9.73
+      ],
+      [
+       6.09,
+       12.02
+      ],
+      [
+       3.87,
+       13.83
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       10.79,
+       3.36
+      ],
+      [
+       12.81,
+       1.42
+      ],
+      [
+       14.93,
+       3.54
+      ],
+      [
+       13.0,
+       5.49
+      ],
+      [
+       12.77,
+       5.53
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -12.91,
+       -4.19
+      ],
+      [
+       -12.35,
+       -4.67
+      ],
+      [
+       -9.17,
+       -4.51
+      ],
+      [
+       -8.87,
+       -4.11
+      ],
+      [
+       -9.18,
+       -3.82
+      ],
+      [
+       -9.82,
+       -3.69
+      ],
+      [
+       -12.63,
+       -3.89
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       13.34,
+       -8.08
+      ],
+      [
+       16.51,
+       -11.04
+      ],
+      [
+       18.54,
+       -8.77
+      ],
+      [
+       16.43,
+       -6.83
+      ],
+      [
+       14.44,
+       -6.91
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -26.49,
+       -11.9
+      ],
+      [
+       -26.34,
+       -12.26
+      ],
+      [
+       -24.77,
+       -10.62
+      ],
+      [
+       -25.17,
+       -10.19
+      ],
+      [
+       -26.49,
+       -11.64
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -26.49,
+       -17.4
+      ],
+      [
+       -22.22,
+       -12.87
+      ],
+      [
+       -21.82,
+       -11.09
+      ],
+      [
+       -22.87,
+       -10.14
+      ],
+      [
+       -24.69,
+       -10.76
+      ],
+      [
+       -25.69,
+       -11.79
+      ],
+      [
+       -26.49,
+       -15.34
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       11.86,
+       -18.54
+      ],
+      [
+       14.96,
+       -21.52
+      ],
+      [
+       16.99,
+       -21.48
+      ],
+      [
+       23.0,
+       -15.04
+      ],
+      [
+       22.95,
+       -12.92
+      ],
+      [
+       19.83,
+       -9.98
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -4.07,
+       -12.59
+      ],
+      [
+       -1.89,
+       -14.6
+      ],
+      [
+       0.12,
+       -12.5
+      ],
+      [
+       -2.18,
+       -10.52
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -23.71,
+       -21.74
+      ],
+      [
+       -19.88,
+       -25.42
+      ],
+      [
+       -18.82,
+       -26.37
+      ],
+      [
+       -17.9,
+       -26.37
+      ],
+      [
+       -15.42,
+       -25.38
+      ],
+      [
+       -15.43,
+       -25.11
+      ],
+      [
+       -16.44,
+       -23.36
+      ],
+      [
+       -18.11,
+       -21.34
+      ],
+      [
+       -20.89,
+       -19.26
+      ],
+      [
+       -22.79,
+       -18.54
+      ]
+     ]
+    },
+    {
+     "kind": "room",
+     "poly": [
+      [
+       -16.62,
+       -26.11
+      ],
+      [
+       -16.34,
+       -26.37
+      ],
+      [
+       -12.18,
+       -26.37
+      ],
+      [
+       -13.66,
+       -24.99
+      ],
+      [
+       -13.93,
+       -24.99
+      ]
+     ]
+    },
+    {
+     "kind": "toilet",
+     "poly": [
+      [
+       4.39,
+       18.71
+      ],
+      [
+       4.95,
+       18.39
+      ],
+      [
+       6.43,
+       16.8
+      ],
+      [
+       3.8,
+       14.15
+      ],
+      [
+       1.87,
+       16.0
+      ],
+      [
+       2.42,
+       16.65
+      ],
+      [
+       3.14,
+       15.99
+      ],
+      [
+       3.94,
+       16.01
+      ],
+      [
+       4.42,
+       16.41
+      ],
+      [
+       4.58,
+       16.68
+      ],
+      [
+       4.56,
+       17.47
+      ],
+      [
+       3.88,
+       18.16
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       12.79,
+       23.21
+      ],
+      [
+       13.65,
+       21.18
+      ],
+      [
+       17.96,
+       23.05
+      ],
+      [
+       17.57,
+       23.87
+      ],
+      [
+       13.42,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       11.84,
+       22.22
+      ],
+      [
+       11.92,
+       21.69
+      ],
+      [
+       12.37,
+       21.17
+      ],
+      [
+       13.31,
+       21.01
+      ],
+      [
+       12.12,
+       20.45
+      ],
+      [
+       7.75,
+       15.72
+      ],
+      [
+       7.72,
+       15.41
+      ],
+      [
+       8.06,
+       14.89
+      ],
+      [
+       7.38,
+       14.35
+      ],
+      [
+       7.74,
+       13.38
+      ],
+      [
+       6.14,
+       12.16
+      ],
+      [
+       4.05,
+       14.01
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       7.14,
+       21.59
+      ],
+      [
+       7.32,
+       21.59
+      ],
+      [
+       9.27,
+       19.78
+      ],
+      [
+       7.61,
+       18.03
+      ],
+      [
+       6.96,
+       18.58
+      ],
+      [
+       7.78,
+       18.65
+      ],
+      [
+       8.42,
+       19.23
+      ],
+      [
+       8.4,
+       20.11
+      ],
+      [
+       8.14,
+       20.46
+      ],
+      [
+       7.65,
+       20.67
+      ],
+      [
+       6.94,
+       20.65
+      ],
+      [
+       6.59,
+       20.47
+      ],
+      [
+       6.3,
+       20.07
+      ],
+      [
+       6.26,
+       19.26
+      ],
+      [
+       5.59,
+       19.88
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       20.91,
+       11.95
+      ],
+      [
+       22.25,
+       11.35
+      ],
+      [
+       22.47,
+       11.47
+      ],
+      [
+       25.47,
+       14.71
+      ],
+      [
+       24.43,
+       15.67
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       12.97,
+       5.71
+      ],
+      [
+       15.15,
+       3.77
+      ],
+      [
+       20.81,
+       9.76
+      ],
+      [
+       20.11,
+       11.07
+      ],
+      [
+       14.28,
+       7.27
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       18.97,
+       -2.13
+      ],
+      [
+       20.79,
+       -3.98
+      ],
+      [
+       21.76,
+       -3.04
+      ],
+      [
+       23.67,
+       -0.18
+      ],
+      [
+       26.8,
+       5.87
+      ],
+      [
+       26.8,
+       8.84
+      ],
+      [
+       19.87,
+       1.43
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       24.38,
+       -7.32
+      ],
+      [
+       26.47,
+       -9.17
+      ],
+      [
+       26.8,
+       -8.82
+      ],
+      [
+       26.8,
+       -7.88
+      ],
+      [
+       25.93,
+       -6.85
+      ],
+      [
+       25.35,
+       -6.38
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       -18.89,
+       -6.35
+      ],
+      [
+       -16.93,
+       -8.17
+      ],
+      [
+       -17.05,
+       -8.48
+      ],
+      [
+       -18.52,
+       -9.98
+      ],
+      [
+       -19.44,
+       -9.1
+      ],
+      [
+       -18.36,
+       -9.21
+      ],
+      [
+       -17.83,
+       -8.94
+      ],
+      [
+       -17.62,
+       -8.44
+      ],
+      [
+       -17.65,
+       -7.74
+      ],
+      [
+       -17.86,
+       -7.43
+      ],
+      [
+       -18.4,
+       -7.18
+      ],
+      [
+       -19.11,
+       -7.2
+      ],
+      [
+       -19.5,
+       -7.42
+      ],
+      [
+       -19.76,
+       -7.87
+      ],
+      [
+       -19.6,
+       -8.94
+      ],
+      [
+       -20.52,
+       -8.06
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       -26.49,
+       -12.92
+      ],
+      [
+       -25.51,
+       -13.93
+      ],
+      [
+       -24.72,
+       -13.1
+      ],
+      [
+       -25.81,
+       -12.11
+      ],
+      [
+       -25.95,
+       -12.15
+      ],
+      [
+       -26.49,
+       -12.74
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       -4.25,
+       -12.77
+      ],
+      [
+       -2.11,
+       -14.67
+      ],
+      [
+       -2.11,
+       -14.85
+      ],
+      [
+       -12.36,
+       -25.8
+      ],
+      [
+       -12.54,
+       -25.8
+      ],
+      [
+       -13.62,
+       -24.77
+      ],
+      [
+       -15.2,
+       -25.22
+      ],
+      [
+       -15.94,
+       -23.75
+      ],
+      [
+       -12.26,
+       -22.02
+      ],
+      [
+       -12.28,
+       -23.01
+      ],
+      [
+       -11.79,
+       -23.57
+      ],
+      [
+       -10.81,
+       -23.64
+      ],
+      [
+       -10.29,
+       -23.19
+      ],
+      [
+       -10.19,
+       -22.17
+      ],
+      [
+       -10.63,
+       -21.65
+      ],
+      [
+       -11.04,
+       -21.48
+      ],
+      [
+       -9.86,
+       -20.75
+      ],
+      [
+       -5.66,
+       -16.47
+      ],
+      [
+       -5.2,
+       -15.09
+      ],
+      [
+       -5.83,
+       -14.13
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       3.99,
+       -18.26
+      ],
+      [
+       5.95,
+       -20.08
+      ],
+      [
+       5.35,
+       -20.8
+      ],
+      [
+       4.96,
+       -21.09
+      ],
+      [
+       4.43,
+       -20.87
+      ],
+      [
+       2.08,
+       -23.09
+      ],
+      [
+       1.36,
+       -22.52
+      ],
+      [
+       1.01,
+       -22.53
+      ],
+      [
+       0.06,
+       -23.84
+      ],
+      [
+       -0.83,
+       -23.54
+      ],
+      [
+       -2.82,
+       -25.43
+      ],
+      [
+       -3.11,
+       -25.83
+      ],
+      [
+       -3.16,
+       -26.28
+      ],
+      [
+       -3.7,
+       -25.72
+      ],
+      [
+       -4.23,
+       -25.82
+      ],
+      [
+       -4.43,
+       -26.12
+      ],
+      [
+       -4.43,
+       -26.37
+      ],
+      [
+       -6.16,
+       -26.37
+      ],
+      [
+       -0.53,
+       -20.43
+      ],
+      [
+       -0.4,
+       -20.47
+      ],
+      [
+       -0.38,
+       -21.18
+      ],
+      [
+       0.07,
+       -21.7
+      ],
+      [
+       1.08,
+       -21.8
+      ],
+      [
+       1.64,
+       -21.31
+      ],
+      [
+       1.77,
+       -20.56
+      ]
+     ]
+    },
+    {
+     "kind": "core",
+     "poly": [
+      [
+       7.63,
+       -26.37
+      ],
+      [
+       10.42,
+       -26.37
+      ],
+      [
+       11.36,
+       -25.36
+      ],
+      [
+       11.32,
+       -25.14
+      ],
+      [
+       9.83,
+       -23.62
+      ],
+      [
+       9.38,
+       -23.37
+      ],
+      [
+       8.53,
+       -24.36
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       4.72,
+       23.87
+      ],
+      [
+       4.79,
+       21.97
+      ],
+      [
+       6.59,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       10.29,
+       23.07
+      ],
+      [
+       10.3,
+       22.89
+      ],
+      [
+       11.24,
+       21.98
+      ],
+      [
+       11.42,
+       21.99
+      ],
+      [
+       13.24,
+       23.87
+      ],
+      [
+       10.99,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       1.51,
+       20.77
+      ],
+      [
+       2.63,
+       19.62
+      ],
+      [
+       4.65,
+       21.81
+      ],
+      [
+       4.56,
+       23.87
+      ],
+      [
+       4.42,
+       23.87
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       4.81,
+       19.16
+      ],
+      [
+       4.82,
+       18.54
+      ],
+      [
+       6.66,
+       16.95
+      ],
+      [
+       7.46,
+       17.88
+      ],
+      [
+       5.5,
+       19.79
+      ],
+      [
+       5.32,
+       19.79
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       15.14,
+       3.54
+      ],
+      [
+       19.84,
+       -0.89
+      ],
+      [
+       20.81,
+       0.12
+      ],
+      [
+       26.8,
+       9.12
+      ],
+      [
+       26.8,
+       13.59
+      ],
+      [
+       25.94,
+       14.37
+      ],
+      [
+       25.41,
+       14.36
+      ],
+      [
+       22.34,
+       11.16
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       4.99,
+       10.49
+      ],
+      [
+       5.03,
+       8.55
+      ],
+      [
+       10.56,
+       3.43
+      ],
+      [
+       12.64,
+       5.57
+      ],
+      [
+       12.67,
+       5.79
+      ],
+      [
+       6.41,
+       11.81
+      ],
+      [
+       6.21,
+       11.85
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       21.54,
+       -2.61
+      ],
+      [
+       25.88,
+       -6.6
+      ],
+      [
+       26.8,
+       -5.65
+      ],
+      [
+       26.8,
+       -3.0
+      ],
+      [
+       23.99,
+       -0.3
+      ],
+      [
+       23.77,
+       -0.26
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -10.65,
+       -6.45
+      ],
+      [
+       -4.23,
+       -12.45
+      ],
+      [
+       -2.23,
+       -10.25
+      ],
+      [
+       -7.85,
+       -5.06
+      ],
+      [
+       -9.77,
+       -5.44
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -18.72,
+       -6.08
+      ],
+      [
+       -18.72,
+       -6.26
+      ],
+      [
+       -16.7,
+       -8.11
+      ],
+      [
+       -15.97,
+       -7.35
+      ],
+      [
+       -15.98,
+       -7.17
+      ],
+      [
+       -17.86,
+       -5.35
+      ],
+      [
+       -18.04,
+       -5.36
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -25.01,
+       -10.1
+      ],
+      [
+       -23.98,
+       -11.07
+      ],
+      [
+       -22.92,
+       -9.97
+      ],
+      [
+       -23.8,
+       -9.01
+      ],
+      [
+       -24.06,
+       -9.02
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       10.68,
+       -17.51
+      ],
+      [
+       10.68,
+       -17.68
+      ],
+      [
+       11.54,
+       -18.5
+      ],
+      [
+       11.76,
+       -18.46
+      ],
+      [
+       13.92,
+       -16.2
+      ],
+      [
+       19.72,
+       -9.89
+      ],
+      [
+       19.67,
+       -9.67
+      ],
+      [
+       18.9,
+       -8.94
+      ],
+      [
+       18.73,
+       -8.94
+      ],
+      [
+       15.57,
+       -12.23
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -21.72,
+       -11.27
+      ],
+      [
+       -21.27,
+       -11.44
+      ],
+      [
+       -20.48,
+       -12.13
+      ],
+      [
+       -20.47,
+       -12.3
+      ],
+      [
+       -23.48,
+       -15.46
+      ],
+      [
+       -23.44,
+       -15.68
+      ],
+      [
+       -22.32,
+       -16.76
+      ],
+      [
+       -23.36,
+       -19.9
+      ],
+      [
+       -26.19,
+       -17.28
+      ],
+      [
+       -22.05,
+       -12.87
+      ],
+      [
+       -22.49,
+       -12.17
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -8.03,
+       -21.53
+      ],
+      [
+       -1.75,
+       -21.42
+      ],
+      [
+       1.76,
+       -20.29
+      ],
+      [
+       2.84,
+       -19.17
+      ],
+      [
+       2.43,
+       -18.6
+      ],
+      [
+       -1.39,
+       -15.19
+      ],
+      [
+       -1.93,
+       -14.93
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       2.23,
+       -23.25
+      ],
+      [
+       5.51,
+       -26.37
+      ],
+      [
+       5.6,
+       -26.37
+      ],
+      [
+       5.54,
+       -21.77
+      ],
+      [
+       5.14,
+       -21.38
+      ],
+      [
+       4.14,
+       -21.35
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       -12.3,
+       -26.11
+      ],
+      [
+       -12.01,
+       -26.37
+      ],
+      [
+       -6.42,
+       -26.37
+      ],
+      [
+       -1.91,
+       -21.56
+      ],
+      [
+       -8.25,
+       -21.69
+      ]
+     ]
+    },
+    {
+     "kind": "service",
+     "poly": [
+      [
+       5.67,
+       -21.94
+      ],
+      [
+       5.73,
+       -26.37
+      ],
+      [
+       7.43,
+       -26.37
+      ],
+      [
+       8.86,
+       -24.88
+      ]
+     ]
+    }
+   ],
+   "fit_cost": 0.985
+  }
+ },
+ "px_to_m": {
+  "5": {
+   "matrix": [
+    [
+     0.059714,
+     0.001128,
+     -27.403837
+    ],
+    [
+     0.000323,
+     -0.060813,
+     21.64048
+    ]
+   ],
+   "rms_m": 1.35,
+   "about": "x_m, y_m = matrix @ [px, py, 1] for places.json pixels (fallback only)"
+  },
+  "4": {
+   "matrix": [
+    [
+     0.059929,
+     0.00102,
+     -27.014968
+    ],
+    [
+     0.001344,
+     -0.060187,
+     21.766049
+    ]
+   ],
+   "rms_m": 0.54,
+   "about": "x_m, y_m = matrix @ [px, py, 1] for places.json pixels (fallback only)"
+  }
+ }
+}

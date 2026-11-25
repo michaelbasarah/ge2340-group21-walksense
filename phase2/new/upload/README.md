@@ -41,10 +41,67 @@ Not confirmed against a real phone yet: the phyphox `/config` format (buffer dis
 ## The map
 The page shows the collector's floor sketch (`floor-sketch-v1.pdf`, 5F and 4F) with its red stop dots. After a stop, the dot of the top guess **lights up** (red with a yellow ring and a pulse) when the model is at least 80% sure; below that it gets a dashed "maybe" ring and the page says to try again. The map switches to the floor you are on; the 5F/4F buttons show the other floor. Screenshots: `screenshots/`.
 
+- Since 26 Nov the default view is the vector floor plan (next section); this picture is the fallback behind the **Picture** button.
 - `map/make_map.py` builds `map/floor5.png`, `map/floor4.png` and `map/places.json` from the PDF (needs `pymupdf pillow`, only to rebuild). It finds the red dots by colour and checks each place matches exactly one dot.
 - Which dot is which place: route order and the sketch's metre marks, checked against the floor-5 pins in `phase2/map/coordinates_meters.csv`; escalator up vs down on 5F from the compass direction of the three escalator walks (6 of 6 recordings agree). **Please confirm**, especially the 4F lecture theatres (LT1A/LT1B top right, LT2A/LT2B bottom left) and the gate.
 - The 4F **disabled toilet has no dot** on the sketch. It is drawn as a faint dot next to Exit 5 (same offset as the 5F male disabled toilet) and marked `inferred` in `places.json`.
 - 80% is a cut-off chosen on the held-out test itself (lit 33/44 right, not lit 1/9 right), so it is a first guess, not a tested setting.
+
+## The map v2 (vector floor plan)
+The page now draws a real floor plan in metres instead of the picture: corridors, rooms, the 26 places, every corridor with its length, escalators and the lift with the floor they lead to, a 5 m scale bar and a north arrow. It is the default; the **Picture** button switches back to the old sketch PNG (remembered per browser). Light and dark mode follow the phone; **+ / − / ⤢** zoom, drag pans when zoomed, and the blue badges (`▼ to 4F`, `▲ from 4F`, `⇅ 4F`) switch floor. Screenshots: `screenshots/v2-*.png` (both floors, lit circle after a real 25-Nov upload, "maybe" ring, walking dot, zoom, dark, 390 px phone, picture fallback).
+
+Files: `map/floorplan.json` (the data, read by the page), `map/floorplan.js` (the drawing, no libraries), `map/make_floorplan.py` (builds the JSON), `map/sketch_trace.json` (what was read from the sketch PDF). `route.py`, `places.json` and the PNGs are unchanged: the walking dot still comes from `route.py` in `places.json` pixels; the page recovers how far along the corridor it is (projection onto the pixel segment) and puts it at that fraction of the corridor drawn in metres. If a corridor is missing, an affine pixel -> metre fit (`px_to_m` in the JSON) is the fallback.
+
+**How the coordinates were made** (`python map/make_floorplan.py`; numbers from `floorplan.json` > `fit`):
+1. The sketch PDF is the collector's drawing on a Google indoor-map screenshot. From the PDF we take the red dots and the black corridor lines as exact vector coordinates (bends included), the typed 4F metre marks, and the screenshot itself (`python map/make_floorplan.py trace`, needs `pymupdf`). The screenshot is split by Google's flat colours into rooms, corridors, toilets and escalator/stair blocks and traced to polygons.
+2. Metres: x east, y north, the frame of `phase2/map/coordinates_meters.csv` (Google lat/long of 8 floor-5 places). A scale + rotation + shift from screenshot pixels to that frame is fitted on those 8 places: 0.0887 m per pixel, rotation 1.1 deg (the screenshot is north-up, so the north arrow is real), sketch dots vs Google pins 0.75 m RMS (worst Exit 5, 1.15 m).
+3. 4F: the 4F screenshot shows the same two Google markers (City Express, Y5ZONE). Lining them up gives scale 0.997, rotation -0.08 deg, shift 8.8 / 3.2 px, so 4F uses the same metres as 5F. Exit 5 and the lift landing then sit within about 0.5 m of the 5F ones.
+4. Place points: least squares over every place and corridor bend. Terms: the 8 Google pins (sigma 0.25 m), the corridor lengths of `phase2/new/routing/graph.json` (sigma 0.3 m measured, max(0.5 m, 15%) steps, 4 m guess) and the sketch position (sigma 1.5 m, keeps the shape). Edge residual RMS: 5F 1.04 m, 4F 0.33 m. Per edge below (drawn = corridor length on the plan; mark = what the collector wrote on the sketch, handwriting read by eye).
+
+| floor | corridor | source | graph.json m | drawn m | residual | sketch mark |
+|---|---|---|---|---|---|---|
+| 5F | Canteen - Exit 5 | measured | 11.1 | 11.1 | -0.00 | 11.9 |
+| 5F | Exit 5 - Male WC | measured | 3.6 | 3.62 | +0.02 | 6 |
+| 5F | Male WC - Y5-302 | measured | 11.6 | 11.58 | -0.02 | 10 |
+| 5F | Y5-302 - Study rooms | measured | 13.9 | 13.84 | -0.06 | 11 |
+| 5F | Study rooms - Y5-202 | measured | 10.6 | 10.6 | +0.00 | 11 |
+| 5F | Y5-202 - Female WC | measured | 10.7 | 10.69 | -0.01 | 10 |
+| 5F | Female WC - Exit 10 | measured | 4.4 | 4.4 | +0.00 | 6 |
+| 5F | Exit 10 - Canteen | measured | 11.6 | 11.62 | +0.02 | 11.9 |
+| 5F | Exit 10 - Esc. up | **guess** | 4.9 | 8.47 | +3.57 | (not drawn) |
+| 5F | Esc. up - Esc. down | steps | 10.3 | 9.2 | -1.10 | 3.9 |
+| 5F | Esc. down - Exit 5 | steps | 7.6 | 8.12 | +0.52 | (not drawn) |
+| 5F | Canteen - Esc. down | steps | 8.1 | 7.23 | -0.87 | 4.9 |
+| 5F | Esc. up - Canteen | steps | 8.1 | 7.37 | -0.73 | 4.9 |
+| 5F | Exit 5 - Disabled WC | steps | 3.2 | 3.16 | -0.04 | 1 (unclear) |
+| 5F | Disabled WC - Lift / stairs | steps | 8.1 | 7.97 | -0.13 | 7 + 3 |
+| 5F | Lift / stairs - Y5-401 | steps | 10.3 | 8.76 | -1.54 | 4 |
+| 5F | Y5-401 - Y5-302 back | steps | 5.9 | 6.25 | +0.35 | 9 |
+| 5F | Y5-302 back - Lift / stairs (via Y5-401) | steps | 16.2 | 15.01 | -1.19 | - |
+| 4F | Lift / stairs - Disabled WC | steps | 8.1 | 8.11 | +0.01 | 9.1 + 1.? (whole Exit 5 - lift line) |
+| 4F | Disabled WC - Exit 5 | steps | 3.2 | 3.14 | -0.06 | - |
+| 4F | Exit 5 - LT2A | steps | 4.3 | 4.37 | +0.07 | 4.7 |
+| 4F | LT2A - LT2B | steps | 15.7 | 15.63 | -0.07 | 15 |
+| 4F | LT2B - Esc. down | steps | 5.4 | 5.5 | +0.10 | - |
+| 4F | Esc. down - Y4-502 | steps | 9.7 | 9.59 | -0.11 | 9.38 |
+| 4F | Y4-502 - Esc. up | steps | 9.7 | 9.41 | -0.29 | 9.38 |
+| 4F | Esc. up - LT1B | steps | 5.9 | 5.93 | +0.03 | 6.76 |
+| 4F | LT1B - LT1A | steps | 14.0 | 14.26 | +0.26 | 15 |
+| 4F | LT1A - Exit 10 | steps | 5.9 | 5.75 | -0.15 | 4.77 |
+| 4F | Exit 10 - Gate | steps | 10.8 | 10.9 | +0.10 | 11.43 |
+| 4F | Gate - Exit 5 | steps | 14.6 | 13.61 | -0.99 | 11.43 |
+| 4F | Esc. down - Esc. up | steps | 8.6 | 8.18 | -0.42 | 6.34 |
+
+On the map the label shows the `graph.json` length: plain = measured (Google pin to pin), `~` and dashed = 23-Nov step count x 0.54 m, `?` and dotted = guess. Between floors (badges): escalator rides 20 s each way (**guess**, never timed, one way: 5F down -> 4F down, 4F up -> 5F up), lift/stairs 30 s (timed once 5F -> 4F).
+
+**What is a guess or inferred** (marked in `floorplan.json` by `source`, `status`, `inferred`, `note`):
+- 8 of 31 corridor lengths are measured (all on 5F), 22 are steps x 0.54 m, 1 is a guess (Exit 10 - up escalator; not drawn on the sketch, drawn as a straight line). Esc. down - Exit 5 and Y5-302 back - lift are not drawn on the sketch either (straight line / same corridor through Y5-401).
+- 4F has no Google pins: its positions are the sketch dots fitted to the step lengths, nothing on 4F is surveyed.
+- The 4F mixed disabled toilet has no sketch dot: placed at the 5F offset from Exit 5, which lands at the door of Google's "Wheelchair Accessible Bathroom" (marked `*`).
+- Room footprints are traced from Google, and which block belongs to which place is our reading: Google calls the 5F male-toilet block "Female Bathroom"; LT1A/LT1B/LT2A/LT2B are the nearest Google lecture theatres (Tin Ka Ping, CY Sun, Sze Chi Ching, David Chow), Y4-502 is next to Google's Photo Copying Centre, Y5-202 has no Google room; the lift is not on Google (the purple block is the stair block by the stop).
+- Sketch marks and step lengths disagree in places: the 5F escalator triangle (sketch 3.9 / 4.9 m vs steps 10.3 / 8.1 m) and Lift - Y5-401 - Y5-302 back (sketch 4 + 9 m vs steps 10.3 + 5.9 m). The fit splits the difference (the escalator points moved 2.2 and 2.6 m from the sketch dots, Y5-401 2.4 m).
+
+**Editing `floorplan.json`:** small fixes can be made by hand; the page reads only this file (reload the page). A place is `floors.<5|4>.places.<id>` with `x`, `y` in metres (east, north) and `name` / `short` (label on the map); `label_dx` / `label_dy` move its label. A corridor is an entry of `edges` with `points` (polyline in metres, first and last point = the two places), `metres` and `source` (`measured` / `steps` / `guess`). Rooms are `rooms[].polys` (polygons in metres); `walkable` is the white corridor area; `links` are the escalators and the lift. Place ids must stay the model's ids (the page and `route.py` use them). A real rebuild (`python map/make_floorplan.py`) overwrites hand edits: put lasting changes in `make_floorplan.py` (`NAMES`, `PATHS`, `FOOTPRINTS`, `LABEL_DIR`, weights) or in `graph.json` / `coordinates_meters.csv`, then rebuild. `test_walksense.py` checks that every place the model can guess and every corridor the walking dot can take is in `floorplan.json`.
 
 ## What it does
 | Part | How | Tested |
