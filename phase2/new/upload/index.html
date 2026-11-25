@@ -49,6 +49,7 @@
     <div class="tabs" role="group" aria-label="Show floor"><button data-show="5">5F map</button><button data-show="4">4F map</button></div>
     <svg id="map" role="img" aria-label="Floor map"></svg>
     <div class="muted" id="mapnote">Send a stop to see where you are.</div>
+    <div id="live" hidden><div class="muted" style="margin-top:8px">LIVE from phyphox</div><div class="big" id="livemode" style="font-size:20px"></div><div class="muted" id="livestatus"></div></div>
   </div>
 
   <div class="card">
@@ -101,7 +102,7 @@ function drawMap() {
       }
       const t = sv('text', { x: p.x, y: p.y - 26, 'text-anchor': 'middle' }); t.textContent = nice(id); svg.append(t);
     }
-  } else if (last && last.kind === 'walk') note = 'Walking: send the next stop to light up where you are.';
+  } else if (last && last.kind === 'walk') note = last.live ? 'Walking… stand still facing the door for 10 s to light up where you are.' : 'Walking: send the next stop to light up where you are.';
   else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
   $('mapnote').textContent = note;
   svg.setAttribute('aria-label', `${shown}F floor map. ${note}`);
@@ -110,7 +111,8 @@ function drawMap() {
 function render(s) {
   state = s;
   $('floor').textContent = s.floor + 'F';
-  if (!last) { shown = s.floor; drawMap(); }
+  if (!last) shown = s.floor;
+  drawMap();                                   // redraw: labels may have just arrived
   const t = s.tally || {};
   $('tally').textContent = t.stops ? `Score this session: ${t.correct || 0}/${t.stops} right, ${t.top3 || 0}/${t.stops} in top 3` : 'No scored stops yet';
   const sel = $('truth'), keep = sel.value;
@@ -171,6 +173,27 @@ document.querySelectorAll('[data-show]').forEach(b => b.onclick = () => { shown 
 fetch('/map/places.json').then(r => r.json()).then(j => { maps = j; drawMap(); }).catch(() => { $('mapnote').textContent = 'Map not available.'; });
 document.querySelectorAll('[data-floor]').forEach(b => b.onclick = async () => render(await call('/api/floor?floor=' + b.dataset.floor, { method: 'POST' })));
 $('reset').onclick = async () => { render(await call('/api/reset?floor=' + state.floor, { method: 'POST' })); $('result').hidden = true; last = null; drawMap(); };
+// Live mode (server started with --live): poll once a second and drive the same map.
+let liveKey = '';
+async function pollLive() {
+  let L;
+  try { L = await call('/api/live'); } catch (e) { $('livestatus').textContent = 'Server not reachable'; return setTimeout(pollLive, 2000); }
+  if (!L.enabled) return;                       // upload-only mode: nothing to do
+  $('live').hidden = false;
+  const st = L.state || {};
+  $('livestatus').textContent = !L.connected ? `Not connected to the phone. ${L.error || ''}` :
+    !L.measuring ? 'Connected. Press ▶ in phyphox to start measuring.' : `Connected · ${L.device} · phone time ${st.now ?? '-'} s`;
+  const mode = st.mode || 'waiting';
+  $('livemode').textContent = mode === 'walking' ? `Walking · ${st.steps} steps` :
+    mode === 'standing' ? `Standing ${st.still_s} s… (place at 10 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
+  if (st.floor) $('floor').textContent = st.floor + 'F';
+  const r = mode === 'stop' ? { kind: 'stop', floor: st.floor, top3: st.top3, lit: st.lit, live: true }
+          : mode === 'walking' ? { kind: 'walk', floor: st.floor, live: true } : null;
+  const key = JSON.stringify(r);
+  if (r && key !== liveKey) { liveKey = key; last = r; if (shown !== r.floor) shown = r.floor; drawMap(); }
+  setTimeout(pollLive, 1000);
+}
+pollLive();
 call('/api/state').then(s => { render(s); if (s.history.length) showResult(s.history[s.history.length - 1]); }).catch(e => $('err').textContent = 'Cannot reach the server: ' + e.message);
 </script>
 </body>

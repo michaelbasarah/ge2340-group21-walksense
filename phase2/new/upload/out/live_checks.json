@@ -1,0 +1,72 @@
+{
+ "acc_std_10s_windows": {
+  "sesi1": {
+   "stop": {
+    "n_windows": 270,
+    "std_p5_p50_p95": [
+     0.047,
+     0.082,
+     0.292
+    ]
+   },
+   "walk": {
+    "n_windows": 4,
+    "std_p5_p50_p95": [
+     0.82,
+     1.257,
+     1.628
+    ]
+   }
+  },
+  "sesi2": {
+   "stop": {
+    "n_windows": 260,
+    "std_p5_p50_p95": [
+     0.007,
+     0.11,
+     0.168
+    ]
+   },
+   "walk": {
+    "n_windows": 1,
+    "std_p5_p50_p95": [
+     1.824,
+     1.824,
+     1.824
+    ]
+   }
+  }
+ },
+ "top1_by_standing_time": {
+  "sesi1->sesi2 10s": "16/26",
+  "sesi1->sesi2 20s": "16/26",
+  "sesi1->sesi2 30s": "17/26",
+  "sesi1->sesi2 60s": "17/26",
+  "sesi2->sesi1 10s": "17/27",
+  "sesi2->sesi1 20s": "17/27",
+  "sesi2->sesi1 30s": "17/27",
+  "sesi2->sesi1 60s": "17/27"
+ },
+ "live_replay": {
+  "sesi1 streamed, model iPhone17,4": {
+   "n_stops": 27,
+   "found": 27,
+   "floor": 27,
+   "top1": 17,
+   "top3": 21,
+   "lit": 22,
+   "lit_right": 16,
+   "extra_stops": 0
+  },
+  "sesi2 streamed, model iPhone19,2": {
+   "n_stops": 26,
+   "found": 26,
+   "floor": 26,
+   "top1": 17,
+   "top3": 24,
+   "lit": 22,
+   "lit_right": 16,
+   "extra_stops": 0
+  }
+ }
+}

@@ -34,6 +34,7 @@ Contents:
 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
 24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
 25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
+26. 25 Nov: live mode, phyphox remote access read by the laptop while walking
 - Lessons learned
 - Open questions / next steps
 
@@ -341,6 +342,27 @@ Contents:
 
 ---
 
+## 26. 25 Nov: live mode, phyphox remote access read by the laptop while walking
+
+- **What we tried:** instead of export + upload, the laptop reads the iPhone's phyphox measurement live over the network (phyphox "Allow remote access"), detects walking vs standing, and lights up the place on the map after 10 s standing. Built for the user's iPhone 16 Plus (model iPhone17,4, the session-2 phone; the session-2 README calls it a 16 Pro, but iPhone17,4 is the 16 Plus).
+- **Why:** the user asked for the data to be analysed while it is being collected. Using phyphox (the app the training data was recorded with) keeps the live readings in the same form as the training data; another streaming app might process the magnetometer differently.
+- **How:** `phase2/new/upload/live.py` (`Phyphox` client, `LiveTracker`, `probe`, `check`), `server.py --live <phone url>`, live panel in `index.html`, `test_live.py`. phyphox calls taken from the official web interface's code (`phyphox-webinterface/index.html`): `/get?<buf>=<last>%7C<timebuf>&<timebuf>=<last>` for new samples only, response `buffer` + `status`. The phyphox wiki refused connections, so the `/config` format used to find buffer names is an assumption with fallbacks (export sets, inputs, then common names); `probe` checks it on the real phone. Rules, all from recorded data before any live use: standing = |acc| std over 3 s below 0.4 m/s^2; a place guess after 10 s standing (using up to the last 60 s); floor updated once per stop from its median pressure; a gap of over 5 s in the data ends the current stop.
+- **Result** (`phase2/new/upload/out/live_checks.json`):
+  - |acc| std in 10 s windows: stops p95 0.292 (session 1, 270 windows) and 0.168 (session 2, 260); walks p5 0.82 (session 1, only 4 walk windows are 10 s long) and 1.824 (session 2, 1 window).
+  - Top-1 from only the first N s of each held-out stop: 10 s 16/26 and 17/27; 20 s 16/26 and 17/27; 30 s 17/26 and 17/27; 60 s 17/26 and 17/27.
+  - Held-out live replay (a whole session streamed through `LiveTracker` in 0.5 s steps on its real clock, model from the other iPhone): session 1 with the iPhone17,4 model: 27/27 stops found, 0 extra, floor 27/27, top-1 17/27, top-3 21/27, lit 22 (16 right). Session 2 with the iPhone19,2 model: 26/26, 0 extra, floor 26/26, top-1 17/26, top-3 24/26, lit 22 (16 right).
+  - Tests: `test_walksense.py` 4 pass, `test_live.py` 1 pass (fake phyphox replaying session-2 recordings 20x faster: buffers found through `/config`, 4/4 stops named, floor 5, 5, 4, 4, walking/standing/stop states, steps counted, saved stream readable by `read_folder`).
+- **Outcome:** works on recorded data; not yet tried with a real phone. Failures on the way, all fixed before the numbers above:
+  - FAILURE: the first replay joined the recordings end to end without the real 80-minute break; pressure rose about 1 hPa in that break and flipped the floor (floor 22/27, one stop missed). On the real clock the long-gap rule applies (27/27).
+  - FAILURE: two stops with no recorded walk between them (the stairs were not recorded) merged into one stand; a data gap of over 5 s now ends a stop.
+  - FAILURE: a check meant for gaps reset every stand after 6 s, so no stop was found (0/27); removed.
+  - The step counter crashed on walk segments shorter than its smoothing window; steps are now counted only after 2 s of walking.
+  - Screenshot set-up: when the server joined a fake phone mid-route it missed the stops before the stairs and kept 5F; in real use the server starts first (or tap "I'm on 4F").
+- **What changed because of it:** for the demo a stop needs only 10 s standing, not 60 s. Every live walk is saved under `live_runs/`, so live use also collects data.
+- **Links:** `phase2/new/upload/live.py`, `server.py`, `index.html`, `test_live.py`, `out/live_checks.json`, `README.md` (Live mode), `screenshots/live-walking-5F.png`, `screenshots/live-stop-4F.png`.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -354,6 +376,7 @@ Contents:
 - **A map can't replace a fingerprint.** Where a place had no fingerprint in training, the graph did not find it (0/22 on 23 Nov); it helps most when every place has a fingerprint and the magnetometer is weak (cross-day, area 12/17 vs 7/17).
 - **Hold the phone the same way and raw x/y/z works.** With the phone facing the door at every stop, x/y/z got 17/26 and 17/27 across sessions (entry 24) where it got 18 to 24% across days without that rule.
 - **Compare pressure with a few recent readings, not one.** A single odd reading near a vent flipped the floor; the median of the last 6 did not (entry 24).
+- **Replay recorded data on its real clock.** Squeezing out the breaks made weather drift look like a floor change (entry 26).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps
@@ -369,5 +392,6 @@ Contents:
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
 - **graph-v2 (entry 22):** rerun `crossday.py` against `phase2/new/graph-v2/labels_23nov_merged.csv` to see whether merging the study rooms and lift/stairs changes the exact/area numbers, and decide whether v2 replaces v1 for the map/UI. The collector should confirm the two merges match the hand-drawn maps.
 - **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
+- **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`.
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.

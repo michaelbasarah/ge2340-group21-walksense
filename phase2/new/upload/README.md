@@ -10,7 +10,7 @@ Needs `numpy pandas scikit-learn matplotlib` (same as `crossday.py`).
 cd phase2/new/upload
 python walksense.py evaluate      # once: session 1 <-> session 2 test, writes out/eval.json (~20 s)
 python server.py                  # prints http://<laptop-ip>:8000 -> open it on the phone
-python -m unittest test_walksense.py   # end-to-end check with real 24-Nov ZIPs (~30 s)
+python -m unittest test_walksense.py test_live.py   # end-to-end checks with real 24-Nov data (~90 s)
 ```
 - **Network:** the laptop joins the phone's **hotspot** (turn off any VPN). CityU Wi-Fi usually blocks phone-to-laptop traffic. Allow Python through the Windows firewall when it asks.
 - Anyone on the same network can upload, so only run it on your own hotspot.
@@ -21,6 +21,19 @@ python -m unittest test_walksense.py   # end-to-end check with real 24-Nov ZIPs 
 3. On the page: pick the ZIP, optionally pick the true place (for the score), press **Send**.
 4. Walks can be uploaded too (steps, turns, and they carry a floor change on the stairs).
 At the start, press "I'm on 5F" or "I'm on 4F" once.
+
+## Live mode (phyphox remote access, no export/upload)
+The laptop reads the iPhone's sensors **while you walk** and the map updates every second: walking shows the step count, and after **10 s standing still** (phone flat, facing the door) the place circle lights up. The floor is updated once at each stop. The whole stream is also saved to `live_runs/<time>/` as phyphox-style CSVs (gitignored), so every live walk is new data.
+
+1. **Network:** turn on the laptop's **Windows Mobile Hotspot** (Settings > Network > Mobile hotspot) and join it from the iPhone. Turn off the VPN. (The phone's own hotspot may also work.)
+2. **iPhone:** open the phyphox experiment that records accelerometer, gyroscope, magnetometer and pressure (the one used on 24 Nov), tap the menu > **Allow remote access**. phyphox shows an address like `http://192.168.137.23:8080`. Keep phyphox open and the screen on.
+3. **Laptop, check first:** `python live.py probe http://192.168.137.23:8080` must list buffers for acc, gyr, mag and baro and show samples. If something says NOT FOUND, open `http://<phone>:8080/config` in the laptop browser and send its text so the names can be added.
+4. **Start:** `python server.py --live http://192.168.137.23:8080 --floor 5` (start floor; `--device` defaults to `iPhone17,4` = iPhone 16 Plus). Open the printed address on the laptop (or on the phone in a second tab). Press play in phyphox.
+5. Walk; stop 10 s at each place. If the floor is wrong, tap "I'm on 5F/4F".
+
+Checked on recorded data (`python live.py check` > `out/live_checks.json`): each 24-Nov session streamed through the live code in 0.5 s steps on its real clock, with the other iPhone's model (held out): stops found 27/27 and 26/26 with no extra stops, floor 27/27 and 26/26, top-1 17/27 and 17/26, top-3 21/27 and 24/26, lit 22 (16 right) both ways. Top-1 from only the first 10 s of a stop: 16/26 and 17/27 (60 s: 17/26 and 17/27). `test_live.py` runs the real live code against a fake phyphox that replays session-2 recordings 20x faster through the same `/get` calls.
+
+Not confirmed against a real phone yet: the phyphox `/config` format (buffer discovery; `probe` falls back to common names) and whether iOS keeps serving with the screen on but the phone in a pocket.
 
 ## The map
 The page shows the collector's floor sketch (`floor-sketch-v1.pdf`, 5F and 4F) with its red stop dots. After a stop, the dot of the top guess **lights up** (red with a yellow ring and a pulse) when the model is at least 80% sure; below that it gets a dashed "maybe" ring and the page says to try again. The map switches to the floor you are on; the 5F/4F buttons show the other floor. Screenshots: `screenshots/`.

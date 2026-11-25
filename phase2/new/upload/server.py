@@ -2,11 +2,13 @@
 """WalkSense upload server: open it on the phone, send a phyphox ZIP, get floor + steps + place.
 
   python server.py            # then open the printed http://<laptop-ip>:8000 on the phone
+  python server.py --live http://<phone-ip>:8080 [--device iPhone17,4] [--port 8000]   # live from phyphox
 Phone and laptop must be on the same network (the phone's hotspot works best).
 Anyone on that network can upload: use it on your own hotspot only.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import socket
@@ -17,6 +19,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
+import live
 import walksense as ws
 
 HERE = Path(__file__).resolve().parent
@@ -24,6 +27,7 @@ UPLOADS = HERE / 'uploads'
 MAX_UPLOAD = 40_000_000          # a 60 s iPhone stop is ~1 MB, a 4-phone S24 stop ~4 MB
 LOCK = threading.Lock()
 LABELS = {}
+LIVE = {'tracker': None, 'status': {}}   # set by --live
 STATE = {'session': ws.Session(5), 'models': None}
 NAME_OK = re.compile(r'^[a-z0-9_]{0,40}$')
 STATIC = {'/map/floor5.png': 'image/png', '/map/floor4.png': 'image/png', '/map/places.json': 'application/json'}   # only these files
@@ -55,6 +59,11 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, (HERE / 'index.html').read_bytes(), 'text/html; charset=utf-8')
         if path in STATIC:
             return self._send(200, (HERE / path.lstrip('/')).read_bytes(), STATIC[path])
+        if path == '/api/live':
+            t = LIVE['tracker']
+            if t is None:
+                return self._send(200, {'enabled': False})
+            return self._send(200, {'enabled': True, 'device': t.device, 'model_note': t.model_note, **LIVE['status']})
         if path == '/api/state':
             with LOCK:
                 return self._send(200, self._state())
@@ -75,6 +84,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(400, {'error': 'floor must be 4 or 5'})
             with LOCK:
                 STATE['session'].set_floor(int(q['floor']))
+                if LIVE['tracker'] is not None:
+                    LIVE['tracker'].set_floor(int(q['floor']))
                 return self._send(200, self._state())
         if u.path != '/api/upload':
             return self._send(404, {'error': 'not found'})
@@ -125,10 +136,24 @@ def lan_ips():
     return sorted(i for i in ips if not i.startswith('127.'))
 
 
-def main(port=8000):
+def main(argv):
+    ap = argparse.ArgumentParser(description='WalkSense upload / live server')
+    ap.add_argument('--port', type=int, default=8000)
+    ap.add_argument('--live', metavar='PHONE_URL', help='phyphox remote access address, e.g. http://192.168.137.23:8080')
+    ap.add_argument('--device', default='iPhone17,4', help='phone model for live mode (iPhone 16 Plus = iPhone17,4)')
+    ap.add_argument('--floor', type=int, choices=(4, 5), default=5, help='floor you start on')
+    a = ap.parse_args(argv)
+    port = a.port
     print('Training the place models on the 24-Nov stops ...')
     STATE['models'] = ws.build_models()
     LABELS.update(ws.place_labels())
+    STATE['session'] = ws.Session(a.floor)
+    if a.live:
+        phone = live.Phyphox(a.live)
+        run_dir = HERE / 'live_runs' / time.strftime('%Y%m%d-%H%M%S')
+        LIVE['tracker'] = live.LiveTracker(STATE['models'], a.device, a.floor, run_dir)
+        threading.Thread(target=live.run, args=(phone, LIVE['tracker'], LIVE['status'], threading.Event()), daemon=True).start()
+        print(f'Live: reading {phone.base} as {a.device}; {LIVE["tracker"].model_note}. Saving the stream to {run_dir}')
     srv = ThreadingHTTPServer(('0.0.0.0', port), Handler)
     print('Open one of these on the phone (same network):')
     for ip in lan_ips():
@@ -138,4 +163,4 @@ def main(port=8000):
 
 
 if __name__ == '__main__':
-    main(int(sys.argv[1]) if len(sys.argv) > 1 else 8000)
+    main(sys.argv[1:])

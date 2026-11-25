@@ -102,12 +102,12 @@ def hk_epoch(hhmmss):
 
 
 # ============================================================================ features
-def stop_features(rec, kind='tilt'):
+def stop_features(rec, kind='xyz', trim=TRIM_S):
     """One row per 2 s window of a stop. xyz = mean field in phone axes: works when the phone is
     held flat facing the door (24-Nov protocol). tilt = (B along gravity, B across gravity)."""
     mag, acc = rec['mag'], rec['acc']
     t0, t1 = mag[0, 0], mag[-1, 0]
-    lo, hi = t0 + TRIM_S, t1 - TRIM_S
+    lo, hi = t0 + trim, t1 - trim
     if hi - lo < WINDOW_S:            # short recording: use all of it
         lo, hi = t0, t1
     rows = []
@@ -165,10 +165,10 @@ class PlaceModel:
             self.models[floor] = make_model('knn', len(y)).fit(X, y)
             self.places[floor] = sorted(set(y))
 
-    def top3(self, rec, floor):
+    def top3(self, rec, floor, trim=TRIM_S):
         if floor not in self.models:
             return []
-        f = stop_features(rec, self.kind)
+        f = stop_features(rec, self.kind, trim)
         if not len(f):
             return []
         m = self.models[floor]
