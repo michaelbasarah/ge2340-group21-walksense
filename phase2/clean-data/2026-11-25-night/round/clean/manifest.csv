@@ -1,0 +1,118 @@
+floor,type,node,from_node,to_node,place,phone,device,start_hk,start_iso,duration_s,n_accel,n_gyro,n_mag,n_baro,pressure_hpa,folder,source_zip,label_raw,confidence
+5,stop,canteen,,,Canteen,a56,SM-A566B,21:47:39,2026-11-25 21:47:38,60.0,30011,30009,7502,0,,floor5/stops/s01_canteen,kntin 2026-11-25 21-48-41.zip,kntin,high
+5,stop,canteen,,,Canteen,iphone,"iPhone19,2",21:47:42,2026-11-25 21:47:41,60.0,5973,5972,5972,55,1017.43,floor5/stops/s01_canteen,Canteen 2026-11-25 21-48-54.zip,Canteen,high
+5,walk,,canteen,exit5_door,,a56,SM-A566B,21:50:36,2026-11-25 21:50:35,8.6,4316,4315,1079,0,,floor5/walks/w01_canteen__exit5_door,kantin ke ext5 2026-11-25 21-50-46.zip,kantin ke ext5,high
+5,walk,,canteen,exit5_door,,iphone,"iPhone19,2",21:50:35,2026-11-25 21:50:35,8.6,858,857,857,0,,floor5/walks/w01_canteen__exit5_door,Kantin ke ext5 2026-11-25 21-50-52.zip,Kantin ke ext5,high
+5,stop,exit5_door,,,Exit 5 door,a56,SM-A566B,21:52:31,2026-11-25 21:52:31,60.0,30015,30014,7503,0,,floor5/stops/s02_exit5_door,ext 5 2026-11-25 21-53-59.zip,ext 5,high
+5,stop,exit5_door,,,Exit 5 door,iphone,"iPhone19,2",21:52:31,2026-11-25 21:52:31,60.0,5972,5972,5972,0,,floor5/stops/s02_exit5_door,Ext 5 2026-11-25 21-54-10.zip,Ext 5,high
+5,walk,,exit5_door,male_toilet,,a56,SM-A566B,21:56:15,2026-11-25 21:56:14,5.0,2499,2497,624,0,,floor5/walks/w02_exit5_door__male_toilet,ext5 to men tolet 2026-11-25 21-56-36.zip,ext5 to men tolet,high
+5,walk,,exit5_door,male_toilet,,iphone,"iPhone19,2",21:56:15,2026-11-25 21:56:14,5.0,497,496,496,0,,floor5/walks/w02_exit5_door__male_toilet,Ext5 to men tolet 2026-11-25 21-57-00.zip,Ext5 to men tolet,high
+5,stop,male_toilet,,,Male toilet,a56,SM-A566B,21:58:08,2026-11-25 21:58:08,60.0,30005,30004,7501,0,,floor5/stops/s03_male_toilet,mens toilet 2026-11-25 21-59-24.zip,mens toilet,high
+5,stop,male_toilet,,,Male toilet,iphone,"iPhone19,2",21:58:09,2026-11-25 21:58:08,60.0,5973,5973,5973,55,1017.25,floor5/stops/s03_male_toilet,Male toilet 2026-11-25 21-59-38.zip,Male toilet,high
+5,stop,y5302,,,Y5302,a56,SM-A566B,22:02:38,2026-11-25 22:02:38,60.0,30015,30014,7504,0,,floor5/stops/s04_y5302,y5302 2026-11-25 22-03-42.zip,y5302,high
+5,stop,y5302,,,Y5302,iphone,"iPhone19,2",22:02:38,2026-11-25 22:02:38,60.0,5972,5972,5972,0,,floor5/stops/s04_y5302,Y5302 2026-11-25 22-03-50.zip,Y5302,high
+5,walk,,y5302,sr9,,a56,SM-A566B,22:05:03,2026-11-25 22:05:03,11.9,5962,5960,1489,0,,floor5/walks/w03_y5302__sr9,y5302 to study room 2026-11-25 22-05-17.zip,y5302 to study room,high
+5,walk,,y5302,sr9,,iphone,"iPhone19,2",22:05:01,2026-11-25 22:05:01,13.4,1338,1337,1337,0,,floor5/walks/w03_y5302__sr9,Y5302 to study room 2026-11-25 22-05-24.zip,Y5302 to study room,high
+5,stop,sr9,,,SR9 (study rooms),a56,SM-A566B,22:06:41,2026-11-25 22:06:41,60.0,29995,29994,7498,0,,floor5/stops/s05_sr9,study room 2026-11-25 22-07-45.zip,study room,high
+5,stop,sr9,,,SR9 (study rooms),iphone,"iPhone19,2",22:06:41,2026-11-25 22:06:41,60.0,5972,5972,5972,0,,floor5/stops/s05_sr9,Study room 2026-11-25 22-07-54.zip,Study room,high
+5,walk,,sr9,y5202,,iphone,"iPhone19,2",22:09:11,2026-11-25 22:09:10,8.5,849,849,849,0,,floor5/walks/w04_sr9__y5202,Study room to y5202 2026-11-25 22-09-30.zip,Study room to y5202,high
+5,stop,y5202,,,Y5202,a56,SM-A566B,22:10:54,2026-11-25 22:10:53,60.0,30005,30004,7501,0,,floor5/stops/s06_y5202,y5202 2026-11-25 22-12-14.zip,y5202,high
+5,stop,y5202,,,Y5202,iphone,"iPhone19,2",22:10:54,2026-11-25 22:10:53,60.0,5972,5971,5971,0,,floor5/stops/s06_y5202,Y5202 2026-11-25 22-12-24.zip,Y5202,high
+5,walk,,y5202,female_toilet,,a56,SM-A566B,22:13:49,2026-11-25 22:13:48,7.3,3657,3656,914,0,,floor5/walks/w05_y5202__female_toilet,y5202 to tolet cewe 2026-11-25 22-14-02.zip,y5202 to tolet cewe,high
+5,walk,,y5202,female_toilet,,iphone,"iPhone19,2",22:13:49,2026-11-25 22:13:49,6.9,683,682,682,0,,floor5/walks/w05_y5202__female_toilet,Y5202 to tolet cewe 2026-11-25 22-14-09.zip,Y5202 to tolet cewe,high
+5,stop,female_toilet,,,Female toilet,a56,SM-A566B,22:15:44,2026-11-25 22:15:43,60.0,30022,30020,7504,0,,floor5/stops/s07_female_toilet,tolet cewe 2026-11-25 22-16-47.zip,tolet cewe,high
+5,stop,female_toilet,,,Female toilet,iphone,"iPhone19,2",22:15:44,2026-11-25 22:15:43,60.0,5973,5972,5972,0,,floor5/stops/s07_female_toilet,Tolet cewe 2026-11-25 22-16-55.zip,Tolet cewe,high
+5,walk,,female_toilet,exit10_door,,a56,SM-A566B,22:18:12,2026-11-25 22:18:11,4.8,2401,2400,600,0,,floor5/walks/w06_female_toilet__exit10_door,tolet cewe ke ext 10 2026-11-25 22-18-21.zip,tolet cewe ke ext 10,high
+5,walk,,female_toilet,exit10_door,,iphone,"iPhone19,2",22:18:12,2026-11-25 22:18:11,4.8,481,481,481,0,,floor5/walks/w06_female_toilet__exit10_door,Tolet cewe ke ext 10 2026-11-25 22-18-26.zip,Tolet cewe ke ext 10,high
+5,stop,exit10_door,,,Exit 10 door,a56,SM-A566B,22:19:44,2026-11-25 22:19:44,60.0,30011,30010,7502,0,,floor5/stops/s08_exit10_door,ext10 2026-11-25 22-20-48.zip,ext10,high
+5,stop,exit10_door,,,Exit 10 door,iphone,"iPhone19,2",22:19:45,2026-11-25 22:19:44,60.0,5972,5972,5972,0,,floor5/stops/s08_exit10_door,Ext10 2026-11-25 22-21-02.zip,Ext10,high
+5,walk,,exit10_door,canteen,,a56,SM-A566B,22:23:01,2026-11-25 22:23:00,8.3,4138,4137,1033,0,,floor5/walks/w07_exit10_door__canteen,ext 10 ke kantin 2026-11-25 22-23-17.zip,ext 10 ke kantin,high
+5,walk,,exit10_door,canteen,,iphone,"iPhone19,2",22:23:01,2026-11-25 22:23:00,8.3,822,821,821,0,,floor5/walks/w07_exit10_door__canteen,Ext10 ke kantin 2026-11-25 22-23-24.zip,Ext10 ke kantin,high
+5,walk,,canteen,esca_down,,a56,SM-A566B,22:31:01,2026-11-25 22:31:00,8.3,4156,4156,1039,0,,floor5/walks/w08_canteen__esca_down,kantin ke esca turun 2026-11-25 22-32-41.zip,kantin ke esca turun,high
+5,walk,,canteen,esca_down,,iphone,"iPhone19,2",22:31:01,2026-11-25 22:31:00,9.6,955,954,954,0,,floor5/walks/w08_canteen__esca_down,Kantin ke esca turun 2026-11-25 22-32-56.zip,Kantin ke esca turun,high
+5,walk,,esca_up,canteen,,a56,SM-A566B,22:38:14,2026-11-25 22:38:13,6.4,3207,3206,801,0,,floor5/walks/w09_esca_up__canteen,esca naik ke kantin 2026-11-25 22-38-21.zip,esca naik ke kantin,high
+5,walk,,esca_up,canteen,,iphone,"iPhone19,2",22:38:14,2026-11-25 22:38:13,6.3,627,627,627,0,,floor5/walks/w09_esca_up__canteen,Esca naik ke kantin 2026-11-25 22-38-31.zip,Esca naik ke kantin,high
+5,walk,,esca_up,esca_down,,a56,SM-A566B,22:39:45,2026-11-25 22:39:44,6.8,3373,3372,843,0,,floor5/walks/w10_esca_up__esca_down,esca naik to esca turun 2026-11-25 22-39-53.zip,esca naik to esca turun,high
+5,walk,,esca_up,esca_down,,iphone,"iPhone19,2",22:39:45,2026-11-25 22:39:44,6.5,643,642,642,4,1017.35,floor5/walks/w10_esca_up__esca_down,Esca naik ke esca turun 2026-11-25 22-39-58.zip,Esca naik ke esca turun,high
+5,walk,,exit5_door,male_disabled_toilet,,a56,SM-A566B,22:41:55,2026-11-25 22:41:54,4.1,2049,2048,512,0,,floor5/walks/w11_exit5_door__male_disabled_toilet,exit 5 to disable toilet 2026-11-25 22-42-00.zip,exit 5 to disable toilet,high
+5,walk,,exit5_door,male_disabled_toilet,,iphone,"iPhone19,2",22:41:54,2026-11-25 22:41:54,4.4,435,435,435,3,1017.33,floor5/walks/w11_exit5_door__male_disabled_toilet,Exit 5 door ke male disb toilet 2026-11-25 22-42-12.zip,Exit 5 door ke male disb toilet,high
+5,stop,male_disabled_toilet,,,Male disabled toilet,a56,SM-A566B,22:43:32,2026-11-25 22:43:32,60.0,30007,30006,7501,0,,floor5/stops/s09_male_disabled_toilet,disable toilet 2026-11-25 22-44-55.zip,disable toilet,high
+5,stop,male_disabled_toilet,,,Male disabled toilet,iphone,"iPhone19,2",22:43:32,2026-11-25 22:43:32,60.0,5973,5972,5972,0,,floor5/stops/s09_male_disabled_toilet,Disable tolet 2026-11-25 22-45-09.zip,Disable tolet,high
+5,walk,,male_disabled_toilet,lift_stairs5,,a56,SM-A566B,22:47:59,2026-11-25 22:47:59,6.8,3385,3383,845,0,,floor5/walks/w12_male_disabled_toilet__lift_stairs5,disable tolet to stair 2026-11-25 22-48-11.zip,disable tolet to stair,high
+5,walk,,male_disabled_toilet,lift_stairs5,,iphone,"iPhone19,2",22:48:00,2026-11-25 22:47:59,6.8,674,674,674,0,,floor5/walks/w12_male_disabled_toilet__lift_stairs5,Disable tolet to stair 2026-11-25 22-48-17.zip,Disable tolet to stair,high
+5,stop,lift_stairs5,,,Lift / stairs 5,a56,SM-A566B,22:50:52,2026-11-25 22:50:52,60.0,29993,29992,7498,0,,floor5/stops/s10_lift_stairs5,lift lt5 2026-11-25 22-51-56.zip,lift lt5,high
+5,stop,lift_stairs5,,,Lift / stairs 5,iphone,"iPhone19,2",22:50:52,2026-11-25 22:50:52,60.0,5972,5971,5971,0,,floor5/stops/s10_lift_stairs5,Lift lt5 2026-11-25 22-52-01.zip,Lift lt5,high
+5,walk,,lift_stairs5,y5401,,a56,SM-A566B,22:53:17,2026-11-25 22:53:17,6.5,3267,3265,816,0,,floor5/walks/w13_lift_stairs5__y5401,lift to y5401 2026-11-25 22-53-28.zip,lift to y5401,high
+5,walk,,lift_stairs5,y5401,,iphone,"iPhone19,2",22:53:17,2026-11-25 22:53:17,6.6,658,657,657,0,,floor5/walks/w13_lift_stairs5__y5401,Lift to Y5401 2026-11-25 22-53-32.zip,Lift to Y5401,high
+5,stop,y5401,,,Y5401,a56,SM-A566B,22:54:44,2026-11-25 22:54:43,60.0,30001,29999,7499,0,,floor5/stops/s11_y5401,y5401 2026-11-25 22-55-48.zip,y5401,high
+5,stop,y5401,,,Y5401,iphone,"iPhone19,2",22:54:44,2026-11-25 22:54:44,60.0,5971,5971,5971,0,,floor5/stops/s11_y5401,Y5401 2026-11-25 22-55-52.zip,Y5401,high
+5,walk,,y5401,y5302_point2,,a56,SM-A566B,22:57:28,2026-11-25 22:57:28,4.8,2419,2418,605,0,,floor5/walks/w14_y5401__y5302_point2,y5401 to y5302 2026-11-25 22-57-57.zip,y5401 to y5302,high
+5,walk,,y5401,y5302_point2,,iphone,"iPhone19,2",22:57:29,2026-11-25 22:57:28,4.7,467,467,467,0,,floor5/walks/w14_y5401__y5302_point2,Y5401 to y5302 2026-11-25 22-57-44.zip,Y5401 to y5302,high
+5,stop,y5302_point2,,,Y5302 (point 2 - other door),a56,SM-A566B,22:59:02,2026-11-25 22:59:02,60.0,30011,30010,7503,0,,floor5/stops/s12_y5302_point2,y5302 2026-11-25 23-00-07.zip,y5302,high
+5,stop,y5302_point2,,,Y5302 (point 2 - other door),iphone,"iPhone19,2",22:59:02,2026-11-25 22:59:02,60.0,5972,5971,5971,0,,floor5/stops/s12_y5302_point2,Y5302 2026-11-25 23-00-14.zip,Y5302,high
+5,stop,sr9,,,SR9 (study rooms),a56,SM-A566B,24:15:31,2026-11-26 00:15:30,60.0,30013,30012,7503,0,,floor5/stops/s13_sr9,study room 2026-11-26 00-16-38.zip,study room,high
+5,stop,sr9,,,SR9 (study rooms),iphone,"iPhone19,2",24:15:33,2026-11-26 00:15:32,60.0,5973,5972,5972,55,1016.78,floor5/stops/s13_sr9,Sr9 2026-11-26 00-16-43.zip,Sr9,high
+5,stop,y5202,,,Y5202,a56,SM-A566B,24:18:09,2026-11-26 00:18:09,60.0,30011,30010,7502,0,,floor5/stops/s14_y5202,y5202 2026-11-26 00-19-12.zip,y5202,high
+5,stop,y5202,,,Y5202,iphone,"iPhone19,2",24:18:11,2026-11-26 00:18:10,60.0,5972,5972,5972,55,1016.72,floor5/stops/s14_y5202,Y5202 2026-11-26 00-19-15.zip,Y5202,high
+5,stop,exit10_door,,,Exit 10 door,a56,SM-A566B,24:22:18,2026-11-26 00:22:17,60.0,30011,30009,7501,0,,floor5/stops/s15_exit10_door,exit 10 2026-11-26 00-23-30.zip,exit 10,high
+5,stop,exit10_door,,,Exit 10 door,iphone,"iPhone19,2",24:22:19,2026-11-26 00:22:19,60.0,5973,5972,5972,55,1016.63,floor5/stops/s15_exit10_door,Exit 10 door 2026-11-26 00-23-24.zip,Exit 10 door,high
+5,stop,male_disabled_toilet,,,Male disabled toilet,a56,SM-A566B,24:24:59,2026-11-26 00:24:58,60.0,30020,30018,7505,0,,floor5/stops/s16_male_disabled_toilet,disable toilet cowok 2026-11-26 00-26-05.zip,disable toilet cowok,high
+5,stop,male_disabled_toilet,,,Male disabled toilet,iphone,"iPhone19,2",24:25:03,2026-11-26 00:25:03,60.0,5972,5972,5972,55,1016.62,floor5/stops/s16_male_disabled_toilet,Disb toilet cowo 2026-11-26 00-26-09.zip,Disb toilet cowo,high
+5,stop,lift_stairs5,,,Lift / stairs 5,a56,SM-A566B,24:26:54,2026-11-26 00:26:54,60.0,30002,30002,7500,0,,floor5/stops/s17_lift_stairs5,lift stair 5 lt 5 2026-11-26 00-28-02.zip,lift stair 5 lt 5,high
+5,stop,lift_stairs5,,,Lift / stairs 5,iphone,"iPhone19,2",24:27:14,2026-11-26 00:27:13,60.0,5972,5971,5971,55,1016.61,floor5/stops/s17_lift_stairs5,Lift stair 5 2026-11-26 00-28-18.zip,Lift stair 5,high
+5,stop,y5302_point2,,,Y5302 (point 2 - other door),a56,SM-A566B,24:29:37,2026-11-26 00:29:36,60.0,30003,30002,7500,0,,floor5/stops/s18_y5302_point2,y 5302 2026-11-26 00-30-43.zip,y 5302,high
+5,stop,y5302_point2,,,Y5302 (point 2 - other door),iphone,"iPhone19,2",24:29:38,2026-11-26 00:29:37,60.0,5972,5971,5971,55,1016.61,floor5/stops/s18_y5302_point2,Y5302 back 2026-11-26 00-30-47.zip,Y5302 back,high
+5,stop,y5401,,,Y5401,a56,SM-A566B,24:32:31,2026-11-26 00:32:30,60.0,29994,29993,7498,0,,floor5/stops/s19_y5401,y5401 2026-11-26 00-33-37.zip,y5401,high
+5,stop,y5401,,,Y5401,iphone,"iPhone19,2",24:32:19,2026-11-26 00:32:18,60.0,5972,5971,5971,55,1016.61,floor5/stops/s19_y5401,Y5401 2026-11-26 00-33-25.zip,Y5401,high
+4,stop,lift_stairs5,,,Lift / stairs 5 (floor-4 landing),a56,SM-A566B,23:04:35,2026-11-25 23:04:34,60.0,29988,29985,7496,0,,floor4/stops/s01_lift_stairs5,lift lt4 2026-11-25 23-05-37.zip,lift lt4,high
+4,stop,lift_stairs5,,,Lift / stairs 5 (floor-4 landing),iphone,"iPhone19,2",23:03:47,2026-11-25 23:03:46,60.0,5972,5972,5972,0,,floor4/stops/s01_lift_stairs5,Lift lt4 2026-11-25 23-04-53.zip,Lift lt4,high
+4,walk,,lift_stairs5,disabled_toilet,,a56,SM-A566B,23:06:11,2026-11-25 23:06:11,7.7,3840,3839,960,0,,floor4/walks/w01_lift_stairs5__disabled_toilet,lift lt4 to disable toilet 2026-11-25 23-06-24.zip,lift lt4 to disable toilet,high
+4,walk,,lift_stairs5,disabled_toilet,,iphone,"iPhone19,2",23:06:11,2026-11-25 23:06:11,7.6,759,758,758,0,,floor4/walks/w01_lift_stairs5__disabled_toilet,Lift lt 4 to toilet disable 2026-11-25 23-06-31.zip,Lift lt 4 to toilet disable,high
+4,stop,disabled_toilet,,,Disabled toilet,a56,SM-A566B,23:08:03,2026-11-25 23:08:02,60.0,30015,30013,7503,0,,floor4/stops/s02_disabled_toilet,disable toilet lt4 2026-11-25 23-09-07.zip,disable toilet lt4,high
+4,stop,disabled_toilet,,,Disabled toilet,iphone,"iPhone19,2",23:08:04,2026-11-25 23:08:03,60.0,5972,5972,5972,0,,floor4/stops/s02_disabled_toilet,Disable toilet 2026-11-25 23-09-11.zip,Disable toilet,high
+4,walk,,disabled_toilet,exit5_door,,a56,SM-A566B,23:10:23,2026-11-25 23:10:22,7.0,3497,3496,873,0,,floor4/walks/w02_disabled_toilet__exit5_door,disable toilet to exit 5 lt4 2026-11-25 23-10-31.zip,disable toilet to exit 5 lt4,high
+4,walk,,disabled_toilet,exit5_door,,iphone,"iPhone19,2",23:10:24,2026-11-25 23:10:24,5.0,500,500,500,0,,floor4/walks/w02_disabled_toilet__exit5_door,Disable toilet to exit 5 lt 4 2026-11-25 23-10-37.zip,Disable toilet to exit 5 lt 4,high
+4,stop,exit5_door,,,Exit 5 door,a56,SM-A566B,23:15:16,2026-11-25 23:15:15,60.0,30010,30009,7502,0,,floor4/stops/s03_exit5_door,exit 4 lt4 2026-11-25 23-17-40.zip,exit 4 lt4,medium
+4,stop,exit5_door,,,Exit 5 door,iphone,"iPhone19,2",23:17:42,2026-11-25 23:17:42,60.0,5971,5971,5971,0,,floor4/stops/s03_exit5_door,Exit 4 lt4 2026-11-25 23-18-56.zip,Exit 4 lt4,medium
+4,walk,,exit5_door,lt2a,,a56,SM-A566B,23:36:34,2026-11-25 23:36:34,4.5,2245,2245,561,0,,floor4/walks/w03_exit5_door__lt2a,exit 5 lt 4 to lt2a 2026-11-25 23-36-40.zip,exit 5 lt 4 to lt2a,high
+4,walk,,exit5_door,lt2a,,iphone,"iPhone19,2",23:36:58,2026-11-25 23:36:58,4.8,475,474,474,3,1017.7,floor4/walks/w03_exit5_door__lt2a,Exit 5 lantai 4 ke lt2a 2026-11-25 23-37-08.zip,Exit 5 lantai 4 ke lt2a,high
+4,stop,lt2a,,,LT2A,a56,SM-A566B,23:37:19,2026-11-25 23:37:18,60.0,29989,29986,7496,0,,floor4/stops/s04_lt2a,lt2a 2026-11-25 23-38-26.zip,lt2a,high
+4,stop,lt2a,,,LT2A,iphone,"iPhone19,2",23:37:31,2026-11-25 23:37:31,60.0,5972,5972,5972,55,1017.7,floor4/stops/s04_lt2a,Lt2a 2026-11-25 23-38-36.zip,Lt2a,high
+4,walk,,lt2a,lt2b,,a56,SM-A566B,23:39:36,2026-11-25 23:39:35,12.3,6126,6125,1531,0,,floor4/walks/w04_lt2a__lt2b,lt2a to lt2b 2026-11-25 23-39-49.zip,lt2a to lt2b,high
+4,walk,,lt2a,lt2b,,iphone,"iPhone19,2",23:39:36,2026-11-25 23:39:36,13.5,1343,1342,1342,11,1017.68,floor4/walks/w04_lt2a__lt2b,Lt2a ke lt2b 2026-11-25 23-39-56.zip,Lt2a ke lt2b,high
+4,stop,lt2b,,,LT2B,a56,SM-A566B,23:40:24,2026-11-25 23:40:24,60.0,30009,30008,7501,0,,floor4/stops/s05_lt2b,lt2b 2026-11-25 23-41-30.zip,lt2b,high
+4,stop,lt2b,,,LT2B,iphone,"iPhone19,2",23:41:49,2026-11-25 23:41:48,60.0,5971,5971,5971,55,1017.66,floor4/stops/s05_lt2b,Lt2b 2026-11-25 23-42-56.zip,Lt2b,high
+4,walk,,lt2b,esca_down,,a56,SM-A566B,23:43:19,2026-11-25 23:43:18,5.7,2822,2821,705,0,,floor4/walks/w05_lt2b__esca_down,lt2b to esca down 2026-11-25 23-43-26.zip,lt2b to esca down,high
+4,walk,,lt2b,esca_down,,iphone,"iPhone19,2",23:43:20,2026-11-25 23:43:20,5.9,584,584,584,4,1017.66,floor4/walks/w05_lt2b__esca_down,Lt2b ke esca down 2026-11-25 23-43-32.zip,Lt2b ke esca down,high
+4,stop,esca_down,,,Escalator down,a56,SM-A566B,23:44:17,2026-11-25 23:44:16,60.0,29998,29997,7499,0,,floor4/stops/s06_esca_down,esca down 2026-11-25 23-45-18.zip,esca down,high
+4,stop,esca_down,,,Escalator down,iphone,"iPhone19,2",23:44:02,2026-11-25 23:44:01,60.0,5972,5972,5972,55,1017.65,floor4/stops/s06_esca_down,Esca down 2026-11-25 23-45-07.zip,Esca down,high
+4,walk,,esca_down,y4502,,a56,SM-A566B,23:45:47,2026-11-25 23:45:46,7.7,3859,3858,964,0,,floor4/walks/w06_esca_down__y4502,esca down to y4502 2026-11-25 23-45-56.zip,esca down to y4502,high
+4,walk,,esca_down,y4502,,iphone,"iPhone19,2",23:45:48,2026-11-25 23:45:47,7.7,767,766,766,6,1017.64,floor4/walks/w06_esca_down__y4502,Esca down ke y4502 2026-11-25 23-46-00.zip,Esca down ke y4502,high
+4,stop,y4502,,,Y4502,a56,SM-A566B,23:46:43,2026-11-25 23:46:42,60.0,30025,30024,7505,0,,floor4/stops/s07_y4502,y4502 2026-11-25 23-47-45.zip,y4502,high
+4,stop,y4502,,,Y4502,iphone,"iPhone19,2",23:46:43,2026-11-25 23:46:43,60.0,5972,5972,5972,55,1017.59,floor4/stops/s07_y4502,Y4502 2026-11-25 23-47-48.zip,Y4502,high
+4,walk,,y4502,esca_up,,a56,SM-A566B,23:49:08,2026-11-25 23:49:08,8.3,4126,4125,1031,0,,floor4/walks/w07_y4502__esca_up,y4502 to esca up 2026-11-25 23-49-20.zip,y4502 to esca up,high
+4,walk,,y4502,esca_up,,iphone,"iPhone19,2",23:49:08,2026-11-25 23:49:07,8.8,878,878,878,7,1017.57,floor4/walks/w07_y4502__esca_up,Y4502 ke esca up 2026-11-25 23-49-21.zip,Y4502 ke esca up,high
+4,stop,esca_up,,,Escalator up,a56,SM-A566B,23:50:03,2026-11-25 23:50:03,60.0,30006,30005,7500,0,,floor4/stops/s08_esca_up,esca up 2026-11-25 23-51-05.zip,esca up,high
+4,stop,esca_up,,,Escalator up,iphone,"iPhone19,2",23:49:56,2026-11-25 23:49:55,60.0,5972,5971,5971,55,1017.59,floor4/stops/s08_esca_up,Esca up 2026-11-25 23-51-13.zip,Esca up,high
+4,walk,,esca_up,lt1b,,a56,SM-A566B,23:52:13,2026-11-25 23:52:13,6.3,3122,3120,780,0,,floor4/walks/w08_esca_up__lt1b,esca up to lt1b 2026-11-25 23-52-21.zip,esca up to lt1b,high
+4,walk,,esca_up,lt1b,,iphone,"iPhone19,2",23:52:13,2026-11-25 23:52:13,6.0,597,596,596,4,1017.61,floor4/walks/w08_esca_up__lt1b,Esca up ke lt1b 2026-11-25 23-52-25.zip,Esca up ke lt1b,high
+4,stop,lt1b,,,LT1B,a56,SM-A566B,23:53:23,2026-11-25 23:53:23,60.0,30007,30005,7501,0,,floor4/stops/s09_lt1b,lt1b 2026-11-25 23-54-25.zip,lt1b,high
+4,stop,lt1b,,,LT1B,iphone,"iPhone19,2",23:54:02,2026-11-25 23:54:02,60.0,5972,5971,5971,55,1017.61,floor4/stops/s09_lt1b,Lt1b 2026-11-25 23-55-14.zip,Lt1b,high
+4,walk,,lt1b,lt1a,,a56,SM-A566B,23:56:03,2026-11-25 23:56:02,14.6,7270,7269,1817,0,,floor4/walks/w09_lt1b__lt1a,lt1b to lt1a 2026-11-25 23-56-18.zip,lt1b to lt1a,high
+4,walk,,lt1b,lt1a,,iphone,"iPhone19,2",23:56:03,2026-11-25 23:56:02,13.5,1344,1344,1344,11,1017.6,floor4/walks/w09_lt1b__lt1a,Lt1b to lt1a 2026-11-25 23-56-39.zip,Lt1b to lt1a,high
+4,stop,lt1a,,,LT1A,a56,SM-A566B,23:57:35,2026-11-25 23:57:34,60.0,30008,30007,7501,0,,floor4/stops/s10_lt1a,lt1a 2026-11-25 23-58-49.zip,lt1a,high
+4,stop,lt1a,,,LT1A,iphone,"iPhone19,2",23:57:36,2026-11-25 23:57:35,60.0,5972,5972,5972,55,1017.55,floor4/stops/s10_lt1a,Lt1a 2026-11-25 23-58-50.zip,Lt1a,high
+4,walk,,lt1a,exit10_door,,a56,SM-A566B,24:00:05,2026-11-26 00:00:04,4.7,2327,2326,581,0,,floor4/walks/w10_lt1a__exit10_door,lt1a to exit 10 lt4 2026-11-26 00-00-33.zip,lt1a to exit 10 lt4,high
+4,walk,,lt1a,exit10_door,,iphone,"iPhone19,2",24:00:05,2026-11-26 00:00:05,5.5,550,549,549,4,1017.52,floor4/walks/w10_lt1a__exit10_door,Lt1a ke exit 10 door 2026-11-26 00-00-24.zip,Lt1a ke exit 10 door,high
+4,stop,exit10_door,,,Exit 10 door,a56,SM-A566B,24:02:02,2026-11-26 00:02:01,60.0,29997,29996,7498,0,,floor4/stops/s11_exit10_door,exit 10 lt4 2026-11-26 00-03-05.zip,exit 10 lt4,high
+4,stop,exit10_door,,,Exit 10 door,iphone,"iPhone19,2",24:02:03,2026-11-26 00:02:03,60.0,5973,5972,5972,55,1017.52,floor4/stops/s11_exit10_door,Exit 10 door 2026-11-26 00-03-15.zip,Exit 10 door,high
+4,walk,,exit10_door,gate,,a56,SM-A566B,24:03:59,2026-11-26 00:03:58,9.5,4765,4764,1191,0,,floor4/walks/w11_exit10_door__gate,exit 10 lt4 to gate 2026-11-26 00-04-18.zip,exit 10 lt4 to gate,high
+4,walk,,exit10_door,gate,,iphone,"iPhone19,2",24:03:59,2026-11-26 00:03:58,9.2,910,910,910,7,1017.55,floor4/walks/w11_exit10_door__gate,Exit 10 door ke gate 2026-11-26 00-04-28.zip,Exit 10 door ke gate,high
+4,stop,gate,,,Gate (building entrance/exit),a56,SM-A566B,24:05:22,2026-11-26 00:05:22,60.0,30008,30007,7502,0,,floor4/stops/s12_gate,gate 2026-11-26 00-06-25.zip,gate,high
+4,stop,gate,,,Gate (building entrance/exit),iphone,"iPhone19,2",24:05:23,2026-11-26 00:05:22,60.0,5972,5972,5972,55,1017.53,floor4/stops/s12_gate,Gate 2026-11-26 00-06-30.zip,Gate,high
+4,walk,,gate,exit5_door,,a56,SM-A566B,24:07:26,2026-11-26 00:07:25,9.2,4614,4613,1153,0,,floor4/walks/w12_gate__exit5_door,gate to exit 5 2026-11-26 00-07-53.zip,gate to exit 5,high
+4,walk,,gate,exit5_door,,iphone,"iPhone19,2",24:07:26,2026-11-26 00:07:26,9.4,933,933,933,7,1017.49,floor4/walks/w12_gate__exit5_door,Gate ke exit 5 door 2026-11-26 00-07-40.zip,Gate ke exit 5 door,high
+4,walk,,esca_down,esca_up,,a56,SM-A566B,24:09:02,2026-11-26 00:09:01,7.3,3660,3659,914,0,,floor4/walks/w13_esca_down__esca_up,esca down to esca up 2026-11-26 00-09-28.zip,esca down to esca up,high
+4,walk,,esca_down,esca_up,,iphone,"iPhone19,2",24:09:03,2026-11-26 00:09:03,7.3,722,721,721,5,1017.46,floor4/walks/w13_esca_down__esca_up,Esca down to esca up 2026-11-26 00-09-14.zip,Esca down to esca up,high
+4,stop,lift_stairs5,,,Lift / stairs 5 (floor-4 landing),a56,SM-A566B,24:39:35,2026-11-26 00:39:35,60.0,30003,30002,7500,0,,floor4/stops/s13_lift_stairs5,stair lift lt4 2026-11-26 00-40-37.zip,stair lift lt4,high
+4,stop,lift_stairs5,,,Lift / stairs 5 (floor-4 landing),iphone,"iPhone19,2",24:39:35,2026-11-26 00:39:35,60.0,5972,5972,5972,55,1017.21,floor4/stops/s13_lift_stairs5,Lift stair 5 lantai 4 2026-11-26 00-40-40.zip,Lift stair 5 lantai 4,high

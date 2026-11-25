@@ -14,3 +14,9 @@ floor,type,node,from_node,to_node,place,phone,device,start_hk,duration_s,n_accel
 4,stop,exit_10_4F,,,exit_10_4F,s24,SM-S9280,17:59:13,60.1,27916,27911,6001,1499,1011.25,floor4/stops/spots_s12_exit_10_4F,DOC-20261125-WA0059.zip,spots,DOC-20261125-WA0059,user_filename,high
 4,stop,exit_5_4F,,,exit_5_4F,s24,SM-S9280,18:02:10,68.3,30007,29998,6448,1608,1009.42,floor4/stops/spots_s13_exit_5_4F,DOC-20261125-WA0060.zip,spots,DOC-20261125-WA0060,user_filename,high
 4,stop,lift_stairs_4F,,,lift_stairs_4F,s24,SM-S9280,18:04:01,60.9,28313,28311,6087,1520,1010.43,floor4/stops/spots_s14_lift_stairs_4F,DOC-20261125-WA0061.zip,spots,DOC-20261125-WA0061,user_filename,high
+5,stop,y5401,,,y5401,iphone,"iPhone17,4",20:22:00,60.0,5996,5995,5995,55,1017.18,floor5/stops/spots_s15_y5401,y5401 2026-11-25 20-23-07.zip,spots,y5401,rule,high
+5,stop,male_toilet,,,male_toilet,s24,SM-S9280,20:22:07,60.0,27909,27906,6001,1498,1016.83,floor5/stops/spots_s16_male_toilet,DOC-20261125-WA0075.zip,spots,DOC-20261125-WA0075,user_filename,high
+5,stop,y5302_back,,,y5302_back,iphone,"iPhone17,4",20:23:49,60.0,5994,5993,5993,55,1017.13,floor5/stops/spots_s17_y5302_back,y5302 back 2026-11-25 20-24-55.zip,spots,y5302 back,rule,high
+5,stop,escalator_down,,,escalator_down,s24,SM-S9280,20:23:51,60.0,27912,27906,6000,1498,1016.36,floor5/stops/spots_s18_escalator_down,DOC-20261125-WA0076.zip,spots,DOC-20261125-WA0076,user_filename,high
+5,walk,,lift_stairs,y5401,lift_stairs -> y5401,iphone,"iPhone17,4",20:25:48,11.7,1168,1167,1167,9,1017.16,floor5/walks/spots_w01_lift_stairs__y5401,lift stair y5401 2026-11-25 20-26-04.zip,spots,lift stair y5401,rule,high
+5,walk,,y5401,y5302_back,y5401 -> y5302_back,iphone,"iPhone17,4",20:26:48,5.6,563,561,561,4,1017.16,floor5/walks/spots_w02_y5401__y5302_back,y5401 y5302 back 2026-11-25 20-27-00.zip,spots,y5401 y5302 back,rule,high

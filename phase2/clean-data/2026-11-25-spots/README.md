@@ -100,3 +100,13 @@ is already here as `DOC-...` is recognised as the same recording (same model + S
 - `DOC-20261125-WA0000.gz` in the export is byte-identical to `2026-11-24/sesi2/raw/WigleWifi_20261124235955.csv.gz`
   (a 24-Nov log) and was not copied here.
 - The round's 5F escalator-up stop: Chris started 18:06:12, Benedicta 18:06:57 (45 s apart, one stop).
+
+## Added 26 Nov (PROCESS-LOG entry 72): 6 spot takes at 20:22-20:27, before the night run
+- Michael's S24 (SM-S9280): `DOC-20261125-WA0075.zip` = his file `toilet cowo 2026-11-25 20-23-09.zip` (male_toilet, 5F) and
+  `DOC-20261125-WA0076.zip` = `esc turun lvl 5 2026-11-25 20-24-55.zip` (escalator_down, 5F); names from Dicta's chat export
+  (the named messages at 20:23 and 20:25), rows in `labels_override.csv`. Both copied byte-identical from our Android export;
+  the named `esc turun lvl 5` file the user downloaded is byte-identical to WA0076 and is not stored twice.
+- Tian's ip16 (iPhone17,4): `y5401` (stop), `y5302 back` (stop), `lift stair y5401` and `y5401 y5302 back` (walks), copied
+  byte-identical from the user's Downloads, labelled by the name rules. New rule token `Y5302B` ("y5302 back" / "point 2" =
+  y5302_back) in `build_clean.py`; before it the stop "y5302 back" would have been read as y5302. No earlier label changed.
+- `raw/source_files.csv` got the 6 rows by hand (sha256, size, sender, chat time); `index_sources.py` was not rerun.

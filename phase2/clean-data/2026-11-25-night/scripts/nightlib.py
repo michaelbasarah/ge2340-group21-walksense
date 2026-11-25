@@ -16,6 +16,9 @@ ROOT = Path(__file__).resolve().parent.parent          # phase2/clean-data/2026-
 RAW = ROOT / 'raw'
 OUT = ROOT / 'clean'
 LABELS = ROOT / 'labels_night.csv'
+WIFI_LOGS = ROOT / 'wifi_logs.csv'           # WiGLE log -> track, scanner phone (one row per log in raw/)
+# Tracks = the groups that walked together. Each track is its own clean tree <ROOT>/<track>/clean and its own day-3
+# session: 'round' = Dicta (iPhone19,2) + Chris (SM-A566B) in lockstep, 'tian' = Tian (iPhone17,4) on his own pass.
 HK = timezone(timedelta(hours=8))
 DAY = datetime(2026, 11, 25, tzinfo=HK)                 # session day; times after midnight are written as 24:mm:ss
 WINDOW = (DAY + timedelta(hours=21), DAY + timedelta(hours=25, minutes=30))   # the night run: 25 Nov 21:00 -> 26 Nov 01:30
@@ -25,7 +28,7 @@ SLOT = {'iPhone19,2': 'iphone', 'iPhone17,4': 'ip16', 'SM-S9280': 's24', 'SM-A55
 STOP_MIN_S = 40.0                # as build25.py: >= 40 s = stop, shorter = walk
 MATCH_S = 150.0                  # as build25.py: another phone's recording joins the nearest same-type slot within 150 s
 
-LABEL_FIELDS = ['source_zip', 'label_raw', 'device', 'slot', 'anchor', 'start_hk', 'start_iso', 'duration_s', 'type',
+LABEL_FIELDS = ['source_zip', 'label_raw', 'device', 'slot', 'track', 'anchor', 'start_hk', 'start_iso', 'duration_s', 'type',
                 'floor', 'no', 'node', 'from_node', 'to_node', 'status', 'confidence', 'reason', 'pressure_hpa', 'sha256']
 
 # display names, identical to Dicta's 25-Nov tree (build25.py ROUTE) so the app's place labels do not change
@@ -108,6 +111,11 @@ def label_of(name: str) -> str:
     return re.sub(r'\s+\d{4}-\d{2}-\d{2} \d{2}-\d{2}-\d{2}(\s*\(\d+\))?\.zip$', '', strip_prefix(name), flags=re.I).strip()
 
 
+def plain_name(name: str) -> str:
+    """Name without a browser's duplicate-download suffix: 'x 2026-11-25 22-07-45 (1).zip' -> 'x 2026-11-25 22-07-45.zip'."""
+    return re.sub(r'\s*\(\d+\)(\.zip)$', r'\1', name, flags=re.I)
+
+
 def kind_of(dur: float) -> str:
     return 'stop' if dur >= STOP_MIN_S else 'walk'
 
@@ -120,7 +128,7 @@ def read_labels() -> list[dict]:
 
 
 def write_labels(rows: list[dict]) -> None:
-    rows = sorted(rows, key=lambda r: (clock_epoch(r['start_hk']), r['slot']))
+    rows = sorted(rows, key=lambda r: (r.get('track', ''), clock_epoch(r['start_hk']), r['slot']))
     with LABELS.open('w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=LABEL_FIELDS)
         w.writeheader()
@@ -142,8 +150,8 @@ _ALIAS = [
     ('esca_down', r'\b(esca\w*|eska\w*|eaca\w*|escalator)\s+(down|turun)\b'),
     ('y5302', r'\by\s*5302(\s+(back|point\s*2|p2|belakang))?\b'),
     ('sr9', r'\bsr\s*9\b|\bstudy\s*rooms?\b'),
-    ('lift_stairs5', r'\b(lift|stairs?|tangga)(\s*(stairs?|5))*\b'),
-    ('canteen', r'\b(canteen|kantin|cantin)\b'),
+    ('lift_stairs5', r'\b(lift|stairs?|tangga)(\s*(lift|stairs?|5))*\b'),
+    ('canteen', r'\b(canteen|kantin|kntin|cantin)\b'),
     ('gate', r'\b(gate|entrance|pintu)\b'),
 ] + [(r, rf'\b{r}\b') for r in ('y5202', 'y5401', 'y4502', 'lt1a', 'lt1b', 'lt2a', 'lt2b')]
 # token -> nodes it agrees with (y5302 alone may be either door; "disabled" is the 5F male or the 4F mixed one)
@@ -164,8 +172,9 @@ def name_nodes(label: str, kind: str) -> list[str] | None:
     """Place tokens read from a file label: [node] for a stop, [from, to] for a walk; None if it cannot be read."""
     if kind == 'walk':
         parts = re.split(r'\s+(?:ke|to|->|-)\s+', label.lower(), maxsplit=1)
-        if len(parts) != 2:
-            return None
+        if len(parts) != 2:                      # Tian's style: 'y5302 sr9' = from y5302 to sr9 (two places, no 'to')
+            t = _tokens(label)
+            return t if len(t) == 2 else None
         a, b = _tokens(parts[0]), _tokens(parts[1])
         return [a[0], b[0]] if len(a) == 1 and len(b) == 1 else None
     t = _tokens(label)

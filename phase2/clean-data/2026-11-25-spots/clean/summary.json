@@ -13,27 +13,33 @@
   "DOC-20261125-WA0060.zip",
   "DOC-20261125-WA0061.zip",
   "DOC-20261125-WA0062.gz",
+  "DOC-20261125-WA0075.zip",
+  "DOC-20261125-WA0076.zip",
   "eska naik bawah 2026-11-25 17-52-49.zip",
   "eska turun atas 2026-11-25 17-42-52.zip",
   "eska turun bawah 2026-11-25 17-50-26.zip",
-  "sr9 2026-11-25 17-47-43.zip"
+  "lift stair y5401 2026-11-25 20-26-04.zip",
+  "sr9 2026-11-25 17-47-43.zip",
+  "y5302 back 2026-11-25 20-24-55.zip",
+  "y5401 2026-11-25 20-23-07.zip",
+  "y5401 y5302 back 2026-11-25 20-27-00.zip"
  ],
- "recordings_found": 15,
+ "recordings_found": 21,
  "recordings_unreadable": [],
  "duplicates_dropped": 0,
- "recordings_unique": 15,
- "recordings_labelled": 15,
+ "recordings_unique": 21,
+ "recordings_labelled": 21,
  "recordings_unlabelled": [],
- "recordings_written": 15,
+ "recordings_written": 21,
  "per_track_device": {
-  "spots/SM-S9280": 11,
-  "spots/iPhone17,4": 4
+  "spots/SM-S9280": 13,
+  "spots/iPhone17,4": 8
  },
- "stops": 14,
- "walks": 0,
+ "stops": 18,
+ "walks": 2,
  "stops_per_track_floor": {
   "spots/floor4": 7,
-  "spots/floor5": 7
+  "spots/floor5": 11
  },
  "places_with_a_stop": [
   "disabled_toilet",
@@ -46,21 +52,38 @@
   "female_toilet",
   "lift_stairs",
   "lift_stairs_4F",
-  "sr9"
+  "male_toilet",
+  "sr9",
+  "y5302_back",
+  "y5401"
  ],
  "confidence": {
-  "high": 15
+  "high": 21
  },
  "stop_durations_s": [
   60.0,
   68.3
  ],
- "walk_durations_s": [],
+ "walk_durations_s": [
+  5.6,
+  11.7
+ ],
  "recordings_with_more_than_2_time_events": [
   "DOC-20261125-WA0060.zip (4 events)"
  ],
- "floor_check_disagreements": [],
- "floor_check_pairs": 3,
+ "floor_check_disagreements": [
+  {
+   "device": "iPhone17,4",
+   "from": "escalator_up_4F 17:51:44",
+   "to": "y5401 20:22:00",
+   "hpa_from": 1016.87,
+   "hpa_to": 1017.18,
+   "jump_hpa": 0.313,
+   "label_floors": "4->5",
+   "agrees": false
+  }
+ ],
+ "floor_check_pairs": 5,
  "wifi": {
   "logs": [
    {
@@ -76,6 +99,6 @@
   "rows_assigned_within_120s": 4166,
   "rows_in_window": 1283,
   "stops_with_wifi": 14,
-  "stops_total": 14
+  "stops_total": 18
  }
 }
