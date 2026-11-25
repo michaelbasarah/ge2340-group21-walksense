@@ -59,6 +59,7 @@ Contents:
 48. 25 Nov: GitHub main (Dicta's complete 25-Nov dataset, entry 28) merged into our local main; our entries renumbered 29 to 47
 49. 25 Nov: 25 Nov from Dicta's complete set (session 25nov) plus our non-duplicate spot recordings (session 25spots); duplicates found by hash
 50. 25 Nov: rerun with the complete 25 Nov (sessions 25nov + 25spots): before/after, leave 25 Nov out per phone, the hard places, phone ranking
+51. 25 Nov: data-gaps sheet (coverage, held-out performance and a to-collect list per place x phone)
 - Lessons learned
 - Open questions / next steps
 
@@ -762,6 +763,23 @@ Contents:
 
 ---
 
+## 51. 25 Nov: data-gaps sheet (coverage, held-out performance and a to-collect list per place x phone)
+
+- **What we tried:** one Excel sheet that says, per place and phone, how much data we have, how well it is recognised when its session is held out, and what to record next, before the next collection.
+- **Why:** the user is about to collect more data and asked for the gaps in one file.
+- **How:** new `phase2/new/day3/gaps_sheet.py` (pandas + openpyxl). The rules are fixed in its docstring and the sheet's README tab, written on 25 Nov before the sheet was first generated: coverage MISSING = 0 takes, LACKING = fewer than 2 sessions or fewer than 3 takes; performance (leave one session out, learned-weight fused kNN, `out*/fused_sample_predictions.csv`) WEAK = accuracy < 30 % or fewer than 3 test samples (red), FAIR 30 to 60 % (amber), GOOD >= 60 % (green); priority severity and order as written there; "what to record" = more takes at the place with that phone, or 2 takes at the place and 2 at the place it is most confused with. Ran `python phase2/new/day3/gaps_sheet.py --perf-tab "2026-11-25 gaps full25Nov"` on the entry-50 outputs (a first test run on the entry-45 outputs only checked that it works; its sheet was not kept). Copied to `C:\Users\Hp\Downloads\WalkSense data gaps 2026-11-25.xlsx`.
+- **Result** (`out/data_gaps.xlsx`, tabs README, Coverage, Performance, Priority, Summary; the same tables in `out/perf_csv/data_gaps_*.csv`):
+  - Coverage, 130 place x phone cells (26 places x 5 phones): MISSING 0, LACKING 112, OK 18 (ip16 11, s24 4, ip18 1, a55 1, a56 1). Takes per cell: 2 in 112 cells, 3 in 11, 4 in 6, 6 in 1.
+  - Performance, phone cells: default WEAK 119, FAIR 4, GOOD 7; split20 WEAK 46, FAIR 41, GOOD 43. Place rows (all phones): default WEAK 8, FAIR 11, GOOD 7; split20 WEAK 4, FAIR 15, GOOD 7. Most default WEAK cells have only 2 test takes (rule: fewer than 3 samples = WEAK).
+  - Priority: 144 rows (place rows: severity 3 8, severity 1 17; place x phone rows: severity 2 7, severity 1 112). Top 8 are the places below 30 % with all phones: y5202 1/10 (called lift_stairs 3x), y5302_back 1/10 (lift_stairs_4F 3x), lift_stairs 2/12 (lift_stairs_4F 2x), disabled_toilet 2/10 (escalator_down 4x), y5401 2/10 (escalator_up_4F 3x), sr9 3/14 (escalator_down 5x), exit_10 3/11 (lift_stairs 3x), lift_stairs_4F 3/11 (lt1a 3x); then lift_stairs x ip16 1/4 and sr9 x ip16 1/6.
+  - Summary per phone (default accuracy, macro precision): ip18 0.698, 0.667; ip16 0.500, 0.474; a56 0.453, 0.409; s24 0.250, 0.250; a55 0.226, 0.173.
+  - `out/phone_place_performance.xlsx`: new tab `2026-11-25 gaps full25Nov` appended; no other tab changed.
+- **Outcome:** success. The file was sent to the user before the next collection.
+- **What changed because of it:** the next collection can follow the Priority tab. Rerun `gaps_sheet.py` after each pipeline run (it rewrites `data_gaps.xlsx`; use a new `--perf-tab` name to keep a dated copy in the performance workbook).
+- **Links:** `phase2/new/day3/gaps_sheet.py`, `out/data_gaps.xlsx`, `out/perf_csv/data_gaps_coverage.csv`, `data_gaps_performance.csv`, `data_gaps_priority.csv`, `data_gaps_summary_phone.csv`, `data_gaps_summary_place.csv`, `out/phone_place_performance.xlsx`, `README.md` (outputs table); the commit that adds this entry.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -795,6 +813,7 @@ Contents:
 - **Hash a second export before adding it.** All 36 round recordings of our WhatsApp export were byte-identical to Dicta's set; adding both would have put the same take in training and test (entry 49).
 - **A build step that rebuilds a folder deletes what you add to it.** The duplicates list written into `clean/` was removed by the next `build_clean.py`; outputs of other scripts go next to the folder, not inside it (entry 49).
 - **A complete pass beats more spot recordings of a few places.** Dicta's full 26-place pass ended the zero-correct places; the partial export had no takes at most of them (entries 44, 50).
+- **Fix the thresholds before looking at the sheet.** The data-gaps rules (MISSING, LACKING, WEAK) were written down first, so the to-collect list cannot be tuned to a wanted answer (entry 51).
 - **Write failures down while they are fresh.** They are the reason the day-3 checklist has the rules it has.
 
 ## Open questions / next steps

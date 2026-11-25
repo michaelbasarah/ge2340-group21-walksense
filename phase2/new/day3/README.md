@@ -29,6 +29,7 @@ Needs `numpy pandas scikit-learn scipy matplotlib` (the repo's `.venv/` has them
 | 25-Nov spots clean tree (our partial export; rebuilt first by `run_all.sh`) | `../../clean-data/2026-11-25-spots/scripts/build_clean.py` | `clean-data/2026-11-25-spots/clean/` |
 | 25-Nov spots vs Dicta's complete 25 Nov: which recordings are duplicates | `../../clean-data/2026-11-25-spots/scripts/find_duplicates.py` | `clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv` (session `25spots` leaves the duplicates out via `exclude_sources`) |
 | 25-Nov complete dataset (Dicta, committed built) | `../../clean-data/2026-11-25/scripts/build25.py` | `clean-data/2026-11-25/clean/` |
+| data gaps per place x phone (coverage, held-out accuracy / precision, to-collect list; not run by `run_all.sh`) | `gaps_sheet.py` | `out/data_gaps.xlsx`, `out/perf_csv/data_gaps_*.csv` |
 
 ## Adding a session collected later
 

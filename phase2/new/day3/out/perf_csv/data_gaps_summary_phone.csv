@@ -1,0 +1,11 @@
+variant,phone,test samples,correct,accuracy,macro precision,places with data,sessions,takes (default)
+default,ip16,72,36,0.5,0.4737,26,3,72
+default,ip18,53,37,0.6981,0.6667,26,2,53
+default,s24,56,14,0.25,0.25,26,3,56
+default,a55,53,12,0.2264,0.1731,26,2,53
+default,a56,53,24,0.4528,0.409,26,2,53
+split20,ip16,190,106,0.5579,0.5639,26,3,72
+split20,ip18,159,107,0.673,0.6263,26,2,53
+split20,s24,168,48,0.2857,0.2609,26,3,56
+split20,a55,146,41,0.2808,0.2497,26,2,53
+split20,a56,155,83,0.5355,0.5842,26,2,53
