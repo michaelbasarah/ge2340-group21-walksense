@@ -1,0 +1,146 @@
+{
+ "5": {
+  "image": "floor5.png",
+  "width": 760,
+  "height": 785,
+  "places": {
+   "canteen": {
+    "x": 326.2,
+    "y": 247.2,
+    "inferred": false
+   },
+   "exit5_door": {
+    "x": 186.1,
+    "y": 378.0,
+    "inferred": false
+   },
+   "male_toilet": {
+    "x": 255.4,
+    "y": 428.7,
+    "inferred": false
+   },
+   "y5302": {
+    "x": 382.4,
+    "y": 555.5,
+    "inferred": false
+   },
+   "sr9": {
+    "x": 547.3,
+    "y": 441.0,
+    "inferred": false
+   },
+   "y5202": {
+    "x": 655.4,
+    "y": 277.3,
+    "inferred": false
+   },
+   "female_toilet": {
+    "x": 523.5,
+    "y": 151.7,
+    "inferred": false
+   },
+   "exit10_door": {
+    "x": 469.4,
+    "y": 105.3,
+    "inferred": false
+   },
+   "esca_up": {
+    "x": 414.4,
+    "y": 264.2,
+    "inferred": false
+   },
+   "esca_down": {
+    "x": 362.7,
+    "y": 318.4,
+    "inferred": false
+   },
+   "male_disabled_toilet": {
+    "x": 161.9,
+    "y": 402.8,
+    "inferred": false
+   },
+   "lift_stairs5": {
+    "x": 105.6,
+    "y": 513.1,
+    "inferred": false
+   },
+   "y5401": {
+    "x": 152.1,
+    "y": 573.6,
+    "inferred": false
+   },
+   "y5302_point2": {
+    "x": 261.9,
+    "y": 680.3,
+    "inferred": false
+   }
+  }
+ },
+ "4": {
+  "image": "floor4.png",
+  "width": 760,
+  "height": 682,
+  "places": {
+   "lift_stairs5": {
+    "x": 98.8,
+    "y": 527.9,
+    "inferred": false
+   },
+   "exit5_door": {
+    "x": 173.9,
+    "y": 397.4,
+    "inferred": false
+   },
+   "lt2a": {
+    "x": 263.0,
+    "y": 401.0,
+    "inferred": false
+   },
+   "lt2b": {
+    "x": 445.8,
+    "y": 583.9,
+    "inferred": false
+   },
+   "esca_down": {
+    "x": 483.5,
+    "y": 478.4,
+    "inferred": false
+   },
+   "y4502": {
+    "x": 622.6,
+    "y": 533.7,
+    "inferred": false
+   },
+   "esca_up": {
+    "x": 563.6,
+    "y": 404.4,
+    "inferred": false
+   },
+   "lt1b": {
+    "x": 662.0,
+    "y": 351.0,
+    "inferred": false
+   },
+   "lt1a": {
+    "x": 483.5,
+    "y": 176.2,
+    "inferred": false
+   },
+   "exit10_door": {
+    "x": 461.3,
+    "y": 98.7,
+    "inferred": false
+   },
+   "gate": {
+    "x": 331.2,
+    "y": 236.6,
+    "inferred": false
+   },
+   "disabled_toilet": {
+    "x": 150.7,
+    "y": 421.3,
+    "inferred": true
+   }
+  }
+ }
+}

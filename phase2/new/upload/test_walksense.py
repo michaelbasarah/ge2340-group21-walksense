@@ -25,6 +25,7 @@ class UploadTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         server.STATE['models'] = ws.build_models()
+        server.LABELS.update(ws.place_labels())
         server.UPLOADS = server.HERE / 'out' / 'test_uploads'     # keep test uploads out of uploads/
         cls.srv = ThreadingHTTPServer(('127.0.0.1', 0), server.Handler)
         cls.url = f'http://127.0.0.1:{cls.srv.server_address[1]}'
@@ -57,6 +58,7 @@ class UploadTest(unittest.TestCase):
         r = body['result']
         self.assertEqual((r['kind'], r['floor'], r['device']), ('stop', 5, 'iPhone17,4'))
         self.assertEqual(len(r['top3']), 3)
+        self.assertEqual(r['lit'], r['top3'][0][0] if r['top3'][0][1] >= ws.LIGHT_P else None)
         self.assertIn('trained on this phone model', r['model_note'])
         self.assertEqual(body['tally']['stops'], 1)
         data, _ = raw_zip('sesi2', 'iphone', 'walk', 'canteen', None)
@@ -70,6 +72,18 @@ class UploadTest(unittest.TestCase):
                     code, body = self.post('/api/upload?kind=stop', (ws.DATA / 'sesi2' / 'raw' / r['source_zip']).read_bytes())
                     self.assertEqual(code, 200, body)
         self.assertEqual(body['result']['floor'], 4, body['result']['floor_note'])
+
+    def test_map_has_every_place_and_is_served(self):
+        with urllib.request.urlopen(self.url + '/map/places.json') as r:
+            maps = json.loads(r.read())
+        for floor, names in server.places().items():
+            self.assertEqual(set(names), set(maps[str(floor)]['places']), floor)   # every guess can light a circle
+            self.assertTrue(set(names) <= set(server.LABELS), floor)                 # and has a readable name
+        with urllib.request.urlopen(self.url + '/map/floor5.png') as r:
+            self.assertEqual(r.read(8), b'\x89PNG\r\n\x1a\n')
+        for bad in ('/map/../server.py', '/map/make_map.py', '/walksense.py'):
+            with self.assertRaises(urllib.error.HTTPError):
+                urllib.request.urlopen(self.url + bad)
 
     def test_bad_uploads_refused(self):
         self.assertEqual(self.post('/api/upload', b'not a zip')[0], 400)

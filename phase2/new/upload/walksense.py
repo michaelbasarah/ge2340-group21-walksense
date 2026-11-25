@@ -38,6 +38,7 @@ FLOOR_JUMP_HPA = 0.40   # one floor is ~0.58-0.68 hPa (results.json); 0.30-0.50 
 REF_N = 6               # floor reference = median of the last 6 pressure readings on the current floor
 LONG_GAP_S = 15 * 60    # weather drifts ~0.2-0.3 hPa/h: across a longer gap, keep the floor instead of guessing
 WALK_CADENCE = 0.5      # steps/s above this = a walk, below = a stop
+LIGHT_P = 0.8           # light the map circle only this sure: held-out lit 33/44 right, unlit 1/9 (out/eval.json)
 STRIDE_M = 0.54         # median stride on 23 Nov (PROCESS-LOG entry 19); rough
 MAX_MEMBER_BYTES = 60_000_000   # biggest phyphox CSV on 24 Nov is ~3 MB; refuses zip bombs
 FILES = {'acc': ('Accelerometer.csv',), 'gyr': ('Gyroscope.csv',), 'mag': ('Magnetometer.csv',),
@@ -189,6 +190,12 @@ def training_stops(device=None, sessions=SESSIONS, phone=None):
     return out
 
 
+def place_labels():
+    """Readable names from the manifests, e.g. lt1a -> 'LT1A'."""
+    return {MERGE.get(r['node'], r['node']): r['place'] for s in SESSIONS for r in manifest(s)
+            if r['type'] == 'stop' and r['node'] not in MERGE}
+
+
 def known_devices():
     return sorted({r['device'] for s in SESSIONS for r in manifest(s)})
 
@@ -235,10 +242,11 @@ def analyse(rec, session: Session, models: dict, kind='auto', truth=''):
     note = session.track_floor(p0, p1, rec.get('start_epoch'), mo['duration_s'])
     res = {'device': rec.get('device', ''), 'kind': 'walk' if is_walk else 'stop', **mo,
            'pressure_hpa': None if p1 is None else round(p1, 2), 'floor_before': floor_before,
-           'floor': session.floor, 'floor_note': note, 'top3': [], 'model_note': '', 'truth': truth, 'correct': None}
+           'floor': session.floor, 'floor_note': note, 'top3': [], 'lit': None, 'model_note': '', 'truth': truth, 'correct': None}
     if not is_walk:
         model, res['model_note'] = pick_model(models, rec.get('device', ''))
         res['top3'] = model.top3(rec, session.floor) if model else []
+        res['lit'] = res['top3'][0][0] if res['top3'] and res['top3'][0][1] >= LIGHT_P else None
         if truth and res['top3']:
             res['correct'] = res['top3'][0][0] == truth
             session.tally['stops'] += 1

@@ -23,8 +23,10 @@ HERE = Path(__file__).resolve().parent
 UPLOADS = HERE / 'uploads'
 MAX_UPLOAD = 40_000_000          # a 60 s iPhone stop is ~1 MB, a 4-phone S24 stop ~4 MB
 LOCK = threading.Lock()
+LABELS = {}
 STATE = {'session': ws.Session(5), 'models': None}
 NAME_OK = re.compile(r'^[a-z0-9_]{0,40}$')
+STATIC = {'/map/floor5.png': 'image/png', '/map/floor4.png': 'image/png', '/map/places.json': 'application/json'}   # only these files
 
 
 def places():
@@ -44,13 +46,15 @@ class Handler(BaseHTTPRequestHandler):
 
     def _state(self):
         s = STATE['session']
-        return {'floor': s.floor, 'tally': dict(s.tally), 'places': places(), 'history': s.history[-20:],
+        return {'floor': s.floor, 'tally': dict(s.tally), 'places': places(), 'labels': LABELS, 'history': s.history[-20:],
                 'eval': _eval_summary()}
 
     def do_GET(self):
         path = urlparse(self.path).path
         if path == '/':
             return self._send(200, (HERE / 'index.html').read_bytes(), 'text/html; charset=utf-8')
+        if path in STATIC:
+            return self._send(200, (HERE / path.lstrip('/')).read_bytes(), STATIC[path])
         if path == '/api/state':
             with LOCK:
                 return self._send(200, self._state())
@@ -124,6 +128,7 @@ def lan_ips():
 def main(port=8000):
     print('Training the place models on the 24-Nov stops ...')
     STATE['models'] = ws.build_models()
+    LABELS.update(ws.place_labels())
     srv = ThreadingHTTPServer(('0.0.0.0', port), Handler)
     print('Open one of these on the phone (same network):')
     for ip in lan_ips():

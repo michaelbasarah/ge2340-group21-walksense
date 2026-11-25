@@ -22,6 +22,14 @@ python -m unittest test_walksense.py   # end-to-end check with real 24-Nov ZIPs 
 4. Walks can be uploaded too (steps, turns, and they carry a floor change on the stairs).
 At the start, press "I'm on 5F" or "I'm on 4F" once.
 
+## The map
+The page shows the collector's floor sketch (`floor-sketch-v1.pdf`, 5F and 4F) with its red stop dots. After a stop, the dot of the top guess **lights up** (red with a yellow ring and a pulse) when the model is at least 80% sure; below that it gets a dashed "maybe" ring and the page says to try again. The map switches to the floor you are on; the 5F/4F buttons show the other floor. Screenshots: `screenshots/`.
+
+- `map/make_map.py` builds `map/floor5.png`, `map/floor4.png` and `map/places.json` from the PDF (needs `pymupdf pillow`, only to rebuild). It finds the red dots by colour and checks each place matches exactly one dot.
+- Which dot is which place: route order and the sketch's metre marks, checked against the floor-5 pins in `phase2/map/coordinates_meters.csv`; escalator up vs down on 5F from the compass direction of the three escalator walks (6 of 6 recordings agree). **Please confirm**, especially the 4F lecture theatres (LT1A/LT1B top right, LT2A/LT2B bottom left) and the gate.
+- The 4F **disabled toilet has no dot** on the sketch. It is drawn as a faint dot next to Exit 5 (same offset as the 5F male disabled toilet) and marked `inferred` in `places.json`.
+- 80% is a cut-off chosen on the held-out test itself (lit 33/44 right, not lit 1/9 right), so it is a first guess, not a tested setting.
+
 ## What it does
 | Part | How | Tested |
 |---|---|---|
@@ -42,5 +50,5 @@ Place, train on one 24-Nov session and test every stop of the other (true floor 
 
 ## Not done
 - No Wi-Fi (iOS apps cannot scan). Android + WiGLE upload is the next step if Wi-Fi earns its place.
-- No map/route on this page and no replay export for `circle-ui` (the 24-Nov places have no x/y yet).
+- No route drawing on the map and no replay export for `circle-ui`.
 - No graph prior (neighbouring places) on the place guess.

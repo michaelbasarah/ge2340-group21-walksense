@@ -26,6 +26,16 @@
   .bar { height:6px; background:var(--line); border-radius:3px; margin-top:3px; }
   .bar > div { height:100%; background:var(--accent); border-radius:3px; }
   #err { color:var(--bad); font-weight:600; }
+  .tabs { display:flex; gap:6px; margin:10px 0 8px; } .tabs button { margin:0; min-height:36px; padding:6px; background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .tabs button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+  #map { width:100%; height:auto; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
+  #map .lit { fill:#ff2020; stroke:#ffd400; stroke-width:5; }
+  #map .halo { fill:none; stroke:#ff2020; stroke-width:4; transform-box:fill-box; transform-origin:center; animation:pulse 1.4s ease-out infinite; }
+  #map .maybe { fill:none; stroke:#555; stroke-width:3; stroke-dasharray:6 5; }
+  #map text { font:700 22px system-ui, sans-serif; fill:#111; paint-order:stroke; stroke:#fff; stroke-width:6px; stroke-linejoin:round; }
+  @keyframes pulse { from { transform:scale(1); opacity:.9; } to { transform:scale(3.2); opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { #map .halo { animation:none; opacity:.5; transform:scale(1.8); } }
+  #mapnote { margin-top:6px; }
 </style>
 </head>
 <body>
@@ -36,6 +46,9 @@
     <div class="muted">You are on</div>
     <div class="big" id="floor">-</div>
     <div class="muted" id="tally"></div>
+    <div class="tabs" role="group" aria-label="Show floor"><button data-show="5">5F map</button><button data-show="4">4F map</button></div>
+    <svg id="map" role="img" aria-label="Floor map"></svg>
+    <div class="muted" id="mapnote">Send a stop to see where you are.</div>
   </div>
 
   <div class="card">
@@ -62,12 +75,42 @@
 <script>
 const $ = id => document.getElementById(id);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
-const nice = s => (s || '').replace(/_/g, ' ');
-let state = null;
+const nice = s => (state && state.labels && state.labels[s]) || (s || '').replace(/_/g, ' ');
+let state = null, maps = null, shown = 5, last = null;
+const SVGNS = 'http://www.w3.org/2000/svg';
+const sv = (tag, attrs) => { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); return e; };
+
+function drawMap() {
+  if (!maps) return;
+  const m = maps[shown], svg = $('map');
+  svg.setAttribute('viewBox', `0 0 ${m.width} ${m.height}`);
+  svg.replaceChildren(sv('image', { href: '/map/' + m.image, x: 0, y: 0, width: m.width, height: m.height }));
+  document.querySelectorAll('[data-show]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.show === shown)));
+  for (const [id, p] of Object.entries(m.places)) if (p.inferred) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 9, fill: '#ff3b30', opacity: .55 }));
+  const r = last && last.kind === 'stop' && last.floor === shown ? last : null;
+  let note = 'Send a stop to see where you are.';
+  if (r && r.top3.length) {
+    const id = r.lit || r.top3[0][0], p = m.places[id];
+    if (p) {
+      if (r.lit) {
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 15, class: 'halo' }), sv('circle', { cx: p.x, cy: p.y, r: 15, class: 'lit' }));
+        note = `You are at ${nice(id)} (${Math.round(r.top3[0][1] * 100)}% sure).`;
+      } else {
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 22, class: 'maybe' }));
+        note = `Not sure: maybe ${nice(id)} (${Math.round(r.top3[0][1] * 100)}%). Stand still, phone flat, facing the door, and try again.`;
+      }
+      const t = sv('text', { x: p.x, y: p.y - 26, 'text-anchor': 'middle' }); t.textContent = nice(id); svg.append(t);
+    }
+  } else if (last && last.kind === 'walk') note = 'Walking: send the next stop to light up where you are.';
+  else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
+  $('mapnote').textContent = note;
+  svg.setAttribute('aria-label', `${shown}F floor map. ${note}`);
+}
 
 function render(s) {
   state = s;
   $('floor').textContent = s.floor + 'F';
+  if (!last) { shown = s.floor; drawMap(); }
   const t = s.tally || {};
   $('tally').textContent = t.stops ? `Score this session: ${t.correct || 0}/${t.stops} right, ${t.top3 || 0}/${t.stops} in top 3` : 'No scored stops yet';
   const sel = $('truth'), keep = sel.value;
@@ -81,6 +124,7 @@ function render(s) {
 }
 
 function showResult(r) {
+  last = r; shown = r.floor; drawMap();
   const box = $('result'); box.hidden = false; box.replaceChildren();
   box.append(el('div', r.kind === 'stop' ? 'Stop' : 'Walk', 'muted'));
   const tb = el('table');
@@ -123,8 +167,10 @@ $('send').onclick = async () => {
   } catch (e) { $('err').textContent = e.message; }
   $('send').disabled = false; $('send').textContent = 'Send';
 };
+document.querySelectorAll('[data-show]').forEach(b => b.onclick = () => { shown = +b.dataset.show; drawMap(); });
+fetch('/map/places.json').then(r => r.json()).then(j => { maps = j; drawMap(); }).catch(() => { $('mapnote').textContent = 'Map not available.'; });
 document.querySelectorAll('[data-floor]').forEach(b => b.onclick = async () => render(await call('/api/floor?floor=' + b.dataset.floor, { method: 'POST' })));
-$('reset').onclick = async () => { render(await call('/api/reset?floor=' + state.floor, { method: 'POST' })); $('result').hidden = true; };
+$('reset').onclick = async () => { render(await call('/api/reset?floor=' + state.floor, { method: 'POST' })); $('result').hidden = true; last = null; drawMap(); };
 call('/api/state').then(s => { render(s); if (s.history.length) showResult(s.history[s.history.length - 1]); }).catch(e => $('err').textContent = 'Cannot reach the server: ' + e.message);
 </script>
 </body>

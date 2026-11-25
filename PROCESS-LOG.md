@@ -33,6 +33,7 @@ Contents:
 22. 24 Nov: graph-v2, merged study rooms and lift/stairs (non-destructive)
 23. 24 Nov: two-session clean dataset published (sesi1 4-phone + Wi-Fi, sesi2 2-phone)
 24. 25 Nov: upload pipeline (phyphox ZIP from the phone -> floor, steps, place) and the first session-1 vs session-2 test
+25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
 - Lessons learned
 - Open questions / next steps
 
@@ -328,6 +329,18 @@ Contents:
 
 ---
 
+## 25. 25 Nov: floor map on the upload page; the circle lights up after a confident stop
+
+- **What we tried:** show the collector's floor sketch on the upload page and light up the red dot of the place the system thinks you are at.
+- **Why:** the user asked for the map in the page, with the red circle lighting up after a scan when the system knows where it is.
+- **How:** `phase2/new/upload/map/make_map.py` renders `phase2/clean-data/2026-11-24/floor-sketch-v1.pdf` (identical to the copy the user sent, `Teks paragraf Anda_20261124_222646_0000.pdf`), finds the red dots by colour (14 on 5F, 11 on 4F) and writes `floor5.png`, `floor4.png`, `places.json`. Dot -> place: route order and metre marks of the 24-Nov walks; on 5F checked against `phase2/map/coordinates_meters.csv` (Exit 5, male toilet, Y5-302 to the south-west; Exit 10, female toilet to the north-east; Y5-202 east; study rooms south-east), which also showed that Google's "Female Bathroom" label sits by the stop the team calls the male toilet. 5F escalator up vs down: compass heading of the three escalator walks (canteen -> down, up -> canteen, up -> down) relative to each other, compared with the two possible layouts. 4F: the 9-dot loop and the escalator/Y4502 triangle match the 4F walks, and the lift landing sits under the 5F lift. Light rule: top-1 probability of at least 0.8 (`LIGHT_P` in `walksense.py`). Server serves only the three map files; readable names come from the manifests.
+- **Result:** every place the model can guess has a dot (14 on 5F, 12 on 4F), checked in `test_walksense.py` (4 tests pass). Escalators: all 6 walk recordings (session 1 iPhone, S24, A55, A56; session 2 iPhone, S24) give the pattern of "down = the south dot of the triangle" (relative headings +78 to +154 and +35 to +87 degrees; predicted +128 and +71; the other layout predicts -127 and -56). Cut-off on the held-out iPhone visits (`out/eval.json`, both directions, 53 visits): at 0.8, 44 lit with 33 right; 9 not lit with 1 right; 34/53 right with no cut-off. Screenshots in `phase2/new/upload/screenshots/` (lit on 5F and 4F, "not sure" ring for a walk sent as a stop at 50%).
+- **Outcome:** success as a UI. Three things are not measured: the dot -> place matching is our reading of the sketch (not confirmed by the collector); the 4F disabled toilet has no dot and is placed by the 5F offset (`inferred`); the 0.8 cut-off was picked on the same test data it is judged on. The model's probabilities are over-confident (52 of 53 held-out visits had a top-1 of at least 0.6, right or wrong).
+- **What changed because of it:** the page now shows where you are on the map instead of only a list. The collector should confirm the dot names in `phase2/new/upload/map/make_map.py` (`REF`).
+- **Links:** `phase2/new/upload/map/` (`make_map.py`, `places.json`, `floor5.png`, `floor4.png`), `index.html`, `server.py`, `walksense.py` (`LIGHT_P`, `place_labels`), `test_walksense.py`, `screenshots/`, `README.md`.
+
+---
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -356,4 +369,5 @@ Contents:
 - **Circle UI and tracker (entries 18 to 21), confirmations needed from the team:** the area groups (`phase2/new/graph/README.md`), the floor-4 loop order, the escalator pairs, whether ACC01 really stood still, the stairs U-turn and the corners, and the unrecorded exit5 to exit10 walk (see `phase2/new/tracking/README.md`). The UI shows these as the tracker has them. After day 3, re-export the replay and reload it in `phase2/new/circle-ui/` (it needs no change if the format is the same).
 - **graph-v2 (entry 22):** rerun `crossday.py` against `phase2/new/graph-v2/labels_23nov_merged.csv` to see whether merging the study rooms and lift/stairs changes the exact/area numbers, and decide whether v2 replaces v1 for the map/UI. The collector should confirm the two merges match the hand-drawn maps.
 - **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
+- **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **Report:** the team writes the report wording (course rule). Numbers can be taken from `phase2/new/cross-day/out/` and this log.
