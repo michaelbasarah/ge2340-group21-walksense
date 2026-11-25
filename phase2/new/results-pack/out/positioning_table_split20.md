@@ -2,10 +2,10 @@
 
 | Method | Feature set / variant | Honest held-out test | Correct | n | Accuracy [95% CI] | Chance | LEAKY (random split) | Partly leaky (by recording) | Note |
 |---|---|---|---|---|---|---|---|---|---|
-| B  Wi-Fi kNN | Wi-Fi only (S24 scanner, rows within 120 s) | leave one session out, all phones (n = 842) | 117 | 842 | 13.9% [12 to 16] | 3.8% | 1397/2473 = 56.5% | 336/842 = 39.9% | WiGLE logs a BSSID only when new or stronger: not a fingerprint (entries 12, 30) |
-| C  Magnetic kNN | \|B\| only (field strength) | leave one session out, all phones (n = 842) | 98 | 842 | 11.6% [10 to 14] | 3.8% | 1237/2473 = 50.0% | 83/842 = 9.9% |  |
-| C  Magnetic kNN | \|B\| x/y/z (field vector) | leave one session out, all phones (n = 842) | 309 | 842 | 36.7% [34 to 40] | 3.8% | 2391/2473 = 96.7% | 305/842 = 36.2% | works only if the phone is held the same way (facing the door) |
-| C  Magnetic kNN | tilt (B_vertical, B_horizontal) | leave one session out, all phones (n = 842) | 117 | 842 | 13.9% [12 to 16] | 3.8% | 1795/2473 = 72.6% | 88/842 = 10.5% | needs accelerometer at stops (24 Nov only) |
-| D  Fusion (weighted kNN, no HMM) | fused kNN, learned weights (\|B\|, xyz, tilt, Wi-Fi, floor) | leave one session out, all phones (n = 842) | 375 | 842 | 44.5% [41 to 48] | 3.8% | 2441/2473 = 98.7% | 454/842 = 53.9% | honest alternative: grouped by stop in numbers.md |
+| B  Wi-Fi kNN | Wi-Fi only (S24 scanner, rows within 120 s) | leave one session out, all phones (n = 1108) | 126 | 1108 | 11.4% [10 to 13] | 3.8% | 1407/3253 = 43.3% | 345/1108 = 31.1% | WiGLE logs a BSSID only when new or stronger: not a fingerprint (entries 12, 30) |
+| C  Magnetic kNN | \|B\| only (field strength) | leave one session out, all phones (n = 1108) | 117 | 1108 | 10.6% [9 to 13] | 3.8% | 1471/3253 = 45.2% | 91/1108 = 8.2% |  |
+| C  Magnetic kNN | \|B\| x/y/z (field vector) | leave one session out, all phones (n = 1108) | 423 | 1108 | 38.2% [35 to 41] | 3.8% | 3130/3253 = 96.2% | 366/1108 = 33.0% | works only if the phone is held the same way (facing the door) |
+| C  Magnetic kNN | tilt (B_vertical, B_horizontal) | leave one session out, all phones (n = 1108) | 168 | 1108 | 15.2% [13 to 17] | 3.8% | 2310/3253 = 71.0% | 139/1108 = 12.5% | needs accelerometer at stops (24 Nov only) |
+| D  Fusion (weighted kNN, no HMM) | fused kNN, learned weights (\|B\|, xyz, tilt, Wi-Fi, floor) | leave one session out, all phones (n = 1108) | 501 | 1108 | 45.2% [42 to 48] | 3.8% | 3211/3253 = 98.7% | 516/1108 = 46.6% | honest alternative: grouped by stop in numbers.md |
 
 Chance is 1/(places in training) unless the row says otherwise (floor rows: 1/2 derived; walking dot: not defined in the file). n is recordings for stop tests, stop visits for tracker tests. The LEAKY column is the random-window split of the same classifier; do not quote it as a result.

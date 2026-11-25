@@ -10,7 +10,7 @@ two-floor loop; Dicta and Chris then went back for extra takes at the weak place
 |---|---|---|---|---|---|
 | `round` (`25night`) | Dicta (Benedicta) | ip18 (iPhone19,2), `iphone` | 21:47 to 00:40 | 32 (24 loop + 8 extra) | 27 |
 | `round` (`25night`) | Chris | a56 (SM-A566B), `a56` | 21:47 to 00:40 | 32 (24 loop + 8 extra) | 26 |
-| `tian` (`25night_tian`) | Tian | ip16 (iPhone17,4), `iphone` | 21:40 to 23:00 | 23 | 24 |
+| `tian` (`25night_tian`) | Tian | ip16 (iPhone17,4), `iphone` | 21:40 to 23:00 | 23 | 23 |
 
 Dicta and Chris walked in step (their STARTs are within seconds), Tian walked the loop on his own and faster, in his
 own order, so he is a separate track (his own clean tree, his own day-3 session; the same split as 24 Nov session 1 /
@@ -64,6 +64,18 @@ cowo/cowok/men = male, ext/ezit = exit, kantin/kntin = canteen). Context-resolve
   where the route has LT1B and LT1A, and their field is far from his own LT2A/LT2B takes of 22:34/22:37 and near his 24-Nov
   LT1B (12.6 uT) and LT1A (1.2 uT) takes (`tian_lt_check.csv`). Tian should say which rooms they were; then set the rows to
   `ok` (floor 4, a slot number, node `lt1b`/`lt1a` or `lt2b`/`lt2a`) and rebuild.
+- **Also left out: Tian's walk "toilet disabled bawah lt2a" (22:33)**, 4F disabled toilet -> LT2A. The label is fine, but the place
+  graph and the upload app's floor plan have no direct corridor between those two (the walk passes the 4F exit 5 door), and the
+  app builds its corridors from the walks (`test_walksense.py` checks that every corridor is drawn). Set it `ok` if the team
+  adds that corridor to the map.
+
+## Sensor problems found (`field_check.csv`, `scripts/check_field.py`)
+- **Chris's a56 magnetometer was off all night**: median |B| over his 32 stops 110.9 uT (49.0 to 186.8), against 45.2 uT for the
+  same phone on the first 25-Nov run and 40.6 uT on 24 Nov; mean x/y/z offset against his first-run take at the same 24
+  places -35.4 / -77.6 / -3.3 uT (sd 24.4 / 25.4 / 7.5). Dicta's iPhone on the same walk: 36.9 uT, offset 5.5 / -2.3 / 2.4 uT.
+  This looks like a hard-iron offset (uncalibrated sensor or a magnet / magnetic case near the phone), not a label problem.
+  The takes are kept and used like every other take; see PROCESS-LOG entry 72 for what it does to the a56 numbers.
+- One of Dicta's stops, "Y5302" 22:59 (y5302_point2), is the B_max of her night stops in `field_check.csv` (332.6 uT; her median is 36.9 uT): something magnetic was close to the phone at that take.
 
 ## Coverage of the run (stops per place, from labels_night.csv rows with status ok)
 | place (graph-v2) | ip18 Dicta | a56 Chris | ip16 Tian |
