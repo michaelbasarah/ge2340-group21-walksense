@@ -1565,6 +1565,10 @@ Contents:
 - **What changed because of it:** recommendation for the demo: train on ip18 only (the demo phone), since the user's rule was "similar => both, otherwise ip18 only" and ip16 alone is clearly worse and pooling shows no reliable top-1 gain. The app is NOT changed (`pick_model` already uses the ip18-only model for an iPhone19,2 recording; to pool, `build_models` would need an ip18 model built from `training_stops(device=...)` of both iPhones, see the upload README).
 - **Links:** `phase2/new/upload/eval_iphone_pool.py`, `phase2/new/upload/out/iphone_pool.json`, `phase2/new/day3/eval_iphone_pool_fused.py`, `phase2/new/day3/out-iphone-pool/`, `phase2/new/upload/README.md` (section "ip16 and ip18: pooled training?"), `out/eval.json`; commit on branch `feat/iphone-pool` (hash in the commit).
 
+## 90. 27 Nov: upload app: floor rule (d) wired in, Chris's a56 night left out of the a56 model, Standard mode prefers ordinary toilets (IN PROGRESS)
+
+- Work in progress on branch `feat/app-floor-toilets`; this entry is completed in the last commit of the branch.
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
