@@ -1,4 +1,1292 @@
 {
- "meta": {},
- "responses": {}
+ "meta": {
+  "api": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+  "model": "gemini-3.5-flash-lite",
+  "prompt_version": "v1",
+  "system_prompt": "You map a typed request from a student in one university building to exactly ONE place from a fixed list. Reply with one place ID copied exactly from the list, or the word NONE. Output only that single token: no explanation, no punctuation, no quotes. Answer NONE when no place in the list fits the request, when the request names a place that is not in the list (for example a room number that does not exist), or when the request is not about finding a place. The request may contain typos, Indonesian, Cantonese or a mix of languages. When several places fit equally (for example toilets or escalators on different floors) and the request does not say which floor, pick any one of them. Floor 5 is the upper floor (atas), floor 4 the lower floor (bawah).",
+  "user_prompt_example": "Place list (ID | name | floor | tags | also called):\ncanteen | Canteen (5F) | floor 5 | tags: drink, food | also called: canteen, kantin, cafeteria, food court, food, eat, hungry, lunch, dinner, breakfast, meal, rice, noodles, siu mei, roast meat, char siu, dim sum, drink, coffee, snack, city express, makan, lapar, makan siang\nexit_5 | Exit 5 (5F) | floor 5 | tags: emergency, exit | also called: exit 5, exit5, emergency exit, emergency, emergency case, fire exit, fire, evacuate, alarm, emergency stairs, exit, exits, way out, get out, pintu keluar, keluar\nmale_toilet | Male toilet (5F) | floor 5 | tags: male, toilet | also called: male toilet, mens toilet, mens, mens bathroom, men toilet, gents, toilet cowo, toilet laki, wc cowo, cowo, toilet, bathroom, washroom, restroom, wc, lavatory, loo, pee, poo, toilets, kamar kecil, kamar mandi\ny5302 | Y5-302 (5F) | floor 5 | tags: room, studio | also called: y5302, y5 302, y5-302, y5 studio, y5, year 5, studio 5\nsr9 | Study rooms SR8 to SR11 (merged as SR9, book first) | floor 5 | tags: bookable, quiet, room, study | also called: sr9, study room 9, room 9, sr8, sr10, sr11, study room 8, study room 10, study room 11, study room, study rooms, quiet study, ruang belajar, belajar, revise, revision, study, quiet place\ny5202 | Y5-202 (5F) | floor 5 | tags: room, studio | also called: y5202, y5 202, y5-202, y5, year 5, studio 5\nfemale_toilet | Female toilet (5F) | floor 5 | tags: female, toilet | also called: female toilet, womens toilet, womens, ladies, toilet cewe, toilet perempuan, wc cewe, cewe, toilet, bathroom, washroom, restroom, wc, lavatory, loo, pee, poo, toilets, kamar kecil, kamar mandi\nexit_10 | Exit 10 (5F) | floor 5 | tags: exit | also called: exit 10, exit10, exit, exits, way out, get out, pintu keluar, keluar\nescalator_up | Escalator up (5F) | floor 5 | tags: escalator, floor_change, vertical | also called: escalator up, esca up, esca naik, eska naik, eskalator naik, up escalator, go up, going up, upstairs, naik, escalator, escalators, eskalator, esca, eska, moving stairs, change floor, ganti lantai\nescalator_down | Escalator down (5F) | floor 5 | tags: escalator, floor_change, vertical | also called: escalator down, esca down, esca turun, eska turun, eskalator turun, down escalator, go down, going down, downstairs, turun, escalator, escalators, eskalator, esca, eska, moving stairs, change floor, ganti lantai\ndisabled_toilet | Male disabled toilet (5F) | floor 5 | tags: accessible, toilet, wheelchair | also called: disabled toilet, male disabled toilet, male disabled toilet 5f, accessible toilet, wheelchair toilet, handicap toilet, toilet disabilitas, toilet difabel, toilet, bathroom, washroom, restroom, wc, lavatory, loo, pee, poo, toilets, kamar kecil, kamar mandi\ny5401 | Y5-401 (5F) | floor 5 | tags: room, studio | also called: y5401, y5 401, y5-401, y5, year 5, studio 5\ny5302_back | Y5-302 back, point 2 (5F) | floor 5 | tags: room, studio | also called: y5302 back, y5302 point 2, back of y5302, y5 302 back, y5, year 5, studio 5\ndisabled_toilet_4F | Mixed disabled toilet (4F) | floor 4 | tags: accessible, toilet, wheelchair | also called: disabled toilet 4f, mixed disabled toilet, mixed disabled toilet 4f, unisex accessible toilet, toilet 4f, 4f toilet, disabled toilet bawah, toilet bawah, toilet, bathroom, washroom, restroom, wc, lavatory, loo, pee, poo, toilets, kamar kecil, kamar mandi\nexit_5_4F | Exit 5 (4F) | floor 4 | tags: emergency, exit | also called: exit 5 4f, exit 5 bawah, exit 5 lantai 4, emergency exit 4f, exit, exits, way out, get out, pintu keluar, keluar\nlt2a | Lecture theatre 2A (4F) | floor 4 | tags: lecture | also called: lt2a, lt 2a, lecture theatre 2a, lecture 2a, theatre 2a, kelas 2a, lecture theatre, lecture theater, lecture hall, lecture, class, lesson, kuliah, ruang kuliah, kelas\nlt2b | Lecture theatre 2B (4F) | floor 4 | tags: lecture | also called: lt2b, lt 2b, lecture theatre 2b, lecture 2b, theatre 2b, kelas 2b, lecture theatre, lecture theater, lecture hall, lecture, class, lesson, kuliah, ruang kuliah, kelas\nescalator_down_4F | Escalator down (4F) | floor 4 | tags: escalator, floor_change, vertical | also called: escalator down 4f, esca turun bawah, eska turun bawah, down escalator 4f, go down, going down, downstairs, turun, escalator, escalators, eskalator, esca, eska, moving stairs, change floor, ganti lantai\ny4502 | Y4-502 (4F) | floor 4 | tags: room, studio | also called: y4502, y4 502, y4-502, y4, year 4, studio 4, y4 studio\nescalator_up_4F | Escalator up (4F) | floor 4 | tags: escalator, floor_change, vertical | also called: escalator up 4f, esca naik bawah, eska naik bawah, up escalator 4f, go up, going up, upstairs, naik, escalator, escalators, eskalator, esca, eska, moving stairs, change floor, ganti lantai\nlt1b | Lecture theatre 1B (4F) | floor 4 | tags: lecture | also called: lt1b, lt 1b, lecture theatre 1b, lecture 1b, theatre 1b, kelas 1b, lecture theatre, lecture theater, lecture hall, lecture, class, lesson, kuliah, ruang kuliah, kelas\nlt1a | Lecture theatre 1A (4F) | floor 4 | tags: lecture | also called: lt1a, lt 1a, lecture theatre 1a, lecture 1a, theatre 1a, kelas 1a, lecture theatre, lecture theater, lecture hall, lecture, class, lesson, kuliah, ruang kuliah, kelas\nexit_10_4F | Exit 10 (4F) | floor 4 | tags: exit | also called: exit 10 4f, exit 10 bawah, exit 10 lantai 4, exit, exits, way out, get out, pintu keluar, keluar\nentrance_exit | Entrance / exit gate (4F) | floor 4 | tags: entrance, exit, gate | also called: gate, exit gate, main exit, main entrance, entrance, turnstile, pintu keluar, pintu masuk, leave the building, leave building, exit the building, exit building, way out of the building, go home, go outside, outside, exit, exits, way out, get out, keluar\nlift_stairs | Lift and stairs (5F) | floor 5 | tags: accessible, floor_change, lift, stairs, vertical | also called: lift, elevator, lift and stairs, stairs, staircase, tangga, lift naik, go up, upstairs, downstairs, change floor, ganti lantai\nlift_stairs_4F | Lift and stairs (4F) | floor 4 | tags: accessible, floor_change, lift, stairs, vertical | also called: lift 4f, lift bawah, stairs 4f, lift and stairs 4f, lift, elevator, stairs, staircase, tangga, go up, upstairs, downstairs, change floor\n\nRequest: \"<request>\"\nAnswer (one ID from the list, or NONE):",
+  "note": "same prompt as llm_cache_v1.json (Claude); plain-text reply, parsed with parse_llm"
+ },
+ "responses": {
+  "where can I get food": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 5.344,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:53:28"
+  },
+  "im hungry": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 4.738,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:53:37"
+  },
+  "canteen": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.862,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:53:43"
+  },
+  "somewhere to eat lunch": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 5.424,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:53:53"
+  },
+  "nearest toilet": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 1.575,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:53:59"
+  },
+  "mens bathroom": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 3.982,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:08"
+  },
+  "i need the washroom": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 4.332,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:16"
+  },
+  "how do I get out of here": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 1.866,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:23"
+  },
+  "nearest exit": {
+   "raw": "exit_5",
+   "parsed": "exit_5",
+   "valid": true,
+   "latency_s": 2.134,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:30"
+  },
+  "way out": {
+   "raw": "exit_10",
+   "parsed": "exit_10",
+   "valid": true,
+   "latency_s": 1.478,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:35"
+  },
+  "the exit gate": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 3.648,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:44"
+  },
+  "pintu keluar": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 4.022,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:54:52"
+  },
+  "lecture theatre 2b": {
+   "raw": "lt2b",
+   "parsed": "lt2b",
+   "valid": true,
+   "latency_s": 4.53,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:01"
+  },
+  "LT 1a": {
+   "raw": "lt1a",
+   "parsed": "lt1a",
+   "valid": true,
+   "latency_s": 1.353,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:07"
+  },
+  "take me to lecture theatre 2a": {
+   "raw": "lt2a",
+   "parsed": "lt2a",
+   "valid": true,
+   "latency_s": 7.206,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:19"
+  },
+  "study room 9": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 5.088,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:28"
+  },
+  "sr11": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 5.131,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:38"
+  },
+  "a quiet place to study": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 4.932,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:47"
+  },
+  "where can I study quietly": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 2.471,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:55:54"
+  },
+  "year 5 studio": {
+   "raw": "y5302",
+   "parsed": "y5302",
+   "valid": true,
+   "latency_s": 3.974,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:03"
+  },
+  "y4": {
+   "raw": "y4502",
+   "parsed": "y4502",
+   "valid": true,
+   "latency_s": 4.264,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:12"
+  },
+  "escalator": {
+   "raw": "escalator_up",
+   "parsed": "escalator_up",
+   "valid": true,
+   "latency_s": 4.172,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:20"
+  },
+  "how do I go up a floor": {
+   "raw": "escalator_up",
+   "parsed": "escalator_up",
+   "valid": true,
+   "latency_s": 4.829,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:30"
+  },
+  "I need to print something": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.615,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:36"
+  },
+  "quiet place to revise before my exam": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 5.025,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:45"
+  },
+  "I need somewhere to focus for a few hours": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 1.511,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:56:51"
+  },
+  "grab a bite": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 4.304,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:00"
+  },
+  "I'm thirsty": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 4.764,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:09"
+  },
+  "somewhere I can get a coffee": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.511,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:15"
+  },
+  "where do I go for my class": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.322,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:24"
+  },
+  "I'm late for my lecture": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 3.608,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:32"
+  },
+  "emergency, where do I run": {
+   "raw": "exit_5",
+   "parsed": "exit_5",
+   "valid": true,
+   "latency_s": 6.318,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:43"
+  },
+  "I need to wash my hands": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 1.473,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:49"
+  },
+  "where can I sit and eat my packed lunch": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.644,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:57:55"
+  },
+  "I want to go up to the next floor": {
+   "raw": "escalator_up",
+   "parsed": "escalator_up",
+   "valid": true,
+   "latency_s": 1.381,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:01"
+  },
+  "how do I get to the floor below": {
+   "raw": "escalator_down",
+   "parsed": "escalator_down",
+   "valid": true,
+   "latency_s": 1.389,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:07"
+  },
+  "somewhere to book for a group discussion": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 2.117,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:14"
+  },
+  "I want to leave campus": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 1.471,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:20"
+  },
+  "which way out to the MTR": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.609,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:26"
+  },
+  "take me home": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 1.612,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:32"
+  },
+  "where do students usually have lunch": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.562,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:38"
+  },
+  "I need to charge my phone": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 2.456,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:45"
+  },
+  "where can I get something cold to drink": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.616,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:51"
+  },
+  "wheelchair accessible toilet": {
+   "raw": "disabled_toilet",
+   "parsed": "disabled_toilet",
+   "valid": true,
+   "latency_s": 1.648,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:58:57"
+  },
+  "I use a wheelchair, where is the toilet": {
+   "raw": "disabled_toilet",
+   "parsed": "disabled_toilet",
+   "valid": true,
+   "latency_s": 1.508,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:03"
+  },
+  "step-free way to the other floor": {
+   "raw": "lift_stairs",
+   "parsed": "lift_stairs",
+   "valid": true,
+   "latency_s": 1.533,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:09"
+  },
+  "where is the lift": {
+   "raw": "lift_stairs",
+   "parsed": "lift_stairs",
+   "valid": true,
+   "latency_s": 1.584,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:15"
+  },
+  "elevator please": {
+   "raw": "lift_stairs",
+   "parsed": "lift_stairs",
+   "valid": true,
+   "latency_s": 1.536,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:21"
+  },
+  "accessible restroom on the lower floor": {
+   "raw": "disabled_toilet_4F",
+   "parsed": "disabled_toilet_4F",
+   "valid": true,
+   "latency_s": 1.444,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:27"
+  },
+  "I can't use stairs, how do I get down to the lower floor": {
+   "raw": "lift_stairs",
+   "parsed": "lift_stairs",
+   "valid": true,
+   "latency_s": 1.607,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:33"
+  },
+  "toilet for people with disabilities": {
+   "raw": "disabled_toilet",
+   "parsed": "disabled_toilet",
+   "valid": true,
+   "latency_s": 1.375,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:39"
+  },
+  "where is the cantene": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.581,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:45"
+  },
+  "nearset tolet": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 1.596,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:51"
+  },
+  "lecure theater 2b": {
+   "raw": "lt2b",
+   "parsed": "lt2b",
+   "valid": true,
+   "latency_s": 1.631,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 12:59:58"
+  },
+  "escelator": {
+   "raw": "escalator_up",
+   "parsed": "escalator_up",
+   "valid": true,
+   "latency_s": 1.673,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:04"
+  },
+  "the exti": {
+   "raw": "exit_10",
+   "parsed": "exit_10",
+   "valid": true,
+   "latency_s": 1.634,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:10"
+  },
+  "study rom 9": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 5.375,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:20"
+  },
+  "lecture theatre 1 b": {
+   "raw": "lt1b",
+   "parsed": "lt1b",
+   "valid": true,
+   "latency_s": 4.886,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:29"
+  },
+  "restrom": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 1.299,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:35"
+  },
+  "canten": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 3.59,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:43"
+  },
+  "wher can i eet": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 5.613,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:00:53"
+  },
+  "lt2 a": {
+   "raw": "lt2a",
+   "parsed": "lt2a",
+   "valid": true,
+   "latency_s": 2.855,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:00"
+  },
+  "washrom femail": {
+   "raw": "female_toilet",
+   "parsed": "female_toilet",
+   "valid": true,
+   "latency_s": 5.332,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:10"
+  },
+  "emrgency exit": {
+   "raw": "exit_5",
+   "parsed": "exit_5",
+   "valid": true,
+   "latency_s": 1.427,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:16"
+  },
+  "where is the libary": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.313,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:22"
+  },
+  "y 5302": {
+   "raw": "y5302",
+   "parsed": "y5302",
+   "valid": true,
+   "latency_s": 6.696,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:33"
+  },
+  "fod": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 2.451,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:40"
+  },
+  "sr 9": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 2.856,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:48"
+  },
+  "eskalator naik": {
+   "raw": "escalator_up",
+   "parsed": "escalator_up",
+   "valid": true,
+   "latency_s": 7.029,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:01:59"
+  },
+  "kantin dimana": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 3.178,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:02:07"
+  },
+  "mau makan dong": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 5.036,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:02:16"
+  },
+  "toilet cowo dimana": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 1.848,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:02:23"
+  },
+  "toilet cewe di mana": {
+   "raw": "female_toilet",
+   "parsed": "female_toilet",
+   "valid": true,
+   "latency_s": 2.144,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:02:29"
+  },
+  "esca naik": {
+   "raw": "escalator_up",
+   "parsed": "escalator_up",
+   "valid": true,
+   "latency_s": 5.163,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:02:39"
+  },
+  "esca turun bawah": {
+   "raw": "escalator_down_4F",
+   "parsed": "escalator_down_4F",
+   "valid": true,
+   "latency_s": 5.036,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:02:49"
+  },
+  "eska turun atas": {
+   "raw": "escalator_down",
+   "parsed": "escalator_down",
+   "valid": true,
+   "latency_s": 7.842,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:01"
+  },
+  "lt 2b di mana ya": {
+   "raw": "lt2b",
+   "parsed": "lt2b",
+   "valid": true,
+   "latency_s": 4.777,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:10"
+  },
+  "pintu keluar dong": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 1.989,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:17"
+  },
+  "sr9 dimana": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 2.047,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:23"
+  },
+  "mau belajar yang sepi": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 1.619,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:29"
+  },
+  "lapar banget, ada makanan?": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.344,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:35"
+  },
+  "cari tangga atau lift": {
+   "raw": "lift_stairs_4F",
+   "parsed": "lift_stairs_4F",
+   "valid": true,
+   "latency_s": 4.552,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:44"
+  },
+  "Y5302 dimana": {
+   "raw": "y5302",
+   "parsed": "y5302",
+   "valid": true,
+   "latency_s": 4.947,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:03:54"
+  },
+  "ke lantai bawah gimana": {
+   "raw": "escalator_down",
+   "parsed": "escalator_down",
+   "valid": true,
+   "latency_s": 1.568,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:00"
+  },
+  "我想食嘢": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 1.578,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:06"
+  },
+  "廁所喺邊度": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 1.59,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:12"
+  },
+  "出口喺邊": {
+   "raw": "exit_5",
+   "parsed": "exit_5",
+   "valid": true,
+   "latency_s": 2.566,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:19"
+  },
+  "where got toilet ah": {
+   "raw": "male_toilet",
+   "parsed": "male_toilet",
+   "valid": true,
+   "latency_s": 4.812,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:28"
+  },
+  "邊度可以讀書": {
+   "raw": "sr9",
+   "parsed": "sr9",
+   "valid": true,
+   "latency_s": 4.76,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:38"
+  },
+  "I wanna sik faan": {
+   "raw": "canteen",
+   "parsed": "canteen",
+   "valid": true,
+   "latency_s": 5.293,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:47"
+  },
+  "返屋企點行": {
+   "raw": "entrance_exit",
+   "parsed": "entrance_exit",
+   "valid": true,
+   "latency_s": 2.088,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:04:54"
+  },
+  "電梯喺邊": {
+   "raw": "lift_stairs",
+   "parsed": "lift_stairs",
+   "valid": true,
+   "latency_s": 2.222,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:01"
+  },
+  "where is the library": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 5.082,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:10"
+  },
+  "I need an ATM": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 3.819,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:19"
+  },
+  "nearest gym": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 2.337,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:25"
+  },
+  "where is the president's office": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 6.242,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:36"
+  },
+  "how do I get to the bus stop": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 5.536,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:46"
+  },
+  "lecture theatre 3a": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 5.937,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:05:57"
+  },
+  "study room 12": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 5.36,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:06:06"
+  },
+  "where can I buy a textbook": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 6.35,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:06:17"
+  },
+  "tell me a joke": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.897,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:08"
+  },
+  "what is the weather today": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.643,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:17"
+  },
+  "y5501": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.741,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:26"
+  },
+  "where is the swimming pool": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 6.514,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:37"
+  },
+  "toilet on floor 6": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.699,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:46"
+  },
+  "perpustakaan dimana": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.929,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:53"
+  },
+  "圖書館喺邊": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.894,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:14:59"
+  },
+  "take me to Prof Wong's office": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.743,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:08"
+  },
+  "I feel sick, where is the clinic": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 5.138,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:18"
+  },
+  "parking lot": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 2.186,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:25"
+  },
+  "is there a 7-eleven nearby": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 4.506,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:34"
+  },
+  "where is the computer lab": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.801,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:40"
+  },
+  "lecture theatre 3b": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.856,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:46"
+  },
+  "how are you": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.452,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:15:52"
+  },
+  "lt 4a": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 5.144,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:02"
+  },
+  "toilet on 4F": {
+   "raw": "disabled_toilet_4F",
+   "parsed": "disabled_toilet_4F",
+   "valid": true,
+   "latency_s": 5.026,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:11"
+  },
+  "lift on the lower floor": {
+   "raw": "lift_stairs_4F",
+   "parsed": "lift_stairs_4F",
+   "valid": true,
+   "latency_s": 2.519,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:18"
+  },
+  "escalator going up from the lower floor": {
+   "raw": "escalator_up_4F",
+   "parsed": "escalator_up_4F",
+   "valid": true,
+   "latency_s": 1.677,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:25"
+  },
+  "esc down on 5F": {
+   "raw": "escalator_down",
+   "parsed": "escalator_down",
+   "valid": true,
+   "latency_s": 4.629,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:34"
+  },
+  "exit 10 on floor 4": {
+   "raw": "exit_10_4F",
+   "parsed": "exit_10_4F",
+   "valid": true,
+   "latency_s": 8.409,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:47"
+  },
+  "the lift on the upper floor": {
+   "raw": "lift_stairs",
+   "parsed": "lift_stairs",
+   "valid": true,
+   "latency_s": 5.224,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:16:56"
+  },
+  "exit 5 on 5F": {
+   "raw": "exit_5",
+   "parsed": "exit_5",
+   "valid": true,
+   "latency_s": 1.901,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:03"
+  },
+  "exit 10 on the 5th floor": {
+   "raw": "exit_10",
+   "parsed": "exit_10",
+   "valid": true,
+   "latency_s": 2.288,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:10"
+  },
+  "where do I find the Y5 rooms": {
+   "raw": "NONE",
+   "parsed": "NONE",
+   "valid": true,
+   "latency_s": 1.87,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:16"
+  },
+  "room y5-202": {
+   "raw": "y5202",
+   "parsed": "y5202",
+   "valid": true,
+   "latency_s": 1.756,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:22"
+  },
+  "the Y5 studio ending in 401": {
+   "raw": "y5401",
+   "parsed": "y5401",
+   "valid": true,
+   "latency_s": 4.419,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:31"
+  },
+  "the 502 studio on 4F": {
+   "raw": "y4502",
+   "parsed": "y4502",
+   "valid": true,
+   "latency_s": 4.428,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:40"
+  },
+  "point 2 behind Y5302": {
+   "raw": "y5302_back",
+   "parsed": "y5302_back",
+   "valid": true,
+   "latency_s": 1.708,
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "finish_reason": "STOP",
+   "time_utc": "2026-11-26 13:17:46"
+  }
+ }
 }
