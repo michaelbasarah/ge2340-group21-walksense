@@ -84,7 +84,7 @@ Contents:
 73. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
 74. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change: current rules reproduced, fallbacks pre-registered, then scored on held-out sessions (offline only)
 75. 26 Nov: request matching scored with Gemini (gemini-3.5-flash-lite, free tier): gemini 124/128, hybrid_gemini 115/128, same as Claude hybrid; `--sleep-s` pacing added
-76. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
+77. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
 - Lessons learned
 - Open questions / next steps
 
@@ -1311,7 +1311,7 @@ Contents:
 
 ---
 
-## 76. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
+## 77. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
 
 - **In progress** (branch `feat/a56-offset`): `phase2/new/day3/a56_offset.py` and `a56_offset.sh` write `phase2/new/day3/out-a56/`; results follow in the commit that completes this entry.
 

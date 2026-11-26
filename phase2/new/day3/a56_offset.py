@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""a56 night-run magnetometer offset: numbers for the keep / exclude / recalibrate decision (PROCESS-LOG entry 76).
+"""a56 night-run magnetometer offset: numbers for the keep / exclude / recalibrate decision (PROCESS-LOG entry 77).
 
 OFFLINE ANALYSIS ONLY. config.json, out/ and out-split20/ are not changed; everything is written to out-a56/.
 
@@ -503,7 +503,7 @@ def xlsx(tab='2026-11-26 a56 options'):
                 if h in pct and isinstance(r[j], float):
                     ws.cell(ws.max_row, j + 1).number_format = '0.0%'
         ws.append([])
-    ws.append(['a56 night-run magnetometer offset: keep / exclude / recalibrate (offline analysis, PROCESS-LOG 76; internal team sheet, numbers only)'])
+    ws.append(['a56 night-run magnetometer offset: keep / exclude / recalibrate (offline analysis, PROCESS-LOG 77; internal team sheet, numbers only)'])
     ws['A1'].font = Font(bold=True, size=13)
     ws.append(['Source: phase2/new/day3/out-a56/comparison.csv (a56_offset.py). Official config.json, out/ and out-split20/ unchanged; option A reproduces them.'])
     ws.append(['Scheme: learned-weight fused kNN, leave one session out (per take in default, per 20 s piece in split20). '
