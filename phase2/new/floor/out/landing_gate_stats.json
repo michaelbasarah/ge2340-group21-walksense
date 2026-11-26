@@ -1,5 +1,5 @@
 {
- "what": "per unit and gate source, with the true floors (eR0 frozen T): touches, how many were followed by a real floor change within T, and how many real changes had the gate open",
+ "what": "per unit and gate source, with the true floors (eR0 frozen T): touches, how many were followed by a real floor change within T, and how many real changes had the gate open. connector_recognition: top-1 kind at every stop (pred_app asked on the true floor), all units and phones",
  "units": {
   "23nov iphone": {
    "true": {
@@ -408,6 +408,22 @@
     "changes": 1,
     "changes_with_open_gate": 1
    }
+  }
+ },
+ "connector_recognition": {
+  "pred_d3": {
+   "other_stops": 310,
+   "predicted_a_connector": 57,
+   "connector_stops": 101,
+   "predicted_same_kind": 37,
+   "predicted_other_connector_kind": 7
+  },
+  "pred_app": {
+   "other_stops": 281,
+   "predicted_a_connector": 44,
+   "connector_stops": 88,
+   "predicted_same_kind": 32,
+   "predicted_other_connector_kind": 11
   }
  }
 }

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import itertools
 import json
+from collections import Counter
 
 import numpy as np
 import pandas as pd
@@ -210,8 +211,28 @@ def gate_stats(R, preds, params):
             u[src] = {'T_min': T / 60, 'touches': len(tc), 'touches_followed_by_change': len(useful),
                       'touches_without_change': len(tc) - len(useful), 'changes': len(ch), 'changes_with_open_gate': len(opened)}
         out[f'{sid} {slot}'] = u
+    st = R[R['type'] == 'stop']
+    rec = {}
+    for src in ('pred_d3', 'pred_app'):
+        P = preds[src]
+        c = Counter()
+        for r in st.itertuples():
+            if r.key not in P or (src == 'pred_app' and r.session == '23nov'):
+                continue
+            v = P[r.key]
+            k_true, k_pred = lr.kind(r.place), lr.kind(v.get(int(r.floor), '') if isinstance(v, dict) else v)
+            if k_true:
+                c['connector_stops'] += 1
+                c['predicted_same_kind'] += k_pred == k_true
+                c['predicted_other_connector_kind'] += bool(k_pred) and k_pred != k_true
+            else:
+                c['other_stops'] += 1
+                c['predicted_a_connector'] += bool(k_pred)
+        rec[src] = dict(c)
     return {'what': 'per unit and gate source, with the true floors (eR0 frozen T): touches, how many were followed by a '
-                    'real floor change within T, and how many real changes had the gate open', 'units': out}
+                    'real floor change within T, and how many real changes had the gate open. connector_recognition: '
+                    'top-1 kind at every stop (pred_app asked on the true floor), all units and phones', 'units': out,
+            'connector_recognition': rec}
 
 
 # ----------------------------------------------------------------------------- decision

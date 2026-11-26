@@ -1,6 +1,7 @@
 # Floor rules when the barometer is missing (offline study, PROCESS-LOG entry 74)
 
-Internal team notes, not report text. Nothing here is wired into the upload app.
+Internal team notes, not report text. Nothing here is wired into the upload app. Section 7 (entry 78) adds the
+connector-gated rules ("entry/exit points").
 
 **Question.** The upload app's floor tracker is right at every stop where the iPhone logged pressure, but on the
 25-Nov night run it showed 5F at 12 of Dicta's 4F stops (20/32): her iPhone logged no pressure from 22:43 to 23:17,
@@ -129,3 +130,119 @@ session), but their parameters were chosen on these rows, so they are optimistic
 - The vote uses the day-3 5 s windows with no trimming, not the app's 2 s trimmed windows.
 - Every rule starts on the true first floor, as `walksense.py evaluate` does.
 - 23 Nov has stops only (no walk pressure), so R0 sees one reading per stop there.
+
+## 7. Connector-gated rules: the floor may only switch at a lift/escalator landing (PROCESS-LOG entry 78)
+
+**Idea (user, 26 Nov).** A floor change can only happen through a connector (lift/stairs core, or the one-way
+escalators: down only 5F -> 4F, up only 4F -> 5F), so let the floor switch only right after the walker was at a
+connector landing, in a direction that connector allows, and ignore floor evidence everywhere else.
+
+**Method.** [`PREREGISTRATION_landing.md`](PREREGISTRATION_landing.md), committed (0e8ef6a) before any gated rule was
+run; it lists what had been looked at first. Same recordings, units, split, masked copies and scoring as sections 1 to
+5. A *touch* = a recording at a connector (kind from the name, floor-agnostic: lift / down / up); the gate is open
+at recording i towards the other floor if a touch j <= i of a kind that allows that direction started at most T
+minutes before i (the arrival landing itself counts). Gated rules: eR0 (R0, a jump only switches with the gate open,
+otherwise it joins the reference), eR0n (eR0 without the 15-min reset, threshold theta), eR1 (R1 gated), ed ((d)
+with both its pressure and vote switches gated). Gate sources: `true` (true place names, stops and walk endpoints;
+upper bound), `pred_d3` (day-3 leave-one-session-out fused kNN top-1), `pred_app` (the upload app's own place model,
+top-1 among the places of the floor the tracker shows before the recording: what the app could do live; 23 Nov is
+not an app session, so `pred_app` = ungated there). With the gate always open each gated rule reproduces R0, R1 and
+(d) exactly (asserted in `landing.py`).
+
+```sh
+python phase2/new/floor/landing.py   # ~10 s with out/landing_pred_app.json cached, ~2 min without
+```
+
+Frozen on the tuning sessions (`out/landing_params.json`, grid in `out/landing_tuning.json`): T = 10 min for
+eR0/eR0n/ed with the true gate, 20 min for eR1-true; 20 / 20 / 30 / 30 min for eR0 / eR0n / eR1 / ed with
+`pred_d3`; 20 / 45 / 60 / 45 min with `pred_app`; theta = 0.30 for eR0n-pred_d3 and eR0n-pred_app, 0.40 otherwise.
+
+### 7.1 Scores: stops on the right floor (`out/landing_table.csv`, walks there too; `p_` = `pred_`)
+
+| unit | handset | R0 | R1 | d | eR0-true | eR0-p_d3 | eR0-p_app | eR0n-true | eR0n-p_d3 | eR0n-p_app | eR1-true | eR1-p_d3 | eR1-p_app | ed-true | ed-p_d3 | ed-p_app |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 23nov iphone (tuning) | ip16 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 |
+| 23nov iphone masked (tuning) | ip16 | 26/42 | 30/42 | 41/42 | 26/42 | 26/42 | 26/42 | 30/42 | 30/42 | 30/42 | 30/42 | 30/42 | 30/42 | 41/42 | 41/42 | 41/42 |
+| 24s1 a55 (tuning) | a55 | 15/27 | 15/27 | 26/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 26/27 | 15/27 | 15/27 |
+| 24s1 a56 (tuning) | a56 | 15/27 | 15/27 | 26/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 15/27 | 26/27 | 21/27 | 26/27 |
+| 24s1 iphone (tuning) | ip18 | 27/27 | 23/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 | 27/27 |
+| 24s1 iphone masked (tuning) | ip18 | 15/27 | 21/27 | 22/27 | 15/27 | 15/27 | 15/27 | 21/27 | 21/27 | 21/27 | 21/27 | 21/27 | 21/27 | 24/27 | 22/27 | 22/27 |
+| 24s1 s24 (tuning) | s24 | 10/27 | 13/27 | 24/27 | 15/27 | 17/27 | 26/27 | 15/27 | 17/27 | 18/27 | 20/27 | 19/27 | 20/27 | 24/27 | 26/27 | 26/27 |
+| 24s2 iphone (tuning) | ip16 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 14/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 |
+| 24s2 iphone masked (tuning) | ip16 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 |
+| 24s2 s24 (tuning) | s24 | 15/26 | 17/26 | 20/26 | 17/26 | 21/26 | 17/26 | 17/26 | 22/26 | 16/26 | 21/26 | 18/26 | 18/26 | 24/26 | 24/26 | 24/26 |
+| 25nov a55 (tuning) | a55 | 14/26 | 14/26 | 25/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 25/26 | 25/26 | 25/26 |
+| 25nov a56 (tuning) | a56 | 14/26 | 14/26 | 16/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 25/26 | 25/26 | 21/26 |
+| 25nov iphone (tuning) | ip18 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 | 26/26 |
+| 25nov iphone masked (tuning) | ip18 | 14/26 | 20/26 | 24/26 | 14/26 | 14/26 | 14/26 | 20/26 | 14/26 | 20/26 | 20/26 | 20/26 | 20/26 | 24/26 | 24/26 | 24/26 |
+| **25night a56** | a56 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 | 19/32 |
+| **25night iphone** | ip18 | 20/32 | 29/32 | 30/32 | 20/32 | 20/32 | 20/32 | 20/32 | 20/32 | 20/32 | 20/32 | 20/32 | 20/32 | 27/32 | 20/32 | 20/32 |
+| **25night_tian iphone** | ip16 | 23/23 | 23/23 | 23/23 | 23/23 | 14/23 | 14/23 | 23/23 | 14/23 | 23/23 | 23/23 | 14/23 | 23/23 | 23/23 | 14/23 | 23/23 |
+| **25spots iphone** | ip16 | 4/6 | 4/6 | 5/6 | 4/6 | 4/6 | 4/6 | 4/6 | 4/6 | 4/6 | 4/6 | 4/6 | 4/6 | 4/6 | 5/6 | 4/6 |
+| **25spots s24** | s24 | 7/13 | 8/13 | 10/13 | 6/13 | 6/13 | 7/13 | 6/13 | 6/13 | 7/13 | 7/13 | 7/13 | 7/13 | 9/13 | 9/13 | 9/13 |
+| **26tian iphone** | ip16 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 | 25/25 |
+
+![scores](out/fig_landing_scores.png)
+![25 night](out/fig_landing_25night.png)
+
+### 7.2 Decision (`out/landing_decision.json`)
+
+- **No `pred_app` (or `pred_d3`) candidate passes.** Every one gains 0 stops on 25night ip18 (20/32 like R0). eR0-,
+  eR0n-, eR1- and ed-pred_d3 and eR0-pred_app also lose 9 stops R0 gets right on 25night_tian (14/23 instead of
+  23/23). eR0n-pred_app, eR1-pred_app and ed-pred_app lose nothing on the complete-pressure units but gain nothing.
+- **Only ed-true passes** the iPhone rule (+7 on 25night ip18: 27/32, no loss on 25night_tian, 26tian, 25spots ip16),
+  but it is the upper bound with the true places, it is 3 stops below ungated (d) (30/32), and it loses 4 stops R0
+  gets right on 25spots s24. The pre-registration says true-gate rows never justify an app change.
+- **Phones without a barometer: none passes.** On held-out 25night a56 every ed variant is 19 vs 19 of 32 (the a56
+  night magnetometer, section 4). Tuning a55 + a56 + s24: ed-true 150, ed-pred_app 137, ed-pred_d3 136, vs (d) 137
+  and "start floor kept" 83 of 159.
+- **So the app was not changed** (decision rule 2: nothing eligible passes).
+
+### 7.3 Why the gate does not help here
+
+- **A gate can only remove switches.** On the held-out iPhone units with complete pressure R0 makes no false switch
+  to remove; its only misses there (25spots ip16 20:22 and 20:23, after a 150-min gap) are a switch that did not
+  happen, which a gate cannot add. So on these units a gate can only lose.
+- **A missed gate costs the rest of the floor.** If the connector is not recognised, the real jump joins the reference
+  and the floor never switches. 25night_tian with `pred_d3`: the 22:18 lift stop and the 22:29 4F lift landing were
+  not named as connectors, so 9 stops stay on 5F; 24 s2 ip16 with eR0-pred_app: 14/26 (tuning). Connector
+  recognition at top-1 (`out/landing_gate_stats.json` `connector_recognition`, all stops, all phones): the day-3 fused
+  kNN names the right connector kind at 37 of 101 connector stops and names a connector at 57 of 310 other stops; the
+  app model 32 of 88 and 44 of 281.
+- **The gate opens for 20 of 22 labelled changes with the true places, but for only 13 of 22 (`pred_d3`) and 11 of 21
+  (`pred_app`)** (`out/transitions.json`, at the frozen eR0 T). The app model never sees the arrival landing as a
+  connector (0 of 21), because it is asked among the places of the floor it still believes it is on.
+- **The 25-night dropout is not a gating problem.** Dicta's pressure comes back at 23:36, 33.2 min after the 23:03
+  change, with a step of 0.379 hPa from the last 5F reading at 22:41 (below 0.40); no frozen T keeps the gate open
+  that long with the true touches (T = 10 min), so all pressure-only gated rules stay at 20/32. ed-true (T = 10 min)
+  ignores (d)'s confident 4F votes at 23:17 and 23:37 (gate closed) and switches only at 23:44, after the 23:43 walk
+  to the 4F down escalator re-opens the gate (wrong stops 23:03, 23:08, 23:17, 23:37, 23:41; (d): 23:03, 23:08).
+- **The gate is open often anyway:** with the true places 243 touches, of which 205 are not followed by a floor change
+  within T (people pass the lift and escalators all the time), so it filters little.
+- **What it does fix:** R1's weather switch after the 24 s1 break. eR1 with any of the three gates gives 24s1 ip18
+  27/27 (R1 23/27), because the last touch before the 79-min break (the 16:51 walk between the 5F escalators) is
+  too old. R0 already avoids that case with its 15-min reset.
+
+### 7.4 Entry/exit points in the recordings (step 2 of the request, `out/transitions.json`)
+
+- **No recording with pressure spans a floor change.** 61 iPhone walks start or end at a connector landing (including
+  the 4F walks named after the 5F lift, `lift_stairs5->...`, and the 4F `esca_down->esca_up`); the largest pressure
+  change inside any of them is 0.041 hPa, none above 0.40. Every change happens between two recordings.
+- **Pressure across consecutive recordings brackets every iPhone change that has pressure on both sides** (last
+  reading before -> first after): 23nov +0.684, 24s1 +0.424, 24s2 +0.565, 25nov +0.651, 25night_tian +0.575, 26tian
+  +0.625, 25night 24:15 -0.67 and 24:39 +0.614, 25spots 17:49 +0.591 hPa; the two exceptions are the long gaps
+  (25night 23:03: +0.379 over 55 min, 25spots 20:22: +0.291 after a 150-min gap).
+- **The only recording that spans a change is the 23-Nov stairs walk ACC23** ("exit 5 stairs -> exit 5 stairs bawah",
+  18:34:17 to 18:34:47, 30 s). It has no barometer file; the stops either side bracket it: BM26 (5F lift/stairs)
+  1015.014 hPa, BM27 (4F) 1015.698 hPa, +0.684 hPa. One example, so a motion detector for the ride still cannot be
+  trained or scored.
+- On the route the team walked, the departure landing is usually not the recording right before the change: on the
+  24-Nov-style route the last 5F lift touch (the lift stop or the walk leaving it) is 6.0 to 12.7 min before the
+  change (23 Nov: 3.0 min), then the walker comes back to the lift unrecorded; the first recording on the new floor is
+  a landing at 18 of 22 changes (true places).
+
+### 7.5 Limits
+
+- The fused kNN predictions use the barometer group too, and were left as computed in the masked copies.
+- `pred_app` is trained on the other app sessions of the same phone model; 23 Nov has no `pred_app` (ungated there).
+- One real dropout (25 night ip18) and one held-out no-barometer unit with a faulty magnetometer, as in section 6.
