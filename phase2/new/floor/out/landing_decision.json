@@ -1,0 +1,693 @@
+{
+ "what": "PREREGISTRATION_landing.md decision rule",
+ "iphone": {
+  "eR0-true": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25spots s24": [
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 72
+  },
+  "eR0-pred_d3": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "25spots s24": [
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 63
+  },
+  "eR0-pred_app": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 63
+  },
+  "eR0n-true": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25spots s24": [
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 72
+  },
+  "eR0n-pred_d3": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "25spots s24": [
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 63
+  },
+  "eR0n-pred_app": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {},
+   "heldout_iphone_stops_ok": 72
+  },
+  "eR1-true": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25spots s24": [
+     [
+      "17:45",
+      "female_toilet"
+     ],
+     [
+      "17:51",
+      "lift_stairs"
+     ],
+     [
+      "20:22",
+      "male_toilet"
+     ],
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 72
+  },
+  "eR1-pred_d3": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "25spots s24": [
+     [
+      "17:45",
+      "female_toilet"
+     ],
+     [
+      "17:51",
+      "lift_stairs"
+     ],
+     [
+      "20:22",
+      "male_toilet"
+     ],
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 63
+  },
+  "eR1-pred_app": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25spots s24": [
+     [
+      "17:45",
+      "female_toilet"
+     ],
+     [
+      "17:51",
+      "lift_stairs"
+     ],
+     [
+      "20:22",
+      "male_toilet"
+     ],
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 72
+  },
+  "ed-true": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 7,
+   "gain_over_d_25night_ip18": -3,
+   "recommended": true,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25spots s24": [
+     [
+      "17:45",
+      "female_toilet"
+     ],
+     [
+      "17:47",
+      "sr9"
+     ],
+     [
+      "20:22",
+      "male_toilet"
+     ],
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 79
+  },
+  "ed-pred_d3": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25night_tian iphone": [
+     [
+      "22:29",
+      "lift_stairs5"
+     ],
+     [
+      "22:32",
+      "disabled_toilet"
+     ],
+     [
+      "22:34",
+      "lt2a"
+     ],
+     [
+      "22:37",
+      "lt2b"
+     ],
+     [
+      "22:41",
+      "esca_down"
+     ],
+     [
+      "22:43",
+      "y4502"
+     ],
+     [
+      "22:47",
+      "esca_up"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ],
+     [
+      "22:59",
+      "gate"
+     ]
+    ],
+    "25spots s24": [
+     [
+      "17:45",
+      "female_toilet"
+     ],
+     [
+      "17:47",
+      "sr9"
+     ],
+     [
+      "20:22",
+      "male_toilet"
+     ],
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 64
+  },
+  "ed-pred_app": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "gain_over_d_25night_ip18": -10,
+   "recommended": false,
+   "R0_correct_stops_lost_any_heldout_unit": {
+    "25spots s24": [
+     [
+      "17:45",
+      "female_toilet"
+     ],
+     [
+      "17:47",
+      "sr9"
+     ],
+     [
+      "20:22",
+      "male_toilet"
+     ],
+     [
+      "20:23",
+      "escalator_down"
+     ]
+    ]
+   },
+   "heldout_iphone_stops_ok": 72
+  }
+ },
+ "no_pressure": {
+  "ed-true": {
+   "held_out_25night_a56": "19 vs kept floor 19 of 32",
+   "tuning_a55_a56_s24_sum": "150 vs kept floor 83 of 159",
+   "recommended": false
+  },
+  "ed-pred_d3": {
+   "held_out_25night_a56": "19 vs kept floor 19 of 32",
+   "tuning_a55_a56_s24_sum": "136 vs kept floor 83 of 159",
+   "recommended": false
+  },
+  "ed-pred_app": {
+   "held_out_25night_a56": "19 vs kept floor 19 of 32",
+   "tuning_a55_a56_s24_sum": "137 vs kept floor 83 of 159",
+   "recommended": false
+  }
+ },
+ "app": {
+  "eligible": [
+   "eR0-pred_app",
+   "eR0n-pred_app"
+  ],
+  "passing": [],
+  "wire": null,
+  "ed_pred_app_passes_but_not_wired": false
+ }
+}

@@ -1,0 +1,429 @@
+{
+ "what": "per unit and gate source, with the true floors (eR0 frozen T): touches, how many were followed by a real floor change within T, and how many real changes had the gate open. connector_recognition: top-1 kind at every stop (pred_app asked on the true floor), all units and phones",
+ "units": {
+  "23nov iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 13,
+    "touches_followed_by_change": 4,
+    "touches_without_change": 9,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 8,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 7,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  },
+  "24s1 a55": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 5,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 5,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 7,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 7,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   }
+  },
+  "24s1 a56": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 9,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 9,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 7,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 6,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  },
+  "24s1 iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 8,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 7,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 7,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 6,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  },
+  "24s1 s24": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 6,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 5,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 1,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 0,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  },
+  "24s2 iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 7,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 5,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 3,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 3,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   }
+  },
+  "24s2 s24": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 5,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 4,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 7,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 7,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   }
+  },
+  "25night a56": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 3,
+    "touches_without_change": 14,
+    "changes": 3,
+    "changes_with_open_gate": 3
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 8,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 8,
+    "changes": 3,
+    "changes_with_open_gate": 0
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 2,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 1,
+    "changes": 3,
+    "changes_with_open_gate": 1
+   }
+  },
+  "25night iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 3,
+    "touches_without_change": 14,
+    "changes": 3,
+    "changes_with_open_gate": 3
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 8,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 6,
+    "changes": 3,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 3,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 1,
+    "changes": 3,
+    "changes_with_open_gate": 2
+   }
+  },
+  "25night_tian iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 16,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 14,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 3,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 3,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 8,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 8,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   }
+  },
+  "25nov a55": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 4,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 3,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 11,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 10,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  },
+  "25nov a56": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 16,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 14,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 9,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 7,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 7,
+    "touches_followed_by_change": 0,
+    "touches_without_change": 7,
+    "changes": 1,
+    "changes_with_open_gate": 0
+   }
+  },
+  "25nov iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 15,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 6,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 4,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 4,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 3,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  },
+  "25spots iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 4,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 2,
+    "changes": 2,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 4,
+    "touches_followed_by_change": 3,
+    "touches_without_change": 1,
+    "changes": 2,
+    "changes_with_open_gate": 2
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 3,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 2,
+    "changes": 2,
+    "changes_with_open_gate": 1
+   }
+  },
+  "25spots s24": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 7,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 5,
+    "changes": 2,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 5,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 3,
+    "changes": 2,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 4,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 2,
+    "changes": 2,
+    "changes_with_open_gate": 1
+   }
+  },
+  "26tian iphone": {
+   "true": {
+    "T_min": 10.0,
+    "touches": 17,
+    "touches_followed_by_change": 4,
+    "touches_without_change": 13,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_d3": {
+    "T_min": 20.0,
+    "touches": 6,
+    "touches_followed_by_change": 2,
+    "touches_without_change": 4,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   },
+   "pred_app": {
+    "T_min": 20.0,
+    "touches": 6,
+    "touches_followed_by_change": 1,
+    "touches_without_change": 5,
+    "changes": 1,
+    "changes_with_open_gate": 1
+   }
+  }
+ },
+ "connector_recognition": {
+  "pred_d3": {
+   "other_stops": 310,
+   "predicted_a_connector": 57,
+   "connector_stops": 101,
+   "predicted_same_kind": 37,
+   "predicted_other_connector_kind": 7
+  },
+  "pred_app": {
+   "other_stops": 281,
+   "predicted_a_connector": 44,
+   "connector_stops": 88,
+   "predicted_same_kind": 32,
+   "predicted_other_connector_kind": 11
+  }
+ }
+}
