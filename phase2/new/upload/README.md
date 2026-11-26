@@ -138,6 +138,9 @@ API (all GET, JSON, `400 {"error": ...}` for a bad value):
 
 Tests: `python -m unittest test_search.py` (16 tests: the earlier 10 + toilet requests under the filter, no-option message, Gemini answer post-processed, step-free route, `/api/route` and `/api/nearest` through a real server on a free port). Screenshots `screenshots/v4-*.png` (headless Chromium 1234, served by `server.Handler` without trained place models): Y5-302 -> Female toilet on 5F, Canteen -> LT1a Standard (escalator) vs Step-free (lift, 5F and 4F views), nearest toilet with the Female filter from Y5-401, Step-free + Female "toilet" from the canteen (lift to the 4F mixed toilet), the no-option card, a route set by tapping Y5-202 on the plan, and phone width 390 px in dark and light (page width = 390, no horizontal scroll; no console errors on any of them).
 
+## ip16 and ip18: pooled training? (26 Nov, PROCESS-LOG entry 89)
+`python eval_iphone_pool.py` (about 20 s, reads `walksense.py` read-only) writes `out/iphone_pool.json`: for each held-out ip18 session (`sesi1`, `25nov`, `25night`, 85 stops) the model is trained on (a) the other ip18 sessions, (b) those plus all ip16 sessions (`sesi2`, `25night_tian`, `26tian`), (c) ip16 only. (a) and (c) reproduce `out/eval.json` exactly. xyz top-1 / top-3: (a) 65/85, 73/85; (b) 67/85, 71/85; (c) 57/85, 70/85; macro precision 0.739 / 0.790 / 0.637. The day-3 fused kNN (`../day3/eval_iphone_pool_fused.py` > `../day3/out-iphone-pool/`) gives 59/85, 58/85 and 44/85 top-1. So ip16 alone is clearly worse on ip18, and pooling is a tie on top-1: **demo model = ip18 only** (what the app does already for an iPhone19,2 upload). To pool, `build_models()` would have to build the iPhone19,2 model from `training_stops(sessions=...)` of both iPhone models instead of `training_stops(device=d)`; not done. 23-Nov is not loadable by the app (no entry in `ALL_SESSIONS`).
+
 ## What it does
 | Part | How | Tested |
 |---|---|---|

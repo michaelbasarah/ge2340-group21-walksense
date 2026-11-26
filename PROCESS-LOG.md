@@ -97,6 +97,7 @@ Contents:
 86. 25 Nov: live mode connected to a real phone for the first time; no scored live walk yet (gap audit)
 87. 26 Nov: team chat "Chris forgot the barometer": the A56 never logged pressure; the night floor failure was Dicta's iPhone dropout (gap audit)
 88. 26 Nov: app features requested (route planner, step-free mode, toilet filter, landing-gated floor change) and the "save the story" rule (gap audit)
+89. 26 Nov: ip16 vs ip18 pooled training, tested on ip18 (ip16 alone worse; pooling a tie on top-1)
 - Lessons learned
 - Open questions / next steps
 - See also `PROJECT-STORY.md` (repo root): the whole project as a readable narrative, with links to these entries
@@ -1542,6 +1543,28 @@ Contents:
 - **Outcome:** recorded; the floor-change idea was tested and failed as pre-registered (entry 76), the route planner is in progress (78).
 - **Links:** branches `feat/route-planner`, `feat/landing-floor`; `PROJECT-STORY.md`; `CLAUDE.md`.
 
+## 89. 26 Nov: do ip16 (iPhone17,4) and ip18 (iPhone19,2) data pool? Tested on ip18 only: ip16 alone is clearly worse, pooling is a tie on top-1 (user question for the demo phone)
+
+- **What we tried:** the user asked whether ip18 and ip16 are similar in accuracy and precision (if yes, train on both; if not, on ip18 only), because the demo will use Dicta's ip18. Two leave-one-session-out tests on the three ip18 sessions (`sesi1`, `25nov`, `25night`, 85 stops): training on (a) the other ip18 sessions only, (b) those plus all ip16 sessions, (c) all ip16 sessions only.
+- **Why:** `out/eval.json` (entry 67) already said an ip16-trained model is worse on ip18 (57/85 vs 65/85), but nobody had tested the missing case, ip18 plus ip16 data together.
+- **How:** (1) `phase2/new/upload/eval_iphone_pool.py` imports `walksense.py` read-only (app code unchanged) and uses the app recipe: 2 s windows, per-floor kNN, visit answer = mean kNN probability over its windows among the places on the true floor, xyz plus tilt and magnitude as in `eval.json`. Writes `phase2/new/upload/out/iphone_pool.json` (about 20 s). ip16 sessions = `sesi2`, `25night_tian`, `26tian` (74 stops); 23-Nov is NOT used because `walksense.ALL_SESSIONS` has no 23-Nov entry (its tree has `sensor_samples.csv` and no `clean/manifest.csv`). Macro precision / recall are over the (floor, place) classes with at least one true visit; a never-guessed class counts 0 precision. Exploratory: subtract each session x phone median xyz (test session included, so it is transductive). (2) `phase2/new/day3/eval_iphone_pool_fused.py` repeats it in the day-3 learned-weight fused kNN (imports `fused_knn.tune` and `outer_score` read-only; weights and k tuned by inner leave-one-session-out on the training pool; ip16 pool also has 23nov and 25spots); writes `phase2/new/day3/out-iphone-pool/` only, `out/` untouched (about 4.5 min). The clean sensor folders were copied from the main tree into the worktree, not rebuilt.
+- **Result (app model, xyz, top-1 / top-3, `out/iphone_pool.json`; the (a) and (c) rows reproduce `eval.json` for all three kinds and all three held-out sessions, `check_all_match` true):**
+
+| train set | top-1 | top-3 | macro precision | macro recall | per session top-1 (sesi1, 25nov, 25night) |
+|---|---|---|---|---|---|
+| (a) ip18 only | 65/85 | 73/85 | 0.739 | 0.750 | 21/27, 20/26, 24/32 |
+| (b) ip18 + ip16 | 67/85 | 71/85 | 0.790 | 0.782 | 21/27, 21/26, 25/32 |
+| (c) ip16 only | 57/85 | 70/85 | 0.637 | 0.670 | 19/27, 18/26, 20/32 |
+
+  - (b) vs (a), per stop: 5 stops gained (4F disabled toilet, escalator down, Exit 10 door, LT2B, Y4502) and 3 lost (4F LT1B, 5F male disabled toilet, 5F Y5202); one stop is 1.2 points. (c) vs (a): 8 gained, 16 lost.
+  - tilt top-1: (a) 41/85, (b) 41/85, (c) 32/85. Magnitude: 24/85, 24/85, 18/85.
+  - Mirror test (supplementary, held-out ip16 sessions, 74 stops; a = ip16 only, b = pooled, c = ip18 only), xyz: 39/74, 42/74, 40/74; tilt 18/74, 25/74, 28/74.
+  - Exploratory median-xyz offset, test on ip18: (a) 64/85, (b) 55/85, (c) 40/85 (pooling got worse by 9, not better); mirror 41/74, 41/74, 44/74. Not used for any recommendation.
+  - Day-3 fused kNN (learned weights), test on the same 85 ip18 stops (`out-iphone-pool/iphone_pool_fused.json`): (A) ip18 only 59/85, top-3 66/85, macro precision 0.704, recall 0.702; (B) ip18 + ip16 58/85, top-3 75/85, 0.713 / 0.689; (C) ip16 only 44/85, top-3 63/85, 0.502 / 0.542; (D) all phones 56/85, top-3 77/85, 0.688 / 0.667. B vs A per stop: 8 gained, 9 lost. With the xyz group alone: A 56/85, B 53/85, C 42/85. Control: D should equal the committed `out/fused_sample_predictions.csv` (ip18, leave_one_session_out) at 57/85 top-3 75/85; the rerun gave 56/85 and 77/85, a 1-stop top-1 difference of the kind entry 77 calls the rerun noise floor.
+- **Outcome:** success. ip16 and ip18 are not interchangeable: trained on ip16 alone, ip18 stops lose 8 stops in the app model (57 vs 65) and 15 in the fused kNN (44 vs 59), and macro precision drops about 0.10 and 0.20. Pooling ip16 into ip18 training is a tie on top-1 (app +2, fused -1; the 5 vs 3 and 8 vs 9 gains and losses are inside the noise), top-3 moves in opposite directions in the two models (app -2, fused +9), and the offset variant gets worse. Small n: 85 stops, 3 sessions.
+- **What changed because of it:** recommendation for the demo: train on ip18 only (the demo phone), since the user's rule was "similar => both, otherwise ip18 only" and ip16 alone is clearly worse and pooling shows no reliable top-1 gain. The app is NOT changed (`pick_model` already uses the ip18-only model for an iPhone19,2 recording; to pool, `build_models` would need an ip18 model built from `training_stops(device=...)` of both iPhones, see the upload README).
+- **Links:** `phase2/new/upload/eval_iphone_pool.py`, `phase2/new/upload/out/iphone_pool.json`, `phase2/new/day3/eval_iphone_pool_fused.py`, `phase2/new/day3/out-iphone-pool/`, `phase2/new/upload/README.md` (section "ip16 and ip18: pooled training?"), `out/eval.json`; commit on branch `feat/iphone-pool` (hash in the commit).
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1612,6 +1635,7 @@ Contents:
 - **A rerun is the noise floor.** Rerunning the committed fused kNN on identical input tables moved the total by 1 take and changed the weights in 5 of 23 folds; option differences of a few takes on the unaffected phones are within that (entry 77).
 
 - **Split a shared node into separate edges, not separate nodes.** The lift and the stairs share one landing in our data; two parallel edges with their own costs let a mode drop one without moving any place, and the research graph stays untouched (entry 78).
+- **Test the pooled case, not only the cross case.** "Is the other phone worse alone?" (ip16 only: 57/85 vs 65/85 on ip18) does not answer "does it help as extra data?" (pooled 67/85 in the app model, 58/85 vs 59/85 in the fused kNN: a tie); the top-3 moved in opposite directions in the two models (entry 89).
 
 ## Open questions / next steps
 
@@ -1677,3 +1701,4 @@ Contents:
   - The report should state that the proposal's user tests were dropped (entry 83) and that RAG was not used at 26 places (entry 84); the team writes the wording.
   - Not verifiable from repo files, so left out of entries 79 and 80: the sizes of the laptop exports and the exact count of loose files downloaded before the inventory.
 - **A56 night takes (entry 77), team decision:** recommended B (exclude via `exclude_sources`) for the headline numbers and C1 as the "recalibration partly works" finding; `config.json` still keeps them (A). Also: the committed `day3/out/fused_knn.json` (178/411) is not reproduced by a rerun on identical inputs here (179/411 in two runs); rerun `run_all.sh` on main before quoting the last digit.
+- **iPhone pooling (entry 89):** decide with the user whether the demo model is ip18 only (recommended, nothing to change) or pooled. If more ip18 sessions are recorded, rerun `eval_iphone_pool.py` (about 20 s); 23-Nov ip16 stops are not in the app loader and were not tested there (they are in the fused kNN test).

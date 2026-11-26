@@ -1,0 +1,681 @@
+test_session,train_pool,variant,key,floor,true,pred,in_top3,k,weights,n_train_windows,n_train_sessions
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,escalator_down_4F,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,lift_stairs,False,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s14_y5401:iphone,5,y5401,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,fused (learned weights),24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.3, ""tilt"": 0.1, ""wifi"": 0.2, ""baro"": 0.4}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,sr9,False,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,False,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,exit_10,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs_4F,False,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,False,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,entrance_exit,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,exit_10,False,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,lift_stairs_4F,False,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s14_y5401:iphone,5,y5401,y5401,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,A_ip18_only,xyz only,24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,y5302_back,True,1,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",696,2
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,False,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,escalator_down_4F,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,lift_stairs,False,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,exit_10_4F,False,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s14_y5401:iphone,5,y5401,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,fused (learned weights),24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,sr9,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,exit_10,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s14_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,B_ip18_plus_ip16,xyz only,24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2088,6
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lt1a,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,sr9,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,exit_5_4F,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lift_stairs_4F,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_down_4F,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,canteen,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,lift_stairs,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,lift_stairs_4F,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s14_y5401:iphone,5,y5401,escalator_down_4F,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,fused (learned weights),24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,lt1a,False,15,"{""B"": 0.3, ""xyz"": 0.5, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.2}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,sr9,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,exit_10,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,y5401,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,lift_stairs,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s14_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,C_ip16_only,xyz only,24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,False,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,exit_10,False,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,exit_10_4F,False,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s14_y5401:iphone,5,y5401,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,fused (learned weights),24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 0.2, ""tilt"": 0.1, ""wifi"": 0.1, ""baro"": 0.6}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,sr9,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,lt2b,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s04_lt2a:iphone,4,lt2a,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,exit_10,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lt1a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s06_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s09_canteen_revisit:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s10_esca_down:iphone,5,escalator_down,exit_10,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s11_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s12_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s13_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s14_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+24s1,D_all_phones,xyz only,24s1:floor5/stops/s15_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3408,6
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,y4502,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,canteen,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s05_sr9:iphone,5,sr9,lift_stairs_4F,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,False,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,fused (learned weights),25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,y5302_back,True,5,"{""B"": 0.0, ""xyz"": 0.25, ""tilt"": 0.0, ""wifi"": 0.75, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,y4502,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,canteen,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s05_sr9:iphone,5,sr9,lift_stairs_4F,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,False,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,A_ip18_only,xyz only,25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,y5302_back,True,5,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",708,2
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,False,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,fused (learned weights),25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 0.5, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.4}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,canteen,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,B_ip18_plus_ip16,xyz only,25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2100,6
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,exit_5_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,False,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_down_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lift_stairs_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,sr9,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,escalator_down,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,escalator_down,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,False,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,fused (learned weights),25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,exit_10,True,15,"{""B"": 0.4, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.4}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,y5401,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,canteen,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,escalator_down,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,C_ip16_only,xyz only,25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,escalator_down_4F,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,escalator_down,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,False,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,fused (learned weights),25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.1, ""xyz"": 0.6, ""tilt"": 0.0, ""wifi"": 0.2, ""baro"": 0.1}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,y4502,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s05_lt2b:iphone,4,lt2b,escalator_up_4F,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,escalator_down_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor4/stops/s12_gate:iphone,4,entrance_exit,canteen,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s06_y5202:iphone,5,y5202,female_toilet,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s09_esca_up:iphone,5,escalator_up,escalator_up,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s10_esca_down:iphone,5,escalator_down,sr9,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s11_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s12_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s13_y5401:iphone,5,y5401,escalator_up,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25nov,D_all_phones,xyz only,25nov:floor5/stops/s14_y5302_point2:iphone,5,y5302_back,y5302_back,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3769,6
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,escalator_down_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s07_y4502:iphone,4,y4502,disabled_toilet_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s04_y5302:iphone,5,y5302,y5302,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s05_sr9:iphone,5,sr9,escalator_down,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s06_y5202:iphone,5,y5202,exit_10_4F,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,lift_stairs_4F,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,lt1b,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s13_sr9:iphone,5,sr9,y5202,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s14_y5202:iphone,5,y5202,y5202,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,y5302_back,True,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,fused (learned weights),25night:floor5/stops/s19_y5401:iphone,5,y5401,y5302,False,1,"{""B"": 0.0, ""xyz"": 0.6, ""tilt"": 0.2, ""wifi"": 0.1, ""baro"": 0.1}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s04_y5302:iphone,5,y5302,escalator_up_4F,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,lift_stairs_4F,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,lt1b,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s13_sr9:iphone,5,sr9,disabled_toilet_4F,False,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s14_y5202:iphone,5,y5202,y5202,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,y5302_back,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,A_ip18_only,xyz only,25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,9,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",636,2
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s05_lt2b:iphone,4,lt2b,exit_5_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s09_lt1b:iphone,4,lt1b,entrance_exit,False,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s04_y5302:iphone,5,y5302,y5401,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,lift_stairs_4F,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,lt1b,False,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s13_sr9:iphone,5,sr9,exit_10,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s14_y5202:iphone,5,y5202,y5302_back,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,y5302_back,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,fused (learned weights),25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,15,"{""B"": 0.0, ""xyz"": 0.4, ""tilt"": 0.1, ""wifi"": 0.0, ""baro"": 0.5}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s05_lt2b:iphone,4,lt2b,male_toilet,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s09_lt1b:iphone,4,lt1b,escalator_down_4F,False,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s04_y5302:iphone,5,y5302,y5401,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,lift_stairs_4F,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,lt1b,False,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s13_sr9:iphone,5,sr9,exit_10,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s14_y5202:iphone,5,y5202,y5202,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,y5302_back,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,B_ip18_plus_ip16,xyz only,25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,15,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",2028,6
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,y4502,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,y5302,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s07_y4502:iphone,4,y4502,disabled_toilet_4F,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_down_4F,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s09_lt1b:iphone,4,lt1b,lt1b,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s10_lt1a:iphone,4,lt1a,lt1a,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lt1a,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s01_canteen:iphone,5,canteen,exit_10,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,y5302,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s04_y5302:iphone,5,y5302,y5401,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s06_y5202:iphone,5,y5202,exit_10_4F,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,exit_10,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,lift_stairs_4F,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,exit_5,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s13_sr9:iphone,5,sr9,sr9,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s14_y5202:iphone,5,y5202,exit_10,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,sr9,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,sr9,False,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,fused (learned weights),25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,15,"{""B"": 0.3, ""xyz"": 0.2, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s05_lt2b:iphone,4,lt2b,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,y5401,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s09_lt1b:iphone,4,lt1b,escalator_down_4F,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s10_lt1a:iphone,4,lt1a,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,y5302,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s04_y5302:iphone,5,y5302,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,female_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,canteen,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s13_sr9:iphone,5,sr9,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s14_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,C_ip16_only,xyz only,25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",1392,4
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s07_y4502:iphone,4,y4502,disabled_toilet_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s09_lt1b:iphone,4,lt1b,escalator_down_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s10_lt1a:iphone,4,lt1a,escalator_down_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s01_canteen:iphone,5,canteen,canteen,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s04_y5302:iphone,5,y5302,y5401,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,lift_stairs_4F,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,canteen,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s13_sr9:iphone,5,sr9,exit_10,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s14_y5202:iphone,5,y5202,y5202,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,fused (learned weights),25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.1, ""xyz"": 0.4, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.5}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s01_lift_stairs5:iphone,4,lift_stairs_4F,sr9,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s02_disabled_toilet:iphone,4,disabled_toilet_4F,disabled_toilet_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s03_exit5_door:iphone,4,exit_5_4F,exit_5_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s04_lt2a:iphone,4,lt2a,lt2a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s05_lt2b:iphone,4,lt2b,lt2b,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s06_esca_down:iphone,4,escalator_down_4F,lt1a,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s07_y4502:iphone,4,y4502,y4502,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s08_esca_up:iphone,4,escalator_up_4F,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s09_lt1b:iphone,4,lt1b,escalator_down_4F,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s10_lt1a:iphone,4,lt1a,escalator_down_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s11_exit10_door:iphone,4,exit_10_4F,exit_10_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s12_gate:iphone,4,entrance_exit,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor4/stops/s13_lift_stairs5:iphone,4,lift_stairs_4F,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s01_canteen:iphone,5,canteen,entrance_exit,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s02_exit5_door:iphone,5,exit_5,exit_5,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s03_male_toilet:iphone,5,male_toilet,male_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s04_y5302:iphone,5,y5302,escalator_up_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s05_sr9:iphone,5,sr9,sr9,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s06_y5202:iphone,5,y5202,y5202,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s07_female_toilet:iphone,5,female_toilet,lift_stairs_4F,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s08_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s09_male_disabled_toilet:iphone,5,disabled_toilet,disabled_toilet,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s10_lift_stairs5:iphone,5,lift_stairs,disabled_toilet,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s11_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s12_y5302_point2:iphone,5,y5302_back,lift_stairs_4F,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s13_sr9:iphone,5,sr9,exit_10,False,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s14_y5202:iphone,5,y5202,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s15_exit10_door:iphone,5,exit_10,exit_10,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s16_male_disabled_toilet:iphone,5,disabled_toilet,escalator_up,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s17_lift_stairs5:iphone,5,lift_stairs,lift_stairs,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s18_y5302_point2:iphone,5,y5302_back,y5302_back,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
+25night,D_all_phones,xyz only,25night:floor5/stops/s19_y5401:iphone,5,y5401,y5401,True,25,"{""B"": 0.0, ""xyz"": 1.0, ""tilt"": 0.0, ""wifi"": 0.0, ""baro"": 0.0}",3937,6
