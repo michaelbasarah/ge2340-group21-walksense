@@ -123,10 +123,11 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(g.nodes['disabled_toilet_4F']['name'], 'Mixed disabled toilet (4F)')
 
     def test_toilet_every_mode_and_gender(self):
+        """Standard: ordinary toilets only (disabled ones stay free); Step-free: disabled toilets only (entry 90)."""
         starts = ['canteen', 'y5202', 'y5401', 'exit_10', 'lt1a', 'y4502', 'lt2b', 'entrance_exit']   # 4 on 5F, 4 on 4F
-        allowed = {('standard', 'any'): set(R.TOILETS),
-                   ('standard', 'male'): {'male_toilet', 'disabled_toilet', 'disabled_toilet_4F'},
-                   ('standard', 'female'): {'female_toilet', 'disabled_toilet_4F'},
+        allowed = {('standard', 'any'): {'male_toilet', 'female_toilet'},
+                   ('standard', 'male'): {'male_toilet'},
+                   ('standard', 'female'): {'female_toilet'},
                    ('accessible', 'any'): {'disabled_toilet', 'disabled_toilet_4F'},
                    ('accessible', 'male'): {'disabled_toilet', 'disabled_toilet_4F'},
                    ('accessible', 'female'): {'disabled_toilet_4F'}}
@@ -134,17 +135,59 @@ class PlannerTests(unittest.TestCase):
             for (mode, gender), ok in allowed.items():
                 t = R.nearest_toilet(s, mode, gender)
                 self.assertEqual({o['id'] for o in t['options']}, ok, (s, mode, gender))
+                self.assertEqual(t['policy'], 'ordinary' if mode == 'standard' else 'disabled_only', (s, mode, gender))
                 # the choice is the cheapest allowed toilet by an independent Dijkstra in that mode
                 best = min(ok, key=lambda x: (R.graph(mode).search(s, x, False)[1], x))
                 self.assertEqual(t['toilet'], best, (s, mode, gender))
                 self.assertEqual(t['choice'].path[-1], best)
                 if mode == 'accessible':
                     self.assertFalse({e['kind'] for e in t['choice'].legs} & {'stairs', 'escalator'})
-        # spot checks (5F female, accessible female from 5F has to go down by lift, 4F anyone -> the mixed toilet)
+                else:                                   # every disabled toilet that fits the gender is listed as kept free
+                    kept = {x['id'] for x in t['excluded'] if x['reason'].startswith('disabled toilet, kept free')}
+                    self.assertEqual(kept, {k for k, v in R.TOILETS.items() if v['accessible'] and not R.toilet_allowed(k, mode, gender)})
+                    self.assertIn('disabled toilets stay free', t['policy_note'])
+                # "disabled" / "accessible" words in Standard = accessible_only: same answer as Step-free toilets
+                a = R.nearest_toilet(s, mode, gender, accessible_only=True)
+                self.assertTrue(all(R.TOILETS[o['id']]['accessible'] for o in a['options']), (s, mode, gender))
+                self.assertEqual(a['policy'], 'disabled_only')
+        # spot checks (5F female, accessible female from 5F has to go down by lift)
         self.assertEqual(R.nearest_toilet('y5202', 'standard', 'female')['toilet'], 'female_toilet')
         t = R.nearest_toilet('y5401', 'accessible', 'female')
         self.assertEqual((t['toilet'], [c['kind'] for c in t['choice'].connectors]), ('disabled_toilet_4F', ['lift']))
-        self.assertEqual(R.nearest_toilet('lt1a', 'standard', 'male')['toilet'], 'disabled_toilet_4F')
+        # 4F start, Standard: up to the 5F ordinary toilet, not the nearer 4F mixed disabled toilet
+        t = R.nearest_toilet('lt1a', 'standard', 'male')
+        self.assertEqual(t['toilet'], 'male_toilet')
+        self.assertEqual(R.graph('standard').nodes[t['toilet']]['floor'], 5)
+        self.assertLess(R.graph('standard').search('lt1a', 'disabled_toilet_4F', False)[1], t['choice'].seconds)
+        self.assertEqual(R.nearest_toilet('canteen', 'standard', 'male')['toilet'], 'male_toilet')
+
+    def test_toilet_floor_filter_fallback(self):
+        """Every start x mode x gender with a 5F / 4F filter: Standard falls back to a disabled toilet only on 4F."""
+        starts = ['canteen', 'y5202', 'y5401', 'exit_10', 'lt1a', 'y4502', 'lt2b', 'entrance_exit']
+        want = {('standard', 'any', 5): ({'male_toilet', 'female_toilet'}, 'ordinary'),
+                ('standard', 'male', 5): ({'male_toilet'}, 'ordinary'),
+                ('standard', 'female', 5): ({'female_toilet'}, 'ordinary'),
+                ('standard', 'any', 4): ({'disabled_toilet_4F'}, 'disabled_fallback'),
+                ('standard', 'male', 4): ({'disabled_toilet_4F'}, 'disabled_fallback'),
+                ('standard', 'female', 4): ({'disabled_toilet_4F'}, 'disabled_fallback'),
+                ('accessible', 'any', 5): ({'disabled_toilet'}, 'disabled_only'),
+                ('accessible', 'male', 5): ({'disabled_toilet'}, 'disabled_only'),
+                ('accessible', 'female', 5): (set(), 'disabled_only'),
+                ('accessible', 'any', 4): ({'disabled_toilet_4F'}, 'disabled_only'),
+                ('accessible', 'male', 4): ({'disabled_toilet_4F'}, 'disabled_only'),
+                ('accessible', 'female', 4): ({'disabled_toilet_4F'}, 'disabled_only')}
+        for s in starts:
+            for (mode, gender, floor), (ok, policy) in want.items():
+                t = R.nearest_toilet(s, mode, gender, floor=floor)
+                self.assertEqual(({o['id'] for o in t['options']}, t['policy']), (ok, policy), (s, mode, gender, floor))
+                if policy == 'disabled_fallback':
+                    self.assertIn('No ordinary', t['policy_note'])
+                    self.assertIn('on 4F', t['policy_note'])
+        # a gender no ordinary toilet fits (made-up table): Standard falls back to the fitting disabled toilet
+        no_male = {k: v for k, v in R.TOILETS.items() if k != 'male_toilet'}
+        t = R.nearest_toilet('canteen', 'standard', 'male', toilets=no_male)
+        self.assertEqual((t['policy'], R.TOILETS[t['toilet']]['accessible']), ('disabled_fallback', True))
+        self.assertIn(t['toilet'], {'disabled_toilet', 'disabled_toilet_4F'})
 
     def test_toilet_no_option(self):
         t = R.nearest_toilet('canteen', 'accessible', 'female', floor=5)     # the only 5F disabled toilet is male only

@@ -2,7 +2,7 @@
 """WalkSense upload server: open it on the phone, send a phyphox ZIP, get floor + steps + place.
 
   python server.py            # then open the printed http://<laptop-ip>:8000 on the phone
-  python server.py --live http://<phone-ip>:8080 [--device iPhone17,4] [--port 8000]   # live from phyphox
+  python server.py --live http://<phone-ip> --device iPhone19,2 [--port 8000]   # live from phyphox (port 80, entry 86)
 Phone and laptop must be on the same network (the phone's hotspot works best).
 Anyone on that network can upload: use it on your own hotspot only.
 """
@@ -171,8 +171,9 @@ def lan_ips():
 def main(argv):
     ap = argparse.ArgumentParser(description='WalkSense upload / live server')
     ap.add_argument('--port', type=int, default=8000)
-    ap.add_argument('--live', metavar='PHONE_URL', help='phyphox remote access address, e.g. http://192.168.137.23:8080')
-    ap.add_argument('--device', default='iPhone17,4', help='phone model for live mode (iPhone 16 Plus = iPhone17,4)')
+    ap.add_argument('--live', metavar='PHONE_URL', help='phyphox remote access address, e.g. http://192.168.137.23 (port 80 on our iPhones, entry 86)')
+    ap.add_argument('--device', default='iPhone17,4', help='phone model for live mode (default iPhone17,4 = iPhone 16 Plus, '
+                    "Tian's; the demo phone, Dicta's iPhone 18, is iPhone19,2: pass --device iPhone19,2)")
     ap.add_argument('--floor', type=int, choices=(4, 5), default=5, help='floor you start on')
     a = ap.parse_args(argv)
     port = a.port
@@ -193,7 +194,19 @@ def main(argv):
     for ip in lan_ips():
         print(f'  http://{ip}:{port}')
     print(f'  (this laptop: http://127.0.0.1:{port})   Ctrl+C to stop')
+    if running_in_wsl():
+        print('  WSL: the address above is WSL\'s internal one, a phone cannot open it. On the laptop use '
+              f'http://127.0.0.1:{port}. For the phone, forward the port in Windows (admin PowerShell, README "Run it": '
+              f'netsh interface portproxy ... listenport={port} ... connectaddress=<WSL IP>, plus a firewall rule) and open '
+              f'http://<laptop hotspot address, usually 192.168.137.1>:{port}; or turn on WSL mirrored networking.')
     srv.serve_forever()
+
+
+def running_in_wsl():
+    try:
+        return 'microsoft' in Path('/proc/version').read_text().lower()
+    except OSError:
+        return False
 
 
 if __name__ == '__main__':

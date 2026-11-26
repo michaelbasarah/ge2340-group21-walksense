@@ -1,7 +1,8 @@
 # Floor rules when the barometer is missing (offline study, PROCESS-LOG entry 74)
 
-Internal team notes, not report text. Nothing here is wired into the upload app. Section 7 (entry 76) adds the
-connector-gated rules ("entry/exit points").
+Internal team notes, not report text. Section 7 (entry 76) adds the connector-gated rules ("entry/exit points").
+**Update 27 Nov (entry 90): rule (d) is now wired into the upload app** for phones with a barometer (section 8); the
+files in this folder are unchanged.
 
 **Question.** The upload app's floor tracker is right at every stop where the iPhone logged pressure, but on the
 25-Nov night run it showed 5F at 12 of Dicta's 4F stops (20/32): her iPhone logged no pressure from 22:43 to 23:17,
@@ -246,3 +247,19 @@ eR0/eR0n/ed with the true gate, 20 min for eR1-true; 20 / 20 / 30 / 30 min for e
 - The fused kNN predictions use the barometer group too, and were left as computed in the masked copies.
 - `pred_app` is trained on the other app sessions of the same phone model; 23 Nov has no `pred_app` (ungated there).
 - One real dropout (25 night ip18) and one held-out no-barometer unit with a faulty magnetometer, as in section 6.
+
+## 8. Rule (d) in the upload app (PROCESS-LOG entry 90, 27 Nov)
+
+- The user decided on 27 Nov to wire (d) into the app with the frozen parameters (k 15, P 0.7, H 2, M 3, gap 15 min).
+  Code: `upload/walksense.py` (`FLOOR_RULE`, `Session.update_floor` / `pressure_step` / `apply_vote`, `FloorVote`,
+  `floor_rule_for`); `rules.comb` here and the app's `Session` give the same floors on every app unit
+  (`upload/out/floor_rule_check.json` `app_matches_eval_json`).
+- Re-checked with the app's own features (2 s windows, first/last 5 s trimmed) instead of the day-3 5 s windows:
+  `python phase2/new/upload/floor_rule_check.py` -> `upload/out/floor_rule_check.json`. The iPhone decision rule still
+  passes (no stop lost on 25night_tian, 26tian, 25spots ip16; +10 on 25night ip18, 20 -> 30/32); 25spots ip16 is 4/6
+  with app features (5/6 with day-3 features, R0 4/6). The no-barometer rule still does not pass (held-out a56 19 vs 19),
+  so the app keeps R0 for a55, a56 and the S24 unless `WALKSENSE_FLOOR_VOTE_NO_BARO=1`.
+- `baseline.py` compares R0 with `upload/out/eval.json` `floor_tracking`, which now holds the app default (d) for the
+  iPhone: R0 is in `floor_tracking_by_rule` (`R0`); a rerun of `baseline.py` would report 25night as not matching
+  (20/32 vs 30/32) until it reads that key. `landing.py` (`pred_app`) still trains on the a56 night (it calls
+  `training_stops` without the new `exclude`).

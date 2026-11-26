@@ -12,7 +12,9 @@ keyword -> fuzzy, and the reply says which method answered. The key never leaves
 Route: A* of phase2/new/routing/route.py `plan()` on routing/graph.json (imported, not copied; named astar_route here
 because this folder's route.py is the walking dot), with a mode: standard (every connector) or accessible (lifts only).
 Toilet requests ("toilet", "restroom", or any place that resolves to a toilet) go to the nearest toilet that fits the
-mode and the gender filter (routing/route.py nearest_toilet), not just the matched place.
+mode and the gender filter (routing/route.py nearest_toilet), not just the matched place. Standard mode answers with an
+ordinary toilet whenever one fits and keeps the disabled toilets free (entry 90); Step-free or "disabled" words ->
+disabled toilets only.
 """
 from __future__ import annotations
 
@@ -198,6 +200,7 @@ def nearest(kind, from_id=None, mode='standard', gender='any', tracked=None, flo
     out = {'type': kind, 'mode': mode, 'gender': gender, 'floor_filter': floor, 'accessible_only': accessible_only or mode == 'accessible',
            'from': start, 'place_id': t['toilet'], 'answer': t['message'],
            'options': [{k: v for k, v in o.items() if k != 'plan'} for o in t['options']], 'excluded': t['excluded'],
+           'policy': t['policy'], 'policy_note': t['policy_note'],
            'route': [], 'legs': [], 'connectors': [], 'instructions': [], 'distance_m': None, 'seconds': None}
     if t['choice'] is not None:
         pid = t['toilet']
@@ -248,7 +251,7 @@ def search(query, from_id=None, tracked=None, mode='standard', gender='any'):
     if tq is not None:                                # toilet: nearest one that fits the mode and the filter
         g_use = tq['gender'] or gender
         t = nearest('toilet', out['from']['id'], mode, g_use, floor=tq['floor'], accessible_only=tq['accessible'])
-        out['toilet'] = {k: t[k] for k in ('gender', 'floor_filter', 'accessible_only', 'options', 'excluded')}
+        out['toilet'] = {k: t[k] for k in ('gender', 'floor_filter', 'accessible_only', 'options', 'excluded', 'policy', 'policy_note')}
         if tq['gender'] and tq['gender'] != gender:
             out['toilet']['note'] = f'Your words asked for a {tq["gender"]} toilet, so the {gender} filter was not used.'
         if t['place_id'] is None:

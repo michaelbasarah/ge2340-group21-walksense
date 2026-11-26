@@ -797,32 +797,32 @@
    "top3_acc": 0.222,
    "chance_top1": 0.077
   },
-  "a56 25nov+25night->sesi1 tilt": {
+  "a56 25nov->sesi1 tilt": {
    "mode": "same_model",
    "devices": "SM-A566B -> SM-A566B",
-   "n_train_stops": 58,
+   "n_train_stops": 26,
    "n_test_stops": 27,
-   "top1": "12/27",
-   "top1_acc": 0.444,
-   "top3": "14/27",
-   "top3_acc": 0.519,
+   "top1": "10/27",
+   "top1_acc": 0.37,
+   "top3": "15/27",
+   "top3_acc": 0.556,
    "chance_top1": 0.077
   },
-  "a56 25nov+25night->sesi1 xyz": {
+  "a56 25nov->sesi1 xyz": {
    "mode": "same_model",
    "devices": "SM-A566B -> SM-A566B",
-   "n_train_stops": 58,
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "13/27",
    "top1_acc": 0.481,
-   "top3": "17/27",
-   "top3_acc": 0.63,
+   "top3": "18/27",
+   "top3_acc": 0.667,
    "chance_top1": 0.077,
    "visits": [
     {
      "floor": 5,
      "truth": "canteen",
-     "guess": "y5302_point2",
+     "guess": "canteen",
      "p": 1.0
     },
     {
@@ -841,7 +841,7 @@
      "floor": 5,
      "truth": "y5302",
      "guess": "y5401",
-     "p": 0.8
+     "p": 0.508
     },
     {
      "floor": 5,
@@ -853,7 +853,7 @@
      "floor": 5,
      "truth": "y5202",
      "guess": "y5302_point2",
-     "p": 0.911
+     "p": 1.0
     },
     {
      "floor": 5,
@@ -870,20 +870,20 @@
     {
      "floor": 5,
      "truth": "canteen",
-     "guess": "y5302_point2",
-     "p": 0.975
+     "guess": "canteen",
+     "p": 1.0
     },
     {
      "floor": 5,
      "truth": "esca_down",
-     "guess": "lift_stairs5",
-     "p": 1.0
+     "guess": "exit10_door",
+     "p": 0.875
     },
     {
      "floor": 5,
      "truth": "esca_up",
      "guess": "male_disabled_toilet",
-     "p": 0.776
+     "p": 0.992
     },
     {
      "floor": 5,
@@ -894,8 +894,8 @@
     {
      "floor": 5,
      "truth": "lift_stairs5",
-     "guess": "lift_stairs5",
-     "p": 1.0
+     "guess": "exit10_door",
+     "p": 0.641
     },
     {
      "floor": 5,
@@ -919,7 +919,7 @@
      "floor": 4,
      "truth": "disabled_toilet",
      "guess": "y4502",
-     "p": 0.96
+     "p": 1.0
     },
     {
      "floor": 4,
@@ -930,14 +930,14 @@
     {
      "floor": 4,
      "truth": "lt2a",
-     "guess": "y4502",
-     "p": 0.68
+     "guess": "disabled_toilet",
+     "p": 0.577
     },
     {
      "floor": 4,
      "truth": "lt2b",
-     "guess": "lt2b",
-     "p": 0.925
+     "guess": "exit5_door",
+     "p": 0.526
     },
     {
      "floor": 4,
@@ -961,7 +961,7 @@
      "floor": 4,
      "truth": "lt1b",
      "guess": "lt1b",
-     "p": 0.993
+     "p": 0.984
     },
     {
      "floor": 4,
@@ -983,15 +983,15 @@
     }
    ]
   },
-  "a56 25nov+25night->sesi1 magnitude": {
+  "a56 25nov->sesi1 magnitude": {
    "mode": "same_model",
    "devices": "SM-A566B -> SM-A566B",
-   "n_train_stops": 58,
+   "n_train_stops": 26,
    "n_test_stops": 27,
    "top1": "3/27",
    "top1_acc": 0.111,
-   "top3": "10/27",
-   "top3_acc": 0.37,
+   "top3": "11/27",
+   "top3_acc": 0.407,
    "chance_top1": 0.077
   },
   "iphone 25night_tian+26tian->sesi2 tilt": {
@@ -2140,33 +2140,33 @@
    "top3_acc": 0.346,
    "chance_top1": 0.077
   },
-  "a56 sesi1+25night->25nov tilt": {
+  "a56 sesi1->25nov tilt": {
    "mode": "same_model",
    "devices": "SM-A566B -> SM-A566B",
-   "n_train_stops": 59,
+   "n_train_stops": 27,
    "n_test_stops": 26,
-   "top1": "9/26",
-   "top1_acc": 0.346,
-   "top3": "14/26",
-   "top3_acc": 0.538,
+   "top1": "7/26",
+   "top1_acc": 0.269,
+   "top3": "13/26",
+   "top3_acc": 0.5,
    "chance_top1": 0.077
   },
-  "a56 sesi1+25night->25nov xyz": {
+  "a56 sesi1->25nov xyz": {
    "mode": "same_model",
    "devices": "SM-A566B -> SM-A566B",
-   "n_train_stops": 59,
+   "n_train_stops": 27,
    "n_test_stops": 26,
-   "top1": "12/26",
-   "top1_acc": 0.462,
-   "top3": "15/26",
-   "top3_acc": 0.577,
+   "top1": "14/26",
+   "top1_acc": 0.538,
+   "top3": "18/26",
+   "top3_acc": 0.692,
    "chance_top1": 0.077,
    "visits": [
     {
      "floor": 5,
      "truth": "canteen",
      "guess": "y5302_point2",
-     "p": 1.0
+     "p": 0.992
     },
     {
      "floor": 5,
@@ -2177,38 +2177,38 @@
     {
      "floor": 5,
      "truth": "male_toilet",
-     "guess": "canteen",
+     "guess": "male_toilet",
      "p": 1.0
     },
     {
      "floor": 5,
      "truth": "y5302",
-     "guess": "canteen",
-     "p": 1.0
+     "guess": "y5302",
+     "p": 0.585
     },
     {
      "floor": 5,
      "truth": "sr9",
-     "guess": "y5302_point2",
-     "p": 0.426
+     "guess": "lift_stairs5",
+     "p": 0.637
     },
     {
      "floor": 5,
      "truth": "y5202",
      "guess": "lift_stairs5",
-     "p": 1.0
+     "p": 0.555
     },
     {
      "floor": 5,
      "truth": "female_toilet",
      "guess": "lift_stairs5",
-     "p": 0.719
+     "p": 1.0
     },
     {
      "floor": 5,
      "truth": "exit10_door",
      "guess": "lift_stairs5",
-     "p": 0.978
+     "p": 1.0
     },
     {
      "floor": 5,
@@ -2219,26 +2219,26 @@
     {
      "floor": 5,
      "truth": "esca_down",
-     "guess": "y5302_point2",
-     "p": 0.502
+     "guess": "lift_stairs5",
+     "p": 1.0
     },
     {
      "floor": 5,
      "truth": "male_disabled_toilet",
      "guess": "male_disabled_toilet",
-     "p": 0.687
+     "p": 0.634
     },
     {
      "floor": 5,
      "truth": "lift_stairs5",
      "guess": "exit10_door",
-     "p": 0.702
+     "p": 0.726
     },
     {
      "floor": 5,
      "truth": "y5401",
      "guess": "y5401",
-     "p": 0.942
+     "p": 0.976
     },
     {
      "floor": 5,
@@ -2255,8 +2255,8 @@
     {
      "floor": 4,
      "truth": "disabled_toilet",
-     "guess": "lt2b",
-     "p": 0.791
+     "guess": "y4502",
+     "p": 0.92
     },
     {
      "floor": 4,
@@ -2280,7 +2280,7 @@
      "floor": 4,
      "truth": "esca_down",
      "guess": "esca_down",
-     "p": 0.796
+     "p": 0.848
     },
     {
      "floor": 4,
@@ -2298,13 +2298,13 @@
      "floor": 4,
      "truth": "lt1b",
      "guess": "lt1b",
-     "p": 0.635
+     "p": 0.967
     },
     {
      "floor": 4,
      "truth": "lt1a",
      "guess": "esca_down",
-     "p": 0.992
+     "p": 0.654
     },
     {
      "floor": 4,
@@ -2320,15 +2320,15 @@
     }
    ]
   },
-  "a56 sesi1+25night->25nov magnitude": {
+  "a56 sesi1->25nov magnitude": {
    "mode": "same_model",
    "devices": "SM-A566B -> SM-A566B",
-   "n_train_stops": 59,
+   "n_train_stops": 27,
    "n_test_stops": 26,
-   "top1": "3/26",
-   "top1_acc": 0.115,
-   "top3": "6/26",
-   "top3_acc": 0.231,
+   "top1": "4/26",
+   "top1_acc": 0.154,
+   "top3": "9/26",
+   "top3_acc": 0.346,
    "chance_top1": 0.077
   },
   "iphone sesi1+25nov->25night tilt": {
@@ -3732,27 +3732,598 @@
  "floor_tracking": {
   "sesi1 iphone": {
    "stops_correct": "27/27",
-   "acc": 1.0
+   "acc": 1.0,
+   "rule": "d"
   },
   "sesi2 iphone": {
    "stops_correct": "26/26",
-   "acc": 1.0
+   "acc": 1.0,
+   "rule": "d"
   },
   "25nov iphone": {
    "stops_correct": "26/26",
-   "acc": 1.0
+   "acc": 1.0,
+   "rule": "d"
   },
   "25night iphone": {
-   "stops_correct": "20/32",
-   "acc": 0.625
+   "stops_correct": "30/32",
+   "acc": 0.938,
+   "rule": "d"
   },
   "25night_tian iphone": {
    "stops_correct": "23/23",
-   "acc": 1.0
+   "acc": 1.0,
+   "rule": "d"
   },
   "26tian iphone": {
    "stops_correct": "25/25",
-   "acc": 1.0
+   "acc": 1.0,
+   "rule": "d"
+  }
+ },
+ "floor_rule": {
+  "rule": "d",
+  "rules": {
+   "R0": "pressure only: 0.40 hPa from the median of the last 6 readings, reference emptied after a 15-min gap, no pressure = floor kept",
+   "d": "R0 while pressure is present and continuous; magnetic floor vote (k 15, 2 s xyz windows, same phone model, other sessions) at stops without pressure and the first 3 stops after a gap; 2 votes with p >= 0.7 in a row switch; barometer ignored for ['SM-S9280']",
+   "app_default": "what the app does by default: d for phones with a barometer, R0 for ['SM-A556E', 'SM-A566B', 'SM-S9280'] (WALKSENSE_FLOOR_VOTE_NO_BARO=1 gives them d)"
+  },
+  "train_exclude": {
+   "25night a56": "Chris's a56 on the 25-Nov night: magnetometer hard-iron offset (about 85 uT off, drifting after 22:59); team decision option B, PROCESS-LOG 77 (clean-data/2026-11-25-night/field_check.csv)"
+  },
+  "floor_tracking": "iPhone stops under the app default (d); floor_tracking_by_rule has every phone, R0, d (pre-registered, every phone) and app_default, stops and walks; every unit starts on its true first floor"
+ },
+ "floor_tracking_by_rule": {
+  "sesi1 iphone": {
+   "device": "iPhone19,2",
+   "vote_pool": "same model",
+   "pressure_recordings": "55/55",
+   "R0": {
+    "rule": "R0",
+    "stops": "27/27",
+    "walks": "28/28",
+    "wrong_stops": []
+   },
+   "d": {
+    "rule": "d",
+    "stops": "27/27",
+    "walks": "28/28",
+    "wrong_stops": []
+   },
+   "app_default": {
+    "rule": "d",
+    "stops": "27/27",
+    "walks": "28/28",
+    "wrong_stops": []
+   }
+  },
+  "sesi1 s24": {
+   "device": "SM-S9280",
+   "vote_pool": "same model",
+   "pressure_recordings": "55/55",
+   "R0": {
+    "rule": "R0",
+    "stops": "10/27",
+    "walks": "13/28",
+    "wrong_stops": [
+     "15:59 canteen true 5F shown 4F",
+     "16:04 exit5_door true 5F shown 4F",
+     "16:08 male_toilet true 5F shown 4F",
+     "16:13 y5302 true 5F shown 4F",
+     "16:45 esca_down true 5F shown 4F",
+     "16:49 esca_up true 5F shown 4F",
+     "18:22 y5302_point2 true 5F shown 4F",
+     "18:33 exit5_door true 4F shown 5F",
+     "18:37 lt2a true 4F shown 5F",
+     "18:40 lt2b true 4F shown 5F",
+     "18:43 esca_down true 4F shown 5F",
+     "18:47 y4502 true 4F shown 5F",
+     "18:49 esca_up true 4F shown 5F",
+     "18:52 lt1b true 4F shown 5F",
+     "18:55 lt1a true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:07 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "24/27",
+    "walks": "24/28",
+    "wrong_stops": [
+     "18:26 lift_stairs5 true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:07 gate true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "10/27",
+    "walks": "13/28",
+    "wrong_stops": [
+     "15:59 canteen true 5F shown 4F",
+     "16:04 exit5_door true 5F shown 4F",
+     "16:08 male_toilet true 5F shown 4F",
+     "16:13 y5302 true 5F shown 4F",
+     "16:45 esca_down true 5F shown 4F",
+     "16:49 esca_up true 5F shown 4F",
+     "18:22 y5302_point2 true 5F shown 4F",
+     "18:33 exit5_door true 4F shown 5F",
+     "18:37 lt2a true 4F shown 5F",
+     "18:40 lt2b true 4F shown 5F",
+     "18:43 esca_down true 4F shown 5F",
+     "18:47 y4502 true 4F shown 5F",
+     "18:49 esca_up true 4F shown 5F",
+     "18:52 lt1b true 4F shown 5F",
+     "18:55 lt1a true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:07 gate true 4F shown 5F"
+    ]
+   }
+  },
+  "sesi1 a55": {
+   "device": "SM-A556E",
+   "vote_pool": "same model",
+   "pressure_recordings": "0/55",
+   "R0": {
+    "rule": "R0",
+    "stops": "15/27",
+    "walks": "15/28",
+    "wrong_stops": [
+     "18:26 lift_stairs5 true 4F shown 5F",
+     "18:29 disabled_toilet true 4F shown 5F",
+     "18:33 exit5_door true 4F shown 5F",
+     "18:37 lt2a true 4F shown 5F",
+     "18:40 lt2b true 4F shown 5F",
+     "18:43 esca_down true 4F shown 5F",
+     "18:47 y4502 true 4F shown 5F",
+     "18:49 esca_up true 4F shown 5F",
+     "18:52 lt1b true 4F shown 5F",
+     "18:55 lt1a true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:06 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "26/27",
+    "walks": "28/28",
+    "wrong_stops": [
+     "18:22 y5302_point2 true 5F shown 4F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "15/27",
+    "walks": "15/28",
+    "wrong_stops": [
+     "18:26 lift_stairs5 true 4F shown 5F",
+     "18:29 disabled_toilet true 4F shown 5F",
+     "18:33 exit5_door true 4F shown 5F",
+     "18:37 lt2a true 4F shown 5F",
+     "18:40 lt2b true 4F shown 5F",
+     "18:43 esca_down true 4F shown 5F",
+     "18:47 y4502 true 4F shown 5F",
+     "18:49 esca_up true 4F shown 5F",
+     "18:52 lt1b true 4F shown 5F",
+     "18:55 lt1a true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:06 gate true 4F shown 5F"
+    ]
+   }
+  },
+  "sesi1 a56": {
+   "device": "SM-A566B",
+   "vote_pool": "same model",
+   "pressure_recordings": "0/55",
+   "R0": {
+    "rule": "R0",
+    "stops": "15/27",
+    "walks": "15/28",
+    "wrong_stops": [
+     "18:26 lift_stairs5 true 4F shown 5F",
+     "18:29 disabled_toilet true 4F shown 5F",
+     "18:33 exit5_door true 4F shown 5F",
+     "18:37 lt2a true 4F shown 5F",
+     "18:40 lt2b true 4F shown 5F",
+     "18:43 esca_down true 4F shown 5F",
+     "18:47 y4502 true 4F shown 5F",
+     "18:49 esca_up true 4F shown 5F",
+     "18:52 lt1b true 4F shown 5F",
+     "18:55 lt1a true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:06 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "26/27",
+    "walks": "27/28",
+    "wrong_stops": [
+     "18:26 lift_stairs5 true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "15/27",
+    "walks": "15/28",
+    "wrong_stops": [
+     "18:26 lift_stairs5 true 4F shown 5F",
+     "18:29 disabled_toilet true 4F shown 5F",
+     "18:33 exit5_door true 4F shown 5F",
+     "18:37 lt2a true 4F shown 5F",
+     "18:40 lt2b true 4F shown 5F",
+     "18:43 esca_down true 4F shown 5F",
+     "18:47 y4502 true 4F shown 5F",
+     "18:49 esca_up true 4F shown 5F",
+     "18:52 lt1b true 4F shown 5F",
+     "18:55 lt1a true 4F shown 5F",
+     "18:58 exit10_door true 4F shown 5F",
+     "19:06 gate true 4F shown 5F"
+    ]
+   }
+  },
+  "sesi2 iphone": {
+   "device": "iPhone17,4",
+   "vote_pool": "same model",
+   "pressure_recordings": "54/54",
+   "R0": {
+    "rule": "R0",
+    "stops": "26/26",
+    "walks": "28/28",
+    "wrong_stops": []
+   },
+   "d": {
+    "rule": "d",
+    "stops": "26/26",
+    "walks": "28/28",
+    "wrong_stops": []
+   },
+   "app_default": {
+    "rule": "d",
+    "stops": "26/26",
+    "walks": "28/28",
+    "wrong_stops": []
+   }
+  },
+  "sesi2 s24": {
+   "device": "SM-S9280",
+   "vote_pool": "same model",
+   "pressure_recordings": "54/54",
+   "R0": {
+    "rule": "R0",
+    "stops": "15/26",
+    "walks": "14/28",
+    "wrong_stops": [
+     "22:29 male_disabled_toilet true 5F shown 4F",
+     "22:50 disabled_toilet true 4F shown 5F",
+     "22:53 exit5_door true 4F shown 5F",
+     "22:56 lt2a true 4F shown 5F",
+     "22:59 lt2b true 4F shown 5F",
+     "23:02 esca_down true 4F shown 5F",
+     "23:09 esca_up true 4F shown 5F",
+     "23:11 lt1b true 4F shown 5F",
+     "23:15 lt1a true 4F shown 5F",
+     "23:17 exit10_door true 4F shown 5F",
+     "23:21 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "20/26",
+    "walks": "22/28",
+    "wrong_stops": [
+     "22:01 male_toilet true 5F shown 4F",
+     "22:04 y5302 true 5F shown 4F",
+     "22:07 sr9 true 5F shown 4F",
+     "22:10 y5202 true 5F shown 4F",
+     "22:47 lift_stairs5 true 4F shown 5F",
+     "22:50 disabled_toilet true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "15/26",
+    "walks": "14/28",
+    "wrong_stops": [
+     "22:29 male_disabled_toilet true 5F shown 4F",
+     "22:50 disabled_toilet true 4F shown 5F",
+     "22:53 exit5_door true 4F shown 5F",
+     "22:56 lt2a true 4F shown 5F",
+     "22:59 lt2b true 4F shown 5F",
+     "23:02 esca_down true 4F shown 5F",
+     "23:09 esca_up true 4F shown 5F",
+     "23:11 lt1b true 4F shown 5F",
+     "23:15 lt1a true 4F shown 5F",
+     "23:17 exit10_door true 4F shown 5F",
+     "23:21 gate true 4F shown 5F"
+    ]
+   }
+  },
+  "25nov iphone": {
+   "device": "iPhone19,2",
+   "vote_pool": "same model",
+   "pressure_recordings": "54/54",
+   "R0": {
+    "rule": "R0",
+    "stops": "26/26",
+    "walks": "28/28",
+    "wrong_stops": []
+   },
+   "d": {
+    "rule": "d",
+    "stops": "26/26",
+    "walks": "28/28",
+    "wrong_stops": []
+   },
+   "app_default": {
+    "rule": "d",
+    "stops": "26/26",
+    "walks": "28/28",
+    "wrong_stops": []
+   }
+  },
+  "25nov a55": {
+   "device": "SM-A556E",
+   "vote_pool": "same model",
+   "pressure_recordings": "0/54",
+   "R0": {
+    "rule": "R0",
+    "stops": "14/26",
+    "walks": "15/28",
+    "wrong_stops": [
+     "18:34 lift_stairs5 true 4F shown 5F",
+     "18:38 disabled_toilet true 4F shown 5F",
+     "18:42 exit5_door true 4F shown 5F",
+     "18:45 lt2a true 4F shown 5F",
+     "18:48 lt2b true 4F shown 5F",
+     "18:51 esca_down true 4F shown 5F",
+     "18:54 y4502 true 4F shown 5F",
+     "18:58 esca_up true 4F shown 5F",
+     "19:02 lt1b true 4F shown 5F",
+     "19:06 lt1a true 4F shown 5F",
+     "19:08 exit10_door true 4F shown 5F",
+     "19:11 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "25/26",
+    "walks": "27/28",
+    "wrong_stops": [
+     "18:34 lift_stairs5 true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "14/26",
+    "walks": "15/28",
+    "wrong_stops": [
+     "18:34 lift_stairs5 true 4F shown 5F",
+     "18:38 disabled_toilet true 4F shown 5F",
+     "18:42 exit5_door true 4F shown 5F",
+     "18:45 lt2a true 4F shown 5F",
+     "18:48 lt2b true 4F shown 5F",
+     "18:51 esca_down true 4F shown 5F",
+     "18:54 y4502 true 4F shown 5F",
+     "18:58 esca_up true 4F shown 5F",
+     "19:02 lt1b true 4F shown 5F",
+     "19:06 lt1a true 4F shown 5F",
+     "19:08 exit10_door true 4F shown 5F",
+     "19:11 gate true 4F shown 5F"
+    ]
+   }
+  },
+  "25nov a56": {
+   "device": "SM-A566B",
+   "vote_pool": "same model",
+   "pressure_recordings": "0/53",
+   "R0": {
+    "rule": "R0",
+    "stops": "14/26",
+    "walks": "15/27",
+    "wrong_stops": [
+     "18:33 lift_stairs5 true 4F shown 5F",
+     "18:38 disabled_toilet true 4F shown 5F",
+     "18:41 exit5_door true 4F shown 5F",
+     "18:45 lt2a true 4F shown 5F",
+     "18:48 lt2b true 4F shown 5F",
+     "18:51 esca_down true 4F shown 5F",
+     "18:54 y4502 true 4F shown 5F",
+     "18:58 esca_up true 4F shown 5F",
+     "19:02 lt1b true 4F shown 5F",
+     "19:05 lt1a true 4F shown 5F",
+     "19:09 exit10_door true 4F shown 5F",
+     "19:11 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "17/26",
+    "walks": "16/27",
+    "wrong_stops": [
+     "17:44 male_toilet true 5F shown 4F",
+     "17:46 y5302 true 5F shown 4F",
+     "17:50 sr9 true 5F shown 4F",
+     "17:53 y5202 true 5F shown 4F",
+     "17:57 female_toilet true 5F shown 4F",
+     "18:01 exit10_door true 5F shown 4F",
+     "18:06 esca_up true 5F shown 4F",
+     "18:11 esca_down true 5F shown 4F",
+     "18:33 lift_stairs5 true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "14/26",
+    "walks": "15/27",
+    "wrong_stops": [
+     "18:33 lift_stairs5 true 4F shown 5F",
+     "18:38 disabled_toilet true 4F shown 5F",
+     "18:41 exit5_door true 4F shown 5F",
+     "18:45 lt2a true 4F shown 5F",
+     "18:48 lt2b true 4F shown 5F",
+     "18:51 esca_down true 4F shown 5F",
+     "18:54 y4502 true 4F shown 5F",
+     "18:58 esca_up true 4F shown 5F",
+     "19:02 lt1b true 4F shown 5F",
+     "19:05 lt1a true 4F shown 5F",
+     "19:09 exit10_door true 4F shown 5F",
+     "19:11 gate true 4F shown 5F"
+    ]
+   }
+  },
+  "25night iphone": {
+   "device": "iPhone19,2",
+   "vote_pool": "same model",
+   "pressure_recordings": "32/59",
+   "R0": {
+    "rule": "R0",
+    "stops": "20/32",
+    "walks": "14/27",
+    "wrong_stops": [
+     "23:03 lift_stairs5 true 4F shown 5F",
+     "23:08 disabled_toilet true 4F shown 5F",
+     "23:17 exit5_door true 4F shown 5F",
+     "23:37 lt2a true 4F shown 5F",
+     "23:41 lt2b true 4F shown 5F",
+     "23:44 esca_down true 4F shown 5F",
+     "23:46 y4502 true 4F shown 5F",
+     "23:49 esca_up true 4F shown 5F",
+     "23:54 lt1b true 4F shown 5F",
+     "23:57 lt1a true 4F shown 5F",
+     "24:02 exit10_door true 4F shown 5F",
+     "24:05 gate true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "30/32",
+    "walks": "25/27",
+    "wrong_stops": [
+     "23:03 lift_stairs5 true 4F shown 5F",
+     "23:08 disabled_toilet true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "d",
+    "stops": "30/32",
+    "walks": "25/27",
+    "wrong_stops": [
+     "23:03 lift_stairs5 true 4F shown 5F",
+     "23:08 disabled_toilet true 4F shown 5F"
+    ]
+   }
+  },
+  "25night a56": {
+   "device": "SM-A566B",
+   "vote_pool": "same model",
+   "pressure_recordings": "0/58",
+   "R0": {
+    "rule": "R0",
+    "stops": "19/32",
+    "walks": "13/26",
+    "wrong_stops": [
+     "23:04 lift_stairs5 true 4F shown 5F",
+     "23:08 disabled_toilet true 4F shown 5F",
+     "23:15 exit5_door true 4F shown 5F",
+     "23:37 lt2a true 4F shown 5F",
+     "23:40 lt2b true 4F shown 5F",
+     "23:44 esca_down true 4F shown 5F",
+     "23:46 y4502 true 4F shown 5F",
+     "23:50 esca_up true 4F shown 5F",
+     "23:53 lt1b true 4F shown 5F",
+     "23:57 lt1a true 4F shown 5F",
+     "24:02 exit10_door true 4F shown 5F",
+     "24:05 gate true 4F shown 5F",
+     "24:39 lift_stairs5 true 4F shown 5F"
+    ]
+   },
+   "d": {
+    "rule": "d",
+    "stops": "19/32",
+    "walks": "13/26",
+    "wrong_stops": [
+     "23:04 lift_stairs5 true 4F shown 5F",
+     "23:08 disabled_toilet true 4F shown 5F",
+     "23:15 exit5_door true 4F shown 5F",
+     "23:37 lt2a true 4F shown 5F",
+     "23:40 lt2b true 4F shown 5F",
+     "23:44 esca_down true 4F shown 5F",
+     "23:46 y4502 true 4F shown 5F",
+     "23:50 esca_up true 4F shown 5F",
+     "23:53 lt1b true 4F shown 5F",
+     "23:57 lt1a true 4F shown 5F",
+     "24:02 exit10_door true 4F shown 5F",
+     "24:05 gate true 4F shown 5F",
+     "24:39 lift_stairs5 true 4F shown 5F"
+    ]
+   },
+   "app_default": {
+    "rule": "R0",
+    "stops": "19/32",
+    "walks": "13/26",
+    "wrong_stops": [
+     "23:04 lift_stairs5 true 4F shown 5F",
+     "23:08 disabled_toilet true 4F shown 5F",
+     "23:15 exit5_door true 4F shown 5F",
+     "23:37 lt2a true 4F shown 5F",
+     "23:40 lt2b true 4F shown 5F",
+     "23:44 esca_down true 4F shown 5F",
+     "23:46 y4502 true 4F shown 5F",
+     "23:50 esca_up true 4F shown 5F",
+     "23:53 lt1b true 4F shown 5F",
+     "23:57 lt1a true 4F shown 5F",
+     "24:02 exit10_door true 4F shown 5F",
+     "24:05 gate true 4F shown 5F",
+     "24:39 lift_stairs5 true 4F shown 5F"
+    ]
+   }
+  },
+  "25night_tian iphone": {
+   "device": "iPhone17,4",
+   "vote_pool": "same model",
+   "pressure_recordings": "46/46",
+   "R0": {
+    "rule": "R0",
+    "stops": "23/23",
+    "walks": "23/23",
+    "wrong_stops": []
+   },
+   "d": {
+    "rule": "d",
+    "stops": "23/23",
+    "walks": "23/23",
+    "wrong_stops": []
+   },
+   "app_default": {
+    "rule": "d",
+    "stops": "23/23",
+    "walks": "23/23",
+    "wrong_stops": []
+   }
+  },
+  "26tian iphone": {
+   "device": "iPhone17,4",
+   "vote_pool": "same model",
+   "pressure_recordings": "52/52",
+   "R0": {
+    "rule": "R0",
+    "stops": "25/25",
+    "walks": "27/27",
+    "wrong_stops": []
+   },
+   "d": {
+    "rule": "d",
+    "stops": "25/25",
+    "walks": "27/27",
+    "wrong_stops": []
+   },
+   "app_default": {
+    "rule": "d",
+    "stops": "25/25",
+    "walks": "27/27",
+    "wrong_stops": []
+   }
   }
  }
 }
