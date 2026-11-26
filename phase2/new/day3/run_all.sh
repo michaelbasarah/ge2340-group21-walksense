@@ -12,6 +12,9 @@ if [ "$1" = "--variant" ]; then export DAY3_VARIANT="$2"; fi      # e.g. --varia
 if [ -f phase2/clean-data/2026-11-25-night/scripts/build_night.py ]; then
   "$PY" -I phase2/clean-data/2026-11-25-night/scripts/build_night.py > /dev/null   # 25 Nov night raw/ + labels_night.csv -> clean/
 fi
+if [ -f phase2/clean-data/2026-11-26-tian/scripts/build_tian26.py ]; then
+  "$PY" -I phase2/clean-data/2026-11-26-tian/scripts/build_tian26.py > /dev/null   # 26 Nov morning (Tian) raw/ + labels_tian26.csv -> clean/
+fi
 if [ -f phase2/clean-data/2026-11-25-spots/scripts/build_clean.py ]; then
   "$PY" -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py > /dev/null   # 25 Nov raw/attachments -> clean/ (labels_used.csv, summary.json)
 fi

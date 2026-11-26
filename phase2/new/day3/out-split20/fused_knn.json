@@ -17,9 +17,9 @@
  ],
  "weight_grid": "simplex step 0.25, then step 0.1 within 0.25 of the best; plus each group alone and equal weights",
  "samples": {
-  "windows": 4432,
-  "recordings": 1108,
-  "stop_visits": 187,
+  "windows": 4732,
+  "recordings": 1183,
+  "stop_visits": 212,
   "places": 26,
   "window_s": 5.0,
   "per_session_phone": {
@@ -37,9 +37,10 @@
    "25nov/a56": 300,
    "25nov/ip18": 312,
    "25spots/ip16": 60,
-   "25spots/s24": 156
+   "25spots/s24": 156,
+   "26tian/ip16": 300
   },
-  "takes": 379
+  "takes": 404
  },
  "wifi": "nearest stop within 120 s, s24 scanner only; Wi-Fi and baro are per physical stop (shared by all its windows)",
  "schemes": {
@@ -47,46 +48,46 @@
    "folds": [
     {
      "fold": "random fold 1",
-     "n_train_windows": 3545,
-     "n_test_windows": 887,
+     "n_train_windows": 3785,
+     "n_test_windows": 947,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
       "B": 0.0,
-      "xyz": 0.6,
+      "xyz": 0.3,
       "tilt": 0.1,
-      "wifi": 0.2,
+      "wifi": 0.5,
       "baro": 0.1
      },
-     "chosen_k": 5,
-     "inner_acc_chosen": 0.982,
-     "n_weight_vectors_tried": 239,
+     "chosen_k": 1,
+     "inner_acc_chosen": 0.985,
+     "n_weight_vectors_tried": 475,
      "fused (learned weights)": {
-      "k": 5,
+      "k": 1,
       "weights": {
        "B": 0.0,
-       "xyz": 0.6,
+       "xyz": 0.3,
        "tilt": 0.1,
-       "wifi": 0.2,
+       "wifi": 0.5,
        "baro": 0.1
       },
-      "n_recordings": 656,
-      "exact": 647,
-      "exact_acc": 0.986,
+      "n_recordings": 716,
+      "exact": 709,
+      "exact_acc": 0.99,
       "exact_ci95": [
-       0.974,
-       0.993
-      ],
-      "area": 650,
-      "area_acc": 0.991,
-      "area_ci95": [
        0.98,
+       0.995
+      ],
+      "area": 710,
+      "area_acc": 0.992,
+      "area_ci95": [
+       0.982,
        0.996
       ],
-      "window_acc": 0.975
+      "window_acc": 0.985
      },
      "equal weights": {
-      "k": 3,
+      "k": 5,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -94,23 +95,23 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 656,
-      "exact": 636,
-      "exact_acc": 0.97,
+      "n_recordings": 716,
+      "exact": 696,
+      "exact_acc": 0.972,
       "exact_ci95": [
-       0.953,
-       0.98
+       0.957,
+       0.982
       ],
-      "area": 640,
-      "area_acc": 0.976,
+      "area": 702,
+      "area_acc": 0.98,
       "area_ci95": [
-       0.961,
-       0.985
+       0.967,
+       0.988
       ],
-      "window_acc": 0.957
+      "window_acc": 0.969
      },
      "B only": {
-      "k": 25,
+      "k": 9,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -118,23 +119,23 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 656,
-      "exact": 290,
-      "exact_acc": 0.442,
+      "n_recordings": 716,
+      "exact": 318,
+      "exact_acc": 0.444,
       "exact_ci95": [
-       0.405,
-       0.48
+       0.408,
+       0.481
       ],
-      "area": 322,
-      "area_acc": 0.491,
+      "area": 357,
+      "area_acc": 0.499,
       "area_ci95": [
-       0.453,
-       0.529
+       0.462,
+       0.535
       ],
-      "window_acc": 0.419
+      "window_acc": 0.428
      },
      "xyz only": {
-      "k": 1,
+      "k": 3,
       "weights": {
        "B": 0.0,
        "xyz": 1.0,
@@ -142,23 +143,23 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 656,
-      "exact": 633,
-      "exact_acc": 0.965,
+      "n_recordings": 716,
+      "exact": 690,
+      "exact_acc": 0.964,
       "exact_ci95": [
-       0.948,
-       0.977
+       0.947,
+       0.975
       ],
-      "area": 636,
-      "area_acc": 0.97,
+      "area": 691,
+      "area_acc": 0.965,
       "area_ci95": [
-       0.953,
-       0.98
+       0.949,
+       0.976
       ],
-      "window_acc": 0.959
+      "window_acc": 0.954
      },
      "tilt only": {
-      "k": 3,
+      "k": 9,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -166,20 +167,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 656,
-      "exact": 451,
-      "exact_acc": 0.688,
+      "n_recordings": 716,
+      "exact": 485,
+      "exact_acc": 0.677,
       "exact_ci95": [
-       0.651,
-       0.722
+       0.642,
+       0.711
       ],
-      "area": 473,
-      "area_acc": 0.721,
+      "area": 505,
+      "area_acc": 0.705,
       "area_ci95": [
-       0.686,
-       0.754
+       0.671,
+       0.738
       ],
-      "window_acc": 0.675
+      "window_acc": 0.667
      },
      "wifi only": {
       "k": 5,
@@ -190,23 +191,23 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 656,
-      "exact": 284,
-      "exact_acc": 0.433,
+      "n_recordings": 716,
+      "exact": 297,
+      "exact_acc": 0.415,
       "exact_ci95": [
-       0.396,
-       0.471
+       0.379,
+       0.451
       ],
-      "area": 303,
-      "area_acc": 0.462,
+      "area": 319,
+      "area_acc": 0.446,
       "area_ci95": [
-       0.424,
-       0.5
+       0.41,
+       0.482
       ],
-      "window_acc": 0.432
+      "window_acc": 0.405
      },
      "baro only": {
-      "k": 1,
+      "k": 3,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -214,27 +215,27 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 656,
-      "exact": 44,
-      "exact_acc": 0.067,
+      "n_recordings": 716,
+      "exact": 49,
+      "exact_acc": 0.068,
       "exact_ci95": [
-       0.05,
+       0.052,
        0.089
       ],
-      "area": 146,
-      "area_acc": 0.223,
+      "area": 165,
+      "area_acc": 0.23,
       "area_ci95": [
-       0.192,
-       0.256
+       0.201,
+       0.263
       ],
-      "window_acc": 0.071
+      "window_acc": 0.067
      },
-     "seconds": 67.8
+     "seconds": 103.8
     },
     {
      "fold": "random fold 2",
-     "n_train_windows": 3545,
-     "n_test_windows": 887,
+     "n_train_windows": 3785,
+     "n_test_windows": 947,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
@@ -245,7 +246,7 @@
       "baro": 0.1
      },
      "chosen_k": 1,
-     "inner_acc_chosen": 0.985,
+     "inner_acc_chosen": 0.986,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
       "k": 1,
@@ -256,17 +257,17 @@
        "wifi": 0.6,
        "baro": 0.1
       },
-      "n_recordings": 636,
-      "exact": 628,
+      "n_recordings": 709,
+      "exact": 700,
       "exact_acc": 0.987,
       "exact_ci95": [
-       0.975,
-       0.994
+       0.976,
+       0.993
       ],
-      "area": 630,
-      "area_acc": 0.991,
+      "area": 703,
+      "area_acc": 0.992,
       "area_ci95": [
-       0.98,
+       0.982,
        0.996
       ],
       "window_acc": 0.986
@@ -280,20 +281,392 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 636,
-      "exact": 623,
-      "exact_acc": 0.98,
+      "n_recordings": 709,
+      "exact": 686,
+      "exact_acc": 0.968,
       "exact_ci95": [
-       0.965,
-       0.988
+       0.952,
+       0.978
       ],
-      "area": 626,
-      "area_acc": 0.984,
+      "area": 688,
+      "area_acc": 0.97,
+      "area_ci95": [
+       0.955,
+       0.981
+      ],
+      "window_acc": 0.966
+     },
+     "B only": {
+      "k": 15,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 709,
+      "exact": 332,
+      "exact_acc": 0.468,
+      "exact_ci95": [
+       0.432,
+       0.505
+      ],
+      "area": 375,
+      "area_acc": 0.529,
+      "area_ci95": [
+       0.492,
+       0.565
+      ],
+      "window_acc": 0.452
+     },
+     "xyz only": {
+      "k": 3,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 709,
+      "exact": 683,
+      "exact_acc": 0.963,
+      "exact_ci95": [
+       0.947,
+       0.975
+      ],
+      "area": 685,
+      "area_acc": 0.966,
+      "area_ci95": [
+       0.95,
+       0.977
+      ],
+      "window_acc": 0.959
+     },
+     "tilt only": {
+      "k": 3,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 709,
+      "exact": 506,
+      "exact_acc": 0.714,
+      "exact_ci95": [
+       0.679,
+       0.746
+      ],
+      "area": 528,
+      "area_acc": 0.745,
+      "area_ci95": [
+       0.711,
+       0.775
+      ],
+      "window_acc": 0.695
+     },
+     "wifi only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 709,
+      "exact": 278,
+      "exact_acc": 0.392,
+      "exact_ci95": [
+       0.357,
+       0.429
+      ],
+      "area": 299,
+      "area_acc": 0.422,
+      "area_ci95": [
+       0.386,
+       0.458
+      ],
+      "window_acc": 0.392
+     },
+     "baro only": {
+      "k": 9,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 709,
+      "exact": 50,
+      "exact_acc": 0.071,
+      "exact_ci95": [
+       0.054,
+       0.092
+      ],
+      "area": 172,
+      "area_acc": 0.243,
+      "area_ci95": [
+       0.212,
+       0.275
+      ],
+      "window_acc": 0.072
+     },
+     "seconds": 51.9
+    },
+    {
+     "fold": "random fold 3",
+     "n_train_windows": 3786,
+     "n_test_windows": 946,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.0,
+      "xyz": 0.2,
+      "tilt": 0.2,
+      "wifi": 0.5,
+      "baro": 0.1
+     },
+     "chosen_k": 1,
+     "inner_acc_chosen": 0.983,
+     "n_weight_vectors_tried": 475,
+     "fused (learned weights)": {
+      "k": 1,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.5,
+       "baro": 0.1
+      },
+      "n_recordings": 704,
+      "exact": 697,
+      "exact_acc": 0.99,
+      "exact_ci95": [
+       0.98,
+       0.995
+      ],
+      "area": 698,
+      "area_acc": 0.991,
+      "area_ci95": [
+       0.982,
+       0.996
+      ],
+      "window_acc": 0.988
+     },
+     "equal weights": {
+      "k": 3,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 704,
+      "exact": 677,
+      "exact_acc": 0.962,
+      "exact_ci95": [
+       0.945,
+       0.974
+      ],
+      "area": 680,
+      "area_acc": 0.966,
+      "area_ci95": [
+       0.95,
+       0.977
+      ],
+      "window_acc": 0.959
+     },
+     "B only": {
+      "k": 25,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 704,
+      "exact": 304,
+      "exact_acc": 0.432,
+      "exact_ci95": [
+       0.396,
+       0.469
+      ],
+      "area": 338,
+      "area_acc": 0.48,
+      "area_ci95": [
+       0.443,
+       0.517
+      ],
+      "window_acc": 0.411
+     },
+     "xyz only": {
+      "k": 3,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 704,
+      "exact": 685,
+      "exact_acc": 0.973,
+      "exact_ci95": [
+       0.958,
+       0.983
+      ],
+      "area": 686,
+      "area_acc": 0.974,
+      "area_ci95": [
+       0.96,
+       0.984
+      ],
+      "window_acc": 0.965
+     },
+     "tilt only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 704,
+      "exact": 506,
+      "exact_acc": 0.719,
+      "exact_ci95": [
+       0.684,
+       0.751
+      ],
+      "area": 521,
+      "area_acc": 0.74,
+      "area_ci95": [
+       0.706,
+       0.771
+      ],
+      "window_acc": 0.708
+     },
+     "wifi only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 704,
+      "exact": 290,
+      "exact_acc": 0.412,
+      "exact_ci95": [
+       0.376,
+       0.449
+      ],
+      "area": 310,
+      "area_acc": 0.44,
+      "area_ci95": [
+       0.404,
+       0.477
+      ],
+      "window_acc": 0.408
+     },
+     "baro only": {
+      "k": 3,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 704,
+      "exact": 49,
+      "exact_acc": 0.07,
+      "exact_ci95": [
+       0.053,
+       0.091
+      ],
+      "area": 154,
+      "area_acc": 0.219,
+      "area_ci95": [
+       0.19,
+       0.251
+      ],
+      "window_acc": 0.066
+     },
+     "seconds": 100.3
+    },
+    {
+     "fold": "random fold 4",
+     "n_train_windows": 3786,
+     "n_test_windows": 946,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.0,
+      "xyz": 0.4,
+      "tilt": 0.2,
+      "wifi": 0.2,
+      "baro": 0.2
+     },
+     "chosen_k": 1,
+     "inner_acc_chosen": 0.981,
+     "n_weight_vectors_tried": 239,
+     "fused (learned weights)": {
+      "k": 1,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.4,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 716,
+      "exact": 708,
+      "exact_acc": 0.989,
+      "exact_ci95": [
+       0.978,
+       0.994
+      ],
+      "area": 710,
+      "area_acc": 0.992,
+      "area_ci95": [
+       0.982,
+       0.996
+      ],
+      "window_acc": 0.987
+     },
+     "equal weights": {
+      "k": 3,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 716,
+      "exact": 703,
+      "exact_acc": 0.982,
+      "exact_ci95": [
+       0.969,
+       0.989
+      ],
+      "area": 704,
+      "area_acc": 0.983,
       "area_ci95": [
        0.971,
-       0.991
+       0.99
       ],
-      "window_acc": 0.97
+      "window_acc": 0.973
      },
      "B only": {
       "k": 5,
@@ -304,18 +677,18 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 636,
-      "exact": 284,
-      "exact_acc": 0.447,
+      "n_recordings": 716,
+      "exact": 307,
+      "exact_acc": 0.429,
       "exact_ci95": [
-       0.408,
-       0.485
+       0.393,
+       0.465
       ],
-      "area": 325,
-      "area_acc": 0.511,
+      "area": 342,
+      "area_acc": 0.478,
       "area_ci95": [
-       0.472,
-       0.55
+       0.441,
+       0.514
       ],
       "window_acc": 0.41
      },
@@ -328,23 +701,23 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 636,
-      "exact": 613,
+      "n_recordings": 716,
+      "exact": 690,
       "exact_acc": 0.964,
       "exact_ci95": [
-       0.946,
-       0.976
+       0.947,
+       0.975
       ],
-      "area": 615,
-      "area_acc": 0.967,
+      "area": 692,
+      "area_acc": 0.966,
       "area_ci95": [
-       0.95,
-       0.978
+       0.951,
+       0.977
       ],
       "window_acc": 0.957
      },
      "tilt only": {
-      "k": 3,
+      "k": 5,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -352,20 +725,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 636,
-      "exact": 465,
-      "exact_acc": 0.731,
+      "n_recordings": 716,
+      "exact": 506,
+      "exact_acc": 0.707,
       "exact_ci95": [
-       0.695,
-       0.764
+       0.672,
+       0.739
       ],
-      "area": 485,
-      "area_acc": 0.763,
+      "area": 526,
+      "area_acc": 0.735,
       "area_ci95": [
-       0.728,
-       0.794
+       0.701,
+       0.766
       ],
-      "window_acc": 0.703
+      "window_acc": 0.7
      },
      "wifi only": {
       "k": 5,
@@ -376,23 +749,23 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 636,
-      "exact": 271,
-      "exact_acc": 0.426,
+      "n_recordings": 716,
+      "exact": 294,
+      "exact_acc": 0.411,
       "exact_ci95": [
-       0.388,
-       0.465
+       0.375,
+       0.447
       ],
-      "area": 285,
-      "area_acc": 0.448,
+      "area": 311,
+      "area_acc": 0.434,
       "area_ci95": [
-       0.41,
-       0.487
+       0.398,
+       0.471
       ],
-      "window_acc": 0.424
+      "window_acc": 0.408
      },
      "baro only": {
-      "k": 3,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -400,213 +773,27 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 636,
-      "exact": 40,
-      "exact_acc": 0.063,
+      "n_recordings": 716,
+      "exact": 62,
+      "exact_acc": 0.087,
       "exact_ci95": [
-       0.047,
-       0.085
+       0.068,
+       0.109
       ],
-      "area": 134,
-      "area_acc": 0.211,
+      "area": 167,
+      "area_acc": 0.233,
       "area_ci95": [
-       0.181,
-       0.244
+       0.204,
+       0.266
       ],
-      "window_acc": 0.069
+      "window_acc": 0.09
      },
-     "seconds": 68.2
+     "seconds": 48.8
     },
     {
-     "fold": "random fold 3",
-     "n_train_windows": 3546,
-     "n_test_windows": 886,
-     "n_train_places": 26,
-     "chance": 0.038,
-     "chosen_weights": {
-      "B": 0.0,
-      "xyz": 0.4,
-      "tilt": 0.1,
-      "wifi": 0.2,
-      "baro": 0.3
-     },
-     "chosen_k": 3,
-     "inner_acc_chosen": 0.981,
-     "n_weight_vectors_tried": 239,
-     "fused (learned weights)": {
-      "k": 3,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.4,
-       "tilt": 0.1,
-       "wifi": 0.2,
-       "baro": 0.3
-      },
-      "n_recordings": 658,
-      "exact": 649,
-      "exact_acc": 0.986,
-      "exact_ci95": [
-       0.974,
-       0.993
-      ],
-      "area": 650,
-      "area_acc": 0.988,
-      "area_ci95": [
-       0.976,
-       0.994
-      ],
-      "window_acc": 0.981
-     },
-     "equal weights": {
-      "k": 3,
-      "weights": {
-       "B": 0.2,
-       "xyz": 0.2,
-       "tilt": 0.2,
-       "wifi": 0.2,
-       "baro": 0.2
-      },
-      "n_recordings": 658,
-      "exact": 638,
-      "exact_acc": 0.97,
-      "exact_ci95": [
-       0.954,
-       0.98
-      ],
-      "area": 640,
-      "area_acc": 0.973,
-      "area_ci95": [
-       0.957,
-       0.983
-      ],
-      "window_acc": 0.965
-     },
-     "B only": {
-      "k": 9,
-      "weights": {
-       "B": 1.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 312,
-      "exact_acc": 0.474,
-      "exact_ci95": [
-       0.436,
-       0.512
-      ],
-      "area": 349,
-      "area_acc": 0.53,
-      "area_ci95": [
-       0.492,
-       0.568
-      ],
-      "window_acc": 0.436
-     },
-     "xyz only": {
-      "k": 3,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 633,
-      "exact_acc": 0.962,
-      "exact_ci95": [
-       0.945,
-       0.974
-      ],
-      "area": 635,
-      "area_acc": 0.965,
-      "area_ci95": [
-       0.948,
-       0.977
-      ],
-      "window_acc": 0.953
-     },
-     "tilt only": {
-      "k": 3,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 477,
-      "exact_acc": 0.725,
-      "exact_ci95": [
-       0.69,
-       0.758
-      ],
-      "area": 493,
-      "area_acc": 0.749,
-      "area_ci95": [
-       0.715,
-       0.781
-      ],
-      "window_acc": 0.701
-     },
-     "wifi only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 1.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 289,
-      "exact_acc": 0.439,
-      "exact_ci95": [
-       0.402,
-       0.477
-      ],
-      "area": 303,
-      "area_acc": 0.46,
-      "area_ci95": [
-       0.423,
-       0.499
-      ],
-      "window_acc": 0.431
-     },
-     "baro only": {
-      "k": 1,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 1.0
-      },
-      "n_recordings": 658,
-      "exact": 46,
-      "exact_acc": 0.07,
-      "exact_ci95": [
-       0.053,
-       0.092
-      ],
-      "area": 158,
-      "area_acc": 0.24,
-      "area_ci95": [
-       0.209,
-       0.274
-      ],
-      "window_acc": 0.074
-     },
-     "seconds": 69.3
-    },
-    {
-     "fold": "random fold 4",
-     "n_train_windows": 3546,
-     "n_test_windows": 886,
+     "fold": "random fold 5",
+     "n_train_windows": 3786,
+     "n_test_windows": 946,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
@@ -616,11 +803,11 @@
       "wifi": 0.5,
       "baro": 0.1
      },
-     "chosen_k": 1,
-     "inner_acc_chosen": 0.981,
+     "chosen_k": 3,
+     "inner_acc_chosen": 0.985,
      "n_weight_vectors_tried": 475,
      "fused (learned weights)": {
-      "k": 1,
+      "k": 3,
       "weights": {
        "B": 0.0,
        "xyz": 0.3,
@@ -628,23 +815,23 @@
        "wifi": 0.5,
        "baro": 0.1
       },
-      "n_recordings": 658,
-      "exact": 650,
-      "exact_acc": 0.988,
+      "n_recordings": 689,
+      "exact": 679,
+      "exact_acc": 0.985,
       "exact_ci95": [
-       0.976,
-       0.994
+       0.973,
+       0.992
       ],
-      "area": 651,
-      "area_acc": 0.989,
+      "area": 679,
+      "area_acc": 0.985,
       "area_ci95": [
-       0.978,
-       0.995
+       0.973,
+       0.992
       ],
-      "window_acc": 0.99
+      "window_acc": 0.981
      },
      "equal weights": {
-      "k": 3,
+      "k": 9,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -652,20 +839,20 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 658,
-      "exact": 640,
-      "exact_acc": 0.973,
+      "n_recordings": 689,
+      "exact": 670,
+      "exact_acc": 0.972,
       "exact_ci95": [
        0.957,
-       0.983
+       0.982
       ],
-      "area": 640,
-      "area_acc": 0.973,
+      "area": 670,
+      "area_acc": 0.972,
       "area_ci95": [
        0.957,
-       0.983
+       0.982
       ],
-      "window_acc": 0.968
+      "window_acc": 0.96
      },
      "B only": {
       "k": 15,
@@ -676,206 +863,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 658,
-      "exact": 297,
-      "exact_acc": 0.451,
+      "n_recordings": 689,
+      "exact": 310,
+      "exact_acc": 0.45,
       "exact_ci95": [
-       0.414,
-       0.49
+       0.413,
+       0.487
       ],
-      "area": 329,
-      "area_acc": 0.5,
+      "area": 351,
+      "area_acc": 0.509,
       "area_ci95": [
-       0.462,
-       0.538
+       0.472,
+       0.547
       ],
-      "window_acc": 0.437
-     },
-     "xyz only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 633,
-      "exact_acc": 0.962,
-      "exact_ci95": [
-       0.945,
-       0.974
-      ],
-      "area": 634,
-      "area_acc": 0.964,
-      "area_ci95": [
-       0.946,
-       0.975
-      ],
-      "window_acc": 0.95
-     },
-     "tilt only": {
-      "k": 3,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 476,
-      "exact_acc": 0.723,
-      "exact_ci95": [
-       0.688,
-       0.756
-      ],
-      "area": 491,
-      "area_acc": 0.746,
-      "area_ci95": [
-       0.712,
-       0.778
-      ],
-      "window_acc": 0.701
-     },
-     "wifi only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 1.0,
-       "baro": 0.0
-      },
-      "n_recordings": 658,
-      "exact": 284,
-      "exact_acc": 0.432,
-      "exact_ci95": [
-       0.394,
-       0.47
-      ],
-      "area": 300,
-      "area_acc": 0.456,
-      "area_ci95": [
-       0.418,
-       0.494
-      ],
-      "window_acc": 0.437
-     },
-     "baro only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 1.0
-      },
-      "n_recordings": 658,
-      "exact": 39,
-      "exact_acc": 0.059,
-      "exact_ci95": [
-       0.044,
-       0.08
-      ],
-      "area": 159,
-      "area_acc": 0.242,
-      "area_ci95": [
-       0.21,
-       0.276
-      ],
-      "window_acc": 0.055
-     },
-     "seconds": 140.5
-    },
-    {
-     "fold": "random fold 5",
-     "n_train_windows": 3546,
-     "n_test_windows": 886,
-     "n_train_places": 26,
-     "chance": 0.038,
-     "chosen_weights": {
-      "B": 0.0,
-      "xyz": 0.2,
-      "tilt": 0.1,
-      "wifi": 0.5,
-      "baro": 0.2
-     },
-     "chosen_k": 1,
-     "inner_acc_chosen": 0.986,
-     "n_weight_vectors_tried": 475,
-     "fused (learned weights)": {
-      "k": 1,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.2,
-       "tilt": 0.1,
-       "wifi": 0.5,
-       "baro": 0.2
-      },
-      "n_recordings": 645,
-      "exact": 637,
-      "exact_acc": 0.988,
-      "exact_ci95": [
-       0.976,
-       0.994
-      ],
-      "area": 638,
-      "area_acc": 0.989,
-      "area_ci95": [
-       0.978,
-       0.995
-      ],
-      "window_acc": 0.984
-     },
-     "equal weights": {
-      "k": 3,
-      "weights": {
-       "B": 0.2,
-       "xyz": 0.2,
-       "tilt": 0.2,
-       "wifi": 0.2,
-       "baro": 0.2
-      },
-      "n_recordings": 645,
-      "exact": 634,
-      "exact_acc": 0.983,
-      "exact_ci95": [
-       0.97,
-       0.99
-      ],
-      "area": 634,
-      "area_acc": 0.983,
-      "area_ci95": [
-       0.97,
-       0.99
-      ],
-      "window_acc": 0.976
-     },
-     "B only": {
-      "k": 9,
-      "weights": {
-       "B": 1.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 645,
-      "exact": 288,
-      "exact_acc": 0.447,
-      "exact_ci95": [
-       0.409,
-       0.485
-      ],
-      "area": 320,
-      "area_acc": 0.496,
-      "area_ci95": [
-       0.458,
-       0.535
-      ],
-      "window_acc": 0.423
+      "window_acc": 0.42
      },
      "xyz only": {
       "k": 1,
@@ -886,20 +887,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 645,
-      "exact": 618,
-      "exact_acc": 0.958,
+      "n_recordings": 689,
+      "exact": 659,
+      "exact_acc": 0.956,
       "exact_ci95": [
+       0.939,
+       0.969
+      ],
+      "area": 660,
+      "area_acc": 0.958,
+      "area_ci95": [
        0.94,
        0.971
       ],
-      "area": 620,
-      "area_acc": 0.961,
-      "area_ci95": [
-       0.943,
-       0.974
-      ],
-      "window_acc": 0.959
+      "window_acc": 0.952
      },
      "tilt only": {
       "k": 5,
@@ -910,20 +911,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 645,
-      "exact": 441,
-      "exact_acc": 0.684,
+      "n_recordings": 689,
+      "exact": 488,
+      "exact_acc": 0.708,
       "exact_ci95": [
-       0.647,
-       0.718
+       0.673,
+       0.741
       ],
-      "area": 459,
-      "area_acc": 0.712,
+      "area": 507,
+      "area_acc": 0.736,
       "area_ci95": [
-       0.675,
-       0.745
+       0.702,
+       0.767
       ],
-      "window_acc": 0.659
+      "window_acc": 0.668
      },
      "wifi only": {
       "k": 5,
@@ -934,23 +935,23 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 645,
-      "exact": 279,
-      "exact_acc": 0.433,
+      "n_recordings": 689,
+      "exact": 280,
+      "exact_acc": 0.406,
       "exact_ci95": [
-       0.395,
-       0.471
+       0.37,
+       0.443
       ],
-      "area": 295,
-      "area_acc": 0.457,
+      "area": 305,
+      "area_acc": 0.443,
       "area_ci95": [
-       0.419,
-       0.496
+       0.406,
+       0.48
       ],
-      "window_acc": 0.447
+      "window_acc": 0.42
      },
      "baro only": {
-      "k": 3,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -958,115 +959,115 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 645,
-      "exact": 43,
-      "exact_acc": 0.067,
+      "n_recordings": 689,
+      "exact": 55,
+      "exact_acc": 0.08,
       "exact_ci95": [
-       0.05,
-       0.089
+       0.062,
+       0.102
       ],
-      "area": 177,
-      "area_acc": 0.274,
+      "area": 155,
+      "area_acc": 0.225,
       "area_ci95": [
-       0.241,
-       0.31
+       0.195,
+       0.258
       ],
-      "window_acc": 0.065
+      "window_acc": 0.081
      },
-     "seconds": 136.5
+     "seconds": 96.7
     }
    ],
    "overall": {
     "fused (learned weights)": {
-     "exact": 3211,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.987,
+     "exact": 3493,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.988,
      "exact_ci95": [
-      0.983,
-      0.99
+      0.984,
+      0.991
      ],
-     "area": 3219,
+     "area": 3500,
      "area_acc": 0.99,
-     "window_acc": 0.983,
-     "n_test_windows": 4432
+     "window_acc": 0.986,
+     "n_test_windows": 4732
     },
     "equal weights": {
-     "exact": 3171,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.975,
+     "exact": 3432,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.971,
      "exact_ci95": [
-      0.969,
-      0.98
+      0.965,
+      0.976
      ],
-     "area": 3180,
-     "area_acc": 0.978,
-     "window_acc": 0.967,
-     "n_test_windows": 4432
+     "area": 3444,
+     "area_acc": 0.975,
+     "window_acc": 0.965,
+     "n_test_windows": 4732
     },
     "B only": {
-     "exact": 1471,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.452,
+     "exact": 1571,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.445,
      "exact_ci95": [
-      0.435,
-      0.469
+      0.428,
+      0.461
      ],
-     "area": 1645,
-     "area_acc": 0.506,
-     "window_acc": 0.425,
-     "n_test_windows": 4432
+     "area": 1763,
+     "area_acc": 0.499,
+     "window_acc": 0.424,
+     "n_test_windows": 4732
     },
     "xyz only": {
-     "exact": 3130,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.962,
+     "exact": 3407,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.964,
      "exact_ci95": [
-      0.955,
-      0.968
+      0.957,
+      0.97
      ],
-     "area": 3140,
-     "area_acc": 0.965,
-     "window_acc": 0.956,
-     "n_test_windows": 4432
+     "area": 3414,
+     "area_acc": 0.966,
+     "window_acc": 0.957,
+     "n_test_windows": 4732
     },
     "tilt only": {
-     "exact": 2310,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.71,
+     "exact": 2491,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.705,
      "exact_ci95": [
-      0.694,
-      0.725
+      0.69,
+      0.72
      ],
-     "area": 2401,
-     "area_acc": 0.738,
+     "area": 2587,
+     "area_acc": 0.732,
      "window_acc": 0.688,
-     "n_test_windows": 4432
+     "n_test_windows": 4732
     },
     "wifi only": {
-     "exact": 1407,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.433,
+     "exact": 1439,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.407,
      "exact_ci95": [
-      0.416,
-      0.45
+      0.391,
+      0.423
      ],
-     "area": 1486,
-     "area_acc": 0.457,
-     "window_acc": 0.434,
-     "n_test_windows": 4432
+     "area": 1544,
+     "area_acc": 0.437,
+     "window_acc": 0.407,
+     "n_test_windows": 4732
     },
     "baro only": {
-     "exact": 212,
-     "n_recordings_scored": 3253,
-     "exact_acc": 0.065,
+     "exact": 265,
+     "n_recordings_scored": 3534,
+     "exact_acc": 0.075,
      "exact_ci95": [
-      0.057,
-      0.074
+      0.067,
+      0.084
      ],
-     "area": 774,
-     "area_acc": 0.238,
-     "window_acc": 0.067,
-     "n_test_windows": 4432
+     "area": 813,
+     "area_acc": 0.23,
+     "window_acc": 0.075,
+     "n_test_windows": 4732
     }
    },
    "chance_mean": 0.038
@@ -1075,43 +1076,43 @@
    "folds": [
     {
      "fold": "recording fold 1",
-     "n_train_windows": 3544,
-     "n_test_windows": 888,
+     "n_train_windows": 3784,
+     "n_test_windows": 948,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
       "B": 0.0,
-      "xyz": 0.1,
+      "xyz": 0.2,
       "tilt": 0.0,
       "wifi": 0.7,
-      "baro": 0.2
+      "baro": 0.1
      },
-     "chosen_k": 15,
-     "inner_acc_chosen": 0.518,
+     "chosen_k": 25,
+     "inner_acc_chosen": 0.526,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
-      "k": 15,
+      "k": 25,
       "weights": {
        "B": 0.0,
-       "xyz": 0.1,
+       "xyz": 0.2,
        "tilt": 0.0,
        "wifi": 0.7,
-       "baro": 0.2
+       "baro": 0.1
       },
-      "n_recordings": 222,
-      "exact": 100,
-      "exact_acc": 0.45,
+      "n_recordings": 237,
+      "exact": 94,
+      "exact_acc": 0.397,
       "exact_ci95": [
-       0.386,
-       0.516
+       0.336,
+       0.46
       ],
-      "area": 118,
-      "area_acc": 0.532,
+      "area": 129,
+      "area_acc": 0.544,
       "area_ci95": [
-       0.466,
-       0.596
+       0.481,
+       0.607
       ],
-      "window_acc": 0.448
+      "window_acc": 0.39
      },
      "equal weights": {
       "k": 25,
@@ -1122,23 +1123,23 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 222,
-      "exact": 97,
-      "exact_acc": 0.437,
+      "n_recordings": 237,
+      "exact": 92,
+      "exact_acc": 0.388,
       "exact_ci95": [
-       0.373,
-       0.503
+       0.328,
+       0.452
       ],
-      "area": 121,
-      "area_acc": 0.545,
+      "area": 116,
+      "area_acc": 0.489,
       "area_ci95": [
-       0.479,
-       0.609
+       0.426,
+       0.553
       ],
-      "window_acc": 0.417
+      "window_acc": 0.374
      },
      "B only": {
-      "k": 25,
+      "k": 15,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -1146,23 +1147,23 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 19,
-      "exact_acc": 0.086,
+      "n_recordings": 237,
+      "exact": 21,
+      "exact_acc": 0.089,
       "exact_ci95": [
-       0.055,
-       0.13
+       0.059,
+       0.132
       ],
-      "area": 45,
-      "area_acc": 0.203,
+      "area": 47,
+      "area_acc": 0.198,
       "area_ci95": [
-       0.155,
-       0.26
+       0.153,
+       0.254
       ],
-      "window_acc": 0.077
+      "window_acc": 0.075
      },
      "xyz only": {
-      "k": 3,
+      "k": 1,
       "weights": {
        "B": 0.0,
        "xyz": 1.0,
@@ -1170,20 +1171,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 67,
-      "exact_acc": 0.302,
+      "n_recordings": 237,
+      "exact": 70,
+      "exact_acc": 0.295,
       "exact_ci95": [
-       0.245,
-       0.365
+       0.241,
+       0.356
       ],
-      "area": 79,
-      "area_acc": 0.356,
+      "area": 95,
+      "area_acc": 0.401,
       "area_ci95": [
-       0.296,
-       0.421
+       0.341,
+       0.464
       ],
-      "window_acc": 0.295
+      "window_acc": 0.284
      },
      "tilt only": {
       "k": 25,
@@ -1194,20 +1195,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 33,
-      "exact_acc": 0.149,
+      "n_recordings": 237,
+      "exact": 32,
+      "exact_acc": 0.135,
       "exact_ci95": [
-       0.108,
-       0.201
+       0.097,
+       0.184
       ],
-      "area": 51,
-      "area_acc": 0.23,
+      "area": 52,
+      "area_acc": 0.219,
       "area_ci95": [
-       0.179,
-       0.289
+       0.171,
+       0.276
       ],
-      "window_acc": 0.151
+      "window_acc": 0.138
      },
      "wifi only": {
       "k": 5,
@@ -1218,23 +1219,23 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
+      "n_recordings": 237,
       "exact": 68,
-      "exact_acc": 0.306,
+      "exact_acc": 0.287,
       "exact_ci95": [
-       0.249,
-       0.37
+       0.233,
+       0.348
       ],
-      "area": 83,
-      "area_acc": 0.374,
+      "area": 86,
+      "area_acc": 0.363,
       "area_ci95": [
-       0.313,
-       0.439
+       0.304,
+       0.426
       ],
-      "window_acc": 0.306
+      "window_acc": 0.287
      },
      "baro only": {
-      "k": 5,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -1242,27 +1243,27 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 222,
-      "exact": 12,
-      "exact_acc": 0.054,
+      "n_recordings": 237,
+      "exact": 22,
+      "exact_acc": 0.093,
       "exact_ci95": [
-       0.031,
-       0.092
+       0.062,
+       0.137
       ],
-      "area": 44,
-      "area_acc": 0.198,
+      "area": 76,
+      "area_acc": 0.321,
       "area_ci95": [
-       0.151,
-       0.256
+       0.265,
+       0.383
       ],
-      "window_acc": 0.054
+      "window_acc": 0.093
      },
-     "seconds": 67.2
+     "seconds": 47.0
     },
     {
      "fold": "recording fold 2",
-     "n_train_windows": 3544,
-     "n_test_windows": 888,
+     "n_train_windows": 3784,
+     "n_test_windows": 948,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
@@ -1273,7 +1274,7 @@
       "baro": 0.2
      },
      "chosen_k": 9,
-     "inner_acc_chosen": 0.516,
+     "inner_acc_chosen": 0.519,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
       "k": 9,
@@ -1284,23 +1285,23 @@
        "wifi": 0.7,
        "baro": 0.2
       },
-      "n_recordings": 222,
-      "exact": 107,
-      "exact_acc": 0.482,
+      "n_recordings": 237,
+      "exact": 117,
+      "exact_acc": 0.494,
       "exact_ci95": [
-       0.417,
-       0.547
+       0.431,
+       0.557
       ],
-      "area": 119,
-      "area_acc": 0.536,
+      "area": 133,
+      "area_acc": 0.561,
       "area_ci95": [
-       0.47,
-       0.6
+       0.498,
+       0.623
       ],
-      "window_acc": 0.482
+      "window_acc": 0.495
      },
      "equal weights": {
-      "k": 25,
+      "k": 15,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -1308,20 +1309,20 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 222,
-      "exact": 90,
-      "exact_acc": 0.405,
+      "n_recordings": 237,
+      "exact": 92,
+      "exact_acc": 0.388,
       "exact_ci95": [
-       0.343,
-       0.471
+       0.328,
+       0.452
       ],
-      "area": 110,
-      "area_acc": 0.495,
+      "area": 114,
+      "area_acc": 0.481,
       "area_ci95": [
-       0.43,
-       0.561
+       0.418,
+       0.544
       ],
-      "window_acc": 0.408
+      "window_acc": 0.377
      },
      "B only": {
       "k": 15,
@@ -1332,20 +1333,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 14,
-      "exact_acc": 0.063,
+      "n_recordings": 237,
+      "exact": 13,
+      "exact_acc": 0.055,
       "exact_ci95": [
-       0.038,
-       0.103
+       0.032,
+       0.092
       ],
-      "area": 36,
-      "area_acc": 0.162,
+      "area": 37,
+      "area_acc": 0.156,
       "area_ci95": [
-       0.119,
-       0.216
+       0.115,
+       0.208
       ],
-      "window_acc": 0.074
+      "window_acc": 0.069
      },
      "xyz only": {
       "k": 25,
@@ -1356,20 +1357,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 63,
-      "exact_acc": 0.284,
+      "n_recordings": 237,
+      "exact": 67,
+      "exact_acc": 0.283,
       "exact_ci95": [
        0.229,
-       0.346
+       0.343
       ],
-      "area": 75,
-      "area_acc": 0.338,
+      "area": 84,
+      "area_acc": 0.354,
       "area_ci95": [
-       0.279,
-       0.402
+       0.296,
+       0.417
       ],
-      "window_acc": 0.295
+      "window_acc": 0.306
      },
      "tilt only": {
       "k": 25,
@@ -1380,20 +1381,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 32,
-      "exact_acc": 0.144,
+      "n_recordings": 237,
+      "exact": 34,
+      "exact_acc": 0.143,
       "exact_ci95": [
-       0.104,
-       0.196
+       0.105,
+       0.194
       ],
-      "area": 46,
-      "area_acc": 0.207,
+      "area": 52,
+      "area_acc": 0.219,
       "area_ci95": [
-       0.159,
-       0.265
+       0.171,
+       0.276
       ],
-      "window_acc": 0.139
+      "window_acc": 0.138
      },
      "wifi only": {
       "k": 25,
@@ -1404,23 +1405,23 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
+      "n_recordings": 237,
       "exact": 63,
-      "exact_acc": 0.284,
+      "exact_acc": 0.266,
       "exact_ci95": [
-       0.229,
-       0.346
+       0.214,
+       0.325
       ],
       "area": 72,
-      "area_acc": 0.324,
+      "area_acc": 0.304,
       "area_ci95": [
-       0.266,
-       0.388
+       0.249,
+       0.365
       ],
-      "window_acc": 0.284
+      "window_acc": 0.266
      },
      "baro only": {
-      "k": 1,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -1428,65 +1429,65 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 222,
-      "exact": 9,
-      "exact_acc": 0.041,
+      "n_recordings": 237,
+      "exact": 12,
+      "exact_acc": 0.051,
       "exact_ci95": [
-       0.021,
-       0.075
+       0.029,
+       0.086
       ],
-      "area": 51,
-      "area_acc": 0.23,
+      "area": 63,
+      "area_acc": 0.266,
       "area_ci95": [
-       0.179,
-       0.289
+       0.214,
+       0.325
       ],
-      "window_acc": 0.041
+      "window_acc": 0.051
      },
-     "seconds": 65.7
+     "seconds": 47.1
     },
     {
      "fold": "recording fold 3",
-     "n_train_windows": 3544,
-     "n_test_windows": 888,
+     "n_train_windows": 3784,
+     "n_test_windows": 948,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
-      "B": 0.0,
-      "xyz": 0.1,
-      "tilt": 0.0,
-      "wifi": 0.5,
-      "baro": 0.4
+      "B": 0.1,
+      "xyz": 0.3,
+      "tilt": 0.2,
+      "wifi": 0.2,
+      "baro": 0.2
      },
-     "chosen_k": 1,
-     "inner_acc_chosen": 0.465,
-     "n_weight_vectors_tried": 475,
+     "chosen_k": 5,
+     "inner_acc_chosen": 0.455,
+     "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
-      "k": 1,
+      "k": 5,
       "weights": {
-       "B": 0.0,
-       "xyz": 0.1,
-       "tilt": 0.0,
-       "wifi": 0.5,
-       "baro": 0.4
+       "B": 0.1,
+       "xyz": 0.3,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
       },
-      "n_recordings": 222,
-      "exact": 105,
-      "exact_acc": 0.473,
+      "n_recordings": 237,
+      "exact": 109,
+      "exact_acc": 0.46,
       "exact_ci95": [
-       0.408,
-       0.539
+       0.398,
+       0.524
       ],
-      "area": 118,
-      "area_acc": 0.532,
+      "area": 128,
+      "area_acc": 0.54,
       "area_ci95": [
-       0.466,
-       0.596
+       0.476,
+       0.602
       ],
-      "window_acc": 0.466
+      "window_acc": 0.449
      },
      "equal weights": {
-      "k": 25,
+      "k": 1,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -1494,23 +1495,23 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 222,
+      "n_recordings": 237,
       "exact": 103,
-      "exact_acc": 0.464,
+      "exact_acc": 0.435,
       "exact_ci95": [
-       0.4,
-       0.53
+       0.373,
+       0.498
       ],
-      "area": 118,
+      "area": 126,
       "area_acc": 0.532,
       "area_ci95": [
-       0.466,
-       0.596
+       0.468,
+       0.594
       ],
-      "window_acc": 0.453
+      "window_acc": 0.418
      },
      "B only": {
-      "k": 3,
+      "k": 15,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -1518,20 +1519,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 24,
-      "exact_acc": 0.108,
+      "n_recordings": 237,
+      "exact": 25,
+      "exact_acc": 0.105,
       "exact_ci95": [
-       0.074,
-       0.156
+       0.072,
+       0.151
       ],
-      "area": 46,
-      "area_acc": 0.207,
+      "area": 54,
+      "area_acc": 0.228,
       "area_ci95": [
-       0.159,
-       0.265
+       0.179,
+       0.285
       ],
-      "window_acc": 0.102
+      "window_acc": 0.096
      },
      "xyz only": {
       "k": 1,
@@ -1542,20 +1543,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 75,
-      "exact_acc": 0.338,
+      "n_recordings": 237,
+      "exact": 84,
+      "exact_acc": 0.354,
       "exact_ci95": [
-       0.279,
-       0.402
+       0.296,
+       0.417
       ],
-      "area": 80,
-      "area_acc": 0.36,
+      "area": 90,
+      "area_acc": 0.38,
       "area_ci95": [
-       0.3,
-       0.425
+       0.32,
+       0.443
       ],
-      "window_acc": 0.346
+      "window_acc": 0.354
      },
      "tilt only": {
       "k": 3,
@@ -1566,20 +1567,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 20,
-      "exact_acc": 0.09,
+      "n_recordings": 237,
+      "exact": 23,
+      "exact_acc": 0.097,
       "exact_ci95": [
-       0.059,
-       0.135
+       0.066,
+       0.141
       ],
-      "area": 31,
-      "area_acc": 0.14,
+      "area": 41,
+      "area_acc": 0.173,
       "area_ci95": [
-       0.1,
-       0.191
+       0.13,
+       0.226
       ],
-      "window_acc": 0.096
+      "window_acc": 0.1
      },
      "wifi only": {
       "k": 25,
@@ -1590,23 +1591,23 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
+      "n_recordings": 237,
       "exact": 71,
-      "exact_acc": 0.32,
+      "exact_acc": 0.3,
       "exact_ci95": [
-       0.262,
-       0.384
+       0.245,
+       0.361
       ],
       "area": 80,
-      "area_acc": 0.36,
+      "area_acc": 0.338,
       "area_ci95": [
-       0.3,
-       0.425
+       0.28,
+       0.4
       ],
-      "window_acc": 0.32
+      "window_acc": 0.3
      },
      "baro only": {
-      "k": 3,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -1614,27 +1615,27 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 222,
+      "n_recordings": 237,
       "exact": 18,
-      "exact_acc": 0.081,
+      "exact_acc": 0.076,
       "exact_ci95": [
-       0.052,
-       0.125
+       0.049,
+       0.117
       ],
-      "area": 48,
-      "area_acc": 0.216,
+      "area": 53,
+      "area_acc": 0.224,
       "area_ci95": [
-       0.167,
-       0.275
+       0.175,
+       0.281
       ],
-      "window_acc": 0.081
+      "window_acc": 0.076
      },
-     "seconds": 134.5
+     "seconds": 5300.9
     },
     {
      "fold": "recording fold 4",
-     "n_train_windows": 3548,
-     "n_test_windows": 884,
+     "n_train_windows": 3788,
+     "n_test_windows": 944,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
@@ -1645,7 +1646,7 @@
       "baro": 0.2
      },
      "chosen_k": 25,
-     "inner_acc_chosen": 0.515,
+     "inner_acc_chosen": 0.492,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
       "k": 25,
@@ -1656,23 +1657,23 @@
        "wifi": 0.7,
        "baro": 0.2
       },
-      "n_recordings": 221,
-      "exact": 107,
-      "exact_acc": 0.484,
+      "n_recordings": 236,
+      "exact": 112,
+      "exact_acc": 0.475,
       "exact_ci95": [
-       0.419,
-       0.55
+       0.412,
+       0.538
       ],
-      "area": 118,
-      "area_acc": 0.534,
+      "area": 123,
+      "area_acc": 0.521,
       "area_ci95": [
-       0.468,
-       0.599
+       0.458,
+       0.584
       ],
-      "window_acc": 0.469
+      "window_acc": 0.474
      },
      "equal weights": {
-      "k": 15,
+      "k": 9,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -1680,23 +1681,23 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 221,
-      "exact": 91,
-      "exact_acc": 0.412,
+      "n_recordings": 236,
+      "exact": 93,
+      "exact_acc": 0.394,
       "exact_ci95": [
-       0.349,
-       0.478
+       0.334,
+       0.458
       ],
-      "area": 102,
-      "area_acc": 0.462,
+      "area": 107,
+      "area_acc": 0.453,
       "area_ci95": [
-       0.397,
-       0.527
+       0.391,
+       0.517
       ],
-      "window_acc": 0.4
+      "window_acc": 0.387
      },
      "B only": {
-      "k": 1,
+      "k": 25,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -1704,20 +1705,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 12,
-      "exact_acc": 0.054,
+      "n_recordings": 236,
+      "exact": 13,
+      "exact_acc": 0.055,
       "exact_ci95": [
-       0.031,
+       0.032,
        0.092
       ],
-      "area": 32,
-      "area_acc": 0.145,
+      "area": 39,
+      "area_acc": 0.165,
       "area_ci95": [
-       0.104,
-       0.197
+       0.123,
+       0.218
       ],
-      "window_acc": 0.048
+      "window_acc": 0.055
      },
      "xyz only": {
       "k": 5,
@@ -1728,20 +1729,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 75,
-      "exact_acc": 0.339,
+      "n_recordings": 236,
+      "exact": 85,
+      "exact_acc": 0.36,
       "exact_ci95": [
-       0.28,
-       0.404
+       0.302,
+       0.423
       ],
-      "area": 90,
-      "area_acc": 0.407,
+      "area": 98,
+      "area_acc": 0.415,
       "area_ci95": [
-       0.345,
-       0.473
+       0.354,
+       0.479
       ],
-      "window_acc": 0.333
+      "window_acc": 0.353
      },
      "tilt only": {
       "k": 25,
@@ -1752,20 +1753,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 34,
-      "exact_acc": 0.154,
+      "n_recordings": 236,
+      "exact": 37,
+      "exact_acc": 0.157,
       "exact_ci95": [
-       0.112,
-       0.207
+       0.116,
+       0.209
       ],
-      "area": 43,
-      "area_acc": 0.195,
+      "area": 51,
+      "area_acc": 0.216,
       "area_ci95": [
-       0.148,
-       0.252
+       0.168,
+       0.273
       ],
-      "window_acc": 0.15
+      "window_acc": 0.156
      },
      "wifi only": {
       "k": 5,
@@ -1776,20 +1777,20 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
+      "n_recordings": 236,
       "exact": 74,
-      "exact_acc": 0.335,
+      "exact_acc": 0.314,
       "exact_ci95": [
-       0.276,
-       0.399
+       0.258,
+       0.375
       ],
       "area": 86,
-      "area_acc": 0.389,
+      "area_acc": 0.364,
       "area_ci95": [
-       0.327,
-       0.455
+       0.306,
+       0.428
       ],
-      "window_acc": 0.335
+      "window_acc": 0.314
      },
      "baro only": {
       "k": 5,
@@ -1800,62 +1801,62 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 221,
-      "exact": 20,
-      "exact_acc": 0.09,
+      "n_recordings": 236,
+      "exact": 12,
+      "exact_acc": 0.051,
       "exact_ci95": [
-       0.059,
-       0.136
+       0.029,
+       0.087
       ],
-      "area": 50,
-      "area_acc": 0.226,
+      "area": 30,
+      "area_acc": 0.127,
       "area_ci95": [
-       0.176,
-       0.286
+       0.091,
+       0.176
       ],
-      "window_acc": 0.09
+      "window_acc": 0.051
      },
-     "seconds": 66.7
+     "seconds": 46.9
     },
     {
      "fold": "recording fold 5",
-     "n_train_windows": 3548,
-     "n_test_windows": 884,
+     "n_train_windows": 3788,
+     "n_test_windows": 944,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
       "B": 0.0,
       "xyz": 0.1,
-      "tilt": 0.0,
-      "wifi": 0.7,
-      "baro": 0.2
+      "tilt": 0.1,
+      "wifi": 0.5,
+      "baro": 0.3
      },
-     "chosen_k": 15,
-     "inner_acc_chosen": 0.488,
-     "n_weight_vectors_tried": 239,
+     "chosen_k": 25,
+     "inner_acc_chosen": 0.489,
+     "n_weight_vectors_tried": 475,
      "fused (learned weights)": {
-      "k": 15,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.1,
-       "tilt": 0.0,
-       "wifi": 0.7,
-       "baro": 0.2
+       "tilt": 0.1,
+       "wifi": 0.5,
+       "baro": 0.3
       },
-      "n_recordings": 221,
+      "n_recordings": 236,
       "exact": 97,
-      "exact_acc": 0.439,
+      "exact_acc": 0.411,
       "exact_ci95": [
-       0.375,
-       0.505
+       0.35,
+       0.475
       ],
       "area": 100,
-      "area_acc": 0.452,
+      "area_acc": 0.424,
       "area_ci95": [
-       0.388,
-       0.518
+       0.362,
+       0.488
       ],
-      "window_acc": 0.449
+      "window_acc": 0.419
      },
      "equal weights": {
       "k": 15,
@@ -1866,20 +1867,20 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 221,
-      "exact": 103,
-      "exact_acc": 0.466,
+      "n_recordings": 236,
+      "exact": 111,
+      "exact_acc": 0.47,
       "exact_ci95": [
-       0.401,
-       0.532
+       0.408,
+       0.534
       ],
-      "area": 103,
-      "area_acc": 0.466,
+      "area": 117,
+      "area_acc": 0.496,
       "area_ci95": [
-       0.401,
-       0.532
+       0.433,
+       0.559
       ],
-      "window_acc": 0.455
+      "window_acc": 0.459
      },
      "B only": {
       "k": 5,
@@ -1890,23 +1891,23 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 22,
-      "exact_acc": 0.1,
+      "n_recordings": 236,
+      "exact": 28,
+      "exact_acc": 0.119,
       "exact_ci95": [
-       0.067,
-       0.146
+       0.083,
+       0.166
       ],
-      "area": 35,
-      "area_acc": 0.158,
+      "area": 43,
+      "area_acc": 0.182,
       "area_ci95": [
-       0.116,
-       0.212
+       0.138,
+       0.236
       ],
-      "window_acc": 0.094
+      "window_acc": 0.102
      },
      "xyz only": {
-      "k": 5,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 1.0,
@@ -1914,23 +1915,23 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 86,
-      "exact_acc": 0.389,
+      "n_recordings": 236,
+      "exact": 88,
+      "exact_acc": 0.373,
       "exact_ci95": [
-       0.327,
-       0.455
+       0.314,
+       0.436
       ],
-      "area": 86,
-      "area_acc": 0.389,
+      "area": 89,
+      "area_acc": 0.377,
       "area_ci95": [
-       0.327,
-       0.455
+       0.318,
+       0.44
       ],
-      "window_acc": 0.382
+      "window_acc": 0.378
      },
      "tilt only": {
-      "k": 15,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -1938,20 +1939,20 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 20,
-      "exact_acc": 0.09,
+      "n_recordings": 236,
+      "exact": 25,
+      "exact_acc": 0.106,
       "exact_ci95": [
-       0.059,
-       0.136
+       0.073,
+       0.152
       ],
-      "area": 42,
-      "area_acc": 0.19,
+      "area": 56,
+      "area_acc": 0.237,
       "area_ci95": [
-       0.144,
-       0.247
+       0.187,
+       0.296
       ],
-      "window_acc": 0.088
+      "window_acc": 0.099
      },
      "wifi only": {
       "k": 5,
@@ -1962,20 +1963,20 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
+      "n_recordings": 236,
       "exact": 69,
-      "exact_acc": 0.312,
+      "exact_acc": 0.292,
       "exact_ci95": [
-       0.255,
-       0.376
+       0.238,
+       0.353
       ],
-      "area": 78,
-      "area_acc": 0.353,
+      "area": 81,
+      "area_acc": 0.343,
       "area_ci95": [
-       0.293,
-       0.418
+       0.286,
+       0.406
       ],
-      "window_acc": 0.312
+      "window_acc": 0.292
      },
      "baro only": {
       "k": 15,
@@ -1986,115 +1987,115 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 221,
-      "exact": 15,
-      "exact_acc": 0.068,
+      "n_recordings": 236,
+      "exact": 12,
+      "exact_acc": 0.051,
       "exact_ci95": [
-       0.042,
-       0.109
+       0.029,
+       0.087
       ],
-      "area": 67,
-      "area_acc": 0.303,
+      "area": 61,
+      "area_acc": 0.258,
       "area_ci95": [
-       0.246,
-       0.367
+       0.207,
+       0.318
       ],
-      "window_acc": 0.068
+      "window_acc": 0.051
      },
-     "seconds": 69.2
+     "seconds": 98.3
     }
    ],
    "overall": {
     "fused (learned weights)": {
-     "exact": 516,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.466,
+     "exact": 529,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.447,
      "exact_ci95": [
-      0.437,
-      0.495
+      0.419,
+      0.476
      ],
-     "area": 573,
-     "area_acc": 0.517,
-     "window_acc": 0.463,
-     "n_test_windows": 4432
+     "area": 613,
+     "area_acc": 0.518,
+     "window_acc": 0.445,
+     "n_test_windows": 4732
     },
     "equal weights": {
-     "exact": 484,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.437,
+     "exact": 491,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.415,
      "exact_ci95": [
-      0.408,
-      0.466
+      0.387,
+      0.443
      ],
-     "area": 554,
-     "area_acc": 0.5,
-     "window_acc": 0.426,
-     "n_test_windows": 4432
+     "area": 580,
+     "area_acc": 0.49,
+     "window_acc": 0.403,
+     "n_test_windows": 4732
     },
     "B only": {
-     "exact": 91,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.082,
+     "exact": 100,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.085,
      "exact_ci95": [
-      0.067,
-      0.1
+      0.07,
+      0.102
      ],
-     "area": 194,
-     "area_acc": 0.175,
+     "area": 220,
+     "area_acc": 0.186,
      "window_acc": 0.079,
-     "n_test_windows": 4432
+     "n_test_windows": 4732
     },
     "xyz only": {
-     "exact": 366,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.33,
+     "exact": 394,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.333,
      "exact_ci95": [
-      0.303,
-      0.359
+      0.307,
+      0.36
      ],
-     "area": 410,
-     "area_acc": 0.37,
-     "window_acc": 0.33,
-     "n_test_windows": 4432
+     "area": 456,
+     "area_acc": 0.385,
+     "window_acc": 0.335,
+     "n_test_windows": 4732
     },
     "tilt only": {
-     "exact": 139,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.125,
+     "exact": 151,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.128,
      "exact_ci95": [
-      0.107,
-      0.146
+      0.11,
+      0.148
      ],
-     "area": 213,
-     "area_acc": 0.192,
-     "window_acc": 0.125,
-     "n_test_windows": 4432
+     "area": 252,
+     "area_acc": 0.213,
+     "window_acc": 0.126,
+     "n_test_windows": 4732
     },
     "wifi only": {
      "exact": 345,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.311,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.292,
      "exact_ci95": [
-      0.285,
-      0.339
+      0.266,
+      0.318
      ],
-     "area": 399,
-     "area_acc": 0.36,
-     "window_acc": 0.311,
-     "n_test_windows": 4432
+     "area": 405,
+     "area_acc": 0.342,
+     "window_acc": 0.292,
+     "n_test_windows": 4732
     },
     "baro only": {
-     "exact": 74,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.067,
+     "exact": 76,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.064,
      "exact_ci95": [
-      0.054,
-      0.083
+      0.052,
+      0.08
      ],
-     "area": 260,
-     "area_acc": 0.235,
-     "window_acc": 0.067,
-     "n_test_windows": 4432
+     "area": 283,
+     "area_acc": 0.239,
+     "window_acc": 0.064,
+     "n_test_windows": 4732
     }
    },
    "chance_mean": 0.038
@@ -2103,415 +2104,43 @@
    "folds": [
     {
      "fold": "stop fold 1",
-     "n_train_windows": 3544,
-     "n_test_windows": 888,
+     "n_train_windows": 3784,
+     "n_test_windows": 948,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
       "B": 0.0,
-      "xyz": 0.25,
-      "tilt": 0.0,
+      "xyz": 0.4,
+      "tilt": 0.1,
       "wifi": 0.0,
-      "baro": 0.75
+      "baro": 0.5
      },
-     "chosen_k": 1,
-     "inner_acc_chosen": 0.46,
+     "chosen_k": 5,
+     "inner_acc_chosen": 0.482,
      "n_weight_vectors_tried": 150,
      "fused (learned weights)": {
-      "k": 1,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.25,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.75
-      },
-      "n_recordings": 222,
-      "exact": 95,
-      "exact_acc": 0.428,
-      "exact_ci95": [
-       0.365,
-       0.494
-      ],
-      "area": 102,
-      "area_acc": 0.459,
-      "area_ci95": [
-       0.395,
-       0.525
-      ],
-      "window_acc": 0.412
-     },
-     "equal weights": {
-      "k": 1,
-      "weights": {
-       "B": 0.2,
-       "xyz": 0.2,
-       "tilt": 0.2,
-       "wifi": 0.2,
-       "baro": 0.2
-      },
-      "n_recordings": 222,
-      "exact": 98,
-      "exact_acc": 0.441,
-      "exact_ci95": [
-       0.378,
-       0.507
-      ],
-      "area": 102,
-      "area_acc": 0.459,
-      "area_ci95": [
-       0.395,
-       0.525
-      ],
-      "window_acc": 0.431
-     },
-     "B only": {
-      "k": 1,
-      "weights": {
-       "B": 1.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 28,
-      "exact_acc": 0.126,
-      "exact_ci95": [
-       0.089,
-       0.176
-      ],
-      "area": 45,
-      "area_acc": 0.203,
-      "area_ci95": [
-       0.155,
-       0.26
-      ],
-      "window_acc": 0.107
-     },
-     "xyz only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 80,
-      "exact_acc": 0.36,
-      "exact_ci95": [
-       0.3,
-       0.425
-      ],
-      "area": 87,
-      "area_acc": 0.392,
-      "area_ci95": [
-       0.33,
-       0.457
-      ],
-      "window_acc": 0.354
-     },
-     "tilt only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 30,
-      "exact_acc": 0.135,
-      "exact_ci95": [
-       0.096,
-       0.186
-      ],
-      "area": 39,
-      "area_acc": 0.176,
-      "area_ci95": [
-       0.131,
-       0.231
-      ],
-      "window_acc": 0.117
-     },
-     "wifi only": {
       "k": 5,
       "weights": {
        "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 1.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 16,
-      "exact_acc": 0.072,
-      "exact_ci95": [
-       0.045,
-       0.114
-      ],
-      "area": 31,
-      "area_acc": 0.14,
-      "area_ci95": [
-       0.1,
-       0.191
-      ],
-      "window_acc": 0.072
-     },
-     "baro only": {
-      "k": 9,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
+       "xyz": 0.4,
+       "tilt": 0.1,
        "wifi": 0.0,
-       "baro": 1.0
+       "baro": 0.5
       },
-      "n_recordings": 222,
-      "exact": 19,
-      "exact_acc": 0.086,
+      "n_recordings": 237,
+      "exact": 97,
+      "exact_acc": 0.409,
       "exact_ci95": [
-       0.055,
-       0.13
-      ],
-      "area": 52,
-      "area_acc": 0.234,
-      "area_ci95": [
-       0.183,
-       0.294
-      ],
-      "window_acc": 0.086
-     },
-     "seconds": 41.4
-    },
-    {
-     "fold": "stop fold 2",
-     "n_train_windows": 3544,
-     "n_test_windows": 888,
-     "n_train_places": 26,
-     "chance": 0.038,
-     "chosen_weights": {
-      "B": 0.1,
-      "xyz": 0.3,
-      "tilt": 0.2,
-      "wifi": 0.1,
-      "baro": 0.3
-     },
-     "chosen_k": 1,
-     "inner_acc_chosen": 0.442,
-     "n_weight_vectors_tried": 239,
-     "fused (learned weights)": {
-      "k": 1,
-      "weights": {
-       "B": 0.1,
-       "xyz": 0.3,
-       "tilt": 0.2,
-       "wifi": 0.1,
-       "baro": 0.3
-      },
-      "n_recordings": 222,
-      "exact": 98,
-      "exact_acc": 0.441,
-      "exact_ci95": [
-       0.378,
-       0.507
-      ],
-      "area": 119,
-      "area_acc": 0.536,
-      "area_ci95": [
-       0.47,
-       0.6
-      ],
-      "window_acc": 0.445
-     },
-     "equal weights": {
-      "k": 1,
-      "weights": {
-       "B": 0.2,
-       "xyz": 0.2,
-       "tilt": 0.2,
-       "wifi": 0.2,
-       "baro": 0.2
-      },
-      "n_recordings": 222,
-      "exact": 96,
-      "exact_acc": 0.432,
-      "exact_ci95": [
-       0.369,
-       0.498
-      ],
-      "area": 114,
-      "area_acc": 0.514,
-      "area_ci95": [
-       0.448,
-       0.578
-      ],
-      "window_acc": 0.435
-     },
-     "B only": {
-      "k": 15,
-      "weights": {
-       "B": 1.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 28,
-      "exact_acc": 0.126,
-      "exact_ci95": [
-       0.089,
-       0.176
-      ],
-      "area": 63,
-      "area_acc": 0.284,
-      "area_ci95": [
-       0.229,
-       0.346
-      ],
-      "window_acc": 0.122
-     },
-     "xyz only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 90,
-      "exact_acc": 0.405,
-      "exact_ci95": [
-       0.343,
-       0.471
-      ],
-      "area": 98,
-      "area_acc": 0.441,
-      "area_ci95": [
-       0.378,
-       0.507
-      ],
-      "window_acc": 0.396
-     },
-     "tilt only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 37,
-      "exact_acc": 0.167,
-      "exact_ci95": [
-       0.123,
-       0.221
-      ],
-      "area": 51,
-      "area_acc": 0.23,
-      "area_ci95": [
-       0.179,
-       0.289
-      ],
-      "window_acc": 0.161
-     },
-     "wifi only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 1.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 27,
-      "exact_acc": 0.122,
-      "exact_ci95": [
-       0.085,
-       0.171
-      ],
-      "area": 45,
-      "area_acc": 0.203,
-      "area_ci95": [
-       0.155,
-       0.26
-      ],
-      "window_acc": 0.122
-     },
-     "baro only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 1.0
-      },
-      "n_recordings": 222,
-      "exact": 9,
-      "exact_acc": 0.041,
-      "exact_ci95": [
-       0.021,
-       0.075
-      ],
-      "area": 38,
-      "area_acc": 0.171,
-      "area_ci95": [
-       0.127,
-       0.226
-      ],
-      "window_acc": 0.041
-     },
-     "seconds": 69.7
-    },
-    {
-     "fold": "stop fold 3",
-     "n_train_windows": 3544,
-     "n_test_windows": 888,
-     "n_train_places": 26,
-     "chance": 0.038,
-     "chosen_weights": {
-      "B": 0.0,
-      "xyz": 0.1,
-      "tilt": 0.2,
-      "wifi": 0.0,
-      "baro": 0.7
-     },
-     "chosen_k": 25,
-     "inner_acc_chosen": 0.405,
-     "n_weight_vectors_tried": 239,
-     "fused (learned weights)": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.1,
-       "tilt": 0.2,
-       "wifi": 0.0,
-       "baro": 0.7
-      },
-      "n_recordings": 222,
-      "exact": 93,
-      "exact_acc": 0.419,
-      "exact_ci95": [
-       0.356,
-       0.485
+       0.349,
+       0.473
       ],
       "area": 110,
-      "area_acc": 0.495,
+      "area_acc": 0.464,
       "area_ci95": [
-       0.43,
-       0.561
+       0.402,
+       0.528
       ],
-      "window_acc": 0.421
+      "window_acc": 0.418
      },
      "equal weights": {
       "k": 1,
@@ -2522,20 +2151,20 @@
        "wifi": 0.2,
        "baro": 0.2
       },
-      "n_recordings": 222,
-      "exact": 103,
+      "n_recordings": 237,
+      "exact": 110,
       "exact_acc": 0.464,
       "exact_ci95": [
-       0.4,
-       0.53
+       0.402,
+       0.528
       ],
-      "area": 114,
-      "area_acc": 0.514,
+      "area": 118,
+      "area_acc": 0.498,
       "area_ci95": [
-       0.448,
-       0.578
+       0.435,
+       0.561
       ],
-      "window_acc": 0.455
+      "window_acc": 0.444
      },
      "B only": {
       "k": 3,
@@ -2546,416 +2175,44 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 222,
-      "exact": 19,
-      "exact_acc": 0.086,
-      "exact_ci95": [
-       0.055,
-       0.13
-      ],
-      "area": 55,
-      "area_acc": 0.248,
-      "area_ci95": [
-       0.196,
-       0.309
-      ],
-      "window_acc": 0.078
-     },
-     "xyz only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 76,
-      "exact_acc": 0.342,
-      "exact_ci95": [
-       0.283,
-       0.407
-      ],
-      "area": 81,
-      "area_acc": 0.365,
-      "area_ci95": [
-       0.304,
-       0.43
-      ],
-      "window_acc": 0.337
-     },
-     "tilt only": {
-      "k": 15,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 27,
-      "exact_acc": 0.122,
-      "exact_ci95": [
-       0.085,
-       0.171
-      ],
-      "area": 44,
-      "area_acc": 0.198,
-      "area_ci95": [
-       0.151,
-       0.256
-      ],
-      "window_acc": 0.124
-     },
-     "wifi only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 1.0,
-       "baro": 0.0
-      },
-      "n_recordings": 222,
-      "exact": 6,
-      "exact_acc": 0.027,
-      "exact_ci95": [
-       0.012,
-       0.058
-      ],
-      "area": 30,
-      "area_acc": 0.135,
-      "area_ci95": [
-       0.096,
-       0.186
-      ],
-      "window_acc": 0.027
-     },
-     "baro only": {
-      "k": 9,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 1.0
-      },
-      "n_recordings": 222,
-      "exact": 6,
-      "exact_acc": 0.027,
-      "exact_ci95": [
-       0.012,
-       0.058
-      ],
-      "area": 45,
-      "area_acc": 0.203,
-      "area_ci95": [
-       0.155,
-       0.26
-      ],
-      "window_acc": 0.027
-     },
-     "seconds": 67.5
-    },
-    {
-     "fold": "stop fold 4",
-     "n_train_windows": 3548,
-     "n_test_windows": 884,
-     "n_train_places": 26,
-     "chance": 0.038,
-     "chosen_weights": {
-      "B": 0.1,
-      "xyz": 0.2,
-      "tilt": 0.4,
-      "wifi": 0.2,
-      "baro": 0.1
-     },
-     "chosen_k": 25,
-     "inner_acc_chosen": 0.375,
-     "n_weight_vectors_tried": 475,
-     "fused (learned weights)": {
-      "k": 25,
-      "weights": {
-       "B": 0.1,
-       "xyz": 0.2,
-       "tilt": 0.4,
-       "wifi": 0.2,
-       "baro": 0.1
-      },
-      "n_recordings": 221,
-      "exact": 88,
-      "exact_acc": 0.398,
-      "exact_ci95": [
-       0.336,
-       0.464
-      ],
-      "area": 101,
-      "area_acc": 0.457,
-      "area_ci95": [
-       0.393,
-       0.523
-      ],
-      "window_acc": 0.402
-     },
-     "equal weights": {
-      "k": 25,
-      "weights": {
-       "B": 0.2,
-       "xyz": 0.2,
-       "tilt": 0.2,
-       "wifi": 0.2,
-       "baro": 0.2
-      },
-      "n_recordings": 221,
-      "exact": 96,
-      "exact_acc": 0.434,
-      "exact_ci95": [
-       0.371,
-       0.5
-      ],
-      "area": 109,
-      "area_acc": 0.493,
-      "area_ci95": [
-       0.428,
-       0.559
-      ],
-      "window_acc": 0.428
-     },
-     "B only": {
-      "k": 1,
-      "weights": {
-       "B": 1.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 221,
-      "exact": 17,
-      "exact_acc": 0.077,
-      "exact_ci95": [
-       0.049,
-       0.12
-      ],
-      "area": 45,
-      "area_acc": 0.204,
-      "area_ci95": [
-       0.156,
-       0.262
-      ],
-      "window_acc": 0.074
-     },
-     "xyz only": {
-      "k": 15,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 221,
-      "exact": 71,
-      "exact_acc": 0.321,
-      "exact_ci95": [
-       0.263,
-       0.385
-      ],
-      "area": 83,
-      "area_acc": 0.376,
-      "area_ci95": [
-       0.314,
-       0.441
-      ],
-      "window_acc": 0.335
-     },
-     "tilt only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 221,
+      "n_recordings": 237,
       "exact": 22,
-      "exact_acc": 0.1,
+      "exact_acc": 0.093,
       "exact_ci95": [
-       0.067,
-       0.146
+       0.062,
+       0.137
       ],
-      "area": 33,
-      "area_acc": 0.149,
+      "area": 46,
+      "area_acc": 0.194,
       "area_ci95": [
-       0.108,
-       0.202
+       0.149,
+       0.249
       ],
-      "window_acc": 0.103
+      "window_acc": 0.094
      },
-     "wifi only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 1.0,
-       "baro": 0.0
-      },
-      "n_recordings": 221,
-      "exact": 18,
-      "exact_acc": 0.081,
-      "exact_ci95": [
-       0.052,
-       0.125
-      ],
-      "area": 24,
-      "area_acc": 0.109,
-      "area_ci95": [
-       0.074,
-       0.156
-      ],
-      "window_acc": 0.081
-     },
-     "baro only": {
-      "k": 5,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 1.0
-      },
-      "n_recordings": 221,
-      "exact": 0,
-      "exact_acc": 0.0,
-      "exact_ci95": [
-       0.0,
-       0.017
-      ],
-      "area": 36,
-      "area_acc": 0.163,
-      "area_ci95": [
-       0.12,
-       0.217
-      ],
-      "window_acc": 0.0
-     },
-     "seconds": 140.9
-    },
-    {
-     "fold": "stop fold 5",
-     "n_train_windows": 3548,
-     "n_test_windows": 884,
-     "n_train_places": 26,
-     "chance": 0.038,
-     "chosen_weights": {
-      "B": 0.0,
-      "xyz": 0.7,
-      "tilt": 0.0,
-      "wifi": 0.1,
-      "baro": 0.2
-     },
-     "chosen_k": 25,
-     "inner_acc_chosen": 0.387,
-     "n_weight_vectors_tried": 239,
-     "fused (learned weights)": {
+     "xyz only": {
       "k": 25,
       "weights": {
        "B": 0.0,
-       "xyz": 0.7,
+       "xyz": 1.0,
        "tilt": 0.0,
-       "wifi": 0.1,
-       "baro": 0.2
+       "wifi": 0.0,
+       "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 83,
+      "n_recordings": 237,
+      "exact": 89,
       "exact_acc": 0.376,
       "exact_ci95": [
-       0.314,
-       0.441
+       0.316,
+       0.439
       ],
-      "area": 97,
-      "area_acc": 0.439,
+      "area": 96,
+      "area_acc": 0.405,
       "area_ci95": [
-       0.375,
-       0.505
+       0.345,
+       0.469
       ],
-      "window_acc": 0.378
-     },
-     "equal weights": {
-      "k": 1,
-      "weights": {
-       "B": 0.2,
-       "xyz": 0.2,
-       "tilt": 0.2,
-       "wifi": 0.2,
-       "baro": 0.2
-      },
-      "n_recordings": 221,
-      "exact": 96,
-      "exact_acc": 0.434,
-      "exact_ci95": [
-       0.371,
-       0.5
-      ],
-      "area": 122,
-      "area_acc": 0.552,
-      "area_ci95": [
-       0.486,
-       0.616
-      ],
-      "window_acc": 0.419
-     },
-     "B only": {
-      "k": 1,
-      "weights": {
-       "B": 1.0,
-       "xyz": 0.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 221,
-      "exact": 14,
-      "exact_acc": 0.063,
-      "exact_ci95": [
-       0.038,
-       0.104
-      ],
-      "area": 30,
-      "area_acc": 0.136,
-      "area_ci95": [
-       0.097,
-       0.187
-      ],
-      "window_acc": 0.06
-     },
-     "xyz only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 221,
-      "exact": 69,
-      "exact_acc": 0.312,
-      "exact_ci95": [
-       0.255,
-       0.376
-      ],
-      "area": 81,
-      "area_acc": 0.367,
-      "area_ci95": [
-       0.306,
-       0.432
-      ],
-      "window_acc": 0.312
+      "window_acc": 0.362
      },
      "tilt only": {
       "k": 25,
@@ -2966,17 +2223,17 @@
        "wifi": 0.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 28,
-      "exact_acc": 0.127,
+      "n_recordings": 237,
+      "exact": 32,
+      "exact_acc": 0.135,
       "exact_ci95": [
-       0.089,
-       0.177
+       0.097,
+       0.184
       ],
-      "area": 49,
-      "area_acc": 0.222,
+      "area": 53,
+      "area_acc": 0.224,
       "area_ci95": [
-       0.172,
+       0.175,
        0.281
       ],
       "window_acc": 0.121
@@ -2990,20 +2247,392 @@
        "wifi": 1.0,
        "baro": 0.0
       },
-      "n_recordings": 221,
-      "exact": 26,
-      "exact_acc": 0.118,
+      "n_recordings": 237,
+      "exact": 16,
+      "exact_acc": 0.068,
       "exact_ci95": [
-       0.082,
-       0.167
+       0.042,
+       0.107
       ],
-      "area": 50,
-      "area_acc": 0.226,
+      "area": 31,
+      "area_acc": 0.131,
       "area_ci95": [
-       0.176,
-       0.286
+       0.094,
+       0.18
       ],
-      "window_acc": 0.118
+      "window_acc": 0.068
+     },
+     "baro only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 237,
+      "exact": 21,
+      "exact_acc": 0.089,
+      "exact_ci95": [
+       0.059,
+       0.132
+      ],
+      "area": 62,
+      "area_acc": 0.262,
+      "area_ci95": [
+       0.21,
+       0.321
+      ],
+      "window_acc": 0.089
+     },
+     "seconds": 28.1
+    },
+    {
+     "fold": "stop fold 2",
+     "n_train_windows": 3784,
+     "n_test_windows": 948,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.1,
+      "xyz": 0.5,
+      "tilt": 0.0,
+      "wifi": 0.1,
+      "baro": 0.3
+     },
+     "chosen_k": 3,
+     "inner_acc_chosen": 0.433,
+     "n_weight_vectors_tried": 239,
+     "fused (learned weights)": {
+      "k": 3,
+      "weights": {
+       "B": 0.1,
+       "xyz": 0.5,
+       "tilt": 0.0,
+       "wifi": 0.1,
+       "baro": 0.3
+      },
+      "n_recordings": 237,
+      "exact": 103,
+      "exact_acc": 0.435,
+      "exact_ci95": [
+       0.373,
+       0.498
+      ],
+      "area": 120,
+      "area_acc": 0.506,
+      "area_ci95": [
+       0.443,
+       0.569
+      ],
+      "window_acc": 0.436
+     },
+     "equal weights": {
+      "k": 1,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 237,
+      "exact": 95,
+      "exact_acc": 0.401,
+      "exact_ci95": [
+       0.341,
+       0.464
+      ],
+      "area": 116,
+      "area_acc": 0.489,
+      "area_ci95": [
+       0.426,
+       0.553
+      ],
+      "window_acc": 0.402
+     },
+     "B only": {
+      "k": 3,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 25,
+      "exact_acc": 0.105,
+      "exact_ci95": [
+       0.072,
+       0.151
+      ],
+      "area": 58,
+      "area_acc": 0.245,
+      "area_ci95": [
+       0.194,
+       0.303
+      ],
+      "window_acc": 0.113
+     },
+     "xyz only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 97,
+      "exact_acc": 0.409,
+      "exact_ci95": [
+       0.349,
+       0.473
+      ],
+      "area": 104,
+      "area_acc": 0.439,
+      "area_ci95": [
+       0.377,
+       0.502
+      ],
+      "window_acc": 0.398
+     },
+     "tilt only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 40,
+      "exact_acc": 0.169,
+      "exact_ci95": [
+       0.126,
+       0.222
+      ],
+      "area": 54,
+      "area_acc": 0.228,
+      "area_ci95": [
+       0.179,
+       0.285
+      ],
+      "window_acc": 0.16
+     },
+     "wifi only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 27,
+      "exact_acc": 0.114,
+      "exact_ci95": [
+       0.079,
+       0.161
+      ],
+      "area": 45,
+      "area_acc": 0.19,
+      "area_ci95": [
+       0.145,
+       0.245
+      ],
+      "window_acc": 0.114
+     },
+     "baro only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 237,
+      "exact": 25,
+      "exact_acc": 0.105,
+      "exact_ci95": [
+       0.072,
+       0.151
+      ],
+      "area": 40,
+      "area_acc": 0.169,
+      "area_ci95": [
+       0.126,
+       0.222
+      ],
+      "window_acc": 0.105
+     },
+     "seconds": 46.9
+    },
+    {
+     "fold": "stop fold 3",
+     "n_train_windows": 3784,
+     "n_test_windows": 948,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.0,
+      "xyz": 0.3,
+      "tilt": 0.2,
+      "wifi": 0.1,
+      "baro": 0.4
+     },
+     "chosen_k": 25,
+     "inner_acc_chosen": 0.406,
+     "n_weight_vectors_tried": 475,
+     "fused (learned weights)": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.3,
+       "tilt": 0.2,
+       "wifi": 0.1,
+       "baro": 0.4
+      },
+      "n_recordings": 237,
+      "exact": 100,
+      "exact_acc": 0.422,
+      "exact_ci95": [
+       0.361,
+       0.486
+      ],
+      "area": 120,
+      "area_acc": 0.506,
+      "area_ci95": [
+       0.443,
+       0.569
+      ],
+      "window_acc": 0.422
+     },
+     "equal weights": {
+      "k": 1,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 237,
+      "exact": 110,
+      "exact_acc": 0.464,
+      "exact_ci95": [
+       0.402,
+       0.528
+      ],
+      "area": 123,
+      "area_acc": 0.519,
+      "area_ci95": [
+       0.456,
+       0.582
+      ],
+      "window_acc": 0.458
+     },
+     "B only": {
+      "k": 15,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 19,
+      "exact_acc": 0.08,
+      "exact_ci95": [
+       0.052,
+       0.122
+      ],
+      "area": 54,
+      "area_acc": 0.228,
+      "area_ci95": [
+       0.179,
+       0.285
+      ],
+      "window_acc": 0.074
+     },
+     "xyz only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 74,
+      "exact_acc": 0.312,
+      "exact_ci95": [
+       0.257,
+       0.374
+      ],
+      "area": 84,
+      "area_acc": 0.354,
+      "area_ci95": [
+       0.296,
+       0.417
+      ],
+      "window_acc": 0.311
+     },
+     "tilt only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 32,
+      "exact_acc": 0.135,
+      "exact_ci95": [
+       0.097,
+       0.184
+      ],
+      "area": 56,
+      "area_acc": 0.236,
+      "area_ci95": [
+       0.187,
+       0.294
+      ],
+      "window_acc": 0.132
+     },
+     "wifi only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 237,
+      "exact": 6,
+      "exact_acc": 0.025,
+      "exact_ci95": [
+       0.012,
+       0.054
+      ],
+      "area": 30,
+      "area_acc": 0.127,
+      "area_ci95": [
+       0.09,
+       0.175
+      ],
+      "window_acc": 0.025
      },
      "baro only": {
       "k": 15,
@@ -3014,115 +2643,487 @@
        "wifi": 0.0,
        "baro": 1.0
       },
-      "n_recordings": 221,
-      "exact": 29,
-      "exact_acc": 0.131,
+      "n_recordings": 237,
+      "exact": 30,
+      "exact_acc": 0.127,
       "exact_ci95": [
-       0.093,
-       0.182
+       0.09,
+       0.175
       ],
       "area": 59,
-      "area_acc": 0.267,
+      "area_acc": 0.249,
       "area_ci95": [
-       0.213,
-       0.329
+       0.198,
+       0.308
       ],
-      "window_acc": 0.131
+      "window_acc": 0.127
      },
-     "seconds": 65.3
+     "seconds": 96.3
+    },
+    {
+     "fold": "stop fold 4",
+     "n_train_windows": 3788,
+     "n_test_windows": 944,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.0,
+      "xyz": 0.1,
+      "tilt": 0.4,
+      "wifi": 0.1,
+      "baro": 0.4
+     },
+     "chosen_k": 25,
+     "inner_acc_chosen": 0.41,
+     "n_weight_vectors_tried": 475,
+     "fused (learned weights)": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.1,
+       "tilt": 0.4,
+       "wifi": 0.1,
+       "baro": 0.4
+      },
+      "n_recordings": 236,
+      "exact": 83,
+      "exact_acc": 0.352,
+      "exact_ci95": [
+       0.294,
+       0.415
+      ],
+      "area": 89,
+      "area_acc": 0.377,
+      "area_ci95": [
+       0.318,
+       0.44
+      ],
+      "window_acc": 0.356
+     },
+     "equal weights": {
+      "k": 25,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 236,
+      "exact": 97,
+      "exact_acc": 0.411,
+      "exact_ci95": [
+       0.35,
+       0.475
+      ],
+      "area": 110,
+      "area_acc": 0.466,
+      "area_ci95": [
+       0.404,
+       0.53
+      ],
+      "window_acc": 0.406
+     },
+     "B only": {
+      "k": 9,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 27,
+      "exact_acc": 0.114,
+      "exact_ci95": [
+       0.08,
+       0.161
+      ],
+      "area": 54,
+      "area_acc": 0.229,
+      "area_ci95": [
+       0.18,
+       0.286
+      ],
+      "window_acc": 0.078
+     },
+     "xyz only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 70,
+      "exact_acc": 0.297,
+      "exact_ci95": [
+       0.242,
+       0.358
+      ],
+      "area": 85,
+      "area_acc": 0.36,
+      "area_ci95": [
+       0.302,
+       0.423
+      ],
+      "window_acc": 0.32
+     },
+     "tilt only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 24,
+      "exact_acc": 0.102,
+      "exact_ci95": [
+       0.069,
+       0.147
+      ],
+      "area": 37,
+      "area_acc": 0.157,
+      "area_ci95": [
+       0.116,
+       0.209
+      ],
+      "window_acc": 0.105
+     },
+     "wifi only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 18,
+      "exact_acc": 0.076,
+      "exact_ci95": [
+       0.049,
+       0.117
+      ],
+      "area": 30,
+      "area_acc": 0.127,
+      "area_ci95": [
+       0.091,
+       0.176
+      ],
+      "window_acc": 0.076
+     },
+     "baro only": {
+      "k": 15,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 236,
+      "exact": 30,
+      "exact_acc": 0.127,
+      "exact_ci95": [
+       0.091,
+       0.176
+      ],
+      "area": 56,
+      "area_acc": 0.237,
+      "area_ci95": [
+       0.187,
+       0.296
+      ],
+      "window_acc": 0.127
+     },
+     "seconds": 94.6
+    },
+    {
+     "fold": "stop fold 5",
+     "n_train_windows": 3788,
+     "n_test_windows": 944,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.0,
+      "xyz": 0.6,
+      "tilt": 0.0,
+      "wifi": 0.2,
+      "baro": 0.2
+     },
+     "chosen_k": 25,
+     "inner_acc_chosen": 0.414,
+     "n_weight_vectors_tried": 239,
+     "fused (learned weights)": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.6,
+       "tilt": 0.0,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 236,
+      "exact": 99,
+      "exact_acc": 0.419,
+      "exact_ci95": [
+       0.358,
+       0.483
+      ],
+      "area": 119,
+      "area_acc": 0.504,
+      "area_ci95": [
+       0.441,
+       0.567
+      ],
+      "window_acc": 0.415
+     },
+     "equal weights": {
+      "k": 1,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 236,
+      "exact": 93,
+      "exact_acc": 0.394,
+      "exact_ci95": [
+       0.334,
+       0.458
+      ],
+      "area": 122,
+      "area_acc": 0.517,
+      "area_ci95": [
+       0.453,
+       0.58
+      ],
+      "window_acc": 0.377
+     },
+     "B only": {
+      "k": 1,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 15,
+      "exact_acc": 0.064,
+      "exact_ci95": [
+       0.039,
+       0.102
+      ],
+      "area": 33,
+      "area_acc": 0.14,
+      "area_ci95": [
+       0.101,
+       0.19
+      ],
+      "window_acc": 0.067
+     },
+     "xyz only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 82,
+      "exact_acc": 0.347,
+      "exact_ci95": [
+       0.29,
+       0.41
+      ],
+      "area": 99,
+      "area_acc": 0.419,
+      "area_ci95": [
+       0.358,
+       0.483
+      ],
+      "window_acc": 0.341
+     },
+     "tilt only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 29,
+      "exact_acc": 0.123,
+      "exact_ci95": [
+       0.087,
+       0.171
+      ],
+      "area": 50,
+      "area_acc": 0.212,
+      "area_ci95": [
+       0.165,
+       0.268
+      ],
+      "window_acc": 0.118
+     },
+     "wifi only": {
+      "k": 5,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 236,
+      "exact": 26,
+      "exact_acc": 0.11,
+      "exact_ci95": [
+       0.076,
+       0.157
+      ],
+      "area": 50,
+      "area_acc": 0.212,
+      "area_ci95": [
+       0.165,
+       0.268
+      ],
+      "window_acc": 0.11
+     },
+     "baro only": {
+      "k": 3,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 236,
+      "exact": 17,
+      "exact_acc": 0.072,
+      "exact_ci95": [
+       0.045,
+       0.112
+      ],
+      "area": 65,
+      "area_acc": 0.275,
+      "area_ci95": [
+       0.222,
+       0.336
+      ],
+      "window_acc": 0.072
+     },
+     "seconds": 45.8
     }
    ],
    "overall": {
     "fused (learned weights)": {
-     "exact": 457,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.412,
+     "exact": 482,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.407,
      "exact_ci95": [
-      0.384,
-      0.442
+      0.38,
+      0.436
      ],
-     "area": 529,
-     "area_acc": 0.477,
-     "window_acc": 0.412,
-     "n_test_windows": 4432
+     "area": 558,
+     "area_acc": 0.472,
+     "window_acc": 0.409,
+     "n_test_windows": 4732
     },
     "equal weights": {
-     "exact": 489,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.441,
+     "exact": 505,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.427,
      "exact_ci95": [
-      0.412,
-      0.471
+      0.399,
+      0.455
      ],
-     "area": 561,
-     "area_acc": 0.506,
-     "window_acc": 0.433,
-     "n_test_windows": 4432
+     "area": 589,
+     "area_acc": 0.498,
+     "window_acc": 0.417,
+     "n_test_windows": 4732
     },
     "B only": {
-     "exact": 106,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.096,
+     "exact": 108,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.091,
      "exact_ci95": [
-      0.08,
-      0.114
+      0.076,
+      0.109
      ],
-     "area": 238,
-     "area_acc": 0.215,
-     "window_acc": 0.088,
-     "n_test_windows": 4432
+     "area": 245,
+     "area_acc": 0.207,
+     "window_acc": 0.085,
+     "n_test_windows": 4732
     },
     "xyz only": {
-     "exact": 386,
-     "n_recordings_scored": 1108,
+     "exact": 412,
+     "n_recordings_scored": 1183,
      "exact_acc": 0.348,
      "exact_ci95": [
-      0.321,
-      0.377
+      0.322,
+      0.376
      ],
-     "area": 430,
-     "area_acc": 0.388,
-     "window_acc": 0.347,
-     "n_test_windows": 4432
+     "area": 468,
+     "area_acc": 0.396,
+     "window_acc": 0.346,
+     "n_test_windows": 4732
     },
     "tilt only": {
-     "exact": 144,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.13,
+     "exact": 157,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.133,
      "exact_ci95": [
-      0.111,
-      0.151
+      0.115,
+      0.153
      ],
-     "area": 216,
-     "area_acc": 0.195,
-     "window_acc": 0.125,
-     "n_test_windows": 4432
+     "area": 250,
+     "area_acc": 0.211,
+     "window_acc": 0.127,
+     "n_test_windows": 4732
     },
     "wifi only": {
      "exact": 93,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.084,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.079,
      "exact_ci95": [
-      0.069,
-      0.102
+      0.065,
+      0.095
      ],
-     "area": 180,
-     "area_acc": 0.162,
-     "window_acc": 0.084,
-     "n_test_windows": 4432
+     "area": 186,
+     "area_acc": 0.157,
+     "window_acc": 0.079,
+     "n_test_windows": 4732
     },
     "baro only": {
-     "exact": 63,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.057,
+     "exact": 123,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.104,
      "exact_ci95": [
-      0.045,
-      0.072
+      0.088,
+      0.123
      ],
-     "area": 230,
-     "area_acc": 0.208,
-     "window_acc": 0.057,
-     "n_test_windows": 4432
+     "area": 282,
+     "area_acc": 0.238,
+     "window_acc": 0.104,
+     "n_test_windows": 4732
     }
    },
    "chance_mean": 0.038
@@ -3131,7 +3132,7 @@
    "folds": [
     {
      "fold": "test 23nov",
-     "n_train_windows": 4020,
+     "n_train_windows": 4320,
      "n_test_windows": 412,
      "n_train_places": 26,
      "chance": 0.038,
@@ -3143,7 +3144,7 @@
       "baro": 0.75
      },
      "chosen_k": 25,
-     "inner_acc_chosen": 0.494,
+     "inner_acc_chosen": 0.491,
      "n_weight_vectors_tried": 150,
      "fused (learned weights)": {
       "k": 25,
@@ -3155,22 +3156,22 @@
        "baro": 0.75
       },
       "n_recordings": 103,
-      "exact": 58,
-      "exact_acc": 0.563,
+      "exact": 56,
+      "exact_acc": 0.544,
       "exact_ci95": [
-       0.467,
-       0.655
+       0.448,
+       0.637
       ],
-      "area": 62,
-      "area_acc": 0.602,
+      "area": 59,
+      "area_acc": 0.573,
       "area_ci95": [
-       0.505,
-       0.691
+       0.476,
+       0.664
       ],
-      "window_acc": 0.578
+      "window_acc": 0.556
      },
      "equal weights": {
-      "k": 15,
+      "k": 25,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -3179,19 +3180,19 @@
        "baro": 0.2
       },
       "n_recordings": 103,
-      "exact": 64,
-      "exact_acc": 0.621,
+      "exact": 61,
+      "exact_acc": 0.592,
       "exact_ci95": [
+       0.496,
+       0.682
+      ],
+      "area": 64,
+      "area_acc": 0.621,
+      "area_ci95": [
        0.525,
        0.709
       ],
-      "area": 67,
-      "area_acc": 0.65,
-      "area_ci95": [
-       0.554,
-       0.736
-      ],
-      "window_acc": 0.587
+      "window_acc": 0.558
      },
      "B only": {
       "k": 9,
@@ -3203,19 +3204,19 @@
        "baro": 0.0
       },
       "n_recordings": 103,
-      "exact": 5,
-      "exact_acc": 0.049,
+      "exact": 6,
+      "exact_acc": 0.058,
       "exact_ci95": [
-       0.021,
-       0.109
+       0.027,
+       0.121
       ],
-      "area": 18,
-      "area_acc": 0.175,
+      "area": 19,
+      "area_acc": 0.184,
       "area_ci95": [
-       0.113,
-       0.259
+       0.121,
+       0.27
       ],
-      "window_acc": 0.063
+      "window_acc": 0.058
      },
      "xyz only": {
       "k": 25,
@@ -3227,19 +3228,19 @@
        "baro": 0.0
       },
       "n_recordings": 103,
-      "exact": 40,
-      "exact_acc": 0.388,
+      "exact": 39,
+      "exact_acc": 0.379,
       "exact_ci95": [
-       0.3,
-       0.485
+       0.291,
+       0.475
       ],
-      "area": 43,
-      "area_acc": 0.417,
+      "area": 42,
+      "area_acc": 0.408,
       "area_ci95": [
-       0.327,
-       0.514
+       0.318,
+       0.504
       ],
-      "window_acc": 0.41
+      "window_acc": 0.405
      },
      "tilt only": {
       "k": 25,
@@ -3290,7 +3291,7 @@
       "window_acc": 0.029
      },
      "baro only": {
-      "k": 9,
+      "k": 5,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -3313,11 +3314,11 @@
       ],
       "window_acc": 0.117
      },
-     "seconds": 67.7
+     "seconds": 46.5
     },
     {
      "fold": "test 24s1",
-     "n_train_windows": 3160,
+     "n_train_windows": 3460,
      "n_test_windows": 1272,
      "n_train_places": 26,
      "chance": 0.038,
@@ -3325,11 +3326,11 @@
       "B": 0.0,
       "xyz": 0.1,
       "tilt": 0.0,
-      "wifi": 0.2,
-      "baro": 0.7
+      "wifi": 0.5,
+      "baro": 0.4
      },
      "chosen_k": 25,
-     "inner_acc_chosen": 0.525,
+     "inner_acc_chosen": 0.516,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
       "k": 25,
@@ -3337,26 +3338,26 @@
        "B": 0.0,
        "xyz": 0.1,
        "tilt": 0.0,
-       "wifi": 0.2,
-       "baro": 0.7
+       "wifi": 0.5,
+       "baro": 0.4
       },
       "n_recordings": 318,
-      "exact": 138,
-      "exact_acc": 0.434,
+      "exact": 140,
+      "exact_acc": 0.44,
       "exact_ci95": [
-       0.381,
-       0.489
+       0.387,
+       0.495
       ],
-      "area": 158,
-      "area_acc": 0.497,
+      "area": 165,
+      "area_acc": 0.519,
       "area_ci95": [
-       0.442,
-       0.552
+       0.464,
+       0.573
       ],
-      "window_acc": 0.432
+      "window_acc": 0.44
      },
      "equal weights": {
-      "k": 9,
+      "k": 25,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -3365,74 +3366,26 @@
        "baro": 0.2
       },
       "n_recordings": 318,
-      "exact": 123,
-      "exact_acc": 0.387,
+      "exact": 125,
+      "exact_acc": 0.393,
       "exact_ci95": [
-       0.335,
-       0.441
+       0.341,
+       0.448
       ],
-      "area": 143,
-      "area_acc": 0.45,
+      "area": 147,
+      "area_acc": 0.462,
       "area_ci95": [
-       0.396,
-       0.505
+       0.408,
+       0.517
       ],
-      "window_acc": 0.386
+      "window_acc": 0.39
      },
      "B only": {
-      "k": 1,
+      "k": 25,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
        "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 318,
-      "exact": 34,
-      "exact_acc": 0.107,
-      "exact_ci95": [
-       0.078,
-       0.146
-      ],
-      "area": 75,
-      "area_acc": 0.236,
-      "area_ci95": [
-       0.193,
-       0.285
-      ],
-      "window_acc": 0.093
-     },
-     "xyz only": {
-      "k": 25,
-      "weights": {
-       "B": 0.0,
-       "xyz": 1.0,
-       "tilt": 0.0,
-       "wifi": 0.0,
-       "baro": 0.0
-      },
-      "n_recordings": 318,
-      "exact": 110,
-      "exact_acc": 0.346,
-      "exact_ci95": [
-       0.296,
-       0.4
-      ],
-      "area": 124,
-      "area_acc": 0.39,
-      "area_ci95": [
-       0.338,
-       0.445
-      ],
-      "window_acc": 0.344
-     },
-     "tilt only": {
-      "k": 1,
-      "weights": {
-       "B": 0.0,
-       "xyz": 0.0,
-       "tilt": 1.0,
        "wifi": 0.0,
        "baro": 0.0
       },
@@ -3443,13 +3396,61 @@
        0.08,
        0.149
       ],
-      "area": 61,
-      "area_acc": 0.192,
+      "area": 65,
+      "area_acc": 0.204,
       "area_ci95": [
-       0.152,
-       0.239
+       0.164,
+       0.252
       ],
-      "window_acc": 0.106
+      "window_acc": 0.102
+     },
+     "xyz only": {
+      "k": 15,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 318,
+      "exact": 111,
+      "exact_acc": 0.349,
+      "exact_ci95": [
+       0.299,
+       0.403
+      ],
+      "area": 126,
+      "area_acc": 0.396,
+      "area_ci95": [
+       0.344,
+       0.451
+      ],
+      "window_acc": 0.342
+     },
+     "tilt only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 318,
+      "exact": 48,
+      "exact_acc": 0.151,
+      "exact_ci95": [
+       0.116,
+       0.194
+      ],
+      "area": 73,
+      "area_acc": 0.23,
+      "area_ci95": [
+       0.187,
+       0.279
+      ],
+      "window_acc": 0.142
      },
      "wifi only": {
       "k": 5,
@@ -3476,7 +3477,7 @@
       "window_acc": 0.186
      },
      "baro only": {
-      "k": 25,
+      "k": 5,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -3485,11 +3486,11 @@
        "baro": 1.0
       },
       "n_recordings": 318,
-      "exact": 23,
-      "exact_acc": 0.072,
+      "exact": 24,
+      "exact_acc": 0.075,
       "exact_ci95": [
-       0.049,
-       0.106
+       0.051,
+       0.11
       ],
       "area": 69,
       "area_acc": 0.217,
@@ -3497,13 +3498,13 @@
        0.175,
        0.266
       ],
-      "window_acc": 0.072
+      "window_acc": 0.075
      },
-     "seconds": 72.8
+     "seconds": 51.8
     },
     {
      "fold": "test 24s2",
-     "n_train_windows": 3808,
+     "n_train_windows": 4108,
      "n_test_windows": 624,
      "n_train_places": 26,
      "chance": 0.038,
@@ -3515,7 +3516,7 @@
       "baro": 0.3
      },
      "chosen_k": 25,
-     "inner_acc_chosen": 0.487,
+     "inner_acc_chosen": 0.489,
      "n_weight_vectors_tried": 150,
      "fused (learned weights)": {
       "k": 25,
@@ -3527,19 +3528,19 @@
        "baro": 0.3
       },
       "n_recordings": 156,
-      "exact": 72,
-      "exact_acc": 0.462,
+      "exact": 69,
+      "exact_acc": 0.442,
       "exact_ci95": [
-       0.385,
-       0.54
+       0.367,
+       0.521
       ],
-      "area": 84,
-      "area_acc": 0.538,
+      "area": 82,
+      "area_acc": 0.526,
       "area_ci95": [
-       0.46,
-       0.615
+       0.448,
+       0.602
       ],
-      "window_acc": 0.466
+      "window_acc": 0.436
      },
      "equal weights": {
       "k": 25,
@@ -3563,7 +3564,7 @@
        0.486,
        0.639
       ],
-      "window_acc": 0.538
+      "window_acc": 0.537
      },
      "B only": {
       "k": 25,
@@ -3575,19 +3576,19 @@
        "baro": 0.0
       },
       "n_recordings": 156,
-      "exact": 22,
-      "exact_acc": 0.141,
+      "exact": 21,
+      "exact_acc": 0.135,
       "exact_ci95": [
-       0.095,
-       0.204
+       0.09,
+       0.197
       ],
-      "area": 36,
-      "area_acc": 0.231,
+      "area": 35,
+      "area_acc": 0.224,
       "area_ci95": [
-       0.172,
-       0.303
+       0.166,
+       0.296
       ],
-      "window_acc": 0.139
+      "window_acc": 0.133
      },
      "xyz only": {
       "k": 25,
@@ -3599,19 +3600,19 @@
        "baro": 0.0
       },
       "n_recordings": 156,
-      "exact": 62,
-      "exact_acc": 0.397,
+      "exact": 58,
+      "exact_acc": 0.372,
       "exact_ci95": [
-       0.324,
-       0.476
+       0.3,
+       0.45
       ],
-      "area": 72,
-      "area_acc": 0.462,
+      "area": 67,
+      "area_acc": 0.429,
       "area_ci95": [
-       0.385,
-       0.54
+       0.354,
+       0.508
       ],
-      "window_acc": 0.385
+      "window_acc": 0.364
      },
      "tilt only": {
       "k": 25,
@@ -3629,13 +3630,13 @@
        0.138,
        0.261
       ],
-      "area": 38,
-      "area_acc": 0.244,
+      "area": 39,
+      "area_acc": 0.25,
       "area_ci95": [
-       0.183,
-       0.317
+       0.189,
+       0.323
       ],
-      "window_acc": 0.199
+      "window_acc": 0.196
      },
      "wifi only": {
       "k": 5,
@@ -3662,7 +3663,7 @@
       "window_acc": 0.269
      },
      "baro only": {
-      "k": 9,
+      "k": 25,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -3677,55 +3678,55 @@
        0.045,
        0.13
       ],
-      "area": 36,
-      "area_acc": 0.231,
+      "area": 42,
+      "area_acc": 0.269,
       "area_ci95": [
-       0.172,
-       0.303
+       0.206,
+       0.344
       ],
       "window_acc": 0.077
      },
-     "seconds": 58.2
+     "seconds": 42.4
     },
     {
      "fold": "test 25night",
-     "n_train_windows": 3692,
+     "n_train_windows": 3992,
      "n_test_windows": 740,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
-      "B": 0.1,
-      "xyz": 0.2,
+      "B": 0.0,
+      "xyz": 0.25,
       "tilt": 0.0,
       "wifi": 0.0,
-      "baro": 0.7
+      "baro": 0.75
      },
-     "chosen_k": 9,
-     "inner_acc_chosen": 0.508,
+     "chosen_k": 25,
+     "inner_acc_chosen": 0.507,
      "n_weight_vectors_tried": 150,
      "fused (learned weights)": {
-      "k": 9,
+      "k": 25,
       "weights": {
-       "B": 0.1,
-       "xyz": 0.2,
+       "B": 0.0,
+       "xyz": 0.25,
        "tilt": 0.0,
        "wifi": 0.0,
-       "baro": 0.7
+       "baro": 0.75
       },
       "n_recordings": 185,
-      "exact": 70,
-      "exact_acc": 0.378,
+      "exact": 78,
+      "exact_acc": 0.422,
       "exact_ci95": [
-       0.312,
-       0.45
+       0.353,
+       0.494
       ],
-      "area": 84,
-      "area_acc": 0.454,
+      "area": 89,
+      "area_acc": 0.481,
       "area_ci95": [
-       0.384,
-       0.526
+       0.41,
+       0.553
       ],
-      "window_acc": 0.373
+      "window_acc": 0.424
      },
      "equal weights": {
       "k": 15,
@@ -3737,22 +3738,22 @@
        "baro": 0.2
       },
       "n_recordings": 185,
-      "exact": 65,
-      "exact_acc": 0.351,
+      "exact": 66,
+      "exact_acc": 0.357,
       "exact_ci95": [
-       0.286,
-       0.423
+       0.291,
+       0.428
       ],
-      "area": 70,
-      "area_acc": 0.378,
+      "area": 72,
+      "area_acc": 0.389,
       "area_ci95": [
-       0.312,
-       0.45
+       0.322,
+       0.461
       ],
       "window_acc": 0.349
      },
      "B only": {
-      "k": 9,
+      "k": 15,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -3761,19 +3762,19 @@
        "baro": 0.0
       },
       "n_recordings": 185,
-      "exact": 13,
-      "exact_acc": 0.07,
+      "exact": 12,
+      "exact_acc": 0.065,
       "exact_ci95": [
-       0.042,
-       0.117
+       0.037,
+       0.11
       ],
-      "area": 27,
-      "area_acc": 0.146,
+      "area": 28,
+      "area_acc": 0.151,
       "area_ci95": [
-       0.102,
-       0.204
+       0.107,
+       0.21
       ],
-      "window_acc": 0.068
+      "window_acc": 0.062
      },
      "xyz only": {
       "k": 25,
@@ -3809,17 +3810,17 @@
        "baro": 0.0
       },
       "n_recordings": 185,
-      "exact": 28,
-      "exact_acc": 0.151,
+      "exact": 27,
+      "exact_acc": 0.146,
       "exact_ci95": [
-       0.107,
-       0.21
+       0.102,
+       0.204
       ],
-      "area": 37,
-      "area_acc": 0.2,
+      "area": 36,
+      "area_acc": 0.195,
       "area_ci95": [
-       0.149,
-       0.263
+       0.144,
+       0.258
       ],
       "window_acc": 0.146
      },
@@ -3848,7 +3849,7 @@
       "window_acc": 0.032
      },
      "baro only": {
-      "k": 9,
+      "k": 5,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -3857,61 +3858,61 @@
        "baro": 1.0
       },
       "n_recordings": 185,
-      "exact": 12,
-      "exact_acc": 0.065,
+      "exact": 6,
+      "exact_acc": 0.032,
       "exact_ci95": [
-       0.037,
-       0.11
+       0.015,
+       0.069
       ],
-      "area": 24,
-      "area_acc": 0.13,
+      "area": 34,
+      "area_acc": 0.184,
       "area_ci95": [
-       0.089,
-       0.186
+       0.135,
+       0.246
       ],
-      "window_acc": 0.065
+      "window_acc": 0.032
      },
-     "seconds": 57.6
+     "seconds": 40.1
     },
     {
      "fold": "test 25night_tian",
-     "n_train_windows": 4156,
+     "n_train_windows": 4456,
      "n_test_windows": 276,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
-      "B": 0.0,
-      "xyz": 0.25,
-      "tilt": 0.25,
+      "B": 0.1,
+      "xyz": 0.1,
+      "tilt": 0.1,
       "wifi": 0.0,
-      "baro": 0.5
+      "baro": 0.7
      },
      "chosen_k": 25,
-     "inner_acc_chosen": 0.491,
+     "inner_acc_chosen": 0.494,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
       "k": 25,
       "weights": {
-       "B": 0.0,
-       "xyz": 0.25,
-       "tilt": 0.25,
+       "B": 0.1,
+       "xyz": 0.1,
+       "tilt": 0.1,
        "wifi": 0.0,
-       "baro": 0.5
+       "baro": 0.7
       },
       "n_recordings": 69,
-      "exact": 35,
-      "exact_acc": 0.507,
+      "exact": 46,
+      "exact_acc": 0.667,
       "exact_ci95": [
-       0.392,
-       0.622
+       0.549,
+       0.766
       ],
-      "area": 39,
-      "area_acc": 0.565,
+      "area": 49,
+      "area_acc": 0.71,
       "area_ci95": [
-       0.448,
-       0.676
+       0.594,
+       0.804
       ],
-      "window_acc": 0.514
+      "window_acc": 0.652
      },
      "equal weights": {
       "k": 25,
@@ -3923,22 +3924,22 @@
        "baro": 0.2
       },
       "n_recordings": 69,
-      "exact": 43,
-      "exact_acc": 0.623,
+      "exact": 42,
+      "exact_acc": 0.609,
       "exact_ci95": [
-       0.505,
-       0.728
+       0.491,
+       0.715
       ],
-      "area": 48,
-      "area_acc": 0.696,
+      "area": 47,
+      "area_acc": 0.681,
       "area_ci95": [
-       0.579,
-       0.792
+       0.564,
+       0.779
       ],
-      "window_acc": 0.63
+      "window_acc": 0.623
      },
      "B only": {
-      "k": 15,
+      "k": 25,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -3947,19 +3948,19 @@
        "baro": 0.0
       },
       "n_recordings": 69,
-      "exact": 4,
-      "exact_acc": 0.058,
+      "exact": 6,
+      "exact_acc": 0.087,
       "exact_ci95": [
-       0.023,
-       0.14
+       0.04,
+       0.177
       ],
-      "area": 10,
-      "area_acc": 0.145,
+      "area": 12,
+      "area_acc": 0.174,
       "area_ci95": [
-       0.081,
-       0.247
+       0.102,
+       0.28
       ],
-      "window_acc": 0.051
+      "window_acc": 0.091
      },
      "xyz only": {
       "k": 25,
@@ -3983,7 +3984,7 @@
        0.311,
        0.538
       ],
-      "window_acc": 0.424
+      "window_acc": 0.42
      },
      "tilt only": {
       "k": 25,
@@ -4034,7 +4035,7 @@
       "window_acc": 0.043
      },
      "baro only": {
-      "k": 9,
+      "k": 5,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -4049,40 +4050,40 @@
        0.04,
        0.177
       ],
-      "area": 24,
-      "area_acc": 0.348,
+      "area": 15,
+      "area_acc": 0.217,
       "area_ci95": [
-       0.246,
-       0.466
+       0.136,
+       0.328
       ],
       "window_acc": 0.087
      },
-     "seconds": 116.1
+     "seconds": 86.9
     },
     {
      "fold": "test 25nov",
-     "n_train_windows": 3540,
+     "n_train_windows": 3840,
      "n_test_windows": 892,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
       "B": 0.1,
-      "xyz": 0.4,
+      "xyz": 0.6,
       "tilt": 0.0,
       "wifi": 0.0,
-      "baro": 0.5
+      "baro": 0.3
      },
      "chosen_k": 15,
-     "inner_acc_chosen": 0.486,
+     "inner_acc_chosen": 0.482,
      "n_weight_vectors_tried": 239,
      "fused (learned weights)": {
       "k": 15,
       "weights": {
        "B": 0.1,
-       "xyz": 0.4,
+       "xyz": 0.6,
        "tilt": 0.0,
        "wifi": 0.0,
-       "baro": 0.5
+       "baro": 0.3
       },
       "n_recordings": 223,
       "exact": 113,
@@ -4091,16 +4092,16 @@
        0.442,
        0.572
       ],
-      "area": 121,
-      "area_acc": 0.543,
+      "area": 119,
+      "area_acc": 0.534,
       "area_ci95": [
-       0.477,
-       0.607
+       0.468,
+       0.598
       ],
-      "window_acc": 0.496
+      "window_acc": 0.489
      },
      "equal weights": {
-      "k": 15,
+      "k": 25,
       "weights": {
        "B": 0.2,
        "xyz": 0.2,
@@ -4109,19 +4110,19 @@
        "baro": 0.2
       },
       "n_recordings": 223,
-      "exact": 116,
-      "exact_acc": 0.52,
+      "exact": 120,
+      "exact_acc": 0.538,
       "exact_ci95": [
-       0.455,
-       0.585
+       0.473,
+       0.602
       ],
-      "area": 128,
-      "area_acc": 0.574,
+      "area": 130,
+      "area_acc": 0.583,
       "area_ci95": [
-       0.508,
-       0.637
+       0.517,
+       0.646
       ],
-      "window_acc": 0.525
+      "window_acc": 0.536
      },
      "B only": {
       "k": 9,
@@ -4139,11 +4140,11 @@
        0.123,
        0.22
       ],
-      "area": 56,
-      "area_acc": 0.251,
+      "area": 55,
+      "area_acc": 0.247,
       "area_ci95": [
-       0.199,
-       0.312
+       0.195,
+       0.307
       ],
       "window_acc": 0.138
      },
@@ -4157,22 +4158,22 @@
        "baro": 0.0
       },
       "n_recordings": 223,
-      "exact": 96,
-      "exact_acc": 0.43,
+      "exact": 101,
+      "exact_acc": 0.453,
       "exact_ci95": [
-       0.367,
-       0.496
+       0.389,
+       0.518
       ],
-      "area": 103,
-      "area_acc": 0.462,
+      "area": 108,
+      "area_acc": 0.484,
       "area_ci95": [
-       0.398,
-       0.527
+       0.42,
+       0.55
       ],
-      "window_acc": 0.409
+      "window_acc": 0.435
      },
      "tilt only": {
-      "k": 25,
+      "k": 9,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -4181,19 +4182,19 @@
        "baro": 0.0
       },
       "n_recordings": 223,
-      "exact": 50,
-      "exact_acc": 0.224,
+      "exact": 47,
+      "exact_acc": 0.211,
       "exact_ci95": [
-       0.174,
-       0.283
+       0.162,
+       0.269
       ],
-      "area": 62,
-      "area_acc": 0.278,
+      "area": 57,
+      "area_acc": 0.256,
       "area_ci95": [
-       0.223,
-       0.34
+       0.203,
+       0.317
       ],
-      "window_acc": 0.2
+      "window_acc": 0.17
      },
      "wifi only": {
       "k": 25,
@@ -4220,7 +4221,7 @@
       "window_acc": 0.031
      },
      "baro only": {
-      "k": 25,
+      "k": 5,
       "weights": {
        "B": 0.0,
        "xyz": 0.0,
@@ -4229,61 +4230,61 @@
        "baro": 1.0
       },
       "n_recordings": 223,
-      "exact": 16,
-      "exact_acc": 0.072,
+      "exact": 18,
+      "exact_acc": 0.081,
       "exact_ci95": [
-       0.045,
-       0.113
+       0.052,
+       0.124
       ],
-      "area": 52,
-      "area_acc": 0.233,
+      "area": 62,
+      "area_acc": 0.278,
       "area_ci95": [
-       0.182,
-       0.293
+       0.223,
+       0.34
       ],
-      "window_acc": 0.072
+      "window_acc": 0.081
      },
-     "seconds": 89.4
+     "seconds": 64.5
     },
     {
      "fold": "test 25spots",
-     "n_train_windows": 4216,
+     "n_train_windows": 4516,
      "n_test_windows": 216,
      "n_train_places": 26,
      "chance": 0.038,
      "chosen_weights": {
       "B": 0.1,
       "xyz": 0.3,
-      "tilt": 0.0,
+      "tilt": 0.1,
       "wifi": 0.0,
-      "baro": 0.6
+      "baro": 0.5
      },
      "chosen_k": 25,
-     "inner_acc_chosen": 0.502,
-     "n_weight_vectors_tried": 125,
+     "inner_acc_chosen": 0.5,
+     "n_weight_vectors_tried": 475,
      "fused (learned weights)": {
       "k": 25,
       "weights": {
        "B": 0.1,
        "xyz": 0.3,
-       "tilt": 0.0,
+       "tilt": 0.1,
        "wifi": 0.0,
-       "baro": 0.6
+       "baro": 0.5
       },
       "n_recordings": 54,
-      "exact": 15,
-      "exact_acc": 0.278,
+      "exact": 14,
+      "exact_acc": 0.259,
       "exact_ci95": [
-       0.176,
-       0.409
+       0.161,
+       0.389
       ],
-      "area": 17,
-      "area_acc": 0.315,
+      "area": 16,
+      "area_acc": 0.296,
       "area_ci95": [
-       0.207,
-       0.447
+       0.191,
+       0.428
       ],
-      "window_acc": 0.292
+      "window_acc": 0.273
      },
      "equal weights": {
       "k": 25,
@@ -4307,10 +4308,10 @@
        0.254,
        0.504
       ],
-      "window_acc": 0.25
+      "window_acc": 0.259
      },
      "B only": {
-      "k": 9,
+      "k": 25,
       "weights": {
        "B": 1.0,
        "xyz": 0.0,
@@ -4319,19 +4320,19 @@
        "baro": 0.0
       },
       "n_recordings": 54,
-      "exact": 2,
-      "exact_acc": 0.037,
+      "exact": 1,
+      "exact_acc": 0.019,
       "exact_ci95": [
-       0.01,
-       0.125
+       0.003,
+       0.098
       ],
-      "area": 14,
-      "area_acc": 0.259,
+      "area": 13,
+      "area_acc": 0.241,
       "area_ci95": [
-       0.161,
-       0.389
+       0.146,
+       0.369
       ],
-      "window_acc": 0.037
+      "window_acc": 0.046
      },
      "xyz only": {
       "k": 25,
@@ -4355,7 +4356,7 @@
        0.222,
        0.466
       ],
-      "window_acc": 0.343
+      "window_acc": 0.347
      },
      "tilt only": {
       "k": 25,
@@ -4415,114 +4416,300 @@
        "baro": 1.0
       },
       "n_recordings": 54,
-      "exact": 1,
-      "exact_acc": 0.019,
+      "exact": 0,
+      "exact_acc": 0.0,
       "exact_ci95": [
-       0.003,
-       0.098
+       0.0,
+       0.066
       ],
-      "area": 12,
-      "area_acc": 0.222,
+      "area": 9,
+      "area_acc": 0.167,
       "area_ci95": [
-       0.132,
-       0.349
+       0.09,
+       0.287
       ],
-      "window_acc": 0.019
+      "window_acc": 0.0
      },
-     "seconds": 61.1
+     "seconds": 178.2
+    },
+    {
+     "fold": "test 26tian",
+     "n_train_windows": 4432,
+     "n_test_windows": 300,
+     "n_train_places": 26,
+     "chance": 0.038,
+     "chosen_weights": {
+      "B": 0.1,
+      "xyz": 0.3,
+      "tilt": 0.0,
+      "wifi": 0.0,
+      "baro": 0.6
+     },
+     "chosen_k": 15,
+     "inner_acc_chosen": 0.504,
+     "n_weight_vectors_tried": 150,
+     "fused (learned weights)": {
+      "k": 15,
+      "weights": {
+       "B": 0.1,
+       "xyz": 0.3,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.6
+      },
+      "n_recordings": 75,
+      "exact": 37,
+      "exact_acc": 0.493,
+      "exact_ci95": [
+       0.383,
+       0.604
+      ],
+      "area": 41,
+      "area_acc": 0.547,
+      "area_ci95": [
+       0.434,
+       0.654
+      ],
+      "window_acc": 0.523
+     },
+     "equal weights": {
+      "k": 25,
+      "weights": {
+       "B": 0.2,
+       "xyz": 0.2,
+       "tilt": 0.2,
+       "wifi": 0.2,
+       "baro": 0.2
+      },
+      "n_recordings": 75,
+      "exact": 43,
+      "exact_acc": 0.573,
+      "exact_ci95": [
+       0.461,
+       0.679
+      ],
+      "area": 49,
+      "area_acc": 0.653,
+      "area_ci95": [
+       0.541,
+       0.751
+      ],
+      "window_acc": 0.553
+     },
+     "B only": {
+      "k": 9,
+      "weights": {
+       "B": 1.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 75,
+      "exact": 7,
+      "exact_acc": 0.093,
+      "exact_ci95": [
+       0.046,
+       0.18
+      ],
+      "area": 17,
+      "area_acc": 0.227,
+      "area_ci95": [
+       0.147,
+       0.333
+      ],
+      "window_acc": 0.1
+     },
+     "xyz only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 1.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 75,
+      "exact": 26,
+      "exact_acc": 0.347,
+      "exact_ci95": [
+       0.249,
+       0.459
+      ],
+      "area": 31,
+      "area_acc": 0.413,
+      "area_ci95": [
+       0.309,
+       0.526
+      ],
+      "window_acc": 0.327
+     },
+     "tilt only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 1.0,
+       "wifi": 0.0,
+       "baro": 0.0
+      },
+      "n_recordings": 75,
+      "exact": 10,
+      "exact_acc": 0.133,
+      "exact_ci95": [
+       0.074,
+       0.228
+      ],
+      "area": 22,
+      "area_acc": 0.293,
+      "area_ci95": [
+       0.202,
+       0.404
+      ],
+      "window_acc": 0.12
+     },
+     "wifi only": {
+      "k": 25,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 1.0,
+       "baro": 0.0
+      },
+      "n_recordings": 75,
+      "exact": 0,
+      "exact_acc": 0.0,
+      "exact_ci95": [
+       0.0,
+       0.049
+      ],
+      "area": 6,
+      "area_acc": 0.08,
+      "area_ci95": [
+       0.037,
+       0.164
+      ],
+      "window_acc": 0.0
+     },
+     "baro only": {
+      "k": 9,
+      "weights": {
+       "B": 0.0,
+       "xyz": 0.0,
+       "tilt": 0.0,
+       "wifi": 0.0,
+       "baro": 1.0
+      },
+      "n_recordings": 75,
+      "exact": 3,
+      "exact_acc": 0.04,
+      "exact_ci95": [
+       0.014,
+       0.111
+      ],
+      "area": 15,
+      "area_acc": 0.2,
+      "area_ci95": [
+       0.125,
+       0.304
+      ],
+      "window_acc": 0.04
+     },
+     "seconds": 48.7
     }
    ],
    "overall": {
     "fused (learned weights)": {
-     "exact": 501,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.452,
+     "exact": 553,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.467,
      "exact_ci95": [
-      0.423,
-      0.482
+      0.439,
+      0.496
      ],
-     "area": 565,
-     "area_acc": 0.51,
-     "window_acc": 0.451,
-     "n_test_windows": 4432
+     "area": 620,
+     "area_acc": 0.524,
+     "window_acc": 0.466,
+     "n_test_windows": 4732
     },
     "equal weights": {
-     "exact": 508,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.458,
+     "exact": 554,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.468,
      "exact_ci95": [
-      0.429,
-      0.488
+      0.44,
+      0.497
      ],
-     "area": 564,
-     "area_acc": 0.509,
-     "window_acc": 0.456,
-     "n_test_windows": 4432
+     "area": 617,
+     "area_acc": 0.522,
+     "window_acc": 0.463,
+     "n_test_windows": 4732
     },
     "B only": {
-     "exact": 117,
-     "n_recordings_scored": 1108,
+     "exact": 125,
+     "n_recordings_scored": 1183,
      "exact_acc": 0.106,
      "exact_ci95": [
       0.089,
-      0.125
-     ],
-     "area": 236,
-     "area_acc": 0.213,
-     "window_acc": 0.096,
-     "n_test_windows": 4432
-    },
-    "xyz only": {
-     "exact": 423,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.382,
-     "exact_ci95": [
-      0.354,
-      0.411
-     ],
-     "area": 460,
-     "area_acc": 0.415,
-     "window_acc": 0.379,
-     "n_test_windows": 4432
-    },
-    "tilt only": {
-     "exact": 168,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.152,
-     "exact_ci95": [
-      0.132,
-      0.174
+      0.124
      ],
      "area": 244,
-     "area_acc": 0.22,
-     "window_acc": 0.145,
-     "n_test_windows": 4432
+     "area_acc": 0.206,
+     "window_acc": 0.1,
+     "n_test_windows": 4732
+    },
+    "xyz only": {
+     "exact": 450,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.38,
+     "exact_ci95": [
+      0.353,
+      0.408
+     ],
+     "area": 492,
+     "area_acc": 0.416,
+     "window_acc": 0.377,
+     "n_test_windows": 4732
+    },
+    "tilt only": {
+     "exact": 187,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.158,
+     "exact_ci95": [
+      0.138,
+      0.18
+     ],
+     "area": 273,
+     "area_acc": 0.231,
+     "window_acc": 0.147,
+     "n_test_windows": 4732
     },
     "wifi only": {
      "exact": 126,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.114,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.107,
      "exact_ci95": [
-      0.096,
-      0.134
+      0.09,
+      0.125
      ],
-     "area": 207,
-     "area_acc": 0.187,
-     "window_acc": 0.114,
-     "n_test_windows": 4432
+     "area": 213,
+     "area_acc": 0.18,
+     "window_acc": 0.107,
+     "n_test_windows": 4732
     },
     "baro only": {
-     "exact": 82,
-     "n_recordings_scored": 1108,
-     "exact_acc": 0.074,
+     "exact": 81,
+     "n_recordings_scored": 1183,
+     "exact_acc": 0.068,
      "exact_ci95": [
-      0.06,
-      0.091
+      0.055,
+      0.084
      ],
-     "area": 247,
-     "area_acc": 0.223,
-     "window_acc": 0.074,
-     "n_test_windows": 4432
+     "area": 276,
+     "area_acc": 0.233,
+     "window_acc": 0.068,
+     "n_test_windows": 4732
     }
    },
    "chance_mean": 0.038
@@ -4538,9 +4725,9 @@
    "wifi": 0.0,
    "baro": 0.6
   },
-  "k": 15,
-  "loso_inner_acc": 0.505,
-  "floor_jump_threshold_hpa": 0.296,
+  "k": 25,
+  "loso_inner_acc": 0.5,
+  "floor_jump_threshold_hpa": 0.301,
   "sessions": [
    "23nov",
    "24s1",
@@ -4548,7 +4735,8 @@
    "25night",
    "25night_tian",
    "25nov",
-   "25spots"
+   "25spots",
+   "26tian"
   ],
   "window_s": 5.0
  }

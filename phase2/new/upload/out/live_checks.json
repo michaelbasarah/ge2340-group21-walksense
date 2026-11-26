@@ -89,6 +89,24 @@
      2.372
     ]
    }
+  },
+  "26tian": {
+   "stop": {
+    "n_windows": 250,
+    "std_p5_p50_p95": [
+     0.057,
+     0.082,
+     0.095
+    ]
+   },
+   "walk": {
+    "n_windows": 2,
+    "std_p5_p50_p95": [
+     3.837,
+     4.168,
+     4.499
+    ]
+   }
   }
  },
  "top1_by_standing_time": {
@@ -108,6 +126,10 @@
   "sesi1->25night_tian 6s": "8/23",
   "sesi1->25night_tian 10s": "8/23",
   "sesi1->25night_tian 60s": "9/23",
+  "sesi1->26tian 3s": "8/25",
+  "sesi1->26tian 6s": "9/25",
+  "sesi1->26tian 10s": "9/25",
+  "sesi1->26tian 60s": "8/25",
   "sesi2->sesi1 3s": "16/27",
   "sesi2->sesi1 6s": "16/27",
   "sesi2->sesi1 10s": "17/27",
@@ -124,6 +146,10 @@
   "sesi2->25night_tian 6s": "13/23",
   "sesi2->25night_tian 10s": "13/23",
   "sesi2->25night_tian 60s": "12/23",
+  "sesi2->26tian 3s": "11/25",
+  "sesi2->26tian 6s": "11/25",
+  "sesi2->26tian 10s": "11/25",
+  "sesi2->26tian 60s": "11/25",
   "25nov->sesi1 3s": "17/27",
   "25nov->sesi1 6s": "17/27",
   "25nov->sesi1 10s": "17/27",
@@ -140,6 +166,10 @@
   "25nov->25night_tian 6s": "10/23",
   "25nov->25night_tian 10s": "11/23",
   "25nov->25night_tian 60s": "11/23",
+  "25nov->26tian 3s": "9/25",
+  "25nov->26tian 6s": "11/25",
+  "25nov->26tian 10s": "11/25",
+  "25nov->26tian 60s": "11/25",
   "25night->sesi1 3s": "17/27",
   "25night->sesi1 6s": "17/27",
   "25night->sesi1 10s": "17/27",
@@ -156,6 +186,10 @@
   "25night->25night_tian 6s": "13/23",
   "25night->25night_tian 10s": "13/23",
   "25night->25night_tian 60s": "14/23",
+  "25night->26tian 3s": "11/25",
+  "25night->26tian 6s": "11/25",
+  "25night->26tian 10s": "11/25",
+  "25night->26tian 60s": "10/25",
   "25night_tian->sesi1 3s": "10/27",
   "25night_tian->sesi1 6s": "10/27",
   "25night_tian->sesi1 10s": "10/27",
@@ -171,7 +205,31 @@
   "25night_tian->25night 3s": "13/32",
   "25night_tian->25night 6s": "13/32",
   "25night_tian->25night 10s": "13/32",
-  "25night_tian->25night 60s": "15/32"
+  "25night_tian->25night 60s": "15/32",
+  "25night_tian->26tian 3s": "8/25",
+  "25night_tian->26tian 6s": "8/25",
+  "25night_tian->26tian 10s": "8/25",
+  "25night_tian->26tian 60s": "8/25",
+  "26tian->sesi1 3s": "11/27",
+  "26tian->sesi1 6s": "11/27",
+  "26tian->sesi1 10s": "12/27",
+  "26tian->sesi1 60s": "10/27",
+  "26tian->sesi2 3s": "11/26",
+  "26tian->sesi2 6s": "11/26",
+  "26tian->sesi2 10s": "12/26",
+  "26tian->sesi2 60s": "12/26",
+  "26tian->25nov 3s": "13/26",
+  "26tian->25nov 6s": "12/26",
+  "26tian->25nov 10s": "13/26",
+  "26tian->25nov 60s": "14/26",
+  "26tian->25night 3s": "13/32",
+  "26tian->25night 6s": "13/32",
+  "26tian->25night 10s": "13/32",
+  "26tian->25night 60s": "13/32",
+  "26tian->25night_tian 3s": "8/23",
+  "26tian->25night_tian 6s": "8/23",
+  "26tian->25night_tian 10s": "8/23",
+  "26tian->25night_tian 60s": "7/23"
  },
  "walking_dot": {
   "sesi1->sesi2": {
@@ -206,6 +264,14 @@
    "end_error_m_p90": 3.3,
    "m_per_px": 0.0617
   },
+  "sesi1->26tian": {
+   "walks": 27,
+   "first_corridor_right": 26,
+   "end_within_3m": 24,
+   "end_error_m_median": 0.8,
+   "end_error_m_p90": 2.7,
+   "m_per_px": 0.0617
+  },
   "sesi2->sesi1": {
    "walks": 28,
    "first_corridor_right": 26,
@@ -236,6 +302,14 @@
    "end_within_3m": 22,
    "end_error_m_median": 0.6,
    "end_error_m_p90": 1.4,
+   "m_per_px": 0.0571
+  },
+  "sesi2->26tian": {
+   "walks": 27,
+   "first_corridor_right": 27,
+   "end_within_3m": 26,
+   "end_error_m_median": 0.6,
+   "end_error_m_p90": 1.9,
    "m_per_px": 0.0571
   },
   "25nov->sesi1": {
@@ -270,6 +344,14 @@
    "end_error_m_p90": 3.0,
    "m_per_px": 0.0623
   },
+  "25nov->26tian": {
+   "walks": 27,
+   "first_corridor_right": 26,
+   "end_within_3m": 25,
+   "end_error_m_median": 1.1,
+   "end_error_m_p90": 2.9,
+   "m_per_px": 0.0623
+  },
   "25night->sesi1": {
    "walks": 28,
    "first_corridor_right": 25,
@@ -300,6 +382,14 @@
    "end_within_3m": 18,
    "end_error_m_median": 1.5,
    "end_error_m_p90": 10.0,
+   "m_per_px": 0.0613
+  },
+  "25night->26tian": {
+   "walks": 27,
+   "first_corridor_right": 23,
+   "end_within_3m": 22,
+   "end_error_m_median": 1.3,
+   "end_error_m_p90": 10.7,
    "m_per_px": 0.0613
   },
   "25night_tian->sesi1": {
@@ -333,6 +423,54 @@
    "end_error_m_median": 1.4,
    "end_error_m_p90": 5.1,
    "m_per_px": 0.0577
+  },
+  "25night_tian->26tian": {
+   "walks": 25,
+   "first_corridor_right": 21,
+   "end_within_3m": 22,
+   "end_error_m_median": 0.7,
+   "end_error_m_p90": 3.7,
+   "m_per_px": 0.0577
+  },
+  "26tian->sesi1": {
+   "walks": 28,
+   "first_corridor_right": 24,
+   "end_within_3m": 23,
+   "end_error_m_median": 1.0,
+   "end_error_m_p90": 7.3,
+   "m_per_px": 0.0566
+  },
+  "26tian->sesi2": {
+   "walks": 28,
+   "first_corridor_right": 26,
+   "end_within_3m": 26,
+   "end_error_m_median": 0.6,
+   "end_error_m_p90": 2.5,
+   "m_per_px": 0.0566
+  },
+  "26tian->25nov": {
+   "walks": 28,
+   "first_corridor_right": 24,
+   "end_within_3m": 23,
+   "end_error_m_median": 1.2,
+   "end_error_m_p90": 4.1,
+   "m_per_px": 0.0566
+  },
+  "26tian->25night": {
+   "walks": 27,
+   "first_corridor_right": 24,
+   "end_within_3m": 23,
+   "end_error_m_median": 1.2,
+   "end_error_m_p90": 6.0,
+   "m_per_px": 0.0566
+  },
+  "26tian->25night_tian": {
+   "walks": 23,
+   "first_corridor_right": 21,
+   "end_within_3m": 21,
+   "end_error_m_median": 0.6,
+   "end_error_m_p90": 2.3,
+   "m_per_px": 0.0566
   }
  },
  "live_replay": {
@@ -341,9 +479,9 @@
    "found": 27,
    "floor": 27,
    "top1": 19,
-   "top3": 21,
+   "top3": 22,
    "lit": 24,
-   "lit_right": 17,
+   "lit_right": 18,
    "extra_stops": 2
   },
   "sesi2 streamed, model iPhone19,2": {
@@ -360,10 +498,10 @@
    "n_stops": 26,
    "found": 26,
    "floor": 26,
-   "top1": 17,
-   "top3": 20,
-   "lit": 20,
-   "lit_right": 15,
+   "top1": 18,
+   "top3": 21,
+   "lit": 21,
+   "lit_right": 16,
    "extra_stops": 0
   },
   "sesi1 streamed, model iPhone19,2 from 25nov only": {
