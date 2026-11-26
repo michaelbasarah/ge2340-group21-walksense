@@ -82,6 +82,26 @@
   #map.plan .route { stroke-width:calc(var(--u) * .35px); }
   #map .route-end { fill:var(--route); stroke:#fff; stroke-width:4; } #map.plan .route-end { stroke-width:calc(var(--u) * .2px); }
   #map .route-start { fill:#fff; stroke:var(--route); stroke-width:5; } #map.plan .route-start { stroke-width:calc(var(--u) * .25px); }
+  /* route planner: distance on each walked leg, connector tags, tappable places */
+  #map text.route-len { font-weight:800; fill:var(--route); stroke:var(--fp-halo); paint-order:stroke; }
+  #map text.route-conn { font-weight:800; fill:var(--on-route); stroke:none; } #map .route-connbg { fill:var(--route); }
+  #map .fp-hit { fill:transparent; } #map .fp-tap { cursor:pointer; } #map .fp-hit:focus { outline:none; stroke:var(--route); stroke-width:calc(var(--u) * .12px); }
+  :root { --on-route:#fff; } @media (prefers-color-scheme: dark) { :root { --on-route:#1a0d00; } }
+  .searchbar .planrow { flex:1 1 100%; display:flex; gap:6px; align-items:center; font-size:14px; color:var(--ink2); }
+  .searchbar .planrow label { margin:0; font-size:14px; }
+  .searchbar .planrow select { flex:1; min-width:0; width:0; }
+  .chips { flex:1 1 100%; display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:13.5px; color:var(--ink2); }
+  .chips .seg { display:inline-flex; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .searchbar .chips button { min-height:32px; padding:0 10px; font-size:13.5px; font-weight:600; border-radius:0; background:transparent; color:var(--ink); border:none; }
+  .searchbar .chips .seg button + button { border-left:1px solid var(--line); }
+  .searchbar .chips button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); }
+  .searchbar .chips button.wc { border:1px solid var(--accent); border-radius:16px; color:var(--accent); }
+  #found .sum { font-size:15px; font-weight:600; margin:4px 0; } #found .conn { margin:4px 0; }
+  #found .opts { margin-top:8px; font-size:13.5px; }
+  .tapto { display:flex; gap:6px; align-items:center; margin-top:6px; font-size:13.5px; color:var(--ink2); }
+  .tapto .seg { display:inline-flex; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .tapto button { width:auto; margin:0; min-height:30px; padding:0 12px; font-size:13.5px; border-radius:0; background:transparent; color:var(--ink); border:none; }
+  .tapto button[aria-pressed=true] { background:var(--route); color:var(--on-route); }
 </style>
 </head>
 <body>
@@ -89,7 +109,13 @@
   <form id="searchform" role="search" autocomplete="off">
     <input id="q" type="search" placeholder="Search: a room, a place or a question" aria-label="Search for a place" maxlength="200" enterkeyhint="search">
     <button id="go" type="submit">Go</button>
-    <div class="fromrow"><label for="from" style="margin:0">From</label><select id="from"><option value="">where I am (else the 4F entrance gate)</option></select><button type="button" class="secondary" id="clearroute" hidden>Clear</button></div>
+    <div class="planrow"><label for="from">From</label><select id="from"><option value="">where I am (else the 4F gate)</option></select>
+      <label for="to">To</label><select id="to"><option value="">search or tap the map</option></select><button type="button" class="secondary" id="clearroute" hidden>Clear</button></div>
+    <div class="chips">
+      <span class="seg" role="group" aria-label="Route mode"><button type="button" data-mode="standard" aria-pressed="true">Standard</button><button type="button" data-mode="accessible" aria-pressed="false" title="Wheelchair / step-free: lifts only, disabled toilets only">Step-free</button></span>
+      <span class="seg" role="group" aria-label="Toilet filter"><button type="button" data-gender="any" aria-pressed="true">Any WC</button><button type="button" data-gender="male" aria-pressed="false">Male</button><button type="button" data-gender="female" aria-pressed="false">Female</button></span>
+      <button type="button" class="wc" id="nearestwc">Nearest toilet</button>
+    </div>
   </form>
 </header>
 <main>
@@ -106,6 +132,7 @@
       <svg id="map" role="img" aria-label="Floor map"></svg>
       <div class="zoom" id="zoom" hidden><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zfit" aria-label="Show the whole floor">&#x2922;</button></div>
     </div>
+    <div class="tapto" id="tapto" hidden><span>Tap a place to set</span><span class="seg" role="group" aria-label="Tapping a place sets"><button type="button" data-tap="to" aria-pressed="true">To</button><button type="button" data-tap="from" aria-pressed="false">From</button></span></div>
     <div class="muted" id="mapnote">Send a stop to see where you are.</div>
     <div class="muted" id="legend" hidden>Lines are corridors: solid = measured, dashed with "~" = steps &times; 0.54 m, dotted with "?" = guess. * = inferred place. Blocks are traced from the Google indoor map. Tap a blue badge to change floor.</div>
     <div id="live" hidden><div class="muted" style="margin-top:8px">LIVE from phyphox</div><div class="big" id="livemode" style="font-size:20px"></div><div class="muted" id="livestatus"></div><div class="muted" id="livesaved"></div></div>
@@ -150,7 +177,7 @@ function drawMap() {
   document.querySelectorAll('[data-show]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.show === shown)));
   $('mapmode').setAttribute('aria-pressed', String(!plan));
   $('mapmode').textContent = plan ? 'Picture' : 'Floor plan';
-  $('zoom').hidden = !plan; $('legend').hidden = !plan;
+  $('zoom').hidden = !plan; $('legend').hidden = !plan; $('tapto').hidden = !plan;
   svg.style.touchAction = plan && FloorPlan.zoomed(shown) ? 'none' : '';   // zoomed in: a drag pans the plan
   // where things go: plan = metres (y flipped for SVG), picture = places.json pixels
   const r = last && last.kind === 'stop' && last.floor === shown ? last : null;
@@ -161,7 +188,7 @@ function drawMap() {
   }
   let pos, k;
   if (plan) {
-    FloorPlan.draw(svg, shown, { onFloor: f => { shown = f; drawMap(); } });
+    FloorPlan.draw(svg, shown, { onFloor: f => { shown = f; drawMap(); }, onPlace: key => tapPlace(shown, key) });
     const u = FloorPlan.unit(shown);
     svg.style.setProperty('--u', u);
     pos = id => { const p = FloorPlan.xy(shown, id); return p && { x: p[0], y: -p[1] }; };
@@ -204,7 +231,8 @@ function drawMap() {
   else if (last && last.floor !== shown) note = `Your last result is on ${last.floor}F.`;
   if (found && found.route.length) {
     const other = [...new Set(found.route.map(st => st.floor))].filter(f => f !== shown);
-    note += ` Route to ${found.name}` + (other.length ? ` continues on ${other.join(', ')}F (tap the ${other[0]}F map button).` : ' shown in orange.');
+    const dest = found.route[found.route.length - 1].name;
+    note += ` Route to ${dest}` + (other.length ? ` shown in orange; it continues on ${other.join(', ')}F (tap the ${other[0]}F map button).` : ' shown in orange.');
   }
   $('mapnote').textContent = note;
   svg.setAttribute('aria-label', `${shown}F ${plan ? 'floor plan' : 'floor map'}. ${note}`);
@@ -289,7 +317,7 @@ $('zfit').onclick = () => { FloorPlan.reset(shown); drawMap(); };
     if (!drag) return;
     const svg = $('map'), vb = svg.viewBox.baseVal, f = vb.width / svg.clientWidth, dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!drag.moved && Math.hypot(dx, dy) < 4) return;
-    if (!drag.moved) { drag.moved = true; try { svg.setPointerCapture(e.pointerId); } catch (err) {} }
+    if (!drag.moved) { drag.moved = true; window.__dragMoved = true; try { svg.setPointerCapture(e.pointerId); } catch (err) {} }
     FloorPlan.pan(shown, dx * f, dy * f); drag.x = e.clientX; drag.y = e.clientY; drawMap(); e.preventDefault();
   });
   const end = () => { drag = null; };
@@ -315,60 +343,146 @@ async function pollLive() {
   const r = mode === 'stop' ? { kind: 'stop', floor: st.floor, top3: st.top3, lit: st.lit, live: true }
           : mode === 'walking' ? { kind: 'walk', floor: st.floor, dot: st.dot, live: true } : null;
   const key = JSON.stringify(r);
-  if (r && key !== liveKey) { liveKey = key; last = r; if (shown !== r.floor) shown = r.floor; drawMap(); }
+  if (r && key !== liveKey) {
+    const relit = r.kind === 'stop' && r.lit && !(last && last.kind === 'stop' && last.lit === r.lit);
+    liveKey = key; last = r; if (shown !== r.floor) shown = r.floor; drawMap();
+    if (relit && lastReq && !$('from').value) rerun();           // From = where I am: follow the newly lit place
+  }
   setTimeout(pollLive, 1000);
 }
-// ---------------------------------------------------------------- search + route (GET /api/search; Gemini key stays on the server)
+// ---------------------------------------------------------------- search + route planner (GET /api/search, /api/route, /api/nearest; Gemini key stays on the server)
+let mode = 'standard', gender = 'any', tapTo = 'to', lastReq = null, places = [], suppressTap = 0;
+try { const m = localStorage.getItem('walksense-route-mode'); if (m === 'standard' || m === 'accessible') mode = m; } catch (e) {}
+try { const g = localStorage.getItem('walksense-toilet-gender'); if (['any', 'male', 'female'].includes(g)) gender = g; } catch (e) {}
+const KIND = { lift: 'Lift', stairs: 'Stairs', escalator: 'Escalator' };
+const fmtTime = s => { s = Math.round(s); return s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${s % 60} s`; };
 function drawRoute(svg, pos, k, plan) {
   if (!found || !found.route.length) return;
-  const R = found.route;
+  const R = found.route, u = plan ? FloorPlan.unit(shown) : 15;
   let d = '';
+  const labels = [];
   for (let i = 1; i < R.length; i++) {
     const a = R[i - 1], b = R[i];
-    if (a.floor !== shown || b.floor !== shown) continue;          // lift / escalator hops are on the floor badges
+    if (a.floor !== shown || b.floor !== shown) continue;          // lift / stairs / escalator hops: tags below
     let pts;
-    if (plan) pts = (FloorPlan.corridor(shown, a.map_key, b.map_key) || []).map(([x, y]) => [x, -y]);
-    else { const pa = pos(a.map_key), pb = pos(b.map_key); pts = pa && pb ? [[pa.x, pa.y], [pb.x, pb.y]] : []; }
-    if (pts.length) d += 'M' + pts.map(([x, y]) => `${Math.round(x * 100) / 100},${Math.round(y * 100) / 100}`).join('L');
+    if (plan) pts = FloorPlan.corridor(shown, a.map_key, b.map_key) || [];
+    else { const pa = pos(a.map_key), pb = pos(b.map_key); pts = pa && pb ? [[pa.x, -pa.y], [pb.x, -pb.y]] : []; }
+    if (!pts.length) continue;
+    d += 'M' + pts.map(([x, y]) => `${Math.round(x * 100) / 100},${Math.round(-y * 100) / 100}`).join('L');
+    svg.querySelectorAll('text.fp-len').forEach(t => { if (t.dataset.edge === a.map_key + '|' + b.map_key || t.dataset.edge === b.map_key + '|' + a.map_key) t.remove(); });   // the orange label replaces it
+    if (b.metres != null) {                                       // the edge length, at the middle of the walked leg
+      const L = plan ? FloorPlan.lengthOf(pts) : Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]);
+      const m = plan ? FloorPlan.along(pts, L / 2) : { x: (pts[0][0] + pts[1][0]) / 2, y: (pts[0][1] + pts[1][1]) / 2 };
+      labels.push([m.x, -m.y, b.metres.toFixed(1) + ' m']);
+    }
   }
   if (d) svg.append(sv('path', { d, class: 'route' }));
+  for (const [x, y, txt] of labels) {
+    const t = sv('text', { x, y: y - 0.9 * u, 'text-anchor': 'middle', class: 'route-len' });
+    t.style.fontSize = (1.05 * u) + 'px'; t.style.strokeWidth = (0.4 * u) + 'px'; t.textContent = txt; svg.append(t);
+  }
+  for (let i = 1; i < R.length; i++) {                             // floor change: a tag at the place where you leave and arrive
+    const a = R[i - 1], b = R[i];
+    if (a.floor === b.floor) continue;
+    const down = b.floor < a.floor ? '▼' : '▲';
+    for (const [st, txt] of [[a, `${KIND[b.mode] || b.mode} ${down} ${b.floor}F`], [b, `${KIND[b.mode] || b.mode} from ${a.floor}F`]]) {
+      if (st.floor !== shown) continue;
+      const p = pos(st.map_key); if (!p) continue;
+      const fs = 1.0 * u, w = 0.58 * fs * txt.length + 0.8 * u, h = 1.5 * u, y = p.y + 1.6 * u;
+      svg.append(sv('rect', { x: p.x - w / 2, y: y - h / 2, width: w, height: h, rx: h / 2, class: 'route-connbg' }));
+      const t = sv('text', { x: p.x, y: y + 0.36 * fs, 'text-anchor': 'middle', class: 'route-conn' }); t.style.fontSize = fs + 'px'; t.textContent = txt; svg.append(t);
+    }
+  }
   const s0 = R[0], s1 = R[R.length - 1];
   if (s0.floor === shown) { const p = pos(s0.map_key); if (p) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 11 * k, class: 'route-start' })); }
   if (s1.floor === shown) { const p = pos(s1.map_key); if (p) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 13 * k, class: 'route-end' })); }
 }
-const METHOD = { gemini: 'Answered by Gemini', keyword: 'Answered offline: keyword match', fuzzy: 'Answered offline: typo-tolerant (fuzzy) match', none: 'Not found' };
-function showFound(r) {
-  found = r.place_id ? r : null;
+const METHOD = { gemini: 'Answered by Gemini', keyword: 'Answered offline: keyword match', fuzzy: 'Answered offline: typo-tolerant (fuzzy) match', none: 'Not found',
+                 route: 'Route planner', nearest: 'Nearest toilet' };
+function showFound(r, how) {
+  const method = how || r.method;
+  found = r.route && r.route.length ? r : null;
   const box = $('found'); box.hidden = false; box.replaceChildren();
-  const head = el('div'); head.append(el('span', METHOD[r.method] + (r.method === 'gemini' && r.gemini && r.gemini.model ? ` (${r.gemini.model})` : ''), 'badge' + (r.method === 'gemini' ? ' gemini' : '')));
-  box.append(head, el('div', r.answer, 'answer'));
-  const g = r.gemini || {};
-  if (r.method !== 'gemini') box.append(el('div', g.configured ? `Gemini not used this time: ${r.fallback_reason || g.error || ''}` : 'Gemini is off (no key in .env), so search works offline.', 'muted'));
-  if (r.place_id) {
-    if (r.from) box.append(el('div', `From ${r.from.name} (${r.from.source === 'tracked' ? 'where you are' : r.from.source === 'chosen' ? 'chosen' : 'default start'})` +
-      (r.distance_m != null ? ` · about ${Math.round(r.distance_m)} m walking, ${Math.round(r.seconds)} s` : ''), 'muted'));
-    if (r.instructions.length) { const ol = el('ol'); r.instructions.forEach(t => ol.append(el('li', t))); box.append(ol); }
-    if (r.route_error) box.append(el('div', 'No route: ' + r.route_error, 'bad'));
-    shown = r.route.length ? r.route[0].floor : r.floor;
+  const head = el('div'); head.append(el('span', METHOD[method] + (method === 'gemini' && r.gemini && r.gemini.model ? ` (${r.gemini.model})` : ''), 'badge' + (method === 'gemini' ? ' gemini' : '')));
+  if (r.mode === 'accessible') { head.append(' '); head.append(el('span', 'Step-free: lifts only', 'badge')); }
+  box.append(head);
+  if (r.answer) box.append(el('div', r.answer, 'answer' + (r.place_id == null && (r.toilet || method === 'nearest') ? ' bad' : '')));
+  else if (method === 'route' && r.to) box.append(el('div', `${r.from.name} → ${r.to.name}`, 'answer'));
+  if (method !== 'route' && method !== 'nearest') {
+    const g = r.gemini || {};
+    if (method !== 'gemini') box.append(el('div', g.configured ? `Gemini not used this time: ${r.fallback_reason || g.error || ''}` : 'Gemini is off (no key in .env), so search works offline.', 'muted'));
   }
-  $('clearroute').hidden = !found;
+  if (r.toilet && r.toilet.note) box.append(el('div', r.toilet.note, 'muted'));
+  if (r.from && (r.route.length || r.route_error)) box.append(el('div', `From ${r.from.name} (${r.from.source === 'tracked' ? 'where you are' : r.from.source === 'chosen' ? 'chosen' : 'default start'})`, 'muted'));
+  if (r.distance_m != null) {
+    const walked = r.legs.filter(l => l.kind === 'walk').length;
+    box.append(el('div', `${r.distance_m.toFixed(1)} m on foot · about ${fmtTime(r.seconds)} (walking at 1.3 m/s${r.connectors.length ? ' + the floor change' : ''}) · ${walked} corridor${walked === 1 ? '' : 's'}`, 'sum'));
+    for (const c of r.connectors) box.append(el('div', `Floor change: ${KIND[c.kind] || c.kind} ${c.from_floor}F → ${c.to_floor}F, about ${Math.round(c.seconds)} s` +
+      (c.kind === 'lift' ? ' (includes the wait; a guess)' : c.kind === 'escalator' ? ' (ride time is a guess)' : ' (timed once going down)'), 'muted conn'));
+  }
+  if (r.instructions && r.instructions.length) { const ol = el('ol'); r.instructions.forEach(t => ol.append(el('li', t))); box.append(ol); }
+  if (r.route_error) box.append(el('div', 'No route: ' + r.route_error, 'bad'));
+  const opts = r.toilet ? r.toilet.options : r.options, excl = r.toilet ? r.toilet.excluded : r.excluded;
+  if (opts && opts.length > 1) box.append(el('div', 'Other toilets that fit: ' + opts.slice(1).map(o => `${o.name} ${Math.round(o.metres)} m / ${fmtTime(o.seconds)}`).join(' · '), 'muted opts'));
+  if (excl && excl.length && opts && opts.length) box.append(el('div', 'Left out: ' + excl.map(x => `${x.name} (${x.reason})`).join(' · '), 'muted opts'));
+  if (found) {
+    shown = found.route[0].floor;
+    const last = found.route[found.route.length - 1];
+    if ([...$('to').options].some(o => o.value === last.id)) $('to').value = last.id;
+  }
+  $('clearroute').hidden = !found && !lastReq;
   drawMap();
 }
-$('searchform').onsubmit = async e => {
-  e.preventDefault();
-  const q = $('q').value.trim();
-  if (!q) return;
-  $('go').disabled = true; $('go').textContent = '…';
-  try { showFound(await call('/api/search?' + new URLSearchParams({ q, from: $('from').value }))); }
-  catch (err) { const box = $('found'); box.hidden = false; box.replaceChildren(el('div', 'Search failed: ' + err.message, 'bad')); }
+function failed(err) { const box = $('found'); box.hidden = false; box.replaceChildren(el('div', 'Failed: ' + err.message, 'bad')); }
+async function run(req) {
+  lastReq = req;
+  const base = { from: $('from').value, mode, gender };
+  try {
+    if (req.kind === 'search') {
+      $('go').disabled = true; $('go').textContent = '…';
+      showFound(await call('/api/search?' + new URLSearchParams({ q: req.q, ...base })));
+    } else if (req.kind === 'route') {
+      showFound(await call('/api/route?' + new URLSearchParams({ to: req.to, from: base.from, mode })), 'route');
+    } else if (req.kind === 'nearest') {
+      showFound(await call('/api/nearest?' + new URLSearchParams({ type: 'toilet', ...base })), 'nearest');
+    }
+  } catch (err) { failed(err); }
   $('go').disabled = false; $('go').textContent = 'Go';
-};
-$('clearroute').onclick = () => { found = null; $('found').hidden = true; $('clearroute').hidden = true; drawMap(); };
+}
+const rerun = () => { if (lastReq) run(lastReq); };
+function setChips() {
+  document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  document.querySelectorAll('[data-gender]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.gender === gender)));
+  document.querySelectorAll('[data-tap]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tap === tapTo)));
+}
+document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => {
+  mode = b.dataset.mode; try { localStorage.setItem('walksense-route-mode', mode); } catch (e) {}
+  setChips(); rerun();
+});
+document.querySelectorAll('[data-gender]').forEach(b => b.onclick = () => {
+  gender = b.dataset.gender; try { localStorage.setItem('walksense-toilet-gender', gender); } catch (e) {}
+  setChips(); if (lastReq && (lastReq.kind === 'nearest' || (lastReq.kind === 'search' && found && found.toilet))) rerun();
+});
+document.querySelectorAll('[data-tap]').forEach(b => b.onclick = () => { tapTo = b.dataset.tap; setChips(); });
+$('nearestwc').onclick = () => run({ kind: 'nearest' });
+$('searchform').onsubmit = e => { e.preventDefault(); const q = $('q').value.trim(); if (q) run({ kind: 'search', q }); };
+$('to').onchange = () => { if ($('to').value) run({ kind: 'route', to: $('to').value }); };
+$('from').onchange = rerun;
+function tapPlace(floor, key) {
+  if (Date.now() < suppressTap) return;                         // the end of a drag, not a tap
+  const p = places.find(o => o.floor === floor && o.map_key === key); if (!p) return;
+  if (tapTo === 'from') { $('from').value = p.id; if (lastReq) rerun(); else { tapTo = 'to'; setChips(); $('mapnote').textContent = `Start set to ${p.name}. Now tap where you want to go.`; } }
+  else { $('to').value = p.id; run({ kind: 'route', to: p.id }); }
+}
+$('map').addEventListener('pointerup', () => { if (window.__dragMoved) suppressTap = Date.now() + 350; window.__dragMoved = false; });
+$('clearroute').onclick = () => { found = null; lastReq = null; $('to').value = ''; $('found').hidden = true; $('clearroute').hidden = true; drawMap(); };
+setChips();
 call('/api/search/places').then(list => {
-  for (const f of [5, 4]) {
+  places = list;
+  for (const f of [5, 4]) for (const sel of [$('from'), $('to')]) {
     const grp = document.createElement('optgroup'); grp.label = f + 'F';
     list.filter(p => p.floor === f).forEach(p => { const o = el('option', p.name); o.value = p.id; grp.append(o); });
-    $('from').append(grp);
+    sel.append(grp);
   }
 }).catch(() => {});
 pollLive();

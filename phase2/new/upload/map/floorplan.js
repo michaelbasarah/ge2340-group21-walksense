@@ -1,6 +1,7 @@
 // WalkSense vector floor plan: draws map/floorplan.json (metres, x east, y north) into an <svg>. No libraries.
 // Used by index.html: FloorPlan.load(), FloorPlan.draw(svg, floor, {onFloor}), FloorPlan.xy(floor, place),
-// FloorPlan.dotXY(floor, dot, placesPx), FloorPlan.name(floor, place) and FloorPlan.corridor(floor, a, b) (search route). SVG user units are metres;
+// FloorPlan.dotXY(floor, dot, placesPx), FloorPlan.name(floor, place), FloorPlan.corridor(floor, a, b) (search route) and
+// FloorPlan.along / lengthOf (route labels). opts.onPlace(mapKey) makes the places tappable (route planner). SVG user units are metres;
 // the drawing flips y (SVG y points down), so a point (x, y) is drawn at (x, -y).
 (function () {
   'use strict';
@@ -93,7 +94,7 @@
       if (ang > 90) ang -= 180; if (ang <= -90) ang += 180;
       const lx = m.x, ly = m.y;                                    // on the line; its halo hides the line behind it
       const txt = (e.source === 'measured' ? '' : '~') + e.metres.toFixed(1) + ' m' + (e.source === 'guess' ? '?' : '');
-      const t = mk('text', { x: r2(lx), y: r2(-ly), class: 'fp-len fp-src-' + e.source, 'text-anchor': 'middle', 'dominant-baseline': 'central', transform: `rotate(${r2(ang)} ${r2(lx)} ${r2(-ly)})`, ...fs(0.85) }, txt);
+      const t = mk('text', { x: r2(lx), y: r2(-ly), class: 'fp-len fp-src-' + e.source, 'data-edge': e.from + '|' + e.to, 'text-anchor': 'middle', 'dominant-baseline': 'central', transform: `rotate(${r2(ang)} ${r2(lx)} ${r2(-ly)})`, ...fs(0.85) }, txt);
       t.append(mk('title', {}, `${name(floor, e.from)} - ${name(floor, e.to)}: ${e.metres} m (${e.source}: ${e.source_detail}); drawn ${e.drawn_m} m` + (e.sketch_mark_m ? `; sketch mark ${e.sketch_mark_m} m` : '')));
       g.append(t);
     }
@@ -109,10 +110,21 @@
     // places: marker + short label, pushed away from the middle of the floor
     const ids = Object.keys(F.places);
     const mx = ids.reduce((s, k) => s + F.places[k].x, 0) / ids.length, my = ids.reduce((s, k) => s + F.places[k].y, 0) / ids.length;
+    const tap = (node, id) => {                                    // route planner: tap a place to pick it
+      if (!opts.onPlace) return;
+      node.classList.add('fp-tap');
+      node.addEventListener('click', ev => { ev.stopPropagation(); opts.onPlace(id); });
+    };
     for (const id of ids) {
       const p = F.places[id];
+      if (opts.onPlace) {                                          // bigger invisible touch target under the marker
+        const hit = mk('circle', { cx: r2(p.x), cy: r2(-p.y), r: r2(Math.max(0.9, 1.1 * s)), class: 'fp-hit', role: 'button', tabindex: 0, 'aria-label': `Choose ${p.name}` });
+        hit.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); opts.onPlace(id); } });
+        tap(hit, id); g.append(hit);
+      }
       const c = mk('circle', { cx: r2(p.x), cy: r2(-p.y), r: r2(Math.max(0.35, 0.4 * s)), class: 'fp-place fp-k-' + p.kind + (p.inferred ? ' fp-inferred' : '') });
       c.append(mk('title', {}, `${p.name}: ${p.status}`));
+      tap(c, id);
       g.append(c);
       let dx = p.x - mx, dy = p.y - my; const n = Math.hypot(dx, dy) || 1; dx /= n; dy /= n;
       if (p.label_dx != null) { dx = p.label_dx; dy = p.label_dy; }
@@ -125,6 +137,7 @@
       else if (anchor === 'middle' && lx + wid / 2 > vb[0] + vb[2]) anchor = 'end';
       const t = mk('text', { x: r2(lx), y: r2(-ly + 0.35 * s), class: 'fp-label', 'data-place': id, 'text-anchor': anchor, ...fs(1.05) }, text);
       t.append(mk('title', {}, p.name));
+      tap(t, id);
       g.append(t);
     }
     // escalators and lift/stairs: arrow badge that links to the other floor
@@ -187,5 +200,5 @@
 
   function unit(floor) { const F = floorOf(floor); return F ? (view[floor] || fullBox(F))[2] / 40 : 1; }
 
-  window.FloorPlan = { load, draw, xy, name, dotXY, corridor, zoom, pan, reset, zoomed, center, unit, get plan() { return plan; } };
+  window.FloorPlan = { load, draw, xy, name, dotXY, corridor, along, lengthOf, zoom, pan, reset, zoomed, center, unit, get plan() { return plan; } };
 })();
