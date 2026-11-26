@@ -128,7 +128,7 @@
       ],
       "failures": [
         "Chris's a56 magnetometer read a median |B| of 110.9 uT over his 32 night stops against 40.6 to 45.2 uT on the other days (field_check.csv); his night takes scored 2/32 and a56 per-phone accuracy fell 49.1% -> 34.1% (leave one session out) [72]",
-        "the a56 offset was not constant over the night: median take offset against the first 25-Nov run (x, y, z uT) {{json:phase2/new/day3/out-a56/night_drift.json#a56.before 22:59.median_dx_dy_dz_uT}} before 22:59 and {{json:phase2/new/day3/out-a56/night_drift.json#a56.from 23:00.median_dx_dy_dz_uT}} from 23:00 (ip18 on the same walk {{json:phase2/new/day3/out-a56/night_drift.json#ip18.all.median_dx_dy_dz_uT}}) [75]",
+        "the a56 offset was not constant over the night: median take offset against the first 25-Nov run (x, y, z uT) {{json:phase2/new/day3/out-a56/night_drift.json#a56.before 22:59.median_dx_dy_dz_uT}} before 22:59 and {{json:phase2/new/day3/out-a56/night_drift.json#a56.from 23:00.median_dx_dy_dz_uT}} from 23:00 (ip18 on the same walk {{json:phase2/new/day3/out-a56/night_drift.json#ip18.all.median_dx_dy_dz_uT}}) [76]",
         "Dicta's iPhone logged no pressure in {{json:phase2/clean-data/2026-11-25-night/build_summary.json#tracks.round.iphone_takes_without_barometer}} takes ({{json:phase2/clean-data/2026-11-25-night/build_summary.json#tracks.round.iphone_stops_without_barometer|len}} stops, including the 5F -> 4F change); the upload app's floor tracker stayed on 5F and got 20/32 on that session (day-3 step tracking {{f:d3.floor.iphone_test_25night.step}}) [72]",
         "missing, with no file in any download: the 5F escalator stops of Dicta and Chris, the 5F walk male_toilet -> y5302, Chris's walk sr9 -> y5202, Tian's 4F exit 5 door stop [72]",
         "Tian's five 4F takes 22:49 to 22:55 named lt2b/lt2a a second time left out for review (their field is nearest his 24-Nov lt1b/lt1a takes) [72]"
@@ -137,7 +137,7 @@
         "check each phone's raw field before training on it: a one-line median |B| per phone and session (check_field.py) would have caught the a56 offset at ingest [72]",
         "a floor tracker that keeps the floor when pressure is missing fails quietly [72]"
       ],
-      "log": "72, 75",
+      "log": "72, 76",
       "data": "phase2/clean-data/2026-11-25-night/ (raw/, round/clean, tian/clean, labels_night.csv, field_check.csv)"
     }
   ],

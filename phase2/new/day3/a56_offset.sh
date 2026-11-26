@@ -1,5 +1,5 @@
 #!/bin/sh
-# a56 night offset: keep / exclude / recalibrate comparison (PROCESS-LOG entry 75), offline analysis only.
+# a56 night offset: keep / exclude / recalibrate comparison (PROCESS-LOG entry 76), offline analysis only.
 # Writes phase2/new/day3/out-a56/ only; config.json, out/ and out-split20/ are not changed.
 #   sh phase2/new/day3/a56_offset.sh          (PYTHON=/path/to/python; JOBS=parallel runs, default 6)
 set -e

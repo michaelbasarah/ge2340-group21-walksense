@@ -320,7 +320,7 @@ ip16 (default): 48/97 (49.5%) -> 61/122 (50.0%); the `26tian` fold is 12/25 (def
 have no new data; their small changes come from the per-fold weights, which are relearned with `26tian` in every training set.
 All numbers: PROCESS-LOG entry 73.
 
-### o. a56 night offset: keep, exclude or recalibrate (offline comparison; PROCESS-LOG entry 75)
+### o. a56 night offset: keep, exclude or recalibrate (offline comparison; PROCESS-LOG entry 76)
 
 Offline analysis only: `config.json`, `out/` and `out-split20/` are unchanged. `sh phase2/new/day3/a56_offset.sh` (about 2 h with
 12 runs in parallel, one core each) writes `out-a56/`: one folder per option and variant (the same `evaluate.py` + `fused_knn.py`),

@@ -82,7 +82,7 @@ Contents:
 71. 26 Nov: search bar in the upload app (Gemini when a key is pasted, keyword -> fuzzy offline) with the A* route drawn on the floor plan; Gemini backend for request matching
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
 73. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
-75. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
+76. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
 - Lessons learned
 - Open questions / next steps
 
@@ -1263,7 +1263,7 @@ Contents:
 
 ---
 
-## 75. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
+## 76. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
 
 - **In progress** (branch `feat/a56-offset`): `phase2/new/day3/a56_offset.py` and `a56_offset.sh` write `phase2/new/day3/out-a56/`; results follow in the commit that completes this entry.
 

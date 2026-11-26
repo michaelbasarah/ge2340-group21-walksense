@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""a56 night-run magnetometer offset: numbers for the keep / exclude / recalibrate decision (PROCESS-LOG entry 75).
+"""a56 night-run magnetometer offset: numbers for the keep / exclude / recalibrate decision (PROCESS-LOG entry 76).
 
 OFFLINE ANALYSIS ONLY. config.json, out/ and out-split20/ are not changed; everything is written to out-a56/.
 
@@ -404,7 +404,11 @@ def repro(d, o):
     same_r = json.loads((d / 'results.json').read_text())['stop_results'] == json.loads((o / 'results.json').read_text())['stop_results']
     lo = F['schemes']['leave_one_session_out']['overall']['fused (learned weights)']
     loo = Fo['schemes']['leave_one_session_out']['overall']['fused (learned weights)']
-    return {'fused_sample_predictions.csv': bool(same), 'fused_knn.json schemes+model (timings ignored)': bool(same_f),
+    fo = [(a, b) for k in Fo['schemes'] for a, b in zip(Fo['schemes'][k]['folds'], F['schemes'][k]['folds'])]
+    same_wk = sum(a['chosen_weights'] == b['chosen_weights'] and a['chosen_k'] == b['chosen_k'] for a, b in fo)
+    d_inner = max(abs(a['inner_acc_chosen'] - b['inner_acc_chosen']) for a, b in fo)
+    return {'folds_same_weights_and_k': f'{same_wk}/{len(fo)}', 'max_inner_acc_difference': round(d_inner, 3),
+            'fused_sample_predictions.csv': bool(same), 'fused_knn.json schemes+model (timings ignored)': bool(same_f),
             'results.json stop_results': bool(same_r), 'loso': f"{lo['exact']}/{lo['n_recordings_scored']}",
             'loso_official': f"{loo['exact']}/{loo['n_recordings_scored']}", 'official_dir': o.name}
 
@@ -499,7 +503,7 @@ def xlsx(tab='2026-11-26 a56 options'):
                 if h in pct and isinstance(r[j], float):
                     ws.cell(ws.max_row, j + 1).number_format = '0.0%'
         ws.append([])
-    ws.append(['a56 night-run magnetometer offset: keep / exclude / recalibrate (offline analysis, PROCESS-LOG 75; internal team sheet, numbers only)'])
+    ws.append(['a56 night-run magnetometer offset: keep / exclude / recalibrate (offline analysis, PROCESS-LOG 76; internal team sheet, numbers only)'])
     ws['A1'].font = Font(bold=True, size=13)
     ws.append(['Source: phase2/new/day3/out-a56/comparison.csv (a56_offset.py). Official config.json, out/ and out-split20/ unchanged; option A reproduces them.'])
     ws.append(['Scheme: learned-weight fused kNN, leave one session out (per take in default, per 20 s piece in split20). '
