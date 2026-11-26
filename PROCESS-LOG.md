@@ -83,6 +83,7 @@ Contents:
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
 73. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
 74. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change: current rules reproduced, fallbacks pre-registered, then scored on held-out sessions (offline only)
+78. 26 Nov: connector-gated floor rules ("entry/exit points"): the floor may only switch right after a lift/escalator landing; pre-registered, scored on held-out sessions
 - Lessons learned
 - Open questions / next steps
 
@@ -1294,6 +1295,14 @@ Contents:
   - c1 as asked ("keep the floor, re-anchor") is what the app already does; tuning the gap picked "never reset", which breaks the 24 s1 weather case and does not fix 25 night (the 4F reading after the gap was less than 0.40 hPa above the 5F reference).
 - **What changed because of it:** a pre-registered, scored proposal for the app's floor rule (`phase2/new/floor/README.md` section 5: (d) with k = 15, P = 0.7, H = 2, M = 3). Nothing was wired into the app; that is a team decision.
 - **Links:** `phase2/new/floor/` (`PREREGISTRATION.md`, `README.md`, `floorlib.py`, `rules.py`, `baseline.py`, `candidates.py`, `out/`); pre-registration commit a884c97; branch `feat/floor-robust`.
+
+---
+
+## 78. 26 Nov: connector-gated floor rules ("entry/exit points") (IN PROGRESS)
+
+- **What we tried (so far):** the user's idea (26 Nov): a floor change can only happen through a connector (lift/stairs or a one-way escalator), so let the floor switch only right after the walker was at a connector landing, in the direction that connector allows. Before scoring anything: reproduce entry 74 and write down the gated rules, gate sources, grids, selection and decision rule.
+- **How:** worktree `ge2340-landing`, branch `feat/landing-floor`. `phase2/new/floor/baseline.py` and `candidates.py` rerun: `out/` unchanged (git status clean), so entry 74's numbers reproduce. Pre-registration: `phase2/new/floor/PREREGISTRATION_landing.md`, committed in this commit before any gated rule was run; it lists what had been looked at (place sequences around each floor change, and the day-3 fused predictions at connector stops).
+- Completed in a later commit of this entry.
 
 ## Lessons learned
 
