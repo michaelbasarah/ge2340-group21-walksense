@@ -82,6 +82,7 @@ Contents:
 71. 26 Nov: search bar in the upload app (Gemini when a key is pasted, keyword -> fuzzy offline) with the A* route drawn on the floor plan; Gemini backend for request matching
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
 73. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
+74. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change: current rules reproduced, fallbacks pre-registered, then scored on held-out sessions (offline only)
 - Lessons learned
 - Open questions / next steps
 
@@ -1260,6 +1261,40 @@ Contents:
   - Not done here: `perf_sheet.py` tabs, `hard_places.py`, the results pack (left for after the other branch lands).
 - **Links:** `phase2/clean-data/2026-11-26-tian/` (README, `labels_tian26.csv`, `lt_night_check.csv`, `medium_label_check.csv`, `clean/summary.json`), `phase2/new/day3/config.json`, `phase2/new/day3/out*/fused_knn.json`, `results.json`, `out/perf_csv/data_gaps_*.csv`, `phase2/new/upload/out/eval.json`, `live_checks.json`; branch `feat/tian-morning` (commits 9a9de5d, 3b7a70f, 0f5d3ca and the final one).
 
+---
+
+## 74. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change: current rules reproduced, fallbacks pre-registered, then scored on held-out sessions (offline only)
+
+(Landed as entry 74; the pre-registration file and code comments still say "entry 76, provisional": they were left unchanged on purpose so the pre-registration commit a884c97 stays as written.)
+
+- **What we tried:** find a floor rule that survives the 25-night failure (Dicta's iPhone logged no pressure 22:43 to 23:17, across the 5F -> 4F change; the upload app showed 5F at 12 of her 4F stops, 20/32) without breaking the sessions where pressure is complete, and see whether anything helps the phones that never log pressure (a55, a56). Four fallback ideas: (a) the magnetic kNN's own floor vote, (b) detecting the escalator/lift/stair ride from the motion sensors, (c) gap handling, (d) pressure when present, else the magnetic vote, with hysteresis.
+- **Why:** open questions of entries 30 and 72 ("add a guard for long pauses and pre-register it before testing it"; "the upload app's floor tracker should handle a recording without pressure, and a long gap, at a floor change").
+- **How:**
+  - New folder `phase2/new/floor/` (analysis only). The upload app (`upload/walksense.py`) and day 3 (`day3/data.py`, `day3/evaluate.py`) are imported read-only; nothing in `upload/` or `day3/` was changed. `floorlib.py` builds one table of every recording (stops and walks) per session and phone slot with its edge pressures; 23 Nov comes from the day-3 visit table (stops only).
+  - Step 1, `baseline.py` -> `out/baseline.json`: R0 (upload app, `Session.track_floor`: 0.40 hPa against the median of the last 6 edge readings, reference emptied after 15 min without pressure) and R1 (day-3 step tracking on stop medians, threshold from the other sessions) rerun from their own code.
+  - Step 2, `PREREGISTRATION.md`, committed with step 1 in a884c97 **before any candidate was run**: the rules, the grids (a: k in {5, 15, 25}; c1: gap T in {5, 10, 15, 30, 60 min, never}; c2: drift-extrapolated reference, fixed; d: k x P in {0.5..0.9} x H in {1, 2} x M in {0, 3}), the selection criterion and tie-breaks, the split (tuning = 23nov, 24s1, 24s2, 25nov; held-out = 25night, 25night_tian, 26tian, 25spots), the masked tuning runs (pressure deleted for every recording within 20 min of the floor change, to imitate Dicta's dropout) and the decision rule.
+  - Step 3, `candidates.py`: tunes on the tuning units only (`out/tuning.json`), freezes the parameters (`out/params.json`), scores every rule on every session x phone slot (`out/scores.json` with the wrong stops and the magnetic votes, `out/table.csv`), applies the decision rule (`out/decision.json`), runs the (b) data check (`out/motion_check.json`) and draws `fig_scores.png`, `fig_25night_timeline.png`, `fig_motion_check.png`. Results and recommendation: `phase2/new/floor/README.md`.
+  - Data: the gitignored clean CSVs of the night, spots and 26-Nov trees were copied from the main tree, and the day-3 feature cache (`features_e3dbec0cff7b.pkl`) from the a56 worktree; nothing was rebuilt. Both scripts take a few seconds.
+- **Result:**
+  - **Reproduction** (`out/baseline.json`, `all_match` true): R0 27/27, 26/26, 26/26, 20/32, 23/23, 25/25 (24 s1, 24 s2, 25 Nov, 25night, 25night_tian, 26tian) = `upload/out/eval.json`; R1 = every `day3/out/results.json` `floor` number (24s1 23/27, 25night 29/32, 25spots 12/18, s24 13/27, 17/26, 9/18, the rest all right).
+  - **(b) not testable** (`out/motion_check.json`): in 301 iPhone recordings with pressure the largest start-to-end change is 0.19 hPa; no floor change happened inside any recording (the rides were between recordings), so there is nothing labelled to build a motion detector on.
+  - **Frozen parameters** (`out/params.json`, `out/tuning.json`): (a) k = 5 (211 of 280 tuning stops); c1 T = never (202 of 242, against 190 for 5 to 30 min and 196 for 60 min); (d) k = 15, P = 0.7, H = 2, M = 3 (359 of 401).
+  - **Held-out stops on the right floor**, R0 / R1 / c1 / c2 / a / d (`out/scores.json`):
+    - 25night ip18: 20 / 29 / 20 / 28 / 25 / **30** of 32 (walks 14 / 24 / 14 / 22 / 22 / 25 of 27).
+    - 25night a56: 19 / 19 / 19 / 19 / 17 / 19 of 32.
+    - 25night_tian ip16: 23 / 23 / 23 / 23 / 21 / 23 of 23. 26tian ip16: 25 / 25 / 25 / 25 / 24 / 25 of 25.
+    - 25spots ip16: 4 / 4 / 4 / 4 / 5 / 5 of 6. 25spots s24: 7 / 8 / 7 / 7 / 9 / 10 of 13.
+  - **Tuning units** (in-sample for the parameters): 24s1 ip18 27 / 23 / 23 / 23 / 19 / 27 of 27 (R1, c1, c2 lose the 4 weather stops after the break); masked 24s1 15 / 21 / 21 / 21 / 19 / 22, masked 25nov 14 / 20 / 20 / 20 / 24 / 24 of 26, masked 24s2 14 / 14 / 14 / 14 / 17 / 14 of 26; a55 24s1 15 -> 26/27 and 25nov 14 -> 25/26 with (d); s24 24s1 10 -> 24/27.
+  - **Where (d) fails:** 25night ip18 23:03 and 23:08 (votes: 4F at 22:59 while still on 5F, 5F at 23:03, 4F at 23:08 and 23:17, so H = 2 switches at 23:17); a56 on 25night: the vote says 5F at 11 of its 13 4F stops (the a56 night magnetometer offset of entry 72), so it never switches.
+  - **Decision rule** (`out/decision.json`): iPhone: R1 (+9 on 25night), c2 (+8) and (d) (+10) lose no stop that R0 gets right on 25night_tian, 26tian and 25spots; (a) loses 4, c1 gains 0. Phones without a barometer: (d) 137 vs 83 of 159 on the tuning a55/a56/s24 units but 19 vs 19 of 32 on the held-out a56 unit, so neither (a) (17 vs 19) nor (d) passes.
+- **Outcome:**
+  - Success for the iPhone: (d) (R0 unchanged when pressure is present and continuous; the magnetic vote only when pressure is missing or right after a gap longer than 15 min) gets 30/32 on the 25-night ip18 session where the app got 20/32, keeps every complete-pressure held-out stop, and, unlike R1 and c2, keeps the 4 weather stops of 24 s1.
+  - Failure for the phones without a barometer: no candidate is shown to help on held-out data, because the only held-out no-barometer unit (a56, 25 night) has a faulty magnetometer.
+  - (b) could not be tested: the data has no recording across a floor change.
+  - c1 as asked ("keep the floor, re-anchor") is what the app already does; tuning the gap picked "never reset", which breaks the 24 s1 weather case and does not fix 25 night (the 4F reading after the gap was less than 0.40 hPa above the 5F reference).
+- **What changed because of it:** a pre-registered, scored proposal for the app's floor rule (`phase2/new/floor/README.md` section 5: (d) with k = 15, P = 0.7, H = 2, M = 3). Nothing was wired into the app; that is a team decision.
+- **Links:** `phase2/new/floor/` (`PREREGISTRATION.md`, `README.md`, `floorlib.py`, `rules.py`, `baseline.py`, `candidates.py`, `out/`); pre-registration commit a884c97; branch `feat/floor-robust`.
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1313,6 +1348,8 @@ Contents:
 - **A floor tracker that keeps the floor when pressure is missing fails quietly.** 13 of Dicta's 32 night stops had no barometer, including the 5F -> 4F change, so the upload app stayed on 5F for 12 stops (entry 72).
 - **When the file names say nothing, match the label trail strictly.** Tian's phone saved 51 of 52 files as "point <time>"; his chat captions became labels only through a one-to-one, in-order match that fails loudly (gap 7 to 45 s, each caption before the next file), and each caption's stop/walk was checked against the duration (entry 73). Name the recording in phyphox before saving when possible.
 - **A second pass on the same phone settles a doubtful label better than a guess.** Tian's morning LT stops put his doubtful night "lt2b" 3.0 uT from LT1B and far from LT2B (entry 73); the walk-endpoint version of the check failed its own control, so only the stops count as evidence.
+- **Pre-register a fallback and test it where the main signal is complete too.** On the 25-night dropout the day-3 step tracker (+9 stops), the drift-extrapolated reference (+8) and the pressure-else-magnetic rule (+10) all beat the app, but the first two lose the 24-s1 weather stops that the app already handled; only the rule that asks the magnetometer just when pressure is missing kept both (entry 74).
+- **A fallback cannot be scored where the failure never happens.** The tuning sessions never lost pressure, so the dropout had to be simulated (masked runs), and the a56 held-out test was spoiled by its own sensor fault (entry 74).
 
 ## Open questions / next steps
 
@@ -1330,7 +1367,7 @@ Contents:
 - **graph-v2 (entries 22, 29):** done: the merge changes cross-day exact by one visit and area not at all (entry 29). Still open: decide whether v2 replaces v1 for the map/UI; the collector should confirm the two merges match the hand-drawn maps.
 - **Collector to confirm (entry 30, `phase2/new/day3/names_24nov.csv`):** RESOLVED 26 Nov (entry 69, confirmed by the user): 24-Nov `male_disabled_toilet` = 23-Nov `disabled_toilet`; `y5302_point2` = `y5302_back`; `gate` = `entrance_exit` (now `high`, basis `user confirmed 2026-11-26`). Still open: which study room the 24-Nov `sr9` stop was at.
 - **24-Nov data questions (entries 33, 34):** what made the field above 100 uT at the 4F escalators in session 2 (both phones); the out-of-order walks in session 2 (floor-5 escalators, and gate -> exit 5 recorded before the gate stop); `sesi2/clean/ROUTE.md` says no Wi-Fi but the session has a WiGLE log; the session READMEs call both iPhones "iPhone 16 Pro" but the device IDs differ (iPhone19,2 and iPhone17,4); the user says they are an iPhone 16 (ip16, iPhone17,4) and an iPhone 18 (ip18, iPhone19,2), so the READMEs are wrong for the second phone. The handsets can be renamed (e.g. to owners) in `phase2/new/day3/config.json` `phones.display`.
-- **Barometer floor rule:** add a guard for long pauses (entry 30) and pre-register it before testing it on new data.
+- **Barometer floor rule:** add a guard for long pauses (entry 30) and pre-register it before testing it on new data. Done offline in entry 74 (`phase2/new/floor/`): the team should decide whether the upload app adopts rule (d) (pressure, else the magnetic vote, k 15, P 0.7, H 2, M 3; 25night ip18 20 -> 30/32, no loss elsewhere).
 - **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
 - **Walking dot (entry 27):** test a whole route on a real walk (not single corridors from the true start); the dot needs the stop it starts from to be right.
 - **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`.
@@ -1357,3 +1394,8 @@ Contents:
   - Tian's five night takes 22:49 to 22:55 ("lt2b"/"lt2a" a second time): his morning LT stops on the same phone put the 22:50 stop at LT1B (3.0 uT) and the 22:53 stop at LT1A (14.2 uT), far from LT2B/LT2A (`2026-11-26-tian/lt_night_check.csv`); the walks are not conclusive. Relabel them lt1b/lt1a (stops) and esca_up -> lt1b, lt1b -> lt1a, lt1a -> exit_10_4F (walks) and set them `ok`? Team decision; Tian can confirm.
   - Two captions were resolved from the sequence (medium): "lift turun bawah" = escalator down 4F stop, "lt1b exit 10" = walk LT1A -> exit 10 4F. Tian can confirm.
   - Team chat 26 Nov about 10:06 (no action taken): Dicta says Chris forgot to turn on the barometer, and asks whether the a56 should redo everything and the ip18 redo floor 5. Not decided here; any redo would come in as a new session.
+- **Floor rules (entry 74):**
+  - Adopt rule (d) in the upload app? (team decision; nothing wired in.) If yes, re-run `phase2/new/floor/candidates.py` after adding sessions and check `out/decision.json` again.
+  - Phones without a barometer: (d) looks strong on the tuning sessions but has no healthy held-out test; a new Android session (a55 or a56, magnetometer checked with `field_check.csv` first) would test it.
+  - (b) motion detection: only testable with takes that cover a floor change (start recording before the escalator or stairs, stop after).
+  - The magnetic vote should not be trusted on a phone whose median |B| is far from its other days (a56 night); a field check before voting is untested.
