@@ -83,6 +83,7 @@ Contents:
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
 73. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
 74. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change: current rules reproduced, fallbacks pre-registered, then scored on held-out sessions (offline only)
+77. 26 Nov: route planner in the upload app: shortest path A -> B lit on the map, lift / stairs / escalator as separate connectors, step-free mode and toilet gender filter
 - Lessons learned
 - Open questions / next steps
 
@@ -1294,6 +1295,10 @@ Contents:
   - c1 as asked ("keep the floor, re-anchor") is what the app already does; tuning the gap picked "never reset", which breaks the 24 s1 weather case and does not fix 25 night (the 4F reading after the gap was less than 0.40 hPa above the 5F reference).
 - **What changed because of it:** a pre-registered, scored proposal for the app's floor rule (`phase2/new/floor/README.md` section 5: (d) with k = 15, P = 0.7, H = 2, M = 3). Nothing was wired into the app; that is a team decision.
 - **Links:** `phase2/new/floor/` (`PREREGISTRATION.md`, `README.md`, `floorlib.py`, `rules.py`, `baseline.py`, `candidates.py`, `out/`); pre-registration commit a884c97; branch `feat/floor-robust`.
+
+## 77. 26 Nov: route planner in the upload app: shortest path A -> B lit on the map, lift / stairs / escalator as separate connectors, step-free mode and toilet gender filter
+
+- **In progress** (branch `feat/route-planner`): `phase2/new/routing/route.py` `plan()` (modes standard / accessible, lift and stairs split into separate edges) and `nearest_toilet()`; `routing/test_route.py` 13 tests OK. App wiring, screenshots and the full entry follow.
 
 ## Lessons learned
 
