@@ -79,6 +79,9 @@ The night run lifted ip18 to **60/85 = 70.6%** and gave ip16 its first same-hand
 ### 3.12 Floor rules (26 Nov) [74, 76]
 Pre-registered, tuned on four sessions, scored on held-out ones. Rule (d), pressure first and the magnetic vote only when pressure is missing or after a long gap: **30/32** on the night dropout where the app got 20/32, with no loss elsewhere [74]. The user's idea of switching floor only after a lift/escalator landing failed as pre-registered: the place guess names the right connector too rarely to open the gate (37 of 101 connector stops for the day-3 kNN) [76]. Nothing was wired into the app; adopting (d) is a team decision.
 
+### 3.13 A runbook for the demo and a scoring rule written before the first live walk (27 Nov) [92]
+The demo phone is Dicta's iPhone 18 only [89]. `phase2/new/DEMO-RUNBOOK.md` collects the night-before checklist, the start commands, a 2-minute self-test, a failure table and the 8 weak places to retake. Checking the commands again found that the upload README still said port 8080 although the phone serves on port 80 (entry 86), and that a fresh clone still stops with `KeyError: 'mag'` until two build scripts are run [81]. `phase2/new/live-walk/PROTOCOL.md` fixes, before any live walk, a 7-stop route through the strong places, what counts as a correct lit place (10 s after arrival) and how to file the results.
+
 ---
 
 ## 4. Milestone numbers
@@ -150,6 +153,6 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 4. **Tian's night LT stops:** relabel to LT1B/LT1A? [73]
 5. **Team review** of the 105 agent-drafted search queries and the guessed routing edges [57, 52-55].
 6. **Never measured on site:** the 5F escalator landings, Y5-401's door, the 4F corridors, which LT is which [70].
-7. **A scored live walk** with the truth noted [26, 86]; a take that spans a floor change [74, 76].
+7. **A scored live walk** with the truth noted [26, 86]: the protocol and blank score sheet are written (`phase2/new/live-walk/`, [92]), the walk itself is not done; a take that spans a floor change [74, 76].
 8. **Report wording** about dropped user tests and no RAG is the team's to write [83, 84].
 9. **Route planner** (entry 78, branch `feat/route-planner`, built, not yet landed): From / To or a tap on the plan, cheapest path with the metres of each leg, lift / stairs / escalator as separate connectors, Step-free mode (lifts and disabled toilets only), Male / Female / Any toilet filter, `/api/route` and `/api/nearest`. Still open: time the lift (42 s = 30 s wait + 12 s ride is a guess) and the escalators (20 s guess); confirm one lift next to the stairs on both floors, that 4F has no ordinary toilet, and step-free access along the routes [78].
