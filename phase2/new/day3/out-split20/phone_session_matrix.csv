@@ -1,11 +1,11 @@
 mode,phone,phone_model,train_session,test_session,n_train_windows,n_test_windows,win_hit,win_n,win_acc,rec_hit,rec_n,rec_acc,chance,cross_handset,train_handsets
 same,ip16,"iPhone17,4",23nov,24s1,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",23nov,24s2,412,312,165,312,0.529,41,78,0.526,0.038,False,ip16
+same,ip16,"iPhone17,4",23nov,24s2,412,312,129,312,0.413,32,78,0.41,0.038,False,ip16
 same,ip16,"iPhone17,4",23nov,25night,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",23nov,25night_tian,412,276,146,276,0.529,37,69,0.536,0.038,False,ip16
+same,ip16,"iPhone17,4",23nov,25night_tian,412,276,140,276,0.507,34,69,0.493,0.038,False,ip16
 same,ip16,"iPhone17,4",23nov,25nov,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",23nov,25spots,412,60,12,60,0.2,3,15,0.2,0.038,False,ip16
-same,ip16,"iPhone17,4",23nov,26tian,412,300,134,300,0.447,31,75,0.413,0.038,False,ip16
+same,ip16,"iPhone17,4",23nov,26tian,412,300,161,300,0.537,40,75,0.533,0.038,False,ip16
 same,ip16,"iPhone17,4",24s1,23nov,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",24s1,24s2,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",24s1,25night,0,0,0,0,,0,0,,,False,
@@ -13,13 +13,13 @@ same,ip16,"iPhone17,4",24s1,25night_tian,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",24s1,25nov,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",24s1,25spots,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",24s1,26tian,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",24s2,23nov,312,412,218,412,0.529,55,103,0.534,0.038,False,ip16
+same,ip16,"iPhone17,4",24s2,23nov,312,412,224,412,0.544,57,103,0.553,0.038,False,ip16
 same,ip16,"iPhone17,4",24s2,24s1,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",24s2,25night,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",24s2,25night_tian,312,276,164,276,0.594,41,69,0.594,0.038,False,ip16
+same,ip16,"iPhone17,4",24s2,25night_tian,312,276,136,276,0.493,35,69,0.507,0.038,False,ip16
 same,ip16,"iPhone17,4",24s2,25nov,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",24s2,25spots,312,60,18,60,0.3,4,15,0.267,0.038,False,ip16
-same,ip16,"iPhone17,4",24s2,26tian,312,300,159,300,0.53,40,75,0.533,0.038,False,ip16
+same,ip16,"iPhone17,4",24s2,25spots,312,60,0,60,0.0,0,15,0.0,0.038,False,ip16
+same,ip16,"iPhone17,4",24s2,26tian,312,300,137,300,0.457,34,75,0.453,0.038,False,ip16
 same,ip16,"iPhone17,4",25night,23nov,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25night,24s1,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25night,24s2,0,0,0,0,,0,0,,,False,
@@ -27,13 +27,13 @@ same,ip16,"iPhone17,4",25night,25night_tian,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25night,25nov,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25night,25spots,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25night,26tian,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25night_tian,23nov,276,412,221,412,0.536,58,103,0.563,0.043,False,ip16
+same,ip16,"iPhone17,4",25night_tian,23nov,276,412,216,412,0.524,55,103,0.534,0.043,False,ip16
 same,ip16,"iPhone17,4",25night_tian,24s1,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25night_tian,24s2,276,312,166,312,0.532,42,78,0.538,0.043,False,ip16
+same,ip16,"iPhone17,4",25night_tian,24s2,276,312,141,312,0.452,36,78,0.462,0.043,False,ip16
 same,ip16,"iPhone17,4",25night_tian,25night,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25night_tian,25nov,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25night_tian,25spots,276,60,3,60,0.05,1,15,0.067,0.043,False,ip16
-same,ip16,"iPhone17,4",25night_tian,26tian,276,300,96,300,0.32,24,75,0.32,0.043,False,ip16
+same,ip16,"iPhone17,4",25night_tian,25spots,276,60,1,60,0.017,0,15,0.0,0.043,False,ip16
+same,ip16,"iPhone17,4",25night_tian,26tian,276,300,104,300,0.347,26,75,0.347,0.043,False,ip16
 same,ip16,"iPhone17,4",25nov,23nov,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25nov,24s1,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25nov,24s2,0,0,0,0,,0,0,,,False,
@@ -41,21 +41,21 @@ same,ip16,"iPhone17,4",25nov,25night,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25nov,25night_tian,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25nov,25spots,0,0,0,0,,0,0,,,False,
 same,ip16,"iPhone17,4",25nov,26tian,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25spots,23nov,60,412,24,412,0.058,6,103,0.058,0.167,False,ip16
+same,ip16,"iPhone17,4",25spots,23nov,60,412,40,412,0.097,9,103,0.087,0.167,False,ip16
 same,ip16,"iPhone17,4",25spots,24s1,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25spots,24s2,60,312,24,312,0.077,6,78,0.077,0.167,False,ip16
+same,ip16,"iPhone17,4",25spots,24s2,60,312,36,312,0.115,9,78,0.115,0.167,False,ip16
 same,ip16,"iPhone17,4",25spots,25night,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25spots,25night_tian,60,276,24,276,0.087,6,69,0.087,0.167,False,ip16
+same,ip16,"iPhone17,4",25spots,25night_tian,60,276,41,276,0.149,9,69,0.13,0.167,False,ip16
 same,ip16,"iPhone17,4",25spots,25nov,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",25spots,26tian,60,300,36,300,0.12,9,75,0.12,0.167,False,ip16
-same,ip16,"iPhone17,4",26tian,23nov,300,412,184,412,0.447,46,103,0.447,0.04,False,ip16
+same,ip16,"iPhone17,4",25spots,26tian,60,300,48,300,0.16,12,75,0.16,0.167,False,ip16
+same,ip16,"iPhone17,4",26tian,23nov,300,412,200,412,0.485,52,103,0.505,0.04,False,ip16
 same,ip16,"iPhone17,4",26tian,24s1,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",26tian,24s2,300,312,117,312,0.375,30,78,0.385,0.04,False,ip16
+same,ip16,"iPhone17,4",26tian,24s2,300,312,135,312,0.433,34,78,0.436,0.04,False,ip16
 same,ip16,"iPhone17,4",26tian,25night,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",26tian,25night_tian,300,276,86,276,0.312,22,69,0.319,0.04,False,ip16
+same,ip16,"iPhone17,4",26tian,25night_tian,300,276,86,276,0.312,21,69,0.304,0.04,False,ip16
 same,ip16,"iPhone17,4",26tian,25nov,0,0,0,0,,0,0,,,False,
-same,ip16,"iPhone17,4",26tian,25spots,300,60,24,60,0.4,6,15,0.4,0.04,False,ip16
-same,ip16,"iPhone17,4",other two sessions,each session in turn,5440,1360,790,1360,0.581,196,340,0.576,0.038,False,ip16
+same,ip16,"iPhone17,4",26tian,25spots,300,60,1,60,0.017,0,15,0.0,0.04,False,ip16
+same,ip16,"iPhone17,4",other two sessions,each session in turn,5440,1360,712,1360,0.524,181,340,0.532,0.038,False,ip16
 same,ip18,"iPhone19,2",23nov,24s1,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",23nov,24s2,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",23nov,25night,0,0,0,0,,0,0,,,False,
@@ -65,9 +65,9 @@ same,ip18,"iPhone19,2",23nov,25spots,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",23nov,26tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",24s1,23nov,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",24s1,24s2,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",24s1,25night,324,376,278,376,0.739,71,94,0.755,0.038,False,ip18
+same,ip18,"iPhone19,2",24s1,25night,324,376,294,376,0.782,74,94,0.787,0.038,False,ip18
 same,ip18,"iPhone19,2",24s1,25night_tian,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",24s1,25nov,324,312,227,312,0.728,56,78,0.718,0.038,False,ip18
+same,ip18,"iPhone19,2",24s1,25nov,324,312,229,312,0.734,57,78,0.731,0.038,False,ip18
 same,ip18,"iPhone19,2",24s1,25spots,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",24s1,26tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",24s2,23nov,0,0,0,0,,0,0,,,False,
@@ -78,10 +78,10 @@ same,ip18,"iPhone19,2",24s2,25nov,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",24s2,25spots,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",24s2,26tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25night,23nov,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",25night,24s1,376,324,227,324,0.701,57,81,0.704,0.042,False,ip18
+same,ip18,"iPhone19,2",25night,24s1,376,324,227,324,0.701,56,81,0.691,0.042,False,ip18
 same,ip18,"iPhone19,2",25night,24s2,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25night,25night_tian,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",25night,25nov,376,312,225,312,0.721,57,78,0.731,0.042,False,ip18
+same,ip18,"iPhone19,2",25night,25nov,376,312,208,312,0.667,53,78,0.679,0.042,False,ip18
 same,ip18,"iPhone19,2",25night,25spots,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25night,26tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25night_tian,23nov,0,0,0,0,,0,0,,,False,
@@ -92,9 +92,9 @@ same,ip18,"iPhone19,2",25night_tian,25nov,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25night_tian,25spots,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25night_tian,26tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25nov,23nov,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",25nov,24s1,312,324,225,324,0.694,57,81,0.704,0.038,False,ip18
+same,ip18,"iPhone19,2",25nov,24s1,312,324,225,324,0.694,56,81,0.691,0.038,False,ip18
 same,ip18,"iPhone19,2",25nov,24s2,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",25nov,25night,312,376,265,376,0.705,65,94,0.691,0.038,False,ip18
+same,ip18,"iPhone19,2",25nov,25night,312,376,250,376,0.665,61,94,0.649,0.038,False,ip18
 same,ip18,"iPhone19,2",25nov,25night_tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25nov,25spots,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",25nov,26tian,0,0,0,0,,0,0,,,False,
@@ -112,7 +112,7 @@ same,ip18,"iPhone19,2",26tian,25night,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",26tian,25night_tian,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",26tian,25nov,0,0,0,0,,0,0,,,False,
 same,ip18,"iPhone19,2",26tian,25spots,0,0,0,0,,0,0,,,False,
-same,ip18,"iPhone19,2",other two sessions,each session in turn,2024,1012,735,1012,0.726,184,253,0.727,0.038,False,ip18
+same,ip18,"iPhone19,2",other two sessions,each session in turn,2024,1012,814,1012,0.804,203,253,0.802,0.038,False,ip18
 same,s24,SM-S9280,23nov,24s1,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,23nov,24s2,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,23nov,25night,0,0,0,0,,0,0,,,False,
@@ -121,18 +121,18 @@ same,s24,SM-S9280,23nov,25nov,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,23nov,25spots,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,23nov,26tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s1,23nov,0,0,0,0,,0,0,,,False,
-same,s24,SM-S9280,24s1,24s2,324,312,84,312,0.269,21,78,0.269,0.038,False,s24
+same,s24,SM-S9280,24s1,24s2,324,312,124,312,0.397,30,78,0.385,0.038,False,s24
 same,s24,SM-S9280,24s1,25night,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s1,25night_tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s1,25nov,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s1,25spots,324,156,24,156,0.154,6,39,0.154,0.038,False,s24
 same,s24,SM-S9280,24s1,26tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s2,23nov,0,0,0,0,,0,0,,,False,
-same,s24,SM-S9280,24s2,24s1,312,324,129,324,0.398,33,81,0.407,0.038,False,s24
+same,s24,SM-S9280,24s2,24s1,312,324,156,324,0.481,39,81,0.481,0.038,False,s24
 same,s24,SM-S9280,24s2,25night,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s2,25night_tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,24s2,25nov,0,0,0,0,,0,0,,,False,
-same,s24,SM-S9280,24s2,25spots,312,156,48,156,0.308,12,39,0.308,0.038,False,s24
+same,s24,SM-S9280,24s2,25spots,312,156,31,156,0.199,8,39,0.205,0.038,False,s24
 same,s24,SM-S9280,24s2,26tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25night,23nov,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25night,24s1,0,0,0,0,,0,0,,,False,
@@ -156,8 +156,8 @@ same,s24,SM-S9280,25nov,25night_tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25nov,25spots,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25nov,26tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25spots,23nov,0,0,0,0,,0,0,,,False,
-same,s24,SM-S9280,25spots,24s1,156,324,48,324,0.148,12,81,0.148,0.083,False,s24
-same,s24,SM-S9280,25spots,24s2,156,312,70,312,0.224,17,78,0.218,0.083,False,s24
+same,s24,SM-S9280,25spots,24s1,156,324,45,324,0.139,11,81,0.136,0.083,False,s24
+same,s24,SM-S9280,25spots,24s2,156,312,36,312,0.115,9,78,0.115,0.083,False,s24
 same,s24,SM-S9280,25spots,25night,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25spots,25night_tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,25spots,25nov,0,0,0,0,,0,0,,,False,
@@ -169,7 +169,7 @@ same,s24,SM-S9280,26tian,25night,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,26tian,25night_tian,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,26tian,25nov,0,0,0,0,,0,0,,,False,
 same,s24,SM-S9280,26tian,25spots,0,0,0,0,,0,0,,,False,
-same,s24,SM-S9280,other two sessions,each session in turn,1584,792,257,792,0.324,65,198,0.328,0.038,False,s24
+same,s24,SM-S9280,other two sessions,each session in turn,1584,792,327,792,0.413,81,198,0.409,0.038,False,s24
 same,a55,SM-A556E,23nov,24s1,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,23nov,24s2,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,23nov,25night,0,0,0,0,,0,0,,,False,
@@ -181,7 +181,7 @@ same,a55,SM-A556E,24s1,23nov,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,24s1,24s2,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,24s1,25night,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,24s1,25night_tian,0,0,0,0,,0,0,,,False,
-same,a55,SM-A556E,24s1,25nov,304,280,79,280,0.282,19,70,0.271,0.038,False,a55
+same,a55,SM-A556E,24s1,25nov,304,280,83,280,0.296,21,70,0.3,0.038,False,a55
 same,a55,SM-A556E,24s1,25spots,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,24s1,26tian,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,24s2,23nov,0,0,0,0,,0,0,,,False,
@@ -206,7 +206,7 @@ same,a55,SM-A556E,25night_tian,25nov,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,25night_tian,25spots,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,25night_tian,26tian,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,25nov,23nov,0,0,0,0,,0,0,,,False,
-same,a55,SM-A556E,25nov,24s1,280,304,17,304,0.056,4,76,0.053,0.038,False,a55
+same,a55,SM-A556E,25nov,24s1,280,304,37,304,0.122,9,76,0.118,0.038,False,a55
 same,a55,SM-A556E,25nov,24s2,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,25nov,25night,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,25nov,25night_tian,0,0,0,0,,0,0,,,False,
@@ -226,7 +226,7 @@ same,a55,SM-A556E,26tian,25night,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,26tian,25night_tian,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,26tian,25nov,0,0,0,0,,0,0,,,False,
 same,a55,SM-A556E,26tian,25spots,0,0,0,0,,0,0,,,False,
-same,a55,SM-A556E,other two sessions,each session in turn,584,584,96,584,0.164,23,146,0.158,0.038,False,a55
+same,a55,SM-A556E,other two sessions,each session in turn,584,584,120,584,0.205,30,146,0.205,0.038,False,a55
 same,a56,SM-A566B,23nov,24s1,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,23nov,24s2,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,23nov,25night,0,0,0,0,,0,0,,,False,
@@ -236,9 +236,9 @@ same,a56,SM-A566B,23nov,25spots,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,23nov,26tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s1,23nov,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s1,24s2,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,24s1,25night,320,364,12,364,0.033,3,91,0.033,0.038,False,a56
+same,a56,SM-A566B,24s1,25night,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s1,25night_tian,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,24s1,25nov,320,300,144,300,0.48,36,75,0.48,0.038,False,a56
+same,a56,SM-A566B,24s1,25nov,320,300,178,300,0.593,45,75,0.6,0.038,False,a56
 same,a56,SM-A566B,24s1,25spots,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s1,26tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s2,23nov,0,0,0,0,,0,0,,,False,
@@ -249,10 +249,10 @@ same,a56,SM-A566B,24s2,25nov,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s2,25spots,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,24s2,26tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night,23nov,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,25night,24s1,364,320,24,320,0.075,6,80,0.075,0.042,False,a56
+same,a56,SM-A566B,25night,24s1,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night,24s2,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night,25night_tian,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,25night,25nov,364,300,24,300,0.08,6,75,0.08,0.042,False,a56
+same,a56,SM-A566B,25night,25nov,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night,25spots,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night,26tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night_tian,23nov,0,0,0,0,,0,0,,,False,
@@ -263,9 +263,9 @@ same,a56,SM-A566B,25night_tian,25nov,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night_tian,25spots,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25night_tian,26tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25nov,23nov,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,25nov,24s1,300,320,140,320,0.438,35,80,0.438,0.038,False,a56
+same,a56,SM-A566B,25nov,24s1,300,320,147,320,0.459,37,80,0.463,0.038,False,a56
 same,a56,SM-A566B,25nov,24s2,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,25nov,25night,300,364,0,364,0.0,0,91,0.0,0.038,False,a56
+same,a56,SM-A566B,25nov,25night,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25nov,25night_tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25nov,25spots,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,25nov,26tian,0,0,0,0,,0,0,,,False,
@@ -283,289 +283,289 @@ same,a56,SM-A566B,26tian,25night,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,26tian,25night_tian,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,26tian,25nov,0,0,0,0,,0,0,,,False,
 same,a56,SM-A566B,26tian,25spots,0,0,0,0,,0,0,,,False,
-same,a56,SM-A566B,other two sessions,each session in turn,1968,984,265,984,0.269,66,246,0.268,0.038,False,a56
+same,a56,SM-A566B,other two sessions,each session in turn,620,620,325,620,0.524,82,155,0.529,0.038,False,a56
 all,ip16,"iPhone17,4",23nov,24s1,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",23nov,24s2,412,312,165,312,0.529,41,78,0.526,0.038,False,ip16
+all,ip16,"iPhone17,4",23nov,24s2,412,312,129,312,0.413,32,78,0.41,0.038,False,ip16
 all,ip16,"iPhone17,4",23nov,25night,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",23nov,25night_tian,412,276,146,276,0.529,37,69,0.536,0.038,False,ip16
+all,ip16,"iPhone17,4",23nov,25night_tian,412,276,140,276,0.507,34,69,0.493,0.038,False,ip16
 all,ip16,"iPhone17,4",23nov,25nov,0,0,0,0,,0,0,,,False,
 all,ip16,"iPhone17,4",23nov,25spots,412,60,12,60,0.2,3,15,0.2,0.038,False,ip16
-all,ip16,"iPhone17,4",23nov,26tian,412,300,134,300,0.447,31,75,0.413,0.038,False,ip16
-all,ip16,"iPhone17,4",24s1,23nov,1272,412,190,412,0.461,49,103,0.476,0.038,True,a55 a56 ip18 s24
-all,ip16,"iPhone17,4",24s1,24s2,1272,312,183,312,0.587,47,78,0.603,0.038,True,a55 a56 ip18 s24
+all,ip16,"iPhone17,4",23nov,26tian,412,300,161,300,0.537,40,75,0.533,0.038,False,ip16
+all,ip16,"iPhone17,4",24s1,23nov,1272,412,210,412,0.51,53,103,0.515,0.038,True,a55 a56 ip18 s24
+all,ip16,"iPhone17,4",24s1,24s2,1272,312,198,312,0.635,49,78,0.628,0.038,True,a55 a56 ip18 s24
 all,ip16,"iPhone17,4",24s1,25night,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",24s1,25night_tian,1272,276,130,276,0.471,32,69,0.464,0.038,True,a55 a56 ip18 s24
+all,ip16,"iPhone17,4",24s1,25night_tian,1272,276,125,276,0.453,30,69,0.435,0.038,True,a55 a56 ip18 s24
 all,ip16,"iPhone17,4",24s1,25nov,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",24s1,25spots,1272,60,24,60,0.4,6,15,0.4,0.038,True,a55 a56 ip18 s24
-all,ip16,"iPhone17,4",24s1,26tian,1272,300,134,300,0.447,34,75,0.453,0.038,True,a55 a56 ip18 s24
-all,ip16,"iPhone17,4",24s2,23nov,624,412,200,412,0.485,51,103,0.495,0.038,True,ip16 s24
+all,ip16,"iPhone17,4",24s1,25spots,1272,60,26,60,0.433,7,15,0.467,0.038,True,a55 a56 ip18 s24
+all,ip16,"iPhone17,4",24s1,26tian,1272,300,103,300,0.343,26,75,0.347,0.038,True,a55 a56 ip18 s24
+all,ip16,"iPhone17,4",24s2,23nov,624,412,217,412,0.527,56,103,0.544,0.038,True,ip16 s24
 all,ip16,"iPhone17,4",24s2,24s1,0,0,0,0,,0,0,,,False,
 all,ip16,"iPhone17,4",24s2,25night,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",24s2,25night_tian,624,276,120,276,0.435,30,69,0.435,0.038,True,ip16 s24
+all,ip16,"iPhone17,4",24s2,25night_tian,624,276,135,276,0.489,34,69,0.493,0.038,True,ip16 s24
 all,ip16,"iPhone17,4",24s2,25nov,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",24s2,25spots,624,60,18,60,0.3,4,15,0.267,0.038,True,ip16 s24
-all,ip16,"iPhone17,4",24s2,26tian,624,300,118,300,0.393,30,75,0.4,0.038,True,ip16 s24
-all,ip16,"iPhone17,4",25night,23nov,740,412,199,412,0.483,51,103,0.495,0.042,True,a56 ip18
+all,ip16,"iPhone17,4",24s2,25spots,624,60,0,60,0.0,0,15,0.0,0.038,True,ip16 s24
+all,ip16,"iPhone17,4",24s2,26tian,624,300,130,300,0.433,32,75,0.427,0.038,True,ip16 s24
+all,ip16,"iPhone17,4",25night,23nov,376,412,193,412,0.468,50,103,0.485,0.042,True,ip18
 all,ip16,"iPhone17,4",25night,24s1,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25night,24s2,740,312,185,312,0.593,46,78,0.59,0.042,True,a56 ip18
-all,ip16,"iPhone17,4",25night,25night_tian,740,276,137,276,0.496,33,69,0.478,0.042,True,a56 ip18
+all,ip16,"iPhone17,4",25night,24s2,376,312,188,312,0.603,48,78,0.615,0.042,True,ip18
+all,ip16,"iPhone17,4",25night,25night_tian,376,276,166,276,0.601,43,69,0.623,0.042,True,ip18
 all,ip16,"iPhone17,4",25night,25nov,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25night,25spots,740,60,0,60,0.0,0,15,0.0,0.042,True,a56 ip18
-all,ip16,"iPhone17,4",25night,26tian,740,300,130,300,0.433,32,75,0.427,0.042,True,a56 ip18
-all,ip16,"iPhone17,4",25night_tian,23nov,276,412,221,412,0.536,58,103,0.563,0.043,False,ip16
+all,ip16,"iPhone17,4",25night,25spots,376,60,12,60,0.2,3,15,0.2,0.042,True,ip18
+all,ip16,"iPhone17,4",25night,26tian,376,300,117,300,0.39,29,75,0.387,0.042,True,ip18
+all,ip16,"iPhone17,4",25night_tian,23nov,276,412,216,412,0.524,55,103,0.534,0.043,False,ip16
 all,ip16,"iPhone17,4",25night_tian,24s1,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25night_tian,24s2,276,312,166,312,0.532,42,78,0.538,0.043,False,ip16
+all,ip16,"iPhone17,4",25night_tian,24s2,276,312,141,312,0.452,36,78,0.462,0.043,False,ip16
 all,ip16,"iPhone17,4",25night_tian,25night,0,0,0,0,,0,0,,,False,
 all,ip16,"iPhone17,4",25night_tian,25nov,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25night_tian,25spots,276,60,3,60,0.05,1,15,0.067,0.043,False,ip16
-all,ip16,"iPhone17,4",25night_tian,26tian,276,300,96,300,0.32,24,75,0.32,0.043,False,ip16
-all,ip16,"iPhone17,4",25nov,23nov,892,412,269,412,0.653,68,103,0.66,0.038,True,a55 a56 ip18
+all,ip16,"iPhone17,4",25night_tian,25spots,276,60,1,60,0.017,0,15,0.0,0.043,False,ip16
+all,ip16,"iPhone17,4",25night_tian,26tian,276,300,104,300,0.347,26,75,0.347,0.043,False,ip16
+all,ip16,"iPhone17,4",25nov,23nov,892,412,218,412,0.529,54,103,0.524,0.038,True,a55 a56 ip18
 all,ip16,"iPhone17,4",25nov,24s1,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25nov,24s2,892,312,187,312,0.599,47,78,0.603,0.038,True,a55 a56 ip18
+all,ip16,"iPhone17,4",25nov,24s2,892,312,188,312,0.603,46,78,0.59,0.038,True,a55 a56 ip18
 all,ip16,"iPhone17,4",25nov,25night,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25nov,25night_tian,892,276,156,276,0.565,39,69,0.565,0.038,True,a55 a56 ip18
-all,ip16,"iPhone17,4",25nov,25spots,892,60,17,60,0.283,4,15,0.267,0.038,True,a55 a56 ip18
-all,ip16,"iPhone17,4",25nov,26tian,892,300,184,300,0.613,46,75,0.613,0.038,True,a55 a56 ip18
-all,ip16,"iPhone17,4",25spots,23nov,216,412,86,412,0.209,21,103,0.204,0.071,True,ip16 s24
+all,ip16,"iPhone17,4",25nov,25night_tian,892,276,139,276,0.504,35,69,0.507,0.038,True,a55 a56 ip18
+all,ip16,"iPhone17,4",25nov,25spots,892,60,23,60,0.383,6,15,0.4,0.038,True,a55 a56 ip18
+all,ip16,"iPhone17,4",25nov,26tian,892,300,161,300,0.537,39,75,0.52,0.038,True,a55 a56 ip18
+all,ip16,"iPhone17,4",25spots,23nov,216,412,75,412,0.182,18,103,0.175,0.071,True,ip16 s24
 all,ip16,"iPhone17,4",25spots,24s1,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25spots,24s2,216,312,48,312,0.154,12,78,0.154,0.071,True,ip16 s24
+all,ip16,"iPhone17,4",25spots,24s2,216,312,60,312,0.192,15,78,0.192,0.071,True,ip16 s24
 all,ip16,"iPhone17,4",25spots,25night,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",25spots,25night_tian,216,276,36,276,0.13,9,69,0.13,0.071,True,ip16 s24
+all,ip16,"iPhone17,4",25spots,25night_tian,216,276,47,276,0.17,12,69,0.174,0.071,True,ip16 s24
 all,ip16,"iPhone17,4",25spots,25nov,0,0,0,0,,0,0,,,False,
 all,ip16,"iPhone17,4",25spots,26tian,216,300,60,300,0.2,15,75,0.2,0.071,True,ip16 s24
-all,ip16,"iPhone17,4",26tian,23nov,300,412,184,412,0.447,46,103,0.447,0.04,False,ip16
+all,ip16,"iPhone17,4",26tian,23nov,300,412,200,412,0.485,52,103,0.505,0.04,False,ip16
 all,ip16,"iPhone17,4",26tian,24s1,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",26tian,24s2,300,312,117,312,0.375,30,78,0.385,0.04,False,ip16
+all,ip16,"iPhone17,4",26tian,24s2,300,312,135,312,0.433,34,78,0.436,0.04,False,ip16
 all,ip16,"iPhone17,4",26tian,25night,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",26tian,25night_tian,300,276,86,276,0.312,22,69,0.319,0.04,False,ip16
+all,ip16,"iPhone17,4",26tian,25night_tian,300,276,86,276,0.312,21,69,0.304,0.04,False,ip16
 all,ip16,"iPhone17,4",26tian,25nov,0,0,0,0,,0,0,,,False,
-all,ip16,"iPhone17,4",26tian,25spots,300,60,24,60,0.4,6,15,0.4,0.04,False,ip16
-all,ip16,"iPhone17,4",other two sessions,each session in turn,21832,1360,767,1360,0.564,192,340,0.565,0.038,True,a55 a56 ip16 ip18 s24
-all,ip18,"iPhone19,2",23nov,24s1,412,324,154,324,0.475,38,81,0.469,0.038,True,ip16
+all,ip16,"iPhone17,4",26tian,25spots,300,60,1,60,0.017,0,15,0.0,0.04,False,ip16
+all,ip16,"iPhone17,4",other two sessions,each session in turn,20012,1360,736,1360,0.541,185,340,0.544,0.038,True,a55 a56 ip16 ip18 s24
+all,ip18,"iPhone19,2",23nov,24s1,412,324,171,324,0.528,44,81,0.543,0.038,True,ip16
 all,ip18,"iPhone19,2",23nov,24s2,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",23nov,25night,412,376,200,376,0.532,50,94,0.532,0.038,True,ip16
+all,ip18,"iPhone19,2",23nov,25night,412,376,215,376,0.572,54,94,0.574,0.038,True,ip16
 all,ip18,"iPhone19,2",23nov,25night_tian,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",23nov,25nov,412,312,158,312,0.506,39,78,0.5,0.038,True,ip16
+all,ip18,"iPhone19,2",23nov,25nov,412,312,171,312,0.548,43,78,0.551,0.038,True,ip16
 all,ip18,"iPhone19,2",23nov,25spots,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",23nov,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",24s1,23nov,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",24s1,24s2,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",24s1,25night,1272,376,231,376,0.614,57,94,0.606,0.038,True,a55 a56 ip18 s24
+all,ip18,"iPhone19,2",24s1,25night,1272,376,253,376,0.673,62,94,0.66,0.038,True,a55 a56 ip18 s24
 all,ip18,"iPhone19,2",24s1,25night_tian,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",24s1,25nov,1272,312,207,312,0.663,52,78,0.667,0.038,True,a55 a56 ip18 s24
+all,ip18,"iPhone19,2",24s1,25nov,1272,312,216,312,0.692,54,78,0.692,0.038,True,a55 a56 ip18 s24
 all,ip18,"iPhone19,2",24s1,25spots,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",24s1,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",24s2,23nov,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",24s2,24s1,624,324,177,324,0.546,46,81,0.568,0.038,True,ip16 s24
-all,ip18,"iPhone19,2",24s2,25night,624,376,244,376,0.649,60,94,0.638,0.038,True,ip16 s24
+all,ip18,"iPhone19,2",24s2,24s1,624,324,193,324,0.596,48,81,0.593,0.038,True,ip16 s24
+all,ip18,"iPhone19,2",24s2,25night,624,376,240,376,0.638,60,94,0.638,0.038,True,ip16 s24
 all,ip18,"iPhone19,2",24s2,25night_tian,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",24s2,25nov,624,312,204,312,0.654,51,78,0.654,0.038,True,ip16 s24
+all,ip18,"iPhone19,2",24s2,25nov,624,312,215,312,0.689,56,78,0.718,0.038,True,ip16 s24
 all,ip18,"iPhone19,2",24s2,25spots,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",24s2,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25night,23nov,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25night,24s1,740,324,227,324,0.701,57,81,0.704,0.042,True,a56 ip18
+all,ip18,"iPhone19,2",25night,24s1,376,324,227,324,0.701,56,81,0.691,0.042,False,ip18
 all,ip18,"iPhone19,2",25night,24s2,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25night,25night_tian,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25night,25nov,740,312,225,312,0.721,57,78,0.731,0.042,True,a56 ip18
+all,ip18,"iPhone19,2",25night,25nov,376,312,208,312,0.667,53,78,0.679,0.042,False,ip18
 all,ip18,"iPhone19,2",25night,25spots,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25night,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25night_tian,23nov,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25night_tian,24s1,276,324,134,324,0.414,34,81,0.42,0.043,True,ip16
+all,ip18,"iPhone19,2",25night_tian,24s1,276,324,139,324,0.429,35,81,0.432,0.043,True,ip16
 all,ip18,"iPhone19,2",25night_tian,24s2,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25night_tian,25night,276,376,180,376,0.479,45,94,0.479,0.043,True,ip16
-all,ip18,"iPhone19,2",25night_tian,25nov,276,312,130,312,0.417,33,78,0.423,0.043,True,ip16
+all,ip18,"iPhone19,2",25night_tian,25night,276,376,171,376,0.455,44,94,0.468,0.043,True,ip16
+all,ip18,"iPhone19,2",25night_tian,25nov,276,312,106,312,0.34,27,78,0.346,0.043,True,ip16
 all,ip18,"iPhone19,2",25night_tian,25spots,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25night_tian,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25nov,23nov,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25nov,24s1,892,324,227,324,0.701,57,81,0.704,0.038,True,a55 a56 ip18
+all,ip18,"iPhone19,2",25nov,24s1,892,324,216,324,0.667,55,81,0.679,0.038,True,a55 a56 ip18
 all,ip18,"iPhone19,2",25nov,24s2,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25nov,25night,892,376,284,376,0.755,69,94,0.734,0.038,True,a55 a56 ip18
+all,ip18,"iPhone19,2",25nov,25night,892,376,295,376,0.785,74,94,0.787,0.038,True,a55 a56 ip18
 all,ip18,"iPhone19,2",25nov,25night_tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25nov,25spots,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25nov,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25spots,23nov,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",25spots,24s1,216,324,48,324,0.148,12,81,0.148,0.071,True,ip16 s24
 all,ip18,"iPhone19,2",25spots,24s2,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25spots,25night,216,376,61,376,0.162,15,94,0.16,0.071,True,ip16 s24
+all,ip18,"iPhone19,2",25spots,25night,216,376,73,376,0.194,18,94,0.191,0.071,True,ip16 s24
 all,ip18,"iPhone19,2",25spots,25night_tian,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",25spots,25nov,216,312,41,312,0.131,11,78,0.141,0.071,True,ip16 s24
+all,ip18,"iPhone19,2",25spots,25nov,216,312,43,312,0.138,11,78,0.141,0.071,True,ip16 s24
 all,ip18,"iPhone19,2",25spots,26tian,0,0,0,0,,0,0,,,False,
 all,ip18,"iPhone19,2",26tian,23nov,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",26tian,24s1,300,324,130,324,0.401,33,81,0.407,0.04,True,ip16
+all,ip18,"iPhone19,2",26tian,24s1,300,324,145,324,0.448,37,81,0.457,0.04,True,ip16
 all,ip18,"iPhone19,2",26tian,24s2,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",26tian,25night,300,376,165,376,0.439,41,94,0.436,0.04,True,ip16
+all,ip18,"iPhone19,2",26tian,25night,300,376,160,376,0.426,40,94,0.426,0.04,True,ip16
 all,ip18,"iPhone19,2",26tian,25night_tian,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",26tian,25nov,300,312,130,312,0.417,33,78,0.423,0.04,True,ip16
+all,ip18,"iPhone19,2",26tian,25nov,300,312,161,312,0.516,40,78,0.513,0.04,True,ip16
 all,ip18,"iPhone19,2",26tian,25spots,0,0,0,0,,0,0,,,False,
-all,ip18,"iPhone19,2",other two sessions,each session in turn,11292,1012,704,1012,0.696,177,253,0.7,0.038,True,a55 a56 ip16 ip18 s24
-all,s24,SM-S9280,23nov,24s1,412,324,94,324,0.29,24,81,0.296,0.038,True,ip16
-all,s24,SM-S9280,23nov,24s2,412,312,94,312,0.301,24,78,0.308,0.038,True,ip16
+all,ip18,"iPhone19,2",other two sessions,each session in turn,10564,1012,756,1012,0.747,190,253,0.751,0.038,True,a55 a56 ip16 ip18 s24
+all,s24,SM-S9280,23nov,24s1,412,324,99,324,0.306,26,81,0.321,0.038,True,ip16
+all,s24,SM-S9280,23nov,24s2,412,312,118,312,0.378,30,78,0.385,0.038,True,ip16
 all,s24,SM-S9280,23nov,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,23nov,25night_tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,23nov,25nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,23nov,25spots,412,156,25,156,0.16,6,39,0.154,0.038,True,ip16
+all,s24,SM-S9280,23nov,25spots,412,156,37,156,0.237,9,39,0.231,0.038,True,ip16
 all,s24,SM-S9280,23nov,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,24s1,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,24s1,24s2,1272,312,96,312,0.308,24,78,0.308,0.038,True,a55 a56 ip18 s24
+all,s24,SM-S9280,24s1,24s2,1272,312,102,312,0.327,25,78,0.321,0.038,True,a55 a56 ip18 s24
 all,s24,SM-S9280,24s1,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,24s1,25night_tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,24s1,25nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,24s1,25spots,1272,156,48,156,0.308,12,39,0.308,0.038,True,a55 a56 ip18 s24
+all,s24,SM-S9280,24s1,25spots,1272,156,41,156,0.263,10,39,0.256,0.038,True,a55 a56 ip18 s24
 all,s24,SM-S9280,24s1,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,24s2,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,24s2,24s1,624,324,146,324,0.451,37,81,0.457,0.038,True,ip16 s24
+all,s24,SM-S9280,24s2,24s1,624,324,147,324,0.454,36,81,0.444,0.038,True,ip16 s24
 all,s24,SM-S9280,24s2,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,24s2,25night_tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,24s2,25nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,24s2,25spots,624,156,48,156,0.308,12,39,0.308,0.038,True,ip16 s24
+all,s24,SM-S9280,24s2,25spots,624,156,43,156,0.276,11,39,0.282,0.038,True,ip16 s24
 all,s24,SM-S9280,24s2,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25night,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25night,24s1,740,324,96,324,0.296,24,81,0.296,0.042,True,a56 ip18
-all,s24,SM-S9280,25night,24s2,740,312,118,312,0.378,30,78,0.385,0.042,True,a56 ip18
+all,s24,SM-S9280,25night,24s1,376,324,146,324,0.451,37,81,0.457,0.042,True,ip18
+all,s24,SM-S9280,25night,24s2,376,312,151,312,0.484,38,78,0.487,0.042,True,ip18
 all,s24,SM-S9280,25night,25night_tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25night,25nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25night,25spots,740,156,36,156,0.231,9,39,0.231,0.042,True,a56 ip18
+all,s24,SM-S9280,25night,25spots,376,156,48,156,0.308,12,39,0.308,0.042,True,ip18
 all,s24,SM-S9280,25night,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25night_tian,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25night_tian,24s1,276,324,82,324,0.253,20,81,0.247,0.043,True,ip16
-all,s24,SM-S9280,25night_tian,24s2,276,312,106,312,0.34,27,78,0.346,0.043,True,ip16
+all,s24,SM-S9280,25night_tian,24s1,276,324,110,324,0.34,29,81,0.358,0.043,True,ip16
+all,s24,SM-S9280,25night_tian,24s2,276,312,112,312,0.359,29,78,0.372,0.043,True,ip16
 all,s24,SM-S9280,25night_tian,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25night_tian,25nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25night_tian,25spots,276,156,12,156,0.077,3,39,0.077,0.043,True,ip16
+all,s24,SM-S9280,25night_tian,25spots,276,156,24,156,0.154,6,39,0.154,0.043,True,ip16
 all,s24,SM-S9280,25night_tian,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25nov,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25nov,24s1,892,324,95,324,0.293,24,81,0.296,0.038,True,a55 a56 ip18
-all,s24,SM-S9280,25nov,24s2,892,312,124,312,0.397,31,78,0.397,0.038,True,a55 a56 ip18
+all,s24,SM-S9280,25nov,24s1,892,324,122,324,0.377,30,81,0.37,0.038,True,a55 a56 ip18
+all,s24,SM-S9280,25nov,24s2,892,312,159,312,0.51,40,78,0.513,0.038,True,a55 a56 ip18
 all,s24,SM-S9280,25nov,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25nov,25night_tian,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25nov,25spots,892,156,60,156,0.385,15,39,0.385,0.038,True,a55 a56 ip18
+all,s24,SM-S9280,25nov,25spots,892,156,44,156,0.282,12,39,0.308,0.038,True,a55 a56 ip18
 all,s24,SM-S9280,25nov,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25spots,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,25spots,24s1,216,324,66,324,0.204,15,81,0.185,0.071,True,ip16 s24
-all,s24,SM-S9280,25spots,24s2,216,312,72,312,0.231,18,78,0.231,0.071,True,ip16 s24
+all,s24,SM-S9280,25spots,24s1,216,324,66,324,0.204,16,81,0.198,0.071,True,ip16 s24
+all,s24,SM-S9280,25spots,24s2,216,312,60,312,0.192,15,78,0.192,0.071,True,ip16 s24
 all,s24,SM-S9280,25spots,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25spots,25night_tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25spots,25nov,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,25spots,26tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,26tian,23nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,26tian,24s1,300,324,57,324,0.176,14,81,0.173,0.04,True,ip16
-all,s24,SM-S9280,26tian,24s2,300,312,96,312,0.308,24,78,0.308,0.04,True,ip16
+all,s24,SM-S9280,26tian,24s1,300,324,73,324,0.225,18,81,0.222,0.04,True,ip16
+all,s24,SM-S9280,26tian,24s2,300,312,97,312,0.311,24,78,0.308,0.04,True,ip16
 all,s24,SM-S9280,26tian,25night,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,26tian,25night_tian,0,0,0,0,,0,0,,,False,
 all,s24,SM-S9280,26tian,25nov,0,0,0,0,,0,0,,,False,
-all,s24,SM-S9280,26tian,25spots,300,156,41,156,0.263,10,39,0.256,0.04,True,ip16
-all,s24,SM-S9280,other two sessions,each session in turn,12084,792,261,792,0.33,66,198,0.333,0.038,True,a55 a56 ip16 ip18 s24
-all,a55,SM-A556E,23nov,24s1,412,304,52,304,0.171,13,76,0.171,0.038,True,ip16
+all,s24,SM-S9280,26tian,25spots,300,156,37,156,0.237,9,39,0.231,0.04,True,ip16
+all,s24,SM-S9280,other two sessions,each session in turn,10992,792,308,792,0.389,76,198,0.384,0.038,True,a55 a56 ip16 ip18 s24
+all,a55,SM-A556E,23nov,24s1,412,304,83,304,0.273,21,76,0.276,0.038,True,ip16
 all,a55,SM-A556E,23nov,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,23nov,25night,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,23nov,25night_tian,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,23nov,25nov,412,280,94,280,0.336,24,70,0.343,0.038,True,ip16
+all,a55,SM-A556E,23nov,25nov,412,280,117,280,0.418,30,70,0.429,0.038,True,ip16
 all,a55,SM-A556E,23nov,25spots,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,23nov,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s1,23nov,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s1,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s1,25night,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s1,25night_tian,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,24s1,25nov,1272,280,105,280,0.375,26,70,0.371,0.038,True,a55 a56 ip18 s24
+all,a55,SM-A556E,24s1,25nov,1272,280,95,280,0.339,23,70,0.329,0.038,True,a55 a56 ip18 s24
 all,a55,SM-A556E,24s1,25spots,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s1,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s2,23nov,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,24s2,24s1,624,304,32,304,0.105,7,76,0.092,0.038,True,ip16 s24
+all,a55,SM-A556E,24s2,24s1,624,304,59,304,0.194,14,76,0.184,0.038,True,ip16 s24
 all,a55,SM-A556E,24s2,25night,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s2,25night_tian,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,24s2,25nov,624,280,91,280,0.325,24,70,0.343,0.038,True,ip16 s24
+all,a55,SM-A556E,24s2,25nov,624,280,103,280,0.368,26,70,0.371,0.038,True,ip16 s24
 all,a55,SM-A556E,24s2,25spots,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,24s2,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25night,23nov,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25night,24s1,740,304,43,304,0.141,11,76,0.145,0.042,True,a56 ip18
+all,a55,SM-A556E,25night,24s1,376,304,65,304,0.214,16,76,0.211,0.042,True,ip18
 all,a55,SM-A556E,25night,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25night,25night_tian,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25night,25nov,740,280,126,280,0.45,32,70,0.457,0.042,True,a56 ip18
+all,a55,SM-A556E,25night,25nov,376,280,118,280,0.421,29,70,0.414,0.042,True,ip18
 all,a55,SM-A556E,25night,25spots,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25night,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25night_tian,23nov,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25night_tian,24s1,276,304,80,304,0.263,20,76,0.263,0.043,True,ip16
+all,a55,SM-A556E,25night_tian,24s1,276,304,50,304,0.164,12,76,0.158,0.043,True,ip16
 all,a55,SM-A556E,25night_tian,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25night_tian,25night,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25night_tian,25nov,276,280,103,280,0.368,25,70,0.357,0.043,True,ip16
+all,a55,SM-A556E,25night_tian,25nov,276,280,127,280,0.454,32,70,0.457,0.043,True,ip16
 all,a55,SM-A556E,25night_tian,25spots,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25night_tian,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25nov,23nov,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25nov,24s1,892,304,36,304,0.118,8,76,0.105,0.038,True,a55 a56 ip18
+all,a55,SM-A556E,25nov,24s1,892,304,57,304,0.188,14,76,0.184,0.038,True,a55 a56 ip18
 all,a55,SM-A556E,25nov,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25nov,25night,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25nov,25night_tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25nov,25spots,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25nov,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25spots,23nov,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25spots,24s1,216,304,16,304,0.053,4,76,0.053,0.071,True,ip16 s24
+all,a55,SM-A556E,25spots,24s1,216,304,28,304,0.092,7,76,0.092,0.071,True,ip16 s24
 all,a55,SM-A556E,25spots,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25spots,25night,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,25spots,25night_tian,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,25spots,25nov,216,280,53,280,0.189,13,70,0.186,0.071,True,ip16 s24
+all,a55,SM-A556E,25spots,25nov,216,280,59,280,0.211,14,70,0.2,0.071,True,ip16 s24
 all,a55,SM-A556E,25spots,26tian,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,26tian,23nov,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,26tian,24s1,300,304,48,304,0.158,12,76,0.158,0.04,True,ip16
+all,a55,SM-A556E,26tian,24s1,300,304,61,304,0.201,15,76,0.197,0.04,True,ip16
 all,a55,SM-A556E,26tian,24s2,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,26tian,25night,0,0,0,0,,0,0,,,False,
 all,a55,SM-A556E,26tian,25night_tian,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,26tian,25nov,300,280,93,280,0.332,24,70,0.343,0.04,True,ip16
+all,a55,SM-A556E,26tian,25nov,300,280,100,280,0.357,26,70,0.371,0.04,True,ip16
 all,a55,SM-A556E,26tian,25spots,0,0,0,0,,0,0,,,False,
-all,a55,SM-A556E,other two sessions,each session in turn,7300,584,149,584,0.255,34,146,0.233,0.038,True,a55 a56 ip16 ip18 s24
-all,a56,SM-A566B,23nov,24s1,412,320,97,320,0.303,24,80,0.3,0.038,True,ip16
+all,a55,SM-A556E,other two sessions,each session in turn,6572,584,218,584,0.373,55,146,0.377,0.038,True,a55 a56 ip16 ip18 s24
+all,a56,SM-A566B,23nov,24s1,412,320,147,320,0.459,38,80,0.475,0.038,True,ip16
 all,a56,SM-A566B,23nov,24s2,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,23nov,25night,412,364,12,364,0.033,3,91,0.033,0.038,True,ip16
+all,a56,SM-A566B,23nov,25night,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,23nov,25night_tian,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,23nov,25nov,412,300,142,300,0.473,36,75,0.48,0.038,True,ip16
+all,a56,SM-A566B,23nov,25nov,412,300,158,300,0.527,40,75,0.533,0.038,True,ip16
 all,a56,SM-A566B,23nov,25spots,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,23nov,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s1,23nov,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s1,24s2,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,24s1,25night,1272,364,47,364,0.129,12,91,0.132,0.038,True,a55 a56 ip18 s24
+all,a56,SM-A566B,24s1,25night,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s1,25night_tian,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,24s1,25nov,1272,300,145,300,0.483,36,75,0.48,0.038,True,a55 a56 ip18 s24
+all,a56,SM-A566B,24s1,25nov,1272,300,154,300,0.513,40,75,0.533,0.038,True,a55 a56 ip18 s24
 all,a56,SM-A566B,24s1,25spots,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s1,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s2,23nov,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,24s2,24s1,624,320,166,320,0.519,42,80,0.525,0.038,True,ip16 s24
-all,a56,SM-A566B,24s2,25night,624,364,20,364,0.055,5,91,0.055,0.038,True,ip16 s24
+all,a56,SM-A566B,24s2,24s1,624,320,155,320,0.484,38,80,0.475,0.038,True,ip16 s24
+all,a56,SM-A566B,24s2,25night,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s2,25night_tian,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,24s2,25nov,624,300,112,300,0.373,29,75,0.387,0.038,True,ip16 s24
+all,a56,SM-A566B,24s2,25nov,624,300,119,300,0.397,30,75,0.4,0.038,True,ip16 s24
 all,a56,SM-A566B,24s2,25spots,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,24s2,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25night,23nov,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25night,24s1,740,320,159,320,0.497,40,80,0.5,0.042,True,a56 ip18
+all,a56,SM-A566B,25night,24s1,376,320,158,320,0.494,40,80,0.5,0.042,True,ip18
 all,a56,SM-A566B,25night,24s2,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25night,25night_tian,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25night,25nov,740,300,154,300,0.513,39,75,0.52,0.042,True,a56 ip18
+all,a56,SM-A566B,25night,25nov,376,300,143,300,0.477,34,75,0.453,0.042,True,ip18
 all,a56,SM-A566B,25night,25spots,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25night,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25night_tian,23nov,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25night_tian,24s1,276,320,91,320,0.284,22,80,0.275,0.043,True,ip16
+all,a56,SM-A566B,25night_tian,24s1,276,320,154,320,0.481,39,80,0.487,0.043,True,ip16
 all,a56,SM-A566B,25night_tian,24s2,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25night_tian,25night,276,364,12,364,0.033,3,91,0.033,0.043,True,ip16
-all,a56,SM-A566B,25night_tian,25nov,276,300,84,300,0.28,21,75,0.28,0.043,True,ip16
+all,a56,SM-A566B,25night_tian,25night,0,0,0,0,,0,0,,,False,
+all,a56,SM-A566B,25night_tian,25nov,276,300,105,300,0.35,26,75,0.347,0.043,True,ip16
 all,a56,SM-A566B,25night_tian,25spots,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25night_tian,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25nov,23nov,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25nov,24s1,892,320,207,320,0.647,51,80,0.637,0.038,True,a55 a56 ip18
+all,a56,SM-A566B,25nov,24s1,892,320,227,320,0.709,57,80,0.713,0.038,True,a55 a56 ip18
 all,a56,SM-A566B,25nov,24s2,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25nov,25night,892,364,12,364,0.033,3,91,0.033,0.038,True,a55 a56 ip18
+all,a56,SM-A566B,25nov,25night,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25nov,25night_tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25nov,25spots,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25nov,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25spots,23nov,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25spots,24s1,216,320,73,320,0.228,19,80,0.237,0.071,True,ip16 s24
+all,a56,SM-A566B,25spots,24s1,216,320,76,320,0.237,19,80,0.237,0.071,True,ip16 s24
 all,a56,SM-A566B,25spots,24s2,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25spots,25night,216,364,24,364,0.066,6,91,0.066,0.071,True,ip16 s24
+all,a56,SM-A566B,25spots,25night,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,25spots,25night_tian,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,25spots,25nov,216,300,95,300,0.317,25,75,0.333,0.071,True,ip16 s24
+all,a56,SM-A566B,25spots,25nov,216,300,84,300,0.28,22,75,0.293,0.071,True,ip16 s24
 all,a56,SM-A566B,25spots,26tian,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,26tian,23nov,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,26tian,24s1,300,320,121,320,0.378,32,80,0.4,0.04,True,ip16
+all,a56,SM-A566B,26tian,24s1,300,320,130,320,0.406,33,80,0.412,0.04,True,ip16
 all,a56,SM-A566B,26tian,24s2,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,26tian,25night,300,364,8,364,0.022,2,91,0.022,0.04,True,ip16
+all,a56,SM-A566B,26tian,25night,0,0,0,0,,0,0,,,False,
 all,a56,SM-A566B,26tian,25night_tian,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,26tian,25nov,300,300,156,300,0.52,41,75,0.547,0.04,True,ip16
+all,a56,SM-A566B,26tian,25nov,300,300,117,300,0.39,30,75,0.4,0.04,True,ip16
 all,a56,SM-A566B,26tian,25spots,0,0,0,0,,0,0,,,False,
-all,a56,SM-A566B,other two sessions,each session in turn,11292,984,350,984,0.356,88,246,0.358,0.038,True,a55 a56 ip16 ip18 s24
+all,a56,SM-A566B,other two sessions,each session in turn,6572,620,384,620,0.619,97,155,0.626,0.038,True,a55 a56 ip16 ip18 s24

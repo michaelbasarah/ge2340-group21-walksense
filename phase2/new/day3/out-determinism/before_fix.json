@@ -1,0 +1,22 @@
+{
+ "what": "PROCESS-LOG 91, part 1: why a rerun on identical inputs gave 179/411 instead of the committed 178/411 (entry 77). Code and data = main 38082d0 (before the fix), one BLAS thread, fused_knn.main() run by a driver with output to a scratch folder.",
+ "runs": {
+  "p1_standalone": {
+   "how": "fused_knn.main() alone in a fresh process (as run_all.sh runs it)",
+   "loso": "178/411",
+   "fused_knn.json equals committed (timings ignored)": true,
+   "fused_sample_predictions.csv equals committed": true,
+   "folds_same_weights_and_k_as_committed": "23/23",
+   "loso_25night_fold": "k 9, 22/64"
+  },
+  "p2_evalfirst": {
+   "how": "evaluate.main() then fused_knn.main() in ONE process (as a56_offset.py run A did)",
+   "loso": "179/411",
+   "fused_knn.json equals committed (timings ignored)": false,
+   "fused_sample_predictions.csv equals committed": false,
+   "folds_same_weights_and_k_as_committed": "18/23",
+   "loso_25night_fold": "k 3, 23/64"
+  }
+ },
+ "cause": "gknn.py drew the 3000 random pairs for each group scale (median pair distance) from ONE module-level generator np.random.default_rng(21). Every Bank.dists() call advanced it, so the scale in a fold depended on how many dists() calls the process had made before. evaluate.py calls dists() too; run in the same process before fused_knn.py it shifts the stream: different scales -> different weights/k in some folds -> 179/411. run_all.sh runs each script in its own process, so the committed run (178) was itself reproducible."
+}

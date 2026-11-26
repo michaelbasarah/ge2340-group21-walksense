@@ -16,7 +16,6 @@
   "24s1/s24": "s24 (SM-S9280)",
   "24s2/iphone": "ip16 (iPhone17,4)",
   "24s2/s24": "s24 (SM-S9280)",
-  "25night/a56": "a56 (SM-A566B)",
   "25night/iphone": "ip18 (iPhone19,2)",
   "25night_tian/iphone": "ip16 (iPhone17,4)",
   "25nov/a55": "a55 (SM-A556E)",
@@ -34,7 +33,6 @@
   "24s1/s24": "s24",
   "24s2/iphone": "ip16",
   "24s2/s24": "s24",
-  "25night/a56": "a56",
   "25night/iphone": "ip18",
   "25night_tian/iphone": "ip16",
   "25nov/a55": "a55",
@@ -52,7 +50,6 @@
   "24s1/s24": 50,
   "24s2/ip16": 46,
   "24s2/s24": 50,
-  "25night/a56": 40,
   "25night/ip18": 44,
   "25night_tian/ip16": 44,
   "25nov/a55": 48,
@@ -93,90 +90,6 @@
     "phone": "s24",
     "place": "escalator_down_4F",
     "median_B_uT": 127.7
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "disabled_toilet",
-    "median_B_uT": 153.5
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "disabled_toilet_4F",
-    "median_B_uT": 126.6
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "exit_10_4F",
-    "median_B_uT": 113.5
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "exit_5",
-    "median_B_uT": 119.0
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "exit_5_4F",
-    "median_B_uT": 120.2
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "female_toilet",
-    "median_B_uT": 134.8
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "lift_stairs",
-    "median_B_uT": 125.7
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "lift_stairs_4F",
-    "median_B_uT": 104.7
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "lt2a",
-    "median_B_uT": 115.4
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "male_toilet",
-    "median_B_uT": 144.5
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "sr9",
-    "median_B_uT": 142.4
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "y4502",
-    "median_B_uT": 124.0
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "y5302",
-    "median_B_uT": 151.2
-   },
-   {
-    "session": "25night",
-    "phone": "a56",
-    "place": "y5401",
-    "median_B_uT": 104.6
    },
    {
     "session": "25nov",
@@ -237,10 +150,6 @@
    "24s2/s24": [
     20.7,
     127.7
-   ],
-   "25night/a56": [
-    48.7,
-    153.5
    ],
    "25night/ip18": [
     27.4,
@@ -1033,7 +942,7 @@
      0.255,
      0.611
     ],
-    "window_acc": 0.343,
+    "window_acc": 0.34,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -1155,7 +1064,7 @@
      0.321,
      0.679
     ],
-    "window_acc": 0.369,
+    "window_acc": 0.362,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -2009,11 +1918,11 @@
      0.11,
      0.421
     ],
-    "window_acc": 0.141,
+    "window_acc": 0.138,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
-      "y5302_back"
+      "escalator_down_4F"
      ],
      "24s2:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
@@ -2131,11 +2040,11 @@
      0.224,
      0.575
     ],
-    "window_acc": 0.295,
+    "window_acc": 0.292,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
-      "y5302_back"
+      "escalator_down_4F"
      ],
      "24s2:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
@@ -2764,7 +2673,7 @@
      0.407,
      0.755
     ],
-    "window_acc": 0.457,
+    "window_acc": 0.454,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -3142,7 +3051,7 @@
      0.159,
      0.485
     ],
-    "window_acc": 0.278,
+    "window_acc": 0.281,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -3268,7 +3177,7 @@
      0.215,
      0.558
     ],
-    "window_acc": 0.275,
+    "window_acc": 0.281,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -3394,7 +3303,7 @@
      0.373,
      0.724
     ],
-    "window_acc": 0.472,
+    "window_acc": 0.475,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -3508,19 +3417,19 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 27,
-    "exact": 15,
-    "exact_acc": 0.556,
+    "exact": 14,
+    "exact_acc": 0.519,
     "exact_ci95": [
-     0.373,
-     0.724
+     0.34,
+     0.693
     ],
-    "area": 15,
-    "area_acc": 0.556,
+    "area": 14,
+    "area_acc": 0.519,
     "area_ci95": [
-     0.373,
-     0.724
+     0.34,
+     0.693
     ],
-    "window_acc": 0.497,
+    "window_acc": 0.494,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -3600,7 +3509,7 @@
      ],
      "24s1:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
-      "exit_10"
+      "y5302_back"
      ],
      "24s1:floor5/stops/s09_canteen_revisit:iphone": [
       "canteen",
@@ -3616,7 +3525,7 @@
      ],
      "24s1:floor5/stops/s12_male_disabled_toilet:iphone": [
       "disabled_toilet",
-      "disabled_toilet_4F"
+      "lt2b"
      ],
      "24s1:floor5/stops/s13_lift_stairs5:iphone": [
       "lift_stairs",
@@ -3898,7 +3807,7 @@
      0.307,
      0.66
     ],
-    "window_acc": 0.451,
+    "window_acc": 0.454,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -4024,7 +3933,7 @@
      0.407,
      0.755
     ],
-    "window_acc": 0.46,
+    "window_acc": 0.463,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -4150,7 +4059,7 @@
      0.215,
      0.558
     ],
-    "window_acc": 0.324,
+    "window_acc": 0.327,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -4276,7 +4185,7 @@
      0.245,
      0.593
     ],
-    "window_acc": 0.327,
+    "window_acc": 0.33,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -4783,7 +4692,7 @@
      0.224,
      0.575
     ],
-    "window_acc": 0.269,
+    "window_acc": 0.266,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:s24": [
       "lift_stairs_4F",
@@ -4905,7 +4814,7 @@
      0.288,
      0.645
     ],
-    "window_acc": 0.266,
+    "window_acc": 0.263,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:s24": [
       "lift_stairs_4F",
@@ -7380,7 +7289,7 @@
      0.186,
      0.522
     ],
-    "window_acc": 0.157,
+    "window_acc": 0.16,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:s24": [
       "lift_stairs_4F",
@@ -7506,7 +7415,7 @@
      0.245,
      0.593
     ],
-    "window_acc": 0.176,
+    "window_acc": 0.179,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:s24": [
       "lift_stairs_4F",
@@ -9097,7 +9006,7 @@
      ],
      "24s2:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
-      "y5302_back"
+      "lift_stairs_4F"
      ],
      "24s2:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
@@ -9143,7 +9052,7 @@
      0.355,
      0.712
     ],
-    "window_acc": 0.497,
+    "window_acc": 0.5,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -9512,13 +9421,13 @@
      0.255,
      0.611
     ],
-    "area": 13,
-    "area_acc": 0.5,
+    "area": 14,
+    "area_acc": 0.538,
     "area_ci95": [
-     0.321,
-     0.679
+     0.355,
+     0.712
     ],
-    "window_acc": 0.417,
+    "window_acc": 0.407,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -9602,7 +9511,7 @@
      ],
      "24s2:floor5/stops/s09_esca_up:iphone": [
       "escalator_up",
-      "disabled_toilet"
+      "escalator_down"
      ],
      "24s2:floor5/stops/s10_esca_down:iphone": [
       "escalator_down",
@@ -9634,13 +9543,13 @@
      0.355,
      0.712
     ],
-    "area": 16,
-    "area_acc": 0.615,
+    "area": 17,
+    "area_acc": 0.654,
     "area_ci95": [
-     0.425,
-     0.776
+     0.462,
+     0.806
     ],
-    "window_acc": 0.535,
+    "window_acc": 0.538,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -9724,7 +9633,7 @@
      ],
      "24s2:floor5/stops/s09_esca_up:iphone": [
       "escalator_up",
-      "disabled_toilet"
+      "escalator_down"
      ],
      "24s2:floor5/stops/s10_esca_down:iphone": [
       "escalator_down",
@@ -10148,7 +10057,7 @@
      0.172,
      0.436
     ],
-    "window_acc": 0.2,
+    "window_acc": 0.202,
     "predictions": {
      "23nov:BM01:iphone": [
       "canteen",
@@ -10322,19 +10231,19 @@
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 42,
-    "exact": 18,
-    "exact_acc": 0.429,
+    "exact": 19,
+    "exact_acc": 0.452,
     "exact_ci95": [
-     0.291,
-     0.578
-    ],
-    "area": 19,
-    "area_acc": 0.452,
-    "area_ci95": [
      0.312,
      0.601
     ],
-    "window_acc": 0.333,
+    "area": 20,
+    "area_acc": 0.476,
+    "area_ci95": [
+     0.334,
+     0.623
+    ],
+    "window_acc": 0.331,
     "predictions": {
      "23nov:BM01:iphone": [
       "canteen",
@@ -10430,7 +10339,7 @@
      ],
      "23nov:BM24:iphone": [
       "y5401",
-      "female_toilet"
+      "y5401"
      ],
      "23nov:BM25:iphone": [
       "y5302_back",
@@ -10901,7 +10810,7 @@
      0.153,
      0.411
     ],
-    "window_acc": 0.194,
+    "window_acc": 0.192,
     "predictions": {
      "23nov:BM01:iphone": [
       "canteen",
@@ -11075,11 +10984,11 @@
    },
    "|B|+xyz+Wi-Fi + baro floor": {
     "n_recordings": 42,
-    "exact": 14,
-    "exact_acc": 0.333,
+    "exact": 15,
+    "exact_acc": 0.357,
     "exact_ci95": [
-     0.21,
-     0.484
+     0.23,
+     0.508
     ],
     "area": 20,
     "area_acc": 0.476,
@@ -11087,7 +10996,7 @@
      0.334,
      0.623
     ],
-    "window_acc": 0.298,
+    "window_acc": 0.3,
     "predictions": {
      "23nov:BM01:iphone": [
       "canteen",
@@ -11247,7 +11156,7 @@
      ],
      "23nov:BM40:iphone": [
       "exit_5_4F",
-      "lt2a"
+      "exit_5_4F"
      ],
      "23nov:BM41:iphone": [
       "escalator_down_4F",
@@ -11539,7 +11448,7 @@
      0.215,
      0.558
     ],
-    "window_acc": 0.346,
+    "window_acc": 0.349,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -11571,7 +11480,7 @@
      ],
      "24s1:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "y5401"
+      "lift_stairs_4F"
      ],
      "24s1:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -11665,7 +11574,7 @@
      0.34,
      0.693
     ],
-    "window_acc": 0.417,
+    "window_acc": 0.423,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -12052,7 +11961,7 @@
      0.215,
      0.558
     ],
-    "window_acc": 0.333,
+    "window_acc": 0.327,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -12084,7 +11993,7 @@
      ],
      "24s1:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "y5401"
+      "lift_stairs_4F"
      ],
      "24s1:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -12178,7 +12087,7 @@
      0.34,
      0.693
     ],
-    "window_acc": 0.414,
+    "window_acc": 0.417,
     "predictions": {
      "24s1:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -12562,7 +12471,7 @@
      0.355,
      0.712
     ],
-    "window_acc": 0.506,
+    "window_acc": 0.503,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -13172,7 +13081,7 @@
      0.288,
      0.645
     ],
-    "window_acc": 0.228,
+    "window_acc": 0.234,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -13294,7 +13203,7 @@
      0.321,
      0.679
     ],
-    "window_acc": 0.5,
+    "window_acc": 0.503,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -13904,7 +13813,7 @@
      0.321,
      0.679
     ],
-    "window_acc": 0.462,
+    "window_acc": 0.468,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -14026,7 +13935,7 @@
      0.137,
      0.461
     ],
-    "window_acc": 0.163,
+    "window_acc": 0.16,
     "predictions": {
      "24s2:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -14353,7 +14262,7 @@
      ],
      "25nov:floor5/stops/s06_y5202:a55": [
       "y5202",
-      "sr9"
+      "exit_10"
      ],
      "25nov:floor5/stops/s07_female_toilet:a55": [
       "female_toilet",
@@ -15135,7 +15044,7 @@
      0.11,
      0.421
     ],
-    "window_acc": 0.103,
+    "window_acc": 0.106,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -15887,7 +15796,7 @@
      0.194,
      0.538
     ],
-    "window_acc": 0.16,
+    "window_acc": 0.163,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -16253,7 +16162,7 @@
      0.061,
      0.335
     ],
-    "window_acc": 0.054,
+    "window_acc": 0.051,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -16375,7 +16284,7 @@
      0.085,
      0.379
     ],
-    "window_acc": 0.061,
+    "window_acc": 0.058,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -16740,7 +16649,7 @@
   "leave25nov_out_allphones_test_a56": {
    "_split": {
     "train_recordings": 227,
-    "test_recordings": 58,
+    "test_recordings": 26,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
@@ -16748,149 +16657,21 @@
     "note": "train 23nov+24s1+24s2+26tian (all handsets), test 25night+25night_tian+25nov+25spots a56 (SM-A566B)"
    },
    "|B|": {
-    "n_recordings": 58,
-    "exact": 5,
-    "exact_acc": 0.086,
+    "n_recordings": 26,
+    "exact": 2,
+    "exact_acc": 0.077,
     "exact_ci95": [
-     0.037,
-     0.186
+     0.021,
+     0.241
     ],
-    "area": 9,
-    "area_acc": 0.155,
+    "area": 4,
+    "area_acc": 0.154,
     "area_ci95": [
-     0.084,
-     0.269
+     0.061,
+     0.335
     ],
-    "window_acc": 0.08,
+    "window_acc": 0.083,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_down"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2b"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "y5302"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5401"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5401"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "lift_stairs"
@@ -16998,149 +16779,21 @@
     }
    },
    "|B| + baro floor": {
-    "n_recordings": 58,
-    "exact": 7,
-    "exact_acc": 0.121,
+    "n_recordings": 26,
+    "exact": 6,
+    "exact_acc": 0.231,
     "exact_ci95": [
-     0.06,
-     0.229
+     0.11,
+     0.421
     ],
-    "area": 12,
-    "area_acc": 0.207,
+    "area": 9,
+    "area_acc": 0.346,
     "area_ci95": [
-     0.123,
-     0.328
+     0.194,
+     0.538
     ],
-    "window_acc": 0.096,
+    "window_acc": 0.179,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_down"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt1a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2b"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "entrance_exit"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "y5302"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "lt1a"
@@ -17248,149 +16901,21 @@
     }
    },
    "|B|+xyz": {
-    "n_recordings": 58,
-    "exact": 10,
-    "exact_acc": 0.172,
+    "n_recordings": 26,
+    "exact": 7,
+    "exact_acc": 0.269,
     "exact_ci95": [
-     0.096,
-     0.289
+     0.137,
+     0.461
     ],
-    "area": 14,
-    "area_acc": 0.241,
+    "area": 8,
+    "area_acc": 0.308,
     "area_ci95": [
-     0.15,
-     0.365
+     0.165,
+     0.5
     ],
-    "window_acc": 0.162,
+    "window_acc": 0.244,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "y5202"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "y4502"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "y5202"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "sr9"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "lt2a"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "y5202"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "lt2a"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "lt1a"
@@ -17498,149 +17023,21 @@
     }
    },
    "|B|+xyz + baro floor": {
-    "n_recordings": 58,
-    "exact": 13,
-    "exact_acc": 0.224,
+    "n_recordings": 26,
+    "exact": 11,
+    "exact_acc": 0.423,
     "exact_ci95": [
-     0.136,
-     0.347
+     0.255,
+     0.611
     ],
-    "area": 17,
-    "area_acc": 0.293,
+    "area": 12,
+    "area_acc": 0.462,
     "area_ci95": [
-     0.192,
-     0.42
+     0.288,
+     0.645
     ],
-    "window_acc": 0.217,
+    "window_acc": 0.404,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "y4502"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "y5202"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_down_4F"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "y5202"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "lt1a"
@@ -17748,149 +17145,21 @@
     }
    },
    "tilt": {
-    "n_recordings": 58,
-    "exact": 6,
-    "exact_acc": 0.103,
+    "n_recordings": 26,
+    "exact": 2,
+    "exact_acc": 0.077,
     "exact_ci95": [
-     0.048,
-     0.208
+     0.021,
+     0.241
     ],
-    "area": 11,
-    "area_acc": 0.19,
+    "area": 3,
+    "area_acc": 0.115,
     "area_ci95": [
-     0.109,
-     0.309
+     0.04,
+     0.29
     ],
-    "window_acc": 0.08,
+    "window_acc": 0.051,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt1a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "male_toilet"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "lift_stairs_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "lt1b"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5401"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5401"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -17998,149 +17267,21 @@
     }
    },
    "tilt + baro floor": {
-    "n_recordings": 58,
-    "exact": 7,
-    "exact_acc": 0.121,
+    "n_recordings": 26,
+    "exact": 5,
+    "exact_acc": 0.192,
     "exact_ci95": [
-     0.06,
-     0.229
+     0.085,
+     0.379
     ],
-    "area": 11,
-    "area_acc": 0.19,
+    "area": 6,
+    "area_acc": 0.231,
     "area_ci95": [
-     0.109,
-     0.309
+     0.11,
+     0.421
     ],
-    "window_acc": 0.116,
+    "window_acc": 0.196,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt1a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "lift_stairs_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "y5302"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "lt1b"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "exit_5"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -18248,149 +17389,21 @@
     }
    },
    "|B|+tilt": {
-    "n_recordings": 58,
-    "exact": 4,
-    "exact_acc": 0.069,
+    "n_recordings": 26,
+    "exact": 1,
+    "exact_acc": 0.038,
     "exact_ci95": [
-     0.027,
-     0.164
+     0.007,
+     0.189
     ],
-    "area": 7,
-    "area_acc": 0.121,
+    "area": 1,
+    "area_acc": 0.038,
     "area_ci95": [
-     0.06,
-     0.229
+     0.007,
+     0.189
     ],
-    "window_acc": 0.065,
+    "window_acc": 0.045,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt1a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "male_toilet"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "lift_stairs_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "escalator_down_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "lt1b"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5401"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5401"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "lift_stairs"
@@ -18498,149 +17511,21 @@
     }
    },
    "|B|+tilt + baro floor": {
-    "n_recordings": 58,
-    "exact": 5,
-    "exact_acc": 0.086,
+    "n_recordings": 26,
+    "exact": 4,
+    "exact_acc": 0.154,
     "exact_ci95": [
-     0.037,
-     0.186
+     0.061,
+     0.335
     ],
-    "area": 7,
-    "area_acc": 0.121,
+    "area": 4,
+    "area_acc": 0.154,
     "area_ci95": [
-     0.06,
-     0.229
+     0.061,
+     0.335
     ],
-    "window_acc": 0.098,
+    "window_acc": 0.186,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt1a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "lift_stairs_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt1b"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "escalator_down_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "y5302"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "lt1b"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "exit_5"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "exit_5"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "lt1a"
@@ -18748,149 +17633,21 @@
     }
    },
    "|B|+xyz+tilt": {
-    "n_recordings": 58,
-    "exact": 11,
-    "exact_acc": 0.19,
+    "n_recordings": 26,
+    "exact": 7,
+    "exact_acc": 0.269,
     "exact_ci95": [
-     0.109,
-     0.309
+     0.137,
+     0.461
     ],
-    "area": 15,
-    "area_acc": 0.259,
+    "area": 8,
+    "area_acc": 0.308,
     "area_ci95": [
-     0.163,
-     0.384
+     0.165,
+     0.5
     ],
-    "window_acc": 0.2,
+    "window_acc": 0.292,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "y5202"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "y4502"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "y5202"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "sr9"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "lt2a"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "y5202"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "y5202"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -18998,149 +17755,21 @@
     }
    },
    "|B|+xyz+tilt + baro floor": {
-    "n_recordings": 58,
-    "exact": 16,
-    "exact_acc": 0.276,
+    "n_recordings": 26,
+    "exact": 13,
+    "exact_acc": 0.5,
     "exact_ci95": [
-     0.178,
-     0.402
+     0.321,
+     0.679
     ],
-    "area": 20,
-    "area_acc": 0.345,
+    "area": 14,
+    "area_acc": 0.538,
     "area_ci95": [
-     0.236,
-     0.473
+     0.355,
+     0.712
     ],
-    "window_acc": 0.272,
+    "window_acc": 0.5,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "y5202"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "escalator_up_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "y4502"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "lt2a"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "y5202"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "disabled_toilet"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "y5202"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "y5202"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "y5202"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "y5202"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "y5202"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "y5202"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "y5202"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -19260,7 +17889,7 @@
   "leave25nov_out_samehandset_test_a56": {
    "_split": {
     "train_recordings": 27,
-    "test_recordings": 58,
+    "test_recordings": 26,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
@@ -19268,149 +17897,21 @@
     "note": "train a56 only (24s1), test 25night+25night_tian+25nov+25spots a56"
    },
    "|B|": {
-    "n_recordings": 58,
+    "n_recordings": 26,
     "exact": 2,
-    "exact_acc": 0.034,
+    "exact_acc": 0.077,
     "exact_ci95": [
-     0.01,
-     0.117
+     0.021,
+     0.241
     ],
-    "area": 5,
-    "area_acc": 0.086,
+    "area": 4,
+    "area_acc": 0.154,
     "area_ci95": [
-     0.037,
-     0.186
+     0.061,
+     0.335
     ],
-    "window_acc": 0.047,
+    "window_acc": 0.106,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "escalator_down"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -19518,149 +18019,21 @@
     }
    },
    "|B| + baro floor": {
-    "n_recordings": 58,
-    "exact": 4,
-    "exact_acc": 0.069,
+    "n_recordings": 26,
+    "exact": 3,
+    "exact_acc": 0.115,
     "exact_ci95": [
-     0.027,
-     0.164
+     0.04,
+     0.29
     ],
-    "area": 8,
-    "area_acc": 0.138,
+    "area": 5,
+    "area_acc": 0.192,
     "area_ci95": [
-     0.072,
-     0.249
+     0.085,
+     0.379
     ],
-    "window_acc": 0.078,
+    "window_acc": 0.135,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "entrance_exit"
@@ -19768,149 +18141,21 @@
     }
    },
    "|B|+xyz": {
-    "n_recordings": 58,
+    "n_recordings": 26,
     "exact": 10,
-    "exact_acc": 0.172,
+    "exact_acc": 0.385,
     "exact_ci95": [
-     0.096,
-     0.289
+     0.224,
+     0.575
     ],
     "area": 11,
-    "area_acc": 0.19,
+    "area_acc": 0.423,
     "area_ci95": [
-     0.109,
-     0.309
+     0.255,
+     0.611
     ],
-    "window_acc": 0.162,
+    "window_acc": 0.362,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "sr9"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -20018,149 +18263,21 @@
     }
    },
    "|B|+xyz + baro floor": {
-    "n_recordings": 58,
-    "exact": 11,
-    "exact_acc": 0.19,
+    "n_recordings": 26,
+    "exact": 10,
+    "exact_acc": 0.385,
     "exact_ci95": [
-     0.109,
-     0.309
+     0.224,
+     0.575
     ],
-    "area": 15,
-    "area_acc": 0.259,
+    "area": 12,
+    "area_acc": 0.462,
     "area_ci95": [
-     0.163,
-     0.384
+     0.288,
+     0.645
     ],
-    "window_acc": 0.181,
+    "window_acc": 0.365,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -20268,149 +18385,21 @@
     }
    },
    "tilt": {
-    "n_recordings": 58,
-    "exact": 4,
-    "exact_acc": 0.069,
+    "n_recordings": 26,
+    "exact": 3,
+    "exact_acc": 0.115,
     "exact_ci95": [
-     0.027,
-     0.164
+     0.04,
+     0.29
     ],
-    "area": 6,
-    "area_acc": 0.103,
+    "area": 4,
+    "area_acc": 0.154,
     "area_ci95": [
-     0.048,
-     0.208
+     0.061,
+     0.335
     ],
-    "window_acc": 0.085,
+    "window_acc": 0.151,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "lift_stairs"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "lift_stairs"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "exit_10_4F"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "escalator_down_4F"
@@ -20518,149 +18507,21 @@
     }
    },
    "tilt + baro floor": {
-    "n_recordings": 58,
-    "exact": 7,
-    "exact_acc": 0.121,
+    "n_recordings": 26,
+    "exact": 6,
+    "exact_acc": 0.231,
     "exact_ci95": [
-     0.06,
-     0.229
+     0.11,
+     0.421
     ],
-    "area": 10,
-    "area_acc": 0.172,
+    "area": 7,
+    "area_acc": 0.269,
     "area_ci95": [
-     0.096,
-     0.289
+     0.137,
+     0.461
     ],
-    "window_acc": 0.118,
+    "window_acc": 0.224,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_down"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "escalator_down_4F"
@@ -20768,149 +18629,21 @@
     }
    },
    "|B|+tilt": {
-    "n_recordings": 58,
+    "n_recordings": 26,
     "exact": 5,
-    "exact_acc": 0.086,
+    "exact_acc": 0.192,
     "exact_ci95": [
-     0.037,
-     0.186
+     0.085,
+     0.379
     ],
-    "area": 7,
-    "area_acc": 0.121,
+    "area": 6,
+    "area_acc": 0.231,
     "area_ci95": [
-     0.06,
-     0.229
+     0.11,
+     0.421
     ],
-    "window_acc": 0.092,
+    "window_acc": 0.208,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "exit_10_4F"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -21018,149 +18751,21 @@
     }
    },
    "|B|+tilt + baro floor": {
-    "n_recordings": 58,
-    "exact": 8,
-    "exact_acc": 0.138,
+    "n_recordings": 26,
+    "exact": 7,
+    "exact_acc": 0.269,
     "exact_ci95": [
-     0.072,
-     0.249
+     0.137,
+     0.461
     ],
-    "area": 11,
-    "area_acc": 0.19,
+    "area": 8,
+    "area_acc": 0.308,
     "area_ci95": [
-     0.109,
-     0.309
+     0.165,
+     0.5
     ],
-    "window_acc": 0.138,
+    "window_acc": 0.272,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -21268,149 +18873,21 @@
     }
    },
    "|B|+xyz+tilt": {
-    "n_recordings": 58,
+    "n_recordings": 26,
     "exact": 10,
-    "exact_acc": 0.172,
+    "exact_acc": 0.385,
     "exact_ci95": [
-     0.096,
-     0.289
+     0.224,
+     0.575
     ],
-    "area": 12,
-    "area_acc": 0.207,
+    "area": 11,
+    "area_acc": 0.423,
     "area_ci95": [
-     0.123,
-     0.328
+     0.255,
+     0.611
     ],
-    "window_acc": 0.164,
+    "window_acc": 0.369,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "sr9"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "exit_10_4F"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -21518,149 +18995,21 @@
     }
    },
    "|B|+xyz+tilt + baro floor": {
-    "n_recordings": 58,
-    "exact": 12,
-    "exact_acc": 0.207,
+    "n_recordings": 26,
+    "exact": 11,
+    "exact_acc": 0.423,
     "exact_ci95": [
-     0.123,
-     0.328
+     0.255,
+     0.611
     ],
-    "area": 15,
-    "area_acc": 0.259,
+    "area": 12,
+    "area_acc": 0.462,
     "area_ci95": [
-     0.163,
-     0.384
+     0.288,
+     0.645
     ],
-    "window_acc": 0.193,
+    "window_acc": 0.385,
     "predictions": {
-     "25night:floor4/stops/s01_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s02_disabled_toilet:a56": [
-      "disabled_toilet_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s03_exit5_door:a56": [
-      "exit_5_4F",
-      "escalator_up"
-     ],
-     "25night:floor4/stops/s04_lt2a:a56": [
-      "lt2a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s05_lt2b:a56": [
-      "lt2b",
-      "disabled_toilet_4F"
-     ],
-     "25night:floor4/stops/s06_esca_down:a56": [
-      "escalator_down_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s07_y4502:a56": [
-      "y4502",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s08_esca_up:a56": [
-      "escalator_up_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s09_lt1b:a56": [
-      "lt1b",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s10_lt1a:a56": [
-      "lt1a",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s11_exit10_door:a56": [
-      "exit_10_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor4/stops/s12_gate:a56": [
-      "entrance_exit",
-      "lift_stairs"
-     ],
-     "25night:floor4/stops/s13_lift_stairs5:a56": [
-      "lift_stairs_4F",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s01_canteen:a56": [
-      "canteen",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s02_exit5_door:a56": [
-      "exit_5",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s03_male_toilet:a56": [
-      "male_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s04_y5302:a56": [
-      "y5302",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s05_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s06_y5202:a56": [
-      "y5202",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s07_female_toilet:a56": [
-      "female_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s08_exit10_door:a56": [
-      "exit_10",
-      "exit_10_4F"
-     ],
-     "25night:floor5/stops/s09_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s10_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s11_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s12_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s13_sr9:a56": [
-      "sr9",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s14_y5202:a56": [
-      "y5202",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s15_exit10_door:a56": [
-      "exit_10",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s16_male_disabled_toilet:a56": [
-      "disabled_toilet",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s17_lift_stairs5:a56": [
-      "lift_stairs",
-      "escalator_up"
-     ],
-     "25night:floor5/stops/s18_y5302_point2:a56": [
-      "y5302_back",
-      "escalator_down"
-     ],
-     "25night:floor5/stops/s19_y5401:a56": [
-      "y5401",
-      "escalator_up"
-     ],
      "25nov:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
       "y5302_back"
@@ -22069,7 +19418,7 @@
      0.407,
      0.745
     ],
-    "window_acc": 0.529,
+    "window_acc": 0.532,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22861,19 +20210,19 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 29,
-    "exact": 14,
-    "exact_acc": 0.483,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.314,
-     0.656
+     0.344,
+     0.686
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 17,
+    "area_acc": 0.586,
     "area_ci95": [
-     0.375,
-     0.716
+     0.407,
+     0.745
     ],
-    "window_acc": 0.468,
+    "window_acc": 0.474,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22953,7 +20302,7 @@
      ],
      "25night_tian:floor5/stops/s11_male_disabled_toilet:iphone": [
       "disabled_toilet",
-      "sr9"
+      "disabled_toilet"
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
@@ -23007,7 +20356,7 @@
      0.44,
      0.773
     ],
-    "window_acc": 0.555,
+    "window_acc": 0.546,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23409,7 +20758,7 @@
      0.407,
      0.745
     ],
-    "window_acc": 0.526,
+    "window_acc": 0.529,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23811,7 +21160,7 @@
      0.147,
      0.457
     ],
-    "window_acc": 0.161,
+    "window_acc": 0.164,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24358,7 +21707,7 @@
      0.44,
      0.773
     ],
-    "window_acc": 0.511,
+    "window_acc": 0.509,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25028,7 +22377,7 @@
      0.344,
      0.686
     ],
-    "window_acc": 0.443,
+    "window_acc": 0.445,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25150,19 +22499,19 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 29,
-    "exact": 14,
-    "exact_acc": 0.483,
+    "exact": 13,
+    "exact_acc": 0.448,
     "exact_ci95": [
-     0.314,
-     0.656
+     0.284,
+     0.625
     ],
-    "area": 17,
-    "area_acc": 0.586,
+    "area": 16,
+    "area_acc": 0.552,
     "area_ci95": [
-     0.407,
-     0.745
+     0.375,
+     0.716
     ],
-    "window_acc": 0.46,
+    "window_acc": 0.463,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25178,7 +22527,7 @@
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "lt2b"
+      "exit_5_4F"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
@@ -25564,7 +22913,7 @@
      0.44,
      0.773
     ],
-    "window_acc": 0.511,
+    "window_acc": 0.509,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25698,7 +23047,7 @@
      0.44,
      0.773
     ],
-    "window_acc": 0.511,
+    "window_acc": 0.509,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -26861,7 +24210,7 @@
      0.544,
      0.779
     ],
-    "window_acc": 0.657,
+    "window_acc": 0.655,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -27611,7 +24960,7 @@
      0.15,
      0.365
     ],
-    "window_acc": 0.129,
+    "window_acc": 0.131,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -29381,7 +26730,7 @@
      0.408,
      0.657
     ],
-    "window_acc": 0.47,
+    "window_acc": 0.471,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -30131,7 +27480,7 @@
      0.163,
      0.384
     ],
-    "window_acc": 0.257,
+    "window_acc": 0.261,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -30381,7 +27730,7 @@
      0.192,
      0.42
     ],
-    "window_acc": 0.3,
+    "window_acc": 0.302,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -31279,17 +28628,17 @@
    },
    "|B|+xyz": {
     "n_recordings": 13,
-    "exact": 4,
-    "exact_acc": 0.308,
+    "exact": 3,
+    "exact_acc": 0.231,
     "exact_ci95": [
+     0.082,
+     0.503
+    ],
+    "area": 4,
+    "area_acc": 0.308,
+    "area_ci95": [
      0.127,
      0.576
-    ],
-    "area": 5,
-    "area_acc": 0.385,
-    "area_ci95": [
-     0.177,
-     0.645
     ],
     "window_acc": 0.236,
     "predictions": {
@@ -31327,7 +28676,7 @@
      ],
      "25spots:floor5/stops/spots_s05_sr9:s24": [
       "sr9",
-      "sr9"
+      "y4502"
      ],
      "25spots:floor5/stops/spots_s07_disabled_toilet:s24": [
       "disabled_toilet",
@@ -32422,7 +29771,7 @@
      0.082,
      0.503
     ],
-    "window_acc": 0.14,
+    "window_acc": 0.134,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -32702,7 +30051,7 @@
      0.082,
      0.503
     ],
-    "window_acc": 0.064,
+    "window_acc": 0.07,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -32772,7 +30121,7 @@
      0.082,
      0.503
     ],
-    "window_acc": 0.076,
+    "window_acc": 0.083,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -33262,7 +30611,7 @@
      0.177,
      0.645
     ],
-    "window_acc": 0.083,
+    "window_acc": 0.076,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -33332,7 +30681,7 @@
      0.177,
      0.645
     ],
-    "window_acc": 0.089,
+    "window_acc": 0.096,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -33860,7 +31209,7 @@
      "jump_from_previous_stop_hpa": NaN
     },
     {
-     "start_hk": "23:15",
+     "start_hk": "23:17",
      "place": "exit_5_4F",
      "true": 4,
      "pred": 5,
