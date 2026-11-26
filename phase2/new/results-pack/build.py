@@ -481,6 +481,43 @@ def read_sample_predictions(variant, rel_dir):
     return None, None
 
 
+def read_headline_config():
+    """Which data the headline uses (day3 config.json): every session-level exclusion with its reason, plus the note
+    on the upload-app numbers. Text comes from the config files, not from this script."""
+    cfg = loadj(CFG["day3_config"])
+    for s in cfg["sessions"]:
+        if s.get("exclude_sources") and s.get("_comment_exclude"):
+            ex = pd.read_csv(P(f"phase2/new/day3/{s['exclude_sources']}"))
+            kinds = ex["recording_type"].value_counts().to_dict() if "recording_type" in ex else {}
+            add(Fact(f"headline.exclude.{s['id']}", f"headline data: session {s['id']} leaves out {len(ex)} recordings", value=f"{len(ex)} recordings excluded "
+                     + ", ".join(f"{v} {k}s" for k, v in sorted(kinds.items())), kind="descriptive",
+                     src=[CFG["day3_config"], f"phase2/new/day3/{s['exclude_sources']}"], test=s["_comment_exclude"]))
+    note = CFG.get("upload_eval_note")
+    if note:
+        add(Fact("headline.upload_note", "upload-app numbers", value="read from upload/out/eval.json at build time", kind="descriptive",
+                 src=[f"{CFG['upload_dir']}/eval.json"], test=note))
+
+
+def read_a56_options():
+    """Supporting evidence for the a56 night exclusion (PROCESS-LOG 77, 91): the option comparison in day3/out-a56/."""
+    rel = CFG["a56_comparison"]
+    C = pd.read_csv(P(rel))
+    unit = {"default": "recordings", "split20": "20 s pieces"}
+    for _, r in C[C["option"].isin(CFG["a56_options_shown"])].iterrows():
+        v, o = r["variant"], r["option"]
+        base = f"a56opt.{v}.{o}"
+        tdef = f"option {o} ({r['what']}); fused kNN learned weights, leave one session out; variant {v}; code: {r.get('run_code', 'n/a')}"
+        add(Fact(f"{base}.loso", f"a56 option {o}, LOSO, all test samples ({v})", int(r["loso_correct"]), int(r["loso_n"]), None, "honest", [rel], tdef, unit[v]))
+        k, n = parse_frac(r["loso_without_a56_night"])
+        add(Fact(f"{base}.same", f"a56 option {o}, LOSO, same samples in every option = all but the a56 night ({v})", k, n, None, "honest", [rel], tdef, unit[v]))
+        for col, lab in (("a56", "a56, all its sessions"), ("a56_night", "a56 night takes"), ("a56_other_sessions", "a56 on 24s1 + 25nov"), ("ip18", "ip18")):
+            k, n = parse_frac(r[col])
+            if k is None:
+                add(Fact(f"{base}.{col}", f"a56 option {o}, {lab} ({v})", value=str(r[col]), kind="descriptive", src=[rel], test=tdef))
+            else:
+                add(Fact(f"{base}.{col}", f"a56 option {o}, {lab} ({v})", k, n, None, "honest", [rel], tdef, unit[v]))
+
+
 # ----------------------------------------------------------------------------- run readers
 
 PRIMARY = CFG["primary_variant"]
@@ -506,6 +543,8 @@ VAR = guard("variance_by_place.csv", read_variance)
 guard("pdr summary", read_pdr)
 guard("pilot results", read_pilot)
 guard("request-matching results", read_reqmatch)
+guard("headline configuration (day3 config.json exclusions)", read_headline_config)
+guard("a56 night options (day3/out-a56/comparison.csv)", read_a56_options)
 SAMPLES = {}
 for var, rel_dir in CFG["day3_variants"].items():
     SAMPLES[var] = read_sample_predictions(var, rel_dir)
@@ -521,6 +560,16 @@ def derived_from_samples():
     zero = sorted(g.index[g["sum"] == 0])
     add(Fact("derived.never_correct", "places with 0 correct recordings in leave-one-session-out", value=", ".join(zero) if zero else "none", kind="descriptive", src=[rel],
              test=f"fused kNN learned weights, leave one session out, {len(df)} recordings, {len(g)} places; derived by build.py from the per-sample file"))
+    for ph in CFG["phone_order"]:
+        q = df[df.phone == ph]
+        if not len(q):
+            continue
+        places = sorted(set(q["true"]))
+        rec = [float((q[q["true"] == pl]["pred"] == pl).mean()) for pl in places]
+        prec = [float((q[q["pred"] == pl]["true"] == pl).mean()) if (q["pred"] == pl).any() else 0.0 for pl in places]
+        add(Fact(f"derived.phone.{ph}", f"{ph}: accuracy, leave one session out", int(q.hit.sum()), len(q), None, "honest", [rel],
+                 f"fused kNN learned weights, leave one session out, test samples recorded by {ph}; macro precision {np.mean(prec):.3f}, "
+                 f"macro recall {np.mean(rec):.3f} over its {len(places)} test places (never-predicted place = precision 0, as day3/perf_sheet.py)"))
     tot = df.hit.sum()
     f = F(f"fused.{PRIMARY}.leave_one_session_out.fused")
     ok = f is not None and (f.k == tot and f.n == len(df))
@@ -998,6 +1047,37 @@ def fig_wifi(fmt):
     return fig
 
 
+def fig_a56_options(fmt):
+    """A / B / C1 of the a56 night decision, default and split20: all test samples and the same samples (PROCESS-LOG 77, 91)."""
+    opts = CFG["a56_options_shown"]
+    rows = [(v, o) for v in ("default", "split20") for o in opts if F(f"a56opt.{v}.{o}.loso")]
+    if not rows:
+        return None
+    s = SIZES[fmt]
+    figsize = s["figsize"] if fmt == "slide" else (CFG["report_width_in"], 3.2)
+    fig, axes = plt.subplots(1, 2, figsize=figsize, sharey=True)
+    col = {"A": OI["grey"], "B": OI["blue"], "C1": OI["orange"]}
+    for ax, v in zip(axes, ("default", "split20")):
+        for j, (metric, lab) in enumerate((("loso", "all test samples"), ("same", "same samples\n(a56 night left out)"))):
+            for i, o in enumerate(opts):
+                f = F(f"a56opt.{v}.{o}.{metric}")
+                if f is None:
+                    continue
+                x = j + (i - (len(opts) - 1) / 2) * 0.26
+                lo, hi = f.ci
+                ax.bar(x, f.p * 100, 0.24, color=col.get(o, OI["black"]), label=o if j == 0 else None)
+                ax.errorbar(x, f.p * 100, yerr=[[f.p * 100 - lo * 100], [hi * 100 - f.p * 100]], color="black", capsize=3, lw=s["lw"] * 0.6)
+                ax.text(x, hi * 100 + 1.5, f"{f.k}/{f.n}", ha="center", va="bottom", fontsize=s["small"] * 0.8, rotation=90)
+        ax.set_xticks([0, 1], ["all test samples", "same samples\n(a56 night left out)"])
+        ax.set_title(f"{'takes' if v == 'default' else '20 s pieces'}", loc="left")
+        ax.set_ylim(0, 80)
+    axes[0].set_ylabel("place accuracy, leave one session out (%)")
+    axes[0].legend(title="option", frameon=False, loc="upper left", ncol=len(opts))
+    fig.suptitle("a56 night: A keep, B exclude (official), C1 label-free offset fix", x=0.01, ha="left", fontweight="bold", fontsize=s["title"])
+    fig.tight_layout()
+    return fig
+
+
 def _bar_text(*a):
     pass
 
@@ -1030,6 +1110,8 @@ FIG_SPECS = [
      "HMM tracker vs snapshot kNN on the same stop visits; exact place and right area; bar label = stop visits correct."),
     ("fig_wifi_diagnosis", fig_wifi, "Wi-Fi logger diagnosis", ["phase2/new/day3/out/wifi_diagnosis.json"],
      "Why the WiGLE CSV is not a fingerprint: each BSSID is logged about once per stop and repeats are mostly stronger rows."),
+    ("fig_a56_options", fig_a56_options, "a56 night: keep, exclude (official headline) or offset-correct", [CFG.get("a56_comparison", "")],
+     "Supporting evidence (PROCESS-LOG 77, 91): fused kNN, leave one session out, options A / B / C1 on all test samples and on the samples common to every option; 95% Wilson intervals."),
 ]
 
 
@@ -1199,6 +1281,20 @@ def other_tables():
                     recs.append([pk, meth, metric, f.k, f.n, f"{100 * f.p:.1f}%", f.test[:140]])
     if recs:
         pd.DataFrame(recs, columns=["test", "method", "metric", "correct", "n", "accuracy", "definition"]).to_csv(OUT / "table_tracker_vs_snapshot.csv", index=False)
+    # 3b. a56 night options (supporting table)
+    recs = []
+    for v in ("default", "split20"):
+        for o in CFG.get("a56_options_shown", []):
+            row = [v, o]
+            for m in ("loso", "same", "a56", "a56_night", "a56_other_sessions", "ip18"):
+                f = F(f"a56opt.{v}.{o}.{m}")
+                row.append("" if f is None else f.fmt())
+            f = F(f"a56opt.{v}.{o}.loso")
+            if f is not None:
+                recs.append(row + [f.test])
+    if recs:
+        pd.DataFrame(recs, columns=["variant", "option", "LOSO all samples", "LOSO same samples (no a56 night)", "a56 all", "a56 night",
+                                    "a56 other sessions", "ip18", "definition"]).to_csv(OUT / "table_a56_options.csv", index=False)
     # 4. request matching
     ids = [f"rm.{m}.{sl}" for sl in ("test", "all") for m in ("keyword", "embed", "llm", "fuzzy_keyword", "hybrid", "tokens")]
     if any(F(i) for i in ids):
@@ -1234,6 +1330,7 @@ def write_numbers_md(rows_fig):
     L.append("Kinds: **honest** = train and test are different visits, sessions or stops; **partly leaky** = the other phones of the same physical stop may be in training; **LEAKY** = same recording in train and test (illustration only, never quote as a result); **descriptive** = not an accuracy.")
     L.append("")
     sections = [
+        ("0. Headline configuration (which data the headline numbers use)", lambda f: f.id.startswith("headline.")),
         ("1. The leakage story (one classifier, four splits)", lambda f: f.id.startswith(f"fused.{PRIMARY}.") and f.id.count(".") == 3),
         ("2. Fused kNN per feature group (leave one session out, grouped by stop; area counts)", lambda f: f.id.startswith(f"fused.{PRIMARY}.") and (f.id.endswith(".area") or "loso.fold" in f.id or "deployable" in f.id)),
         ("3. Same, 20 s pieces variant (out-split20; pieces of one take are not independent): fused groups", lambda f: f.id.startswith("fused.split20.") and f.id.count(".") == 3),
@@ -1249,7 +1346,8 @@ def write_numbers_md(rows_fig):
         ("12. Wi-Fi diagnosis", lambda f: f.id.startswith("wifi.")),
         ("13. Variance decomposition (all places, session-first)", lambda f: f.id.startswith("var.session_first")),
         ("14. Old pilot (superseded, leaky) and request matching", lambda f: f.id.startswith(("pilot", "rm."))),
-        ("15. Derived by build.py", lambda f: f.id.startswith("derived")),
+        ("15. Derived by build.py (per phone: accuracy; macro precision / recall in the definition)", lambda f: f.id.startswith("derived")),
+        ("16. a56 night: keep (A) / exclude (B, the official headline since 27 Nov) / offset-correct (C1); supporting, day3/out-a56/", lambda f: f.id.startswith("a56opt.")),
     ]
     used = set()
     for title, pred in sections:
