@@ -1206,8 +1206,6 @@ Contents:
 
 ## 74. 26 Nov: Tian's 26-Nov morning pass added as session `26tian` (labels from his chat captions); day-3 rerun, gaps sheet, upload app retrained
 
-*(In progress: data and labels are in; the reruns follow in the next commits of `feat/tian-morning`.)*
-
 - **What we tried:** add Tian's morning pass of 26 Nov (iPhone17,4 = ip16, 09:30 to 10:39, both floors) as a new day-3 session, rerun day 3 (default and split20), the gaps sheet, the playgrounds and Tian's upload app, and use his new LT stops to check his five doubtful night takes.
 - **Why:** a third same-handset session for ip16 (24 s2, `25night_tian`, now `26tian`), and this morning he recorded LT2A, LT2B, LT1B and LT1A on the same phone, which the night-run open question needed.
 - **How:**
@@ -1215,6 +1213,8 @@ Contents:
   - `phase2/clean-data/2026-11-26-tian/scripts/ingest_tian26.py <folder> <chat.txt>`: SHA-256 of every ZIP against every `.zip`/`.gz` in the repo (the night run's `repo_hashes`; all 52 new), all 52 iPhone17,4; each file matched to Tian's first `<document omitted>` line at or after its save time, failing unless the match is one-to-one, in order, each gap 0 to 60 s and each caption before the next file. Captions -> places through one table in the script (reason per caption), kind checked against the duration. Writes `labels_tian26.csv` and copies the ZIPs to `raw/`.
   - `scripts/build_tian26.py` (the night build for one phone) writes `clean/` in Dicta's layout; `run_all.sh` runs it first. `config.json` has session `26tian` (same structure as `25night_tian`, names `names_25night.csv`); `visualise.py` has a colour and marker for it.
   - `scripts/check_lt_night.py` writes `lt_night_check.csv` and `medium_label_check.csv`.
+  - Before the rerun, dated copies: `day3/out*/fused_sample_predictions_2026-11-26b.csv`, `day3/out*/knn_playground_2026-11-26b.html`, `upload/out/eval_2026-11-26b.json`, `upload/out/live_checks_2026-11-26b.json`.
+  - Commands: `sh phase2/new/day3/run_all.sh` and `--split20`; `playground_check.py` (both variants); `gaps_sheet.py` (no `--perf-tab`: `perf_sheet.py` and `phone_place_performance.xlsx` were left alone because another branch is adding a tab there); in `upload/`: `walksense.py evaluate`, `live.py check`, `python -m unittest test_walksense.py test_live.py`. The results pack was not rebuilt.
 - **Result:**
   - **Data** (`clean/summary.json`, `labels_tian26.csv`): 52 recordings, 25 stops (5F 13, 4F 12) + 27 walks (5F 14, 4F 13); 50 high, 2 medium; all with a barometer; none left out. Chat gaps 7 to 45 s.
   - **Medium labels:** "lift turun bawah" (60 s stop between "lt2b esc turun bawah" and two walks that start at the 4F down escalator) = escalator_down_4F; its field is 40.8 and 49.2 uT (x/y/z) from his two 4F lift/stairs stops and 14.9 uT from this morning's 4F escalator-up stop (`medium_label_check.csv`). "lt1b exit 10" (walk right after the "lt1a" stop, before "exit 10 bawah") = lt1a -> exit_10_4F.
@@ -1230,12 +1230,35 @@ Contents:
   - **Leave 25 Nov out** (`results.json`, kNN k=5): `26tian` is a later day, so it now trains (the whole 25-Nov day is still held out). ip16 same handset |B|+xyz+tilt + baro floor 13 -> 14 (|B|+xyz 11 -> 15); ip16 all phones 16 -> 16; ip18 all phones 37 -> 36, same handset 27 -> 27; a56 all phones 15 -> 16, same handset unchanged.
   - **Barometer floor** (`results.json` `floor`, step tracking): `26tian` 25/25 (absolute threshold also 25/25); every other session unchanged (23nov 42/42, 24s1 23/27, 24s2 26/26, 25nov 26/26, 25night 29/32, 25night_tian 23/23, 25spots 12/18).
   - **Playground** (`playground_check.py`, default): predicted place 1320/1320, PCA within 0.0005, compare-phones 56/56.
+  - **Day 3, split20** (20 s pieces, `out-split20/fused_knn.json`; before = `out-split20/fused_sample_predictions_2026-11-26b.csv`):
+    - Pieces (`variant_summary.json`): 1160 -> 1235, kept 1108 -> 1183 (`26tian` 25 takes, 75 pieces kept, none removed); outlier 32, excluded 18, incomplete 2 unchanged.
+    - Leave one session out: 501/1108 = 45.2% -> 553/1183 = 46.7% (CI 43.9 to 49.6%). Grouped by stop 457/1108 -> 482/1183 (40.7%).
+    - Folds: 26tian 37/75 (49.3%, new); 25night_tian 35 -> 46/69, 25night 70 -> 78/185, 24s1 138 -> 140/318, 23nov 58 -> 56/103, 24s2 72 -> 69/156, 25spots 15 -> 14/54, 25nov 113 -> 113/223.
+    - Per phone: ip16 145/265 (54.7%) -> 189/340 (55.6%); on the same 265 old pieces 152/265 (57.4%). ip18 172 -> 174/253, a56 87 -> 96/246, s24 61 -> 60/198, a55 36 -> 34/146.
+    - ip16 places, old pieces before -> after: exit_10 0/10 -> 3/10, lift_stairs 0/9 -> 3/9, sr9 6/12 -> 8/12, y5401 3/12 -> 5/12, +1 at disabled_toilet, exit_5 and female_toilet; losses y5202 3/9 -> 0/9, lift_stairs_4F 5/9 -> 4/9, male_toilet 7/9 -> 6/9, escalator_down 12/15 -> 11/15. `26tian` pieces 3/3 right at 11 places, 2/3 at lift_stairs_4F and male_toilet, 0/3 at the other 12 (incl. lt1a, lt1b, lt2b, y5302, y5302_back, y5401, escalator_up, escalator_up_4F, exit_10, lift_stairs).
+    - Deployable model: B 0.1, xyz 0.3, baro 0.6, k 25, inner 0.5 (was the same weights with k 15, 0.505).
+    - Leave 25 Nov out (|B|+xyz+tilt + baro floor, `26tian` now trains), all phones / same handset: ip16 43 -> 47/84 / 33 -> 42/84; ip18 114 -> 112/172 / 83 -> 83; a56 49 -> 53/166 / 32 -> 32; s24 9 -> 12/39 / 6 -> 6; a55 20 -> 21/70 / 8 -> 8.
+    - Playground check (split20): predicted place 1320/1320, PCA within 0.0005, compare-phones 56/56.
+  - **Gaps sheet** (`gaps_sheet.py`, `out/data_gaps.xlsx`, `out/perf_csv/data_gaps_*.csv`; copied to Downloads as `WalkSense data gaps 2026-11-26c.xlsx`, older copies kept):
+    - Coverage: 86 -> 88 OK, 44 -> 42 LACKING (ip16 lt1a and lt1b now have 3 takes).
+    - Default WEAK cells per phone, before -> after: ip18 3 -> 3, ip16 7 -> 9, a56 12 -> 11, s24 21 -> 22, a55 25 -> 25. ip16 cells that changed: sr9 WEAK -> FAIR (3/8), lt1b WEAK -> GOOD (2/3, it was WEAK only because n was 2), y5401 FAIR -> GOOD (3/5); y5202 FAIR -> WEAK (0/4), y5302, exit_10_4F and lt2b FAIR -> WEAK (each 1/4), disabled_toilet_4F GOOD -> FAIR.
+    - split20 WEAK per phone: ip18 3 -> 2, ip16 5 -> 8, a56 9 -> 9, s24 13 -> 12, a55 16 -> 16.
+    - Top place priorities: lt1a 1/13, y5202 2/16, escalator_down_4F 3/17, lift_stairs 4/19, lift_stairs_4F 5/18, escalator_up 4/14.
   - **Upload app** (`phase2/new/upload/out/eval.json`, xyz top-1 (top-3); before = `eval_2026-11-26b.json`; the only app change is `26tian` in `ALL_SESSIONS`, plus the session tuple in `test_walksense.py`):
     - iPhone17,4 same handset, now three sessions: test 24 s2 10/26 (19/26) -> 14/26 (22/26) (train `25night_tian` + `26tian`); test `25night_tian` 12/23 (15/23) -> 12/23 (16/23) (train 24 s2 + `26tian`); test `26tian` 13/25 (16/25) (train 24 s2 + `25night_tian`, new).
     - Cross handset, iPhone17,4 model on iPhone19,2 sessions: 24 s1 19/27 (21/27) unchanged; 25 Nov 17/26 (20/26) -> 18/26 (22/26); `25night` 18/32 (27/32) -> 20/32 (27/32). iPhone19,2 model on `26tian`: 10/25 (16/25).
     - Every other key (s24, a55, a56, iPhone19,2 same handset) unchanged. Floor tracking `26tian` 25/25; the others unchanged.
     - `live.py check` (`live_checks.json`; before = `live_checks_2026-11-26b.json`): 113 of the 115 old entries unchanged; the two replays streamed with the iPhone17,4 model changed: 24 s1 top-3 21 -> 22/27, lit right 17 -> 18; 25 Nov top-1 17 -> 18/26, top-3 20 -> 21, lit 20 -> 21, lit right 15 -> 16. New walking dot: 24 s2 -> `26tian` first corridor right 27/27, end within 3 m 26/27; `25night_tian` -> `26tian` 21/25, 22/25; `26tian` -> `25night_tian` 21/23, 21/23.
     - Tests: `python -m unittest test_walksense.py test_live.py`, 7 tests OK.
+- **Outcome:**
+  - Success for the data and the labels: 52 of 52 recordings labelled from Tian's own captions with a strict, checked match; nothing left out; floor tracking 25/25 in both the day-3 step tracker and the upload app.
+  - ip16 is now a three-session handset. The upload app's same-handset iPhone17,4 test exists in both directions for three sessions (24 s2 10/26 -> 14/26 with two training sessions); the day-3 numbers for ip16 rise a little (default 49.5% -> 50.0%, split20 54.7% -> 55.6%), and the default overall falls 43.8% -> 43.3% because the relearned fold weights moved the other phones (no new data for them).
+  - The morning LT stops answer the night-run question with evidence (the two night stops match LT1B and LT1A); the relabel itself is left to the team.
+- **What changed because of it:**
+  - Eight sessions in day 3; the upload app trains on six (`sesi1`, `sesi2`, `25nov`, `25night`, `25night_tian`, `26tian`).
+  - New session folder `phase2/clean-data/2026-11-26-tian/` with its scripts; `day3/README.md` section n.
+  - Not done here: `perf_sheet.py` tabs, `hard_places.py`, the results pack (left for after the other branch lands).
+- **Links:** `phase2/clean-data/2026-11-26-tian/` (README, `labels_tian26.csv`, `lt_night_check.csv`, `medium_label_check.csv`, `clean/summary.json`), `phase2/new/day3/config.json`, `phase2/new/day3/out*/fused_knn.json`, `results.json`, `out/perf_csv/data_gaps_*.csv`, `phase2/new/upload/out/eval.json`, `live_checks.json`; branch `feat/tian-morning` (commits 9a9de5d, 3b7a70f, 0f5d3ca and the final one).
 
 ## Lessons learned
 
@@ -1288,6 +1311,8 @@ Contents:
 - **Put the key in one ignored file and make the app work without it.** Search falls back to keyword -> fuzzy on no key, no internet, a timeout or a bad reply, so the demo cannot break on the LLM (entry 71).
 - **Check each phone's raw field before training on it.** Chris's a56 read a median |B| of 110.9 uT on the night run against 40 to 45 uT on the other days (`field_check.csv`), and its 32 night takes scored 2/32. A one-line check of median |B| per phone and session (`check_field.py`) would have caught it at ingest (entry 72).
 - **A floor tracker that keeps the floor when pressure is missing fails quietly.** 13 of Dicta's 32 night stops had no barometer, including the 5F -> 4F change, so the upload app stayed on 5F for 12 stops (entry 72).
+- **When the file names say nothing, match the label trail strictly.** Tian's phone saved 51 of 52 files as "point <time>"; his chat captions became labels only through a one-to-one, in-order match that fails loudly (gap 7 to 45 s, each caption before the next file), and each caption's stop/walk was checked against the duration (entry 74). Name the recording in phyphox before saving when possible.
+- **A second pass on the same phone settles a doubtful label better than a guess.** Tian's morning LT stops put his doubtful night "lt2b" 3.0 uT from LT1B and far from LT2B (entry 74); the walk-endpoint version of the check failed its own control, so only the stops count as evidence.
 
 ## Open questions / next steps
 
