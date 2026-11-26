@@ -1298,7 +1298,7 @@ Contents:
 
 ## 77. 26 Nov: route planner in the upload app: shortest path A -> B lit on the map, lift / stairs / escalator as separate connectors, step-free mode and toilet gender filter
 
-- **In progress** (branch `feat/route-planner`): `phase2/new/routing/route.py` `plan()` (modes standard / accessible, lift and stairs split into separate edges) and `nearest_toilet()`; `routing/test_route.py` 13 tests OK. App wiring, screenshots and the full entry follow.
+- **In progress** (branch `feat/route-planner`): `phase2/new/routing/route.py` `plan()` (modes standard / accessible, lift and stairs split into separate edges) and `nearest_toilet()`; `routing/test_route.py` 13 tests OK. `upload/search.py` `plan_route()` / `nearest()` + mode/gender on `search()`, `server.py` `GET /api/route`, `GET /api/nearest`; `test_search.py` 16 tests OK. Page, screenshots and the full entry follow.
 
 ## Lessons learned
 

@@ -9,6 +9,7 @@ import socket
 import threading
 import unittest
 import urllib.error
+import urllib.parse
 import urllib.request
 from http.server import ThreadingHTTPServer
 from unittest import mock
@@ -133,8 +134,59 @@ class TestNoKey(Base):
         r = search.search('lt1a', from_id='canteen')
         self.assertEqual(r['from']['source'], 'chosen')
         self.assertEqual({s['floor'] for s in r['route']}, {4, 5})
-        self.assertTrue(any(s.get('mode') in ('escalator', 'lift_stairs') for s in r['route']))
+        self.assertTrue(any(s.get('mode') in ('escalator', 'lift', 'stairs') for s in r['route']))
         self.assertAlmostEqual(r['distance_m'], round(sum(s.get('metres', 0) for s in r['route']), 1), places=1)
+
+
+class TestPlanner(Base):
+    """Route planner + modes + toilet filter through search.py (Gemini off: no key)."""
+    key = ''
+
+    def test_toilet_query_uses_mode_and_filter(self):
+        for q in ('toilet', 'nearest restroom', 'washroom please'):
+            r = search.search(q, from_id='canteen', gender='female')
+            self.assertEqual(r['place_id'], 'female_toilet', q)
+            self.assertIn('female toilet', r['answer'])
+        r = search.search('toilet', from_id='canteen', mode='accessible', gender='female')    # only the 4F mixed one
+        self.assertEqual(r['place_id'], 'disabled_toilet_4F')
+        self.assertEqual([c['kind'] for c in r['connectors']], ['lift'])
+        self.assertEqual(search.search('toilet', from_id='canteen', mode='accessible')['place_id'], 'disabled_toilet')
+        r = search.search('male toilet', from_id='y5202', mode='standard', gender='any')
+        self.assertEqual((r['method'], r['place_id']), ('keyword', 'male_toilet'))
+        r = search.search('ladies', from_id='canteen', gender='male')                       # the words win over the filter
+        self.assertEqual(r['place_id'], 'female_toilet')
+        self.assertIn('not used', r['toilet']['note'])
+        r = search.search('disabled toilet', from_id='y5202')                               # standard mode, words ask for accessible
+        self.assertEqual(r['place_id'], 'disabled_toilet')
+
+    def test_toilet_no_option_message(self):
+        r = search.search('disabled toilet 5F', from_id='canteen', mode='accessible', gender='female')
+        self.assertIsNone(r['place_id'])
+        self.assertEqual(r['route'], [])
+        self.assertIn('No disabled female toilet on 5F', r['answer'])
+        self.assertEqual(r['toilet']['options'], [])
+
+    def test_gemini_toilet_post_processed(self):
+        self.key = FAKE_KEY
+        with mock.patch.dict(os.environ, {'GEMINI_API_KEY': FAKE_KEY}):
+            self.answers('{"place_id": "male_toilet", "answer": "The male toilet is on 5F near Exit 5."}')
+            r = search.search('I need the toilet', from_id='y5202', gender='female')
+            self.assertEqual((r['method'], r['matched_place'], r['place_id']), ('gemini', 'male_toilet', 'female_toilet'))
+            self.assertNotIn('male toilet is', r['answer'])
+            search._cache.clear()
+            self.answers('{"place_id": "female_toilet", "answer": "The female toilet is next to Exit 10."}')
+            r = search.search('where can I pee', from_id='y5202', gender='female')           # same toilet: Gemini's sentence kept
+            self.assertEqual((r['place_id'], r['answer']), ('female_toilet', 'The female toilet is next to Exit 10.'))
+
+    def test_accessible_route_and_bad_mode(self):
+        r = search.search('lt1a', from_id='canteen', mode='accessible')
+        self.assertEqual([c['kind'] for c in r['connectors']], ['lift'])
+        self.assertTrue(any(t.startswith('Take the lift down to 4F') for t in r['instructions']))
+        self.assertEqual(len(r['legs']), len(r['route']) - 1)
+        with self.assertRaises(KeyError):
+            search.search('lt1a', mode='wheelchair')
+        with self.assertRaises(KeyError):
+            search.search('toilet', gender='other')
 
 
 class TestIdTable(unittest.TestCase):
@@ -181,6 +233,51 @@ class TestServer(Base):
         code, body = self.get('/')
         self.assertIn('id="searchform"', body)
         self.assertNotIn(FAKE_KEY, body)
+
+    def get_json(self, path, expect=200):
+        try:
+            code, body = self.get(path)
+        except urllib.error.HTTPError as e:
+            with e:
+                code, body = e.code, e.read().decode()
+        self.assertEqual(code, expect, path)
+        return json.loads(body)
+
+    def test_api_route(self):
+        server.STATE['session'] = server.ws.Session(5)
+        r = self.get_json('/api/route?from=y5302&to=sr9')                                  # one floor, measured edge
+        self.assertEqual((r['path'], r['distance_m'], r['mode']), (['y5302', 'sr9'], 13.9, 'standard'))
+        self.assertEqual(r['legs'][0]['metres'], 13.9)
+        st = self.get_json('/api/route?from=canteen&to=lt1a&mode=standard')
+        ac = self.get_json('/api/route?from=canteen&to=lt1a&mode=accessible')
+        self.assertEqual([c['kind'] for c in st['connectors']], ['escalator'])
+        self.assertEqual([c['kind'] for c in ac['connectors']], ['lift'])
+        self.assertAlmostEqual(ac['seconds'], round(sum(l['seconds'] for l in ac['legs']), 1), places=1)
+        self.assertEqual(ac['from']['source'], 'chosen')
+        r = self.get_json('/api/route?to=lt1a')                                            # no start: default gate
+        self.assertEqual(r['from']['id'], 'entrance_exit')
+        self.assertIn('error', self.get_json('/api/route?from=canteen&to=nowhere', 400))
+        self.assertIn('mode', self.get_json('/api/route?from=canteen&to=lt1a&mode=fly', 400)['error'])
+
+    def test_api_nearest(self):
+        server.STATE['session'] = server.ws.Session(5)
+        r = self.get_json('/api/nearest?type=toilet&from=y5202&gender=female')
+        self.assertEqual((r['place_id'], r['floor']), ('female_toilet', 5))
+        self.assertEqual(r['route'][-1]['id'], 'female_toilet')
+        r = self.get_json('/api/nearest?type=toilet&from=y5401&mode=accessible&gender=female')
+        self.assertEqual(r['place_id'], 'disabled_toilet_4F')
+        self.assertEqual([c['kind'] for c in r['connectors']], ['lift'])
+        self.assertEqual({x['id'] for x in r['excluded']}, {'male_toilet', 'female_toilet', 'disabled_toilet'})
+        r = self.get_json('/api/nearest?type=toilet&from=lt1a&mode=accessible&gender=male')
+        self.assertEqual(r['place_id'], 'disabled_toilet_4F')
+        server.STATE['session'].history.append({'kind': 'stop', 'floor': 5, 'lit': 'y5202'})   # from = the lit place
+        r = self.get_json('/api/nearest?type=toilet')
+        self.assertEqual((r['from']['source'], r['place_id']), ('tracked', 'female_toilet'))
+        self.assertIn('error', self.get_json('/api/nearest?type=exit', 400))
+        self.assertIn('gender', self.get_json('/api/nearest?type=toilet&gender=x', 400)['error'])
+        self.answers('{"place_id": "male_toilet", "answer": "The male toilet is on 5F."}')      # Gemini (fake) picks a male one
+        r = self.get_json('/api/search?' + urllib.parse.urlencode({'q': 'toilet', 'from': 'canteen', 'mode': 'accessible', 'gender': 'female'}))
+        self.assertEqual((r['method'], r['matched_place'], r['place_id']), ('gemini', 'male_toilet', 'disabled_toilet_4F'))
 
 
 if __name__ == '__main__':

@@ -71,11 +71,20 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, self._state())
         if path == '/api/search/places':
             return self._send(200, search.place_options())
-        if path == '/api/search':
+        if path in ('/api/search', '/api/route', '/api/nearest'):
             q = {k: v[0] for k, v in parse_qs(urlparse(self.path).query).items()}
             with LOCK:
                 here = tracked_place()
-            return self._send(200, search.search(q.get('q', ''), q.get('from') or None, here))   # may call Gemini: outside LOCK
+            try:
+                if path == '/api/route':           # GET /api/route?from=&to=&mode=   (graph ids; from empty = where I am)
+                    return self._send(200, search.plan_route(q.get('from') or None, q.get('to', ''), q.get('mode'), here))
+                if path == '/api/nearest':         # GET /api/nearest?type=toilet&from=&mode=&gender=
+                    return self._send(200, search.nearest(q.get('type', 'toilet'), q.get('from') or None, q.get('mode'),
+                                                          q.get('gender'), here))
+                return self._send(200, search.search(q.get('q', ''), q.get('from') or None, here,       # may call Gemini: outside LOCK
+                                                     q.get('mode'), q.get('gender')))
+            except KeyError as e:
+                return self._send(400, {'error': str(e.args[0]) if e.args else 'bad request'})
         self._send(404, {'error': 'not found'})
 
     def do_POST(self):
