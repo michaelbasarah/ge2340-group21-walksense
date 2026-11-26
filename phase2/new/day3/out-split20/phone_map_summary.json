@@ -1,5 +1,5 @@
 {
- "recordings": 752,
+ "recordings": 804,
  "per_session": {
   "23nov": {
    "ip16 (iPhone17,4)": 42,
@@ -30,6 +30,9 @@
   },
   "25night_tian": {
    "ip16 (iPhone17,4)": 46
+  },
+  "26tian": {
+   "ip16 (iPhone17,4)": 52
   }
  },
  "per_session_type": {
@@ -74,6 +77,12 @@
   },
   "25night_tian/walk/iphone slot": {
    "ip16": 23
+  },
+  "26tian/stop/iphone slot": {
+   "ip16": 25
+  },
+  "26tian/walk/iphone slot": {
+   "ip16": 27
   }
  },
  "mixed_sessions": [

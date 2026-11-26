@@ -305,6 +305,21 @@ Per phone (default): ip18 60.4% -> 70.6%, ip16 48.6% -> 49.5%, a56 49.1% -> 34.1
 in the training set. They are kept; excluding them is a team decision (for example an `exclude_sources` CSV that lists them).
 All numbers: PROCESS-LOG entry 72.
 
+### n. Tian's 26-Nov morning pass (session `26tian`; PROCESS-LOG entry 73)
+
+`26tian` = Tian's ip16 (iPhone17,4) alone, 09:30 to 10:39, 25 stops + 27 walks (`../../clean-data/2026-11-26-tian/clean`,
+labels from his chat captions in `labels_tian26.csv`; names `names_25night.csv`). `run_all.sh` builds it first
+(`build_tian26.py`). ip16 now has three sessions with stops of its own handset besides 23 Nov (24s2, 25night_tian, 26tian).
+
+| leave one session out, learned-weight fused kNN | before (entry 72) | after |
+|---|---|---|
+| default (takes) | 169/386 = 43.8% | 178/411 = 43.3% |
+| split20 (20 s pieces) | 501/1108 = 45.2% | 553/1183 = 46.7% |
+
+ip16 (default): 48/97 (49.5%) -> 61/122 (50.0%); the `26tian` fold is 12/25 (default) and 37/75 (split20). The other phones
+have no new data; their small changes come from the per-fold weights, which are relearned with `26tian` in every training set.
+All numbers: PROCESS-LOG entry 73.
+
 ## Data issues found
 
 - Very strong fields (place median \|B\| above 100 uT, `results.json` `magnetic_check`): 24 s2 iPhone at escalator_down_4F 147.9 and escalator_up_4F 142.5 uT, 24 s2 S24 at escalator_down_4F 127.7, 24 s1 S24 at disabled_toilet 121.6 and escalator_down 101.3. The iPhone on 23 Nov ranges 32.9 to 58.9 uT. Both phones see the 4F down-escalator in session 2, so it is more likely something physical there that night (running escalator machinery?) than one sensor. Worth asking the collector; see `fig_per_place_B_pressure.png`.

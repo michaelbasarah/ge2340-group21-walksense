@@ -39,7 +39,10 @@
      "note": "Second collection run of 25 Nov, track 'round' (PROCESS-LOG entry 72): Dicta (iphone slot = ip18, iPhone19,2) and Chris (a56, SM-A566B) together, 21:47 to 00:40 (start_hk after midnight is written 24:mm:ss). Labels from their own file names, clean-data/2026-11-25-night/labels_night.csv (built by scripts/build_night.py). 32 stops (incl. 8 extra weak-spot stops after the loop) x 2 phones; Wi-Fi from Chris's a56 WiGLE log (observations.csv has epoch and scanner columns)"},
     {"id": "25night_tian", "day": "2026-11-25", "loader": "clean_tree",
      "path": "../../clean-data/2026-11-25-night/tian/clean", "raw": "../../clean-data/2026-11-25-night/raw", "names": "names_25night.csv",
-     "note": "Second collection run of 25 Nov, track 'tian' (PROCESS-LOG entry 72): Tian (iphone slot = ip16, iPhone17,4) on his own pass 21:40 to 23:00, labels from his own file names (labels_night.csv; 5 takes left out for review). 23 stops, no Wi-Fi log"}
+     "note": "Second collection run of 25 Nov, track 'tian' (PROCESS-LOG entry 72): Tian (iphone slot = ip16, iPhone17,4) on his own pass 21:40 to 23:00, labels from his own file names (labels_night.csv; 5 takes left out for review). 23 stops, no Wi-Fi log"},
+    {"id": "26tian", "day": "2026-11-26", "loader": "clean_tree",
+     "path": "../../clean-data/2026-11-26-tian/clean", "raw": "../../clean-data/2026-11-26-tian/raw", "names": "names_25night.csv",
+     "note": "26-Nov morning run, Tian alone (PROCESS-LOG entry 74): iphone slot = ip16 (iPhone17,4), 09:30 to 10:39, floor 5 then floor 4. Labels from his WhatsApp captions (his phone saved every file as 'point <time>.zip'), clean-data/2026-11-26-tian/labels_tian26.csv (built by scripts/build_tian26.py; node names as the night run, so names_25night.csv). 25 stops + 27 walks, 2 captions resolved from the sequence (medium), no Wi-Fi log"}
   ],
   "variants": {
     "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 40).",

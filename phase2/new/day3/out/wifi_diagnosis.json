@@ -239,6 +239,14 @@
    "bssids_per_stop_median": 40.0,
    "rows_per_bssid_inside_one_stop_median": 1.05,
    "rows_per_bssid_inside_one_stop_max": 1.21
+  },
+  "26tian": {
+   "stop_visits": 25,
+   "stop_x_scanner_pairs_with_in_window_rows": 0,
+   "distinct_scan_timestamps_per_60s_stop_median": 0,
+   "bssids_per_stop_median": 0,
+   "rows_per_bssid_inside_one_stop_median": 0,
+   "rows_per_bssid_inside_one_stop_max": 0
   }
  },
  "bssid_spread_within_session": {
@@ -277,6 +285,11 @@
     "bssids": 0,
     "share_heard_at_one_stop_only": NaN,
     "share_heard_at_3plus_stops": NaN
+   },
+   "26tian": {
+    "bssids": 0,
+    "share_heard_at_one_stop_only": NaN,
+    "share_heard_at_3plus_stops": NaN
    }
   },
   "nearest_stop_120s": {
@@ -311,6 +324,11 @@
     "share_heard_at_3plus_stops": 0.291
    },
    "25night_tian": {
+    "bssids": 0,
+    "share_heard_at_one_stop_only": NaN,
+    "share_heard_at_3plus_stops": NaN
+   },
+   "26tian": {
     "bssids": 0,
     "share_heard_at_one_stop_only": NaN,
     "share_heard_at_3plus_stops": NaN
@@ -646,6 +664,7 @@
   "25nov": "26/26",
   "25spots": "14/18",
   "25night": "24/32",
-  "25night_tian": "0/23"
+  "25night_tian": "0/23",
+  "26tian": "0/25"
  }
 }
