@@ -79,7 +79,10 @@ The night run lifted ip18 to **60/85 = 70.6%** and gave ip16 its first same-hand
 ### 3.12 Floor rules (26 Nov) [74, 76]
 Pre-registered, tuned on four sessions, scored on held-out ones. Rule (d), pressure first and the magnetic vote only when pressure is missing or after a long gap: **30/32** on the night dropout where the app got 20/32, with no loss elsewhere [74]. The user's idea of switching floor only after a lift/escalator landing failed as pre-registered: the place guess names the right connector too rarely to open the gate (37 of 101 connector stops for the day-3 kNN) [76]. Nothing was wired into the app; adopting (d) is a team decision.
 
-### 3.13 A runbook for the demo and a scoring rule written before the first live walk (27 Nov) [92]
+### 3.13 The app adopts floor rule (d), drops the a56 night from training, and keeps disabled toilets free (27 Nov) [90]
+The user adopted rule (d) for the app. Re-checked with the app's own 2 s windows it still passed the pre-registered iPhone rule: the app's night floor went from **20/32 to 30/32** with no stop lost elsewhere; for phones without a barometer the rule still did not pass, so they keep the pressure-only rule unless a switch is set. Chris's a56 night takes no longer train the app's a56 model (a56 xyz 13/27 and 14/26 on its other sessions). In Standard mode a toilet request now goes to an ordinary toilet whenever one fits; a disabled toilet only when none does (in our data: a "4F" request). The upload README was corrected for the demo (port 80, `--device iPhone19,2`, build step, WSL networking) [90].
+
+### 3.14 A runbook for the demo and a scoring rule written before the first live walk (27 Nov) [92]
 The demo phone is Dicta's iPhone 18 only [89]. `phase2/new/DEMO-RUNBOOK.md` collects the night-before checklist, the start commands, a 2-minute self-test, a failure table and the 8 weak places to retake. Checking the commands again found that the upload README still said port 8080 although the phone serves on port 80 (entry 86), and that a fresh clone still stops with `KeyError: 'mag'` until two build scripts are run [81]. `phase2/new/live-walk/PROTOCOL.md` fixes, before any live walk, a 7-stop route through the strong places, what counts as a correct lit place (10 s after arrival) and how to file the results.
 
 ---
@@ -139,7 +142,7 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 
 ## 6. Decisions and who made them
 
-- **User (Michael):** split20 notes [40]; no production app, max 5 agents, no user tests [83, 85]; LLM search, Gemini free tier, offline fallback, no RAG [84]; plain Excel with append-only progress [45, 85]; push everything to GitHub [85]; trust the collectors' own names [69]; delete duplicates only after a byte check [68]; route planner, step-free mode, toilet gender filter, landing-gated floor change [76, 88]; save the story, not just the code [88].
+- **User (Michael):** split20 notes [40]; no production app, max 5 agents, no user tests [83, 85]; LLM search, Gemini free tier, offline fallback, no RAG [84]; plain Excel with append-only progress [45, 85]; push everything to GitHub [85]; trust the collectors' own names [69]; delete duplicates only after a byte check [68]; route planner, step-free mode, toilet gender filter, landing-gated floor change [76, 88]; save the story, not just the code [88]; floor rule (d) in the app, the a56 night out of the app's training, ordinary toilets first in Standard mode [90].
 - **Team / collectors:** the route list that fixed the 23-Nov labels [9]; Dicta's complete 25-Nov push [28]; the name mappings confirmed on 26 Nov [69]. Still waiting: Tian's LT1/LT2 confirmation [73], Chris's phone set-up on the night run [72, 87], Dicta's phyphox barometer setting [72, 87].
 - **Pre-registered before results (so nobody could tune to a wanted answer):** graph areas [18], never-correct places [41], data-gaps thresholds [51], smoothing selection rule [60], request-matching dev/test split [57], floor rules [74, 76].
 
@@ -149,7 +152,7 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 
 1. **Which numbers the report quotes:** take level or split20 [40]; which chance level and place list [62].
 2. **A56 night takes:** keep, exclude or recalibrate. Entry 77: recommended exclude (B) for the headline numbers and the one-offset correction (C1: default **194/411**, split20 **614/1183**) as the evidence that the fault is a drifting hard-iron offset; do not correct phones without a fault. A full A56 redo only after a side-by-side |B| check against the ip18; no ip18 floor-5 redo needed for the fingerprints. `config.json` still keeps the takes until the team decides [72, 77, 87].
-3. **Adopt floor rule (d) in the app?** [74]
+3. **Floor rule (d):** adopted in the app for iPhones (25 night 20/32 -> 30/32); still off for phones without a barometer, which need a held-out session with a healthy Android magnetometer [74, 90].
 4. **Tian's night LT stops:** relabel to LT1B/LT1A? [73]
 5. **Team review** of the 105 agent-drafted search queries and the guessed routing edges [57, 52-55].
 6. **Never measured on site:** the 5F escalator landings, Y5-401's door, the 4F corridors, which LT is which [70].
