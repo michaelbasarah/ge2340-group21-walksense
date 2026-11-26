@@ -1,2 +1,5 @@
 cache/
 __pycache__/
+out-a56/logs/
+out-a56/*/fused_window_predictions.csv
+out-a56/*/results.json

@@ -2,7 +2,7 @@
 
 > **Internal team notes, not report text.** Course rule: an LLM may only polish our own writing, so nothing here is meant to be pasted into the report. Every number below is copied from `PROCESS-LOG.md` (entry numbers in brackets, e.g. [32]), which names the output file it came from. If you need a number for the report, go to the entry and its file, not to this page.
 
-Written 26 Nov 2026. Times are Hong Kong time. Entries 77 and 78 are reserved for two branches still running when this was written (A56 offset, route planner).
+Written 26 Nov 2026. Times are Hong Kong time. Entries 77 and 78 are reserved for two branches still running when this was written (A56 offset, route planner); 77 (A56 offset) is now written on branch `feat/a56-offset`.
 
 ---
 
@@ -72,7 +72,7 @@ The never-correct places were named *before* the new data went in [41]. The part
 The sketch had been drawn over a Google indoor-map screenshot, which turned it into a survey: a metric floor plan for both floors, 0.75 m RMS against the Google pins [70]. Search: Gemini when a key is in `.env`, keyword -> fuzzy offline otherwise, A* route drawn on the plan [71]. Gemini scored **124/128** alone, hybrid 115/128 [75]. No RAG: all 26 places fit in the prompt [84].
 
 ### 3.11 The night run and Tian's morning (26 Nov) [72, 73]
-The night run lifted ip18 to **60/85 = 70.6%** and gave ip16 its first same-handset test; the total became **169/386 = 43.8%**. Chris's A56 night takes scored 2/32 because of the magnetometer offset (kept, not dropped; team decision pending, entry 77). The upload app's floor tracker got only 20/32 because Dicta's iPhone stopped logging pressure across the 5F -> 4F change. Tian's morning pass made ip16 a three-session handset (total **178/411 = 43.3%**, split20 **553/1183 = 46.7%**) and showed that his doubtful night "lt2b"/"lt2a" stops match LT1B/LT1A (3.0 and 14.2 uT) [73].
+The night run lifted ip18 to **60/85 = 70.6%** and gave ip16 its first same-handset test; the total became **169/386 = 43.8%**. Chris's A56 night takes scored 2/32 because of the magnetometer offset (kept, not dropped). Entry 77 compared keep / exclude / recalibrate: the offset drifted over the night, a label-free circle fit lifts those takes from 2/32 to 11/32 (16/32 with a time-local fit) but not to the A56's normal level (30/53); excluding them gives **190/379 = 50.1%** (split20 **526/1092 = 48.2%**); recommended: exclude for the headline numbers, team to decide [77]. The upload app's floor tracker got only 20/32 because Dicta's iPhone stopped logging pressure across the 5F -> 4F change. Tian's morning pass made ip16 a three-session handset (total **178/411 = 43.3%**, split20 **553/1183 = 46.7%**) and showed that his doubtful night "lt2b"/"lt2a" stops match LT1B/LT1A (3.0 and 14.2 uT) [73].
 
 ### 3.12 Floor rules (26 Nov) [74, 76]
 Pre-registered, tuned on four sessions, scored on held-out ones. Rule (d), pressure first and the magnetic vote only when pressure is missing or after a long gap: **30/32** on the night dropout where the app got 20/32, with no loss elsewhere [74]. The user's idea of switching floor only after a lift/escalator landing failed as pre-registered: the place guess names the right connector too rarely to open the gate (37 of 101 connector stops for the day-3 kNN) [76]. Nothing was wired into the app; adopting (d) is a team decision.
@@ -143,7 +143,7 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 ## 7. What is still open (short list; the full list is at the end of `PROCESS-LOG.md`)
 
 1. **Which numbers the report quotes:** take level or split20 [40]; which chance level and place list [62].
-2. **A56 night takes:** keep, exclude or recalibrate (entry 77, in progress) [72, 87].
+2. **A56 night takes:** keep, exclude or recalibrate. Entry 77: recommended exclude (B) for the headline numbers and the one-offset correction (C1: default **194/411**, split20 **614/1183**) as the evidence that the fault is a drifting hard-iron offset; do not correct phones without a fault. A full A56 redo only after a side-by-side |B| check against the ip18; no ip18 floor-5 redo needed for the fingerprints. `config.json` still keeps the takes until the team decides [72, 77, 87].
 3. **Adopt floor rule (d) in the app?** [74]
 4. **Tian's night LT stops:** relabel to LT1B/LT1A? [73]
 5. **Team review** of the 105 agent-drafted search queries and the guessed routing edges [57, 52-55].

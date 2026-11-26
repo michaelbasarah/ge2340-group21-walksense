@@ -1,0 +1,135 @@
+{
+ "_comment": "Sessions used by every day3 script. To add a session collected later, add one entry: loader 'clean_tree' reads any folder built by clean-data/2026-11-24/scripts/build_clean.py (manifest.csv, floor*/stops|walks/<folder>/<phone>/<Sensor>.csv, wifi/observations.csv); 'names' maps its node names onto graph-v2 place names (see names_24nov.csv for the columns). Then rerun: sh phase2/new/day3/run_all.sh",
+ "window_s": 5.0,
+ "wifi_nearest_stop_max_gap_s": 120,
+ "places_graph": "../graph-v2/nodes.csv",
+ "phones": {
+  "_comment": "Handset identity. Key = deviceModel read from each recording's meta/device.csv (phone_map.py). id = stable label used in files, results.json and keys; display = the name shown in the HTML pages, figures and tables, so rename display (e.g. \"Michael's iPhone\") and rerun, no code change. Per the user (2026-11-25): iPhone17,4 is an iPhone 16, iPhone19,2 an iPhone 18. A model id not listed here stops the pipeline instead of being guessed.",
+  "iPhone17,4": {
+   "id": "ip16",
+   "display": "ip16",
+   "marketing": "iPhone 16 (user-confirmed)"
+  },
+  "iPhone19,2": {
+   "id": "ip18",
+   "display": "ip18",
+   "marketing": "iPhone 18 (user-confirmed)"
+  },
+  "SM-S9280": {
+   "id": "s24",
+   "display": "s24",
+   "marketing": "Samsung Galaxy S24 Ultra-class SM-S9280"
+  },
+  "SM-A556E": {
+   "id": "a55",
+   "display": "a55",
+   "marketing": "Samsung Galaxy A55"
+  },
+  "SM-A566B": {
+   "id": "a56",
+   "display": "a56",
+   "marketing": "Samsung Galaxy A56"
+  }
+ },
+ "place_display": {
+  "_comment": "Display names only (user 2026-11-26): the 5F disabled toilet is the MALE disabled toilet, the 4F one is a MIXED (unisex) disabled toilet. Place ids stay unchanged (keys in every file and comparison). Used by the interactive pages and the Excel sheets.",
+  "disabled_toilet": "Male disabled toilet (5F)",
+  "disabled_toilet_4F": "Mixed disabled toilet (4F)"
+ },
+ "sessions": [
+  {
+   "id": "23nov",
+   "day": "2026-11-23",
+   "loader": "crossday_23nov",
+   "labels": "../graph-v2/labels_23nov_merged.csv",
+   "note": "stops only logged magnetometer + barometer (ip16 = iPhone17,4), no accelerometer, so no tilt features"
+  },
+  {
+   "id": "24s1",
+   "day": "2026-11-24",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-24/sesi1/clean",
+   "names": "names_24nov.csv",
+   "note": "4 phones; iPhone slot = ip18 (iPhone19,2), not the same handset as 24s2"
+  },
+  {
+   "id": "24s2",
+   "day": "2026-11-24",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-24/sesi2/clean",
+   "names": "names_24nov.csv",
+   "note": "2 phones; iPhone slot = ip16 (iPhone17,4, the 23-Nov stop handset)"
+  },
+  {
+   "id": "25nov",
+   "day": "2026-11-25",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-25/clean",
+   "raw": "../../clean-data/2026-11-25/raw",
+   "names": "names_25nov.csv",
+   "wifi_scanner": "a56",
+   "wifi_log": "WigleWifi_20261125191559.csv.gz",
+   "note": "Dicta's complete 25-Nov dataset (PROCESS-LOG entry 28): one continuous pass of floor 5 + floor 4, 3 phones (iphone slot = ip18 = iPhone19,2, a55, a56), 26 stops; node names mapped in names_25nov.csv. Her wifi/observations.csv has no epoch/scanner columns: epoch from firstseen_hk, scanner a56 (her clean/README: the one non-empty WiGLE log was scanned on a56), log name from her clean/wifi/log_summary.csv"
+  },
+  {
+   "id": "25spots",
+   "day": "2026-11-25",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-25-spots/clean",
+   "raw": "../../clean-data/2026-11-25-spots/raw/attachments",
+   "names": "names_25spots.csv",
+   "exclude_sources": "../../clean-data/2026-11-25-spots/duplicates_vs_2026-11-25.csv",
+   "note": "our partial WhatsApp export of 25 Nov minus every recording already in 25nov (exclude_sources: the 36 round recordings of ip18 + a56 are byte-identical to Dicta's). Left: the spot stops by ip16 (iPhone17,4, Tian) and s24 (SM-S9280, Michael) with a label in clean/labels_used.csv (track 'spots'); the 8 unlabelled s24 files are not in the clean tree"
+  },
+  {
+   "id": "25night",
+   "day": "2026-11-25",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-25-night/round/clean",
+   "raw": "../../clean-data/2026-11-25-night/raw",
+   "names": "names_25night.csv",
+   "note": "Second collection run of 25 Nov, track 'round' (PROCESS-LOG entry 72): Dicta (iphone slot = ip18, iPhone19,2) and Chris (a56, SM-A566B) together, 21:47 to 00:40 (start_hk after midnight is written 24:mm:ss). Labels from their own file names, clean-data/2026-11-25-night/labels_night.csv (built by scripts/build_night.py). 32 stops (incl. 8 extra weak-spot stops after the loop) x 2 phones; Wi-Fi from Chris's a56 WiGLE log (observations.csv has epoch and scanner columns)",
+   "exclude_sources": "out-a56/exclude_a56_night.csv"
+  },
+  {
+   "id": "25night_tian",
+   "day": "2026-11-25",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-25-night/tian/clean",
+   "raw": "../../clean-data/2026-11-25-night/raw",
+   "names": "names_25night.csv",
+   "note": "Second collection run of 25 Nov, track 'tian' (PROCESS-LOG entry 72): Tian (iphone slot = ip16, iPhone17,4) on his own pass 21:40 to 23:00, labels from his own file names (labels_night.csv; 5 takes left out for review). 23 stops, no Wi-Fi log"
+  },
+  {
+   "id": "26tian",
+   "day": "2026-11-26",
+   "loader": "clean_tree",
+   "path": "../../clean-data/2026-11-26-tian/clean",
+   "raw": "../../clean-data/2026-11-26-tian/raw",
+   "names": "names_25night.csv",
+   "note": "26-Nov morning run, Tian alone (PROCESS-LOG entry 74): iphone slot = ip16 (iPhone17,4), 09:30 to 10:39, floor 5 then floor 4. Labels from his WhatsApp captions (his phone saved every file as 'point <time>.zip'), clean-data/2026-11-26-tian/labels_tian26.csv (built by scripts/build_tian26.py; node names as the night run, so names_25night.csv). 25 stops + 27 walks, 2 captions resolved from the sequence (medium), no Wi-Fi log"
+  }
+ ],
+ "variants": {
+  "_comment": "Optional variants of the stop data, chosen with DAY3_VARIANT=<name> (run_all.sh --split20). Output goes to out-<name>/; the default (no variant) is unchanged and writes out/. Rules and thresholds were fixed before any accuracy of the variant was computed (PROCESS-LOG entry 40).",
+  "split20": {
+   "_comment": "User 2026-11-25: every stop take -> consecutive 20 s pieces (each its own sample, pieces of one take always on the same side of a split); 23-Nov stairs stops and sr8/sr10/sr11 excluded; obvious outlier pieces removed. Outlier thresholds chosen from the within-take spread of the pieces (|B| and field direction; the spread is in out-split20/variant_summary.json within_take_spread), not from accuracy.",
+   "piece_s": 20,
+   "span_tolerance_s": 0.5,
+   "exclude": "exclude_23nov.csv",
+   "flat_B_std_uT": 0.01,
+   "outlier_B_uT": 5.0,
+   "outlier_angle_deg": 20.0
+  },
+  "split20_only": {
+   "_comment": "Control for split20: the same 20 s pieces, but no exclusions and no outlier removal (only incomplete pieces dropped), to separate the effect of the split from the effect of removing data.",
+   "piece_s": 20,
+   "span_tolerance_s": 0.5,
+   "exclude": null,
+   "flat_B_std_uT": null,
+   "outlier_B_uT": null,
+   "outlier_angle_deg": null
+  }
+ },
+ "_comment_a56": "Derived by a56_offset.py for option B only (offline analysis): session 25night leaves out every a56 recording."
+}
