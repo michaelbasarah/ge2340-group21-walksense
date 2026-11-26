@@ -269,11 +269,26 @@ def toilet_allowed(toilet_id, mode='standard', gender='any', toilets=TOILETS):
     return ''
 
 
+# Standard-mode toilet policy (user, 27 Nov; PROCESS-LOG entry 90): disabled toilets stay free for people who need them.
+# Standard mode answers with an ORDINARY toilet (male_toilet / female_toilet) whenever one fits the gender filter and
+# the floor filter and can be reached; a disabled toilet is used only when no ordinary one is left (in our data: a
+# "4F" request, since 4F has only the mixed disabled toilet, or a filter no ordinary toilet fits). Distance does not
+# override this: from 4F a Standard "male toilet" goes up to the 5F male toilet, not to the nearer 4F disabled one.
+# Step-free mode and words like "disabled" / "accessible" / "wheelchair" (accessible_only) -> disabled toilets only.
+POLICY_NOTE = {
+    'ordinary': 'Standard mode: ordinary toilets first, so disabled toilets stay free for people who need them '
+                '(choose Step-free or ask for a "disabled toilet" to get one).',
+    'disabled_fallback': 'No %s fits here, so this is a disabled toilet (Standard mode uses one only then).',
+    'disabled_only': ''}
+
+
 def nearest_toilet(start_id, mode='standard', gender='any', floor=None, accessible_only=False, toilets=TOILETS):
     """Nearest suitable toilet by route cost (seconds; on one floor that is also the shortest walk).
     gender: any / male / female (male -> male toilets + mixed; female -> female toilets + mixed).
     mode 'accessible' (or accessible_only) -> disabled toilets only. floor: only toilets on that floor.
-    -> {'choice': Plan or None, 'toilet': id or None, 'options': [...], 'excluded': [...], 'message': str}"""
+    Standard mode: ordinary toilets only, unless none fits; then disabled toilets (POLICY_NOTE above).
+    -> {'choice': Plan or None, 'toilet': id or None, 'options': [...], 'excluded': [...], 'message': str,
+        'policy': 'ordinary' | 'disabled_fallback' | 'disabled_only', 'policy_note': str}"""
     if mode not in PROFILES:
         raise KeyError('unknown mode %r' % mode)
     if gender not in GENDERS:
@@ -295,16 +310,34 @@ def nearest_toilet(start_id, mode='standard', gender='any', floor=None, accessib
             options.append({'id': tid, 'name': g.nodes[tid]['name'], 'floor': g.nodes[tid]['floor'], 'metres': p.metres,
                             'seconds': p.seconds, 'plan': p})
     options.sort(key=lambda o: (o['seconds'], o['metres'], o['id']))
-    want = ' '.join(w for w in (('disabled' if mode == 'accessible' or accessible_only else ''),
+    disabled_only = mode == 'accessible' or accessible_only
+    policy = 'disabled_only' if disabled_only else 'ordinary'
+    if not disabled_only:
+        ordinary = [o for o in options if not toilets[o['id']]['accessible']]
+        if ordinary:                                     # keep the disabled toilets free
+            excluded += [{'id': o['id'], 'name': o['name'], 'floor': o['floor'],
+                          'reason': 'disabled toilet, kept free: an ordinary toilet fits'} for o in options if o not in ordinary]
+            options = ordinary
+        elif options:
+            policy = 'disabled_fallback'
+    want = ' '.join(w for w in (('disabled' if disabled_only else ''),
                                 (gender if gender != 'any' else ''), 'toilet') if w)
     if not options:
         msg = 'No %s%s in the area WalkSense covers (AC1 5F and 4F). Toilets we know: %s.' % (
             want, (' on %dF' % floor) if floor is not None else '',
             '; '.join('%s (%s)' % (x['name'], x['reason']) for x in excluded))
-        return {'choice': None, 'toilet': None, 'options': [], 'excluded': excluded, 'message': msg}
+        return {'choice': None, 'toilet': None, 'options': [], 'excluded': excluded, 'message': msg,
+                'policy': policy, 'policy_note': ''}
     best = options[0]
     msg = 'Nearest %s: %s, about %.0f m walking, %.0f s.' % (want, best['name'], best['metres'], best['seconds'])
-    return {'choice': best['plan'], 'toilet': best['id'], 'options': options, 'excluded': excluded, 'message': msg}
+    note = POLICY_NOTE[policy]
+    if policy == 'disabled_fallback':
+        note = note % ('ordinary %s%s' % (want, (' on %dF' % floor) if floor is not None else ''))
+    elif policy == 'ordinary' and not any(toilets[x['id']]['accessible'] and x['reason'].startswith('disabled toilet, kept')
+                                          for x in excluded):
+        note = ''
+    return {'choice': best['plan'], 'toilet': best['id'], 'options': options, 'excluded': excluded, 'message': msg,
+            'policy': policy, 'policy_note': note}
 
 
 SAMPLE_ROUTES = [('y5302', 'female_toilet'), ('canteen', 'lt1a'), ('y5302', 'lt2b'), ('lt1a', 'canteen'),
@@ -314,7 +347,8 @@ SAMPLE_STARTS = ['canteen', 'y5202', 'y5401', 'exit_10', 'lt1a', 'y4502', 'lt2b'
 
 def samples(path=HERE / 'out' / 'planner_samples.json'):
     """python route.py samples -> out/planner_samples.json: example routes in both modes, the connector costs and the
-    nearest toilet for every mode x gender from 8 starts (4 per floor). The README and PROCESS-LOG quote this file."""
+    nearest toilet for every mode x gender from 8 starts (4 per floor), also with a 5F / 4F floor filter.
+    The README and PROCESS-LOG quote this file."""
     def brief(p):
         return {'path': p.path, 'metres': p.metres, 'seconds': p.seconds,
                 'legs': [{'from': a, 'to': b, 'kind': e['kind'], 'metres': e['metres'], 'seconds': e['seconds'], 'length_status': e['length_status']}
@@ -335,6 +369,7 @@ def samples(path=HERE / 'out' / 'planner_samples.json'):
             for gd in GENDERS:
                 t = nearest_toilet(st, m, gd)
                 out['toilets'].append({'from': st, 'from_floor': graph().nodes[st]['floor'], 'mode': m, 'gender': gd, 'toilet': t['toilet'],
+                                       'policy': t['policy'],
                                        'metres': t['choice'].metres if t['choice'] else None, 'seconds': t['choice'].seconds if t['choice'] else None,
                                        'connectors': [c['kind'] for c in t['choice'].connectors] if t['choice'] else [],
                                        'options': [{'id': o['id'], 'metres': o['metres'], 'seconds': o['seconds']} for o in t['options']], 'message': t['message']})
@@ -349,6 +384,16 @@ def samples(path=HERE / 'out' / 'planner_samples.json'):
                     cnt[k] = cnt.get(k, 0) + 1
         use[m] = cnt
     out['cross_floor_pairs_by_connector'] = use
+    out['toilet_policy'] = ('Standard: ordinary toilets first, a disabled toilet only when no ordinary one fits the filters '
+                            '(PROCESS-LOG entry 90); Step-free or "disabled" words: disabled toilets only')
+    out['toilets_floor_filter'] = []                     # "4F toilet" / "5F toilet": the case where Standard falls back
+    for st in SAMPLE_STARTS:
+        for m in PROFILES:
+            for gd in GENDERS:
+                for fl in (5, 4):
+                    t = nearest_toilet(st, m, gd, floor=fl)
+                    out['toilets_floor_filter'].append({'from': st, 'mode': m, 'gender': gd, 'floor': fl, 'toilet': t['toilet'],
+                                                        'policy': t['policy'], 'message': t['message']})
     t = nearest_toilet('canteen', 'accessible', 'female', floor=5)
     out['no_option_example'] = {'from': 'canteen', 'mode': 'accessible', 'gender': 'female', 'floor': 5, 'message': t['message']}
     path.parent.mkdir(exist_ok=True)

@@ -413,6 +413,8 @@ function showFound(r, how) {
     if (method !== 'gemini') box.append(el('div', g.configured ? `Gemini not used this time: ${r.fallback_reason || g.error || ''}` : 'Gemini is off (no key in .env), so search works offline.', 'muted'));
   }
   if (r.toilet && r.toilet.note) box.append(el('div', r.toilet.note, 'muted'));
+  const pnote = r.toilet ? r.toilet.policy_note : r.policy_note;
+  if (pnote && r.place_id != null) box.append(el('div', pnote, 'muted policy'));
   if (r.from && (r.route.length || r.route_error)) box.append(el('div', `From ${r.from.name} (${r.from.source === 'tracked' ? 'where you are' : r.from.source === 'chosen' ? 'chosen' : 'default start'})`, 'muted'));
   if (r.distance_m != null) {
     const walked = r.legs.filter(l => l.kind === 'walk').length;

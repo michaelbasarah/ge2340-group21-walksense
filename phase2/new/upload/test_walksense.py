@@ -9,6 +9,8 @@ import urllib.request
 import zipfile
 from http.server import ThreadingHTTPServer
 
+import numpy as np
+
 import route
 import server
 import walksense as ws
@@ -125,6 +127,117 @@ class UploadTest(unittest.TestCase):
         self.assertEqual(self.post('/api/upload?kind=drop', b'x')[0], 400)
         self.assertEqual(self.post('/api/floor?floor=9')[0], 400)
         self.assertEqual(self.post('/api/upload', b'')[0], 413)
+
+
+class FloorRuleTest(unittest.TestCase):
+    """Floor rule (d) in walksense.Session (PROCESS-LOG entry 90), with made-up pressures and votes; fast, no models.
+    Recordings are 60 s, 3 min apart; 1 floor = about 0.6 hPa (pressure RISES going down)."""
+
+    def run_rule(self, rule, recs, floor=5):
+        """recs = [(t_min, p or None, vote (floor, p) or None, is_stop)] -> floor after each recording."""
+        s, out = ws.Session(floor, rule=rule), []
+        for t, p, vote, stop in recs:
+            s.update_floor(p, p, t * 60.0, 60.0, is_stop=stop, vote=vote)
+            out.append(s.floor)
+        return out
+
+    def test_default_rule_and_params(self):
+        self.assertIn(ws.FLOOR_RULE, ws.FLOOR_RULES)
+        self.assertEqual(ws.Session().rule, ws.FLOOR_RULE)
+        self.assertEqual((ws.VOTE_K, ws.VOTE_P, ws.VOTE_H, ws.VOTE_M, ws.LONG_GAP_S), (15, 0.7, 2, 3, 900))   # floor/out/params.json
+
+    def test_missing_pressure_uses_the_vote(self):
+        recs = [(0, 1010.0, (5, 0.9), True), (3, 1010.0, (5, 0.9), True),
+                (6, None, (4, 0.9), True), (9, None, None, False), (12, None, (4, 0.9), True), (15, None, (4, 0.9), True)]
+        self.assertEqual(self.run_rule('d', recs), [5, 5, 5, 5, 4, 4])     # two confident votes in a row (H = 2)
+        self.assertEqual(self.run_rule('R0', recs), [5] * 6)              # R0: no pressure = floor kept
+        unsure = [r if r[2] is None else (r[0], r[1], (4, 0.6), r[3]) for r in recs]
+        self.assertEqual(self.run_rule('d', unsure)[-1], 5)               # p < 0.7 never counts
+
+    def test_long_gap_then_small_step(self):
+        """25-night case: 55 min without pressure, back on 4F but the step is under 0.40 hPa (weather fell)."""
+        recs = [(0, 1010.00, (5, 0.9), True), (3, 1010.02, (5, 0.9), True),
+                (58, 1010.38, (4, 0.9), True), (61, 1010.38, (4, 0.9), True), (64, 1010.39, (4, 0.9), True)]
+        self.assertEqual(self.run_rule('R0', recs), [5, 5, 5, 5, 5])
+        self.assertEqual(self.run_rule('d', recs), [5, 5, 5, 4, 4])
+        # after the switch the reference restarts from the 4F readings: later 4F readings keep 4F
+        s = ws.Session(5, rule='d')
+        for t, p, v, st in recs:
+            s.update_floor(p, p, t * 60.0, 60.0, is_stop=st, vote=v)
+        self.assertEqual(s.recent[-1], 1010.39)
+        self.assertEqual(s.consult_left, 0)
+        # only the first VOTE_M stops after the gap ask the vote
+        late = recs[:2] + [(58, 1010.38, (5, 0.9), True), (61, 1010.38, (5, 0.9), True), (64, 1010.39, (5, 0.9), True),
+                           (67, 1010.39, (4, 0.9), True), (70, 1010.39, (4, 0.9), True)]
+        self.assertEqual(self.run_rule('d', late)[-1], 5)
+
+    def test_weather_drift_with_pressure_does_not_ask_the_vote(self):
+        """Continuous pressure drifting +0.3 hPa/h on 5F, the magnetometer wrongly says 4F: (d) = R0 = stays 5F."""
+        recs = [(t, 1010.0 + 0.3 * t / 60, (4, 0.95), True) for t in range(0, 120, 3)]
+        self.assertEqual(self.run_rule('d', recs), [5] * len(recs))
+        self.assertEqual(self.run_rule('R0', recs), [5] * len(recs))
+
+    def test_real_floor_change_with_pressure(self):
+        recs = [(0, 1010.0, (5, 0.9), True), (3, 1010.01, (5, 0.9), True), (6, 1010.0, None, False),
+                (9, 1010.62, (5, 0.95), True), (12, 1010.63, (5, 0.95), True), (15, 1010.0, (5, 0.95), True)]
+        self.assertEqual(self.run_rule('R0', recs), [5, 5, 5, 4, 4, 5])
+        self.assertEqual(self.run_rule('d', recs), [5, 5, 5, 4, 4, 5])     # pressure wins; votes are not asked
+
+    def test_no_barometer_phone(self):
+        votes = [(4, 0.9), (5, 0.9), (4, 0.9), (4, 0.5), (4, 0.9), (5, 0.9), (5, 0.8)]
+        recs = [(3 * i, None, v, True) for i, v in enumerate(votes)]
+        # 4 (1 of 2), 5 = current floor -> count reset, 4 (1), unsure 4 (count kept), 4 (2) -> 4F, then 5 twice -> 5F
+        self.assertEqual(self.run_rule('d', recs), [5, 5, 5, 5, 4, 4, 5])
+        self.assertEqual(self.run_rule('R0', recs), [5] * len(recs))
+        # S24: its barometer is ignored under (d), used by R0
+        rec = {'device': 'SM-S9280', 'baro': np.array([[0, 1010.0], [1, 1010.0], [5, 1010.1]])}
+        self.assertEqual(ws.floor_pressure(rec, 'd'), (None, None))
+        self.assertEqual(ws.floor_pressure(rec, 'R0'), (1010.0, 1010.1))
+        rec['device'] = 'iPhone19,2'
+        self.assertEqual(ws.floor_pressure(rec, 'd'), (1010.0, 1010.1))
+
+    def test_rule_per_phone_model(self):
+        """(d) passed the pre-registered rule for the iPhone only: barometer-less phones and the S24 keep R0 by default."""
+        self.assertEqual(ws.floor_rule_for('iPhone19,2', 'd'), 'd')
+        self.assertEqual(ws.floor_rule_for('iPhone17,4', 'd'), 'd')
+        self.assertEqual(ws.floor_rule_for('SomeNewPhone', 'd'), 'd')
+        self.assertEqual(ws.floor_rule_for('iPhone19,2', 'R0'), 'R0')
+        old = ws.VOTE_NO_BARO
+        try:
+            ws.VOTE_NO_BARO = False
+            for dev in ('SM-A566B', 'SM-A556E', 'SM-S9280'):
+                self.assertEqual(ws.floor_rule_for(dev, 'd'), 'R0', dev)
+            ws.VOTE_NO_BARO = True
+            for dev in ('SM-A566B', 'SM-A556E', 'SM-S9280'):
+                self.assertEqual(ws.floor_rule_for(dev, 'd'), 'd', dev)
+        finally:
+            ws.VOTE_NO_BARO = old
+
+    def test_manual_floor_resets_the_count(self):
+        s = ws.Session(5, rule='d')
+        s.update_floor(None, None, 0, 60, vote=(4, 0.9))
+        s.set_floor(5)
+        s.update_floor(None, None, 180, 60, vote=(4, 0.9))
+        self.assertEqual(s.floor, 5)
+
+
+class TrainExcludeTest(unittest.TestCase):
+    """Chris's a56 night session is never training data (PROCESS-LOG 77 option B, entry 90); other phones unchanged."""
+
+    def test_a56_night_left_out_of_training(self):
+        self.assertIn(('25night', 'a56'), ws.TRAIN_EXCLUDE)
+        if '25night' not in ws.SESSIONS:
+            self.skipTest('WALKSENSE_SESSIONS limits the sessions')
+        a56 = ws.training_stops(device='SM-A566B', exclude=ws.TRAIN_EXCLUDE)
+        self.assertNotIn('25night', {x['session'] for x in a56})
+        self.assertIn('25night', {x['session'] for x in ws.training_stops(device='SM-A566B')})   # data still on disk
+        ip = ws.training_stops(device='iPhone19,2', exclude=ws.TRAIN_EXCLUDE)
+        self.assertIn('25night', {x['session'] for x in ip})                                     # Dicta's iPhone kept
+        fake = {(s, 'a56'): [{'device': 'SM-A566B', 'session': s}] for s in ('sesi1', '25nov', '25night')}
+        folds = {(te[0]['session'], mode): names for _, mode, names, _, te in ws.eval_folds(fake)}
+        self.assertEqual(folds[('sesi1', 'same_model')], ['25nov'])
+        self.assertEqual(folds[('25nov', 'same_model')], ['sesi1'])
+        self.assertEqual(folds[('25night', 'same_model')], ['sesi1', '25nov'])    # still tested
 
 
 if __name__ == '__main__':

@@ -159,6 +159,38 @@ class TestPlanner(Base):
         r = search.search('disabled toilet', from_id='y5202')                               # standard mode, words ask for accessible
         self.assertEqual(r['place_id'], 'disabled_toilet')
 
+    def test_standard_prefers_ordinary_toilets_every_case(self):
+        """Entry 90: Standard -> ordinary toilets (disabled ones stay free), Step-free -> disabled only; every start x
+        mode x gender filter, plain "toilet" request; words "disabled" / "accessible" / "wheelchair" force disabled."""
+        starts = ['canteen', 'y5202', 'y5401', 'exit_10', 'lt1a', 'y4502', 'lt2b', 'entrance_exit']
+        ordinary = {'any': {'male_toilet', 'female_toilet'}, 'male': {'male_toilet'}, 'female': {'female_toilet'}}
+        disabled = {'any': {'disabled_toilet', 'disabled_toilet_4F'}, 'male': {'disabled_toilet', 'disabled_toilet_4F'},
+                    'female': {'disabled_toilet_4F'}}
+        for st in starts:
+            for gender in ('any', 'male', 'female'):
+                r = search.search('toilet', from_id=st, mode='standard', gender=gender)
+                self.assertIn(r['place_id'], ordinary[gender], (st, gender))
+                self.assertEqual(r['toilet']['policy'], 'ordinary')
+                self.assertIn('disabled toilets stay free', r['toilet']['policy_note'])
+                r = search.search('toilet', from_id=st, mode='accessible', gender=gender)
+                self.assertIn(r['place_id'], disabled[gender], (st, gender))
+                self.assertEqual(r['toilet']['policy'], 'disabled_only')
+                for words in ('disabled toilet', 'accessible toilet', 'wheelchair toilet'):
+                    r = search.search(words, from_id=st, mode='standard', gender=gender)
+                    self.assertIn(r['place_id'], disabled[gender], (st, gender, words))
+                n = search.nearest('toilet', st, 'standard', gender)
+                self.assertIn(n['place_id'], ordinary[gender], (st, gender))
+        # the screenshot case: Standard + Male from the canteen -> the ordinary male toilet
+        r = search.search('toilet', from_id='canteen', mode='standard', gender='male')
+        self.assertEqual(r['place_id'], 'male_toilet')
+        self.assertIn('Male disabled toilet (5F)', {x['name'] for x in r['toilet']['excluded']})
+        # 4F start, Standard: up to the 5F male toilet, not the 4F mixed disabled toilet
+        self.assertEqual(search.search('toilet', from_id='lt1a', gender='male')['place_id'], 'male_toilet')
+        # a 4F-only request in Standard: no ordinary toilet on 4F -> the mixed disabled toilet, and the card says why
+        r = search.search('toilet 4F', from_id='canteen', mode='standard', gender='male')
+        self.assertEqual((r['place_id'], r['toilet']['policy']), ('disabled_toilet_4F', 'disabled_fallback'))
+        self.assertIn('No ordinary male toilet on 4F', r['toilet']['policy_note'])
+
     def test_toilet_no_option_message(self):
         r = search.search('disabled toilet 5F', from_id='canteen', mode='accessible', gender='female')
         self.assertIsNone(r['place_id'])
@@ -270,6 +302,9 @@ class TestServer(Base):
         self.assertEqual({x['id'] for x in r['excluded']}, {'male_toilet', 'female_toilet', 'disabled_toilet'})
         r = self.get_json('/api/nearest?type=toilet&from=lt1a&mode=accessible&gender=male')
         self.assertEqual(r['place_id'], 'disabled_toilet_4F')
+        r = self.get_json('/api/nearest?type=toilet&from=lt1a&mode=standard&gender=male')            # entry 90 policy
+        self.assertEqual((r['place_id'], r['policy']), ('male_toilet', 'ordinary'))
+        self.assertIn('disabled_toilet_4F', {x['id'] for x in r['excluded']})
         server.STATE['session'].history.append({'kind': 'stop', 'floor': 5, 'lit': 'y5202'})   # from = the lit place
         r = self.get_json('/api/nearest?type=toilet')
         self.assertEqual((r['from']['source'], r['place_id']), ('tracked', 'female_toilet'))

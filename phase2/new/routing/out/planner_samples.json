@@ -894,16 +894,12 @@
    "from_floor": 5,
    "mode": "standard",
    "gender": "any",
-   "toilet": "disabled_toilet",
-   "metres": 14.3,
-   "seconds": 11.0,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 14.7,
+   "seconds": 11.3,
    "connectors": [],
    "options": [
-    {
-     "id": "disabled_toilet",
-     "metres": 14.3,
-     "seconds": 11.0
-    },
     {
      "id": "male_toilet",
      "metres": 14.7,
@@ -913,42 +909,28 @@
      "id": "female_toilet",
      "metres": 16.0,
      "seconds": 12.3
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 36.7,
-     "seconds": 48.2
     }
    ],
-   "message": "Nearest toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+   "message": "Nearest toilet: Male toilet, about 15 m walking, 11 s."
   },
   {
    "from": "canteen",
    "from_floor": 5,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet",
-   "metres": 14.3,
-   "seconds": 11.0,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 14.7,
+   "seconds": 11.3,
    "connectors": [],
    "options": [
-    {
-     "id": "disabled_toilet",
-     "metres": 14.3,
-     "seconds": 11.0
-    },
     {
      "id": "male_toilet",
      "metres": 14.7,
      "seconds": 11.3
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 36.7,
-     "seconds": 48.2
     }
    ],
-   "message": "Nearest male toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+   "message": "Nearest male toilet: Male toilet, about 15 m walking, 11 s."
   },
   {
    "from": "canteen",
@@ -956,6 +938,7 @@
    "mode": "standard",
    "gender": "female",
    "toilet": "female_toilet",
+   "policy": "ordinary",
    "metres": 16.0,
    "seconds": 12.3,
    "connectors": [],
@@ -964,11 +947,6 @@
      "id": "female_toilet",
      "metres": 16.0,
      "seconds": 12.3
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 36.7,
-     "seconds": 48.2
     }
    ],
    "message": "Nearest female toilet: Female toilet, about 16 m walking, 12 s."
@@ -979,6 +957,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 14.3,
    "seconds": 11.0,
    "connectors": [],
@@ -1002,6 +981,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 14.3,
    "seconds": 11.0,
    "connectors": [],
@@ -1025,6 +1005,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 30.5,
    "seconds": 65.5,
    "connectors": [
@@ -1045,6 +1026,7 @@
    "mode": "standard",
    "gender": "any",
    "toilet": "female_toilet",
+   "policy": "ordinary",
    "metres": 10.7,
    "seconds": 8.2,
    "connectors": [],
@@ -1058,16 +1040,6 @@
      "id": "male_toilet",
      "metres": 36.1,
      "seconds": 27.8
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 41.0,
-     "seconds": 31.5
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 58.9,
-     "seconds": 65.3
     }
    ],
    "message": "Nearest toilet: Female toilet, about 11 m walking, 8 s."
@@ -1078,6 +1050,7 @@
    "mode": "standard",
    "gender": "male",
    "toilet": "male_toilet",
+   "policy": "ordinary",
    "metres": 36.1,
    "seconds": 27.8,
    "connectors": [],
@@ -1086,16 +1059,6 @@
      "id": "male_toilet",
      "metres": 36.1,
      "seconds": 27.8
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 41.0,
-     "seconds": 31.5
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 58.9,
-     "seconds": 65.3
     }
    ],
    "message": "Nearest male toilet: Male toilet, about 36 m walking, 28 s."
@@ -1106,6 +1069,7 @@
    "mode": "standard",
    "gender": "female",
    "toilet": "female_toilet",
+   "policy": "ordinary",
    "metres": 10.7,
    "seconds": 8.2,
    "connectors": [],
@@ -1114,11 +1078,6 @@
      "id": "female_toilet",
      "metres": 10.7,
      "seconds": 8.2
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 58.9,
-     "seconds": 65.3
     }
    ],
    "message": "Nearest female toilet: Female toilet, about 11 m walking, 8 s."
@@ -1129,6 +1088,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 41.0,
    "seconds": 31.5,
    "connectors": [],
@@ -1152,6 +1112,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 41.0,
    "seconds": 31.5,
    "connectors": [],
@@ -1175,6 +1136,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 57.2,
    "seconds": 86.0,
    "connectors": [
@@ -1194,16 +1156,12 @@
    "from_floor": 5,
    "mode": "standard",
    "gender": "any",
-   "toilet": "disabled_toilet",
-   "metres": 18.4,
-   "seconds": 14.2,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 25.2,
+   "seconds": 19.4,
    "connectors": [],
    "options": [
-    {
-     "id": "disabled_toilet",
-     "metres": 18.4,
-     "seconds": 14.2
-    },
     {
      "id": "male_toilet",
      "metres": 25.2,
@@ -1213,42 +1171,28 @@
      "id": "female_toilet",
      "metres": 48.7,
      "seconds": 37.5
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 47.0,
-     "seconds": 44.2
     }
    ],
-   "message": "Nearest toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+   "message": "Nearest toilet: Male toilet, about 25 m walking, 19 s."
   },
   {
    "from": "y5401",
    "from_floor": 5,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet",
-   "metres": 18.4,
-   "seconds": 14.2,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 25.2,
+   "seconds": 19.4,
    "connectors": [],
    "options": [
-    {
-     "id": "disabled_toilet",
-     "metres": 18.4,
-     "seconds": 14.2
-    },
     {
      "id": "male_toilet",
      "metres": 25.2,
      "seconds": 19.4
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 47.0,
-     "seconds": 44.2
     }
    ],
-   "message": "Nearest male toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+   "message": "Nearest male toilet: Male toilet, about 25 m walking, 19 s."
   },
   {
    "from": "y5401",
@@ -1256,6 +1200,7 @@
    "mode": "standard",
    "gender": "female",
    "toilet": "female_toilet",
+   "policy": "ordinary",
    "metres": 48.7,
    "seconds": 37.5,
    "connectors": [],
@@ -1264,11 +1209,6 @@
      "id": "female_toilet",
      "metres": 48.7,
      "seconds": 37.5
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 47.0,
-     "seconds": 44.2
     }
    ],
    "message": "Nearest female toilet: Female toilet, about 49 m walking, 38 s."
@@ -1279,6 +1219,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 18.4,
    "seconds": 14.2,
    "connectors": [],
@@ -1302,6 +1243,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 18.4,
    "seconds": 14.2,
    "connectors": [],
@@ -1325,6 +1267,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 18.4,
    "seconds": 56.2,
    "connectors": [
@@ -1345,6 +1288,7 @@
    "mode": "standard",
    "gender": "any",
    "toilet": "female_toilet",
+   "policy": "ordinary",
    "metres": 4.4,
    "seconds": 3.4,
    "connectors": [],
@@ -1355,19 +1299,9 @@
      "seconds": 3.4
     },
     {
-     "id": "disabled_toilet",
-     "metres": 25.9,
-     "seconds": 19.9
-    },
-    {
      "id": "male_toilet",
      "metres": 26.3,
      "seconds": 20.2
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 43.8,
-     "seconds": 53.7
     }
    ],
    "message": "Nearest toilet: Female toilet, about 4 m walking, 3 s."
@@ -1377,28 +1311,19 @@
    "from_floor": 5,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet",
-   "metres": 25.9,
-   "seconds": 19.9,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 26.3,
+   "seconds": 20.2,
    "connectors": [],
    "options": [
-    {
-     "id": "disabled_toilet",
-     "metres": 25.9,
-     "seconds": 19.9
-    },
     {
      "id": "male_toilet",
      "metres": 26.3,
      "seconds": 20.2
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 43.8,
-     "seconds": 53.7
     }
    ],
-   "message": "Nearest male toilet: Male disabled toilet (5F), about 26 m walking, 20 s."
+   "message": "Nearest male toilet: Male toilet, about 26 m walking, 20 s."
   },
   {
    "from": "exit_10",
@@ -1406,6 +1331,7 @@
    "mode": "standard",
    "gender": "female",
    "toilet": "female_toilet",
+   "policy": "ordinary",
    "metres": 4.4,
    "seconds": 3.4,
    "connectors": [],
@@ -1414,11 +1340,6 @@
      "id": "female_toilet",
      "metres": 4.4,
      "seconds": 3.4
-    },
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 43.8,
-     "seconds": 53.7
     }
    ],
    "message": "Nearest female toilet: Female toilet, about 4 m walking, 3 s."
@@ -1429,6 +1350,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 25.9,
    "seconds": 19.9,
    "connectors": [],
@@ -1452,6 +1374,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet",
+   "policy": "disabled_only",
    "metres": 25.9,
    "seconds": 19.9,
    "connectors": [],
@@ -1475,6 +1398,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 42.1,
    "seconds": 74.4,
    "connectors": [
@@ -1494,25 +1418,18 @@
    "from_floor": 4,
    "mode": "standard",
    "gender": "any",
-   "toilet": "disabled_toilet_4F",
-   "metres": 34.5,
-   "seconds": 26.5,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 29.2,
+   "seconds": 42.5,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 34.5,
-     "seconds": 26.5
-    },
     {
      "id": "female_toilet",
      "metres": 29.2,
      "seconds": 42.5
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 41.0,
-     "seconds": 51.5
     },
     {
      "id": "male_toilet",
@@ -1520,58 +1437,49 @@
      "seconds": 51.9
     }
    ],
-   "message": "Nearest toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+   "message": "Nearest toilet: Female toilet, about 29 m walking, 42 s."
   },
   {
    "from": "lt1a",
    "from_floor": 4,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet_4F",
-   "metres": 34.5,
-   "seconds": 26.5,
-   "connectors": [],
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 41.4,
+   "seconds": 51.9,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 34.5,
-     "seconds": 26.5
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 41.0,
-     "seconds": 51.5
-    },
     {
      "id": "male_toilet",
      "metres": 41.4,
      "seconds": 51.9
     }
    ],
-   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+   "message": "Nearest male toilet: Male toilet, about 41 m walking, 52 s."
   },
   {
    "from": "lt1a",
    "from_floor": 4,
    "mode": "standard",
    "gender": "female",
-   "toilet": "disabled_toilet_4F",
-   "metres": 34.5,
-   "seconds": 26.5,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 29.2,
+   "seconds": 42.5,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 34.5,
-     "seconds": 26.5
-    },
     {
      "id": "female_toilet",
      "metres": 29.2,
      "seconds": 42.5
     }
    ],
-   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+   "message": "Nearest female toilet: Female toilet, about 29 m walking, 42 s."
   },
   {
    "from": "lt1a",
@@ -1579,6 +1487,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 34.5,
    "seconds": 26.5,
    "connectors": [],
@@ -1602,6 +1511,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 34.5,
    "seconds": 26.5,
    "connectors": [],
@@ -1625,6 +1535,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 34.5,
    "seconds": 26.5,
    "connectors": [],
@@ -1642,25 +1553,18 @@
    "from_floor": 4,
    "mode": "standard",
    "gender": "any",
-   "toilet": "disabled_toilet_4F",
-   "metres": 38.3,
-   "seconds": 29.5,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 19.0,
+   "seconds": 34.6,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 38.3,
-     "seconds": 29.5
-    },
     {
      "id": "female_toilet",
      "metres": 19.0,
      "seconds": 34.6
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 30.8,
-     "seconds": 43.7
     },
     {
      "id": "male_toilet",
@@ -1668,58 +1572,49 @@
      "seconds": 44.0
     }
    ],
-   "message": "Nearest toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+   "message": "Nearest toilet: Female toilet, about 19 m walking, 35 s."
   },
   {
    "from": "y4502",
    "from_floor": 4,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet_4F",
-   "metres": 38.3,
-   "seconds": 29.5,
-   "connectors": [],
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 31.2,
+   "seconds": 44.0,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 38.3,
-     "seconds": 29.5
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 30.8,
-     "seconds": 43.7
-    },
     {
      "id": "male_toilet",
      "metres": 31.2,
      "seconds": 44.0
     }
    ],
-   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+   "message": "Nearest male toilet: Male toilet, about 31 m walking, 44 s."
   },
   {
    "from": "y4502",
    "from_floor": 4,
    "mode": "standard",
    "gender": "female",
-   "toilet": "disabled_toilet_4F",
-   "metres": 38.3,
-   "seconds": 29.5,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 19.0,
+   "seconds": 34.6,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 38.3,
-     "seconds": 29.5
-    },
     {
      "id": "female_toilet",
      "metres": 19.0,
      "seconds": 34.6
     }
    ],
-   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+   "message": "Nearest female toilet: Female toilet, about 19 m walking, 35 s."
   },
   {
    "from": "y4502",
@@ -1727,6 +1622,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 38.3,
    "seconds": 29.5,
    "connectors": [],
@@ -1750,6 +1646,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 38.3,
    "seconds": 29.5,
    "connectors": [],
@@ -1773,6 +1670,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 38.3,
    "seconds": 29.5,
    "connectors": [],
@@ -1790,25 +1688,18 @@
    "from_floor": 4,
    "mode": "standard",
    "gender": "any",
-   "toilet": "disabled_toilet_4F",
-   "metres": 23.2,
-   "seconds": 17.9,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 23.3,
+   "seconds": 37.9,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 23.2,
-     "seconds": 17.9
-    },
     {
      "id": "female_toilet",
      "metres": 23.3,
      "seconds": 37.9
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 35.1,
-     "seconds": 47.0
     },
     {
      "id": "male_toilet",
@@ -1816,58 +1707,49 @@
      "seconds": 47.3
     }
    ],
-   "message": "Nearest toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+   "message": "Nearest toilet: Female toilet, about 23 m walking, 38 s."
   },
   {
    "from": "lt2b",
    "from_floor": 4,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet_4F",
-   "metres": 23.2,
-   "seconds": 17.9,
-   "connectors": [],
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 35.5,
+   "seconds": 47.3,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 23.2,
-     "seconds": 17.9
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 35.1,
-     "seconds": 47.0
-    },
     {
      "id": "male_toilet",
      "metres": 35.5,
      "seconds": 47.3
     }
    ],
-   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+   "message": "Nearest male toilet: Male toilet, about 36 m walking, 47 s."
   },
   {
    "from": "lt2b",
    "from_floor": 4,
    "mode": "standard",
    "gender": "female",
-   "toilet": "disabled_toilet_4F",
-   "metres": 23.2,
-   "seconds": 17.9,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 23.3,
+   "seconds": 37.9,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 23.2,
-     "seconds": 17.9
-    },
     {
      "id": "female_toilet",
      "metres": 23.3,
      "seconds": 37.9
     }
    ],
-   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+   "message": "Nearest female toilet: Female toilet, about 23 m walking, 38 s."
   },
   {
    "from": "lt2b",
@@ -1875,6 +1757,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 23.2,
    "seconds": 17.9,
    "connectors": [],
@@ -1898,6 +1781,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 23.2,
    "seconds": 17.9,
    "connectors": [],
@@ -1921,6 +1805,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 23.2,
    "seconds": 17.9,
    "connectors": [],
@@ -1938,25 +1823,18 @@
    "from_floor": 4,
    "mode": "standard",
    "gender": "any",
-   "toilet": "disabled_toilet_4F",
-   "metres": 17.8,
-   "seconds": 13.7,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 45.9,
+   "seconds": 55.3,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 17.8,
-     "seconds": 13.7
-    },
     {
      "id": "female_toilet",
      "metres": 45.9,
      "seconds": 55.3
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 62.6,
-     "seconds": 56.2
     },
     {
      "id": "male_toilet",
@@ -1964,58 +1842,49 @@
      "seconds": 61.4
     }
    ],
-   "message": "Nearest toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+   "message": "Nearest toilet: Female toilet, about 46 m walking, 55 s."
   },
   {
    "from": "entrance_exit",
    "from_floor": 4,
    "mode": "standard",
    "gender": "male",
-   "toilet": "disabled_toilet_4F",
-   "metres": 17.8,
-   "seconds": 13.7,
-   "connectors": [],
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "metres": 69.4,
+   "seconds": 61.4,
+   "connectors": [
+    "stairs"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 17.8,
-     "seconds": 13.7
-    },
-    {
-     "id": "disabled_toilet",
-     "metres": 62.6,
-     "seconds": 56.2
-    },
     {
      "id": "male_toilet",
      "metres": 69.4,
      "seconds": 61.4
     }
    ],
-   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+   "message": "Nearest male toilet: Male toilet, about 69 m walking, 61 s."
   },
   {
    "from": "entrance_exit",
    "from_floor": 4,
    "mode": "standard",
    "gender": "female",
-   "toilet": "disabled_toilet_4F",
-   "metres": 17.8,
-   "seconds": 13.7,
-   "connectors": [],
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "metres": 45.9,
+   "seconds": 55.3,
+   "connectors": [
+    "escalator"
+   ],
    "options": [
-    {
-     "id": "disabled_toilet_4F",
-     "metres": 17.8,
-     "seconds": 13.7
-    },
     {
      "id": "female_toilet",
      "metres": 45.9,
      "seconds": 55.3
     }
    ],
-   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+   "message": "Nearest female toilet: Female toilet, about 46 m walking, 55 s."
   },
   {
    "from": "entrance_exit",
@@ -2023,6 +1892,7 @@
    "mode": "accessible",
    "gender": "any",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 17.8,
    "seconds": 13.7,
    "connectors": [],
@@ -2046,6 +1916,7 @@
    "mode": "accessible",
    "gender": "male",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 17.8,
    "seconds": 13.7,
    "connectors": [],
@@ -2069,6 +1940,7 @@
    "mode": "accessible",
    "gender": "female",
    "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
    "metres": 17.8,
    "seconds": 13.7,
    "connectors": [],
@@ -2117,6 +1989,873 @@
    "lift": 336
   }
  },
+ "toilet_policy": "Standard: ordinary toilets first, a disabled toilet only when no ordinary one fits the filters (PROCESS-LOG entry 90); Step-free or \"disabled\" words: disabled toilets only",
+ "toilets_floor_filter": [
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Male toilet, about 15 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 37 m walking, 48 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 15 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 37 m walking, 48 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 16 m walking, 12 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 37 m walking, 48 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 30 m walking, 66 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 30 m walking, 66 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 30 m walking, 66 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Female toilet, about 11 m walking, 8 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 59 m walking, 65 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 36 m walking, 28 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 59 m walking, 65 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 11 m walking, 8 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 59 m walking, 65 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 41 m walking, 32 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 57 m walking, 86 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 41 m walking, 32 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 57 m walking, 86 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 57 m walking, 86 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Male toilet, about 25 m walking, 19 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 47 m walking, 44 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 25 m walking, 19 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 47 m walking, 44 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 49 m walking, 38 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 47 m walking, 44 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 18 m walking, 56 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 18 m walking, 56 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 18 m walking, 56 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Female toilet, about 4 m walking, 3 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 44 m walking, 54 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 26 m walking, 20 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 44 m walking, 54 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 4 m walking, 3 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 44 m walking, 54 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 26 m walking, 20 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 42 m walking, 74 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 26 m walking, 20 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 42 m walking, 74 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 42 m walking, 74 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Female toilet, about 29 m walking, 42 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 41 m walking, 52 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 29 m walking, 42 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 51 m walking, 81 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 51 m walking, 81 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Female toilet, about 19 m walking, 35 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 31 m walking, 44 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 19 m walking, 35 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 54 m walking, 84 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 54 m walking, 84 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Female toilet, about 23 m walking, 38 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 36 m walking, 47 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 23 m walking, 38 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 39 m walking, 72 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 39 m walking, 72 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest toilet: Female toilet, about 46 m walking, 55 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "male_toilet",
+   "policy": "ordinary",
+   "message": "Nearest male toilet: Male toilet, about 69 m walking, 61 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 5,
+   "toilet": "female_toilet",
+   "policy": "ordinary",
+   "message": "Nearest female toilet: Female toilet, about 46 m walking, 55 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_fallback",
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 34 m walking, 68 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "gender": "any",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 5,
+   "toilet": "disabled_toilet",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 34 m walking, 68 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "gender": "male",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 5,
+   "toilet": null,
+   "policy": "disabled_only",
+   "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "gender": "female",
+   "floor": 4,
+   "toilet": "disabled_toilet_4F",
+   "policy": "disabled_only",
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  }
+ ],
  "no_option_example": {
   "from": "canteen",
   "mode": "accessible",
