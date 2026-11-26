@@ -81,6 +81,7 @@ Contents:
 70. 26 Nov: the upload app's map becomes a vector floor plan in metres (Google screenshot under the sketch + pins + graph.json lengths, least-squares fit), picture kept as fallback
 71. 26 Nov: search bar in the upload app (Gemini when a key is pasted, keyword -> fuzzy offline) with the A* route drawn on the floor plan; Gemini backend for request matching
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
+74. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
 - Lessons learned
 - Open questions / next steps
 
@@ -1202,6 +1203,22 @@ Contents:
 - **Links:** `phase2/clean-data/2026-11-25-night/` (README, `labels_night.csv`, `wifi_logs.csv`, `build_summary.json`, `field_check.csv`, `tian_lt_check.csv`, `scripts/`); `phase2/clean-data/2026-11-25-spots/` (`labels_override.csv`, `raw/source_files.csv`, `scripts/build_clean.py`, README "Added 26 Nov"); `phase2/new/day3/config.json`, `names_25night.csv`, `run_all.sh`, `phone_map.py`, `visualise.py`, `README.md` section m, `out/`, `out-split20/`; `phase2/new/upload/walksense.py`, `test_walksense.py`, `out/eval.json`, `out/live_checks.json`; branch `feat/night-run` commits 5d51f45, 5758f0e, 42020ad and the commit that completes this entry.
 
 ---
+
+## 74. 26 Nov: Tian's 26-Nov morning pass added as session `26tian` (labels from his chat captions); day-3 rerun, gaps sheet, upload app retrained
+
+*(In progress: data and labels are in; the reruns follow in the next commits of `feat/tian-morning`.)*
+
+- **What we tried:** add Tian's morning pass of 26 Nov (iPhone17,4 = ip16, 09:30 to 10:39, both floors) as a new day-3 session, rerun day 3 (default and split20), the gaps sheet, the playgrounds and Tian's upload app, and use his new LT stops to check his five doubtful night takes.
+- **Why:** a third same-handset session for ip16 (24 s2, `25night_tian`, now `26tian`), and this morning he recorded LT2A, LT2B, LT1B and LT1A on the same phone, which the night-run open question needed.
+- **How:**
+  - Inputs are untrusted downloads: 52 phyphox ZIPs (`exit 5 2026-11-26 09-31-47.zip` and 51 `point 2026-11-26 HH-MM-SS.zip`) and the chat export `GE2340 (1).zip`, extracted in Python into its own scratch folder; every script ran with `python -I`; nothing from the inputs was executed. The chat text is not in the repo.
+  - `phase2/clean-data/2026-11-26-tian/scripts/ingest_tian26.py <folder> <chat.txt>`: SHA-256 of every ZIP against every `.zip`/`.gz` in the repo (the night run's `repo_hashes`; all 52 new), all 52 iPhone17,4; each file matched to Tian's first `<document omitted>` line at or after its save time, failing unless the match is one-to-one, in order, each gap 0 to 60 s and each caption before the next file. Captions -> places through one table in the script (reason per caption), kind checked against the duration. Writes `labels_tian26.csv` and copies the ZIPs to `raw/`.
+  - `scripts/build_tian26.py` (the night build for one phone) writes `clean/` in Dicta's layout; `run_all.sh` runs it first. `config.json` has session `26tian` (same structure as `25night_tian`, names `names_25night.csv`); `visualise.py` has a colour and marker for it.
+  - `scripts/check_lt_night.py` writes `lt_night_check.csv` and `medium_label_check.csv`.
+- **Result:**
+  - **Data** (`clean/summary.json`, `labels_tian26.csv`): 52 recordings, 25 stops (5F 13, 4F 12) + 27 walks (5F 14, 4F 13); 50 high, 2 medium; all with a barometer; none left out. Chat gaps 7 to 45 s.
+  - **Medium labels:** "lift turun bawah" (60 s stop between "lt2b esc turun bawah" and two walks that start at the 4F down escalator) = escalator_down_4F; its field is 40.8 and 49.2 uT (x/y/z) from his two 4F lift/stairs stops and 14.9 uT from this morning's 4F escalator-up stop (`medium_label_check.csv`). "lt1b exit 10" (walk right after the "lt1a" stop, before "exit 10 bawah") = lt1a -> exit_10_4F.
+  - **Night "lt2b"/"lt2a" takes** (`lt_night_check.csv`, same phone, mean x/y/z): the 22:50 stop "lt2b" is 3.0 uT from this morning's LT1B (LT1A 36.2, LT2B 61.4, LT2A 63.3); the 22:53 stop "lt2a" is 14.2 uT from LT1A (LT1B 27.1, LT2A 61.0, LT2B 69.7). Controls: his night LT2A (22:34) is 22.1 uT from this morning's LT2A (next 53.4); his night LT2B (22:37) is 39.3 from LT2B and 42.2 from LT2A. The three walks are not conclusive (the same start/end check puts this morning's own LT1B -> LT1A walk nearest LT2B / LT2A). Not relabelled.
 
 ## Lessons learned
 

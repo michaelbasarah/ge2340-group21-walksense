@@ -1,0 +1,41 @@
+{
+ "dataset": "2026-11-26 morning, track tian26 (Tian alone, floor 5 + floor 4)",
+ "phones": [
+  "iphone"
+ ],
+ "devices": {
+  "iphone": [
+   "iPhone17,4"
+  ]
+ },
+ "recordings_written": 52,
+ "stops": 25,
+ "walks": 27,
+ "stops_floor5": 13,
+ "stops_floor4": 12,
+ "walks_floor5": 14,
+ "walks_floor4": 13,
+ "per_phone": {
+  "iphone": {
+   "stop": 25,
+   "walk": 27
+  }
+ },
+ "confidence": {
+  "high": 50,
+  "medium": 2
+ },
+ "medium_confidence": [
+  "floor4/stops/s06_esca_down ('lift turun bawah')",
+  "floor4/walks/w11_lt1a__exit10_door ('lt1b exit 10')"
+ ],
+ "takes_without_barometer": 0,
+ "raw_zips": 52,
+ "raw_without_label_row": [],
+ "labels_not_built": [],
+ "wifi": "none",
+ "warnings": [
+  "No canteen stop (the run starts at the exit 5 door) and no 5F exit 5 -> ... walk from the escalators: between the 5F escalator-up stop and \"esit 5 toilet disabled men\" nothing was recorded.",
+  "Two captions contradict their neighbours and were resolved from the sequence (confidence medium): \"lift turun bawah\" = escalator down 4F stop, \"lt1b exit 10\" = walk LT1A -> exit 10 door 4F."
+ ]
+}

@@ -30,9 +30,10 @@ S1, S2, S3 = '#2a78d6', '#eb6834', '#1baf7a'          # categorical slots 1-3 (v
 S4 = '#8f4fd1'                                         # 4th session (25 Nov)
 S5 = '#b0306a'                                         # 5th session (25 Nov spot recordings)
 S6 = '#5c5c5c'                                         # 6th session (25 Nov night run)
-SESS_COL = {'23nov': S1, '24s1': S2, '24s2': S3, '25nov': S4, '25spots': S5, '25night': S6}
-SESS_MARK = {'23nov': 'o', '24s1': 's', '24s2': '^', '25nov': 'D', '25spots': 'v', '25night': 'P'}
-SESS_NAME = {'23nov': '23 Nov', '24s1': '24 Nov session 1', '24s2': '24 Nov session 2', '25nov': '25 Nov', '25spots': '25 Nov spots', '25night': '25 Nov night'}
+S7 = '#a06a00'                                         # 26 Nov morning (Tian)
+SESS_COL = {'23nov': S1, '24s1': S2, '24s2': S3, '25nov': S4, '25spots': S5, '25night': S6, '26tian': S7}
+SESS_MARK = {'23nov': 'o', '24s1': 's', '24s2': '^', '25nov': 'D', '25spots': 'v', '25night': 'P', '26tian': 'X'}
+SESS_NAME = {'23nov': '23 Nov', '24s1': '24 Nov session 1', '24s2': '24 Nov session 2', '25nov': '25 Nov', '25spots': '25 Nov spots', '25night': '25 Nov night', '26tian': '26 Nov Tian'}
 SESSIONS = [s['id'] for s in data.config()['sessions']]          # config order; every figure loops over these
 for _i, _s in enumerate(SESSIONS):                               # a session added later without an entry above still draws
     SESS_COL.setdefault(_s, ['#5c5c5c', '#b0306a'][_i % 2]); SESS_MARK.setdefault(_s, 'v'); SESS_NAME.setdefault(_s, _s)
