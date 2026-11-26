@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Live mode: read phyphox's remote access while you walk, and guess the place at every stop.
 
-  python live.py probe http://<phone-ip>:8080     # first: check the laptop can read the phone
-  python server.py --live http://<phone-ip>:8080  # then: the map page updates live
+  python live.py probe http://<phone-ip>     # first: check the laptop can read the phone (port 80 on our iPhones, entry 86)
+  python server.py --live http://<phone-ip> --device iPhone19,2  # then: the map page updates live
 
 phyphox REST calls used (from the official web interface's code, phyphox-webinterface/index.html):
   /get?<buf>=<last value of ref>%7C<ref>&<ref>=<last value>   -> only newer samples ("full" = all)
@@ -13,7 +13,9 @@ reach), otherwise common names are tried; `probe` shows what was found.
 Rules (all checked on the 24-Nov iPhone data, PROCESS-LOG entry 26):
   standing = |acc| std over the last 3 s < 0.4 m/s^2 (stops 95% <= 0.29, walks >= 0.8)
   a stop is named once the last 3 s are still (3 s of stop gives the same top-1 as 10 s; entry 27)
-  the floor is updated once per stop from its median pressure (27/27 and 26/26)
+  the floor is updated once per stop from its median pressure (27/27 and 26/26); under floor rule (d) (default,
+  PROCESS-LOG 90) a stop without pressure, or one of the first stops after a 15-min gap, also asks the magnetic
+  floor vote once it has lasted VOTE_AFTER_S (2 confident votes in a row switch the floor)
   while walking, a dot moves along the recorded corridors from the last named stop (route.py)
   phyphox play -> pause is saved as a phyphox-style ZIP in recordings/ (uploadable on the page)
 """
@@ -40,6 +42,7 @@ STILL_STD = 0.4        # m/s^2
 MOTION_S = 3.0         # window for the still/moving test
 NAME_AFTER_S = 3.0     # seconds of stillness before the first place guess (counted from the start of the still 3 s)
 MAX_STOP_S = 60.0      # use at most the last 60 s of a stop (what the model was trained on)
+VOTE_AFTER_S = 10.0    # floor rule (d): ask the magnetic floor vote once a stop has lasted 10 s (several 2 s windows)
 POLL_S = 0.5
 GAP_S = 5.0            # a break in the data (phyphox paused) ends the current stop or walk
 KEEP_S = 180.0         # samples kept in memory
@@ -59,7 +62,7 @@ class Phyphox:
     def __init__(self, base, timeout=3.0):
         u = urllib.parse.urlparse(base if '://' in base else 'http://' + base)
         if u.scheme != 'http' or not u.hostname:
-            raise ValueError('phyphox address must look like http://192.168.1.23:8080')
+            raise ValueError('phyphox address must look like http://192.168.137.23 (add :port only if phyphox shows one)')
         self.base, self.timeout = f'http://{u.netloc}', timeout
         self.bufs, self.last = {}, {}
 
@@ -140,7 +143,7 @@ class LiveTracker:
     def __init__(self, models, device='iPhone17,4', floor=5, graph=None):
         self.models, self.device = models, device
         self.model, self.model_note = ws.pick_model(models, device)
-        self.session = ws.Session(floor)
+        self.session = ws.Session(floor, rule=ws.floor_rule_for(device))   # (d) for barometer phones (entry 90)
         self.data = {s: np.empty((0, 2 if s == 'baro' else 4)) for s in SENSORS}
         self.graph = route.build() if graph is None else graph
         self.anchor = None            # last named place (floor, place): where the walking dot starts
@@ -206,10 +209,20 @@ class LiveTracker:
             win = self._window(max(self.still_since, now - MAX_STOP_S), now)
             if self.stop is None:                               # first look at this stop: floor, once
                 p = win['baro'][:, 1] if len(win['baro']) else None
-                note = self.session.track_floor(float(np.median(p)), float(np.median(p)), now, 0.0) if p is not None and len(p) \
-                    else 'no barometer data: floor kept'
+                ignored = self.session.rule == 'd' and self.device in ws.BARO_IGNORED
+                if p is not None and len(p) and not ignored:
+                    note = self.session.pressure_step(float(np.median(p)), float(np.median(p)), now, 0.0, is_stop=True)
+                else:
+                    self.session.pressure_step(None, None, now, 0.0, is_stop=True)    # (d): this stop may ask the vote
+                    note = ws.BARO_IGNORED[self.device] if ignored else 'no barometer data: floor kept'
                 self.stop = {'start': self.still_since}
                 st.update(floor=self.session.floor, floor_note=note)
+            if self.session.vote_pending and now - self.still_since >= VOTE_AFTER_S and len(win['mag']) >= 20:
+                v = self.model.vote_floor(win, trim=0.0) if self.model else None      # once per stop
+                note = self.session.apply_vote(*v) if v else ''
+                self.session.vote_pending = False
+                if note:
+                    st.update(floor=self.session.floor, floor_note=note)
             top3 = self.model.top3(win, self.session.floor, trim=0.0) if len(win['mag']) >= 20 and len(win['acc']) >= 20 else []
             if top3:
                 lit = top3[0][0] if top3 and top3[0][1] >= ws.LIGHT_P else None
@@ -291,7 +304,7 @@ def probe(url):
     for s, a in chunk.items():
         print(f'  {s:5}: {len(a)} samples, last t = {a[-1, 0]:.2f} s, last values = {np.round(a[-1, 1:], 3).tolist()}')
     if not {'acc', 'mag'} <= set(found):
-        print('Missing buffers: send the output of http://<phone>:8080/config so the names can be added.')
+        print('Missing buffers: send the output of http://<phone>/config (the same address as above + /config) so the names can be added.')
 
 
 # ============================================================================ checks on recorded data
@@ -301,20 +314,23 @@ def _stream(session):
     t_first, parts, truth, prev_end = ws.hk_epoch(rows[0]['start_hk']), {s: [] for s in SENSORS}, [], -1.0
     for r in rows:
         rec = ws.read_folder(ws.session_dir(session) / 'clean' / r['folder'] / 'iphone', r['device'])
-        start = min(rec[s][0, 0] for s in SENSORS)
+        have = [s for s in SENSORS if s in rec and len(rec[s])]           # 25 night: some takes have no barometer
+        start = min(rec[s][0, 0] for s in have)
         t0 = max(ws.hk_epoch(r['start_hk']) - t_first, prev_end + 0.5)     # manifest start times can overlap by a few s
-        prev_end = t0 + max(rec[s][-1, 0] for s in SENSORS) - start
-        for s in SENSORS:
+        prev_end = t0 + max(rec[s][-1, 0] for s in have) - start
+        for s in have:
             a = rec[s].copy(); a[:, 0] += t0 - start; parts[s].append(a)
         if r['type'] == 'stop':
             truth.append((int(r['floor']), ws.MERGE.get(r['node'], r['node']), t0))
-    return {s: np.vstack(parts[s]) for s in SENSORS}, truth, int(rows[0]['floor'])
+    return {s: np.vstack(parts[s]) for s in SENSORS if parts[s]}, truth, int(rows[0]['floor'])
 
 
-def replay(session, device, models):
+def replay(session, device, models, rule=None):
     """Stream a recorded session through LiveTracker in 0.5 s steps and score every recorded stop."""
     stream, truth, floor = _stream(session)
     tr = LiveTracker(models, device, floor, graph={})
+    if rule:
+        tr.session.rule = rule
     end = max(a[-1, 0] for a in stream.values())
     for t in np.arange(0, end + 1, POLL_S):
         tr.add({s: a[(a[:, 0] > t - POLL_S) & (a[:, 0] <= t)] for s, a in stream.items()
@@ -373,6 +389,11 @@ def check():
             if held in ws.SESSIONS:
                 out['live_replay'][f'{held} streamed, model iPhone19,2 from {other} only'] = replay(
                     held, 'iPhone19,2', {'iPhone19,2': ws.PlaceModel(ws.training_stops(sessions=(other,), device='iPhone19,2'))})
+    if '25night' in ws.SESSIONS:                  # Dicta's pressure dropout (entries 74, 90): floor rule per stop, held-out model
+        m = {'iPhone19,2': ws.PlaceModel(ws.training_stops(sessions=('sesi1', '25nov'), device='iPhone19,2'))}
+        for rule in ws.FLOOR_RULES:
+            out['live_replay'][f'25night streamed, model iPhone19,2 from sesi1+25nov, floor rule {rule}'] = replay(
+                '25night', 'iPhone19,2', m, rule=rule)
     ws.OUT.mkdir(exist_ok=True)
     ws.out_file('live_checks').write_text(json.dumps(out, indent=1))
     return out
