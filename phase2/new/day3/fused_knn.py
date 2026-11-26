@@ -78,8 +78,11 @@ def eval_grid(bank, folds, grid, area=None):
 
 
 def best(tot, among=None):
+    """Highest sample accuracy, then window accuracy, then k nearest 5. Explicit final tie-break (PROCESS-LOG 91), so the
+    choice never depends on dict order: the smaller k, then the lexicographically smallest weight vector."""
     items = [(wk, v) for wk, v in tot.items() if among is None or wk[0] in among]
-    return max(items, key=lambda it: (it[1][0] / it[1][1], it[1][2] / it[1][3], -abs(it[0][1] - 5)))[0]
+    return max(items, key=lambda it: (it[1][0] / it[1][1], it[1][2] / it[1][3], -abs(it[0][1] - 5), -it[0][1],
+                                      tuple(-x for x in it[0][0])))[0]
 
 
 def tune(bank, folds):

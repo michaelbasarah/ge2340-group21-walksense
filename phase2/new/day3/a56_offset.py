@@ -65,6 +65,26 @@ OPTIONS = {'A': 'keep as now', 'B': 'exclude the a56 night takes',
 N_MIN, R_LO, R_HI, GAP_MAX = 10, 20.0, 60.0, 180.0
 LOCAL_MIN, N_MIN_LOCAL = 30.0, 8
 NIGHT, A56 = '25night', 'a56'
+NIGHT_EXCLUSION = 'exclude_a56_night.csv'     # config.json default since 27 Nov (PROCESS-LOG 91, = option B)
+
+
+def _base_config():
+    """Since 27 Nov config.json itself leaves out the a56 night takes (option B is the default). Every option here starts
+    from config.json WITHOUT that exclusion (out-a56/config_A.json), so A still means 'keep as now (26 Nov)' and the
+    comparison of entry 77 reruns unchanged."""
+    if os.environ.get('DAY3_CONFIG'):
+        return
+    cfg = json.loads((HERE / 'config.json').read_text())
+    for s in cfg['sessions']:
+        if s['id'] == NIGHT and s.get('exclude_sources') == NIGHT_EXCLUSION:
+            del s['exclude_sources']
+            s.pop('_comment_exclude', None)
+    OUTA.mkdir(exist_ok=True)
+    (OUTA / 'config_A.json').write_text(json.dumps(cfg, indent=1))
+    os.environ['DAY3_CONFIG'] = 'out-a56/config_A.json'
+
+
+_base_config()
 PHONES = ['ip18', 'ip16', 'a56', 's24', 'a55']
 
 
@@ -181,7 +201,7 @@ def option_offsets(opt, O):
 def install(opt):
     """Make data.load() return option `opt` and data.OUT point at out-a56/<opt>[-split20]/."""
     if opt == 'B':
-        cfg = json.loads((HERE / 'config.json').read_text())
+        cfg = data.config()              # = out-a56/config_A.json (see _base_config)
         cfg['_comment_a56'] = 'Derived by a56_offset.py for option B only (offline analysis): session 25night leaves out every a56 recording.'
         for s in cfg['sessions']:
             if s['id'] == NIGHT:
