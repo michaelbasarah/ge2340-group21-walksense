@@ -1219,6 +1219,12 @@ Contents:
   - **Data** (`clean/summary.json`, `labels_tian26.csv`): 52 recordings, 25 stops (5F 13, 4F 12) + 27 walks (5F 14, 4F 13); 50 high, 2 medium; all with a barometer; none left out. Chat gaps 7 to 45 s.
   - **Medium labels:** "lift turun bawah" (60 s stop between "lt2b esc turun bawah" and two walks that start at the 4F down escalator) = escalator_down_4F; its field is 40.8 and 49.2 uT (x/y/z) from his two 4F lift/stairs stops and 14.9 uT from this morning's 4F escalator-up stop (`medium_label_check.csv`). "lt1b exit 10" (walk right after the "lt1a" stop, before "exit 10 bawah") = lt1a -> exit_10_4F.
   - **Night "lt2b"/"lt2a" takes** (`lt_night_check.csv`, same phone, mean x/y/z): the 22:50 stop "lt2b" is 3.0 uT from this morning's LT1B (LT1A 36.2, LT2B 61.4, LT2A 63.3); the 22:53 stop "lt2a" is 14.2 uT from LT1A (LT1B 27.1, LT2A 61.0, LT2B 69.7). Controls: his night LT2A (22:34) is 22.1 uT from this morning's LT2A (next 53.4); his night LT2B (22:37) is 39.3 from LT2B and 42.2 from LT2A. The three walks are not conclusive (the same start/end check puts this morning's own LT1B -> LT1A walk nearest LT2B / LT2A). Not relabelled.
+  - **Upload app** (`phase2/new/upload/out/eval.json`, xyz top-1 (top-3); before = `eval_2026-11-26b.json`; the only app change is `26tian` in `ALL_SESSIONS`, plus the session tuple in `test_walksense.py`):
+    - iPhone17,4 same handset, now three sessions: test 24 s2 10/26 (19/26) -> 14/26 (22/26) (train `25night_tian` + `26tian`); test `25night_tian` 12/23 (15/23) -> 12/23 (16/23) (train 24 s2 + `26tian`); test `26tian` 13/25 (16/25) (train 24 s2 + `25night_tian`, new).
+    - Cross handset, iPhone17,4 model on iPhone19,2 sessions: 24 s1 19/27 (21/27) unchanged; 25 Nov 17/26 (20/26) -> 18/26 (22/26); `25night` 18/32 (27/32) -> 20/32 (27/32). iPhone19,2 model on `26tian`: 10/25 (16/25).
+    - Every other key (s24, a55, a56, iPhone19,2 same handset) unchanged. Floor tracking `26tian` 25/25; the others unchanged.
+    - `live.py check` (`live_checks.json`; before = `live_checks_2026-11-26b.json`): 113 of the 115 old entries unchanged; the two replays streamed with the iPhone17,4 model changed: 24 s1 top-3 21 -> 22/27, lit right 17 -> 18; 25 Nov top-1 17 -> 18/26, top-3 20 -> 21, lit 20 -> 21, lit right 15 -> 16. New walking dot: 24 s2 -> `26tian` first corridor right 27/27, end within 3 m 26/27; `25night_tian` -> `26tian` 21/25, 22/25; `26tian` -> `25night_tian` 21/23, 21/23.
+    - Tests: `python -m unittest test_walksense.py test_live.py`, 7 tests OK.
 
 ## Lessons learned
 

@@ -38,7 +38,9 @@ ALL_SESSIONS = [{'name': 'sesi1', 'path': CLEAN / '2026-11-24' / 'sesi1'},
                 {'name': '25nov', 'path': CLEAN / '2026-11-25'},
                 # 25-Nov night run (PROCESS-LOG entry 72): Dicta iPhone19,2 + Chris SM-A566B together; Tian iPhone17,4 on his own
                 {'name': '25night', 'path': CLEAN / '2026-11-25-night' / 'round'},
-                {'name': '25night_tian', 'path': CLEAN / '2026-11-25-night' / 'tian'}]
+                {'name': '25night_tian', 'path': CLEAN / '2026-11-25-night' / 'tian'},
+                # 26-Nov morning (PROCESS-LOG entry 74): Tian iPhone17,4 alone, labels from his chat captions
+                {'name': '26tian', 'path': CLEAN / '2026-11-26-tian'}]
 # WALKSENSE_SESSIONS=24nov (or a comma list of names) limits the sessions; unset = all of them.
 _ENV = os.environ.get('WALKSENSE_SESSIONS', '').strip()
 TAG = _ENV.lower()
