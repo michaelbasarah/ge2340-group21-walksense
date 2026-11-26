@@ -1,0 +1,24 @@
+{
+ "what": "Deployable fused kNN settings, tuned by leave-one-session-out CV on all sessions (fused_knn.py).",
+ "weights": {
+  "B": 0.0,
+  "xyz": 0.2,
+  "tilt": 0.0,
+  "wifi": 0.5,
+  "baro": 0.3
+ },
+ "k": 25,
+ "loso_inner_acc": 0.487,
+ "floor_jump_threshold_hpa": 0.301,
+ "sessions": [
+  "23nov",
+  "24s1",
+  "24s2",
+  "25night",
+  "25night_tian",
+  "25nov",
+  "25spots",
+  "26tian"
+ ],
+ "window_s": 5.0
+}

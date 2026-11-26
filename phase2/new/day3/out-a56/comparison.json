@@ -9,7 +9,27 @@
   "loso_official": "178/411",
   "official_dir": "out"
  },
+ "A_mt_reproduces": {
+  "folds_same_weights_and_k": "18/23",
+  "max_inner_acc_difference": 0.009,
+  "fused_sample_predictions.csv": false,
+  "fused_knn.json schemes+model (timings ignored)": false,
+  "results.json stop_results": true,
+  "loso": "179/411",
+  "loso_official": "178/411",
+  "official_dir": "out"
+ },
  "A-split20_reproduces": {
+  "folds_same_weights_and_k": "17/23",
+  "max_inner_acc_difference": 0.005,
+  "fused_sample_predictions.csv": false,
+  "fused_knn.json schemes+model (timings ignored)": false,
+  "results.json stop_results": true,
+  "loso": "553/1183",
+  "loso_official": "553/1183",
+  "official_dir": "out-split20"
+ },
+ "A_mt-split20_reproduces": {
   "folds_same_weights_and_k": "17/23",
   "max_inner_acc_difference": 0.005,
   "fused_sample_predictions.csv": false,

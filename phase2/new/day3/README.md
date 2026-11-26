@@ -345,7 +345,11 @@ Learned-weight fused kNN, leave one session out (`out-a56/comparison.csv`; "with
 | C2 | 178/411 (43.3%) | 166/379 | 44/85 | 12/32 | 524/1181 (44.4%) | 486/1090 | 128/246 | 38/91 |
 | C21 | 201/411 (48.9%) | 185/379 | 46/85 | 16/32 | 599/1183 (50.6%) | 556/1092 | 137/246 | 43/91 |
 
-A with one BLAS thread per run gives 179/411 where the official run has 178/411 (split20 553/1183 = official); __AMT__
+A here gives 179/411 where the committed `out/` has 178/411 (split20 553/1183 = official total, other per-sample predictions;
+18 and 17 of 23 folds chose the official weights). A rerun with normal threading (`out-a56/A_mt*`) equals it in every fold, so the
+options compare with each other; a 1-take difference against the official files is this rerun effect (`comparison.json`).
+Recommendation (team decides; `config.json` unchanged): quote **B** for the headline numbers, show **C1** as the evidence that a
+label-free fit partly repairs the offset, do not correct phones without a fault (C and C2 cost ip18 5 and 12 takes). PROCESS-LOG entry 77.
 The a56 night offset is not constant (`night_drift.json`, `fig_a56_night_offset.png`): against the first 25-Nov run the median
 take offset is -29.8 / -107.4 / 1.6 uT (x/y/z) before 22:59 and -41.6 / -68.8 / -4.4 uT from 23:00. At 22:59 (y5302_back) both
 phones saw a strong field (ip18 take |B| 284.3 uT) and within that walk + stop the a56 y field went from about -115 to +78 uT (`night_trace_1s.csv`); after it the offset sits in a second regime. So it is not one constant magnet stuck to the phone.
