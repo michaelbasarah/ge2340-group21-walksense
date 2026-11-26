@@ -86,8 +86,19 @@ Contents:
 75. 26 Nov: request matching scored with Gemini (gemini-3.5-flash-lite, free tier): gemini 124/128, hybrid_gemini 115/128, same as Claude hybrid; `--sleep-s` pacing added
 76. 26 Nov: connector-gated floor rules ("entry/exit points"): the floor may only switch right after a lift/escalator landing; pre-registered, scored on held-out sessions; no gain, app not changed
 77. 26 Nov: a56 night offset: keep, exclude or recalibrate (offline comparison, default config unchanged)
+79. 25 to 26 Nov: getting the recordings out of WhatsApp: exports silently left out teammates' files; per-person exports, a GitHub push and an inventory of manual downloads (gap audit)
+80. 25 to 26 Nov: worker runs stopped by usage limits (HTTP 429) or network blocks (HTTP 403) and resumed (gap audit)
+81. 26 Nov: FAILURE, the upload app would not start on main after the night run landed (`KeyError: 'mag'`, gitignored sensor CSVs) (gap audit)
+82. 25 to 26 Nov: log numbers when parallel branches land (provisional numbers, renumbered on merge) (gap audit)
+83. 25 Nov: a user-test kit was built, then dropped by the user (`feat/user-test`, not merged) (gap audit)
+84. 25 to 26 Nov: decisions on search: LLM with keyword -> fuzzy offline fallback, no RAG, Gemini free tier (gap audit)
+85. 25 to 26 Nov: other decisions by the user: scope, deliverables, phones to carry, hosting (gap audit)
+86. 25 Nov: live mode connected to a real phone for the first time; no scored live walk yet (gap audit)
+87. 26 Nov: team chat "Chris forgot the barometer": the A56 never logged pressure; the night floor failure was Dicta's iPhone dropout (gap audit)
+88. 26 Nov: app features requested (route planner, step-free mode, toilet filter, landing-gated floor change) and the "save the story" rule (gap audit)
 - Lessons learned
 - Open questions / next steps
+- See also `PROJECT-STORY.md` (repo root): the whole project as a readable narrative, with links to these entries
 
 ---
 
@@ -1340,6 +1351,136 @@ Contents:
 
 ---
 
+*Entries 79 to 88 were written on 26 Nov as a gap audit: they record process events, decisions and failures of 25 and 26 Nov that had happened but were not yet in this log. Sources: this log, `git log --all` (commit messages and times, HK time), and the advisor session's own record of the user's messages and the worker reports (read as data; no chat text, names' chatter, links, codes or keys copied). Numbers are taken from repo files or commit messages; where a number exists only in the session record it is left out. Times are HK time.*
+
+## 79. 25 to 26 Nov: getting the recordings out of WhatsApp: exports silently left out teammates' files; fixed by per-person exports, a GitHub push and an inventory of manual downloads
+
+- **What we tried:** collect every phyphox ZIP of the 25-Nov afternoon run (entries 28, 42), the 25-Nov night run (entry 72) and Tian's 26-Nov morning pass (entry 73) from the team WhatsApp group onto the laptop, without losing or doubling any file.
+- **Why:** all recordings are shared by posting the ZIPs in the group chat; the repo only gets what reaches the laptop.
+- **How and what happened, in order:**
+  - **First export (25 Nov evening), text only.** The WhatsApp Desktop "Export chat" on the laptop has no "include media" option. The first export held the chat text with every ZIP, both WiGLE logs and Tian's `WalkSense ranking by phone.xlsx` written as omitted.
+  - **Second export, partial.** After files were opened in the chat on the laptop, the next export carried only those files: 52 usable files (the round 17:35 to 18:17, Michael's 11 S24 spots without names, one WiGLE log), and 73 media messages still omitted (Benedicta 35, Chris 37, Tian 1; `phase2/clean-data/2026-11-25-spots/raw/missing_from_export.csv`, entry 42). Cause, found then: **an export only contains media that this device has downloaded**; the laptop had never downloaded most teammates' files.
+  - **Fix 1: the collector pushes her own set.** Dicta pushed her complete 25-Nov dataset to GitHub (`2cb50d8`, entry 28), which replaced the partial export (entries 47 to 49); the A55 raw file that had also been sent by e-mail was inside her push (`attachments.zip`), so nothing was taken from e-mail. 36 of our 52 export files were byte-identical to hers (entries 49, 68).
+  - **Night run, three more laptop exports, no new data.** Export "(1)" (26 Nov, early morning) held only 2 recordings not yet in the repo (Michael's S24 takes at 20:22 to 20:24); the whole night run (25 Nov about 21:40 to 26 Nov 00:40) was again omitted. Export "(2)" was the same chat with export (1) re-posted into the group as a file, and export "(3)" contained (2) and (1) re-posted. Re-exporting from the same device cannot fix the omission.
+  - **Fix 2: each person exports from their own phone.** Dicta's export from her own iPhone contained her own 59 night recordings (an export carries what the exporter sent and downloaded); its other files were byte-identical to files already in the repo and were skipped by hash (entry 72, `ingest_export.py`).
+  - **Fix 3: manual downloads, checked by an inventory.** Tian's and Chris's files were downloaded one by one from WhatsApp Desktop as loose files. Because nobody could tell whether files had been skipped or clicked twice, the loose files were checked against the chat's own list of what each person sent (file name and send time, read from the export's text, not kept). The inventory found that all 8 of Chris's extra takes at the weak places (00:16 to 00:40, the last files of his batch, after his WiGLE log) had not been downloaded, and that 2 of his files had been downloaded twice. The 8 were downloaded, and every file was then hashed on ingest: 2 byte-duplicates skipped, 169 recordings + 1 WiGLE log kept (`2026-11-25-night/build_summary.json`, entry 72; the night README lists Chris's 32 stops as 24 loop + 8 extra).
+  - **Tian's morning pass (26 Nov):** his phone saved 51 of 52 files as "point <time>"; the labels came from his chat captions, matched one-to-one in order to the files (entry 73). The chat export was used only for that matching and is not in the repo.
+  - **Near miss, the two S24 takes at 20:22 to 20:24:** a first look at their timing suggested they were taken with Tian's `y5401` and `y5302 back` stops. They had not been labelled yet; Dicta's export showed Michael's own names for them, "toilet cowo" (male toilet, 5F) and "esc turun lvl 5" (escalator down, 5F). They were labelled from those names (`2026-11-25-spots/labels_override.csv`, `label_source` = `user_filename`, entry 72); the timing guess was never written to any file. The same mistake had happened once already: the 3 timing guesses of entry 42 were all wrong (entry 69).
+- **Result:** no recording of the night run is known to be missing from the downloads (the night README lists what was never recorded: the 5F escalator stops of Dicta and Chris, two walks and Tian's 4F exit 5 door). No chat text was committed (`.gitignore`, `CLAUDE.md`).
+- **Outcome:** success in the end, after several failed exports. The failure was silent: an export looks complete and only the omitted lines in the text show what is missing.
+- **What changed because of it:** the team rule is now (a) each collector exports from their own phone or pushes their raw ZIPs to GitHub, (b) loose downloads are checked against the sender's list before ingest, (c) every file is hashed against the repo (`ingest_export.py`), (d) labels come from the collector's own names or captions, never from timing. The duplicate exports left in the laptop's Downloads folder are outside the repo and were not deleted (the user's decision).
+- **Links:** entries 28, 42, 47 to 49, 68, 69, 72, 73; `phase2/clean-data/2026-11-25-spots/raw/missing_from_export.csv`, `labels_override.csv`, `README.md` ("Added 26 Nov"); `phase2/clean-data/2026-11-25-night/README.md`, `build_summary.json`, `scripts/ingest_export.py`; `phase2/clean-data/2026-11-26-tian/scripts/ingest_tian26.py`.
+
+## 80. 25 to 26 Nov: worker runs that stopped on usage limits (HTTP 429) or network blocks (HTTP 403), and how they were resumed
+
+- **What we tried:** run the analysis and build jobs as background workers (at most 5 at once, the user's rule from 25 Nov), each in its own git worktree and branch, and keep going when a run is cut off.
+- **Why:** several long jobs (reruns of about 6 minutes each, ingest, app work) ran in parallel; any of them can be stopped by the account's usage limit or by the network.
+- **How and what happened** (times from the session record; commit times from `git log`):
+  - **25 Nov about 20:40, usage limit (HTTP 429, "5-hour limit").** Two workers stopped mid-run: the 25-Nov data + per-phone sheet job and the live-smoothing study. Their work so far was kept; after the user logged in again they were resumed with a message (not restarted) and finished: entries 43 to 45 (`ae96b0e` 20:37, `f8cf06d` and `321f6c1` 20:54) and 60 to 61 (`15e11ba` 20:58, `a51bc99` 21:17).
+  - **25 Nov about 21:14, usage limit again** for the coordinating session; the automatic security review of a commit could not run (HTTP 429). It runs again on a later push.
+  - **26 Nov about 00:39 (the coordinating session) and 02:26 / 02:36 (the Gemini-search worker), network block (HTTP 403, "request blocked before it reached the API: unsupported region, VPN or proxy").** The Gemini-search worker stopped twice, the first time before it had changed any file. Signing in again does not help with a 403; the run was restarted once the network allowed it and finished: commits `bfe5017` to `435e654` (02:39 to 02:45), merged as `6f54a80` (02:46, entry 71).
+  - **26 Nov about 02:49, usage limit** during the night-run ingest (entry 72), with its config and pipeline changes not yet committed. It was resumed after the user logged in again (about 02:53) and finished: `5d51f45` (02:55) to `fcfd79b` (04:31), merged as `9e432e2` (04:32).
+  - The private claude.ai pages that show the playground and the figure gallery had been published under another login; after the login changed they could not be updated and were republished as new pages. The repo copies (`phase2/new/day3/out*/knn_playground.html`, `phase2/new/results-pack/out/`) are the source of truth.
+- **Result:** no work was lost and no job had to start from zero; every stopped job ended in a commit listed above.
+- **Outcome:** success after interruptions. A worker that stops leaves uncommitted files in its worktree, so the "WIP" commits that the later jobs made after each step (e.g. `5d51f45`, `5758f0e`, `42020ad` on `feat/night-run`) made a resume cheap and checkable.
+- **What changed because of it:** long jobs commit WIP steps on their branch; the Gemini evaluation got `--sleep-s` pacing and a resumable cache (entry 75); a 403 is treated as a network problem (VPN off), a 429 as a wait-and-resume.
+- **Links:** entries 43 to 45, 60, 61, 71, 72, 75; commits above.
+
+## 81. 26 Nov: FAILURE, the upload app would not start on main after the night run landed (`KeyError: 'mag'`): the cleaned sensor CSVs are gitignored
+
+- **What we tried:** restart Tian's upload app (`phase2/new/upload/server.py --port 8000 --live <phone> --device iPhone19,2 --floor 5`) in the main tree right after merging `feat/night-run` (`9e432e2`, 26 Nov 04:32).
+- **Why:** the app trains on the sessions in `ALL_SESSIONS` at start-up, which now included `25night` and `25night_tian` (entry 72).
+- **How / Result:** start-up stopped in `walksense.build_models()` -> `PlaceModel(training_stops(...))` -> `stop_features` with `KeyError: 'mag'`: the stops of the new sessions had no magnetometer data in the main tree. Cause: the per-recording sensor CSVs under `phase2/clean-data/2026-11-25-night/{round,tian}/clean/floor4|floor5/` (and the new spot folders and `wifi/observations.csv` under `2026-11-25-spots/clean/`) are gitignored by design (`CLAUDE.md`: big CSVs are regenerated), so the merge brought the tables and the code but not the CSVs that the worker had built in its own worktree. `git status --ignored` in the worktree listed exactly those folders. Fix: the generated folders were copied from the worktree into the main tree (they are rebuilt byte for byte by `build_night.py`), then the app started and `/` and `/api/search` answered (HTTP 200).
+- **Outcome:** fixed in a few minutes; nothing in git changed. The error message did not say "data not built", which cost time.
+- **What changed because of it:** the night README and the advisor's note to teammates say: after pulling, run `python -I phase2/clean-data/2026-11-25-night/scripts/build_night.py` (or the day-3 `run_all.sh`, which runs it first) before starting the app. The floor study (entry 74) copied the same gitignored CSVs on purpose and said so. Not done: a clear start-up check in the app that names the missing folder and the build command (would be a code change; suggested, not made here).
+- **Links:** `phase2/new/upload/walksense.py` (`stop_features`, `build_models`), `.gitignore`, `phase2/clean-data/2026-11-25-night/README.md` (layout; rebuild command), entries 72, 74.
+
+## 82. 25 to 26 Nov: log numbers when parallel branches land (provisional numbers, renumbered on merge)
+
+- **What we tried:** keep one gap-free, ordered `PROCESS-LOG.md` while up to five branches wrote entries at the same time.
+- **Why:** every branch appends at the end of the same file, so two branches pick the same next number (first seen in entry 39, again in 48 and 63).
+- **How:** each branch writes a provisional number (often far ahead, e.g. 80, 90, 100) and states it in its commit messages; whoever lands the branch gives it the next free number, updates the contents list and every "entry N" reference, and says so in the merge commit. A branch that stays open while main moves merges main back in and renumbers again.
+- **Result** (from commit messages):
+  - 25 Nov: routing 80 to 83 -> 52 to 55, request matching 70 to 73 -> 56 to 59, results pack 90 -> 62, smoothing 60 to 61 kept (entry 63).
+  - 26 Nov: `feat/vector-map` 90 -> 70 (`916d231`, merge `ad62427`, note `9e1b9fa`); `feat/tian-morning` 74 -> 73 (`b6b53c8`); `feat/floor-robust` 76 -> 74 (`8fef028`); `feat/gemini-eval` 76 -> 75 (`fccc235`); `feat/a56-offset` (still open) 73 -> 74 (`f1ba0ef`) -> 75 (`54f72ab`) -> 76 (`6ee36d5`), merging main twice (`d608002`, `aff8a2b`).
+  - Later on 26 Nov: `feat/landing-floor` 78 -> 76 (`e46596c`). Reserved at the time of writing: A56 offset 77 (76 on its branch), route planner 78 (77 on its branch, `feat/route-planner`), this gap audit 79 to 88 (`docs/project-story`). The numbers 77 to 88 are provisional until those branches land.
+  - `feat/user-test` (provisional 100) never landed (entry 83).
+- **Outcome:** success: entries 1 to 75 on main are gap-free. Cost: commit messages written before a merge carry old numbers (the mapping is in the merge commits and entries 39, 48, 63), and a long-lived branch had to be renumbered three times.
+- **What changed because of it:** the lesson in entry 39 ("number log entries only when they land") is applied to every branch; three branches open at once is the practical limit for the log file.
+- **Links:** entries 39, 48, 63; commits above.
+
+## 83. 25 Nov: a user-test kit was built, then dropped by the user (branch `feat/user-test`, not merged)
+
+- **What we tried:** a kit for the user tests promised in the proposal: a protocol (4 tasks on 5F/4F, with the app and with signs only, counterbalanced, 5 to 8 people), a phone form with a timer, the SUS questionnaire, a consent note and an analysis script, tested only on a clearly marked FAKE example dataset.
+- **Why:** the Phase 1 proposal lists user tests (app vs signage) as part of the evaluation.
+- **How:** one worker on branch `feat/user-test`, commit `49d4109` (25 Nov 20:49): `phase2/new/user-test/` (`PROTOCOL.md`, `form.html`, `SUS.md`, `CONSENT.md`, `analyse.py`, `data/*_template.csv`, `example/FAKE_*`), its own log entry (provisional 100). The worker had committed under a placeholder author name; the author was corrected to the repo owner before the branch was kept.
+- **Result:** `analyse.py` ran on the FAKE data and failed loudly on bad rows (branch entry); the form was never opened in a browser and nobody was tested.
+- **Outcome:** dropped. The user decided on 25 Nov that user tests are not needed and, at the same time, that no production app should be built (the project is not going to production). The branch is kept, unmerged and unpushed, in case it is wanted later; its numbers are FAKE and must never be quoted.
+- **What changed because of it:** the report must say that the user tests in the proposal were dropped from scope (the team writes that line, course rule). The app was later changed only where the user asked for it explicitly: retraining (entry 66), the vector map (70), search (71) and the route planner (entry 78, reserved).
+- **Links:** `git show feat/user-test:phase2/new/user-test/PROTOCOL.md`; commit `49d4109`; entry 63 ("`feat/user-test` stays unmerged").
+
+## 84. 25 to 26 Nov: decisions on search: LLM with a keyword -> fuzzy offline fallback, no RAG at this size, Gemini on the free tier
+
+- **What we tried:** decide how the app turns a typed request into one of the 26 places, using the measured comparison (entries 57 to 59, 64) instead of opinion.
+- **Why:** the proposal preferred an LLM with keywords as the offline fallback; the user questioned whether an LLM is needed at all for so few places.
+- **How (the sequence of decisions, 25 Nov evening to 26 Nov morning):**
+  1. The user asked why an LLM is needed when the search is "like Google Maps" with very few options. The first recommendation was keyword + fuzzy matching with the LLM only as a fallback, and no embeddings (they tied with keywords on the test split, 44/62 each, entry 59, and needed a large install).
+  2. The user chose the LLM, because it answers questions like "where can I study?" or "where is the chemistry lab?"; the hybrid keyword -> fuzzy -> LLM was scored from the cached answers (entry 64: hybrid 56/62 on test, keyword 44/62, fuzzy keyword 49/62, LLM 60/62).
+  3. The user pointed out that the map would not work without internet. The design kept an offline path: when there is no key, no internet, a timeout or a bad reply, the app answers with keyword -> fuzzy (entry 71).
+  4. RAG: not used. The whole place list (26 lines: id, name, floor, tags, aliases) goes into every prompt (prompt grounding), so no retrieval step can miss the right place. RAG becomes useful only at campus scale (hundreds of rooms), with the tested embeddings as the retrieval step: a future-work item, not built.
+  5. Provider: the user asked for everything to be ready so that he only pastes a Gemini key. The key lives in a gitignored `.env` at the repo root (`.env.example` committed; the user had written ".git", which was taken to mean `.env`). The free tier was accepted: pacing for the evaluation, offline fallback if a limit is hit in a demo, and a note that free-tier prompts may be used by the provider, so nothing personal should be typed into the search bar. The key check passed and the app was restarted with it (26 Nov morning); the key was never committed or printed (entries 71, 75).
+- **Result:** Gemini scored 124/128 alone and hybrid_gemini 115/128 (entry 75), the same 13 hybrid misses as with Claude.
+- **Outcome:** decided by the user: LLM search (Gemini, free tier) with the offline keyword -> fuzzy fallback; no embeddings in the app; no RAG.
+- **What changed because of it:** entries 64, 71 and 75 were built and scored on this choice. Still open: whether the app should ask the LLM first or only after the local rules (entry 75: the hybrid's misses are all wrong local answers).
+- **Links:** entries 57 to 59, 64, 71, 75; `phase2/request-matching/README.md`, `phase2/new/upload/README.md`, `.env.example`.
+
+## 85. 25 to 26 Nov: other decisions by the user: scope, deliverables, which phones to carry, hosting
+
+- **What we tried:** record the decisions that shaped the work of 25 and 26 Nov and that are not written in any other entry.
+- **Why:** later readers (and the report) need to know who decided what, and why some promised parts are missing.
+- **How / Result (decisions, in order):**
+  - **Data notes (25 Nov):** cut every take into three 20 s pieces, drop the 23-Nov stairs and sr8/sr10/sr11 stops, remove obvious outliers: done as the `split20` variant (entry 40), with "do s8 10 11" read as dropping those study rooms (still to confirm, open question).
+  - **No production app; at most 5 background agents (25 Nov).** App work only when the user asks for it explicitly (entry 83).
+  - **Per-phone sheets are appended, never overwritten,** so progress over time can be shown in the presentation (dated tabs plus a Progress tab, entry 45). **Plain Excel, not Google Sheets;** a copy goes to the laptop's Downloads each time (entries 45, 51, 69, 72, 73).
+  - **Which phones to carry on the night run (25 Nov):** both iPhones (only the iPhone barometer is reliable for floors, and a second same-handset session was the missing test); Android optional, and if any, the A56 (best Android then, two sessions); the A55 and S24 not worth carrying (weakest phones, S24 pressure unreliable, entry 30). The night run used ip18, ip16 and the A56 (entry 72).
+  - **Push everything to GitHub (25 Nov).** Main was pushed as `c53481a` after a check for keys, chat text and very large files; from then on every landing was pushed. The `prep/*` and `feat/user-test` branches stay local.
+  - **Hosting (25 Nov, question only, nothing built):** the user asked whether a server could replace the laptop hotspot, since phone and laptop lose each other across floors. Options listed: carry the laptop, a private network between phone and laptop (e.g. Tailscale), a public tunnel or a cloud server. Upload mode works with any of them; live mode needs the laptop to reach phyphox on the phone, so only the first two work for it. For the demo: carry the laptop.
+  - **Labels and names (26 Nov):** the collector's own file names are ground truth (entry 69); delete duplicates only after a byte check (entry 68); disabled-toilet display names (entry 69).
+  - **Explainer (26 Nov):** the user asked how training works (no GPU, no neural network: kNN on CPU) and for a visual explanation; a private explainer page was built outside the repo from the committed result files. It is not a repo file and adds no new numbers.
+  - **A tidy-up of the user's whole personal folder** was requested and then put on hold by the user; it changed nothing in this repo (its `.gitignore` already covered `.env` since entry 71).
+- **Outcome:** recorded. None of these decisions changed a number.
+- **Links:** entries 40, 45, 51, 63, 68, 69, 71, 72, 83.
+
+## 86. 25 Nov: live mode connected to a real phone for the first time (phyphox remote access); no scored live walk yet
+
+- **What we tried:** point Tian's live mode (entry 26) at a real iPhone running phyphox remote access on the laptop's hotspot, instead of replayed recordings.
+- **Why:** live mode had only been tested on recorded data.
+- **How:** `python live.py probe http://<phone address>:8080` (refused: connection refused), then the same without a port (port 80), then `server.py --port 8000 --live http://<phone address> --device iPhone19,2 --floor 5`. The phone address is the hotspot's local address (not recorded here).
+- **Result:** on port 80 the probe found all four buffers: `acc` (`acc_time`, `accX..Z`), `gyr` (`gyro_time`, `gyroX..Z`), `mag` (`mag_time`, `magX..Z`) and `baro` (`baro_time`, `baroX`). The app ran in live mode on the laptop. No walk with the truth noted was recorded, so there is no live accuracy number (`phase2/new/upload/live_runs/` does not exist).
+- **Outcome:** partial: the connection works; the live test the open question asks for (one walk of the route, scored) is still not done.
+- **What changed because of it:** use the address without `:8080` for phyphox remote access on this phone. The app server runs inside WSL on the laptop, so a phone cannot open the app page directly without extra network set-up; live mode works because the laptop reads the phone, not the other way round.
+- **Links:** `phase2/new/upload/live.py` (`probe`), `server.py`, `README.md`; entries 26, 27.
+
+## 87. 26 Nov: team chat "Chris forgot the barometer, should the A56 redo everything?": what the files say
+
+- **What we tried:** check the team-chat message of 26 Nov morning (Dicta: Chris forgot to turn on the barometer; should the A56 redo everything and the ip18 redo floor 5?) against the raw recordings, before anyone re-collects.
+- **Why:** a redo costs a collection session; the night run's floor problem (entry 72) and the A56 problem might be mixed up.
+- **How:** a one-off scratch script (not in the repo, run with `python -I`) listed the files inside every top-level raw phyphox ZIP, read the model from `meta/device.csv`, and counted ZIPs that contain a pressure sensor file, in `2026-11-24/sesi1/raw`, `2026-11-25/raw` (top level only, not inside Dicta's container ZIPs) and `2026-11-25-night/raw`.
+- **Result:** A56 (SM-A566B): 0 of 55 (24 s1), 0 of 54 (25 Nov) and 0 of 58 (25 night) ZIPs contain pressure: the A56 has never logged a barometer in any session, so the night run is not different for it, and entries 28 and 74 already treat it as a phone without pressure. iPhone19,2 (Dicta): 55 of 55 (24 s1), 54 of 54 (25 Nov), but only 32 of 59 on the night run (27 without, the same count as `build_summary.json`); iPhone17,4 (Tian) 52 of 52 on the night run. The floor failure of the night (upload app 20/32, entry 72) comes from the missing pressure on Dicta's iPhone, not from the A56. The A56's real night problem is the magnetometer offset (median |B| 110.9 uT, `field_check.csv`, entry 72).
+- **Outcome:** the message is consistent with the files only if "barometer" means a setting the A56 never had on; the redo decision should rest on the magnetometer (entry 77, reserved: the A56 options) and on Dicta's barometer dropout, not on the A56 barometer.
+- **What changed because of it:** nothing in the data. Added to the open questions: whether the A56 can log pressure at all in the phyphox experiment the team uses, and that Dicta checks her phyphox set-up before the next collection.
+- **Links:** `phase2/clean-data/2026-11-25-night/build_summary.json`, `field_check.csv`, `README.md`; `phase2/clean-data/2026-11-25/README.md` ("Only one floor sensor this session"); entries 28, 72, 73, 74.
+
+## 88. 26 Nov: app features requested by the user (route planner, step-free mode, toilet filter, landing-gated floor change) and the "save the story" rule
+
+- **What we tried:** record the two requests of 26 Nov evening and where they went.
+- **Why:** they change the scope of the app late in the project, and the second one is why entries 79 to 88 and `PROJECT-STORY.md` exist.
+- **How / Result:**
+  - **Feature request (26 Nov):** (1) detect floor changes from the known escalator and lift entry/exit points; (2) light up the suggested path from B to E as the shortest sum of known corridor lengths (B-C, C-D, D-E, ...) using the distances on the app's map; (3) when the floor changes, suggest the closest lift or escalator; (4) an accessible mode: no stairs or escalators, lifts only, and the disabled toilet for toilet requests; (5) filter toilets by gender. Dispatched as two branches: `feat/route-planner` (connectors, standard and step-free modes, nearest toilet by gender filter; commits `c884b79`, `077aa37`; entry 78 reserved, still running when this entry was written) and `feat/landing-floor` (connector-gated floor rules, pre-registered before scoring; landed as entry 76, merge `e46596c`: no gain on held-out data, because the place guess at the lifts and escalators is too often wrong to open the gate, so the app was not changed). Their numbers belong in their own entries.
+  - **"Save the story" (26 Nov):** the user asked that not only code but the processes, failures, data and the story of the project are saved, and that every agent knows this. The rule was added to the user's global agent instructions ("Every agent, every project: save the story, not just the code"); this repo's `CLAUDE.md` already required a log entry per piece of work. This gap audit (entries 79 to 88) and `PROJECT-STORY.md` were written because of it.
+- **Outcome:** recorded; the floor-change idea was tested and failed as pre-registered (entry 76), the route planner is in progress (78).
+- **Links:** branches `feat/route-planner`, `feat/landing-floor`; `PROJECT-STORY.md`; `CLAUDE.md`.
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1399,6 +1540,13 @@ Contents:
 - **Free-tier pacing and the timeout matter.** Gemini Flash-Lite took up to 8.4 s on one of 129 calls, so an 8 s timeout stopped a run once; use `--sleep-s 4.5` and `GEMINI_TIMEOUT_S=30` for evaluations (entry 75).
 
 - **A gate that only removes switches cannot gain where the base rule is already right, and a missed gate is expensive.** The connector gate stopped nothing R0 got wrong on held-out data and, driven by the place guess, lost 9 stops on a clean session because one lift landing was not recognised (entry 76). Check the recall of the thing that opens a gate before gating on it.
+- **A chat export is only as complete as the device that made it.** WhatsApp exports carry only media that device has downloaded; three re-exports from the laptop added nothing, the collectors' own exports or pushes did (entry 79). Check the omitted lines in the export text before trusting it.
+- **Inventory manual downloads against the sender's list.** Comparing the loose files with what each person sent caught Chris's 8 skipped extra takes and 2 double downloads before ingest (entry 79); hashing on ingest then removes byte-duplicates.
+- **A label from timing was wrong twice.** The 3 S24 guesses of entry 42 and the first reading of the two 20:2x S24 takes (entry 79) both pointed at Tian's places; the senders' own names said otherwise.
+- **Gitignored derived data does not travel with a merge.** The app crashed on main (`KeyError: 'mag'`) because the night run's sensor CSVs exist only where they were built (entry 81); after landing data, run the build script in the target tree, and make start-up errors name the missing build step.
+- **Commit WIP steps in long jobs.** Usage limits (HTTP 429) and network blocks (HTTP 403) stopped four runs on 25 and 26 Nov; WIP commits on the branch made every resume cheap and checkable (entry 80).
+- **Check a chat claim against the raw files before a re-collection.** "Chris forgot the barometer" fits the A56 never logging pressure in any session; the night floor failure came from Dicta's iPhone (27 of 59 takes without pressure) (entry 87).
+- **Scope that was promised and then dropped belongs in the log.** The user-test kit exists on its own branch and was dropped by the user; the report must say so (entry 83).
 
 ## Open questions / next steps
 
@@ -1419,7 +1567,7 @@ Contents:
 - **Barometer floor rule:** add a guard for long pauses (entry 30) and pre-register it before testing it on new data. Done offline in entry 74 (`phase2/new/floor/`): the team should decide whether the upload app adopts rule (d) (pressure, else the magnetic vote, k 15, P 0.7, H 2, M 3; 25night ip18 20 -> 30/32, no loss elsewhere).
 - **Upload pipeline (entry 24):** test it with a new recording that is not in the training data (the 24-Nov stops are). Which iPhone will the demo use? Only that model's session is used for training. Decide whether Wi-Fi (Android + WiGLE) is worth adding.
 - **Walking dot (entry 27):** test a whole route on a real walk (not single corridors from the true start); the dot needs the stop it starts from to be right.
-- **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`.
+- **Live mode (entry 26):** first real test: run `python live.py probe` against the iPhone and fix buffer names if needed; then one walk of the route with the truth noted, scored from `live_runs/`. Probe DONE 25 Nov (entry 86: all four buffers found, port 80, not 8080); the scored walk is still not done.
 - **Map dots (entry 25):** the collector should confirm which red dot is which place (`phase2/new/upload/map/make_map.py`, `REF`), and where the 4F disabled toilet really is (no dot on the sketch). The 0.8 light-up cut-off needs a new recording to test it.
 - **split20 (entry 40):** confirm with the user that "do s8 10 11" means dropping the 23-Nov sr8/sr10/sr11 stops (that is how it was done) and whether "for each dataset" was meant to include 14 Nov (10 s stops, no full 20 s piece) and 17 Nov (30 s stops, one piece), which only `cross-day/` uses. Decide which numbers the team quotes: take level (`out/`) or pieces (`out-split20/`, with the control); if pieces, say that pieces of one take are not independent. BM14 (23 Nov exit_5) was removed whole by the outlier rule; the collector may know what happened there.
 - **25 Nov (entries 42, 44, 45, 49, 50):** Dicta's complete set replaced the partial WhatsApp export (entry 49). Still open: (1) RESOLVED 26 Nov (entry 69): all 11 S24 spot files named from Michael's own file names (the guesses for `WA0052`, `WA0055`, `WA0056` were wrong; WA0052 is `escalator_up` on 5F by the user's correction); (2) the 36 duplicate raw ZIPs in `phase2/clean-data/2026-11-25-spots/raw/attachments/` were deleted on 26 Nov after the hashes were recomputed (entry 68; `results-pack/timeline.md` still has the old counts until `build.py` is rerun); (3) s24 is 1/11 on its 25-Nov spot takes (default, entry 69; was 0/3) and last of five phones by default accuracy; (4) lift_stairs is right in 2/12 takes and over-predicted (precision 0.143), y5302_back 1/10; (5) the kNN uses Wi-Fi of the s24 scanner only, so the 25-Nov a56 Wi-Fi log is not used; (6) RESOLVED 26 Nov (entry 69): the `names_25nov.csv` mappings (male_disabled_toilet, y5302_point2, gate) are confirmed by the user; (7) Tian's `WalkSense ranking by phone.xlsx` is still not in the repo; (8) decide whether the team quotes the default or the split20 ranking. (Old item 1, the 73 media files missing from our export, is covered by Dicta's complete set.)
@@ -1443,7 +1591,7 @@ Contents:
 - **26-Nov morning (entry 73), team decisions and questions:**
   - Tian's five night takes 22:49 to 22:55 ("lt2b"/"lt2a" a second time): his morning LT stops on the same phone put the 22:50 stop at LT1B (3.0 uT) and the 22:53 stop at LT1A (14.2 uT), far from LT2B/LT2A (`2026-11-26-tian/lt_night_check.csv`); the walks are not conclusive. Relabel them lt1b/lt1a (stops) and esca_up -> lt1b, lt1b -> lt1a, lt1a -> exit_10_4F (walks) and set them `ok`? Team decision; Tian can confirm.
   - Two captions were resolved from the sequence (medium): "lift turun bawah" = escalator down 4F stop, "lt1b exit 10" = walk LT1A -> exit 10 4F. Tian can confirm.
-  - Team chat 26 Nov about 10:06 (no action taken): Dicta says Chris forgot to turn on the barometer, and asks whether the a56 should redo everything and the ip18 redo floor 5. Not decided here; any redo would come in as a new session.
+  - Team chat 26 Nov about 10:06 (no action taken): Dicta says Chris forgot to turn on the barometer, and asks whether the a56 should redo everything and the ip18 redo floor 5. Not decided here; any redo would come in as a new session. Checked in entry 87: the A56 has no pressure file in any session (24 s1, 25 Nov, 25 night), so the night run is not special for it; its night problem is the magnetometer offset. Whether the A56 can log pressure in the team's phyphox experiment at all is open; Dicta should check her phyphox set-up (27 of her 59 night takes without pressure).
 - **Floor rules (entry 74):**
   - Adopt rule (d) in the upload app? (team decision; nothing wired in.) If yes, re-run `phase2/new/floor/candidates.py` after adding sessions and check `out/decision.json` again.
   - Phones without a barometer: (d) looks strong on the tuning sessions but has no healthy held-out test; a new Android session (a55 or a56, magnetometer checked with `field_check.csv` first) would test it.
@@ -1452,4 +1600,8 @@ Contents:
 - **Connector-gated floor rules (entry 76):**
   - The idea needs a reliable "I am at a connector" signal: the place guess names the right connector at 37 of 101 (day-3) and 32 of 88 (app) connector stops. Options not tested: in navigation mode the planned route already says where the lift/escalator is (a route-based gate is the "true" upper bound, which helped the no-barometer vote on the tuning sessions: 150 vs 137 of 159); or ask the user "did you take the lift/escalator?" at the next stop.
   - Record at least one take across a ride (start before the escalator or stairs, stop after) with the barometer on; only ACC23 (23 Nov, no barometer) spans a change today.
-
+- **Gap audit (entries 79 to 88):**
+  - Data handling rule to confirm with the team: each collector exports from their own phone or pushes raw ZIPs to GitHub; loose downloads are checked against the sender's list; labels only from the collector's names or captions (entry 79).
+  - The upload app should say "run build_night.py / run_all.sh first" instead of `KeyError: 'mag'` when a session's gitignored CSVs are missing (entry 81; a code change, not made in the audit).
+  - The report should state that the proposal's user tests were dropped (entry 83) and that RAG was not used at 26 places (entry 84); the team writes the wording.
+  - Not verifiable from repo files, so left out of entries 79 and 80: the sizes of the laptop exports and the exact count of loose files downloaded before the inventory.
