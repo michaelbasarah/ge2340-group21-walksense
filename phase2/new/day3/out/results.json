@@ -23,7 +23,8 @@
   "25nov/a56": "a56 (SM-A566B)",
   "25nov/iphone": "ip18 (iPhone19,2)",
   "25spots/iphone": "ip16 (iPhone17,4)",
-  "25spots/s24": "s24 (SM-S9280)"
+  "25spots/s24": "s24 (SM-S9280)",
+  "26tian/iphone": "ip16 (iPhone17,4)"
  },
  "handset_per_session_slot": {
   "23nov/iphone": "ip16",
@@ -40,7 +41,8 @@
   "25nov/a56": "a56",
   "25nov/iphone": "ip18",
   "25spots/iphone": "ip16",
-  "25spots/s24": "s24"
+  "25spots/s24": "s24",
+  "26tian/iphone": "ip16"
  },
  "walk_endpoint_handsets": {
   "23nov/ip18": 66,
@@ -56,7 +58,8 @@
   "25nov/a55": 48,
   "25nov/a56": 40,
   "25nov/ip18": 50,
-  "25spots/ip16": 4
+  "25spots/ip16": 4,
+  "26tian/ip16": 50
  },
  "unmapped_names": [],
  "magnetic_check": {
@@ -266,6 +269,10 @@
    "25spots/s24": [
     31.5,
     73.3
+   ],
+   "26tian/ip16": [
+    29.9,
+    71.6
    ]
   }
  },
@@ -14252,13 +14259,13 @@
   },
   "leave25nov_out_allphones_test_a55": {
    "_split": {
-    "train_recordings": 202,
+    "train_recordings": 227,
     "test_recordings": 26,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
-    "floor_jump_threshold_hpa": 0.288,
-    "note": "train 23nov+24s1+24s2 (all handsets), test 25night+25night_tian+25nov+25spots a55 (SM-A556E)"
+    "floor_jump_threshold_hpa": 0.301,
+    "note": "train 23nov+24s1+24s2+26tian (all handsets), test 25night+25night_tian+25nov+25spots a55 (SM-A556E)"
    },
    "|B|": {
     "n_recordings": 26,
@@ -14346,7 +14353,7 @@
      ],
      "25nov:floor5/stops/s06_y5202:a55": [
       "y5202",
-      "exit_10"
+      "sr9"
      ],
      "25nov:floor5/stops/s07_female_toilet:a55": [
       "female_toilet",
@@ -14390,17 +14397,17 @@
      0.04,
      0.29
     ],
-    "area": 5,
-    "area_acc": 0.192,
+    "area": 4,
+    "area_acc": 0.154,
     "area_ci95": [
-     0.085,
-     0.379
+     0.061,
+     0.335
     ],
     "window_acc": 0.135,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
-      "lt2a"
+      "lift_stairs"
      ],
      "25nov:floor4/stops/s02_disabled_toilet:a55": [
       "disabled_toilet_4F",
@@ -14506,11 +14513,11 @@
    },
    "|B|+xyz": {
     "n_recordings": 26,
-    "exact": 6,
-    "exact_acc": 0.231,
+    "exact": 7,
+    "exact_acc": 0.269,
     "exact_ci95": [
-     0.11,
-     0.421
+     0.137,
+     0.461
     ],
     "area": 9,
     "area_acc": 0.346,
@@ -14518,11 +14525,11 @@
      0.194,
      0.538
     ],
-    "window_acc": 0.215,
+    "window_acc": 0.24,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
-      "lt2a"
+      "lift_stairs"
      ],
      "25nov:floor4/stops/s02_disabled_toilet:a55": [
       "disabled_toilet_4F",
@@ -14570,7 +14577,7 @@
      ],
      "25nov:floor5/stops/s01_canteen:a55": [
       "canteen",
-      "exit_5"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s02_exit5_door:a55": [
       "exit_5",
@@ -14606,7 +14613,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a55": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a55": [
       "disabled_toilet",
@@ -14628,19 +14635,19 @@
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 26,
-    "exact": 8,
-    "exact_acc": 0.308,
+    "exact": 9,
+    "exact_acc": 0.346,
     "exact_ci95": [
-     0.165,
-     0.5
+     0.194,
+     0.538
     ],
-    "area": 11,
-    "area_acc": 0.423,
+    "area": 12,
+    "area_acc": 0.462,
     "area_ci95": [
-     0.255,
-     0.611
+     0.288,
+     0.645
     ],
-    "window_acc": 0.314,
+    "window_acc": 0.34,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -14692,7 +14699,7 @@
      ],
      "25nov:floor5/stops/s01_canteen:a55": [
       "canteen",
-      "exit_5"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s02_exit5_door:a55": [
       "exit_5",
@@ -14728,7 +14735,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a55": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a55": [
       "disabled_toilet",
@@ -14750,19 +14757,19 @@
    },
    "tilt": {
     "n_recordings": 26,
-    "exact": 2,
-    "exact_acc": 0.077,
+    "exact": 3,
+    "exact_acc": 0.115,
     "exact_ci95": [
-     0.021,
-     0.241
+     0.04,
+     0.29
     ],
-    "area": 4,
-    "area_acc": 0.154,
+    "area": 5,
+    "area_acc": 0.192,
     "area_ci95": [
-     0.061,
-     0.335
+     0.085,
+     0.379
     ],
-    "window_acc": 0.087,
+    "window_acc": 0.099,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -14770,7 +14777,7 @@
      ],
      "25nov:floor4/stops/s02_disabled_toilet:a55": [
       "disabled_toilet_4F",
-      "escalator_down_4F"
+      "lt1b"
      ],
      "25nov:floor4/stops/s03_exit5_door:a55": [
       "exit_5_4F",
@@ -14798,7 +14805,7 @@
      ],
      "25nov:floor4/stops/s09_lt1b:a55": [
       "lt1b",
-      "lt2a"
+      "y4502"
      ],
      "25nov:floor4/stops/s10_lt1a:a55": [
       "lt1a",
@@ -14826,7 +14833,7 @@
      ],
      "25nov:floor5/stops/s04_y5302:a55": [
       "y5302",
-      "exit_10"
+      "male_toilet"
      ],
      "25nov:floor5/stops/s05_sr9:a55": [
       "sr9",
@@ -14842,7 +14849,7 @@
      ],
      "25nov:floor5/stops/s08_exit10_door:a55": [
       "exit_10",
-      "sr9"
+      "entrance_exit"
      ],
      "25nov:floor5/stops/s09_esca_up:a55": [
       "escalator_up",
@@ -14850,7 +14857,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a55": [
       "escalator_down",
-      "exit_5"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a55": [
       "disabled_toilet",
@@ -14872,27 +14879,27 @@
    },
    "tilt + baro floor": {
     "n_recordings": 26,
-    "exact": 2,
-    "exact_acc": 0.077,
+    "exact": 4,
+    "exact_acc": 0.154,
     "exact_ci95": [
-     0.021,
-     0.241
-    ],
-    "area": 4,
-    "area_acc": 0.154,
-    "area_ci95": [
      0.061,
      0.335
     ],
-    "window_acc": 0.125,
+    "area": 6,
+    "area_acc": 0.231,
+    "area_ci95": [
+     0.11,
+     0.421
+    ],
+    "window_acc": 0.154,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
-      "lift_stairs"
+      "lift_stairs_4F"
      ],
      "25nov:floor4/stops/s02_disabled_toilet:a55": [
       "disabled_toilet_4F",
-      "y4502"
+      "lt1b"
      ],
      "25nov:floor4/stops/s03_exit5_door:a55": [
       "exit_5_4F",
@@ -14920,7 +14927,7 @@
      ],
      "25nov:floor4/stops/s09_lt1b:a55": [
       "lt1b",
-      "lt2a"
+      "y4502"
      ],
      "25nov:floor4/stops/s10_lt1a:a55": [
       "lt1a",
@@ -14972,11 +14979,11 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a55": [
       "escalator_down",
-      "exit_5"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a55": [
       "disabled_toilet",
-      "escalator_down"
+      "sr9"
      ],
      "25nov:floor5/stops/s12_lift_stairs5:a55": [
       "lift_stairs",
@@ -14994,19 +15001,19 @@
    },
    "|B|+tilt": {
     "n_recordings": 26,
-    "exact": 3,
-    "exact_acc": 0.115,
+    "exact": 2,
+    "exact_acc": 0.077,
     "exact_ci95": [
-     0.04,
-     0.29
+     0.021,
+     0.241
     ],
-    "area": 4,
-    "area_acc": 0.154,
+    "area": 5,
+    "area_acc": 0.192,
     "area_ci95": [
-     0.061,
-     0.335
+     0.085,
+     0.379
     ],
-    "window_acc": 0.074,
+    "window_acc": 0.077,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -15058,7 +15065,7 @@
      ],
      "25nov:floor5/stops/s01_canteen:a55": [
       "canteen",
-      "exit_5"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s02_exit5_door:a55": [
       "exit_5",
@@ -15102,7 +15109,7 @@
      ],
      "25nov:floor5/stops/s12_lift_stairs5:a55": [
       "lift_stairs",
-      "lift_stairs"
+      "male_toilet"
      ],
      "25nov:floor5/stops/s13_y5401:a55": [
       "y5401",
@@ -15116,17 +15123,17 @@
    },
    "|B|+tilt + baro floor": {
     "n_recordings": 26,
-    "exact": 3,
-    "exact_acc": 0.115,
+    "exact": 2,
+    "exact_acc": 0.077,
     "exact_ci95": [
-     0.04,
-     0.29
+     0.021,
+     0.241
     ],
-    "area": 5,
-    "area_acc": 0.192,
+    "area": 6,
+    "area_acc": 0.231,
     "area_ci95": [
-     0.085,
-     0.379
+     0.11,
+     0.421
     ],
     "window_acc": 0.103,
     "predictions": {
@@ -15180,7 +15187,7 @@
      ],
      "25nov:floor5/stops/s01_canteen:a55": [
       "canteen",
-      "exit_5"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s02_exit5_door:a55": [
       "exit_5",
@@ -15224,7 +15231,7 @@
      ],
      "25nov:floor5/stops/s12_lift_stairs5:a55": [
       "lift_stairs",
-      "lift_stairs"
+      "male_toilet"
      ],
      "25nov:floor5/stops/s13_y5401:a55": [
       "y5401",
@@ -15238,11 +15245,11 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 26,
-    "exact": 5,
-    "exact_acc": 0.192,
+    "exact": 6,
+    "exact_acc": 0.231,
     "exact_ci95": [
-     0.085,
-     0.379
+     0.11,
+     0.421
     ],
     "area": 9,
     "area_acc": 0.346,
@@ -15250,7 +15257,7 @@
      0.194,
      0.538
     ],
-    "window_acc": 0.202,
+    "window_acc": 0.234,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -15338,7 +15345,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a55": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a55": [
       "disabled_toilet",
@@ -15360,11 +15367,11 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 26,
-    "exact": 7,
-    "exact_acc": 0.269,
+    "exact": 8,
+    "exact_acc": 0.308,
     "exact_ci95": [
-     0.137,
-     0.461
+     0.165,
+     0.5
     ],
     "area": 10,
     "area_acc": 0.385,
@@ -15372,7 +15379,7 @@
      0.224,
      0.575
     ],
-    "window_acc": 0.295,
+    "window_acc": 0.33,
     "predictions": {
      "25nov:floor4/stops/s01_lift_stairs5:a55": [
       "lift_stairs_4F",
@@ -15428,7 +15435,7 @@
      ],
      "25nov:floor5/stops/s02_exit5_door:a55": [
       "exit_5",
-      "escalator_up"
+      "y5202"
      ],
      "25nov:floor5/stops/s03_male_toilet:a55": [
       "male_toilet",
@@ -15460,7 +15467,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a55": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a55": [
       "disabled_toilet",
@@ -16732,13 +16739,13 @@
   },
   "leave25nov_out_allphones_test_a56": {
    "_split": {
-    "train_recordings": 202,
+    "train_recordings": 227,
     "test_recordings": 58,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
-    "floor_jump_threshold_hpa": 0.288,
-    "note": "train 23nov+24s1+24s2 (all handsets), test 25night+25night_tian+25nov+25spots a56 (SM-A566B)"
+    "floor_jump_threshold_hpa": 0.301,
+    "note": "train 23nov+24s1+24s2+26tian (all handsets), test 25night+25night_tian+25nov+25spots a56 (SM-A566B)"
    },
    "|B|": {
     "n_recordings": 58,
@@ -16748,13 +16755,13 @@
      0.037,
      0.186
     ],
-    "area": 8,
-    "area_acc": 0.138,
+    "area": 9,
+    "area_acc": 0.155,
     "area_ci95": [
-     0.072,
-     0.249
+     0.084,
+     0.269
     ],
-    "window_acc": 0.078,
+    "window_acc": 0.08,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -16786,7 +16793,7 @@
      ],
      "25night:floor4/stops/s08_esca_up:a56": [
       "escalator_up_4F",
-      "male_toilet"
+      "lt2b"
      ],
      "25night:floor4/stops/s09_lt1b:a56": [
       "lt1b",
@@ -16898,7 +16905,7 @@
      ],
      "25nov:floor4/stops/s04_lt2a:a56": [
       "lt2a",
-      "lt2b"
+      "escalator_up"
      ],
      "25nov:floor4/stops/s05_lt2b:a56": [
       "lt2b",
@@ -16922,7 +16929,7 @@
      ],
      "25nov:floor4/stops/s10_lt1a:a56": [
       "lt1a",
-      "disabled_toilet"
+      "escalator_down_4F"
      ],
      "25nov:floor4/stops/s11_exit10_door:a56": [
       "exit_10_4F",
@@ -16950,7 +16957,7 @@
      ],
      "25nov:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "lt1b"
+      "escalator_up"
      ],
      "25nov:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -16970,7 +16977,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a56": [
       "escalator_down",
-      "male_toilet"
+      "lt2b"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a56": [
       "disabled_toilet",
@@ -16982,7 +16989,7 @@
      ],
      "25nov:floor5/stops/s13_y5401:a56": [
       "y5401",
-      "escalator_up_4F"
+      "entrance_exit"
      ],
      "25nov:floor5/stops/s14_y5302_point2:a56": [
       "y5302_back",
@@ -16992,19 +16999,19 @@
    },
    "|B| + baro floor": {
     "n_recordings": 58,
-    "exact": 6,
-    "exact_acc": 0.103,
+    "exact": 7,
+    "exact_acc": 0.121,
     "exact_ci95": [
-     0.048,
-     0.208
+     0.06,
+     0.229
     ],
-    "area": 10,
-    "area_acc": 0.172,
+    "area": 12,
+    "area_acc": 0.207,
     "area_ci95": [
-     0.096,
-     0.289
+     0.123,
+     0.328
     ],
-    "window_acc": 0.086,
+    "window_acc": 0.096,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -17036,7 +17043,7 @@
      ],
      "25night:floor4/stops/s08_esca_up:a56": [
       "escalator_up_4F",
-      "lt2a"
+      "lt2b"
      ],
      "25night:floor4/stops/s09_lt1b:a56": [
       "lt1b",
@@ -17156,7 +17163,7 @@
      ],
      "25nov:floor4/stops/s06_esca_down:a56": [
       "escalator_down_4F",
-      "disabled_toilet"
+      "escalator_down_4F"
      ],
      "25nov:floor4/stops/s07_y4502:a56": [
       "y4502",
@@ -17172,7 +17179,7 @@
      ],
      "25nov:floor4/stops/s10_lt1a:a56": [
       "lt1a",
-      "disabled_toilet"
+      "escalator_up_4F"
      ],
      "25nov:floor4/stops/s11_exit10_door:a56": [
       "exit_10_4F",
@@ -17208,7 +17215,7 @@
      ],
      "25nov:floor5/stops/s07_female_toilet:a56": [
       "female_toilet",
-      "canteen"
+      "escalator_up"
      ],
      "25nov:floor5/stops/s08_exit10_door:a56": [
       "exit_10",
@@ -17254,7 +17261,7 @@
      0.15,
      0.365
     ],
-    "window_acc": 0.161,
+    "window_acc": 0.162,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -17326,7 +17333,7 @@
      ],
      "25night:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "escalator_down_4F"
+      "disabled_toilet"
      ],
      "25night:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -17450,7 +17457,7 @@
      ],
      "25nov:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25nov:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -17492,19 +17499,19 @@
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 58,
-    "exact": 12,
-    "exact_acc": 0.207,
+    "exact": 13,
+    "exact_acc": 0.224,
     "exact_ci95": [
-     0.123,
-     0.328
+     0.136,
+     0.347
     ],
-    "area": 16,
-    "area_acc": 0.276,
+    "area": 17,
+    "area_acc": 0.293,
     "area_ci95": [
-     0.178,
-     0.402
+     0.192,
+     0.42
     ],
-    "window_acc": 0.2,
+    "window_acc": 0.217,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -17576,7 +17583,7 @@
      ],
      "25night:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "escalator_down_4F"
+      "disabled_toilet"
      ],
      "25night:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -17700,7 +17707,7 @@
      ],
      "25nov:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "escalator_up"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -17712,7 +17719,7 @@
      ],
      "25nov:floor5/stops/s08_exit10_door:a56": [
       "exit_10",
-      "lift_stairs"
+      "y5202"
      ],
      "25nov:floor5/stops/s09_esca_up:a56": [
       "escalator_up",
@@ -17720,7 +17727,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a56": [
       "escalator_down",
-      "y5202"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a56": [
       "disabled_toilet",
@@ -17742,19 +17749,19 @@
    },
    "tilt": {
     "n_recordings": 58,
-    "exact": 8,
-    "exact_acc": 0.138,
+    "exact": 6,
+    "exact_acc": 0.103,
     "exact_ci95": [
-     0.072,
-     0.249
+     0.048,
+     0.208
     ],
-    "area": 12,
-    "area_acc": 0.207,
+    "area": 11,
+    "area_acc": 0.19,
     "area_ci95": [
-     0.123,
-     0.328
+     0.109,
+     0.309
     ],
-    "window_acc": 0.112,
+    "window_acc": 0.08,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -17774,7 +17781,7 @@
      ],
      "25night:floor4/stops/s05_lt2b:a56": [
       "lt2b",
-      "male_toilet"
+      "lift_stairs"
      ],
      "25night:floor4/stops/s06_esca_down:a56": [
       "escalator_down_4F",
@@ -17898,7 +17905,7 @@
      ],
      "25nov:floor4/stops/s04_lt2a:a56": [
       "lt2a",
-      "lt2a"
+      "exit_5_4F"
      ],
      "25nov:floor4/stops/s05_lt2b:a56": [
       "lt2b",
@@ -17946,11 +17953,11 @@
      ],
      "25nov:floor5/stops/s04_y5302:a56": [
       "y5302",
-      "escalator_down_4F"
+      "lt1b"
      ],
      "25nov:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25nov:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -17982,7 +17989,7 @@
      ],
      "25nov:floor5/stops/s13_y5401:a56": [
       "y5401",
-      "y5401"
+      "entrance_exit"
      ],
      "25nov:floor5/stops/s14_y5302_point2:a56": [
       "y5302_back",
@@ -17992,19 +17999,19 @@
    },
    "tilt + baro floor": {
     "n_recordings": 58,
-    "exact": 9,
-    "exact_acc": 0.155,
+    "exact": 7,
+    "exact_acc": 0.121,
     "exact_ci95": [
-     0.084,
-     0.269
+     0.06,
+     0.229
     ],
-    "area": 12,
-    "area_acc": 0.207,
+    "area": 11,
+    "area_acc": 0.19,
     "area_ci95": [
-     0.123,
-     0.328
+     0.109,
+     0.309
     ],
-    "window_acc": 0.142,
+    "window_acc": 0.116,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -18148,7 +18155,7 @@
      ],
      "25nov:floor4/stops/s04_lt2a:a56": [
       "lt2a",
-      "lt2a"
+      "exit_5_4F"
      ],
      "25nov:floor4/stops/s05_lt2b:a56": [
       "lt2b",
@@ -18192,11 +18199,11 @@
      ],
      "25nov:floor5/stops/s03_male_toilet:a56": [
       "male_toilet",
-      "male_toilet"
+      "canteen"
      ],
      "25nov:floor5/stops/s04_y5302:a56": [
       "y5302",
-      "exit_5"
+      "y5202"
      ],
      "25nov:floor5/stops/s05_sr9:a56": [
       "sr9",
@@ -18208,11 +18215,11 @@
      ],
      "25nov:floor5/stops/s07_female_toilet:a56": [
       "female_toilet",
-      "male_toilet"
+      "y5202"
      ],
      "25nov:floor5/stops/s08_exit10_door:a56": [
       "exit_10",
-      "male_toilet"
+      "y5202"
      ],
      "25nov:floor5/stops/s09_esca_up:a56": [
       "escalator_up",
@@ -18232,7 +18239,7 @@
      ],
      "25nov:floor5/stops/s13_y5401:a56": [
       "y5401",
-      "escalator_down"
+      "sr9"
      ],
      "25nov:floor5/stops/s14_y5302_point2:a56": [
       "y5302_back",
@@ -18242,19 +18249,19 @@
    },
    "|B|+tilt": {
     "n_recordings": 58,
-    "exact": 6,
-    "exact_acc": 0.103,
+    "exact": 4,
+    "exact_acc": 0.069,
     "exact_ci95": [
-     0.048,
-     0.208
+     0.027,
+     0.164
     ],
-    "area": 9,
-    "area_acc": 0.155,
+    "area": 7,
+    "area_acc": 0.121,
     "area_ci95": [
-     0.084,
-     0.269
+     0.06,
+     0.229
     ],
-    "window_acc": 0.08,
+    "window_acc": 0.065,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -18298,7 +18305,7 @@
      ],
      "25night:floor4/stops/s11_exit10_door:a56": [
       "exit_10_4F",
-      "disabled_toilet"
+      "y5202"
      ],
      "25night:floor4/stops/s12_gate:a56": [
       "entrance_exit",
@@ -18402,7 +18409,7 @@
      ],
      "25nov:floor4/stops/s05_lt2b:a56": [
       "lt2b",
-      "y5202"
+      "disabled_toilet"
      ],
      "25nov:floor4/stops/s06_esca_down:a56": [
       "escalator_down_4F",
@@ -18414,7 +18421,7 @@
      ],
      "25nov:floor4/stops/s08_esca_up:a56": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "disabled_toilet_4F"
      ],
      "25nov:floor4/stops/s09_lt1b:a56": [
       "lt1b",
@@ -18482,7 +18489,7 @@
      ],
      "25nov:floor5/stops/s13_y5401:a56": [
       "y5401",
-      "y5401"
+      "entrance_exit"
      ],
      "25nov:floor5/stops/s14_y5302_point2:a56": [
       "y5302_back",
@@ -18492,19 +18499,19 @@
    },
    "|B|+tilt + baro floor": {
     "n_recordings": 58,
-    "exact": 6,
-    "exact_acc": 0.103,
+    "exact": 5,
+    "exact_acc": 0.086,
     "exact_ci95": [
-     0.048,
-     0.208
+     0.037,
+     0.186
     ],
-    "area": 8,
-    "area_acc": 0.138,
+    "area": 7,
+    "area_acc": 0.121,
     "area_ci95": [
-     0.072,
-     0.249
+     0.06,
+     0.229
     ],
-    "window_acc": 0.101,
+    "window_acc": 0.098,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -18664,7 +18671,7 @@
      ],
      "25nov:floor4/stops/s08_esca_up:a56": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "disabled_toilet_4F"
      ],
      "25nov:floor4/stops/s09_lt1b:a56": [
       "lt1b",
@@ -18742,19 +18749,19 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 58,
-    "exact": 12,
-    "exact_acc": 0.207,
+    "exact": 11,
+    "exact_acc": 0.19,
     "exact_ci95": [
-     0.123,
-     0.328
+     0.109,
+     0.309
     ],
-    "area": 16,
-    "area_acc": 0.276,
+    "area": 15,
+    "area_acc": 0.259,
     "area_ci95": [
-     0.178,
-     0.402
+     0.163,
+     0.384
     ],
-    "window_acc": 0.198,
+    "window_acc": 0.2,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -18790,7 +18797,7 @@
      ],
      "25night:floor4/stops/s09_lt1b:a56": [
       "lt1b",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night:floor4/stops/s10_lt1a:a56": [
       "lt1a",
@@ -18894,7 +18901,7 @@
      ],
      "25nov:floor4/stops/s03_exit5_door:a56": [
       "exit_5_4F",
-      "exit_5_4F"
+      "escalator_down_4F"
      ],
      "25nov:floor4/stops/s04_lt2a:a56": [
       "lt2a",
@@ -18950,7 +18957,7 @@
      ],
      "25nov:floor5/stops/s05_sr9:a56": [
       "sr9",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25nov:floor5/stops/s06_y5202:a56": [
       "y5202",
@@ -18962,7 +18969,7 @@
      ],
      "25nov:floor5/stops/s08_exit10_door:a56": [
       "exit_10",
-      "lift_stairs_4F"
+      "y5202"
      ],
      "25nov:floor5/stops/s09_esca_up:a56": [
       "escalator_up",
@@ -18992,19 +18999,19 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 58,
-    "exact": 15,
-    "exact_acc": 0.259,
+    "exact": 16,
+    "exact_acc": 0.276,
     "exact_ci95": [
-     0.163,
-     0.384
+     0.178,
+     0.402
     ],
-    "area": 19,
-    "area_acc": 0.328,
+    "area": 20,
+    "area_acc": 0.345,
     "area_ci95": [
-     0.221,
-     0.456
+     0.236,
+     0.473
     ],
-    "window_acc": 0.259,
+    "window_acc": 0.272,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:a56": [
       "lift_stairs_4F",
@@ -19040,7 +19047,7 @@
      ],
      "25night:floor4/stops/s09_lt1b:a56": [
       "lt1b",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night:floor4/stops/s10_lt1a:a56": [
       "lt1a",
@@ -19060,7 +19067,7 @@
      ],
      "25night:floor5/stops/s01_canteen:a56": [
       "canteen",
-      "escalator_up"
+      "escalator_down"
      ],
      "25night:floor5/stops/s02_exit5_door:a56": [
       "exit_5",
@@ -19212,7 +19219,7 @@
      ],
      "25nov:floor5/stops/s08_exit10_door:a56": [
       "exit_10",
-      "lift_stairs"
+      "y5202"
      ],
      "25nov:floor5/stops/s09_esca_up:a56": [
       "escalator_up",
@@ -19220,7 +19227,7 @@
      ],
      "25nov:floor5/stops/s10_esca_down:a56": [
       "escalator_down",
-      "y5302"
+      "escalator_down"
      ],
      "25nov:floor5/stops/s11_male_disabled_toilet:a56": [
       "disabled_toilet",
@@ -21772,13 +21779,13 @@
   },
   "leave25nov_out_allphones_test_ip16": {
    "_split": {
-    "train_recordings": 202,
+    "train_recordings": 227,
     "test_recordings": 29,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
-    "floor_jump_threshold_hpa": 0.288,
-    "note": "train 23nov+24s1+24s2 (all handsets), test 25night+25night_tian+25nov+25spots ip16 (iPhone17,4)"
+    "floor_jump_threshold_hpa": 0.301,
+    "note": "train 23nov+24s1+24s2+26tian (all handsets), test 25night+25night_tian+25nov+25spots ip16 (iPhone17,4)"
    },
    "|B|": {
     "n_recordings": 29,
@@ -21794,7 +21801,7 @@
      0.098,
      0.384
     ],
-    "window_acc": 0.055,
+    "window_acc": 0.063,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -21810,11 +21817,11 @@
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "lt2a"
+      "disabled_toilet"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
-      "y5302"
+      "entrance_exit"
      ],
      "25night_tian:floor4/stops/s06_y4502:iphone": [
       "y4502",
@@ -21854,7 +21861,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "exit_5"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -21862,7 +21869,7 @@
      ],
      "25night_tian:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
-      "y5302_back"
+      "female_toilet"
      ],
      "25night_tian:floor5/stops/s09_esca_down:iphone": [
       "escalator_down",
@@ -21878,7 +21885,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_5"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -21916,23 +21923,23 @@
    },
    "|B| + baro floor": {
     "n_recordings": 29,
-    "exact": 3,
-    "exact_acc": 0.103,
+    "exact": 4,
+    "exact_acc": 0.138,
     "exact_ci95": [
-     0.036,
-     0.264
+     0.055,
+     0.306
     ],
-    "area": 9,
-    "area_acc": 0.31,
+    "area": 8,
+    "area_acc": 0.276,
     "area_ci95": [
-     0.173,
-     0.492
+     0.147,
+     0.457
     ],
     "window_acc": 0.129,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
-      "lt2a"
+      "y4502"
      ],
      "25night_tian:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
@@ -21948,15 +21955,15 @@
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
-      "escalator_down_4F"
+      "entrance_exit"
      ],
      "25night_tian:floor4/stops/s06_y4502:iphone": [
       "y4502",
-      "lt2a"
+      "y4502"
      ],
      "25night_tian:floor4/stops/s07_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "entrance_exit"
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
@@ -21972,11 +21979,11 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "canteen"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "escalator_up"
+      "male_toilet"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -21984,11 +21991,11 @@
      ],
      "25night_tian:floor5/stops/s05_sr9:iphone": [
       "sr9",
-      "escalator_down"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "exit_5"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -22012,7 +22019,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_5"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -22050,19 +22057,19 @@
    },
    "|B|+xyz": {
     "n_recordings": 29,
-    "exact": 14,
-    "exact_acc": 0.483,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.314,
-     0.656
+     0.344,
+     0.686
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 17,
+    "area_acc": 0.586,
     "area_ci95": [
-     0.375,
-     0.716
+     0.407,
+     0.745
     ],
-    "window_acc": 0.463,
+    "window_acc": 0.529,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22074,7 +22081,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "lt2b"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -22122,7 +22129,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "lift_stairs_4F"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -22146,7 +22153,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -22166,7 +22173,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -22178,25 +22185,25 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "y5302_back"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 29,
-    "exact": 14,
-    "exact_acc": 0.483,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.314,
-     0.656
+     0.344,
+     0.686
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 17,
+    "area_acc": 0.586,
     "area_ci95": [
-     0.375,
-     0.716
+     0.407,
+     0.745
     ],
-    "window_acc": 0.497,
+    "window_acc": 0.569,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22208,7 +22215,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "lt2b"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -22256,7 +22263,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -22280,7 +22287,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -22300,7 +22307,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -22312,7 +22319,7 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "y5302_back"
+      "lift_stairs_4F"
      ]
     }
    },
@@ -22452,19 +22459,19 @@
    },
    "tilt + baro floor": {
     "n_recordings": 29,
-    "exact": 4,
-    "exact_acc": 0.138,
+    "exact": 3,
+    "exact_acc": 0.103,
     "exact_ci95": [
-     0.055,
-     0.306
+     0.036,
+     0.264
     ],
-    "area": 4,
-    "area_acc": 0.138,
+    "area": 3,
+    "area_acc": 0.103,
     "area_ci95": [
-     0.055,
-     0.306
+     0.036,
+     0.264
     ],
-    "window_acc": 0.144,
+    "window_acc": 0.112,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22480,7 +22487,7 @@
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "lift_stairs"
+      "exit_10_4F"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
@@ -22576,7 +22583,7 @@
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
-      "y5401"
+      "lift_stairs_4F"
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
@@ -22598,7 +22605,7 @@
      0.006,
      0.172
     ],
-    "window_acc": 0.02,
+    "window_acc": 0.026,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22720,19 +22727,19 @@
    },
    "|B|+tilt + baro floor": {
     "n_recordings": 29,
-    "exact": 2,
-    "exact_acc": 0.069,
+    "exact": 3,
+    "exact_acc": 0.103,
     "exact_ci95": [
-     0.019,
-     0.22
+     0.036,
+     0.264
     ],
-    "area": 6,
-    "area_acc": 0.207,
+    "area": 7,
+    "area_acc": 0.241,
     "area_ci95": [
-     0.098,
-     0.384
+     0.122,
+     0.421
     ],
-    "window_acc": 0.109,
+    "window_acc": 0.132,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22776,7 +22783,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "canteen"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -22854,19 +22861,19 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 29,
-    "exact": 13,
-    "exact_acc": 0.448,
+    "exact": 14,
+    "exact_acc": 0.483,
     "exact_ci95": [
-     0.284,
-     0.625
+     0.314,
+     0.656
     ],
-    "area": 15,
-    "area_acc": 0.517,
+    "area": 16,
+    "area_acc": 0.552,
     "area_ci95": [
-     0.344,
-     0.686
+     0.375,
+     0.716
     ],
-    "window_acc": 0.445,
+    "window_acc": 0.468,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -22878,7 +22885,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -22914,7 +22921,7 @@
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "male_toilet"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -22926,7 +22933,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "lift_stairs_4F"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -22950,7 +22957,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -22970,7 +22977,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -23000,7 +23007,7 @@
      0.44,
      0.773
     ],
-    "window_acc": 0.526,
+    "window_acc": 0.555,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23012,7 +23019,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -23048,7 +23055,7 @@
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "male_toilet"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -23060,7 +23067,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -23084,7 +23091,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -23104,7 +23111,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -23116,7 +23123,7 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "y5302_back"
+      "lift_stairs_4F"
      ]
     }
    },
@@ -23390,19 +23397,19 @@
    },
    "|B|+xyz+Wi-Fi": {
     "n_recordings": 29,
-    "exact": 14,
-    "exact_acc": 0.483,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.314,
-     0.656
-    ],
-    "area": 15,
-    "area_acc": 0.517,
-    "area_ci95": [
      0.344,
      0.686
     ],
-    "window_acc": 0.46,
+    "area": 17,
+    "area_acc": 0.586,
+    "area_ci95": [
+     0.407,
+     0.745
+    ],
+    "window_acc": 0.526,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23414,7 +23421,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "lt2b"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -23462,7 +23469,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "lift_stairs_4F"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -23486,7 +23493,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -23506,7 +23513,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "lt2a"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -23518,25 +23525,25 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "y5302_back"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+xyz+Wi-Fi + baro floor": {
     "n_recordings": 29,
-    "exact": 14,
-    "exact_acc": 0.483,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.314,
-     0.656
+     0.344,
+     0.686
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 17,
+    "area_acc": 0.586,
     "area_ci95": [
-     0.375,
-     0.716
+     0.407,
+     0.745
     ],
-    "window_acc": 0.503,
+    "window_acc": 0.575,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23548,7 +23555,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "lt2b"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -23596,7 +23603,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -23620,7 +23627,7 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -23640,7 +23647,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -23652,25 +23659,25 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "y5302_back"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+tilt+Wi-Fi": {
     "n_recordings": 29,
-    "exact": 0,
-    "exact_acc": 0.0,
+    "exact": 1,
+    "exact_acc": 0.034,
     "exact_ci95": [
-     0.0,
-     0.117
-    ],
-    "area": 1,
-    "area_acc": 0.034,
-    "area_ci95": [
      0.006,
      0.172
     ],
-    "window_acc": 0.02,
+    "area": 2,
+    "area_acc": 0.069,
+    "area_ci95": [
+     0.019,
+     0.22
+    ],
+    "window_acc": 0.055,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23774,7 +23781,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "entrance_exit"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -23792,19 +23799,19 @@
    },
    "|B|+tilt+Wi-Fi + baro floor": {
     "n_recordings": 29,
-    "exact": 2,
-    "exact_acc": 0.069,
+    "exact": 4,
+    "exact_acc": 0.138,
     "exact_ci95": [
-     0.019,
-     0.22
+     0.055,
+     0.306
     ],
-    "area": 7,
-    "area_acc": 0.241,
+    "area": 8,
+    "area_acc": 0.276,
     "area_ci95": [
-     0.122,
-     0.421
+     0.147,
+     0.457
     ],
-    "window_acc": 0.112,
+    "window_acc": 0.161,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23848,7 +23855,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "canteen"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -23908,7 +23915,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -23927,29 +23934,29 @@
   },
   "leave25nov_out_samehandset_test_ip16": {
    "_split": {
-    "train_recordings": 68,
+    "train_recordings": 93,
     "test_recordings": 29,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
-    "floor_jump_threshold_hpa": 0.315,
-    "note": "train ip16 only (23nov+24s2), test 25night+25night_tian+25nov+25spots ip16"
+    "floor_jump_threshold_hpa": 0.313,
+    "note": "train ip16 only (23nov+24s2+26tian), test 25night+25night_tian+25nov+25spots ip16"
    },
    "|B|": {
     "n_recordings": 29,
-    "exact": 3,
-    "exact_acc": 0.103,
+    "exact": 5,
+    "exact_acc": 0.172,
     "exact_ci95": [
-     0.036,
-     0.264
+     0.076,
+     0.345
     ],
-    "area": 7,
-    "area_acc": 0.241,
+    "area": 9,
+    "area_acc": 0.31,
     "area_ci95": [
-     0.122,
-     0.421
+     0.173,
+     0.492
     ],
-    "window_acc": 0.086,
+    "window_acc": 0.138,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -23965,15 +23972,15 @@
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "lt2a"
+      "disabled_toilet"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
-      "sr9"
+      "entrance_exit"
      ],
      "25night_tian:floor4/stops/s06_y4502:iphone": [
       "y4502",
-      "lt2a"
+      "y4502"
      ],
      "25night_tian:floor4/stops/s07_esca_up:iphone": [
       "escalator_up_4F",
@@ -23981,7 +23988,7 @@
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor4/stops/s09_gate:iphone": [
       "entrance_exit",
@@ -24005,15 +24012,15 @@
      ],
      "25night_tian:floor5/stops/s05_sr9:iphone": [
       "sr9",
-      "sr9"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "lift_stairs_4F"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
-      "entrance_exit"
+      "lift_stairs_4F"
      ],
      "25night_tian:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
@@ -24029,15 +24036,15 @@
      ],
      "25night_tian:floor5/stops/s11_male_disabled_toilet:iphone": [
       "disabled_toilet",
-      "sr9"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "y5302_back"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "sr9"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -24049,15 +24056,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "escalator_up"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -24071,19 +24078,19 @@
    },
    "|B| + baro floor": {
     "n_recordings": 29,
-    "exact": 4,
-    "exact_acc": 0.138,
+    "exact": 6,
+    "exact_acc": 0.207,
     "exact_ci95": [
-     0.055,
-     0.306
+     0.098,
+     0.384
     ],
-    "area": 9,
-    "area_acc": 0.31,
+    "area": 11,
+    "area_acc": 0.379,
     "area_ci95": [
-     0.173,
-     0.492
+     0.227,
+     0.56
     ],
-    "window_acc": 0.118,
+    "window_acc": 0.181,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24103,15 +24110,15 @@
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
-      "lift_stairs_4F"
+      "entrance_exit"
      ],
      "25night_tian:floor4/stops/s06_y4502:iphone": [
       "y4502",
-      "lt2a"
+      "y4502"
      ],
      "25night_tian:floor4/stops/s07_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "lift_stairs_4F"
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
@@ -24127,7 +24134,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "escalator_up"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -24139,11 +24146,11 @@
      ],
      "25night_tian:floor5/stops/s05_sr9:iphone": [
       "sr9",
-      "sr9"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "y5302_back"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -24163,15 +24170,15 @@
      ],
      "25night_tian:floor5/stops/s11_male_disabled_toilet:iphone": [
       "disabled_toilet",
-      "y5302"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "y5302_back"
+      "exit_10"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "sr9"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -24183,15 +24190,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "lt1b"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -24205,19 +24212,19 @@
    },
    "|B|+xyz": {
     "n_recordings": 29,
-    "exact": 11,
-    "exact_acc": 0.379,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.227,
-     0.56
+     0.344,
+     0.686
     ],
-    "area": 13,
-    "area_acc": 0.448,
+    "area": 18,
+    "area_acc": 0.621,
     "area_ci95": [
-     0.284,
-     0.625
+     0.44,
+     0.773
     ],
-    "window_acc": 0.353,
+    "window_acc": 0.509,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24229,7 +24236,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "escalator_up"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -24249,7 +24256,7 @@
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor4/stops/s09_gate:iphone": [
       "entrance_exit",
@@ -24261,7 +24268,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "lt2b"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -24277,7 +24284,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -24301,11 +24308,11 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "y5302"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -24317,15 +24324,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "escalator_up"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -24333,25 +24340,25 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "exit_10"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 29,
-    "exact": 13,
-    "exact_acc": 0.448,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.284,
-     0.625
+     0.344,
+     0.686
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 18,
+    "area_acc": 0.621,
     "area_ci95": [
-     0.375,
-     0.716
+     0.44,
+     0.773
     ],
-    "window_acc": 0.414,
+    "window_acc": 0.511,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24363,7 +24370,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -24399,7 +24406,7 @@
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "male_toilet"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -24411,7 +24418,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -24435,11 +24442,11 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "y5302"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -24455,11 +24462,11 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -24467,7 +24474,7 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "lt1a"
+      "lift_stairs_4F"
      ]
     }
    },
@@ -24479,33 +24486,33 @@
      0.098,
      0.384
     ],
-    "area": 10,
-    "area_acc": 0.345,
+    "area": 8,
+    "area_acc": 0.276,
     "area_ci95": [
-     0.199,
-     0.527
+     0.147,
+     0.457
     ],
     "window_acc": 0.218,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
-      "exit_5_4F"
+      "y5202"
      ],
      "25night_tian:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
-      "male_toilet"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "disabled_toilet_4F"
+      "y4502"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "lt2b"
+      "exit_10_4F"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
-      "lt1a"
+      "escalator_up_4F"
      ],
      "25night_tian:floor4/stops/s06_y4502:iphone": [
       "y4502",
@@ -24513,7 +24520,7 @@
      ],
      "25night_tian:floor4/stops/s07_esca_up:iphone": [
       "escalator_up_4F",
-      "lt1a"
+      "escalator_up_4F"
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
@@ -24545,7 +24552,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "y5202"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -24581,23 +24588,23 @@
      ],
      "25spots:floor4/stops/spots_s06_escalator_down_4F:iphone": [
       "escalator_down_4F",
-      "escalator_down_4F"
+      "male_toilet"
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "exit_5"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "exit_5"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "exit_5"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
-      "y5302_back"
+      "lift_stairs_4F"
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
@@ -24613,13 +24620,13 @@
      0.173,
      0.492
     ],
-    "area": 14,
-    "area_acc": 0.483,
+    "area": 13,
+    "area_acc": 0.448,
     "area_ci95": [
-     0.314,
-     0.656
+     0.284,
+     0.625
     ],
-    "window_acc": 0.307,
+    "window_acc": 0.325,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24631,15 +24638,15 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "disabled_toilet_4F"
+      "y4502"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "lt2b"
+      "exit_10_4F"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
-      "lt1a"
+      "escalator_up_4F"
      ],
      "25night_tian:floor4/stops/s06_y4502:iphone": [
       "y4502",
@@ -24647,7 +24654,7 @@
      ],
      "25night_tian:floor4/stops/s07_esca_up:iphone": [
       "escalator_up_4F",
-      "lt1a"
+      "escalator_up_4F"
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
@@ -24679,7 +24686,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "y5202"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -24719,15 +24726,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "lt2b"
+      "exit_10_4F"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "exit_5"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "exit_5"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -24741,11 +24748,11 @@
    },
    "|B|+tilt": {
     "n_recordings": 29,
-    "exact": 3,
-    "exact_acc": 0.103,
+    "exact": 4,
+    "exact_acc": 0.138,
     "exact_ci95": [
-     0.036,
-     0.264
+     0.055,
+     0.306
     ],
     "area": 4,
     "area_acc": 0.138,
@@ -24753,7 +24760,7 @@
      0.055,
      0.306
     ],
-    "window_acc": 0.086,
+    "window_acc": 0.121,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24853,15 +24860,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -24875,19 +24882,19 @@
    },
    "|B|+tilt + baro floor": {
     "n_recordings": 29,
-    "exact": 3,
-    "exact_acc": 0.103,
+    "exact": 5,
+    "exact_acc": 0.172,
     "exact_ci95": [
-     0.036,
-     0.264
+     0.076,
+     0.345
     ],
-    "area": 7,
-    "area_acc": 0.241,
+    "area": 9,
+    "area_acc": 0.31,
     "area_ci95": [
-     0.122,
-     0.421
+     0.173,
+     0.492
     ],
-    "window_acc": 0.115,
+    "window_acc": 0.184,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -24931,7 +24938,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "escalator_up"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -24987,15 +24994,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "lt1b"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -25009,23 +25016,23 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 29,
-    "exact": 11,
-    "exact_acc": 0.379,
+    "exact": 13,
+    "exact_acc": 0.448,
     "exact_ci95": [
-     0.227,
-     0.56
-    ],
-    "area": 13,
-    "area_acc": 0.448,
-    "area_ci95": [
      0.284,
      0.625
     ],
-    "window_acc": 0.376,
+    "area": 15,
+    "area_acc": 0.517,
+    "area_ci95": [
+     0.344,
+     0.686
+    ],
+    "window_acc": 0.443,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
-      "exit_10_4F"
+      "y5202"
      ],
      "25night_tian:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
@@ -25033,7 +25040,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "escalator_up"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -25065,11 +25072,11 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "lt2b"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "exit_5_4F"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -25081,7 +25088,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -25105,11 +25112,11 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "y5401"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -25121,15 +25128,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -25143,19 +25150,19 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 29,
-    "exact": 13,
-    "exact_acc": 0.448,
+    "exact": 14,
+    "exact_acc": 0.483,
     "exact_ci95": [
-     0.284,
-     0.625
+     0.314,
+     0.656
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 17,
+    "area_acc": 0.586,
     "area_ci95": [
-     0.375,
-     0.716
+     0.407,
+     0.745
     ],
-    "window_acc": 0.411,
+    "window_acc": 0.46,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25167,11 +25174,11 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
-      "exit_5_4F"
+      "lt2b"
      ],
      "25night_tian:floor4/stops/s05_esca_down:iphone": [
       "escalator_down_4F",
@@ -25203,7 +25210,7 @@
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "male_toilet"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -25215,7 +25222,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -25239,11 +25246,11 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "y5401"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -25259,11 +25266,11 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -25545,19 +25552,19 @@
    },
    "|B|+xyz+Wi-Fi": {
     "n_recordings": 29,
-    "exact": 11,
-    "exact_acc": 0.379,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.227,
-     0.56
+     0.344,
+     0.686
     ],
-    "area": 13,
-    "area_acc": 0.448,
+    "area": 18,
+    "area_acc": 0.621,
     "area_ci95": [
-     0.284,
-     0.625
+     0.44,
+     0.773
     ],
-    "window_acc": 0.353,
+    "window_acc": 0.511,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25569,7 +25576,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "escalator_up"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -25589,7 +25596,7 @@
      ],
      "25night_tian:floor4/stops/s08_exit10_door:iphone": [
       "exit_10_4F",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor4/stops/s09_gate:iphone": [
       "entrance_exit",
@@ -25601,7 +25608,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "lt2b"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -25617,7 +25624,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -25641,11 +25648,11 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "y5302"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -25657,11 +25664,11 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "escalator_up"
+      "lt2b"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -25673,25 +25680,25 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "exit_10"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+xyz+Wi-Fi + baro floor": {
     "n_recordings": 29,
-    "exact": 13,
-    "exact_acc": 0.448,
+    "exact": 15,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.284,
-     0.625
+     0.344,
+     0.686
     ],
-    "area": 16,
-    "area_acc": 0.552,
+    "area": 18,
+    "area_acc": 0.621,
     "area_ci95": [
-     0.375,
-     0.716
+     0.44,
+     0.773
     ],
-    "window_acc": 0.414,
+    "window_acc": 0.511,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25703,7 +25710,7 @@
      ],
      "25night_tian:floor4/stops/s03_lt2a:iphone": [
       "lt2a",
-      "y4502"
+      "disabled_toilet_4F"
      ],
      "25night_tian:floor4/stops/s04_lt2b:iphone": [
       "lt2b",
@@ -25739,7 +25746,7 @@
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
-      "male_toilet"
+      "y5302"
      ],
      "25night_tian:floor5/stops/s04_y5302:iphone": [
       "y5302",
@@ -25751,7 +25758,7 @@
      ],
      "25night_tian:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -25775,11 +25782,11 @@
      ],
      "25night_tian:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night_tian:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "y5302"
+      "y5401"
      ],
      "25night_tian:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -25795,7 +25802,7 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
@@ -25807,17 +25814,17 @@
      ],
      "25spots:floor5/stops/spots_s17_y5302_back:iphone": [
       "y5302_back",
-      "lt1a"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+tilt+Wi-Fi": {
     "n_recordings": 29,
-    "exact": 3,
-    "exact_acc": 0.103,
+    "exact": 4,
+    "exact_acc": 0.138,
     "exact_ci95": [
-     0.036,
-     0.264
+     0.055,
+     0.306
     ],
     "area": 4,
     "area_acc": 0.138,
@@ -25825,7 +25832,7 @@
      0.055,
      0.306
     ],
-    "window_acc": 0.086,
+    "window_acc": 0.121,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -25925,15 +25932,15 @@
      ],
      "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": [
       "escalator_up_4F",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -25947,19 +25954,19 @@
    },
    "|B|+tilt+Wi-Fi + baro floor": {
     "n_recordings": 29,
-    "exact": 3,
-    "exact_acc": 0.103,
+    "exact": 5,
+    "exact_acc": 0.172,
     "exact_ci95": [
-     0.036,
-     0.264
+     0.076,
+     0.345
     ],
-    "area": 7,
-    "area_acc": 0.241,
+    "area": 8,
+    "area_acc": 0.276,
     "area_ci95": [
-     0.122,
-     0.421
+     0.147,
+     0.457
     ],
-    "window_acc": 0.115,
+    "window_acc": 0.184,
     "predictions": {
      "25night_tian:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -26003,7 +26010,7 @@
      ],
      "25night_tian:floor5/stops/s02_exit5_door:iphone": [
       "exit_5",
-      "escalator_up"
+      "exit_5"
      ],
      "25night_tian:floor5/stops/s03_male_toilet:iphone": [
       "male_toilet",
@@ -26063,11 +26070,11 @@
      ],
      "25spots:floor5/stops/spots_s02_escalator_down:iphone": [
       "escalator_down",
-      "escalator_up"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s05_sr9:iphone": [
       "sr9",
-      "escalator_up"
+      "male_toilet"
      ],
      "25spots:floor5/stops/spots_s15_y5401:iphone": [
       "y5401",
@@ -26082,13 +26089,13 @@
   },
   "leave25nov_out_allphones_test_ip18": {
    "_split": {
-    "train_recordings": 202,
+    "train_recordings": 227,
     "test_recordings": 58,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
-    "floor_jump_threshold_hpa": 0.288,
-    "note": "train 23nov+24s1+24s2 (all handsets), test 25night+25night_tian+25nov+25spots ip18 (iPhone19,2)"
+    "floor_jump_threshold_hpa": 0.301,
+    "note": "train 23nov+24s1+24s2+26tian (all handsets), test 25night+25night_tian+25nov+25spots ip18 (iPhone19,2)"
    },
    "|B|": {
     "n_recordings": 58,
@@ -26098,13 +26105,13 @@
      0.109,
      0.309
     ],
-    "area": 17,
-    "area_acc": 0.293,
+    "area": 15,
+    "area_acc": 0.259,
     "area_ci95": [
-     0.192,
-     0.42
+     0.163,
+     0.384
     ],
-    "window_acc": 0.148,
+    "window_acc": 0.141,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -26112,7 +26119,7 @@
      ],
      "25night:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
-      "lt2a"
+      "disabled_toilet"
      ],
      "25night:floor4/stops/s03_exit5_door:iphone": [
       "exit_5_4F",
@@ -26120,7 +26127,7 @@
      ],
      "25night:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
-      "lt1b"
+      "escalator_up"
      ],
      "25night:floor4/stops/s05_lt2b:iphone": [
       "lt2b",
@@ -26144,7 +26151,7 @@
      ],
      "25night:floor4/stops/s10_lt1a:iphone": [
       "lt1a",
-      "canteen"
+      "sr9"
      ],
      "25night:floor4/stops/s11_exit10_door:iphone": [
       "exit_10_4F",
@@ -26180,7 +26187,7 @@
      ],
      "25night:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "escalator_down"
+      "y5302"
      ],
      "25night:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -26204,7 +26211,7 @@
      ],
      "25night:floor5/stops/s12_y5302_point2:iphone": [
       "y5302_back",
-      "male_toilet"
+      "exit_5"
      ],
      "25night:floor5/stops/s13_sr9:iphone": [
       "sr9",
@@ -26248,7 +26255,7 @@
      ],
      "25nov:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
-      "disabled_toilet_4F"
+      "y4502"
      ],
      "25nov:floor4/stops/s05_lt2b:iphone": [
       "lt2b",
@@ -26276,7 +26283,7 @@
      ],
      "25nov:floor4/stops/s11_exit10_door:iphone": [
       "exit_10_4F",
-      "disabled_toilet"
+      "y5202"
      ],
      "25nov:floor4/stops/s12_gate:iphone": [
       "entrance_exit",
@@ -26348,13 +26355,13 @@
      0.123,
      0.328
     ],
-    "area": 20,
-    "area_acc": 0.345,
+    "area": 16,
+    "area_acc": 0.276,
     "area_ci95": [
-     0.236,
-     0.473
+     0.178,
+     0.402
     ],
-    "window_acc": 0.207,
+    "window_acc": 0.193,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -26362,7 +26369,7 @@
      ],
      "25night:floor4/stops/s02_disabled_toilet:iphone": [
       "disabled_toilet_4F",
-      "lt2a"
+      "disabled_toilet"
      ],
      "25night:floor4/stops/s03_exit5_door:iphone": [
       "exit_5_4F",
@@ -26386,7 +26393,7 @@
      ],
      "25night:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_down_4F"
+      "lift_stairs_4F"
      ],
      "25night:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -26430,7 +26437,7 @@
      ],
      "25night:floor5/stops/s06_y5202:iphone": [
       "y5202",
-      "escalator_down"
+      "y5302"
      ],
      "25night:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
@@ -26454,7 +26461,7 @@
      ],
      "25night:floor5/stops/s12_y5302_point2:iphone": [
       "y5302_back",
-      "male_toilet"
+      "exit_5"
      ],
      "25night:floor5/stops/s13_sr9:iphone": [
       "sr9",
@@ -26498,7 +26505,7 @@
      ],
      "25nov:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
-      "disabled_toilet_4F"
+      "y4502"
      ],
      "25nov:floor4/stops/s05_lt2b:iphone": [
       "lt2b",
@@ -26514,7 +26521,7 @@
      ],
      "25nov:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_down_4F"
+      "lift_stairs_4F"
      ],
      "25nov:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -26592,19 +26599,19 @@
    },
    "|B|+xyz": {
     "n_recordings": 58,
-    "exact": 30,
-    "exact_acc": 0.517,
+    "exact": 32,
+    "exact_acc": 0.552,
     "exact_ci95": [
-     0.392,
-     0.641
+     0.425,
+     0.673
     ],
-    "area": 33,
-    "area_acc": 0.569,
+    "area": 34,
+    "area_acc": 0.586,
     "area_ci95": [
-     0.441,
-     0.688
+     0.458,
+     0.704
     ],
-    "window_acc": 0.509,
+    "window_acc": 0.529,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -26620,7 +26627,7 @@
      ],
      "25night:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
-      "exit_5_4F"
+      "lt2a"
      ],
      "25night:floor4/stops/s05_lt2b:iphone": [
       "lt2b",
@@ -26708,7 +26715,7 @@
      ],
      "25night:floor5/stops/s13_sr9:iphone": [
       "sr9",
-      "exit_10"
+      "lt1a"
      ],
      "25night:floor5/stops/s14_y5202:iphone": [
       "y5202",
@@ -26828,7 +26835,7 @@
      ],
      "25nov:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10_4F"
+      "lift_stairs"
      ],
      "25nov:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -26836,25 +26843,25 @@
      ],
      "25nov:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
-      "exit_10"
+      "lift_stairs_4F"
      ]
     }
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 58,
-    "exact": 35,
-    "exact_acc": 0.603,
+    "exact": 37,
+    "exact_acc": 0.638,
     "exact_ci95": [
-     0.475,
-     0.719
+     0.509,
+     0.749
     ],
-    "area": 38,
-    "area_acc": 0.655,
+    "area": 39,
+    "area_acc": 0.672,
     "area_ci95": [
-     0.527,
-     0.764
+     0.544,
+     0.779
     ],
-    "window_acc": 0.632,
+    "window_acc": 0.657,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -26870,7 +26877,7 @@
      ],
      "25night:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
-      "exit_5_4F"
+      "lt2a"
      ],
      "25night:floor4/stops/s05_lt2b:iphone": [
       "lt2b",
@@ -26974,7 +26981,7 @@
      ],
      "25night:floor5/stops/s17_lift_stairs5:iphone": [
       "lift_stairs",
-      "female_toilet"
+      "lift_stairs"
      ],
      "25night:floor5/stops/s18_y5302_point2:iphone": [
       "y5302_back",
@@ -27104,7 +27111,7 @@
      0.178,
      0.402
     ],
-    "window_acc": 0.213,
+    "window_acc": 0.205,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -27116,7 +27123,7 @@
      ],
      "25night:floor4/stops/s03_exit5_door:iphone": [
       "exit_5_4F",
-      "y5401"
+      "y5202"
      ],
      "25night:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
@@ -27136,7 +27143,7 @@
      ],
      "25night:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "y5302"
+      "lift_stairs_4F"
      ],
      "25night:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -27188,7 +27195,7 @@
      ],
      "25night:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
-      "y5401"
+      "entrance_exit"
      ],
      "25night:floor5/stops/s09_male_disabled_toilet:iphone": [
       "disabled_toilet",
@@ -27212,7 +27219,7 @@
      ],
      "25night:floor5/stops/s14_y5202:iphone": [
       "y5202",
-      "y5302_back"
+      "y5401"
      ],
      "25night:floor5/stops/s15_exit10_door:iphone": [
       "exit_10",
@@ -27264,7 +27271,7 @@
      ],
      "25nov:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "y5302"
+      "lift_stairs_4F"
      ],
      "25nov:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -27332,7 +27339,7 @@
      ],
      "25nov:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "escalator_down"
+      "disabled_toilet"
      ],
      "25nov:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -27342,19 +27349,19 @@
    },
    "tilt + baro floor": {
     "n_recordings": 58,
-    "exact": 19,
-    "exact_acc": 0.328,
+    "exact": 16,
+    "exact_acc": 0.276,
     "exact_ci95": [
-     0.221,
-     0.456
+     0.178,
+     0.402
     ],
-    "area": 20,
-    "area_acc": 0.345,
+    "area": 17,
+    "area_acc": 0.293,
     "area_ci95": [
-     0.236,
-     0.473
+     0.192,
+     0.42
     ],
-    "window_acc": 0.267,
+    "window_acc": 0.231,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -27366,7 +27373,7 @@
      ],
      "25night:floor4/stops/s03_exit5_door:iphone": [
       "exit_5_4F",
-      "y5401"
+      "y5202"
      ],
      "25night:floor4/stops/s04_lt2a:iphone": [
       "lt2a",
@@ -27386,7 +27393,7 @@
      ],
      "25night:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "lift_stairs_4F"
      ],
      "25night:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -27438,7 +27445,7 @@
      ],
      "25night:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
-      "y5401"
+      "entrance_exit"
      ],
      "25night:floor5/stops/s09_male_disabled_toilet:iphone": [
       "disabled_toilet",
@@ -27462,11 +27469,11 @@
      ],
      "25night:floor5/stops/s14_y5202:iphone": [
       "y5202",
-      "female_toilet"
+      "y5401"
      ],
      "25night:floor5/stops/s15_exit10_door:iphone": [
       "exit_10",
-      "escalator_down"
+      "sr9"
      ],
      "25night:floor5/stops/s16_male_disabled_toilet:iphone": [
       "disabled_toilet",
@@ -27514,7 +27521,7 @@
      ],
      "25nov:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "lift_stairs_4F"
      ],
      "25nov:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -27558,7 +27565,7 @@
      ],
      "25nov:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
-      "female_toilet"
+      "y5401"
      ],
      "25nov:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
@@ -27582,7 +27589,7 @@
      ],
      "25nov:floor5/stops/s13_y5401:iphone": [
       "y5401",
-      "escalator_down"
+      "disabled_toilet"
      ],
      "25nov:floor5/stops/s14_y5302_point2:iphone": [
       "y5302_back",
@@ -27704,7 +27711,7 @@
      ],
      "25night:floor5/stops/s12_y5302_point2:iphone": [
       "y5302_back",
-      "lift_stairs_4F"
+      "lt2b"
      ],
      "25night:floor5/stops/s13_sr9:iphone": [
       "sr9",
@@ -27842,19 +27849,19 @@
    },
    "|B|+tilt + baro floor": {
     "n_recordings": 58,
-    "exact": 17,
-    "exact_acc": 0.293,
+    "exact": 14,
+    "exact_acc": 0.241,
     "exact_ci95": [
-     0.192,
-     0.42
+     0.15,
+     0.365
     ],
-    "area": 23,
-    "area_acc": 0.397,
+    "area": 20,
+    "area_acc": 0.345,
     "area_ci95": [
-     0.281,
-     0.525
+     0.236,
+     0.473
     ],
-    "window_acc": 0.247,
+    "window_acc": 0.23,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -27886,7 +27893,7 @@
      ],
      "25night:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "lift_stairs_4F"
      ],
      "25night:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -27954,7 +27961,7 @@
      ],
      "25night:floor5/stops/s12_y5302_point2:iphone": [
       "y5302_back",
-      "lift_stairs_4F"
+      "lt2b"
      ],
      "25night:floor5/stops/s13_sr9:iphone": [
       "sr9",
@@ -28014,7 +28021,7 @@
      ],
      "25nov:floor4/stops/s08_esca_up:iphone": [
       "escalator_up_4F",
-      "escalator_up_4F"
+      "lift_stairs_4F"
      ],
      "25nov:floor4/stops/s09_lt1b:iphone": [
       "lt1b",
@@ -28058,7 +28065,7 @@
      ],
      "25nov:floor5/stops/s07_female_toilet:iphone": [
       "female_toilet",
-      "female_toilet"
+      "y5401"
      ],
      "25nov:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
@@ -28092,19 +28099,19 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 58,
-    "exact": 31,
-    "exact_acc": 0.534,
+    "exact": 30,
+    "exact_acc": 0.517,
     "exact_ci95": [
-     0.408,
-     0.657
+     0.392,
+     0.641
     ],
-    "area": 33,
-    "area_acc": 0.569,
+    "area": 32,
+    "area_acc": 0.552,
     "area_ci95": [
-     0.441,
-     0.688
+     0.425,
+     0.673
     ],
-    "window_acc": 0.523,
+    "window_acc": 0.514,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -28188,7 +28195,7 @@
      ],
      "25night:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
-      "exit_10"
+      "lift_stairs_4F"
      ],
      "25night:floor5/stops/s09_male_disabled_toilet:iphone": [
       "disabled_toilet",
@@ -28208,7 +28215,7 @@
      ],
      "25night:floor5/stops/s13_sr9:iphone": [
       "sr9",
-      "exit_10"
+      "lt1a"
      ],
      "25night:floor5/stops/s14_y5202:iphone": [
       "y5202",
@@ -28216,7 +28223,7 @@
      ],
      "25night:floor5/stops/s15_exit10_door:iphone": [
       "exit_10",
-      "exit_10"
+      "lift_stairs_4F"
      ],
      "25night:floor5/stops/s16_male_disabled_toilet:iphone": [
       "disabled_toilet",
@@ -28328,7 +28335,7 @@
      ],
      "25nov:floor5/stops/s12_lift_stairs5:iphone": [
       "lift_stairs",
-      "exit_10_4F"
+      "lift_stairs"
      ],
      "25nov:floor5/stops/s13_y5401:iphone": [
       "y5401",
@@ -28342,19 +28349,19 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 58,
-    "exact": 37,
-    "exact_acc": 0.638,
+    "exact": 36,
+    "exact_acc": 0.621,
     "exact_ci95": [
-     0.509,
-     0.749
+     0.492,
+     0.734
     ],
-    "area": 39,
-    "area_acc": 0.672,
+    "area": 38,
+    "area_acc": 0.655,
     "area_ci95": [
-     0.544,
-     0.779
+     0.527,
+     0.764
     ],
-    "window_acc": 0.631,
+    "window_acc": 0.625,
     "predictions": {
      "25night:floor4/stops/s01_lift_stairs5:iphone": [
       "lift_stairs_4F",
@@ -28438,7 +28445,7 @@
      ],
      "25night:floor5/stops/s08_exit10_door:iphone": [
       "exit_10",
-      "exit_10"
+      "lift_stairs_4F"
      ],
      "25night:floor5/stops/s09_male_disabled_toilet:iphone": [
       "disabled_toilet",
@@ -31122,13 +31129,13 @@
   },
   "leave25nov_out_allphones_test_s24": {
    "_split": {
-    "train_recordings": 202,
+    "train_recordings": 227,
     "test_recordings": 13,
     "train_places": 26,
     "chance": 0.038,
     "test_places_not_in_train": [],
-    "floor_jump_threshold_hpa": 0.288,
-    "note": "train 23nov+24s1+24s2 (all handsets), test 25night+25night_tian+25nov+25spots s24 (SM-S9280)"
+    "floor_jump_threshold_hpa": 0.301,
+    "note": "train 23nov+24s1+24s2+26tian (all handsets), test 25night+25night_tian+25nov+25spots s24 (SM-S9280)"
    },
    "|B|": {
     "n_recordings": 13,
@@ -31272,19 +31279,19 @@
    },
    "|B|+xyz": {
     "n_recordings": 13,
-    "exact": 3,
-    "exact_acc": 0.231,
+    "exact": 4,
+    "exact_acc": 0.308,
     "exact_ci95": [
-     0.082,
-     0.503
-    ],
-    "area": 4,
-    "area_acc": 0.308,
-    "area_ci95": [
      0.127,
      0.576
     ],
-    "window_acc": 0.166,
+    "area": 5,
+    "area_acc": 0.385,
+    "area_ci95": [
+     0.177,
+     0.645
+    ],
+    "window_acc": 0.236,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -31292,7 +31299,7 @@
      ],
      "25spots:floor4/stops/spots_s11_escalator_up_4F:s24": [
       "escalator_up_4F",
-      "exit_5_4F"
+      "lt2a"
      ],
      "25spots:floor4/stops/spots_s12_exit_10_4F:s24": [
       "exit_10_4F",
@@ -31308,7 +31315,7 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
-      "lift_stairs"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -31342,19 +31349,19 @@
    },
    "|B|+xyz + baro floor": {
     "n_recordings": 13,
-    "exact": 3,
-    "exact_acc": 0.231,
+    "exact": 4,
+    "exact_acc": 0.308,
     "exact_ci95": [
-     0.082,
-     0.503
-    ],
-    "area": 4,
-    "area_acc": 0.308,
-    "area_ci95": [
      0.127,
      0.576
     ],
-    "window_acc": 0.21,
+    "area": 5,
+    "area_acc": 0.385,
+    "area_ci95": [
+     0.177,
+     0.645
+    ],
+    "window_acc": 0.287,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -31362,7 +31369,7 @@
      ],
      "25spots:floor4/stops/spots_s11_escalator_up_4F:s24": [
       "escalator_up_4F",
-      "exit_5_4F"
+      "lt2a"
      ],
      "25spots:floor4/stops/spots_s12_exit_10_4F:s24": [
       "exit_10_4F",
@@ -31378,7 +31385,7 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
-      "lift_stairs"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -31600,7 +31607,7 @@
      ],
      "25spots:floor5/stops/spots_s05_sr9:s24": [
       "sr9",
-      "male_toilet"
+      "exit_10_4F"
      ],
      "25spots:floor5/stops/spots_s07_disabled_toilet:s24": [
       "disabled_toilet",
@@ -31634,7 +31641,7 @@
      0.082,
      0.503
     ],
-    "window_acc": 0.0,
+    "window_acc": 0.006,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -31692,19 +31699,19 @@
    },
    "|B|+xyz+tilt": {
     "n_recordings": 13,
-    "exact": 3,
-    "exact_acc": 0.231,
+    "exact": 4,
+    "exact_acc": 0.308,
     "exact_ci95": [
-     0.082,
-     0.503
-    ],
-    "area": 4,
-    "area_acc": 0.308,
-    "area_ci95": [
      0.127,
      0.576
     ],
-    "window_acc": 0.223,
+    "area": 5,
+    "area_acc": 0.385,
+    "area_ci95": [
+     0.177,
+     0.645
+    ],
+    "window_acc": 0.299,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -31728,7 +31735,7 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
-      "lift_stairs"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -31762,19 +31769,19 @@
    },
    "|B|+xyz+tilt + baro floor": {
     "n_recordings": 13,
-    "exact": 3,
-    "exact_acc": 0.231,
+    "exact": 4,
+    "exact_acc": 0.308,
     "exact_ci95": [
-     0.082,
-     0.503
-    ],
-    "area": 4,
-    "area_acc": 0.308,
-    "area_ci95": [
      0.127,
      0.576
     ],
-    "window_acc": 0.223,
+    "area": 5,
+    "area_acc": 0.385,
+    "area_ci95": [
+     0.177,
+     0.645
+    ],
+    "window_acc": 0.299,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -31798,7 +31805,7 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
-      "lift_stairs"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -31972,76 +31979,6 @@
    },
    "|B|+xyz+Wi-Fi": {
     "n_recordings": 13,
-    "exact": 1,
-    "exact_acc": 0.077,
-    "exact_ci95": [
-     0.014,
-     0.333
-    ],
-    "area": 4,
-    "area_acc": 0.308,
-    "area_ci95": [
-     0.127,
-     0.576
-    ],
-    "window_acc": 0.076,
-    "predictions": {
-     "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
-      "escalator_down_4F",
-      "y4502"
-     ],
-     "25spots:floor4/stops/spots_s11_escalator_up_4F:s24": [
-      "escalator_up_4F",
-      "y4502"
-     ],
-     "25spots:floor4/stops/spots_s12_exit_10_4F:s24": [
-      "exit_10_4F",
-      "lift_stairs"
-     ],
-     "25spots:floor4/stops/spots_s13_exit_5_4F:s24": [
-      "exit_5_4F",
-      "escalator_up_4F"
-     ],
-     "25spots:floor4/stops/spots_s14_lift_stairs_4F:s24": [
-      "lift_stairs_4F",
-      "lift_stairs_4F"
-     ],
-     "25spots:floor5/stops/spots_s01_escalator_down:s24": [
-      "escalator_down",
-      "lift_stairs"
-     ],
-     "25spots:floor5/stops/spots_s03_escalator_up:s24": [
-      "escalator_up",
-      "disabled_toilet"
-     ],
-     "25spots:floor5/stops/spots_s04_female_toilet:s24": [
-      "female_toilet",
-      "y4502"
-     ],
-     "25spots:floor5/stops/spots_s05_sr9:s24": [
-      "sr9",
-      "lt1b"
-     ],
-     "25spots:floor5/stops/spots_s07_disabled_toilet:s24": [
-      "disabled_toilet",
-      "lift_stairs"
-     ],
-     "25spots:floor5/stops/spots_s09_lift_stairs:s24": [
-      "lift_stairs",
-      "lt1b"
-     ],
-     "25spots:floor5/stops/spots_s16_male_toilet:s24": [
-      "male_toilet",
-      "lt2b"
-     ],
-     "25spots:floor5/stops/spots_s18_escalator_down:s24": [
-      "escalator_down",
-      "lt2a"
-     ]
-    }
-   },
-   "|B|+xyz+Wi-Fi + baro floor": {
-    "n_recordings": 13,
     "exact": 2,
     "exact_acc": 0.154,
     "exact_ci95": [
@@ -32078,7 +32015,77 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
+      "escalator_down"
+     ],
+     "25spots:floor5/stops/spots_s03_escalator_up:s24": [
+      "escalator_up",
+      "disabled_toilet"
+     ],
+     "25spots:floor5/stops/spots_s04_female_toilet:s24": [
+      "female_toilet",
+      "y4502"
+     ],
+     "25spots:floor5/stops/spots_s05_sr9:s24": [
+      "sr9",
+      "lt1b"
+     ],
+     "25spots:floor5/stops/spots_s07_disabled_toilet:s24": [
+      "disabled_toilet",
       "lift_stairs"
+     ],
+     "25spots:floor5/stops/spots_s09_lift_stairs:s24": [
+      "lift_stairs",
+      "lt1b"
+     ],
+     "25spots:floor5/stops/spots_s16_male_toilet:s24": [
+      "male_toilet",
+      "lt2b"
+     ],
+     "25spots:floor5/stops/spots_s18_escalator_down:s24": [
+      "escalator_down",
+      "lt2a"
+     ]
+    }
+   },
+   "|B|+xyz+Wi-Fi + baro floor": {
+    "n_recordings": 13,
+    "exact": 3,
+    "exact_acc": 0.231,
+    "exact_ci95": [
+     0.082,
+     0.503
+    ],
+    "area": 6,
+    "area_acc": 0.462,
+    "area_ci95": [
+     0.232,
+     0.709
+    ],
+    "window_acc": 0.197,
+    "predictions": {
+     "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
+      "escalator_down_4F",
+      "y4502"
+     ],
+     "25spots:floor4/stops/spots_s11_escalator_up_4F:s24": [
+      "escalator_up_4F",
+      "y4502"
+     ],
+     "25spots:floor4/stops/spots_s12_exit_10_4F:s24": [
+      "exit_10_4F",
+      "lift_stairs"
+     ],
+     "25spots:floor4/stops/spots_s13_exit_5_4F:s24": [
+      "exit_5_4F",
+      "escalator_up_4F"
+     ],
+     "25spots:floor4/stops/spots_s14_lift_stairs_4F:s24": [
+      "lift_stairs_4F",
+      "lift_stairs_4F"
+     ],
+     "25spots:floor5/stops/spots_s01_escalator_down:s24": [
+      "escalator_down",
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -32112,19 +32119,19 @@
    },
    "|B|+tilt+Wi-Fi": {
     "n_recordings": 13,
-    "exact": 1,
-    "exact_acc": 0.077,
+    "exact": 2,
+    "exact_acc": 0.154,
     "exact_ci95": [
-     0.014,
-     0.333
+     0.043,
+     0.422
     ],
-    "area": 4,
-    "area_acc": 0.308,
+    "area": 5,
+    "area_acc": 0.385,
     "area_ci95": [
-     0.127,
-     0.576
+     0.177,
+     0.645
     ],
-    "window_acc": 0.076,
+    "window_acc": 0.14,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -32148,7 +32155,7 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
-      "entrance_exit"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -32182,19 +32189,19 @@
    },
    "|B|+tilt+Wi-Fi + baro floor": {
     "n_recordings": 13,
-    "exact": 1,
-    "exact_acc": 0.077,
+    "exact": 2,
+    "exact_acc": 0.154,
     "exact_ci95": [
-     0.014,
-     0.333
+     0.043,
+     0.422
     ],
-    "area": 4,
-    "area_acc": 0.308,
+    "area": 5,
+    "area_acc": 0.385,
     "area_ci95": [
-     0.127,
-     0.576
+     0.177,
+     0.645
     ],
-    "window_acc": 0.076,
+    "window_acc": 0.153,
     "predictions": {
      "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": [
       "escalator_down_4F",
@@ -32218,7 +32225,7 @@
      ],
      "25spots:floor5/stops/spots_s01_escalator_down:s24": [
       "escalator_down",
-      "entrance_exit"
+      "escalator_down"
      ],
      "25spots:floor5/stops/spots_s03_escalator_up:s24": [
       "escalator_up",
@@ -33755,12 +33762,13 @@
     "25nov",
     "25spots:spots",
     "25night",
-    "25night_tian"
+    "25night_tian",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.292,
+   "jump_threshold_hpa": 0.296,
    "step_tracking": "42/42",
    "step_tracking_wrong_stops": [],
-   "absolute_threshold_hpa": 1017.535,
+   "absolute_threshold_hpa": 1017.525,
    "absolute_threshold": "26/42"
   },
   "iphone_test_24s1": {
@@ -33770,9 +33778,10 @@
     "25nov",
     "25spots:spots",
     "25night",
-    "25night_tian"
+    "25night_tian",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.301,
+   "jump_threshold_hpa": 0.307,
    "step_tracking": "23/27",
    "step_tracking_wrong_stops": [
     {
@@ -33804,7 +33813,7 @@
      "jump_from_previous_stop_hpa": 0.073
     }
    ],
-   "absolute_threshold_hpa": 1017.259,
+   "absolute_threshold_hpa": 1017.289,
    "absolute_threshold": "25/27"
   },
   "iphone_test_24s2": {
@@ -33814,12 +33823,13 @@
     "25nov",
     "25spots:spots",
     "25night",
-    "25night_tian"
+    "25night_tian",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.301,
+   "jump_threshold_hpa": 0.307,
    "step_tracking": "26/26",
    "step_tracking_wrong_stops": [],
-   "absolute_threshold_hpa": 1016.797,
+   "absolute_threshold_hpa": 1016.893,
    "absolute_threshold": "12/26"
   },
   "iphone_test_25night": {
@@ -33829,9 +33839,10 @@
     "24s2",
     "25nov",
     "25spots:spots",
-    "25night_tian"
+    "25night_tian",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.29,
+   "jump_threshold_hpa": 0.292,
    "step_tracking": "29/32",
    "step_tracking_wrong_stops": [
     {
@@ -33856,7 +33867,7 @@
      "jump_from_previous_stop_hpa": NaN
     }
    ],
-   "absolute_threshold_hpa": 1017.258,
+   "absolute_threshold_hpa": 1017.288,
    "absolute_threshold": "27/32"
   },
   "iphone_test_25night_tian": {
@@ -33866,12 +33877,13 @@
     "24s2",
     "25nov",
     "25spots:spots",
-    "25night"
+    "25night",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.301,
+   "jump_threshold_hpa": 0.307,
    "step_tracking": "23/23",
    "step_tracking_wrong_stops": [],
-   "absolute_threshold_hpa": 1017.122,
+   "absolute_threshold_hpa": 1017.171,
    "absolute_threshold": "9/23"
   },
   "iphone_test_25nov": {
@@ -33881,12 +33893,13 @@
     "24s2",
     "25spots:spots",
     "25night",
-    "25night_tian"
+    "25night_tian",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.292,
+   "jump_threshold_hpa": 0.296,
    "step_tracking": "26/26",
    "step_tracking_wrong_stops": [],
-   "absolute_threshold_hpa": 1017.374,
+   "absolute_threshold_hpa": 1017.387,
    "absolute_threshold": "14/26"
   },
   "iphone_test_25spots:spots": {
@@ -33896,9 +33909,10 @@
     "24s2",
     "25nov",
     "25night",
-    "25night_tian"
+    "25night_tian",
+    "26tian"
    ],
-   "jump_threshold_hpa": 0.301,
+   "jump_threshold_hpa": 0.307,
    "step_tracking": "12/18",
    "step_tracking_wrong_stops": [
     {
@@ -33944,8 +33958,24 @@
      "jump_from_previous_stop_hpa": NaN
     }
    ],
-   "absolute_threshold_hpa": 1017.31,
+   "absolute_threshold_hpa": 1017.333,
    "absolute_threshold": "11/18"
+  },
+  "iphone_test_26tian": {
+   "trained_on": [
+    "23nov",
+    "24s1",
+    "24s2",
+    "25nov",
+    "25spots:spots",
+    "25night",
+    "25night_tian"
+   ],
+   "jump_threshold_hpa": 0.296,
+   "step_tracking": "25/25",
+   "step_tracking_wrong_stops": [],
+   "absolute_threshold_hpa": 1017.236,
+   "absolute_threshold": "25/25"
   },
   "s24_test_24s1": {
    "trained_on": [
@@ -34292,6 +34322,17 @@
    "f5_median_hpa": 1016.711,
    "f4_median_hpa": 1016.873,
    "n_stops": 18
+  },
+  "26tian_iphone": {
+   "floor_step_hpa": [
+    0.626
+   ],
+   "largest_same_floor_consecutive_change_hpa": 0.062,
+   "within_stop_sd_hpa_median": 0.005,
+   "f5_range_hpa": 0.15,
+   "f5_median_hpa": 1017.152,
+   "f4_median_hpa": 1017.783,
+   "n_stops": 25
   },
   "24s1_s24": {
    "floor_step_hpa": [
