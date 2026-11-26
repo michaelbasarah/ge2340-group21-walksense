@@ -124,7 +124,8 @@
         "track tian (Tian ip16, session 25night_tian): {{json:phase2/clean-data/2026-11-25-night/build_summary.json#tracks.tian.stops}} stops and {{json:phase2/clean-data/2026-11-25-night/build_summary.json#tracks.tian.walks}} walks, no Wi-Fi log; the first same-handset test for ip16 (iPhone17,4 was only in 24 s2 before) [72]",
         "8 extra stops after the loop (00:15 to 00:40) at the weak places: sr9, y5202, exit 10, the 5F male disabled toilet, lift/stairs on both floors, y5302 back door, y5401 [72]",
         "labels from each collector's own file names; new reusable ingest script (hashes every file against the repo, skips byte-identical copies) [72]",
-        "after the rerun: leave one session out {{f:fused.take.leave_one_session_out.fused}} on takes, {{f:fused.split20.leave_one_session_out.fused}} on 20 s pieces; held-out folds 25night {{f:fused.take.loso.fold.test 25night}}, 25night_tian {{f:fused.take.loso.fold.test 25night_tian}} [72]"
+        "after the rerun: leave one session out {{f:fused.take.leave_one_session_out.fused}} on takes, {{f:fused.split20.leave_one_session_out.fused}} on 20 s pieces; held-out folds 25night {{f:fused.take.loso.fold.test 25night}}, 25night_tian {{f:fused.take.loso.fold.test 25night_tian}} (numbers of the current build, i.e. without the a56 night takes since 27 Nov) [72, 91]",
+        "27 Nov, user decision: the official headline leaves out Chris's a56 night takes ({{f:headline.exclude.25night}}; PROCESS-LOG 77 option B); the data stay in the repo. Supporting: keep (A) {{f:a56opt.default.A.loso}}, exclude (B) {{f:a56opt.default.B.loso}}, label-free offset fix on the a56 night only (C1) {{f:a56opt.default.C1.loso}}; a56 night takes A {{f:a56opt.default.A.a56_night}} vs C1 {{f:a56opt.default.C1.a56_night}} [77, 91]"
       ],
       "failures": [
         "Chris's a56 magnetometer read a median |B| of 110.9 uT over his 32 night stops against 40.6 to 45.2 uT on the other days (field_check.csv); his night takes scored 2/32 and a56 per-phone accuracy fell 49.1% -> 34.1% (leave one session out) [72]",
@@ -137,7 +138,7 @@
         "check each phone's raw field before training on it: a one-line median |B| per phone and session (check_field.py) would have caught the a56 offset at ingest [72]",
         "a floor tracker that keeps the floor when pressure is missing fails quietly [72]"
       ],
-      "log": "72, 77",
+      "log": "72, 77, 91",
       "data": "phase2/clean-data/2026-11-25-night/ (raw/, round/clean, tian/clean, labels_night.csv, field_check.csv)"
     }
   ],
@@ -150,6 +151,7 @@
     "25 Nov: walking dot, first corridor right {{f:up.dot.sesi1->sesi2.first}} and {{f:up.dot.sesi2->sesi1.first}}, end error median/p90 {{f:up.dot.sesi1->sesi2.err}} [27]",
     "25 Nov: leakage demonstration: random windows {{f:fused.take.random_LEAKY.fused}}, by recording {{f:fused.take.by_recording_partly_leaky.fused}}, by stop {{f:fused.take.grouped_by_stop.fused}}, leave one session out {{f:fused.take.leave_one_session_out.fused}} [32]",
     "25 Nov: places never classified correctly under leave one session out were named before the 25-Nov data [41]; after the complete 25 Nov: {{f:derived.never_correct}} [50]",
-    "25 Nov: request matching on 128 queries (hard ones agent-drafted), test split: keyword {{f:rm.keyword.test}}, embeddings {{f:rm.embed.test}}, LLM {{f:rm.llm.test}}, fuzzy keyword {{f:rm.fuzzy_keyword.test}}, hybrid {{f:rm.hybrid.test}} [56 to 59, 64]"
+    "25 Nov: request matching on 128 queries (hard ones agent-drafted), test split: keyword {{f:rm.keyword.test}}, embeddings {{f:rm.embed.test}}, LLM {{f:rm.llm.test}}, fuzzy keyword {{f:rm.fuzzy_keyword.test}}, hybrid {{f:rm.hybrid.test}} [56 to 59, 64]",
+    "27 Nov: final configuration (a56 night excluded, deterministic kNN): leave one session out {{f:fused.take.leave_one_session_out.fused}} on takes, {{f:fused.split20.leave_one_session_out.fused}} on 20 s pieces; ip18 (demo phone) {{f:derived.phone.ip18}}; leaky random windows {{f:fused.take.random_LEAKY.fused}} [91]"
   ]
 }
