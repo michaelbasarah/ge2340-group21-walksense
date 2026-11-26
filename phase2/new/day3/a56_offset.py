@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""a56 night-run magnetometer offset: numbers for the keep / exclude / recalibrate decision (PROCESS-LOG entry 74).
+"""a56 night-run magnetometer offset: numbers for the keep / exclude / recalibrate decision (PROCESS-LOG entry 75).
 
 OFFLINE ANALYSIS ONLY. config.json, out/ and out-split20/ are not changed; everything is written to out-a56/.
 
@@ -393,6 +393,22 @@ def drift_summary(ts):
 
 
 # ----------------------------------------------------------------------------- report
+def repro(d, o):
+    """Does the run in d reproduce the official run in o? (fold timings `seconds` ignored)"""
+    S, So = pd.read_csv(d / 'fused_sample_predictions.csv'), pd.read_csv(o / 'fused_sample_predictions.csv')
+    cols = ['scheme', 'key', 'true', 'pred', 'top3']
+    same = len(So) == len(S) and So.sort_values(['scheme', 'key']).reset_index(drop=True)[cols].equals(S.sort_values(['scheme', 'key']).reset_index(drop=True)[cols])
+    F, Fo = json.loads((d / 'fused_knn.json').read_text()), json.loads((o / 'fused_knn.json').read_text())
+    strip = lambda sc: {k: {**v, 'folds': [{a: b for a, b in f.items() if a != 'seconds'} for f in v['folds']]} for k, v in sc.items()}
+    same_f = strip(F['schemes']) == strip(Fo['schemes']) and F['deployable_model'] == Fo['deployable_model']
+    same_r = json.loads((d / 'results.json').read_text())['stop_results'] == json.loads((o / 'results.json').read_text())['stop_results']
+    lo = F['schemes']['leave_one_session_out']['overall']['fused (learned weights)']
+    loo = Fo['schemes']['leave_one_session_out']['overall']['fused (learned weights)']
+    return {'fused_sample_predictions.csv': bool(same), 'fused_knn.json schemes+model (timings ignored)': bool(same_f),
+            'results.json stop_results': bool(same_r), 'loso': f"{lo['exact']}/{lo['n_recordings_scored']}",
+            'loso_official': f"{loo['exact']}/{loo['n_recordings_scored']}", 'official_dir': o.name}
+
+
 def report():
     rows, per_place, js = [], [], {}
     official = {'': HERE / 'out', '-split20': HERE / 'out-split20'}
@@ -416,6 +432,9 @@ def report():
                 r[f'{ph}_acc'] = round(float(q['ok'].mean()), 3) if len(q) else None
             q = L[(L['session'] == NIGHT) & (L['phone'] == A56)]
             r['a56_night'] = f"{int(q['ok'].sum())}/{len(q)}" if len(q) else 'excluded'
+            q = L[~((L['session'] == NIGHT) & (L['phone'] == A56))]          # the same test samples in every option
+            r['loso_without_a56_night'] = f"{int(q['ok'].sum())}/{len(q)}"
+            r['loso_without_a56_night_acc'] = round(float(q['ok'].mean()), 3)
             q = L[L['phone'] == A56]
             q = q[q['session'] != NIGHT]
             r['a56_other_sessions'] = f"{int(q['ok'].sum())}/{len(q)}"
@@ -430,17 +449,11 @@ def report():
             m = F['deployable_model']
             r['deployable'] = ' '.join(f'{k} {v:g}' for k, v in m['weights'].items()) + f" k {m['k']}"
             if opt == 'A':
-                o = official[var]
-                So = pd.read_csv(o / 'fused_sample_predictions.csv')
-                same = len(So) == len(S) and (So.sort_values(['scheme', 'key']).reset_index(drop=True)[['scheme', 'key', 'true', 'pred', 'top3']]
-                                              .equals(S.sort_values(['scheme', 'key']).reset_index(drop=True)[['scheme', 'key', 'true', 'pred', 'top3']]))
-                Fo = json.loads((o / 'fused_knn.json').read_text())
-                same_f = Fo['schemes'] == F['schemes'] and Fo['deployable_model'] == F['deployable_model']
-                Ro = json.loads((o / 'results.json').read_text())
-                same_r = Ro['stop_results'] == R['stop_results']
-                r['reproduces_official'] = bool(same and same_f and same_r)
-                js[f'A{var}_reproduces'] = {'fused_sample_predictions.csv': bool(same), 'fused_knn.json schemes+model': bool(same_f),
-                                            'results.json stop_results': bool(same_r), 'official_dir': o.name}
+                rep = repro(d, official[var])
+                r['reproduces_official'] = all(v for k, v in rep.items() if k != 'official_dir')
+                js[f'A{var}_reproduces'] = rep
+                if (OUTA / f'A_mt{var}' / 'fused_knn.json').exists():
+                    js[f'A_mt{var}_reproduces'] = repro(OUTA / f'A_mt{var}', official[var])
             rows.append(r)
             q = L[(L['session'] == NIGHT) & (L['phone'] == A56)]
             for p, g in q.groupby('true'):
@@ -486,17 +499,17 @@ def xlsx(tab='2026-11-26 a56 options'):
                 if h in pct and isinstance(r[j], float):
                     ws.cell(ws.max_row, j + 1).number_format = '0.0%'
         ws.append([])
-    ws.append(['a56 night-run magnetometer offset: keep / exclude / recalibrate (offline analysis, PROCESS-LOG 74; internal team sheet, numbers only)'])
+    ws.append(['a56 night-run magnetometer offset: keep / exclude / recalibrate (offline analysis, PROCESS-LOG 75; internal team sheet, numbers only)'])
     ws['A1'].font = Font(bold=True, size=13)
     ws.append(['Source: phase2/new/day3/out-a56/comparison.csv (a56_offset.py). Official config.json, out/ and out-split20/ unchanged; option A reproduces them.'])
     ws.append(['Scheme: learned-weight fused kNN, leave one session out (per take in default, per 20 s piece in split20). '
                'Leave-25-Nov-out = results.json, |B|+xyz+tilt + baro floor, kNN k=5.'])
     ws.append([])
     block('Options', ['option', 'what'], [[k, v] for k, v in OPTIONS.items()])
-    cols = ['variant', 'option', 'loso_correct', 'loso_n', 'loso_acc', 'grouped_acc'] + [f'{p}' for p in PHONES] + [f'{p}_acc' for p in PHONES] + \
+    cols = ['variant', 'option', 'loso_correct', 'loso_n', 'loso_acc', 'loso_without_a56_night', 'loso_without_a56_night_acc', 'grouped_acc'] + [f'{p}' for p in PHONES] + [f'{p}_acc' for p in PHONES] + \
            ['a56_night', 'a56_other_sessions', 'ip18_night', 'stops_over_100uT', 'deployable']
     block('Leave one session out, overall and per phone (correct / n)', cols, C[cols].itertuples(index=False),
-          pct={'loso_acc', 'grouped_acc'} | {f'{p}_acc' for p in PHONES})
+          pct={'loso_acc', 'loso_without_a56_night_acc', 'grouped_acc'} | {f'{p}_acc' for p in PHONES})
     lc = [c for c in C.columns if c.startswith('leave25out_')]
     block('Leave 25 Nov out (train earlier days, test every 25-Nov session), correct / n', ['variant', 'option'] + lc, C[['variant', 'option'] + lc].itertuples(index=False))
     if (OUTA / 'a56_night_per_place_wide.csv').exists():

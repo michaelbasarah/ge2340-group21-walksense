@@ -385,3 +385,28 @@ session,phone,slot,key,place,floor,start_hk,B,x,y,z,ox_session,oy_session,ox_loc
 25spots,s24,s24,25spots:floor4/stops/spots_s14_lift_stairs_4F:s24,lift_stairs_4F,4,11-25 18:04,42.51,-38.822,-0.187,-17.229,-15.271,-29.547,-15.271,-29.547,104.767,local fit failed (R outside 20-60 uT; angular gap > 180 deg); session fit
 25spots,s24,s24,25spots:floor5/stops/spots_s16_male_toilet:s24,male_toilet,5,11-25 20:22,62.461,22.546,-54.836,-19.507,-15.271,-29.547,-15.271,-29.547,,local fit failed (fewer than 8 takes); session fit
 25spots,s24,s24,25spots:floor5/stops/spots_s18_escalator_down:s24,escalator_down,5,11-25 20:23,75.452,-36.496,-65.546,-7.723,-15.271,-29.547,-15.271,-29.547,,local fit failed (fewer than 8 takes); session fit
+26tian,ip16,iphone,26tian:floor5/stops/s01_exit5_door:iphone,exit_5,5,11-26 09:30,54.283,48.107,-23.55,-8.758,-2.484,-13.862,4.492,-17.312,42.452,local fit on 10/10 takes
+26tian,ip16,iphone,26tian:floor5/stops/s02_male_toilet:iphone,male_toilet,5,11-26 09:33,69.94,60.168,-32.315,-15.011,-2.484,-13.862,8.644,-17.365,46.359,local fit on 10/11 takes
+26tian,ip16,iphone,26tian:floor5/stops/s03_y5302:iphone,y5302,5,11-26 09:35,41.647,27.206,-28.411,-13.621,-2.484,-13.862,1.237,-15.76,40.403,local fit on 12/12 takes
+26tian,ip16,iphone,26tian:floor5/stops/s04_sr9:iphone,sr9,5,11-26 09:37,30.128,-26.273,-7.248,-12.791,-2.484,-13.862,1.269,-15.442,40.544,local fit on 13/13 takes
+26tian,ip16,iphone,26tian:floor5/stops/s05_y5202:iphone,y5202,5,11-26 09:39,44.274,-29.291,11.208,-31.186,-2.484,-13.862,1.269,-15.442,40.544,local fit on 13/13 takes
+26tian,ip16,iphone,26tian:floor5/stops/s06_female_toilet:iphone,female_toilet,5,11-26 09:42,40.932,-25.857,15.483,-27.678,-2.484,-13.862,2.558,-14.1,40.036,local fit on 15/15 takes
+26tian,ip16,iphone,26tian:floor5/stops/s07_exit10_door:iphone,exit_10,5,11-26 09:44,39.89,-25.694,10.206,-28.705,-2.484,-13.862,2.558,-14.1,40.036,local fit on 15/15 takes
+26tian,ip16,iphone,26tian:floor5/stops/s08_esca_down:iphone,escalator_down,5,11-26 09:50,61.967,-44.53,-42.568,-6.425,-2.484,-13.862,-3.092,-15.308,36.394,local fit on 17/18 takes
+26tian,ip16,iphone,26tian:floor5/stops/s09_esca_up:iphone,escalator_up,5,11-26 09:56,58.236,-16.391,-55.84,-0.269,-2.484,-13.862,-2.371,-14.106,35.673,local fit on 19/20 takes
+26tian,ip16,iphone,26tian:floor5/stops/s10_male_disabled_toilet:iphone,disabled_toilet,5,11-26 09:59,50.57,-14.748,-48.252,-3.265,-2.484,-13.862,-3.058,-14.87,35.29,local fit on 20/21 takes
+26tian,ip16,iphone,26tian:floor5/stops/s11_lift_stairs5:iphone,lift_stairs,5,11-26 10:01,39.871,-33.448,11.4,-18.371,-2.484,-13.862,-4.912,-14.373,34.514,local fit on 20/21 takes
+26tian,ip16,iphone,26tian:floor5/stops/s12_y5401:iphone,y5401,5,11-26 10:04,37.3,19.792,-27.276,-15.929,-2.484,-13.862,-4.748,-14.411,34.432,local fit on 22/22 takes
+26tian,ip16,iphone,26tian:floor5/stops/s13_y5302_point2:iphone,y5302_back,5,11-26 10:06,42.561,-27.929,14.672,-28.545,-2.484,-13.862,-4.8,-14.398,34.398,local fit on 21/21 takes
+26tian,ip16,iphone,26tian:floor4/stops/s01_lift_stairs5:iphone,lift_stairs_4F,4,11-26 10:09,30.561,-26.237,5.118,-14.693,-2.484,-13.862,-5.164,-13.748,35.22,local fit on 20/20 takes
+26tian,ip16,iphone,26tian:floor4/stops/s02_disabled_toilet:iphone,disabled_toilet_4F,4,11-26 10:11,57.395,-13.814,-45.018,-32.773,-2.484,-13.862,-5.164,-13.748,35.22,local fit on 20/20 takes
+26tian,ip16,iphone,26tian:floor4/stops/s03_exit5_door:iphone,exit_5_4F,4,11-26 10:14,52.443,34.455,-8.67,-38.546,-2.484,-13.862,-5.389,-13.532,35.371,local fit on 18/18 takes
+26tian,ip16,iphone,26tian:floor4/stops/s04_lt2a:iphone,lt2a,4,11-26 10:16,61.838,18.11,-32.764,-49.183,-2.484,-13.862,-5.389,-13.532,35.371,local fit on 18/18 takes
+26tian,ip16,iphone,26tian:floor4/stops/s05_lt2b:iphone,lt2b,4,11-26 10:19,71.85,36.088,-14.504,-60.381,-2.484,-13.862,-5.389,-13.532,35.371,local fit on 18/18 takes
+26tian,ip16,iphone,26tian:floor4/stops/s06_esca_down:iphone,escalator_down_4F,4,11-26 10:22,41.236,5.6,16.969,-37.152,-2.484,-13.862,-3.809,-12.294,34.485,local fit on 17/17 takes
+26tian,ip16,iphone,26tian:floor4/stops/s07_y4502:iphone,y4502,4,11-26 10:25,52.223,-13.822,-36.921,-34.235,-2.484,-13.862,-3.809,-12.294,34.485,local fit on 17/17 takes
+26tian,ip16,iphone,26tian:floor4/stops/s08_esca_up:iphone,escalator_up_4F,4,11-26 10:27,41.209,16.6,7.035,-37.036,-2.484,-13.862,-3.187,-10.63,33.606,local fit on 16/16 takes
+26tian,ip16,iphone,26tian:floor4/stops/s09_lt1b:iphone,lt1b,4,11-26 10:29,50.703,-7.165,25.268,-43.351,-2.484,-13.862,-2.782,-9.525,33.032,local fit on 15/15 takes
+26tian,ip16,iphone,26tian:floor4/stops/s10_lt1a:iphone,lt1a,4,11-26 10:32,39.192,-26.485,-3.51,-28.652,-2.484,-13.862,-2.3,-9.738,32.742,local fit on 14/14 takes
+26tian,ip16,iphone,26tian:floor4/stops/s11_exit10_door:iphone,exit_10_4F,4,11-26 10:34,53.442,-42.925,4.505,-31.48,-2.484,-13.862,-2.3,-9.738,32.742,local fit on 14/14 takes
+26tian,ip16,iphone,26tian:floor4/stops/s12_gate:iphone,entrance_exit,4,11-26 10:36,29.722,19.259,20.658,-9.062,-2.484,-13.862,-1.369,-10.677,33.004,local fit on 12/12 takes

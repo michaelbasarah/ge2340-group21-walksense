@@ -1,5 +1,5 @@
 #!/bin/sh
-# a56 night offset: keep / exclude / recalibrate comparison (PROCESS-LOG entry 74), offline analysis only.
+# a56 night offset: keep / exclude / recalibrate comparison (PROCESS-LOG entry 75), offline analysis only.
 # Writes phase2/new/day3/out-a56/ only; config.json, out/ and out-split20/ are not changed.
 #   sh phase2/new/day3/a56_offset.sh          (PYTHON=/path/to/python; JOBS=parallel runs, default 6)
 set -e
@@ -7,7 +7,9 @@ cd "$(dirname "$0")/../../.."
 PY=${PYTHON:-python3}
 JOBS=${JOBS:-6}
 "$PY" -I phase2/clean-data/2026-11-25-night/scripts/build_night.py > /dev/null
+"$PY" -I phase2/clean-data/2026-11-26-tian/scripts/build_tian26.py > /dev/null
 "$PY" -I phase2/clean-data/2026-11-25-spots/scripts/build_clean.py > /dev/null
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1   # one core per run; the runs go in parallel
 "$PY" phase2/new/day3/data.py > /dev/null                      # default feature cache
 "$PY" phase2/new/day3/a56_offset.py fields > phase2/new/day3/out-a56/fields.log
 "$PY" phase2/new/day3/a56_offset.py prepare                    # build every option's feature tables once (no races)

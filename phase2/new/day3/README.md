@@ -320,6 +320,36 @@ ip16 (default): 48/97 (49.5%) -> 61/122 (50.0%); the `26tian` fold is 12/25 (def
 have no new data; their small changes come from the per-fold weights, which are relearned with `26tian` in every training set.
 All numbers: PROCESS-LOG entry 73.
 
+### o. a56 night offset: keep, exclude or recalibrate (offline comparison; PROCESS-LOG entry 75)
+
+Offline analysis only: `config.json`, `out/` and `out-split20/` are unchanged. `sh phase2/new/day3/a56_offset.sh` (about 2 h with
+12 runs in parallel, one core each) writes `out-a56/`: one folder per option and variant (the same `evaluate.py` + `fused_knn.py`),
+`comparison.csv/.json`, `a56_night_per_place*.csv`, the offset fits and the night time series.
+
+- **A** keep; **B** exclude the a56 night takes (`exclude_sources` in a derived config, `out-a56/config_B.json`);
+- **C** hard-iron correction for every phone and session: offset = centre of a robust circle fitted to the take-mean x/y of all
+  stop takes of that phone in that session (no labels; guards fixed before any accuracy: >= 10 takes, radius 20 to 60 uT, no
+  angular gap over 180 deg, else no correction; z not corrected because every take was recorded flat, `flat_check.csv`);
+  **C1** = C on the a56 night takes only; **C2** / **C21** = the same with a circle fitted to the takes within 30 min of each take.
+- The correction is subtracted from the raw samples before the 5 s windows, so it changes x/y/z, |B| and tilt; Wi-Fi and the
+  barometer are untouched.
+
+Learned-weight fused kNN, leave one session out (`out-a56/comparison.csv`; "without a56 night" = the same test samples in every option):
+
+| option | default | without a56 night | a56 | a56 night | split20 | without a56 night | a56 | a56 night |
+|---|---|---|---|---|---|---|---|---|
+| A | 179/411 (43.6%) | 177/379 | 30/85 | 2/32 | 553/1183 (46.7%) | 541/1092 | 94/246 | 12/91 |
+| B | 190/379 (50.1%) | 190/379 | 30/53 | excluded | 526/1092 (48.2%) | 526/1092 | 85/155 | excluded |
+| C | 197/411 (47.9%) | 183/379 | 43/85 | 14/32 | 573/1180 (48.6%) | 531/1089 | 125/246 | 42/91 |
+| C1 | 194/411 (47.2%) | 183/379 | 42/85 | 11/32 | 614/1183 (51.9%) | 583/1092 | 114/246 | 31/91 |
+| C2 | 178/411 (43.3%) | 166/379 | 44/85 | 12/32 | 524/1181 (44.4%) | 486/1090 | 128/246 | 38/91 |
+| C21 | 201/411 (48.9%) | 185/379 | 46/85 | 16/32 | 599/1183 (50.6%) | 556/1092 | 137/246 | 43/91 |
+
+A with one BLAS thread per run gives 179/411 where the official run has 178/411 (split20 553/1183 = official); __AMT__
+The a56 night offset is not constant (`night_drift.json`, `fig_a56_night_offset.png`): against the first 25-Nov run the median
+take offset is -29.8 / -107.4 / 1.6 uT (x/y/z) before 22:59 and -41.6 / -68.8 / -4.4 uT from 23:00. At 22:59 (y5302_back) both
+phones saw a strong field (ip18 take |B| 284.3 uT) and within that walk + stop the a56 y field went from about -115 to +78 uT (`night_trace_1s.csv`); after it the offset sits in a second regime. So it is not one constant magnet stuck to the phone.
+
 ## Data issues found
 
 - Very strong fields (place median \|B\| above 100 uT, `results.json` `magnetic_check`): 24 s2 iPhone at escalator_down_4F 147.9 and escalator_up_4F 142.5 uT, 24 s2 S24 at escalator_down_4F 127.7, 24 s1 S24 at disabled_toilet 121.6 and escalator_down 101.3. The iPhone on 23 Nov ranges 32.9 to 58.9 uT. Both phones see the 4F down-escalator in session 2, so it is more likely something physical there that night (running escalator machinery?) than one sensor. Worth asking the collector; see `fig_per_place_B_pressure.png`.
