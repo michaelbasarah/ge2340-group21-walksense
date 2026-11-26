@@ -1,0 +1,1650 @@
+{
+ "what": "upload app PlaceModel xyz top-1 per stop, asked on 4F and on 5F; same phone model, trained on the other upload-app sessions (PREREGISTRATION_landing.md pred_app)",
+ "units": {
+  "24s1 a55": {
+   "device": "SM-A556E",
+   "trained_on": [
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "24s1 a56": {
+   "device": "SM-A566B",
+   "trained_on": [
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "24s1 iphone": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "24s1 s24": {
+   "device": "SM-S9280",
+   "trained_on": [
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "24s2 iphone": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "sesi1",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "24s2 s24": {
+   "device": "SM-S9280",
+   "trained_on": [
+    "sesi1",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25night a56": {
+   "device": "SM-A566B",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25nov",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25night iphone": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25nov",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25night_tian iphone": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25nov",
+    "25night",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25nov a55": {
+   "device": "SM-A556E",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25nov a56": {
+   "device": "SM-A566B",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25nov iphone": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25spots iphone": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "25spots s24": {
+   "device": "SM-S9280",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian",
+    "26tian"
+   ],
+   "model": true
+  },
+  "26tian iphone": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "sesi1",
+    "sesi2",
+    "25nov",
+    "25night",
+    "25night_tian"
+   ],
+   "model": true
+  }
+ },
+ "top1": {
+  "24s1:floor5/stops/s01_canteen:a55": {
+   "4": "lt2b",
+   "5": "y5202"
+  },
+  "24s1:floor5/stops/s02_exit5_door:a55": {
+   "4": "lift_stairs5",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor5/stops/s03_male_toilet:a55": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "24s1:floor5/stops/s04_y5302:a55": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s1:floor5/stops/s05_sr9:a55": {
+   "4": "exit10_door",
+   "5": "sr9"
+  },
+  "24s1:floor5/stops/s06_y5202:a55": {
+   "4": "lift_stairs5",
+   "5": "canteen"
+  },
+  "24s1:floor5/stops/s07_female_toilet:a55": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "24s1:floor5/stops/s08_exit10_door:a55": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "24s1:floor5/stops/s09_canteen_revisit:a55": {
+   "4": "gate",
+   "5": "exit10_door"
+  },
+  "24s1:floor5/stops/s10_esca_down:a55": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s11_esca_up:a55": {
+   "4": "esca_up",
+   "5": "exit5_door"
+  },
+  "24s1:floor5/stops/s12_male_disabled_toilet:a55": {
+   "4": "exit10_door",
+   "5": "female_toilet"
+  },
+  "24s1:floor5/stops/s13_lift_stairs5:a55": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "24s1:floor5/stops/s14_y5401:a55": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s1:floor5/stops/s15_y5302_point2:a55": {
+   "4": "exit5_door",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s01_lift_stairs5:a55": {
+   "4": "exit5_door",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s02_disabled_toilet:a55": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "24s1:floor4/stops/s03_exit5_door:a55": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s04_lt2a:a55": {
+   "4": "y4502",
+   "5": "sr9"
+  },
+  "24s1:floor4/stops/s05_lt2b:a55": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s06_esca_down:a55": {
+   "4": "esca_down",
+   "5": "y5302_point2"
+  },
+  "24s1:floor4/stops/s07_y4502:a55": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s08_esca_up:a55": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s1:floor4/stops/s09_lt1b:a55": {
+   "4": "esca_down",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s10_lt1a:a55": {
+   "4": "lt2b",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s11_exit10_door:a55": {
+   "4": "esca_down",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s12_gate:a55": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s1:floor5/stops/s01_canteen:a56": {
+   "4": "gate",
+   "5": "y5302_point2"
+  },
+  "24s1:floor5/stops/s02_exit5_door:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s03_male_toilet:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s04_y5302:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s05_sr9:a56": {
+   "4": "gate",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor5/stops/s06_y5202:a56": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "24s1:floor5/stops/s07_female_toilet:a56": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s08_exit10_door:a56": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s09_canteen_revisit:a56": {
+   "4": "gate",
+   "5": "y5302_point2"
+  },
+  "24s1:floor5/stops/s10_esca_down:a56": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s11_esca_up:a56": {
+   "4": "gate",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor5/stops/s12_male_disabled_toilet:a56": {
+   "4": "gate",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor5/stops/s13_lift_stairs5:a56": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s14_y5401:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s15_y5302_point2:a56": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "24s1:floor4/stops/s01_lift_stairs5:a56": {
+   "4": "lift_stairs5",
+   "5": "exit10_door"
+  },
+  "24s1:floor4/stops/s02_disabled_toilet:a56": {
+   "4": "y4502",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor4/stops/s03_exit5_door:a56": {
+   "4": "exit5_door",
+   "5": "y5302"
+  },
+  "24s1:floor4/stops/s04_lt2a:a56": {
+   "4": "y4502",
+   "5": "y5302"
+  },
+  "24s1:floor4/stops/s05_lt2b:a56": {
+   "4": "lt2b",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s06_esca_down:a56": {
+   "4": "esca_down",
+   "5": "canteen"
+  },
+  "24s1:floor4/stops/s07_y4502:a56": {
+   "4": "y4502",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor4/stops/s08_esca_up:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s09_lt1b:a56": {
+   "4": "lt1b",
+   "5": "canteen"
+  },
+  "24s1:floor4/stops/s10_lt1a:a56": {
+   "4": "lift_stairs5",
+   "5": "exit10_door"
+  },
+  "24s1:floor4/stops/s11_exit10_door:a56": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor4/stops/s12_gate:a56": {
+   "4": "gate",
+   "5": "y5302_point2"
+  },
+  "24s1:floor5/stops/s01_canteen:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s1:floor5/stops/s02_exit5_door:iphone": {
+   "4": "esca_up",
+   "5": "exit5_door"
+  },
+  "24s1:floor5/stops/s03_male_toilet:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s1:floor5/stops/s04_y5302:iphone": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "24s1:floor5/stops/s05_sr9:iphone": {
+   "4": "lift_stairs5",
+   "5": "esca_down"
+  },
+  "24s1:floor5/stops/s06_y5202:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5202"
+  },
+  "24s1:floor5/stops/s07_female_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "24s1:floor5/stops/s08_exit10_door:iphone": {
+   "4": "exit10_door",
+   "5": "exit10_door"
+  },
+  "24s1:floor5/stops/s09_canteen_revisit:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s1:floor5/stops/s10_esca_down:iphone": {
+   "4": "exit10_door",
+   "5": "exit10_door"
+  },
+  "24s1:floor5/stops/s11_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "esca_up"
+  },
+  "24s1:floor5/stops/s12_male_disabled_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor5/stops/s13_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s14_y5401:iphone": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s15_y5302_point2:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "24s1:floor4/stops/s01_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "24s1:floor4/stops/s02_disabled_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "24s1:floor4/stops/s03_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "24s1:floor4/stops/s04_lt2a:iphone": {
+   "4": "lt2a",
+   "5": "y5302"
+  },
+  "24s1:floor4/stops/s05_lt2b:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s1:floor4/stops/s06_esca_down:iphone": {
+   "4": "lift_stairs5",
+   "5": "exit10_door"
+  },
+  "24s1:floor4/stops/s07_y4502:iphone": {
+   "4": "y4502",
+   "5": "sr9"
+  },
+  "24s1:floor4/stops/s08_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "24s1:floor4/stops/s09_lt1b:iphone": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s10_lt1a:iphone": {
+   "4": "lt1a",
+   "5": "y5302_point2"
+  },
+  "24s1:floor4/stops/s11_exit10_door:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor4/stops/s12_gate:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s1:floor5/stops/s01_canteen:s24": {
+   "4": "gate",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s02_exit5_door:s24": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s1:floor5/stops/s03_male_toilet:s24": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s1:floor5/stops/s04_y5302:s24": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s1:floor5/stops/s05_sr9:s24": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s06_y5202:s24": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "24s1:floor5/stops/s07_female_toilet:s24": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "24s1:floor5/stops/s08_exit10_door:s24": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "24s1:floor5/stops/s09_canteen_revisit:s24": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s1:floor5/stops/s10_esca_down:s24": {
+   "4": "esca_down",
+   "5": "female_toilet"
+  },
+  "24s1:floor5/stops/s11_esca_up:s24": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "24s1:floor5/stops/s12_male_disabled_toilet:s24": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "24s1:floor5/stops/s13_lift_stairs5:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s1:floor5/stops/s14_y5401:s24": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "24s1:floor5/stops/s15_y5302_point2:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s1:floor4/stops/s01_lift_stairs5:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s1:floor4/stops/s02_disabled_toilet:s24": {
+   "4": "y4502",
+   "5": "esca_down"
+  },
+  "24s1:floor4/stops/s03_exit5_door:s24": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s04_lt2a:s24": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s05_lt2b:s24": {
+   "4": "lt2b",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s06_esca_down:s24": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "24s1:floor4/stops/s07_y4502:s24": {
+   "4": "y4502",
+   "5": "esca_down"
+  },
+  "24s1:floor4/stops/s08_esca_up:s24": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s1:floor4/stops/s09_lt1b:s24": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "24s1:floor4/stops/s10_lt1a:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s1:floor4/stops/s11_exit10_door:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s1:floor4/stops/s12_gate:s24": {
+   "4": "gate",
+   "5": "exit10_door"
+  },
+  "24s2:floor5/stops/s01_canteen:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s2:floor5/stops/s02_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "24s2:floor5/stops/s03_male_toilet:iphone": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s2:floor5/stops/s04_y5302:iphone": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s2:floor5/stops/s05_sr9:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "24s2:floor5/stops/s06_y5202:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "24s2:floor5/stops/s07_female_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "24s2:floor5/stops/s08_exit10_door:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "24s2:floor5/stops/s09_esca_up:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_up"
+  },
+  "24s2:floor5/stops/s10_esca_down:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "24s2:floor5/stops/s11_male_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_up"
+  },
+  "24s2:floor5/stops/s12_lift_stairs5:iphone": {
+   "4": "exit10_door",
+   "5": "sr9"
+  },
+  "24s2:floor5/stops/s13_y5401:iphone": {
+   "4": "lt2b",
+   "5": "y5401"
+  },
+  "24s2:floor5/stops/s14_y5302_point2:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "24s2:floor4/stops/s01_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "24s2:floor4/stops/s02_disabled_toilet:iphone": {
+   "4": "y4502",
+   "5": "exit10_door"
+  },
+  "24s2:floor4/stops/s03_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "24s2:floor4/stops/s04_lt2a:iphone": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "24s2:floor4/stops/s05_lt2b:iphone": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s2:floor4/stops/s06_esca_down:iphone": {
+   "4": "exit10_door",
+   "5": "esca_up"
+  },
+  "24s2:floor4/stops/s07_y4502:iphone": {
+   "4": "y4502",
+   "5": "y5401"
+  },
+  "24s2:floor4/stops/s08_esca_up:iphone": {
+   "4": "gate",
+   "5": "esca_up"
+  },
+  "24s2:floor4/stops/s09_lt1b:iphone": {
+   "4": "lt1b",
+   "5": "female_toilet"
+  },
+  "24s2:floor4/stops/s10_lt1a:iphone": {
+   "4": "lt1a",
+   "5": "y5302_point2"
+  },
+  "24s2:floor4/stops/s11_exit10_door:iphone": {
+   "4": "exit10_door",
+   "5": "female_toilet"
+  },
+  "24s2:floor4/stops/s12_gate:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s2:floor5/stops/s01_canteen:s24": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "24s2:floor5/stops/s02_exit5_door:s24": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "24s2:floor5/stops/s03_male_toilet:s24": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s2:floor5/stops/s04_y5302:s24": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s2:floor5/stops/s05_sr9:s24": {
+   "4": "gate",
+   "5": "lift_stairs5"
+  },
+  "24s2:floor5/stops/s06_y5202:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s2:floor5/stops/s07_female_toilet:s24": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "24s2:floor5/stops/s08_exit10_door:s24": {
+   "4": "gate",
+   "5": "exit10_door"
+  },
+  "24s2:floor5/stops/s09_esca_up:s24": {
+   "4": "gate",
+   "5": "lift_stairs5"
+  },
+  "24s2:floor5/stops/s10_esca_down:s24": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s2:floor5/stops/s11_male_disabled_toilet:s24": {
+   "4": "lt2b",
+   "5": "esca_up"
+  },
+  "24s2:floor5/stops/s12_lift_stairs5:s24": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "24s2:floor5/stops/s13_y5401:s24": {
+   "4": "lt2b",
+   "5": "y5401"
+  },
+  "24s2:floor5/stops/s14_y5302_point2:s24": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "24s2:floor4/stops/s01_lift_stairs5:s24": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "24s2:floor4/stops/s02_disabled_toilet:s24": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "24s2:floor4/stops/s03_exit5_door:s24": {
+   "4": "esca_down",
+   "5": "y5302"
+  },
+  "24s2:floor4/stops/s04_lt2a:s24": {
+   "4": "esca_down",
+   "5": "sr9"
+  },
+  "24s2:floor4/stops/s05_lt2b:s24": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "24s2:floor4/stops/s06_esca_down:s24": {
+   "4": "lt1b",
+   "5": "esca_down"
+  },
+  "24s2:floor4/stops/s07_y4502:s24": {
+   "4": "y4502",
+   "5": "sr9"
+  },
+  "24s2:floor4/stops/s08_esca_up:s24": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "24s2:floor4/stops/s09_lt1b:s24": {
+   "4": "lt1b",
+   "5": "female_toilet"
+  },
+  "24s2:floor4/stops/s10_lt1a:s24": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "24s2:floor4/stops/s11_exit10_door:s24": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "24s2:floor4/stops/s12_gate:s24": {
+   "4": "gate",
+   "5": "exit10_door"
+  },
+  "25night:floor5/stops/s01_canteen:a56": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor5/stops/s02_exit5_door:a56": {
+   "4": "disabled_toilet",
+   "5": "male_toilet"
+  },
+  "25night:floor5/stops/s03_male_toilet:a56": {
+   "4": "disabled_toilet",
+   "5": "male_toilet"
+  },
+  "25night:floor5/stops/s04_y5302:a56": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor5/stops/s05_sr9:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s06_y5202:a56": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "25night:floor5/stops/s07_female_toilet:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s08_exit10_door:a56": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "25night:floor5/stops/s09_male_disabled_toilet:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s10_lift_stairs5:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s11_y5401:a56": {
+   "4": "disabled_toilet",
+   "5": "male_toilet"
+  },
+  "25night:floor5/stops/s12_y5302_point2:a56": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s01_lift_stairs5:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s02_disabled_toilet:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s03_exit5_door:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s04_lt2a:a56": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "25night:floor4/stops/s05_lt2b:a56": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor4/stops/s06_esca_down:a56": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "25night:floor4/stops/s07_y4502:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s08_esca_up:a56": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor4/stops/s09_lt1b:a56": {
+   "4": "y4502",
+   "5": "sr9"
+  },
+  "25night:floor4/stops/s10_lt1a:a56": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "25night:floor4/stops/s11_exit10_door:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s12_gate:a56": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "25night:floor5/stops/s13_sr9:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s14_y5202:a56": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "25night:floor5/stops/s15_exit10_door:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s16_male_disabled_toilet:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s17_lift_stairs5:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s18_y5302_point2:a56": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "25night:floor5/stops/s19_y5401:a56": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor4/stops/s13_lift_stairs5:a56": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s01_canteen:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "25night:floor5/stops/s02_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "25night:floor5/stops/s03_male_toilet:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "25night:floor5/stops/s04_y5302:iphone": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "25night:floor5/stops/s05_sr9:iphone": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "25night:floor5/stops/s06_y5202:iphone": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s07_female_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "25night:floor5/stops/s08_exit10_door:iphone": {
+   "4": "lift_stairs5",
+   "5": "exit10_door"
+  },
+  "25night:floor5/stops/s09_male_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor5/stops/s10_lift_stairs5:iphone": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor5/stops/s11_y5401:iphone": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "25night:floor5/stops/s12_y5302_point2:iphone": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s01_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "25night:floor4/stops/s02_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "sr9"
+  },
+  "25night:floor4/stops/s03_exit5_door:iphone": {
+   "4": "exit5_door",
+   "5": "male_toilet"
+  },
+  "25night:floor4/stops/s04_lt2a:iphone": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "25night:floor4/stops/s05_lt2b:iphone": {
+   "4": "exit5_door",
+   "5": "male_toilet"
+  },
+  "25night:floor4/stops/s06_esca_down:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s07_y4502:iphone": {
+   "4": "disabled_toilet",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s08_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "25night:floor4/stops/s09_lt1b:iphone": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s10_lt1a:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "25night:floor4/stops/s11_exit10_door:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25night:floor4/stops/s12_gate:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "25night:floor5/stops/s13_sr9:iphone": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s14_y5202:iphone": {
+   "4": "esca_down",
+   "5": "y5202"
+  },
+  "25night:floor5/stops/s15_exit10_door:iphone": {
+   "4": "esca_down",
+   "5": "exit10_door"
+  },
+  "25night:floor5/stops/s16_male_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25night:floor5/stops/s17_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25night:floor5/stops/s18_y5302_point2:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "25night:floor5/stops/s19_y5401:iphone": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "25night:floor4/stops/s13_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5202"
+  },
+  "25night_tian:floor5/stops/s01_canteen:iphone": {
+   "4": "lt1b",
+   "5": "canteen"
+  },
+  "25night_tian:floor5/stops/s02_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "25night_tian:floor5/stops/s03_male_toilet:iphone": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "25night_tian:floor5/stops/s04_y5302:iphone": {
+   "4": "lt2b",
+   "5": "y5401"
+  },
+  "25night_tian:floor5/stops/s05_sr9:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "25night_tian:floor5/stops/s06_y5202:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25night_tian:floor5/stops/s07_female_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "25night_tian:floor5/stops/s08_exit10_door:iphone": {
+   "4": "lift_stairs5",
+   "5": "exit10_door"
+  },
+  "25night_tian:floor5/stops/s09_esca_down:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "25night_tian:floor5/stops/s10_esca_up:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_up"
+  },
+  "25night_tian:floor5/stops/s11_male_disabled_toilet:iphone": {
+   "4": "y4502",
+   "5": "esca_up"
+  },
+  "25night_tian:floor5/stops/s12_lift_stairs5:iphone": {
+   "4": "exit10_door",
+   "5": "exit10_door"
+  },
+  "25night_tian:floor5/stops/s13_y5401:iphone": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "25night_tian:floor5/stops/s14_y5302_point2:iphone": {
+   "4": "lt1a",
+   "5": "female_toilet"
+  },
+  "25night_tian:floor4/stops/s01_lift_stairs5:iphone": {
+   "4": "lt1a",
+   "5": "exit10_door"
+  },
+  "25night_tian:floor4/stops/s02_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "y5401"
+  },
+  "25night_tian:floor4/stops/s03_lt2a:iphone": {
+   "4": "lt2a",
+   "5": "y5401"
+  },
+  "25night_tian:floor4/stops/s04_lt2b:iphone": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "25night_tian:floor4/stops/s05_esca_down:iphone": {
+   "4": "esca_up",
+   "5": "exit10_door"
+  },
+  "25night_tian:floor4/stops/s06_y4502:iphone": {
+   "4": "disabled_toilet",
+   "5": "y5401"
+  },
+  "25night_tian:floor4/stops/s07_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "exit10_door"
+  },
+  "25night_tian:floor4/stops/s08_exit10_door:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25night_tian:floor4/stops/s09_gate:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "25nov:floor5/stops/s01_canteen:a55": {
+   "4": "lt2a",
+   "5": "y5202"
+  },
+  "25nov:floor5/stops/s02_exit5_door:a55": {
+   "4": "lt2a",
+   "5": "esca_up"
+  },
+  "25nov:floor5/stops/s03_male_toilet:a55": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "25nov:floor5/stops/s04_y5302:a55": {
+   "4": "esca_up",
+   "5": "male_toilet"
+  },
+  "25nov:floor5/stops/s05_sr9:a55": {
+   "4": "lt2a",
+   "5": "sr9"
+  },
+  "25nov:floor5/stops/s06_y5202:a55": {
+   "4": "esca_down",
+   "5": "female_toilet"
+  },
+  "25nov:floor5/stops/s07_female_toilet:a55": {
+   "4": "esca_down",
+   "5": "female_toilet"
+  },
+  "25nov:floor5/stops/s08_exit10_door:a55": {
+   "4": "lt2a",
+   "5": "esca_down"
+  },
+  "25nov:floor5/stops/s09_esca_up:a55": {
+   "4": "lt2a",
+   "5": "esca_up"
+  },
+  "25nov:floor5/stops/s10_esca_down:a55": {
+   "4": "lt2a",
+   "5": "esca_up"
+  },
+  "25nov:floor5/stops/s11_male_disabled_toilet:a55": {
+   "4": "lt2a",
+   "5": "exit5_door"
+  },
+  "25nov:floor5/stops/s12_lift_stairs5:a55": {
+   "4": "esca_down",
+   "5": "esca_down"
+  },
+  "25nov:floor5/stops/s13_y5401:a55": {
+   "4": "exit5_door",
+   "5": "male_toilet"
+  },
+  "25nov:floor5/stops/s14_y5302_point2:a55": {
+   "4": "esca_down",
+   "5": "female_toilet"
+  },
+  "25nov:floor4/stops/s01_lift_stairs5:a55": {
+   "4": "lt2a",
+   "5": "sr9"
+  },
+  "25nov:floor4/stops/s02_disabled_toilet:a55": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s03_exit5_door:a55": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s04_lt2a:a55": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s05_lt2b:a55": {
+   "4": "esca_up",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s06_esca_down:a55": {
+   "4": "esca_down",
+   "5": "canteen"
+  },
+  "25nov:floor4/stops/s07_y4502:a55": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s08_esca_up:a55": {
+   "4": "exit5_door",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s09_lt1b:a55": {
+   "4": "esca_down",
+   "5": "female_toilet"
+  },
+  "25nov:floor4/stops/s10_lt1a:a55": {
+   "4": "esca_down",
+   "5": "female_toilet"
+  },
+  "25nov:floor4/stops/s11_exit10_door:a55": {
+   "4": "esca_down",
+   "5": "esca_down"
+  },
+  "25nov:floor4/stops/s12_gate:a55": {
+   "4": "esca_up",
+   "5": "canteen"
+  },
+  "25nov:floor5/stops/s01_canteen:a56": {
+   "4": "esca_down",
+   "5": "y5302_point2"
+  },
+  "25nov:floor5/stops/s02_exit5_door:a56": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "25nov:floor5/stops/s03_male_toilet:a56": {
+   "4": "exit5_door",
+   "5": "canteen"
+  },
+  "25nov:floor5/stops/s04_y5302:a56": {
+   "4": "exit5_door",
+   "5": "canteen"
+  },
+  "25nov:floor5/stops/s05_sr9:a56": {
+   "4": "lt1b",
+   "5": "y5302_point2"
+  },
+  "25nov:floor5/stops/s06_y5202:a56": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "25nov:floor5/stops/s07_female_toilet:a56": {
+   "4": "lt1b",
+   "5": "lift_stairs5"
+  },
+  "25nov:floor5/stops/s08_exit10_door:a56": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25nov:floor5/stops/s09_esca_up:a56": {
+   "4": "esca_up",
+   "5": "esca_up"
+  },
+  "25nov:floor5/stops/s10_esca_down:a56": {
+   "4": "esca_down",
+   "5": "y5302_point2"
+  },
+  "25nov:floor5/stops/s11_male_disabled_toilet:a56": {
+   "4": "gate",
+   "5": "male_disabled_toilet"
+  },
+  "25nov:floor5/stops/s12_lift_stairs5:a56": {
+   "4": "exit10_door",
+   "5": "exit10_door"
+  },
+  "25nov:floor5/stops/s13_y5401:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "25nov:floor5/stops/s14_y5302_point2:a56": {
+   "4": "lt1a",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s01_lift_stairs5:a56": {
+   "4": "lt1a",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s02_disabled_toilet:a56": {
+   "4": "lt2b",
+   "5": "canteen"
+  },
+  "25nov:floor4/stops/s03_exit5_door:a56": {
+   "4": "exit5_door",
+   "5": "y5302"
+  },
+  "25nov:floor4/stops/s04_lt2a:a56": {
+   "4": "exit5_door",
+   "5": "canteen"
+  },
+  "25nov:floor4/stops/s05_lt2b:a56": {
+   "4": "lt2b",
+   "5": "y5302"
+  },
+  "25nov:floor4/stops/s06_esca_down:a56": {
+   "4": "esca_down",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s07_y4502:a56": {
+   "4": "y4502",
+   "5": "canteen"
+  },
+  "25nov:floor4/stops/s08_esca_up:a56": {
+   "4": "esca_up",
+   "5": "y5401"
+  },
+  "25nov:floor4/stops/s09_lt1b:a56": {
+   "4": "lt1b",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s10_lt1a:a56": {
+   "4": "esca_down",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s11_exit10_door:a56": {
+   "4": "exit10_door",
+   "5": "female_toilet"
+  },
+  "25nov:floor4/stops/s12_gate:a56": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "25nov:floor5/stops/s01_canteen:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "25nov:floor5/stops/s02_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "25nov:floor5/stops/s03_male_toilet:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "25nov:floor5/stops/s04_y5302:iphone": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "25nov:floor5/stops/s05_sr9:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "25nov:floor5/stops/s06_y5202:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "25nov:floor5/stops/s07_female_toilet:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "25nov:floor5/stops/s08_exit10_door:iphone": {
+   "4": "esca_down",
+   "5": "exit10_door"
+  },
+  "25nov:floor5/stops/s09_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "esca_up"
+  },
+  "25nov:floor5/stops/s10_esca_down:iphone": {
+   "4": "lift_stairs5",
+   "5": "sr9"
+  },
+  "25nov:floor5/stops/s11_male_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "25nov:floor5/stops/s12_lift_stairs5:iphone": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "25nov:floor5/stops/s13_y5401:iphone": {
+   "4": "esca_up",
+   "5": "esca_up"
+  },
+  "25nov:floor5/stops/s14_y5302_point2:iphone": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s01_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "25nov:floor4/stops/s02_disabled_toilet:iphone": {
+   "4": "y4502",
+   "5": "sr9"
+  },
+  "25nov:floor4/stops/s03_exit5_door:iphone": {
+   "4": "exit5_door",
+   "5": "y5302"
+  },
+  "25nov:floor4/stops/s04_lt2a:iphone": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "25nov:floor4/stops/s05_lt2b:iphone": {
+   "4": "exit5_door",
+   "5": "exit5_door"
+  },
+  "25nov:floor4/stops/s06_esca_down:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "25nov:floor4/stops/s07_y4502:iphone": {
+   "4": "y4502",
+   "5": "sr9"
+  },
+  "25nov:floor4/stops/s08_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "y5302"
+  },
+  "25nov:floor4/stops/s09_lt1b:iphone": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "25nov:floor4/stops/s10_lt1a:iphone": {
+   "4": "lt1a",
+   "5": "y5302_point2"
+  },
+  "25nov:floor4/stops/s11_exit10_door:iphone": {
+   "4": "exit10_door",
+   "5": "lift_stairs5"
+  },
+  "25nov:floor4/stops/s12_gate:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  },
+  "25spots:floor5/stops/spots_s02_escalator_down:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_up"
+  },
+  "25spots:floor5/stops/spots_s05_sr9:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "25spots:floor4/stops/spots_s06_escalator_down_4F:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_up"
+  },
+  "25spots:floor4/stops/spots_s08_escalator_up_4F:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "25spots:floor5/stops/spots_s15_y5401:iphone": {
+   "4": "exit5_door",
+   "5": "y5302"
+  },
+  "25spots:floor5/stops/spots_s17_y5302_back:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "25spots:floor5/stops/spots_s01_escalator_down:s24": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25spots:floor5/stops/spots_s03_escalator_up:s24": {
+   "4": "exit10_door",
+   "5": "y5302_point2"
+  },
+  "25spots:floor5/stops/spots_s04_female_toilet:s24": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "25spots:floor5/stops/spots_s05_sr9:s24": {
+   "4": "exit10_door",
+   "5": "sr9"
+  },
+  "25spots:floor5/stops/spots_s07_disabled_toilet:s24": {
+   "4": "esca_down",
+   "5": "lift_stairs5"
+  },
+  "25spots:floor5/stops/spots_s09_lift_stairs:s24": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "25spots:floor4/stops/spots_s10_escalator_down_4F:s24": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "25spots:floor4/stops/spots_s11_escalator_up_4F:s24": {
+   "4": "exit5_door",
+   "5": "sr9"
+  },
+  "25spots:floor4/stops/spots_s12_exit_10_4F:s24": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "25spots:floor4/stops/spots_s13_exit_5_4F:s24": {
+   "4": "exit5_door",
+   "5": "y5401"
+  },
+  "25spots:floor4/stops/spots_s14_lift_stairs_4F:s24": {
+   "4": "lift_stairs5",
+   "5": "y5302_point2"
+  },
+  "25spots:floor5/stops/spots_s16_male_toilet:s24": {
+   "4": "disabled_toilet",
+   "5": "esca_up"
+  },
+  "25spots:floor5/stops/spots_s18_escalator_down:s24": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "26tian:floor5/stops/s01_exit5_door:iphone": {
+   "4": "lt2b",
+   "5": "exit5_door"
+  },
+  "26tian:floor5/stops/s02_male_toilet:iphone": {
+   "4": "lt2b",
+   "5": "male_toilet"
+  },
+  "26tian:floor5/stops/s03_y5302:iphone": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "26tian:floor5/stops/s04_sr9:iphone": {
+   "4": "lift_stairs5",
+   "5": "lift_stairs5"
+  },
+  "26tian:floor5/stops/s05_y5202:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "26tian:floor5/stops/s06_female_toilet:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "26tian:floor5/stops/s07_exit10_door:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "26tian:floor5/stops/s08_esca_down:iphone": {
+   "4": "disabled_toilet",
+   "5": "esca_down"
+  },
+  "26tian:floor5/stops/s09_esca_up:iphone": {
+   "4": "y4502",
+   "5": "esca_up"
+  },
+  "26tian:floor5/stops/s10_male_disabled_toilet:iphone": {
+   "4": "disabled_toilet",
+   "5": "male_disabled_toilet"
+  },
+  "26tian:floor5/stops/s11_lift_stairs5:iphone": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "26tian:floor5/stops/s12_y5401:iphone": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "26tian:floor5/stops/s13_y5302_point2:iphone": {
+   "4": "lt1a",
+   "5": "y5202"
+  },
+  "26tian:floor4/stops/s01_lift_stairs5:iphone": {
+   "4": "lift_stairs5",
+   "5": "exit10_door"
+  },
+  "26tian:floor4/stops/s02_disabled_toilet:iphone": {
+   "4": "y4502",
+   "5": "female_toilet"
+  },
+  "26tian:floor4/stops/s03_exit5_door:iphone": {
+   "4": "exit5_door",
+   "5": "male_toilet"
+  },
+  "26tian:floor4/stops/s04_lt2a:iphone": {
+   "4": "lt2a",
+   "5": "male_toilet"
+  },
+  "26tian:floor4/stops/s05_lt2b:iphone": {
+   "4": "exit5_door",
+   "5": "y5202"
+  },
+  "26tian:floor4/stops/s06_esca_down:iphone": {
+   "4": "esca_up",
+   "5": "y5202"
+  },
+  "26tian:floor4/stops/s07_y4502:iphone": {
+   "4": "disabled_toilet",
+   "5": "female_toilet"
+  },
+  "26tian:floor4/stops/s08_esca_up:iphone": {
+   "4": "esca_up",
+   "5": "y5202"
+  },
+  "26tian:floor4/stops/s09_lt1b:iphone": {
+   "4": "lt1b",
+   "5": "y5202"
+  },
+  "26tian:floor4/stops/s10_lt1a:iphone": {
+   "4": "lift_stairs5",
+   "5": "female_toilet"
+  },
+  "26tian:floor4/stops/s11_exit10_door:iphone": {
+   "4": "exit10_door",
+   "5": "y5202"
+  },
+  "26tian:floor4/stops/s12_gate:iphone": {
+   "4": "gate",
+   "5": "canteen"
+  }
+ }
+}
