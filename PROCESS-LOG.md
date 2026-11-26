@@ -82,6 +82,7 @@ Contents:
 71. 26 Nov: search bar in the upload app (Gemini when a key is pasted, keyword -> fuzzy offline) with the A* route drawn on the floor plan; Gemini backend for request matching
 72. 26 Nov: 25-Nov night run (Dicta ip18, Chris a56, Tian ip16) added as sessions `25night` and `25night_tian`; a56 magnetometer offset found; day-3 rerun, sheets, playground, results pack, upload app retrained
 73. 26 Nov: Tian's 26-Nov morning pass (ip16, 52 recordings labelled from his chat captions) added as session `26tian`; day-3 rerun, gaps sheet, upload app retrained; evidence on his night "lt2b"/"lt2a" takes
+76. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change: current rules reproduced, fallbacks pre-registered, then scored on held-out sessions (offline only)
 - Lessons learned
 - Open questions / next steps
 
@@ -1259,6 +1260,15 @@ Contents:
   - New session folder `phase2/clean-data/2026-11-26-tian/` with its scripts; `day3/README.md` section n.
   - Not done here: `perf_sheet.py` tabs, `hard_places.py`, the results pack (left for after the other branch lands).
 - **Links:** `phase2/clean-data/2026-11-26-tian/` (README, `labels_tian26.csv`, `lt_night_check.csv`, `medium_label_check.csv`, `clean/summary.json`), `phase2/new/day3/config.json`, `phase2/new/day3/out*/fused_knn.json`, `results.json`, `out/perf_csv/data_gaps_*.csv`, `phase2/new/upload/out/eval.json`, `live_checks.json`; branch `feat/tian-morning` (commits 9a9de5d, 3b7a70f, 0f5d3ca and the final one).
+
+---
+
+## 76. 26 Nov: floor rules when the barometer is missing or a long gap hides a floor change (IN PROGRESS)
+
+- **What we tried (so far):** reproduce the two current floor rules from their own code, and write down the candidate fallback rules, their parameter grids and the tuning/held-out split before scoring any of them.
+- **How:** new folder `phase2/new/floor/` (offline analysis; the upload app and day-3 code are imported read-only). `floorlib.py` (one table of every recording per session and phone slot), `rules.py` (R0 = `upload/walksense.py` `Session.track_floor`, R1 = `day3/data.py` `track_floor` with the `evaluate.py` threshold), `baseline.py` -> `out/baseline.json`. Pre-registration: `PREREGISTRATION.md`, committed in this commit before any candidate was run.
+- **Result (so far):** `out/baseline.json` `all_match` true: R0 gives 27/27, 26/26, 26/26, 20/32, 23/23, 25/25 (24 s1, 24 s2, 25 Nov, 25night, 25night_tian, 26tian), equal to `upload/out/eval.json`; R1 gives every `day3/out/results.json` `floor` step-tracking number (e.g. 24s1 23/27, 25night 29/32, 25spots 12/18).
+- Completed in the next commit of this entry.
 
 ## Lessons learned
 
