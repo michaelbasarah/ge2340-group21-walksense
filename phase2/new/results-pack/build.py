@@ -355,10 +355,22 @@ def read_upload():
                  f"2 s windows, first/last 5 s skipped", "stop visits", chance_note="per-floor model, floor given"))
         k3, n3 = parse_frac(r["top3"])
         add(Fact(f"up.{name}.top3", f"upload eval {name} top-3", k3, n3, None, "descriptive", [rel], "true place is among the 3 best guesses"))
+    # Since PROCESS-LOG 90 `floor_tracking` holds the app default rule per iPhone session (rule d for barometer phones) and
+    # `floor_tracking_by_rule` every phone under R0 (pressure only), d and app_default; rule texts come from `floor_rule.rules`.
+    rules = d.get("floor_rule", {}).get("rules", {})
     for key, r in d["floor_tracking"].items():
         k, n = parse_frac(r["stops_correct"])
-        add(Fact(f"up.floor.{key}", f"upload floor tracking {key}", k, n, 0.5, "honest", [rel],
-                 "median-of-last-6 pressure rule, 0.40 hPa; chance 0.5 derived", "stops", chance_note="derived: 2 floors"))
+        rule = r.get("rule", "R0")
+        add(Fact(f"up.floor.{key}", f"upload floor tracking {key} (app default, rule {rule})", k, n, 0.5, "honest", [rel],
+                 f"rule {rule}: {rules.get(rule, 'pressure rule (eval.json has no rule text)')}; chance 0.5 derived", "stops", chance_note="derived: 2 floors"))
+    for key, blk in d.get("floor_tracking_by_rule", {}).items():
+        for rule in ("R0", "d"):
+            if rule in blk:
+                k, n = parse_frac(blk[rule]["stops"])
+                add(Fact(f"up.floor_{rule}.{key}", f"upload floor tracking {key}, rule {rule}", k, n, 0.5, "honest", [rel],
+                         f"rule {rule}: {rules.get(rule, '')}; {blk.get('device', '')}; chance 0.5 derived", "stops", chance_note="derived: 2 floors"))
+    for key, why in d.get("floor_rule", {}).get("train_exclude", {}).items():
+        add(Fact(f"up.train_exclude.{key}", f"upload app: {key} left out of training", value="excluded", kind="descriptive", src=[rel], test=why))
     rl = f"{CFG['upload_dir']}/live_checks.json"
     lc = loadj(rl)
     for key, r in lc["walking_dot"].items():
@@ -376,6 +388,17 @@ def read_upload():
     for k, v in lc["top1_by_standing_time"].items():
         kk, nn = parse_frac(v)
         add(Fact(f"up.standing.{k}", f"top-1 from first N s only, {k}", kk, nn, None, "honest", [rl], "first N seconds of each held-out stop only", "stop visits"))
+
+
+def read_upload_history():
+    """Dated upload evals quoted by the timeline (config upload_history_evals: prefix -> file), so a historical milestone
+    keeps the number it had when it happened (the current eval.json renames its keys when training sessions change)."""
+    for pre, rel in CFG.get("upload_history_evals", {}).items():
+        d = loadj(rel)
+        for name, r in d["place"].items():
+            k, n = parse_frac(r["top1"])
+            add(Fact(f"{pre}.{name}.top1", f"upload app ({rel.rsplit('/', 1)[-1]}) {name} top-1", k, n, r["chance_top1"], "honest", [rel],
+                     f"dated upload eval {rel}; leave one session out, true floor GIVEN, 2 s windows", "stop visits", chance_note="per-floor model, floor given"))
 
 
 def read_upload_before():
@@ -534,6 +557,7 @@ guard("tracker results", read_tracker)
 guard("track24 results", read_track24)
 guard("upload eval/live checks", read_upload)
 guard("upload eval before the 3-session retrain", read_upload_before)
+guard("dated upload evals for the timeline", read_upload_history)
 for var, rel_dir in CFG["day3_variants"].items():
     if var != PRIMARY:
         guard(f"upload eval on pieces ({var})", read_upload_split20, rel_dir)
@@ -1306,9 +1330,9 @@ def other_tables():
 
 KNOWN_ISSUES = [
     ("Chance is not one number.", "Stop tests in day3 use chance 1/26 (26 graph-v2 places); upload/out/eval.json uses 1/13 because the true floor is given; cross-day/ uses 1/31 (23-Nov places), 1/15 and 1/12 for core sets; the tracker tests use 1/31 or 1/26. Always quote chance together with n."),
-    ("iPhone 'xyz' cross-session: upload app vs day3 are different tests.", "upload/out/eval.json (leave one session out; iPhone trained on sesi1 + 25 Nov, tested on sesi2, cross-handset; fact up.iphone sesi1+25nov->sesi2 xyz) gives the true floor and a 2 s window per-floor model, chance 1/13. day3/out/results.json (fact d3.xsession_24s1_to_24s2_iphone) uses floor from step tracking and 5 s windows, chance 1/26. Same data, different recipe and chance. They are not the same test."),
+    ("iPhone 'xyz' cross-session: upload app vs day3 are different tests.", "upload/out/eval.json (leave one session out; iPhone trained on sesi1 + 25 Nov + 25 Nov night, tested on sesi2, cross-handset; fact up.iphone sesi1+25nov+25night->sesi2 xyz) gives the true floor and a 2 s window per-floor model, chance 1/13. day3/out/results.json (fact d3.xsession_24s1_to_24s2_iphone) uses floor from step tracking and 5 s windows, chance 1/26. Same data, different recipe and chance. They are not the same test."),
     ("Snapshot kNN differs between files.", "track24 snapshot kNN exact 15/26 (2 s windows, sklearn per floor) vs day3 results.json 12/26 for the same s1 to s2 split (5 s windows, gknn.py); the log (entry 32) states this. In the tracking/ cross-day test the snapshot is 2/17 exact while crossday.py gives 3/17 or 4/17 for the same 23 to 17 test (tracker_results.json reference block)."),
-    ("Floor tracking 24 s1: 23/27 vs 27/27.", "day3/out/results.json (jump threshold rule) 23/27 and a fixed threshold 27/27; upload/out/eval.json (median of last 6 readings, long-gap rule) 27/27 for the same session. Different rules."),
+    ("Floor tracking 24 s1: 23/27 vs 27/27.", "day3/out/results.json (jump threshold rule) 23/27 and a fixed threshold 27/27; upload/out/eval.json (app default since PROCESS-LOG 90 = rule d: the median-of-last-6 pressure rule R0 with a magnetic floor vote where pressure is missing; R0 alone in floor_tracking_by_rule) 27/27 for the same session. Different rules."),
     ("Wi-Fi coverage claims.", "PROCESS-LOG entry 12 says the 23-Nov Wi-Fi covers 41/42 stops (counted rows), day3/out/wifi_diagnosis.json says 42/42 (stops_with_any_wifi, all scanners, within 120 s); neither says the data is usable (rows per BSSID per stop is about 1)."),
     ("Cross-day Wi-Fi range.", "Entry 12 says cross-day core Wi-Fi 11 to 22%; cross-day/out/summary_table.csv has 11% to 44% across the eight Wi-Fi variants of cross_core (n = 9, the 44% is presence_knn + floor)."),
     ("Entry numbers.", "Commit messages made before the first merge use old entry numbers 24 to 33 (see entry 39); the log uses 29 to 38 (renumbered twice: +4 at entry 39, +1 when Dicta's entry 28 landed, entry 48)."),
@@ -1422,6 +1446,7 @@ def resolve(text):
                 parts = tok[2:].split(":")
                 f = F(parts[0])
                 if f is None:
+                    note_missing(f"timeline placeholder {tok}", "(no such fact in this build)")
                     return "[n/a]"
                 if len(parts) == 2:
                     return {"k": str(f.k), "n": str(f.n), "pct": f"{100 * f.p:.1f}%"}.get(parts[1], f.fmt())
