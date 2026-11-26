@@ -9,9 +9,10 @@ Proposal objective: the building is a graph (nodes = checkpoints, lifts/stairs, 
 | file | what |
 |---|---|
 | `build_graph.py` -> `graph.json` | the one routing graph: 26 places from `graph-v2`, 34 edges, each edge with metres, seconds and where the number came from |
-| `route.py` | A*, Dijkstra, turn-by-turn instructions, `route(start, goal) -> (path, metres, seconds, instructions)`; standard library only. Wiring it into the app is out of scope for now |
+| `route.py` | A*, Dijkstra, turn-by-turn instructions, `route(start, goal) -> (path, metres, seconds, instructions)` on graph.json as it is (used by the checks below); route planner for the app: `plan(start, goal, mode)` and `nearest_toilet(start, mode, gender)` (section "Route planner"); standard library only |
 | `check_astar.py` -> `out/astar_check.json` | A* vs Dijkstra on every ordered pair, heuristic checks, walking-speed sensitivity |
-| `test_route.py` | 4 unit tests (`python -m unittest test_route` inside this folder) |
+| `test_route.py` | 13 unit tests (`python -m unittest test_route` inside this folder): the 4 original + 9 for the planner |
+| `python route.py samples` -> `out/planner_samples.json` | planner examples in both modes, connector costs, which connector the cross-floor pairs use, nearest toilet for every mode x gender from 8 starts |
 | `llm_baseline.py` -> `out/llm_cache/*.json` | text floor plan from the graph, 50 pairs x 3 conditions = 150 calls of `claude -p --model haiku`; every raw answer cached with prompt, model, date, CLI version, latency |
 | `evaluate.py` -> `out/results.json`, `results_table.csv`, `llm_answers.csv`, `routing_results.png` | scoring |
 
@@ -72,6 +73,40 @@ What this does and does not say: given a correct text plan of this small graph (
 - adjacency only, `lift_stairs` -> `escalator_up_4F`: valid but takes the stairs and walks the 4F loop (64.85 s), 1.5756 x the fastest (41.16 s: walk on 5F to the down escalator and ride it).
 - distances, `y5302_back` -> `lt1a`: valid but goes `lift_stairs > lift_stairs_4F > ... > entrance_exit` instead of the fastest route, 1.0914 x; the same answer in adjacency only.
 - No condition with a plan produced a wrong-direction escalator or an unknown ID.
+
+## Route planner (used by the upload app, entry 78)
+
+`plan(start, goal, mode)` and `nearest_toilet(start, mode, gender)` in `route.py`. `route()`, `check_astar.py`, `evaluate.py` and `llm_baseline.py` still use graph.json exactly as before (`Graph(profile=None)`), so the A* checks and the LLM comparison above are unchanged.
+
+**Cost.** Seconds, as above: a walked corridor costs metres / 1.3 m/s, so on one floor the fastest route is also the shortest. Every graph edge already has a length (8 measured, 23 steps x 0.54 m, 3 guesses); nothing had to be derived from `floorplan.json`. "On foot" metres in the app = walked corridors + the stairs flight (28.6 m); lift and escalator rides count 0 m.
+
+**Connectors.** graph.json has one `lift_stairs` edge between the two lift landings (lift and stairs side by side). The planner splits it into two parallel edges between the same landings, both directions, and keeps the escalators one way:
+
+| connector | where | cost | status |
+|---|---|---|---|
+| stairs | `lift_stairs` <-> `lift_stairs_4F` | 30.0 s, 28.6 m | timed once 5F -> 4F (ACC23); 4F -> 5F assumed the same |
+| lift | same landings | 42.0 s = 30 s wait + 12 s ride (one floor) | GUESS (`LIFT_WAIT_S`, `LIFT_RIDE_S` in `route.py`); nobody timed the lift |
+| escalator down | `escalator_down` -> `escalator_down_4F` only | 20 s | GUESS (graph.json) |
+| escalator up | `escalator_up_4F` -> `escalator_up` only | 20 s | GUESS (graph.json) |
+
+Between two nodes only the cheapest edge the mode allows is searched (Dijkstra on a multigraph = Dijkstra on its cheapest parallel edges); the instructions still know the other one ("Take the stairs down to 4F (about 30 s); the lift is next to them."). With these numbers Standard never picks the lift (stairs 30 s < lift 42 s at the same landing); the lift would win in Standard only if the wait were under 18 s. Over all 336 ordered cross-floor pairs (`out/planner_samples.json`): Standard uses the escalator for 251 and the stairs for 85; Step-free uses the lift for all 336. Standard costs equal the old `route()` costs for every pair (test).
+
+**Modes.** `standard` = walk + stairs + lift + escalator; `accessible` (Step-free in the app) = walk + lift. Wheelchair speed is not modelled (same 1.3 m/s); we do not know whether any corridor has a step.
+
+**Examples** (`out/planner_samples.json`):
+
+| from -> to | Standard | Step-free |
+|---|---|---|
+| Y5-302 -> Female toilet (5F, "B -> C -> D -> E") | 35.2 m, 27.1 s: Y5-302 -> study rooms 13.9 m -> Y5-202 10.6 m -> Female toilet 10.7 m (all measured) | same |
+| Canteen -> LT1a | 36.6 m, 48.2 s, down escalator | 65.0 m, 92.0 s, lift |
+| Y5-302 -> LT2B | 28.2 m, 41.7 s, escalator | 57.8 m, 86.5 s, lift |
+| LT1a -> Canteen | 28.0 m, 41.5 s, up escalator | 65.0 m, 92.0 s, lift |
+| 5F lift landing -> 4F lift landing | 28.6 m, 30.0 s, stairs | 0.0 m, 42.0 s, lift |
+| 5F up escalator -> 4F down escalator | 10.3 m, 27.9 s (walk to the down escalator first) | 65.9 m, 92.7 s, lift |
+
+**Toilets.** `TOILETS` in `route.py`: `male_toilet` (5F, male), `female_toilet` (5F, female), `disabled_toilet` (5F, male, disabled: "Male disabled toilet (5F)"), `disabled_toilet_4F` (4F, mixed, disabled: "Mixed disabled toilet (4F)"); names from `day3/config.json` `place_display` (user, 26 Nov). 4F has no ordinary toilet in our data. Male -> male + mixed; Female -> female + mixed; Step-free -> disabled only. Nearest = lowest route cost; ties by metres. A filter with no toilet returns `choice = None` and a message that lists every toilet with its reason (e.g. Step-free + Female + 5F only: the 5F disabled toilet is male only). Standard + Any or Male can pick a disabled toilet when it is the nearest (from the canteen: male disabled toilet 14.3 m / 11.0 s, male toilet 14.7 m / 11.3 s); the app lists the other fitting toilets under the route.
+
+**To confirm on site:** the lift position (one lift next to the stairs on each floor, as `lift_stairs` assumes), whether stairs exist at that core on both floors and whether there are other lifts; a timed lift wait and ride; a timed escalator ride; 4F -> 5F on the stairs; whether 4F really has no ordinary toilets; whether the 5F disabled toilet is male only and the 4F one mixed (from the user, 26 Nov); step-free access along every corridor (thresholds, doors).
 
 ## Not done / to check
 

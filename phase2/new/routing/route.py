@@ -307,8 +307,61 @@ def nearest_toilet(start_id, mode='standard', gender='any', floor=None, accessib
     return {'choice': best['plan'], 'toilet': best['id'], 'options': options, 'excluded': excluded, 'message': msg}
 
 
+SAMPLE_ROUTES = [('y5302', 'female_toilet'), ('canteen', 'lt1a'), ('y5302', 'lt2b'), ('lt1a', 'canteen'),
+                 ('lift_stairs', 'lift_stairs_4F'), ('lift_stairs_4F', 'lift_stairs'), ('escalator_up', 'escalator_down_4F')]
+SAMPLE_STARTS = ['canteen', 'y5202', 'y5401', 'exit_10', 'lt1a', 'y4502', 'lt2b', 'entrance_exit']
+
+
+def samples(path=HERE / 'out' / 'planner_samples.json'):
+    """python route.py samples -> out/planner_samples.json: example routes in both modes, the connector costs and the
+    nearest toilet for every mode x gender from 8 starts (4 per floor). The README and PROCESS-LOG quote this file."""
+    def brief(p):
+        return {'path': p.path, 'metres': p.metres, 'seconds': p.seconds,
+                'legs': [{'from': a, 'to': b, 'kind': e['kind'], 'metres': e['metres'], 'seconds': e['seconds'], 'length_status': e['length_status']}
+                         for a, b, e in zip(p.path, p.path[1:], p.legs)],
+                'connectors': [c['kind'] for c in p.connectors], 'instructions': p.instructions}
+    out = {'about': 'route planner samples (routing/route.py plan / nearest_toilet), written by `python route.py samples`',
+           'speed_mps': graph().speed,
+           'connector_costs_s': {'lift_wait_guess': LIFT_WAIT_S, 'lift_ride_per_floor_guess': LIFT_RIDE_S,
+                                 'lift_total_one_floor': LIFT_WAIT_S + LIFT_RIDE_S,
+                                 'stairs_graph_json': graph().edge[('lift_stairs', 'lift_stairs_4F')]['seconds'],
+                                 'escalator_graph_json': graph().edge[('escalator_down', 'escalator_down_4F')]['seconds']},
+           'routes': [], 'toilets': [], 'toilet_table': {k: dict(v, name=graph().nodes[k]['name'], floor=graph().nodes[k]['floor'])
+                                                         for k, v in TOILETS.items()}}
+    for a, b in SAMPLE_ROUTES:
+        out['routes'].append({'from': a, 'to': b, **{m: brief(plan(a, b, m)) for m in PROFILES}})
+    for st in SAMPLE_STARTS:
+        for m in PROFILES:
+            for gd in GENDERS:
+                t = nearest_toilet(st, m, gd)
+                out['toilets'].append({'from': st, 'from_floor': graph().nodes[st]['floor'], 'mode': m, 'gender': gd, 'toilet': t['toilet'],
+                                       'metres': t['choice'].metres if t['choice'] else None, 'seconds': t['choice'].seconds if t['choice'] else None,
+                                       'connectors': [c['kind'] for c in t['choice'].connectors] if t['choice'] else [],
+                                       'options': [{'id': o['id'], 'metres': o['metres'], 'seconds': o['seconds']} for o in t['options']], 'message': t['message']})
+    use = {}
+    for m in PROFILES:                                   # which connector the cross-floor pairs use, per mode
+        g = graph(m)
+        cnt = {}
+        for a in g.nodes:
+            for b in g.nodes:
+                if g.nodes[a]['floor'] != g.nodes[b]['floor']:
+                    k = '+'.join(c['kind'] for c in plan(a, b, m).connectors)
+                    cnt[k] = cnt.get(k, 0) + 1
+        use[m] = cnt
+    out['cross_floor_pairs_by_connector'] = use
+    t = nearest_toilet('canteen', 'accessible', 'female', floor=5)
+    out['no_option_example'] = {'from': 'canteen', 'mode': 'accessible', 'gender': 'female', 'floor': 5, 'message': t['message']}
+    path.parent.mkdir(exist_ok=True)
+    path.write_text(json.dumps(out, indent=1) + '\n', encoding='utf-8')
+    return out
+
+
 if __name__ == '__main__':
     import sys
+    if sys.argv[1:] == ['samples']:
+        samples()
+        print('wrote', HERE / 'out' / 'planner_samples.json')
+        sys.exit()
     if len(sys.argv) > 3:
         r = plan(sys.argv[1], sys.argv[2], sys.argv[3])
     else:
