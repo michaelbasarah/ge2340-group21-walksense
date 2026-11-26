@@ -1,0 +1,2514 @@
+{
+ "what": "Does pooling iPhone 16 (iPhone17,4) training data with iPhone 18 (iPhone19,2) data help when testing on iPhone 18?",
+ "train_sets": {
+  "a": "ip18 only (other ip18 sessions)",
+  "b": "ip18 other sessions + all ip16 sessions",
+  "c": "ip16 only (all ip16 sessions)"
+ },
+ "ip18_sessions": [
+  "sesi1",
+  "25nov",
+  "25night"
+ ],
+ "ip16_sessions": [
+  "sesi2",
+  "25night_tian",
+  "26tian"
+ ],
+ "n_test_stops_ip18": 85,
+ "n_test_stops_ip16": 74,
+ "not_used": "23-Nov is not loadable by walksense.py (ALL_SESSIONS has no 23-Nov entry; its tree has sensor_samples.csv, no clean/manifest.csv)",
+ "scoring": "visit answer = mean kNN probability over 2 s windows among places on the true floor. macro precision/recall over (floor, place) classes with >=1 true visit; precision of a never-guessed class counts 0.",
+ "test_on_ip18": {
+  "xyz": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "65/85",
+     "top1_acc": 0.765,
+     "top3": "73/85",
+     "top3_acc": 0.859,
+     "macro_recall": 0.75,
+     "macro_precision": 0.739,
+     "n_classes": 26,
+     "n_classes_never_guessed": 1
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "21/27",
+      "top1_acc": 0.778,
+      "top3": "23/27",
+      "top3_acc": 0.852,
+      "macro_recall": 0.769,
+      "macro_precision": 0.702,
+      "n_classes": 26,
+      "n_classes_never_guessed": 5
+     },
+     "25nov": {
+      "top1": "20/26",
+      "top1_acc": 0.769,
+      "top3": "21/26",
+      "top3_acc": 0.808,
+      "macro_recall": 0.769,
+      "macro_precision": 0.654,
+      "n_classes": 26,
+      "n_classes_never_guessed": 6
+     },
+     "25night": {
+      "top1": "24/32",
+      "top1_acc": 0.75,
+      "top3": "29/32",
+      "top3_acc": 0.906,
+      "macro_recall": 0.729,
+      "macro_precision": 0.66,
+      "n_classes": 24,
+      "n_classes_never_guessed": 5
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "67/85",
+     "top1_acc": 0.788,
+     "top3": "71/85",
+     "top3_acc": 0.835,
+     "macro_recall": 0.782,
+     "macro_precision": 0.79,
+     "n_classes": 26,
+     "n_classes_never_guessed": 0
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "21/27",
+      "top1_acc": 0.778,
+      "top3": "23/27",
+      "top3_acc": 0.852,
+      "macro_recall": 0.769,
+      "macro_precision": 0.686,
+      "n_classes": 26,
+      "n_classes_never_guessed": 5
+     },
+     "25nov": {
+      "top1": "21/26",
+      "top1_acc": 0.808,
+      "top3": "21/26",
+      "top3_acc": 0.808,
+      "macro_recall": 0.808,
+      "macro_precision": 0.712,
+      "n_classes": 26,
+      "n_classes_never_guessed": 5
+     },
+     "25night": {
+      "top1": "25/32",
+      "top1_acc": 0.781,
+      "top3": "27/32",
+      "top3_acc": 0.844,
+      "macro_recall": 0.792,
+      "macro_precision": 0.792,
+      "n_classes": 24,
+      "n_classes_never_guessed": 2
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "57/85",
+     "top1_acc": 0.671,
+     "top3": "70/85",
+     "top3_acc": 0.824,
+     "macro_recall": 0.67,
+     "macro_precision": 0.637,
+     "n_classes": 26,
+     "n_classes_never_guessed": 2
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "19/27",
+      "top1_acc": 0.704,
+      "top3": "21/27",
+      "top3_acc": 0.778,
+      "macro_recall": 0.692,
+      "macro_precision": 0.558,
+      "n_classes": 26,
+      "n_classes_never_guessed": 7
+     },
+     "25nov": {
+      "top1": "18/26",
+      "top1_acc": 0.692,
+      "top3": "22/26",
+      "top3_acc": 0.846,
+      "macro_recall": 0.692,
+      "macro_precision": 0.551,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25night": {
+      "top1": "20/32",
+      "top1_acc": 0.625,
+      "top3": "27/32",
+      "top3_acc": 0.844,
+      "macro_recall": 0.646,
+      "macro_precision": 0.579,
+      "n_classes": 24,
+      "n_classes_never_guessed": 4
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "3/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "4/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "3/3",
+     "4F lt2a": "3/3",
+     "4F lt2b": "1/3",
+     "4F y4502": "2/3",
+     "5F canteen": "4/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "4/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "3/4",
+     "5F male_disabled_toilet": "4/4",
+     "5F male_toilet": "3/3",
+     "5F sr9": "2/4",
+     "5F y5202": "3/4",
+     "5F y5302": "3/3",
+     "5F y5302_point2": "3/4",
+     "5F y5401": "3/4"
+    },
+    "b": {
+     "4F disabled_toilet": "2/3",
+     "4F esca_down": "1/3",
+     "4F esca_up": "3/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "4/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "2/3",
+     "4F lt2a": "3/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "3/3",
+     "5F canteen": "4/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "4/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "3/4",
+     "5F male_disabled_toilet": "3/4",
+     "5F male_toilet": "3/3",
+     "5F sr9": "2/4",
+     "5F y5202": "2/4",
+     "5F y5302": "3/3",
+     "5F y5302_point2": "3/4",
+     "5F y5401": "3/4"
+    },
+    "c": {
+     "4F disabled_toilet": "2/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "3/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "4/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "2/3",
+     "4F lt2a": "3/3",
+     "4F lt2b": "3/3",
+     "4F y4502": "2/3",
+     "5F canteen": "4/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "4/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "1/4",
+     "5F male_disabled_toilet": "1/4",
+     "5F male_toilet": "1/3",
+     "5F sr9": "3/4",
+     "5F y5202": "1/4",
+     "5F y5302": "3/3",
+     "5F y5302_point2": "1/4",
+     "5F y5401": "4/4"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 5,
+    "losses_total": 3,
+    "by_place": {
+     "4F disabled_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F esca_down": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F exit10_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lt1b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2b": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F y4502": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F male_disabled_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F y5202": {
+      "wins": 0,
+      "losses": 1
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 8,
+    "losses_total": 16
+   }
+  },
+  "tilt": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "41/85",
+     "top1_acc": 0.482,
+     "top3": "54/85",
+     "top3_acc": 0.635,
+     "macro_recall": 0.497,
+     "macro_precision": 0.504,
+     "n_classes": 26,
+     "n_classes_never_guessed": 0
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "10/27",
+      "top1_acc": 0.37,
+      "top3": "17/27",
+      "top3_acc": 0.63,
+      "macro_recall": 0.365,
+      "macro_precision": 0.321,
+      "n_classes": 26,
+      "n_classes_never_guessed": 7
+     },
+     "25nov": {
+      "top1": "16/26",
+      "top1_acc": 0.615,
+      "top3": "19/26",
+      "top3_acc": 0.731,
+      "macro_recall": 0.615,
+      "macro_precision": 0.49,
+      "n_classes": 26,
+      "n_classes_never_guessed": 9
+     },
+     "25night": {
+      "top1": "15/32",
+      "top1_acc": 0.469,
+      "top3": "18/32",
+      "top3_acc": 0.562,
+      "macro_recall": 0.542,
+      "macro_precision": 0.507,
+      "n_classes": 24,
+      "n_classes_never_guessed": 2
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "41/85",
+     "top1_acc": 0.482,
+     "top3": "60/85",
+     "top3_acc": 0.706,
+     "macro_recall": 0.497,
+     "macro_precision": 0.47,
+     "n_classes": 26,
+     "n_classes_never_guessed": 2
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "13/27",
+      "top1_acc": 0.481,
+      "top3": "19/27",
+      "top3_acc": 0.704,
+      "macro_recall": 0.481,
+      "macro_precision": 0.436,
+      "n_classes": 26,
+      "n_classes_never_guessed": 9
+     },
+     "25nov": {
+      "top1": "15/26",
+      "top1_acc": 0.577,
+      "top3": "22/26",
+      "top3_acc": 0.846,
+      "macro_recall": 0.577,
+      "macro_precision": 0.455,
+      "n_classes": 26,
+      "n_classes_never_guessed": 7
+     },
+     "25night": {
+      "top1": "13/32",
+      "top1_acc": 0.406,
+      "top3": "19/32",
+      "top3_acc": 0.594,
+      "macro_recall": 0.458,
+      "macro_precision": 0.382,
+      "n_classes": 24,
+      "n_classes_never_guessed": 4
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "32/85",
+     "top1_acc": 0.376,
+     "top3": "48/85",
+     "top3_acc": 0.565,
+     "macro_recall": 0.378,
+     "macro_precision": 0.389,
+     "n_classes": 26,
+     "n_classes_never_guessed": 4
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "9/27",
+      "top1_acc": 0.333,
+      "top3": "15/27",
+      "top3_acc": 0.556,
+      "macro_recall": 0.346,
+      "macro_precision": 0.315,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25nov": {
+      "top1": "10/26",
+      "top1_acc": 0.385,
+      "top3": "17/26",
+      "top3_acc": 0.654,
+      "macro_recall": 0.385,
+      "macro_precision": 0.301,
+      "n_classes": 26,
+      "n_classes_never_guessed": 7
+     },
+     "25night": {
+      "top1": "13/32",
+      "top1_acc": 0.406,
+      "top3": "16/32",
+      "top3_acc": 0.5,
+      "macro_recall": 0.438,
+      "macro_precision": 0.371,
+      "n_classes": 24,
+      "n_classes_never_guessed": 7
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "1/3",
+     "4F esca_up": "3/3",
+     "4F exit10_door": "0/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "3/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "3/3",
+     "4F lt2a": "1/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "1/3",
+     "5F canteen": "2/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "1/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "1/4",
+     "5F male_disabled_toilet": "3/4",
+     "5F male_toilet": "2/3",
+     "5F sr9": "0/4",
+     "5F y5202": "1/4",
+     "5F y5302": "2/3",
+     "5F y5302_point2": "1/4",
+     "5F y5401": "1/4"
+    },
+    "b": {
+     "4F disabled_toilet": "2/3",
+     "4F esca_down": "1/3",
+     "4F esca_up": "3/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "1/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "3/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "3/3",
+     "4F lt2a": "1/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "1/3",
+     "5F canteen": "2/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "1/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "1/4",
+     "5F male_disabled_toilet": "1/4",
+     "5F male_toilet": "1/3",
+     "5F sr9": "0/4",
+     "5F y5202": "1/4",
+     "5F y5302": "3/3",
+     "5F y5302_point2": "2/4",
+     "5F y5401": "2/4"
+    },
+    "c": {
+     "4F disabled_toilet": "2/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "1/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "2/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "0/3",
+     "4F lt2a": "1/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "2/3",
+     "5F canteen": "0/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "0/2",
+     "5F exit10_door": "0/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "2/4",
+     "5F male_disabled_toilet": "1/4",
+     "5F male_toilet": "1/3",
+     "5F sr9": "0/4",
+     "5F y5202": "0/4",
+     "5F y5302": "2/3",
+     "5F y5302_point2": "3/4",
+     "5F y5401": "2/4"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 6,
+    "losses_total": 6,
+    "by_place": {
+     "4F disabled_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F exit10_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F exit5_door": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F y4502": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F female_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F male_disabled_toilet": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F male_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F y5302": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5302_point2": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5401": {
+      "wins": 1,
+      "losses": 0
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 12,
+    "losses_total": 21
+   }
+  },
+  "magnitude": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "24/85",
+     "top1_acc": 0.282,
+     "top3": "52/85",
+     "top3_acc": 0.612,
+     "macro_recall": 0.298,
+     "macro_precision": 0.237,
+     "n_classes": 26,
+     "n_classes_never_guessed": 1
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "8/27",
+      "top1_acc": 0.296,
+      "top3": "19/27",
+      "top3_acc": 0.704,
+      "macro_recall": 0.288,
+      "macro_precision": 0.25,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25nov": {
+      "top1": "7/26",
+      "top1_acc": 0.269,
+      "top3": "16/26",
+      "top3_acc": 0.615,
+      "macro_recall": 0.269,
+      "macro_precision": 0.16,
+      "n_classes": 26,
+      "n_classes_never_guessed": 10
+     },
+     "25night": {
+      "top1": "9/32",
+      "top1_acc": 0.281,
+      "top3": "17/32",
+      "top3_acc": 0.531,
+      "macro_recall": 0.292,
+      "macro_precision": 0.191,
+      "n_classes": 24,
+      "n_classes_never_guessed": 8
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "24/85",
+     "top1_acc": 0.282,
+     "top3": "49/85",
+     "top3_acc": 0.576,
+     "macro_recall": 0.304,
+     "macro_precision": 0.268,
+     "n_classes": 26,
+     "n_classes_never_guessed": 2
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "9/27",
+      "top1_acc": 0.333,
+      "top3": "16/27",
+      "top3_acc": 0.593,
+      "macro_recall": 0.346,
+      "macro_precision": 0.298,
+      "n_classes": 26,
+      "n_classes_never_guessed": 10
+     },
+     "25nov": {
+      "top1": "8/26",
+      "top1_acc": 0.308,
+      "top3": "16/26",
+      "top3_acc": 0.615,
+      "macro_recall": 0.308,
+      "macro_precision": 0.231,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25night": {
+      "top1": "7/32",
+      "top1_acc": 0.219,
+      "top3": "17/32",
+      "top3_acc": 0.531,
+      "macro_recall": 0.229,
+      "macro_precision": 0.181,
+      "n_classes": 24,
+      "n_classes_never_guessed": 6
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "18/85",
+     "top1_acc": 0.212,
+     "top3": "36/85",
+     "top3_acc": 0.424,
+     "macro_recall": 0.215,
+     "macro_precision": 0.206,
+     "n_classes": 26,
+     "n_classes_never_guessed": 3
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "5/27",
+      "top1_acc": 0.185,
+      "top3": "10/27",
+      "top3_acc": 0.37,
+      "macro_recall": 0.192,
+      "macro_precision": 0.141,
+      "n_classes": 26,
+      "n_classes_never_guessed": 9
+     },
+     "25nov": {
+      "top1": "8/26",
+      "top1_acc": 0.308,
+      "top3": "13/26",
+      "top3_acc": 0.5,
+      "macro_recall": 0.308,
+      "macro_precision": 0.224,
+      "n_classes": 26,
+      "n_classes_never_guessed": 9
+     },
+     "25night": {
+      "top1": "5/32",
+      "top1_acc": 0.156,
+      "top3": "13/32",
+      "top3_acc": 0.406,
+      "macro_recall": 0.146,
+      "macro_precision": 0.125,
+      "n_classes": 24,
+      "n_classes_never_guessed": 7
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "0/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "2/3",
+     "4F exit10_door": "0/3",
+     "4F exit5_door": "0/3",
+     "4F gate": "1/3",
+     "4F lift_stairs5": "1/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "3/3",
+     "4F lt2a": "1/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "0/3",
+     "5F canteen": "2/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "1/4",
+     "5F exit5_door": "2/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "1/4",
+     "5F male_disabled_toilet": "2/4",
+     "5F male_toilet": "1/3",
+     "5F sr9": "0/4",
+     "5F y5202": "0/4",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "0/4",
+     "5F y5401": "0/4"
+    },
+    "b": {
+     "4F disabled_toilet": "0/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "1/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "0/3",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "1/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "2/3",
+     "4F lt2a": "0/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "2/3",
+     "5F canteen": "0/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "1/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "0/4",
+     "5F male_disabled_toilet": "1/4",
+     "5F male_toilet": "2/3",
+     "5F sr9": "1/4",
+     "5F y5202": "0/4",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "0/4",
+     "5F y5401": "1/4"
+    },
+    "c": {
+     "4F disabled_toilet": "0/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "1/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "0/4",
+     "4F lt1a": "1/3",
+     "4F lt1b": "1/3",
+     "4F lt2a": "0/3",
+     "4F lt2b": "1/3",
+     "4F y4502": "2/3",
+     "5F canteen": "0/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "0/2",
+     "5F exit10_door": "0/4",
+     "5F exit5_door": "1/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "0/4",
+     "5F male_disabled_toilet": "0/4",
+     "5F male_toilet": "1/3",
+     "5F sr9": "1/4",
+     "5F y5202": "1/4",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "1/4",
+     "5F y5401": "2/4"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 9,
+    "losses_total": 9,
+    "by_place": {
+     "4F esca_up": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F exit10_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F gate": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lt1b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2a": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2b": {
+      "wins": 0,
+      "losses": 2
+     },
+     "4F y4502": {
+      "wins": 2,
+      "losses": 0
+     },
+     "5F canteen": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F exit5_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F female_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F lift_stairs5": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F male_disabled_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F male_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F sr9": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5401": {
+      "wins": 1,
+      "losses": 0
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 14,
+    "losses_total": 20
+   }
+  }
+ },
+ "test_on_ip16_mirror": {
+  "xyz": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "39/74",
+     "top1_acc": 0.527,
+     "top3": "54/74",
+     "top3_acc": 0.73,
+     "macro_recall": 0.538,
+     "macro_precision": 0.524,
+     "n_classes": 26,
+     "n_classes_never_guessed": 1
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "14/26",
+      "top1_acc": 0.538,
+      "top3": "22/26",
+      "top3_acc": 0.846,
+      "macro_recall": 0.538,
+      "macro_precision": 0.397,
+      "n_classes": 26,
+      "n_classes_never_guessed": 9
+     },
+     "25night_tian": {
+      "top1": "12/23",
+      "top1_acc": 0.522,
+      "top3": "16/23",
+      "top3_acc": 0.696,
+      "macro_recall": 0.522,
+      "macro_precision": 0.37,
+      "n_classes": 23,
+      "n_classes_never_guessed": 8
+     },
+     "26tian": {
+      "top1": "13/25",
+      "top1_acc": 0.52,
+      "top3": "16/25",
+      "top3_acc": 0.64,
+      "macro_recall": 0.52,
+      "macro_precision": 0.401,
+      "n_classes": 25,
+      "n_classes_never_guessed": 9
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "42/74",
+     "top1_acc": 0.568,
+     "top3": "55/74",
+     "top3_acc": 0.743,
+     "macro_recall": 0.577,
+     "macro_precision": 0.581,
+     "n_classes": 26,
+     "n_classes_never_guessed": 0
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "17/26",
+      "top1_acc": 0.654,
+      "top3": "23/26",
+      "top3_acc": 0.885,
+      "macro_recall": 0.654,
+      "macro_precision": 0.577,
+      "n_classes": 26,
+      "n_classes_never_guessed": 4
+     },
+     "25night_tian": {
+      "top1": "13/23",
+      "top1_acc": 0.565,
+      "top3": "17/23",
+      "top3_acc": 0.739,
+      "macro_recall": 0.565,
+      "macro_precision": 0.42,
+      "n_classes": 23,
+      "n_classes_never_guessed": 10
+     },
+     "26tian": {
+      "top1": "12/25",
+      "top1_acc": 0.48,
+      "top3": "15/25",
+      "top3_acc": 0.6,
+      "macro_recall": 0.48,
+      "macro_precision": 0.36,
+      "n_classes": 25,
+      "n_classes_never_guessed": 9
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "40/74",
+     "top1_acc": 0.541,
+     "top3": "54/74",
+     "top3_acc": 0.73,
+     "macro_recall": 0.551,
+     "macro_precision": 0.502,
+     "n_classes": 26,
+     "n_classes_never_guessed": 4
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "18/26",
+      "top1_acc": 0.692,
+      "top3": "22/26",
+      "top3_acc": 0.846,
+      "macro_recall": 0.692,
+      "macro_precision": 0.609,
+      "n_classes": 26,
+      "n_classes_never_guessed": 5
+     },
+     "25night_tian": {
+      "top1": "12/23",
+      "top1_acc": 0.522,
+      "top3": "16/23",
+      "top3_acc": 0.696,
+      "macro_recall": 0.522,
+      "macro_precision": 0.377,
+      "n_classes": 23,
+      "n_classes_never_guessed": 11
+     },
+     "26tian": {
+      "top1": "10/25",
+      "top1_acc": 0.4,
+      "top3": "16/25",
+      "top3_acc": 0.64,
+      "macro_recall": 0.4,
+      "macro_precision": 0.267,
+      "n_classes": 25,
+      "n_classes_never_guessed": 11
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "2/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "1/2",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "2/3",
+     "4F lt1a": "1/2",
+     "4F lt1b": "2/2",
+     "4F lt2a": "3/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "1/3",
+     "5F canteen": "2/2",
+     "5F esca_down": "2/3",
+     "5F esca_up": "3/3",
+     "5F exit10_door": "1/3",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "0/3",
+     "5F male_disabled_toilet": "1/3",
+     "5F male_toilet": "1/3",
+     "5F sr9": "1/3",
+     "5F y5202": "1/3",
+     "5F y5302": "1/3",
+     "5F y5302_point2": "0/3",
+     "5F y5401": "2/3"
+    },
+    "b": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "2/3",
+     "4F exit10_door": "3/3",
+     "4F exit5_door": "2/2",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "2/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "2/2",
+     "4F lt2a": "3/3",
+     "4F lt2b": "1/3",
+     "4F y4502": "2/3",
+     "5F canteen": "2/2",
+     "5F esca_down": "1/3",
+     "5F esca_up": "1/3",
+     "5F exit10_door": "1/3",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "2/3",
+     "5F male_disabled_toilet": "2/3",
+     "5F male_toilet": "2/3",
+     "5F sr9": "3/3",
+     "5F y5202": "0/3",
+     "5F y5302": "1/3",
+     "5F y5302_point2": "0/3",
+     "5F y5401": "2/3"
+    },
+    "c": {
+     "4F disabled_toilet": "2/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "3/3",
+     "4F exit5_door": "2/2",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "2/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "2/2",
+     "4F lt2a": "1/3",
+     "4F lt2b": "1/3",
+     "4F y4502": "3/3",
+     "5F canteen": "2/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "1/3",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "2/3",
+     "5F male_disabled_toilet": "3/3",
+     "5F male_toilet": "2/3",
+     "5F sr9": "2/3",
+     "5F y5202": "1/3",
+     "5F y5302": "1/3",
+     "5F y5302_point2": "0/3",
+     "5F y5401": "2/3"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 12,
+    "losses_total": 9,
+    "by_place": {
+     "4F exit10_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F exit5_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lt1a": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F y4502": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F esca_down": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F esca_up": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F exit10_door": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F lift_stairs5": {
+      "wins": 2,
+      "losses": 0
+     },
+     "5F male_disabled_toilet": {
+      "wins": 2,
+      "losses": 1
+     },
+     "5F male_toilet": {
+      "wins": 2,
+      "losses": 1
+     },
+     "5F sr9": {
+      "wins": 2,
+      "losses": 0
+     },
+     "5F y5202": {
+      "wins": 0,
+      "losses": 1
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 16,
+    "losses_total": 15
+   }
+  },
+  "tilt": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "18/74",
+     "top1_acc": 0.243,
+     "top3": "32/74",
+     "top3_acc": 0.432,
+     "macro_recall": 0.237,
+     "macro_precision": 0.202,
+     "n_classes": 26,
+     "n_classes_never_guessed": 4
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "7/26",
+      "top1_acc": 0.269,
+      "top3": "14/26",
+      "top3_acc": 0.538,
+      "macro_recall": 0.269,
+      "macro_precision": 0.147,
+      "n_classes": 26,
+      "n_classes_never_guessed": 12
+     },
+     "25night_tian": {
+      "top1": "8/23",
+      "top1_acc": 0.348,
+      "top3": "10/23",
+      "top3_acc": 0.435,
+      "macro_recall": 0.348,
+      "macro_precision": 0.204,
+      "n_classes": 23,
+      "n_classes_never_guessed": 10
+     },
+     "26tian": {
+      "top1": "3/25",
+      "top1_acc": 0.12,
+      "top3": "8/25",
+      "top3_acc": 0.32,
+      "macro_recall": 0.12,
+      "macro_precision": 0.031,
+      "n_classes": 25,
+      "n_classes_never_guessed": 14
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "25/74",
+     "top1_acc": 0.338,
+     "top3": "43/74",
+     "top3_acc": 0.581,
+     "macro_recall": 0.327,
+     "macro_precision": 0.331,
+     "n_classes": 26,
+     "n_classes_never_guessed": 4
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "14/26",
+      "top1_acc": 0.538,
+      "top3": "21/26",
+      "top3_acc": 0.808,
+      "macro_recall": 0.538,
+      "macro_precision": 0.439,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25night_tian": {
+      "top1": "5/23",
+      "top1_acc": 0.217,
+      "top3": "11/23",
+      "top3_acc": 0.478,
+      "macro_recall": 0.217,
+      "macro_precision": 0.116,
+      "n_classes": 23,
+      "n_classes_never_guessed": 10
+     },
+     "26tian": {
+      "top1": "6/25",
+      "top1_acc": 0.24,
+      "top3": "11/25",
+      "top3_acc": 0.44,
+      "macro_recall": 0.24,
+      "macro_precision": 0.163,
+      "n_classes": 25,
+      "n_classes_never_guessed": 14
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "28/74",
+     "top1_acc": 0.378,
+     "top3": "44/74",
+     "top3_acc": 0.595,
+     "macro_recall": 0.378,
+     "macro_precision": 0.44,
+     "n_classes": 26,
+     "n_classes_never_guessed": 3
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "14/26",
+      "top1_acc": 0.538,
+      "top3": "20/26",
+      "top3_acc": 0.769,
+      "macro_recall": 0.538,
+      "macro_precision": 0.446,
+      "n_classes": 26,
+      "n_classes_never_guessed": 7
+     },
+     "25night_tian": {
+      "top1": "6/23",
+      "top1_acc": 0.261,
+      "top3": "12/23",
+      "top3_acc": 0.522,
+      "macro_recall": 0.261,
+      "macro_precision": 0.139,
+      "n_classes": 23,
+      "n_classes_never_guessed": 11
+     },
+     "26tian": {
+      "top1": "8/25",
+      "top1_acc": 0.32,
+      "top3": "12/25",
+      "top3_acc": 0.48,
+      "macro_recall": 0.32,
+      "macro_precision": 0.233,
+      "n_classes": 25,
+      "n_classes_never_guessed": 12
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "1/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "0/2",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "2/3",
+     "4F lt1a": "1/2",
+     "4F lt1b": "0/2",
+     "4F lt2a": "1/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "1/3",
+     "5F canteen": "0/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "2/3",
+     "5F exit10_door": "2/3",
+     "5F exit5_door": "1/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "2/3",
+     "5F male_disabled_toilet": "0/3",
+     "5F male_toilet": "0/3",
+     "5F sr9": "0/3",
+     "5F y5202": "0/3",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "0/3",
+     "5F y5401": "0/3"
+    },
+    "b": {
+     "4F disabled_toilet": "3/3",
+     "4F esca_down": "1/3",
+     "4F esca_up": "1/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "1/2",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "1/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "0/2",
+     "4F lt2a": "2/3",
+     "4F lt2b": "1/3",
+     "4F y4502": "1/3",
+     "5F canteen": "0/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "0/3",
+     "5F exit5_door": "1/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "3/3",
+     "5F male_disabled_toilet": "1/3",
+     "5F male_toilet": "1/3",
+     "5F sr9": "0/3",
+     "5F y5202": "1/3",
+     "5F y5302": "1/3",
+     "5F y5302_point2": "1/3",
+     "5F y5401": "1/3"
+    },
+    "c": {
+     "4F disabled_toilet": "3/3",
+     "4F esca_down": "2/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "1/2",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "1/3",
+     "4F lt1a": "1/2",
+     "4F lt1b": "1/2",
+     "4F lt2a": "2/3",
+     "4F lt2b": "1/3",
+     "4F y4502": "1/3",
+     "5F canteen": "0/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "0/3",
+     "5F exit5_door": "1/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "2/3",
+     "5F male_disabled_toilet": "1/3",
+     "5F male_toilet": "1/3",
+     "5F sr9": "0/3",
+     "5F y5202": "2/3",
+     "5F y5302": "1/3",
+     "5F y5302_point2": "1/3",
+     "5F y5401": "1/3"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 16,
+    "losses_total": 9,
+    "by_place": {
+     "4F disabled_toilet": {
+      "wins": 2,
+      "losses": 0
+     },
+     "4F esca_down": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F exit10_door": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F exit5_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lift_stairs5": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt1a": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2a": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lt2b": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F y4502": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F esca_up": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F exit10_door": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F exit5_door": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F female_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F lift_stairs5": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F male_disabled_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F male_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5202": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5302": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5302_point2": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5401": {
+      "wins": 1,
+      "losses": 0
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 21,
+    "losses_total": 11
+   }
+  },
+  "magnitude": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "18/74",
+     "top1_acc": 0.243,
+     "top3": "28/74",
+     "top3_acc": 0.378,
+     "macro_recall": 0.231,
+     "macro_precision": 0.167,
+     "n_classes": 26,
+     "n_classes_never_guessed": 3
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "6/26",
+      "top1_acc": 0.231,
+      "top3": "8/26",
+      "top3_acc": 0.308,
+      "macro_recall": 0.231,
+      "macro_precision": 0.125,
+      "n_classes": 26,
+      "n_classes_never_guessed": 12
+     },
+     "25night_tian": {
+      "top1": "7/23",
+      "top1_acc": 0.304,
+      "top3": "11/23",
+      "top3_acc": 0.478,
+      "macro_recall": 0.304,
+      "macro_precision": 0.181,
+      "n_classes": 23,
+      "n_classes_never_guessed": 11
+     },
+     "26tian": {
+      "top1": "5/25",
+      "top1_acc": 0.2,
+      "top3": "9/25",
+      "top3_acc": 0.36,
+      "macro_recall": 0.2,
+      "macro_precision": 0.073,
+      "n_classes": 25,
+      "n_classes_never_guessed": 14
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "17/74",
+     "top1_acc": 0.23,
+     "top3": "40/74",
+     "top3_acc": 0.541,
+     "macro_recall": 0.224,
+     "macro_precision": 0.199,
+     "n_classes": 26,
+     "n_classes_never_guessed": 1
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "6/26",
+      "top1_acc": 0.231,
+      "top3": "17/26",
+      "top3_acc": 0.654,
+      "macro_recall": 0.231,
+      "macro_precision": 0.186,
+      "n_classes": 26,
+      "n_classes_never_guessed": 9
+     },
+     "25night_tian": {
+      "top1": "6/23",
+      "top1_acc": 0.261,
+      "top3": "14/23",
+      "top3_acc": 0.609,
+      "macro_recall": 0.261,
+      "macro_precision": 0.188,
+      "n_classes": 23,
+      "n_classes_never_guessed": 9
+     },
+     "26tian": {
+      "top1": "5/25",
+      "top1_acc": 0.2,
+      "top3": "9/25",
+      "top3_acc": 0.36,
+      "macro_recall": 0.2,
+      "macro_precision": 0.108,
+      "n_classes": 25,
+      "n_classes_never_guessed": 13
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "17/74",
+     "top1_acc": 0.23,
+     "top3": "34/74",
+     "top3_acc": 0.459,
+     "macro_recall": 0.231,
+     "macro_precision": 0.198,
+     "n_classes": 26,
+     "n_classes_never_guessed": 2
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "7/26",
+      "top1_acc": 0.269,
+      "top3": "15/26",
+      "top3_acc": 0.577,
+      "macro_recall": 0.269,
+      "macro_precision": 0.205,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25night_tian": {
+      "top1": "6/23",
+      "top1_acc": 0.261,
+      "top3": "11/23",
+      "top3_acc": 0.478,
+      "macro_recall": 0.261,
+      "macro_precision": 0.196,
+      "n_classes": 23,
+      "n_classes_never_guessed": 10
+     },
+     "26tian": {
+      "top1": "4/25",
+      "top1_acc": 0.16,
+      "top3": "8/25",
+      "top3_acc": 0.32,
+      "macro_recall": 0.16,
+      "macro_precision": 0.11,
+      "n_classes": 25,
+      "n_classes_never_guessed": 11
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "0/3",
+     "4F exit5_door": "0/2",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "0/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "0/2",
+     "4F lt2a": "2/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "2/3",
+     "5F canteen": "0/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "1/3",
+     "5F exit5_door": "2/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "3/3",
+     "5F male_disabled_toilet": "0/3",
+     "5F male_toilet": "0/3",
+     "5F sr9": "2/3",
+     "5F y5202": "0/3",
+     "5F y5302": "2/3",
+     "5F y5302_point2": "0/3",
+     "5F y5401": "1/3"
+    },
+    "b": {
+     "4F disabled_toilet": "0/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "0/2",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "0/3",
+     "4F lt1a": "1/2",
+     "4F lt1b": "0/2",
+     "4F lt2a": "2/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "2/3",
+     "5F canteen": "0/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "0/3",
+     "5F exit5_door": "2/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "1/3",
+     "5F male_disabled_toilet": "0/3",
+     "5F male_toilet": "1/3",
+     "5F sr9": "2/3",
+     "5F y5202": "0/3",
+     "5F y5302": "2/3",
+     "5F y5302_point2": "1/3",
+     "5F y5401": "0/3"
+    },
+    "c": {
+     "4F disabled_toilet": "0/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "1/3",
+     "4F exit10_door": "1/3",
+     "4F exit5_door": "0/2",
+     "4F gate": "2/3",
+     "4F lift_stairs5": "0/3",
+     "4F lt1a": "1/2",
+     "4F lt1b": "1/2",
+     "4F lt2a": "2/3",
+     "4F lt2b": "0/3",
+     "4F y4502": "2/3",
+     "5F canteen": "0/2",
+     "5F esca_down": "0/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "0/3",
+     "5F exit5_door": "1/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "0/3",
+     "5F male_disabled_toilet": "0/3",
+     "5F male_toilet": "2/3",
+     "5F sr9": "3/3",
+     "5F y5202": "0/3",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "1/3",
+     "5F y5401": "0/3"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 5,
+    "losses_total": 6,
+    "by_place": {
+     "4F disabled_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F exit10_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lt1a": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F exit10_door": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F exit5_door": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F lift_stairs5": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F male_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5302_point2": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5401": {
+      "wins": 0,
+      "losses": 1
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 9,
+    "losses_total": 10
+   }
+  }
+ },
+ "exploratory_offset": {
+  "offsets_xyz_uT": {
+   "sesi1": [
+    -11.36,
+    -1.14,
+    -14.52
+   ],
+   "25nov": [
+    -14.55,
+    -3.84,
+    -17.38
+   ],
+   "25night": [
+    -13.41,
+    -8.7,
+    -16.29
+   ],
+   "sesi2": [
+    -15.16,
+    -5.61,
+    -13.71
+   ],
+   "25night_tian": [
+    -12.96,
+    -12.27,
+    -17.18
+   ],
+   "26tian": [
+    -14.08,
+    -7.28,
+    -28.11
+   ]
+  },
+  "control_zero_offset_equals_plain": true,
+  "test_on_ip18_xyz": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "64/85",
+     "top1_acc": 0.753,
+     "top3": "72/85",
+     "top3_acc": 0.847,
+     "macro_recall": 0.753,
+     "macro_precision": 0.758,
+     "n_classes": 26,
+     "n_classes_never_guessed": 0
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "18/27",
+      "top1_acc": 0.667,
+      "top3": "20/27",
+      "top3_acc": 0.741,
+      "macro_recall": 0.654,
+      "macro_precision": 0.567,
+      "n_classes": 26,
+      "n_classes_never_guessed": 6
+     },
+     "25nov": {
+      "top1": "21/26",
+      "top1_acc": 0.808,
+      "top3": "23/26",
+      "top3_acc": 0.885,
+      "macro_recall": 0.808,
+      "macro_precision": 0.724,
+      "n_classes": 26,
+      "n_classes_never_guessed": 5
+     },
+     "25night": {
+      "top1": "25/32",
+      "top1_acc": 0.781,
+      "top3": "29/32",
+      "top3_acc": 0.906,
+      "macro_recall": 0.812,
+      "macro_precision": 0.764,
+      "n_classes": 24,
+      "n_classes_never_guessed": 3
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "55/85",
+     "top1_acc": 0.647,
+     "top3": "70/85",
+     "top3_acc": 0.824,
+     "macro_recall": 0.654,
+     "macro_precision": 0.682,
+     "n_classes": 26,
+     "n_classes_never_guessed": 0
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "21/27",
+      "top1_acc": 0.778,
+      "top3": "22/27",
+      "top3_acc": 0.815,
+      "macro_recall": 0.769,
+      "macro_precision": 0.692,
+      "n_classes": 26,
+      "n_classes_never_guessed": 4
+     },
+     "25nov": {
+      "top1": "18/26",
+      "top1_acc": 0.692,
+      "top3": "23/26",
+      "top3_acc": 0.885,
+      "macro_recall": 0.692,
+      "macro_precision": 0.583,
+      "n_classes": 26,
+      "n_classes_never_guessed": 7
+     },
+     "25night": {
+      "top1": "16/32",
+      "top1_acc": 0.5,
+      "top3": "25/32",
+      "top3_acc": 0.781,
+      "macro_recall": 0.542,
+      "macro_precision": 0.486,
+      "n_classes": 24,
+      "n_classes_never_guessed": 6
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "40/85",
+     "top1_acc": 0.471,
+     "top3": "58/85",
+     "top3_acc": 0.682,
+     "macro_recall": 0.487,
+     "macro_precision": 0.435,
+     "n_classes": 26,
+     "n_classes_never_guessed": 3
+    },
+    "per_session": {
+     "sesi1": {
+      "top1": "15/27",
+      "top1_acc": 0.556,
+      "top3": "21/27",
+      "top3_acc": 0.778,
+      "macro_recall": 0.538,
+      "macro_precision": 0.385,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25nov": {
+      "top1": "13/26",
+      "top1_acc": 0.5,
+      "top3": "20/26",
+      "top3_acc": 0.769,
+      "macro_recall": 0.5,
+      "macro_precision": 0.372,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25night": {
+      "top1": "12/32",
+      "top1_acc": 0.375,
+      "top3": "17/32",
+      "top3_acc": 0.531,
+      "macro_recall": 0.458,
+      "macro_precision": 0.365,
+      "n_classes": 24,
+      "n_classes_never_guessed": 7
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "1/3",
+     "4F esca_down": "2/3",
+     "4F esca_up": "3/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "3/4",
+     "4F lt1a": "2/3",
+     "4F lt1b": "3/3",
+     "4F lt2a": "3/3",
+     "4F lt2b": "3/3",
+     "4F y4502": "2/3",
+     "5F canteen": "4/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "3/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "3/4",
+     "5F male_disabled_toilet": "4/4",
+     "5F male_toilet": "3/3",
+     "5F sr9": "2/4",
+     "5F y5202": "2/4",
+     "5F y5302": "3/3",
+     "5F y5302_point2": "1/4",
+     "5F y5401": "3/4"
+    },
+    "b": {
+     "4F disabled_toilet": "3/3",
+     "4F esca_down": "1/3",
+     "4F esca_up": "3/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "1/4",
+     "4F lt1a": "2/3",
+     "4F lt1b": "2/3",
+     "4F lt2a": "3/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "1/3",
+     "5F canteen": "4/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "4/4",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "2/3",
+     "5F lift_stairs5": "3/4",
+     "5F male_disabled_toilet": "2/4",
+     "5F male_toilet": "2/3",
+     "5F sr9": "2/4",
+     "5F y5202": "0/4",
+     "5F y5302": "2/3",
+     "5F y5302_point2": "1/4",
+     "5F y5401": "3/4"
+    },
+    "c": {
+     "4F disabled_toilet": "3/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "2/3",
+     "4F exit5_door": "2/3",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "1/4",
+     "4F lt1a": "3/3",
+     "4F lt1b": "2/3",
+     "4F lt2a": "3/3",
+     "4F lt2b": "3/3",
+     "4F y4502": "0/3",
+     "5F canteen": "4/4",
+     "5F esca_down": "0/2",
+     "5F esca_up": "2/2",
+     "5F exit10_door": "1/4",
+     "5F exit5_door": "1/3",
+     "5F female_toilet": "1/3",
+     "5F lift_stairs5": "2/4",
+     "5F male_disabled_toilet": "0/4",
+     "5F male_toilet": "2/3",
+     "5F sr9": "0/4",
+     "5F y5202": "1/4",
+     "5F y5302": "1/3",
+     "5F y5302_point2": "0/4",
+     "5F y5401": "3/4"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 4,
+    "losses_total": 13,
+    "by_place": {
+     "4F disabled_toilet": {
+      "wins": 2,
+      "losses": 0
+     },
+     "4F esca_down": {
+      "wins": 1,
+      "losses": 2
+     },
+     "4F lift_stairs5": {
+      "wins": 0,
+      "losses": 2
+     },
+     "4F lt1b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F y4502": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F exit10_door": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F male_disabled_toilet": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F male_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F y5202": {
+      "wins": 0,
+      "losses": 2
+     },
+     "5F y5302": {
+      "wins": 0,
+      "losses": 1
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 5,
+    "losses_total": 29
+   }
+  },
+  "test_on_ip16_mirror_xyz": {
+   "a": {
+    "train": "own phone only",
+    "total": {
+     "top1": "41/74",
+     "top1_acc": 0.554,
+     "top3": "55/74",
+     "top3_acc": 0.743,
+     "macro_recall": 0.564,
+     "macro_precision": 0.48,
+     "n_classes": 26,
+     "n_classes_never_guessed": 2
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "14/26",
+      "top1_acc": 0.538,
+      "top3": "20/26",
+      "top3_acc": 0.769,
+      "macro_recall": 0.538,
+      "macro_precision": 0.433,
+      "n_classes": 26,
+      "n_classes_never_guessed": 8
+     },
+     "25night_tian": {
+      "top1": "15/23",
+      "top1_acc": 0.652,
+      "top3": "19/23",
+      "top3_acc": 0.826,
+      "macro_recall": 0.652,
+      "macro_precision": 0.522,
+      "n_classes": 23,
+      "n_classes_never_guessed": 6
+     },
+     "26tian": {
+      "top1": "12/25",
+      "top1_acc": 0.48,
+      "top3": "16/25",
+      "top3_acc": 0.64,
+      "macro_recall": 0.48,
+      "macro_precision": 0.303,
+      "n_classes": 25,
+      "n_classes_never_guessed": 11
+     }
+    }
+   },
+   "b": {
+    "train": "own + other phone pooled",
+    "total": {
+     "top1": "41/74",
+     "top1_acc": 0.554,
+     "top3": "55/74",
+     "top3_acc": 0.743,
+     "macro_recall": 0.564,
+     "macro_precision": 0.512,
+     "n_classes": 26,
+     "n_classes_never_guessed": 2
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "15/26",
+      "top1_acc": 0.577,
+      "top3": "21/26",
+      "top3_acc": 0.808,
+      "macro_recall": 0.577,
+      "macro_precision": 0.474,
+      "n_classes": 26,
+      "n_classes_never_guessed": 6
+     },
+     "25night_tian": {
+      "top1": "12/23",
+      "top1_acc": 0.522,
+      "top3": "16/23",
+      "top3_acc": 0.696,
+      "macro_recall": 0.522,
+      "macro_precision": 0.378,
+      "n_classes": 23,
+      "n_classes_never_guessed": 10
+     },
+     "26tian": {
+      "top1": "14/25",
+      "top1_acc": 0.56,
+      "top3": "18/25",
+      "top3_acc": 0.72,
+      "macro_recall": 0.56,
+      "macro_precision": 0.388,
+      "n_classes": 25,
+      "n_classes_never_guessed": 11
+     }
+    }
+   },
+   "c": {
+    "train": "other phone only",
+    "total": {
+     "top1": "44/74",
+     "top1_acc": 0.595,
+     "top3": "55/74",
+     "top3_acc": 0.743,
+     "macro_recall": 0.603,
+     "macro_precision": 0.549,
+     "n_classes": 26,
+     "n_classes_never_guessed": 3
+    },
+    "per_session": {
+     "sesi2": {
+      "top1": "18/26",
+      "top1_acc": 0.692,
+      "top3": "23/26",
+      "top3_acc": 0.885,
+      "macro_recall": 0.692,
+      "macro_precision": 0.577,
+      "n_classes": 26,
+      "n_classes_never_guessed": 6
+     },
+     "25night_tian": {
+      "top1": "12/23",
+      "top1_acc": 0.522,
+      "top3": "15/23",
+      "top3_acc": 0.652,
+      "macro_recall": 0.522,
+      "macro_precision": 0.378,
+      "n_classes": 23,
+      "n_classes_never_guessed": 10
+     },
+     "26tian": {
+      "top1": "14/25",
+      "top1_acc": 0.56,
+      "top3": "17/25",
+      "top3_acc": 0.68,
+      "macro_recall": 0.56,
+      "macro_precision": 0.387,
+      "n_classes": 25,
+      "n_classes_never_guessed": 10
+     }
+    }
+   },
+   "per_place_top1": {
+    "a": {
+     "4F disabled_toilet": "2/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "2/3",
+     "4F exit10_door": "3/3",
+     "4F exit5_door": "2/2",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "1/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "2/2",
+     "4F lt2a": "3/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "0/3",
+     "5F canteen": "2/2",
+     "5F esca_down": "2/3",
+     "5F esca_up": "3/3",
+     "5F exit10_door": "1/3",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "1/3",
+     "5F male_disabled_toilet": "0/3",
+     "5F male_toilet": "1/3",
+     "5F sr9": "3/3",
+     "5F y5202": "0/3",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "2/3",
+     "5F y5401": "3/3"
+    },
+    "b": {
+     "4F disabled_toilet": "3/3",
+     "4F esca_down": "0/3",
+     "4F esca_up": "2/3",
+     "4F exit10_door": "3/3",
+     "4F exit5_door": "2/2",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "1/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "2/2",
+     "4F lt2a": "3/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "1/3",
+     "5F canteen": "2/2",
+     "5F esca_down": "2/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "1/3",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "2/3",
+     "5F male_disabled_toilet": "2/3",
+     "5F male_toilet": "2/3",
+     "5F sr9": "2/3",
+     "5F y5202": "0/3",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "1/3",
+     "5F y5401": "2/3"
+    },
+    "c": {
+     "4F disabled_toilet": "3/3",
+     "4F esca_down": "2/3",
+     "4F esca_up": "0/3",
+     "4F exit10_door": "3/3",
+     "4F exit5_door": "2/2",
+     "4F gate": "3/3",
+     "4F lift_stairs5": "2/3",
+     "4F lt1a": "0/2",
+     "4F lt1b": "2/2",
+     "4F lt2a": "3/3",
+     "4F lt2b": "2/3",
+     "4F y4502": "1/3",
+     "5F canteen": "2/2",
+     "5F esca_down": "1/3",
+     "5F esca_up": "0/3",
+     "5F exit10_door": "2/3",
+     "5F exit5_door": "3/3",
+     "5F female_toilet": "0/3",
+     "5F lift_stairs5": "3/3",
+     "5F male_disabled_toilet": "2/3",
+     "5F male_toilet": "2/3",
+     "5F sr9": "2/3",
+     "5F y5202": "1/3",
+     "5F y5302": "0/3",
+     "5F y5302_point2": "1/3",
+     "5F y5401": "2/3"
+    }
+   },
+   "b_vs_a": {
+    "wins_total": 8,
+    "losses_total": 8,
+    "by_place": {
+     "4F disabled_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lift_stairs5": {
+      "wins": 1,
+      "losses": 1
+     },
+     "4F y4502": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F esca_down": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F esca_up": {
+      "wins": 0,
+      "losses": 3
+     },
+     "5F lift_stairs5": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F male_disabled_toilet": {
+      "wins": 2,
+      "losses": 0
+     },
+     "5F male_toilet": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F sr9": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F y5302_point2": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F y5401": {
+      "wins": 0,
+      "losses": 1
+     }
+    }
+   },
+   "c_vs_a": {
+    "wins_total": 13,
+    "losses_total": 10
+   }
+  }
+ },
+ "check_against_eval_json": {
+  "xyz a sesi1": {
+   "got_top1_top3": [
+    "21/27",
+    "23/27"
+   ],
+   "eval_json_top1_top3": [
+    "21/27",
+    "23/27"
+   ],
+   "match": true
+  },
+  "xyz a 25nov": {
+   "got_top1_top3": [
+    "20/26",
+    "21/26"
+   ],
+   "eval_json_top1_top3": [
+    "20/26",
+    "21/26"
+   ],
+   "match": true
+  },
+  "xyz a 25night": {
+   "got_top1_top3": [
+    "24/32",
+    "29/32"
+   ],
+   "eval_json_top1_top3": [
+    "24/32",
+    "29/32"
+   ],
+   "match": true
+  },
+  "xyz c sesi1": {
+   "got_top1_top3": [
+    "19/27",
+    "21/27"
+   ],
+   "eval_json_top1_top3": [
+    "19/27",
+    "21/27"
+   ],
+   "match": true
+  },
+  "xyz c 25nov": {
+   "got_top1_top3": [
+    "18/26",
+    "22/26"
+   ],
+   "eval_json_top1_top3": [
+    "18/26",
+    "22/26"
+   ],
+   "match": true
+  },
+  "xyz c 25night": {
+   "got_top1_top3": [
+    "20/32",
+    "27/32"
+   ],
+   "eval_json_top1_top3": [
+    "20/32",
+    "27/32"
+   ],
+   "match": true
+  },
+  "tilt a sesi1": {
+   "got_top1_top3": [
+    "10/27",
+    "17/27"
+   ],
+   "eval_json_top1_top3": [
+    "10/27",
+    "17/27"
+   ],
+   "match": true
+  },
+  "tilt a 25nov": {
+   "got_top1_top3": [
+    "16/26",
+    "19/26"
+   ],
+   "eval_json_top1_top3": [
+    "16/26",
+    "19/26"
+   ],
+   "match": true
+  },
+  "tilt a 25night": {
+   "got_top1_top3": [
+    "15/32",
+    "18/32"
+   ],
+   "eval_json_top1_top3": [
+    "15/32",
+    "18/32"
+   ],
+   "match": true
+  },
+  "tilt c sesi1": {
+   "got_top1_top3": [
+    "9/27",
+    "15/27"
+   ],
+   "eval_json_top1_top3": [
+    "9/27",
+    "15/27"
+   ],
+   "match": true
+  },
+  "tilt c 25nov": {
+   "got_top1_top3": [
+    "10/26",
+    "17/26"
+   ],
+   "eval_json_top1_top3": [
+    "10/26",
+    "17/26"
+   ],
+   "match": true
+  },
+  "tilt c 25night": {
+   "got_top1_top3": [
+    "13/32",
+    "16/32"
+   ],
+   "eval_json_top1_top3": [
+    "13/32",
+    "16/32"
+   ],
+   "match": true
+  },
+  "magnitude a sesi1": {
+   "got_top1_top3": [
+    "8/27",
+    "19/27"
+   ],
+   "eval_json_top1_top3": [
+    "8/27",
+    "19/27"
+   ],
+   "match": true
+  },
+  "magnitude a 25nov": {
+   "got_top1_top3": [
+    "7/26",
+    "16/26"
+   ],
+   "eval_json_top1_top3": [
+    "7/26",
+    "16/26"
+   ],
+   "match": true
+  },
+  "magnitude a 25night": {
+   "got_top1_top3": [
+    "9/32",
+    "17/32"
+   ],
+   "eval_json_top1_top3": [
+    "9/32",
+    "17/32"
+   ],
+   "match": true
+  },
+  "magnitude c sesi1": {
+   "got_top1_top3": [
+    "5/27",
+    "10/27"
+   ],
+   "eval_json_top1_top3": [
+    "5/27",
+    "10/27"
+   ],
+   "match": true
+  },
+  "magnitude c 25nov": {
+   "got_top1_top3": [
+    "8/26",
+    "13/26"
+   ],
+   "eval_json_top1_top3": [
+    "8/26",
+    "13/26"
+   ],
+   "match": true
+  },
+  "magnitude c 25night": {
+   "got_top1_top3": [
+    "5/32",
+    "13/32"
+   ],
+   "eval_json_top1_top3": [
+    "5/32",
+    "13/32"
+   ],
+   "match": true
+  }
+ },
+ "check_all_match": true
+}

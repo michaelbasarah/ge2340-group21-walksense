@@ -50,6 +50,8 @@ Areas pre-registered before testing [18], 39 graph edges from the walks plus ste
 ### 3.4 Tian's upload app and the first fair test (25 Nov) [24-27, 66]
 A phyphox ZIP is uploaded from the phone to the laptop, which answers with floor, steps and top-3 places. Trained on one 24-Nov session and tested on the other: **17/26 and 17/27** across two different iPhones, floor **27/27 and 26/26** after the floor rule changed from "previous reading" to "median of the last 6". Raw x/y/z won over tilt because the phone was held the same way at every stop. Live mode reads phyphox remote access while walking [26, 27]; it first connected to a real phone on 25 Nov, but no live walk has been scored yet [86].
 
+**ip16 vs ip18 for the demo (26 Nov, [89]).** The demo will use Dicta's iPhone 18, so the user asked whether Tian's iPhone 16 data can be pooled. Tested on the three ip18 sessions (85 stops): trained on ip16 alone the app model gets 57/85 against 65/85 for ip18 only, so the phones are not interchangeable; adding ip16 to ip18 training gives 67/85 in the app model and 58/85 against 59/85 in the day-3 fused kNN, a tie. Recommendation: ip18 only.
+
 ### 3.5 One fused kNN, scored honestly (25 Nov) [32]
 The user's design: one weighted kNN over all phones and sessions, with a learned weight per sensor group. Scored four ways on purpose: random windows **99.7%** (leaky) -> by recording 55.4% -> grouped by stop **28.7%** -> leave one session out **74/202 = 36.6%** (chance 3.8%). Wi-Fi and the floor belong to the stop, not the phone, which was a leak we had not named before.
 

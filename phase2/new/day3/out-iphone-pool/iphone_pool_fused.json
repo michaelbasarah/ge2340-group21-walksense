@@ -1,0 +1,318 @@
+{
+ "what": "Day-3 fused kNN: does pooling iPhone 16 (ip16) training windows with iPhone 18 (ip18) beat ip18 only, TESTING ON ip18?",
+ "test": "ip18 stops of 24s1, 25nov, 25night (85 recordings)",
+ "variants": {
+  "fused (learned weights)": {
+   "A_ip18_only": {
+    "top1": "59/85",
+    "top1_acc": 0.694,
+    "top3": "66/85",
+    "macro_recall": 0.702,
+    "macro_precision": 0.704,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "20/27",
+     "25night": "22/32",
+     "25nov": "17/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 0.3, \"tilt\": 0.1, \"wifi\": 0.2, \"baro\": 0.4}",
+      25
+     ],
+     "25night": [
+      "{\"B\": 0.0, \"xyz\": 0.6, \"tilt\": 0.2, \"wifi\": 0.1, \"baro\": 0.1}",
+      1
+     ],
+     "25nov": [
+      "{\"B\": 0.0, \"xyz\": 0.25, \"tilt\": 0.0, \"wifi\": 0.75, \"baro\": 0.0}",
+      5
+     ]
+    }
+   },
+   "B_ip18_plus_ip16": {
+    "top1": "58/85",
+    "top1_acc": 0.682,
+    "top3": "75/85",
+    "macro_recall": 0.689,
+    "macro_precision": 0.713,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "19/27",
+     "25night": "20/32",
+     "25nov": "19/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 0.4, \"tilt\": 0.1, \"wifi\": 0.0, \"baro\": 0.5}",
+      25
+     ],
+     "25night": [
+      "{\"B\": 0.0, \"xyz\": 0.4, \"tilt\": 0.1, \"wifi\": 0.0, \"baro\": 0.5}",
+      15
+     ],
+     "25nov": [
+      "{\"B\": 0.0, \"xyz\": 0.5, \"tilt\": 0.1, \"wifi\": 0.0, \"baro\": 0.4}",
+      25
+     ]
+    }
+   },
+   "C_ip16_only": {
+    "top1": "44/85",
+    "top1_acc": 0.518,
+    "top3": "63/85",
+    "macro_recall": 0.542,
+    "macro_precision": 0.502,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "15/27",
+     "25night": "12/32",
+     "25nov": "17/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.3, \"xyz\": 0.5, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.2}",
+      15
+     ],
+     "25night": [
+      "{\"B\": 0.3, \"xyz\": 0.2, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.5}",
+      15
+     ],
+     "25nov": [
+      "{\"B\": 0.4, \"xyz\": 0.2, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.4}",
+      15
+     ]
+    }
+   },
+   "D_all_phones": {
+    "top1": "56/85",
+    "top1_acc": 0.659,
+    "top3": "77/85",
+    "macro_recall": 0.667,
+    "macro_precision": 0.688,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "16/27",
+     "25night": "20/32",
+     "25nov": "20/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 0.2, \"tilt\": 0.1, \"wifi\": 0.1, \"baro\": 0.6}",
+      25
+     ],
+     "25night": [
+      "{\"B\": 0.1, \"xyz\": 0.4, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.5}",
+      25
+     ],
+     "25nov": [
+      "{\"B\": 0.1, \"xyz\": 0.6, \"tilt\": 0.0, \"wifi\": 0.2, \"baro\": 0.1}",
+      25
+     ]
+    }
+   },
+   "B_vs_A": {
+    "wins_total": 8,
+    "losses_total": 9,
+    "by_place": {
+     "4F disabled_toilet_4F": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F entrance_exit": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F escalator_down_4F": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lift_stairs_4F": {
+      "wins": 1,
+      "losses": 0
+     },
+     "4F lt1a": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt1b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F y4502": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F disabled_toilet": {
+      "wins": 0,
+      "losses": 3
+     },
+     "5F sr9": {
+      "wins": 2,
+      "losses": 0
+     },
+     "5F y5202": {
+      "wins": 1,
+      "losses": 2
+     },
+     "5F y5302": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F y5401": {
+      "wins": 1,
+      "losses": 0
+     }
+    }
+   }
+  },
+  "xyz only": {
+   "A_ip18_only": {
+    "top1": "56/85",
+    "top1_acc": 0.659,
+    "top3": "66/85",
+    "macro_recall": 0.66,
+    "macro_precision": 0.65,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "17/27",
+     "25night": "22/32",
+     "25nov": "17/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      1
+     ],
+     "25night": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      9
+     ],
+     "25nov": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      5
+     ]
+    }
+   },
+   "B_ip18_plus_ip16": {
+    "top1": "53/85",
+    "top1_acc": 0.624,
+    "top3": "76/85",
+    "macro_recall": 0.625,
+    "macro_precision": 0.604,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "17/27",
+     "25night": "20/32",
+     "25nov": "16/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ],
+     "25night": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      15
+     ],
+     "25nov": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ]
+    }
+   },
+   "C_ip16_only": {
+    "top1": "42/85",
+    "top1_acc": 0.494,
+    "top3": "71/85",
+    "macro_recall": 0.506,
+    "macro_precision": 0.493,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "13/27",
+     "25night": "14/32",
+     "25nov": "15/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ],
+     "25night": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ],
+     "25nov": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ]
+    }
+   },
+   "D_all_phones": {
+    "top1": "53/85",
+    "top1_acc": 0.624,
+    "top3": "72/85",
+    "macro_recall": 0.625,
+    "macro_precision": 0.666,
+    "n_classes": 26,
+    "per_session_top1": {
+     "24s1": "15/27",
+     "25night": "20/32",
+     "25nov": "18/26"
+    },
+    "weights_k": {
+     "24s1": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ],
+     "25night": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      25
+     ],
+     "25nov": [
+      "{\"B\": 0.0, \"xyz\": 1.0, \"tilt\": 0.0, \"wifi\": 0.0, \"baro\": 0.0}",
+      9
+     ]
+    }
+   },
+   "B_vs_A": {
+    "wins_total": 3,
+    "losses_total": 6,
+    "by_place": {
+     "4F exit_10_4F": {
+      "wins": 1,
+      "losses": 1
+     },
+     "4F lt1b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "4F lt2b": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F disabled_toilet": {
+      "wins": 0,
+      "losses": 1
+     },
+     "5F lift_stairs": {
+      "wins": 1,
+      "losses": 1
+     },
+     "5F sr9": {
+      "wins": 1,
+      "losses": 0
+     },
+     "5F y5202": {
+      "wins": 0,
+      "losses": 1
+     }
+    }
+   }
+  }
+ },
+ "control_out_fused_sample_predictions_ip18": {
+  "top1": "57/85",
+  "top3": "75/85"
+ }
+}
