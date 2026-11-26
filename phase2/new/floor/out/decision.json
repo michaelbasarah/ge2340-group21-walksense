@@ -1,0 +1,81 @@
+{
+ "what": "PREREGISTRATION.md decision rule",
+ "iphone": {
+  "R1": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 9,
+   "recommended": true
+  },
+  "c1": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 0,
+   "recommended": false
+  },
+  "c2": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 8,
+   "recommended": true
+  },
+  "a": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [
+     [
+      "21:48",
+      "y5302"
+     ],
+     [
+      "22:55",
+      "exit10_door"
+     ]
+    ],
+    "26tian iphone": [
+     [
+      "10:09",
+      "lift_stairs5"
+     ]
+    ],
+    "25spots iphone": [
+     [
+      "17:49",
+      "escalator_down_4F"
+     ]
+    ]
+   },
+   "gain_25night_ip18": 5,
+   "recommended": false
+  },
+  "d": {
+   "R0_correct_stops_lost_where_pressure_complete": {
+    "25night_tian iphone": [],
+    "26tian iphone": [],
+    "25spots iphone": []
+   },
+   "gain_25night_ip18": 10,
+   "recommended": true
+  }
+ },
+ "no_pressure": {
+  "a": {
+   "held_out_25night_a56": "17 vs kept floor 19 of 32",
+   "tuning_a55_a56_s24_sum": "115 vs kept floor 83 of 159",
+   "recommended": false
+  },
+  "d": {
+   "held_out_25night_a56": "19 vs kept floor 19 of 32",
+   "tuning_a55_a56_s24_sum": "137 vs kept floor 83 of 159",
+   "recommended": false
+  }
+ }
+}
