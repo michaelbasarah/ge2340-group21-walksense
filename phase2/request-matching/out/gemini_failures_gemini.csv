@@ -1,0 +1,5 @@
+method,id,split,set,category,query,expected,predicted,raw
+gemini,q030,dev,hard,vague,where do I go for my class,tag:lecture,none,NONE
+gemini,q031,test,hard,vague,I'm late for my lecture,tag:lecture,none,NONE
+gemini,q039,test,hard,vague,which way out to the MTR,tag:exit,none,NONE
+gemini,q124,dev,hard,indirect,where do I find the Y5 rooms,y5302|y5202|y5401|y5302_back,none,NONE

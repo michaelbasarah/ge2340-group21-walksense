@@ -1,0 +1,103 @@
+{
+ "r0_upload": {
+  "24s1": {
+   "reproduced": "27/27",
+   "eval_json": "27/27",
+   "match": true
+  },
+  "24s2": {
+   "reproduced": "26/26",
+   "eval_json": "26/26",
+   "match": true
+  },
+  "25nov": {
+   "reproduced": "26/26",
+   "eval_json": "26/26",
+   "match": true
+  },
+  "25night": {
+   "reproduced": "20/32",
+   "eval_json": "20/32",
+   "match": true
+  },
+  "25night_tian": {
+   "reproduced": "23/23",
+   "eval_json": "23/23",
+   "match": true
+  },
+  "26tian": {
+   "reproduced": "25/25",
+   "eval_json": "25/25",
+   "match": true
+  }
+ },
+ "r1_day3": {
+  "iphone_test_23nov": {
+   "reproduced": "42/42",
+   "results_json": "42/42",
+   "threshold_hpa": 0.296,
+   "match": true
+  },
+  "iphone_test_24s1": {
+   "reproduced": "23/27",
+   "results_json": "23/27",
+   "threshold_hpa": 0.307,
+   "match": true
+  },
+  "iphone_test_24s2": {
+   "reproduced": "26/26",
+   "results_json": "26/26",
+   "threshold_hpa": 0.307,
+   "match": true
+  },
+  "iphone_test_25night": {
+   "reproduced": "29/32",
+   "results_json": "29/32",
+   "threshold_hpa": 0.292,
+   "match": true
+  },
+  "iphone_test_25night_tian": {
+   "reproduced": "23/23",
+   "results_json": "23/23",
+   "threshold_hpa": 0.307,
+   "match": true
+  },
+  "iphone_test_25nov": {
+   "reproduced": "26/26",
+   "results_json": "26/26",
+   "threshold_hpa": 0.296,
+   "match": true
+  },
+  "iphone_test_25spots:spots": {
+   "reproduced": "12/18",
+   "results_json": "12/18",
+   "threshold_hpa": 0.307,
+   "match": true
+  },
+  "iphone_test_26tian": {
+   "reproduced": "25/25",
+   "results_json": "25/25",
+   "threshold_hpa": 0.296,
+   "match": true
+  },
+  "s24_test_24s1": {
+   "reproduced": "13/27",
+   "results_json": "13/27",
+   "threshold_hpa": 0.267,
+   "match": true
+  },
+  "s24_test_24s2": {
+   "reproduced": "17/26",
+   "results_json": "17/26",
+   "threshold_hpa": 0.125,
+   "match": true
+  },
+  "s24_test_25spots:spots": {
+   "reproduced": "9/18",
+   "results_json": "9/18",
+   "threshold_hpa": 0.149,
+   "match": true
+  }
+ },
+ "all_match": true
+}

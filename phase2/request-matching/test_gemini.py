@@ -173,6 +173,38 @@ class TestMatchBackend(Base):
         self.assertEqual(M.GEMINI_CALLS, 1)                     # stopped after the first error
         self.assertIn('rejected', stop)
 
+    def test_pacing_and_resume_after_429(self):
+        qs = E.load_queries()[:6]
+        self.api('NONE', 'NONE', http_error(429, 'rate limit'))
+        with mock.patch.object(E.time, 'sleep') as sl:
+            rows, stop = E.run_gemini('gemini', qs, self.places, True, 150, sleep_s=4.5)
+        self.assertEqual(M.GEMINI_CALLS, 3)                      # stopped at the 429, no retry
+        self.assertIn('429', stop)
+        self.assertEqual(sum(1 for r in rows if r.get('missing')), 4)
+        self.assertEqual(sl.call_count, 2)                       # gap before call 2 and 3 only (not before the first)
+        for c in sl.call_args_list:
+            self.assertGreater(c[0][0], 4.0)
+            self.assertLessEqual(c[0][0], 4.5)
+        M.GEMINI_CALLS = 0                                       # rerun: the two good answers come from the cache
+        self.api('NONE', 'NONE', 'NONE', 'NONE')
+        with mock.patch.object(E.time, 'sleep') as sl:
+            rows, stop = E.run_gemini('gemini', qs, self.places, True, 150, sleep_s=4.5)
+        self.assertEqual(M.GEMINI_CALLS, 4)                      # only the 4 missing queries are called
+        self.assertIsNone(stop)
+        self.assertFalse(any(r.get('missing') for r in rows))
+        self.assertEqual(sl.call_count, 3)                       # cached rows are never delayed
+        M.GEMINI_CALLS = 0
+        with mock.patch.object(E.time, 'sleep') as sl:           # everything cached: no call, no sleep
+            E.run_gemini('gemini', qs, self.places, True, 150, sleep_s=4.5)
+        self.assertEqual((M.GEMINI_CALLS, sl.call_count), (0, 0))
+
+    def test_default_no_sleep(self):
+        qs = E.load_queries()[:3]
+        self.api('NONE', 'NONE', 'NONE')
+        with mock.patch.object(E.time, 'sleep') as sl:
+            E.run_gemini('gemini', qs, self.places, True, 150)
+        self.assertEqual(sl.call_count, 0)
+
     def test_eval_no_key_exits_cleanly(self):
         with mock.patch.dict(os.environ, {'GEMINI_API_KEY': ''}), mock.patch('builtins.print') as p:
             E.gemini_eval('hybrid_gemini', E.load_queries(), self.places, {d['place_id']: d for d in self.places}, True, 150)

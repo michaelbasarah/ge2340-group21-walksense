@@ -1,0 +1,444 @@
+{
+ "what": "PREREGISTRATION.md (b): |p1 - p0| (edge medians) of every recording with pressure; > 0.40 hPa would mean a floor change inside the recording",
+ "n_recordings": {
+  "iphone": 301,
+  "s24": 122
+ },
+ "max_abs_dp_hpa": {
+  "iphone": 0.19,
+  "s24": 6.211
+ },
+ "over_0.40": {
+  "iphone": [],
+  "s24": [
+   {
+    "session": "24s1",
+    "time": "15:59",
+    "type": "stop",
+    "place": "canteen",
+    "dp_hpa": 0.768
+   },
+   {
+    "session": "24s1",
+    "time": "16:13",
+    "type": "stop",
+    "place": "y5302",
+    "dp_hpa": -0.585
+   },
+   {
+    "session": "24s1",
+    "time": "16:22",
+    "type": "walk",
+    "place": "y5302->sr9",
+    "dp_hpa": 1.246
+   },
+   {
+    "session": "24s1",
+    "time": "16:23",
+    "type": "stop",
+    "place": "sr9",
+    "dp_hpa": -1.025
+   },
+   {
+    "session": "24s1",
+    "time": "16:25",
+    "type": "walk",
+    "place": "sr9->y5202",
+    "dp_hpa": -0.463
+   },
+   {
+    "session": "24s1",
+    "time": "16:27",
+    "type": "stop",
+    "place": "y5202",
+    "dp_hpa": -3.0
+   },
+   {
+    "session": "24s1",
+    "time": "16:29",
+    "type": "walk",
+    "place": "y5202->female_toilet",
+    "dp_hpa": -0.495
+   },
+   {
+    "session": "24s1",
+    "time": "16:36",
+    "type": "stop",
+    "place": "exit10_door",
+    "dp_hpa": -0.93
+   },
+   {
+    "session": "24s1",
+    "time": "16:41",
+    "type": "stop",
+    "place": "canteen_revisit",
+    "dp_hpa": -0.59
+   },
+   {
+    "session": "24s1",
+    "time": "16:45",
+    "type": "stop",
+    "place": "esca_down",
+    "dp_hpa": 1.749
+   },
+   {
+    "session": "24s1",
+    "time": "16:49",
+    "type": "stop",
+    "place": "esca_up",
+    "dp_hpa": 0.689
+   },
+   {
+    "session": "24s1",
+    "time": "18:12",
+    "type": "stop",
+    "place": "male_disabled_toilet",
+    "dp_hpa": -4.633
+   },
+   {
+    "session": "24s1",
+    "time": "18:16",
+    "type": "stop",
+    "place": "lift_stairs5",
+    "dp_hpa": 1.248
+   },
+   {
+    "session": "24s1",
+    "time": "18:19",
+    "type": "stop",
+    "place": "y5401",
+    "dp_hpa": -1.585
+   },
+   {
+    "session": "24s1",
+    "time": "18:26",
+    "type": "stop",
+    "place": "lift_stairs5",
+    "dp_hpa": -0.487
+   },
+   {
+    "session": "24s1",
+    "time": "18:29",
+    "type": "stop",
+    "place": "disabled_toilet",
+    "dp_hpa": -0.855
+   },
+   {
+    "session": "24s1",
+    "time": "18:33",
+    "type": "stop",
+    "place": "exit5_door",
+    "dp_hpa": -1.375
+   },
+   {
+    "session": "24s1",
+    "time": "18:37",
+    "type": "stop",
+    "place": "lt2a",
+    "dp_hpa": -0.726
+   },
+   {
+    "session": "24s1",
+    "time": "18:43",
+    "type": "stop",
+    "place": "esca_down",
+    "dp_hpa": -1.202
+   },
+   {
+    "session": "24s1",
+    "time": "18:47",
+    "type": "stop",
+    "place": "y4502",
+    "dp_hpa": -0.641
+   },
+   {
+    "session": "24s1",
+    "time": "18:49",
+    "type": "stop",
+    "place": "esca_up",
+    "dp_hpa": -1.32
+   },
+   {
+    "session": "24s1",
+    "time": "18:52",
+    "type": "stop",
+    "place": "lt1b",
+    "dp_hpa": -0.726
+   },
+   {
+    "session": "24s1",
+    "time": "18:55",
+    "type": "stop",
+    "place": "lt1a",
+    "dp_hpa": -1.051
+   },
+   {
+    "session": "24s1",
+    "time": "19:07",
+    "type": "stop",
+    "place": "gate",
+    "dp_hpa": -1.577
+   },
+   {
+    "session": "24s2",
+    "time": "21:55",
+    "type": "stop",
+    "place": "canteen",
+    "dp_hpa": -0.738
+   },
+   {
+    "session": "24s2",
+    "time": "21:57",
+    "type": "stop",
+    "place": "exit5_door",
+    "dp_hpa": -1.223
+   },
+   {
+    "session": "24s2",
+    "time": "22:01",
+    "type": "stop",
+    "place": "male_toilet",
+    "dp_hpa": -0.621
+   },
+   {
+    "session": "24s2",
+    "time": "22:02",
+    "type": "walk",
+    "place": "male_toilet->y5302",
+    "dp_hpa": -0.536
+   },
+   {
+    "session": "24s2",
+    "time": "22:04",
+    "type": "stop",
+    "place": "y5302",
+    "dp_hpa": -4.482
+   },
+   {
+    "session": "24s2",
+    "time": "22:07",
+    "type": "stop",
+    "place": "sr9",
+    "dp_hpa": -1.214
+   },
+   {
+    "session": "24s2",
+    "time": "22:10",
+    "type": "stop",
+    "place": "y5202",
+    "dp_hpa": -1.577
+   },
+   {
+    "session": "24s2",
+    "time": "22:14",
+    "type": "stop",
+    "place": "female_toilet",
+    "dp_hpa": -1.181
+   },
+   {
+    "session": "24s2",
+    "time": "22:16",
+    "type": "stop",
+    "place": "exit10_door",
+    "dp_hpa": -2.61
+   },
+   {
+    "session": "24s2",
+    "time": "22:18",
+    "type": "stop",
+    "place": "esca_up",
+    "dp_hpa": -1.613
+   },
+   {
+    "session": "24s2",
+    "time": "22:25",
+    "type": "stop",
+    "place": "esca_down",
+    "dp_hpa": -1.378
+   },
+   {
+    "session": "24s2",
+    "time": "22:29",
+    "type": "stop",
+    "place": "male_disabled_toilet",
+    "dp_hpa": -0.609
+   },
+   {
+    "session": "24s2",
+    "time": "22:33",
+    "type": "stop",
+    "place": "lift_stairs5",
+    "dp_hpa": -2.059
+   },
+   {
+    "session": "24s2",
+    "time": "22:39",
+    "type": "stop",
+    "place": "y5401",
+    "dp_hpa": -0.934
+   },
+   {
+    "session": "24s2",
+    "time": "22:44",
+    "type": "stop",
+    "place": "y5302_point2",
+    "dp_hpa": -0.765
+   },
+   {
+    "session": "24s2",
+    "time": "22:50",
+    "type": "stop",
+    "place": "disabled_toilet",
+    "dp_hpa": -1.988
+   },
+   {
+    "session": "24s2",
+    "time": "22:53",
+    "type": "stop",
+    "place": "exit5_door",
+    "dp_hpa": -0.682
+   },
+   {
+    "session": "24s2",
+    "time": "22:56",
+    "type": "stop",
+    "place": "lt2a",
+    "dp_hpa": -1.065
+   },
+   {
+    "session": "24s2",
+    "time": "22:59",
+    "type": "stop",
+    "place": "lt2b",
+    "dp_hpa": -2.747
+   },
+   {
+    "session": "24s2",
+    "time": "23:02",
+    "type": "stop",
+    "place": "esca_down",
+    "dp_hpa": -1.804
+   },
+   {
+    "session": "24s2",
+    "time": "23:09",
+    "type": "stop",
+    "place": "esca_up",
+    "dp_hpa": -1.156
+   },
+   {
+    "session": "24s2",
+    "time": "23:11",
+    "type": "stop",
+    "place": "lt1b",
+    "dp_hpa": -1.096
+   },
+   {
+    "session": "24s2",
+    "time": "23:15",
+    "type": "stop",
+    "place": "lt1a",
+    "dp_hpa": -1.85
+   },
+   {
+    "session": "24s2",
+    "time": "23:17",
+    "type": "stop",
+    "place": "exit10_door",
+    "dp_hpa": -2.058
+   },
+   {
+    "session": "24s2",
+    "time": "23:21",
+    "type": "stop",
+    "place": "gate",
+    "dp_hpa": -3.012
+   },
+   {
+    "session": "25spots",
+    "time": "17:40",
+    "type": "stop",
+    "place": "escalator_down",
+    "dp_hpa": 0.549
+   },
+   {
+    "session": "25spots",
+    "time": "17:41",
+    "type": "stop",
+    "place": "escalator_up",
+    "dp_hpa": -6.211
+   },
+   {
+    "session": "25spots",
+    "time": "17:45",
+    "type": "stop",
+    "place": "female_toilet",
+    "dp_hpa": -1.457
+   },
+   {
+    "session": "25spots",
+    "time": "17:47",
+    "type": "stop",
+    "place": "sr9",
+    "dp_hpa": -5.066
+   },
+   {
+    "session": "25spots",
+    "time": "17:49",
+    "type": "stop",
+    "place": "disabled_toilet",
+    "dp_hpa": -0.505
+   },
+   {
+    "session": "25spots",
+    "time": "17:51",
+    "type": "stop",
+    "place": "lift_stairs",
+    "dp_hpa": -4.056
+   },
+   {
+    "session": "25spots",
+    "time": "17:54",
+    "type": "stop",
+    "place": "escalator_down_4F",
+    "dp_hpa": -4.002
+   },
+   {
+    "session": "25spots",
+    "time": "17:59",
+    "type": "stop",
+    "place": "exit_10_4F",
+    "dp_hpa": -1.883
+   },
+   {
+    "session": "25spots",
+    "time": "18:02",
+    "type": "stop",
+    "place": "exit_5_4F",
+    "dp_hpa": 0.459
+   },
+   {
+    "session": "25spots",
+    "time": "18:04",
+    "type": "stop",
+    "place": "lift_stairs_4F",
+    "dp_hpa": -1.526
+   },
+   {
+    "session": "25spots",
+    "time": "20:22",
+    "type": "stop",
+    "place": "male_toilet",
+    "dp_hpa": -2.337
+   },
+   {
+    "session": "25spots",
+    "time": "20:23",
+    "type": "stop",
+    "place": "escalator_down",
+    "dp_hpa": -3.044
+   }
+  ]
+ },
+ "iphone_testable": false
+}
