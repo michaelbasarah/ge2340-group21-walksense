@@ -150,4 +150,4 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 6. **Never measured on site:** the 5F escalator landings, Y5-401's door, the 4F corridors, which LT is which [70].
 7. **A scored live walk** with the truth noted [26, 86]; a take that spans a floor change [74, 76].
 8. **Report wording** about dropped user tests and no RAG is the team's to write [83, 84].
-9. **Route planner** (entry 78) still being built.
+9. **Route planner** (entry 78, branch `feat/route-planner`, built, not yet landed): From / To or a tap on the plan, cheapest path with the metres of each leg, lift / stairs / escalator as separate connectors, Step-free mode (lifts and disabled toilets only), Male / Female / Any toilet filter, `/api/route` and `/api/nearest`. Still open: time the lift (42 s = 30 s wait + 12 s ride is a guess) and the escalators (20 s guess); confirm one lift next to the stairs on both floors, that 4F has no ordinary toilet, and step-free access along the routes [78].

@@ -1,0 +1,2127 @@
+{
+ "about": "route planner samples (routing/route.py plan / nearest_toilet), written by `python route.py samples`",
+ "speed_mps": 1.3,
+ "connector_costs_s": {
+  "lift_wait_guess": 30.0,
+  "lift_ride_per_floor_guess": 12.0,
+  "lift_total_one_floor": 42.0,
+  "stairs_graph_json": 30.0,
+  "escalator_graph_json": 20.0
+ },
+ "routes": [
+  {
+   "from": "y5302",
+   "to": "female_toilet",
+   "standard": {
+    "path": [
+     "y5302",
+     "sr9",
+     "y5202",
+     "female_toilet"
+    ],
+    "metres": 35.2,
+    "seconds": 27.1,
+    "legs": [
+     {
+      "from": "y5302",
+      "to": "sr9",
+      "kind": "walk",
+      "metres": 13.9,
+      "seconds": 10.69,
+      "length_status": "measured"
+     },
+     {
+      "from": "sr9",
+      "to": "y5202",
+      "kind": "walk",
+      "metres": 10.6,
+      "seconds": 8.15,
+      "length_status": "measured"
+     },
+     {
+      "from": "y5202",
+      "to": "female_toilet",
+      "kind": "walk",
+      "metres": 10.7,
+      "seconds": 8.23,
+      "length_status": "measured"
+     }
+    ],
+    "connectors": [],
+    "instructions": [
+     "Start at Room Y5-302 (front door) (floor 5).",
+     "Walk to Study rooms (Y5-511 to Y5-514) (about 14 m, 11 s).",
+     "Walk to Room Y5-202 (about 11 m, 8 s).",
+     "Turn left at Room Y5-202, then walk to Female toilet (about 11 m, 8 s).",
+     "You have arrived at Female toilet."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "y5302",
+     "sr9",
+     "y5202",
+     "female_toilet"
+    ],
+    "metres": 35.2,
+    "seconds": 27.1,
+    "legs": [
+     {
+      "from": "y5302",
+      "to": "sr9",
+      "kind": "walk",
+      "metres": 13.9,
+      "seconds": 10.69,
+      "length_status": "measured"
+     },
+     {
+      "from": "sr9",
+      "to": "y5202",
+      "kind": "walk",
+      "metres": 10.6,
+      "seconds": 8.15,
+      "length_status": "measured"
+     },
+     {
+      "from": "y5202",
+      "to": "female_toilet",
+      "kind": "walk",
+      "metres": 10.7,
+      "seconds": 8.23,
+      "length_status": "measured"
+     }
+    ],
+    "connectors": [],
+    "instructions": [
+     "Start at Room Y5-302 (front door) (floor 5).",
+     "Walk to Study rooms (Y5-511 to Y5-514) (about 14 m, 11 s).",
+     "Walk to Room Y5-202 (about 11 m, 8 s).",
+     "Turn left at Room Y5-202, then walk to Female toilet (about 11 m, 8 s).",
+     "You have arrived at Female toilet."
+    ]
+   }
+  },
+  {
+   "from": "canteen",
+   "to": "lt1a",
+   "standard": {
+    "path": [
+     "canteen",
+     "escalator_down",
+     "escalator_down_4F",
+     "escalator_up_4F",
+     "lt1b",
+     "lt1a"
+    ],
+    "metres": 36.6,
+    "seconds": 48.2,
+    "legs": [
+     {
+      "from": "canteen",
+      "to": "escalator_down",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "escalator_down",
+      "to": "escalator_down_4F",
+      "kind": "escalator",
+      "metres": 0.0,
+      "seconds": 20.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "escalator_down_4F",
+      "to": "escalator_up_4F",
+      "kind": "walk",
+      "metres": 8.6,
+      "seconds": 6.62,
+      "length_status": "steps"
+     },
+     {
+      "from": "escalator_up_4F",
+      "to": "lt1b",
+      "kind": "walk",
+      "metres": 5.9,
+      "seconds": 4.54,
+      "length_status": "steps"
+     },
+     {
+      "from": "lt1b",
+      "to": "lt1a",
+      "kind": "walk",
+      "metres": 14.0,
+      "seconds": 10.77,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "escalator"
+    ],
+    "instructions": [
+     "Start at Canteen entrance (floor 5).",
+     "Walk to Down escalator (5F) (about 8 m, 6 s).",
+     "Take the down escalator to 4F (about 20 s).",
+     "Walk to Up escalator (4F) (about 9 m, 7 s).",
+     "Walk to LT1b (about 6 m, 5 s).",
+     "Turn left at LT1b, then walk to LT1a (about 14 m, 11 s).",
+     "You have arrived at LT1a."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "canteen",
+     "exit_5",
+     "disabled_toilet",
+     "lift_stairs",
+     "lift_stairs_4F",
+     "disabled_toilet_4F",
+     "exit_5_4F",
+     "entrance_exit",
+     "exit_10_4F",
+     "lt1a"
+    ],
+    "metres": 65.0,
+    "seconds": 92.0,
+    "legs": [
+     {
+      "from": "canteen",
+      "to": "exit_5",
+      "kind": "walk",
+      "metres": 11.1,
+      "seconds": 8.54,
+      "length_status": "measured"
+     },
+     {
+      "from": "exit_5",
+      "to": "disabled_toilet",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet",
+      "to": "lift_stairs",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "lift_stairs",
+      "to": "lift_stairs_4F",
+      "kind": "lift",
+      "metres": 0.0,
+      "seconds": 42.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "lift_stairs_4F",
+      "to": "disabled_toilet_4F",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet_4F",
+      "to": "exit_5_4F",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_5_4F",
+      "to": "entrance_exit",
+      "kind": "walk",
+      "metres": 14.6,
+      "seconds": 11.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "entrance_exit",
+      "to": "exit_10_4F",
+      "kind": "walk",
+      "metres": 10.8,
+      "seconds": 8.31,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_10_4F",
+      "to": "lt1a",
+      "kind": "walk",
+      "metres": 5.9,
+      "seconds": 4.54,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "lift"
+    ],
+    "instructions": [
+     "Start at Canteen entrance (floor 5).",
+     "Walk to Exit 5 (emergency exit) (about 11 m, 9 s).",
+     "Turn right at Exit 5 (emergency exit), then walk to Male disabled toilet (5F) (about 3 m, 2 s).",
+     "Turn left at Male disabled toilet (5F), then walk to Lift and stairs (5F) (about 8 m, 6 s).",
+     "Take the lift down to 4F (about 42 s: 30 s waiting + 12 s ride, both guesses).",
+     "Walk to Mixed disabled toilet (4F) (about 8 m, 6 s).",
+     "Turn right at Mixed disabled toilet (4F), then walk to Exit 5 (4F) (about 3 m, 2 s).",
+     "Turn left at Exit 5 (4F), then walk to Entrance gate (4F) (about 15 m, 11 s).",
+     "Walk to Exit 10 (4F) (about 11 m, 8 s).",
+     "Walk to LT1a (about 6 m, 5 s).",
+     "You have arrived at LT1a."
+    ]
+   }
+  },
+  {
+   "from": "y5302",
+   "to": "lt2b",
+   "standard": {
+    "path": [
+     "y5302",
+     "male_toilet",
+     "exit_5",
+     "escalator_down",
+     "escalator_down_4F",
+     "lt2b"
+    ],
+    "metres": 28.2,
+    "seconds": 41.7,
+    "legs": [
+     {
+      "from": "y5302",
+      "to": "male_toilet",
+      "kind": "walk",
+      "metres": 11.6,
+      "seconds": 8.92,
+      "length_status": "measured"
+     },
+     {
+      "from": "male_toilet",
+      "to": "exit_5",
+      "kind": "walk",
+      "metres": 3.6,
+      "seconds": 2.77,
+      "length_status": "measured"
+     },
+     {
+      "from": "exit_5",
+      "to": "escalator_down",
+      "kind": "walk",
+      "metres": 7.6,
+      "seconds": 5.85,
+      "length_status": "steps"
+     },
+     {
+      "from": "escalator_down",
+      "to": "escalator_down_4F",
+      "kind": "escalator",
+      "metres": 0.0,
+      "seconds": 20.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "escalator_down_4F",
+      "to": "lt2b",
+      "kind": "walk",
+      "metres": 5.4,
+      "seconds": 4.15,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "escalator"
+    ],
+    "instructions": [
+     "Start at Room Y5-302 (front door) (floor 5).",
+     "Walk to Male toilet (about 12 m, 9 s).",
+     "Walk to Exit 5 (emergency exit) (about 4 m, 3 s).",
+     "Turn right at Exit 5 (emergency exit), then walk to Down escalator (5F) (about 8 m, 6 s).",
+     "Take the down escalator to 4F (about 20 s).",
+     "Walk to LT2b (about 5 m, 4 s).",
+     "You have arrived at LT2b."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "y5302",
+     "male_toilet",
+     "exit_5",
+     "disabled_toilet",
+     "lift_stairs",
+     "lift_stairs_4F",
+     "disabled_toilet_4F",
+     "exit_5_4F",
+     "lt2a",
+     "lt2b"
+    ],
+    "metres": 57.8,
+    "seconds": 86.5,
+    "legs": [
+     {
+      "from": "y5302",
+      "to": "male_toilet",
+      "kind": "walk",
+      "metres": 11.6,
+      "seconds": 8.92,
+      "length_status": "measured"
+     },
+     {
+      "from": "male_toilet",
+      "to": "exit_5",
+      "kind": "walk",
+      "metres": 3.6,
+      "seconds": 2.77,
+      "length_status": "measured"
+     },
+     {
+      "from": "exit_5",
+      "to": "disabled_toilet",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet",
+      "to": "lift_stairs",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "lift_stairs",
+      "to": "lift_stairs_4F",
+      "kind": "lift",
+      "metres": 0.0,
+      "seconds": 42.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "lift_stairs_4F",
+      "to": "disabled_toilet_4F",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet_4F",
+      "to": "exit_5_4F",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_5_4F",
+      "to": "lt2a",
+      "kind": "walk",
+      "metres": 4.3,
+      "seconds": 3.31,
+      "length_status": "steps"
+     },
+     {
+      "from": "lt2a",
+      "to": "lt2b",
+      "kind": "walk",
+      "metres": 15.7,
+      "seconds": 12.08,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "lift"
+    ],
+    "instructions": [
+     "Start at Room Y5-302 (front door) (floor 5).",
+     "Walk to Male toilet (about 12 m, 9 s).",
+     "Walk to Exit 5 (emergency exit) (about 4 m, 3 s).",
+     "Walk to Male disabled toilet (5F) (about 3 m, 2 s).",
+     "Turn left at Male disabled toilet (5F), then walk to Lift and stairs (5F) (about 8 m, 6 s).",
+     "Take the lift down to 4F (about 42 s: 30 s waiting + 12 s ride, both guesses).",
+     "Walk to Mixed disabled toilet (4F) (about 8 m, 6 s).",
+     "Turn right at Mixed disabled toilet (4F), then walk to Exit 5 (4F) (about 3 m, 2 s).",
+     "Walk to LT2a (about 4 m, 3 s).",
+     "Walk to LT2b (about 16 m, 12 s).",
+     "You have arrived at LT2b."
+    ]
+   }
+  },
+  {
+   "from": "lt1a",
+   "to": "canteen",
+   "standard": {
+    "path": [
+     "lt1a",
+     "lt1b",
+     "escalator_up_4F",
+     "escalator_up",
+     "canteen"
+    ],
+    "metres": 28.0,
+    "seconds": 41.5,
+    "legs": [
+     {
+      "from": "lt1a",
+      "to": "lt1b",
+      "kind": "walk",
+      "metres": 14.0,
+      "seconds": 10.77,
+      "length_status": "steps"
+     },
+     {
+      "from": "lt1b",
+      "to": "escalator_up_4F",
+      "kind": "walk",
+      "metres": 5.9,
+      "seconds": 4.54,
+      "length_status": "steps"
+     },
+     {
+      "from": "escalator_up_4F",
+      "to": "escalator_up",
+      "kind": "escalator",
+      "metres": 0.0,
+      "seconds": 20.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "escalator_up",
+      "to": "canteen",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "escalator"
+    ],
+    "instructions": [
+     "Start at LT1a (floor 4).",
+     "Walk to LT1b (about 14 m, 11 s).",
+     "Turn right at LT1b, then walk to Up escalator (4F) (about 6 m, 5 s).",
+     "Take the up escalator to 5F (about 20 s).",
+     "Walk to Canteen entrance (about 8 m, 6 s).",
+     "You have arrived at Canteen entrance."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "lt1a",
+     "exit_10_4F",
+     "entrance_exit",
+     "exit_5_4F",
+     "disabled_toilet_4F",
+     "lift_stairs_4F",
+     "lift_stairs",
+     "disabled_toilet",
+     "exit_5",
+     "canteen"
+    ],
+    "metres": 65.0,
+    "seconds": 92.0,
+    "legs": [
+     {
+      "from": "lt1a",
+      "to": "exit_10_4F",
+      "kind": "walk",
+      "metres": 5.9,
+      "seconds": 4.54,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_10_4F",
+      "to": "entrance_exit",
+      "kind": "walk",
+      "metres": 10.8,
+      "seconds": 8.31,
+      "length_status": "steps"
+     },
+     {
+      "from": "entrance_exit",
+      "to": "exit_5_4F",
+      "kind": "walk",
+      "metres": 14.6,
+      "seconds": 11.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_5_4F",
+      "to": "disabled_toilet_4F",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet_4F",
+      "to": "lift_stairs_4F",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "lift_stairs_4F",
+      "to": "lift_stairs",
+      "kind": "lift",
+      "metres": 0.0,
+      "seconds": 42.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "lift_stairs",
+      "to": "disabled_toilet",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet",
+      "to": "exit_5",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_5",
+      "to": "canteen",
+      "kind": "walk",
+      "metres": 11.1,
+      "seconds": 8.54,
+      "length_status": "measured"
+     }
+    ],
+    "connectors": [
+     "lift"
+    ],
+    "instructions": [
+     "Start at LT1a (floor 4).",
+     "Walk to Exit 10 (4F) (about 6 m, 5 s).",
+     "Walk to Entrance gate (4F) (about 11 m, 8 s).",
+     "Walk to Exit 5 (4F) (about 15 m, 11 s).",
+     "Turn right at Exit 5 (4F), then walk to Mixed disabled toilet (4F) (about 3 m, 2 s).",
+     "Turn left at Mixed disabled toilet (4F), then walk to Lift and stairs (4F) (about 8 m, 6 s).",
+     "Take the lift up to 5F (about 42 s: 30 s waiting + 12 s ride, both guesses).",
+     "Walk to Male disabled toilet (5F) (about 8 m, 6 s).",
+     "Turn right at Male disabled toilet (5F), then walk to Exit 5 (emergency exit) (about 3 m, 2 s).",
+     "Turn left at Exit 5 (emergency exit), then walk to Canteen entrance (about 11 m, 9 s).",
+     "You have arrived at Canteen entrance."
+    ]
+   }
+  },
+  {
+   "from": "lift_stairs",
+   "to": "lift_stairs_4F",
+   "standard": {
+    "path": [
+     "lift_stairs",
+     "lift_stairs_4F"
+    ],
+    "metres": 28.6,
+    "seconds": 30.0,
+    "legs": [
+     {
+      "from": "lift_stairs",
+      "to": "lift_stairs_4F",
+      "kind": "stairs",
+      "metres": 28.6,
+      "seconds": 30.0,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "stairs"
+    ],
+    "instructions": [
+     "Start at Lift and stairs (5F) (floor 5).",
+     "Take the stairs down to 4F (about 30 s); the lift is next to them.",
+     "You have arrived at Lift and stairs (4F)."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "lift_stairs",
+     "lift_stairs_4F"
+    ],
+    "metres": 0.0,
+    "seconds": 42.0,
+    "legs": [
+     {
+      "from": "lift_stairs",
+      "to": "lift_stairs_4F",
+      "kind": "lift",
+      "metres": 0.0,
+      "seconds": 42.0,
+      "length_status": "guess"
+     }
+    ],
+    "connectors": [
+     "lift"
+    ],
+    "instructions": [
+     "Start at Lift and stairs (5F) (floor 5).",
+     "Take the lift down to 4F (about 42 s: 30 s waiting + 12 s ride, both guesses).",
+     "You have arrived at Lift and stairs (4F)."
+    ]
+   }
+  },
+  {
+   "from": "lift_stairs_4F",
+   "to": "lift_stairs",
+   "standard": {
+    "path": [
+     "lift_stairs_4F",
+     "lift_stairs"
+    ],
+    "metres": 28.6,
+    "seconds": 30.0,
+    "legs": [
+     {
+      "from": "lift_stairs_4F",
+      "to": "lift_stairs",
+      "kind": "stairs",
+      "metres": 28.6,
+      "seconds": 30.0,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "stairs"
+    ],
+    "instructions": [
+     "Start at Lift and stairs (4F) (floor 4).",
+     "Take the stairs up to 5F (about 30 s); the lift is next to them.",
+     "You have arrived at Lift and stairs (5F)."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "lift_stairs_4F",
+     "lift_stairs"
+    ],
+    "metres": 0.0,
+    "seconds": 42.0,
+    "legs": [
+     {
+      "from": "lift_stairs_4F",
+      "to": "lift_stairs",
+      "kind": "lift",
+      "metres": 0.0,
+      "seconds": 42.0,
+      "length_status": "guess"
+     }
+    ],
+    "connectors": [
+     "lift"
+    ],
+    "instructions": [
+     "Start at Lift and stairs (4F) (floor 4).",
+     "Take the lift up to 5F (about 42 s: 30 s waiting + 12 s ride, both guesses).",
+     "You have arrived at Lift and stairs (5F)."
+    ]
+   }
+  },
+  {
+   "from": "escalator_up",
+   "to": "escalator_down_4F",
+   "standard": {
+    "path": [
+     "escalator_up",
+     "escalator_down",
+     "escalator_down_4F"
+    ],
+    "metres": 10.3,
+    "seconds": 27.9,
+    "legs": [
+     {
+      "from": "escalator_up",
+      "to": "escalator_down",
+      "kind": "walk",
+      "metres": 10.3,
+      "seconds": 7.92,
+      "length_status": "steps"
+     },
+     {
+      "from": "escalator_down",
+      "to": "escalator_down_4F",
+      "kind": "escalator",
+      "metres": 0.0,
+      "seconds": 20.0,
+      "length_status": "guess"
+     }
+    ],
+    "connectors": [
+     "escalator"
+    ],
+    "instructions": [
+     "Start at Up escalator (5F) (floor 5).",
+     "Walk to Down escalator (5F) (about 10 m, 8 s).",
+     "Take the down escalator to 4F (about 20 s).",
+     "You have arrived at Down escalator (4F)."
+    ]
+   },
+   "accessible": {
+    "path": [
+     "escalator_up",
+     "escalator_down",
+     "exit_5",
+     "disabled_toilet",
+     "lift_stairs",
+     "lift_stairs_4F",
+     "disabled_toilet_4F",
+     "exit_5_4F",
+     "lt2a",
+     "lt2b",
+     "escalator_down_4F"
+    ],
+    "metres": 65.9,
+    "seconds": 92.7,
+    "legs": [
+     {
+      "from": "escalator_up",
+      "to": "escalator_down",
+      "kind": "walk",
+      "metres": 10.3,
+      "seconds": 7.92,
+      "length_status": "steps"
+     },
+     {
+      "from": "escalator_down",
+      "to": "exit_5",
+      "kind": "walk",
+      "metres": 7.6,
+      "seconds": 5.85,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_5",
+      "to": "disabled_toilet",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet",
+      "to": "lift_stairs",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "lift_stairs",
+      "to": "lift_stairs_4F",
+      "kind": "lift",
+      "metres": 0.0,
+      "seconds": 42.0,
+      "length_status": "guess"
+     },
+     {
+      "from": "lift_stairs_4F",
+      "to": "disabled_toilet_4F",
+      "kind": "walk",
+      "metres": 8.1,
+      "seconds": 6.23,
+      "length_status": "steps"
+     },
+     {
+      "from": "disabled_toilet_4F",
+      "to": "exit_5_4F",
+      "kind": "walk",
+      "metres": 3.2,
+      "seconds": 2.46,
+      "length_status": "steps"
+     },
+     {
+      "from": "exit_5_4F",
+      "to": "lt2a",
+      "kind": "walk",
+      "metres": 4.3,
+      "seconds": 3.31,
+      "length_status": "steps"
+     },
+     {
+      "from": "lt2a",
+      "to": "lt2b",
+      "kind": "walk",
+      "metres": 15.7,
+      "seconds": 12.08,
+      "length_status": "steps"
+     },
+     {
+      "from": "lt2b",
+      "to": "escalator_down_4F",
+      "kind": "walk",
+      "metres": 5.4,
+      "seconds": 4.15,
+      "length_status": "steps"
+     }
+    ],
+    "connectors": [
+     "lift"
+    ],
+    "instructions": [
+     "Start at Up escalator (5F) (floor 5).",
+     "Walk to Down escalator (5F) (about 10 m, 8 s).",
+     "Walk to Exit 5 (emergency exit) (about 8 m, 6 s).",
+     "Turn right at Exit 5 (emergency exit), then walk to Male disabled toilet (5F) (about 3 m, 2 s).",
+     "Turn left at Male disabled toilet (5F), then walk to Lift and stairs (5F) (about 8 m, 6 s).",
+     "Take the lift down to 4F (about 42 s: 30 s waiting + 12 s ride, both guesses).",
+     "Walk to Mixed disabled toilet (4F) (about 8 m, 6 s).",
+     "Turn right at Mixed disabled toilet (4F), then walk to Exit 5 (4F) (about 3 m, 2 s).",
+     "Walk to LT2a (about 4 m, 3 s).",
+     "Walk to LT2b (about 16 m, 12 s).",
+     "Turn left at LT2b, then walk to Down escalator (4F) (about 5 m, 4 s).",
+     "You have arrived at Down escalator (4F)."
+    ]
+   }
+  }
+ ],
+ "toilets": [
+  {
+   "from": "canteen",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "disabled_toilet",
+   "metres": 14.3,
+   "seconds": 11.0,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 14.3,
+     "seconds": 11.0
+    },
+    {
+     "id": "male_toilet",
+     "metres": 14.7,
+     "seconds": 11.3
+    },
+    {
+     "id": "female_toilet",
+     "metres": 16.0,
+     "seconds": 12.3
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 36.7,
+     "seconds": 48.2
+    }
+   ],
+   "message": "Nearest toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 14.3,
+   "seconds": 11.0,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 14.3,
+     "seconds": 11.0
+    },
+    {
+     "id": "male_toilet",
+     "metres": 14.7,
+     "seconds": 11.3
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 36.7,
+     "seconds": 48.2
+    }
+   ],
+   "message": "Nearest male toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "female_toilet",
+   "metres": 16.0,
+   "seconds": 12.3,
+   "connectors": [],
+   "options": [
+    {
+     "id": "female_toilet",
+     "metres": 16.0,
+     "seconds": 12.3
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 36.7,
+     "seconds": 48.2
+    }
+   ],
+   "message": "Nearest female toilet: Female toilet, about 16 m walking, 12 s."
+  },
+  {
+   "from": "canteen",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet",
+   "metres": 14.3,
+   "seconds": 11.0,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 14.3,
+     "seconds": 11.0
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 30.5,
+     "seconds": 65.5
+    }
+   ],
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 14.3,
+   "seconds": 11.0,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 14.3,
+     "seconds": 11.0
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 30.5,
+     "seconds": 65.5
+    }
+   ],
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 14 m walking, 11 s."
+  },
+  {
+   "from": "canteen",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 30.5,
+   "seconds": 65.5,
+   "connectors": [
+    "lift"
+   ],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 30.5,
+     "seconds": 65.5
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 30 m walking, 66 s."
+  },
+  {
+   "from": "y5202",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "female_toilet",
+   "metres": 10.7,
+   "seconds": 8.2,
+   "connectors": [],
+   "options": [
+    {
+     "id": "female_toilet",
+     "metres": 10.7,
+     "seconds": 8.2
+    },
+    {
+     "id": "male_toilet",
+     "metres": 36.1,
+     "seconds": 27.8
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 41.0,
+     "seconds": 31.5
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 58.9,
+     "seconds": 65.3
+    }
+   ],
+   "message": "Nearest toilet: Female toilet, about 11 m walking, 8 s."
+  },
+  {
+   "from": "y5202",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "male_toilet",
+   "metres": 36.1,
+   "seconds": 27.8,
+   "connectors": [],
+   "options": [
+    {
+     "id": "male_toilet",
+     "metres": 36.1,
+     "seconds": 27.8
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 41.0,
+     "seconds": 31.5
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 58.9,
+     "seconds": 65.3
+    }
+   ],
+   "message": "Nearest male toilet: Male toilet, about 36 m walking, 28 s."
+  },
+  {
+   "from": "y5202",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "female_toilet",
+   "metres": 10.7,
+   "seconds": 8.2,
+   "connectors": [],
+   "options": [
+    {
+     "id": "female_toilet",
+     "metres": 10.7,
+     "seconds": 8.2
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 58.9,
+     "seconds": 65.3
+    }
+   ],
+   "message": "Nearest female toilet: Female toilet, about 11 m walking, 8 s."
+  },
+  {
+   "from": "y5202",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet",
+   "metres": 41.0,
+   "seconds": 31.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 41.0,
+     "seconds": 31.5
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 57.2,
+     "seconds": 86.0
+    }
+   ],
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 41 m walking, 32 s."
+  },
+  {
+   "from": "y5202",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 41.0,
+   "seconds": 31.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 41.0,
+     "seconds": 31.5
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 57.2,
+     "seconds": 86.0
+    }
+   ],
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 41 m walking, 32 s."
+  },
+  {
+   "from": "y5202",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 57.2,
+   "seconds": 86.0,
+   "connectors": [
+    "lift"
+   ],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 57.2,
+     "seconds": 86.0
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 57 m walking, 86 s."
+  },
+  {
+   "from": "y5401",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "disabled_toilet",
+   "metres": 18.4,
+   "seconds": 14.2,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 18.4,
+     "seconds": 14.2
+    },
+    {
+     "id": "male_toilet",
+     "metres": 25.2,
+     "seconds": 19.4
+    },
+    {
+     "id": "female_toilet",
+     "metres": 48.7,
+     "seconds": 37.5
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 47.0,
+     "seconds": 44.2
+    }
+   ],
+   "message": "Nearest toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "y5401",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 18.4,
+   "seconds": 14.2,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 18.4,
+     "seconds": 14.2
+    },
+    {
+     "id": "male_toilet",
+     "metres": 25.2,
+     "seconds": 19.4
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 47.0,
+     "seconds": 44.2
+    }
+   ],
+   "message": "Nearest male toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "y5401",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "female_toilet",
+   "metres": 48.7,
+   "seconds": 37.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "female_toilet",
+     "metres": 48.7,
+     "seconds": 37.5
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 47.0,
+     "seconds": 44.2
+    }
+   ],
+   "message": "Nearest female toilet: Female toilet, about 49 m walking, 38 s."
+  },
+  {
+   "from": "y5401",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet",
+   "metres": 18.4,
+   "seconds": 14.2,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 18.4,
+     "seconds": 14.2
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 18.4,
+     "seconds": 56.2
+    }
+   ],
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "y5401",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 18.4,
+   "seconds": 14.2,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 18.4,
+     "seconds": 14.2
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 18.4,
+     "seconds": 56.2
+    }
+   ],
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "y5401",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 18.4,
+   "seconds": 56.2,
+   "connectors": [
+    "lift"
+   ],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 18.4,
+     "seconds": 56.2
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 18 m walking, 56 s."
+  },
+  {
+   "from": "exit_10",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "female_toilet",
+   "metres": 4.4,
+   "seconds": 3.4,
+   "connectors": [],
+   "options": [
+    {
+     "id": "female_toilet",
+     "metres": 4.4,
+     "seconds": 3.4
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 25.9,
+     "seconds": 19.9
+    },
+    {
+     "id": "male_toilet",
+     "metres": 26.3,
+     "seconds": 20.2
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 43.8,
+     "seconds": 53.7
+    }
+   ],
+   "message": "Nearest toilet: Female toilet, about 4 m walking, 3 s."
+  },
+  {
+   "from": "exit_10",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 25.9,
+   "seconds": 19.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 25.9,
+     "seconds": 19.9
+    },
+    {
+     "id": "male_toilet",
+     "metres": 26.3,
+     "seconds": 20.2
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 43.8,
+     "seconds": 53.7
+    }
+   ],
+   "message": "Nearest male toilet: Male disabled toilet (5F), about 26 m walking, 20 s."
+  },
+  {
+   "from": "exit_10",
+   "from_floor": 5,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "female_toilet",
+   "metres": 4.4,
+   "seconds": 3.4,
+   "connectors": [],
+   "options": [
+    {
+     "id": "female_toilet",
+     "metres": 4.4,
+     "seconds": 3.4
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 43.8,
+     "seconds": 53.7
+    }
+   ],
+   "message": "Nearest female toilet: Female toilet, about 4 m walking, 3 s."
+  },
+  {
+   "from": "exit_10",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet",
+   "metres": 25.9,
+   "seconds": 19.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 25.9,
+     "seconds": 19.9
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 42.1,
+     "seconds": 74.4
+    }
+   ],
+   "message": "Nearest disabled toilet: Male disabled toilet (5F), about 26 m walking, 20 s."
+  },
+  {
+   "from": "exit_10",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet",
+   "metres": 25.9,
+   "seconds": 19.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet",
+     "metres": 25.9,
+     "seconds": 19.9
+    },
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 42.1,
+     "seconds": 74.4
+    }
+   ],
+   "message": "Nearest disabled male toilet: Male disabled toilet (5F), about 26 m walking, 20 s."
+  },
+  {
+   "from": "exit_10",
+   "from_floor": 5,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 42.1,
+   "seconds": 74.4,
+   "connectors": [
+    "lift"
+   ],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 42.1,
+     "seconds": 74.4
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 42 m walking, 74 s."
+  },
+  {
+   "from": "lt1a",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 34.5,
+   "seconds": 26.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 34.5,
+     "seconds": 26.5
+    },
+    {
+     "id": "female_toilet",
+     "metres": 29.2,
+     "seconds": 42.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 41.0,
+     "seconds": 51.5
+    },
+    {
+     "id": "male_toilet",
+     "metres": 41.4,
+     "seconds": 51.9
+    }
+   ],
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 34.5,
+   "seconds": 26.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 34.5,
+     "seconds": 26.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 41.0,
+     "seconds": 51.5
+    },
+    {
+     "id": "male_toilet",
+     "metres": 41.4,
+     "seconds": 51.9
+    }
+   ],
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 34.5,
+   "seconds": 26.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 34.5,
+     "seconds": 26.5
+    },
+    {
+     "id": "female_toilet",
+     "metres": 29.2,
+     "seconds": 42.5
+    }
+   ],
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 34.5,
+   "seconds": 26.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 34.5,
+     "seconds": 26.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 50.7,
+     "seconds": 81.0
+    }
+   ],
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 34.5,
+   "seconds": 26.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 34.5,
+     "seconds": 26.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 50.7,
+     "seconds": 81.0
+    }
+   ],
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "lt1a",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 34.5,
+   "seconds": 26.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 34.5,
+     "seconds": 26.5
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 34 m walking, 26 s."
+  },
+  {
+   "from": "y4502",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 38.3,
+   "seconds": 29.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 38.3,
+     "seconds": 29.5
+    },
+    {
+     "id": "female_toilet",
+     "metres": 19.0,
+     "seconds": 34.6
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 30.8,
+     "seconds": 43.7
+    },
+    {
+     "id": "male_toilet",
+     "metres": 31.2,
+     "seconds": 44.0
+    }
+   ],
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 38.3,
+   "seconds": 29.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 38.3,
+     "seconds": 29.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 30.8,
+     "seconds": 43.7
+    },
+    {
+     "id": "male_toilet",
+     "metres": 31.2,
+     "seconds": 44.0
+    }
+   ],
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 38.3,
+   "seconds": 29.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 38.3,
+     "seconds": 29.5
+    },
+    {
+     "id": "female_toilet",
+     "metres": 19.0,
+     "seconds": 34.6
+    }
+   ],
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 38.3,
+   "seconds": 29.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 38.3,
+     "seconds": 29.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 54.5,
+     "seconds": 83.9
+    }
+   ],
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 38.3,
+   "seconds": 29.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 38.3,
+     "seconds": 29.5
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 54.5,
+     "seconds": 83.9
+    }
+   ],
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "y4502",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 38.3,
+   "seconds": 29.5,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 38.3,
+     "seconds": 29.5
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 38 m walking, 30 s."
+  },
+  {
+   "from": "lt2b",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 23.2,
+   "seconds": 17.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 23.2,
+     "seconds": 17.9
+    },
+    {
+     "id": "female_toilet",
+     "metres": 23.3,
+     "seconds": 37.9
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 35.1,
+     "seconds": 47.0
+    },
+    {
+     "id": "male_toilet",
+     "metres": 35.5,
+     "seconds": 47.3
+    }
+   ],
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 23.2,
+   "seconds": 17.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 23.2,
+     "seconds": 17.9
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 35.1,
+     "seconds": 47.0
+    },
+    {
+     "id": "male_toilet",
+     "metres": 35.5,
+     "seconds": 47.3
+    }
+   ],
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 23.2,
+   "seconds": 17.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 23.2,
+     "seconds": 17.9
+    },
+    {
+     "id": "female_toilet",
+     "metres": 23.3,
+     "seconds": 37.9
+    }
+   ],
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 23.2,
+   "seconds": 17.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 23.2,
+     "seconds": 17.9
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 39.4,
+     "seconds": 72.3
+    }
+   ],
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 23.2,
+   "seconds": 17.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 23.2,
+     "seconds": 17.9
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 39.4,
+     "seconds": 72.3
+    }
+   ],
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt2b",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 23.2,
+   "seconds": 17.9,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 23.2,
+     "seconds": 17.9
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 23 m walking, 18 s."
+  },
+  {
+   "from": "entrance_exit",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 17.8,
+   "seconds": 13.7,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 17.8,
+     "seconds": 13.7
+    },
+    {
+     "id": "female_toilet",
+     "metres": 45.9,
+     "seconds": 55.3
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 62.6,
+     "seconds": 56.2
+    },
+    {
+     "id": "male_toilet",
+     "metres": 69.4,
+     "seconds": 61.4
+    }
+   ],
+   "message": "Nearest toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 17.8,
+   "seconds": 13.7,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 17.8,
+     "seconds": 13.7
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 62.6,
+     "seconds": 56.2
+    },
+    {
+     "id": "male_toilet",
+     "metres": 69.4,
+     "seconds": 61.4
+    }
+   ],
+   "message": "Nearest male toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "from_floor": 4,
+   "mode": "standard",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 17.8,
+   "seconds": 13.7,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 17.8,
+     "seconds": 13.7
+    },
+    {
+     "id": "female_toilet",
+     "metres": 45.9,
+     "seconds": 55.3
+    }
+   ],
+   "message": "Nearest female toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "any",
+   "toilet": "disabled_toilet_4F",
+   "metres": 17.8,
+   "seconds": 13.7,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 17.8,
+     "seconds": 13.7
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 34.0,
+     "seconds": 68.2
+    }
+   ],
+   "message": "Nearest disabled toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "male",
+   "toilet": "disabled_toilet_4F",
+   "metres": 17.8,
+   "seconds": 13.7,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 17.8,
+     "seconds": 13.7
+    },
+    {
+     "id": "disabled_toilet",
+     "metres": 34.0,
+     "seconds": 68.2
+    }
+   ],
+   "message": "Nearest disabled male toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  },
+  {
+   "from": "entrance_exit",
+   "from_floor": 4,
+   "mode": "accessible",
+   "gender": "female",
+   "toilet": "disabled_toilet_4F",
+   "metres": 17.8,
+   "seconds": 13.7,
+   "connectors": [],
+   "options": [
+    {
+     "id": "disabled_toilet_4F",
+     "metres": 17.8,
+     "seconds": 13.7
+    }
+   ],
+   "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  }
+ ],
+ "toilet_table": {
+  "male_toilet": {
+   "gender": "male",
+   "accessible": false,
+   "name": "Male toilet",
+   "floor": 5
+  },
+  "female_toilet": {
+   "gender": "female",
+   "accessible": false,
+   "name": "Female toilet",
+   "floor": 5
+  },
+  "disabled_toilet": {
+   "gender": "male",
+   "accessible": true,
+   "name": "Male disabled toilet (5F)",
+   "floor": 5
+  },
+  "disabled_toilet_4F": {
+   "gender": "mixed",
+   "accessible": true,
+   "name": "Mixed disabled toilet (4F)",
+   "floor": 4
+  }
+ },
+ "cross_floor_pairs_by_connector": {
+  "standard": {
+   "escalator": 251,
+   "stairs": 85
+  },
+  "accessible": {
+   "lift": 336
+  }
+ },
+ "no_option_example": {
+  "from": "canteen",
+  "mode": "accessible",
+  "gender": "female",
+  "floor": 5,
+  "message": "No disabled female toilet on 5F in the area WalkSense covers (AC1 5F and 4F). Toilets we know: Male toilet (not a disabled toilet); Female toilet (not a disabled toilet); Male disabled toilet (5F) (male only); Mixed disabled toilet (4F) (not on 5F)."
+ }
+}
