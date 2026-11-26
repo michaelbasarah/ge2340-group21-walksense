@@ -1,0 +1,494 @@
+{
+ "what": "stops right summed over the tuning units (iphone, iphone masked, s24, a55, a56) per grid cell (PREREGISTRATION_landing.md); pred_app leaves 23 Nov out",
+ "n_stops": {
+  "true": 401,
+  "pred_d3": 401,
+  "pred_app": 317
+ },
+ "ungated_reference": {
+  "eR0 ungated, all tuning units": 273,
+  "eR0 ungated, without 23 Nov (pred_app scope)": 205,
+  "eR0n ungated, all tuning units": 285,
+  "eR0n ungated, without 23 Nov (pred_app scope)": 213,
+  "eR1 ungated, all tuning units": 290,
+  "eR1 ungated, without 23 Nov (pred_app scope)": 218,
+  "ed ungated, all tuning units": 359,
+  "ed ungated, without 23 Nov (pred_app scope)": 276
+ },
+ "grid": {
+  "eR0-true": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 276
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 280
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 276
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 276
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 276
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 276
+   }
+  ],
+  "eR0-pred_d3": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 272
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 285
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 286
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 278
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 274
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 274
+   }
+  ],
+  "eR0-pred_app": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 187
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 189
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 211
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 207
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 211
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 211
+   }
+  ],
+  "eR0n-true": [
+   {
+    "T_min": 5,
+    "theta": 0.3,
+    "stops_ok": 288
+   },
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 288
+   },
+   {
+    "T_min": 10,
+    "theta": 0.3,
+    "stops_ok": 296
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 296
+   },
+   {
+    "T_min": 20,
+    "theta": 0.3,
+    "stops_ok": 294
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 292
+   },
+   {
+    "T_min": 30,
+    "theta": 0.3,
+    "stops_ok": 294
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 292
+   },
+   {
+    "T_min": 45,
+    "theta": 0.3,
+    "stops_ok": 294
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 292
+   },
+   {
+    "T_min": 60,
+    "theta": 0.3,
+    "stops_ok": 294
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 292
+   }
+  ],
+  "eR0n-pred_d3": [
+   {
+    "T_min": 5,
+    "theta": 0.3,
+    "stops_ok": 277
+   },
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 276
+   },
+   {
+    "T_min": 10,
+    "theta": 0.3,
+    "stops_ok": 290
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 289
+   },
+   {
+    "T_min": 20,
+    "theta": 0.3,
+    "stops_ok": 297
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 296
+   },
+   {
+    "T_min": 30,
+    "theta": 0.3,
+    "stops_ok": 295
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 294
+   },
+   {
+    "T_min": 45,
+    "theta": 0.3,
+    "stops_ok": 292
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 290
+   },
+   {
+    "T_min": 60,
+    "theta": 0.3,
+    "stops_ok": 292
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 290
+   }
+  ],
+  "eR0n-pred_app": [
+   {
+    "T_min": 5,
+    "theta": 0.3,
+    "stops_ok": 187
+   },
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 187
+   },
+   {
+    "T_min": 10,
+    "theta": 0.3,
+    "stops_ok": 189
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 189
+   },
+   {
+    "T_min": 20,
+    "theta": 0.3,
+    "stops_ok": 211
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 211
+   },
+   {
+    "T_min": 30,
+    "theta": 0.3,
+    "stops_ok": 208
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 207
+   },
+   {
+    "T_min": 45,
+    "theta": 0.3,
+    "stops_ok": 226
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 223
+   },
+   {
+    "T_min": 60,
+    "theta": 0.3,
+    "stops_ok": 225
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 223
+   }
+  ],
+  "eR1-true": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 301
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 301
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 305
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 305
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 305
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 305
+   }
+  ],
+  "eR1-pred_d3": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 269
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 284
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 294
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 301
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 300
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 300
+   }
+  ],
+  "eR1-pred_app": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 182
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 183
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 211
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 209
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 229
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 230
+   }
+  ],
+  "ed-true": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 369
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 374
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 372
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 372
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 372
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 372
+   }
+  ],
+  "ed-pred_d3": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 293
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 339
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 343
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 358
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 356
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 356
+   }
+  ],
+  "ed-pred_app": [
+   {
+    "T_min": 5,
+    "theta": 0.4,
+    "stops_ok": 188
+   },
+   {
+    "T_min": 10,
+    "theta": 0.4,
+    "stops_ok": 189
+   },
+   {
+    "T_min": 20,
+    "theta": 0.4,
+    "stops_ok": 236
+   },
+   {
+    "T_min": 30,
+    "theta": 0.4,
+    "stops_ok": 264
+   },
+   {
+    "T_min": 45,
+    "theta": 0.4,
+    "stops_ok": 276
+   },
+   {
+    "T_min": 60,
+    "theta": 0.4,
+    "stops_ok": 274
+   }
+  ]
+ }
+}

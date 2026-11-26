@@ -1302,6 +1302,7 @@ Contents:
 
 - **What we tried (so far):** the user's idea (26 Nov): a floor change can only happen through a connector (lift/stairs or a one-way escalator), so let the floor switch only right after the walker was at a connector landing, in the direction that connector allows. Before scoring anything: reproduce entry 74 and write down the gated rules, gate sources, grids, selection and decision rule.
 - **How:** worktree `ge2340-landing`, branch `feat/landing-floor`. `phase2/new/floor/baseline.py` and `candidates.py` rerun: `out/` unchanged (git status clean), so entry 74's numbers reproduce. Pre-registration: `phase2/new/floor/PREREGISTRATION_landing.md`, committed in this commit before any gated rule was run; it lists what had been looked at (place sequences around each floor change, and the day-3 fused predictions at connector stops).
+- **So far (WIP commit 2):** `phase2/new/floor/landing_rules.py` (gate + gated rules eR0, eR0n, eR1, ed; with the gate always open each reproduces R0, R1, (d) exactly, asserted in `landing.py`) and `landing.py` (tune, freeze, score, transitions, gate statistics, decision, figures) run; outputs `out/landing_*.json`, `out/transitions.json`, `out/fig_landing_*.png`. Results and write-up in the next commit.
 - Completed in a later commit of this entry.
 
 ## Lessons learned

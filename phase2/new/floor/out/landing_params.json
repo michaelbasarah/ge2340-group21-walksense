@@ -1,0 +1,61 @@
+{
+ "frozen_from": "tuning sessions 23nov, 24s1, 24s2, 25nov",
+ "d_params_entry74": {
+  "frozen_from": "tuning sessions 23nov, 24s1, 24s2, 25nov",
+  "k_a": 5,
+  "T": null,
+  "k_d": 15,
+  "P": 0.7,
+  "H": 2,
+  "M": 3,
+  "T_min": "never"
+ },
+ "eR0-true": {
+  "T": 10,
+  "theta": 0.4
+ },
+ "eR0-pred_d3": {
+  "T": 20,
+  "theta": 0.4
+ },
+ "eR0-pred_app": {
+  "T": 20,
+  "theta": 0.4
+ },
+ "eR0n-true": {
+  "T": 10,
+  "theta": 0.4
+ },
+ "eR0n-pred_d3": {
+  "T": 20,
+  "theta": 0.3
+ },
+ "eR0n-pred_app": {
+  "T": 45,
+  "theta": 0.3
+ },
+ "eR1-true": {
+  "T": 20,
+  "theta": 0.4
+ },
+ "eR1-pred_d3": {
+  "T": 30,
+  "theta": 0.4
+ },
+ "eR1-pred_app": {
+  "T": 60,
+  "theta": 0.4
+ },
+ "ed-true": {
+  "T": 10,
+  "theta": 0.4
+ },
+ "ed-pred_d3": {
+  "T": 30,
+  "theta": 0.4
+ },
+ "ed-pred_app": {
+  "T": 45,
+  "theta": 0.4
+ }
+}

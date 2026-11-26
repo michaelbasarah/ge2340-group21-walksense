@@ -1,0 +1,1058 @@
+{
+ "what": "every labelled floor change (consecutive recordings on different floors) per unit; departure touch = last touch on the old floor whose connector allows the change; PREREGISTRATION_landing.md",
+ "changes": [
+  {
+   "unit": "23nov iphone",
+   "change": "5F->4F",
+   "time": "18:34",
+   "last_on_old_floor": "lift_stairs",
+   "first_on_new_floor": "lift_stairs_4F",
+   "arrival_is_landing": true,
+   "gap_min": 2.0,
+   "pressure_step_hpa": 0.684,
+   "pressure_last_before": {
+    "time": "18:31",
+    "min_before": 3.0
+   },
+   "pressure_first_after": {
+    "time": "18:34",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 3.0
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 9.7
+     },
+     "arrival_touch": false
+    },
+    "pred_app": "n/a"
+   }
+  },
+  {
+   "unit": "24s1 a55",
+   "change": "5F->4F",
+   "time": "18:26",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.4,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 7.9
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 100.6
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 100.6
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "24s1 a56",
+   "change": "5F->4F",
+   "time": "18:26",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.4,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 7.9
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 100.6
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 10.2
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "24s1 iphone",
+   "change": "5F->4F",
+   "time": "18:26",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.4,
+   "pressure_step_hpa": 0.424,
+   "pressure_last_before": {
+    "time": "18:22",
+    "min_before": 3.4
+   },
+   "pressure_first_after": {
+    "time": "18:26",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 7.9
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "exit10_door",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 110.0
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 10.3
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "24s1 s24",
+   "change": "5F->4F",
+   "time": "18:26",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.4,
+   "pressure_step_hpa": null,
+   "pressure_last_before": {
+    "time": "18:22",
+    "min_before": 3.4
+   },
+   "pressure_first_after": {
+    "time": "18:26",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 7.9
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "y5302_point2",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 3.4
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "male_disabled_toilet",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 14.2
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "24s2 iphone",
+   "change": "5F->4F",
+   "time": "22:47",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.5,
+   "pressure_step_hpa": 0.565,
+   "pressure_last_before": {
+    "time": "22:44",
+    "min_before": 3.5
+   },
+   "pressure_first_after": {
+    "time": "22:47",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 9.8
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 11.8
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "exit10_door",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 31.4
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "24s2 s24",
+   "change": "5F->4F",
+   "time": "22:47",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.3,
+   "pressure_step_hpa": null,
+   "pressure_last_before": {
+    "time": "22:44",
+    "min_before": 3.4
+   },
+   "pressure_first_after": {
+    "time": "22:47",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 9.8
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "male_disabled_toilet",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 18.3
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 22.1
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night a56",
+   "change": "5F->4F",
+   "time": "23:04",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 4.5,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 11.3
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "canteen",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 76.9
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": null,
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night a56",
+   "change": "4F->5F",
+   "time": "24:15",
+   "last_on_old_floor": "esca_down->esca_up",
+   "first_on_new_floor": "sr9",
+   "arrival_is_landing": false,
+   "gap_min": 6.4,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "esca_down->esca_up",
+      "touch_kinds": [
+       "down",
+       "up"
+      ],
+      "min_before": 6.5
+     },
+     "arrival_touch": false
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "y5401",
+      "touch_kinds": [
+       "up"
+      ],
+      "min_before": 80.8
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": null,
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night a56",
+   "change": "5F->4F",
+   "time": "24:39",
+   "last_on_old_floor": "y5401",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 6.1,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 12.7
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "exit5_door",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 84.3
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "y5302_point2",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 10.0
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night iphone",
+   "change": "5F->4F",
+   "time": "23:03",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 3.8,
+   "pressure_step_hpa": 0.379,
+   "pressure_last_before": {
+    "time": "22:41",
+    "min_before": 21.9
+   },
+   "pressure_first_after": {
+    "time": "23:36",
+    "min_after": 33.2
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 10.5
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "female_toilet",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 48.0
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": null,
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night iphone",
+   "change": "4F->5F",
+   "time": "24:15",
+   "last_on_old_floor": "esca_down->esca_up",
+   "first_on_new_floor": "sr9",
+   "arrival_is_landing": false,
+   "gap_min": 6.4,
+   "pressure_step_hpa": -0.67,
+   "pressure_last_before": {
+    "time": "24:09",
+    "min_before": 6.5
+   },
+   "pressure_first_after": {
+    "time": "24:15",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "esca_down->esca_up",
+      "touch_kinds": [
+       "down",
+       "up"
+      ],
+      "min_before": 6.5
+     },
+     "arrival_touch": false
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "esca_up",
+      "touch_kinds": [
+       "up"
+      ],
+      "min_before": 25.6
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "exit10_door",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 13.5
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night iphone",
+   "change": "5F->4F",
+   "time": "24:39",
+   "last_on_old_floor": "y5401",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 6.3,
+   "pressure_step_hpa": 0.614,
+   "pressure_last_before": {
+    "time": "24:32",
+    "min_before": 7.3
+   },
+   "pressure_first_after": {
+    "time": "24:39",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 12.3
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 12.3
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 12.3
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25night_tian iphone",
+   "change": "5F->4F",
+   "time": "22:29",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 3.5,
+   "pressure_step_hpa": 0.575,
+   "pressure_last_before": {
+    "time": "22:24",
+    "min_before": 4.5
+   },
+   "pressure_first_after": {
+    "time": "22:29",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 8.4
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "y5202",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 35.1
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 23.1
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25nov a55",
+   "change": "5F->4F",
+   "time": "18:34",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.4,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 8.9
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "male_disabled_toilet",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 15.0
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 10.6
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25nov a56",
+   "change": "5F->4F",
+   "time": "18:33",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 1.9,
+   "pressure_step_hpa": null,
+   "pressure_last_before": null,
+   "pressure_first_after": null,
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 8.5
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 11.1
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "exit10_door",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 32.6
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25nov iphone",
+   "change": "5F->4F",
+   "time": "18:33",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.0,
+   "pressure_step_hpa": 0.651,
+   "pressure_last_before": {
+    "time": "18:30",
+    "min_before": 3.0
+   },
+   "pressure_first_after": {
+    "time": "18:33",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 8.5
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 10.5
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 10.5
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25spots iphone",
+   "change": "5F->4F",
+   "time": "17:49",
+   "last_on_old_floor": "sr9",
+   "first_on_new_floor": "escalator_down_4F",
+   "arrival_is_landing": true,
+   "gap_min": 1.7,
+   "pressure_step_hpa": 0.591,
+   "pressure_last_before": {
+    "time": "17:46",
+    "min_before": 2.7
+   },
+   "pressure_first_after": {
+    "time": "17:49",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "escalator_down",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 7.6
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "escalator_down",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 7.6
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "sr9",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 2.7
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25spots iphone",
+   "change": "4F->5F",
+   "time": "20:22",
+   "last_on_old_floor": "escalator_up_4F",
+   "first_on_new_floor": "y5401",
+   "arrival_is_landing": false,
+   "gap_min": 149.3,
+   "pressure_step_hpa": 0.291,
+   "pressure_last_before": {
+    "time": "17:51",
+    "min_before": 150.3
+   },
+   "pressure_first_after": {
+    "time": "20:22",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "escalator_up_4F",
+      "touch_kinds": [
+       "up"
+      ],
+      "min_before": 150.3
+     },
+     "arrival_touch": false
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "escalator_up_4F",
+      "touch_kinds": [
+       "up"
+      ],
+      "min_before": 150.3
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "escalator_down_4F",
+      "touch_kinds": [
+       "up"
+      ],
+      "min_before": 152.7
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25spots s24",
+   "change": "5F->4F",
+   "time": "17:54",
+   "last_on_old_floor": "lift_stairs",
+   "first_on_new_floor": "escalator_down_4F",
+   "arrival_is_landing": true,
+   "gap_min": 1.3,
+   "pressure_step_hpa": null,
+   "pressure_last_before": {
+    "time": "17:51",
+    "min_before": 2.3
+   },
+   "pressure_first_after": {
+    "time": "17:54",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 2.3
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "disabled_toilet",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 4.6
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "disabled_toilet",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 4.6
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "25spots s24",
+   "change": "4F->5F",
+   "time": "20:22",
+   "last_on_old_floor": "lift_stairs_4F",
+   "first_on_new_floor": "male_toilet",
+   "arrival_is_landing": false,
+   "gap_min": 137.1,
+   "pressure_step_hpa": null,
+   "pressure_last_before": {
+    "time": "18:04",
+    "min_before": 138.1
+   },
+   "pressure_first_after": {
+    "time": "20:22",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs_4F",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 138.1
+     },
+     "arrival_touch": false
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs_4F",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 138.1
+     },
+     "arrival_touch": false
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs_4F",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 138.1
+     },
+     "arrival_touch": false
+    }
+   }
+  },
+  {
+   "unit": "26tian iphone",
+   "change": "5F->4F",
+   "time": "10:09",
+   "last_on_old_floor": "y5302_point2",
+   "first_on_new_floor": "lift_stairs5",
+   "arrival_is_landing": true,
+   "gap_min": 2.2,
+   "pressure_step_hpa": 0.625,
+   "pressure_last_before": {
+    "time": "10:06",
+    "min_before": 3.2
+   },
+   "pressure_first_after": {
+    "time": "10:09",
+    "min_after": 0.0
+   },
+   "departure_touch": {
+    "true": {
+     "last_on_old_floor": {
+      "true_place": "lift_stairs5->y5401",
+      "touch_kinds": [
+       "lift"
+      ],
+      "min_before": 6.0
+     },
+     "arrival_touch": true
+    },
+    "pred_d3": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 19.7
+     },
+     "arrival_touch": true
+    },
+    "pred_app": {
+     "last_on_old_floor": {
+      "true_place": "esca_down",
+      "touch_kinds": [
+       "down"
+      ],
+      "min_before": 19.7
+     },
+     "arrival_touch": false
+    }
+   }
+  }
+ ],
+ "acc23_23nov": {
+  "walk": "ACC23 \"From exit 5 stairs\" (exit 5 stairs -> exit 5 stairs bawah), 18:34:17 to 18:34:47, 30 s, no barometer",
+  "source": "phase2/clean-data/2026-11-23/accelerometer_edges.csv, recording_intervals.csv",
+  "stop_before": {
+   "stop": "BM26 lift_stairs 5F",
+   "end_hk": "18:32:53",
+   "hpa": 1015.014
+  },
+  "stop_after": {
+   "stop": "BM27 lift_stairs_4F",
+   "start_hk": "18:34:54",
+   "hpa": 1015.698
+  },
+  "pressure_step_hpa": 0.684
+ },
+ "within_walk": {
+  "n_walks_with_connector_endpoint_and_pressure": 61,
+  "max_abs_dp_hpa": 0.041,
+  "over_0.40": 0
+ }
+}
