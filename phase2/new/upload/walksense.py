@@ -364,6 +364,25 @@ class Session:
         self.consult_left = 0
         return f'magnetic floor vote: {VOTE_H} confident votes in a row for {floor}F (p {p:.2f}): moved to {floor}F'
 
+    def watch_pressure(self, p, t=None):
+        """Live only (PROCESS-LOG 95): the current pressure (median of the last few seconds) against this floor's
+        reference (median of the last REF_N readings, which only stops add), with R0's threshold and directions.
+        A move of FLOOR_JUMP_HPA switches the floor at once, also during a ride while standing still on an escalator
+        or in a lift. The reference is not updated here, so a slow ride cannot drag it along."""
+        if not self.recent or (t is not None and self.last_t is not None and t - self.last_t > LONG_GAP_S):
+            return ''
+        d = p - float(np.median(self.recent))
+        if d > FLOOR_JUMP_HPA and self.floor == 5:
+            self.floor, note = 4, f'pressure rose {d:.2f} hPa: moved down to 4F'
+        elif d < -FLOOR_JUMP_HPA and self.floor == 4:
+            self.floor, note = 5, f'pressure fell {-d:.2f} hPa: moved up to 5F'
+        else:
+            return ''
+        self.recent, self.streak, self.consult_left = [p], 0, 0       # pressure saw a floor change: trust it, as (d) does
+        if t is not None:
+            self.last_t = t
+        return note
+
     def track_floor(self, p_start, p_end, t_start=None, duration=0.0):
         """A floor change = pressure moves FLOOR_JUMP_HPA away from the median of the last
         REF_N readings on this floor (one odd reading, e.g. by a vent, can't flip the floor)."""

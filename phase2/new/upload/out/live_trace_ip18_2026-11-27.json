@@ -1,0 +1,1743 @@
+{
+ "source": "../live-walk/evidence/2026-11-27_ip18_rides/full_1830",
+ "old_tracker": "/tmp/claude-1000/-home-basarah-personal/45a31648-2496-49f3-86d8-5bf5ca6c6a05/scratchpad/live_main.py",
+ "baro_lag_s": 3.2,
+ "before": {
+  "source": "full_1830",
+  "baro_lag_s": 3.2,
+  "floor_changes": [
+   {
+    "t": 452.5,
+    "to": 4,
+    "mode": "stop",
+    "note": "magnetic floor vote: 2 confident votes in a row for 4F (p 1.00): moved to 4F"
+   },
+   {
+    "t": 615.5,
+    "to": 5,
+    "mode": "stop",
+    "note": "magnetic floor vote: 2 confident votes in a row for 5F (p 0.97): moved to 5F"
+   },
+   {
+    "t": 764.0,
+    "to": 4,
+    "mode": "stop",
+    "note": "magnetic floor vote: 2 confident votes in a row for 4F (p 1.00): moved to 4F"
+   },
+   {
+    "t": 935.5,
+    "to": 5,
+    "mode": "stop",
+    "note": "magnetic floor vote: 2 confident votes in a row for 5F (p 1.00): moved to 5F"
+   }
+  ],
+  "rides": [
+   {
+    "start": 703.9,
+    "end": 717.8,
+    "seconds": 13.9,
+    "hpa": 0.55,
+    "direction": "5F->4F (pressure rose)",
+    "still_share": 0.86,
+    "floor_change": {
+     "t": 764.0,
+     "to": 4,
+     "mode": "stop",
+     "note": "magnetic floor vote: 2 confident votes in a row for 4F (p 1.00): moved to 4F"
+    },
+    "latency_after_ride_end_s": 46.2
+   },
+   {
+    "start": 818.2,
+    "end": 831.0,
+    "seconds": 12.8,
+    "hpa": -0.5,
+    "direction": "4F->5F (pressure fell)",
+    "still_share": 0.77,
+    "floor_change": {
+     "t": 935.5,
+     "to": 5,
+     "mode": "stop",
+     "note": "magnetic floor vote: 2 confident votes in a row for 5F (p 1.00): moved to 5F"
+    },
+    "latency_after_ride_end_s": 104.5
+   },
+   {
+    "start": 985.8,
+    "end": 998.6,
+    "seconds": 12.8,
+    "hpa": 0.51,
+    "direction": "5F->4F (pressure rose)",
+    "still_share": 0.62,
+    "floor_change": null,
+    "latency_after_ride_end_s": null
+   },
+   {
+    "start": 1094.7,
+    "end": 1109.7,
+    "seconds": 14.9,
+    "hpa": -0.56,
+    "direction": "4F->5F (pressure fell)",
+    "still_share": 0.6,
+    "floor_change": null,
+    "latency_after_ride_end_s": null
+   }
+  ],
+  "stops": [
+   {
+    "t": 399.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 411.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      0.83
+     ],
+     [
+      "exit10_door",
+      0.17
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 442.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 466.5,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 495.0,
+    "floor": 4,
+    "top3": [
+     [
+      "lift_stairs5",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 505.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lift_stairs5",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 511.0,
+    "floor": 4,
+    "top3": [
+     [
+      "lift_stairs5",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 535.0,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 556.0,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 578.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lift_stairs5",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 589.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lift_stairs5",
+      0.8
+     ],
+     [
+      "disabled_toilet",
+      0.2
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 605.0,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      0.88
+     ],
+     [
+      "male_disabled_toilet",
+      0.12
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 630.0,
+    "floor": 5,
+    "top3": [
+     [
+      "y5401",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 650.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 656.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 677.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      0.603
+     ],
+     [
+      "exit5_door",
+      0.292
+     ],
+     [
+      "y5302_point2",
+      0.105
+     ]
+    ]
+   },
+   {
+    "t": 701.0,
+    "floor": 5,
+    "top3": [
+     [
+      "male_disabled_toilet",
+      0.798
+     ],
+     [
+      "sr9",
+      0.202
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 705.0,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 738.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5202",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 748.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5202",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 753.5,
+    "floor": 4,
+    "top3": [
+     [
+      "exit10_door",
+      0.658
+     ],
+     [
+      "lt1a",
+      0.342
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 777.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 783.0,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 815.0,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      0.5
+     ],
+     [
+      "lt1b",
+      0.5
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 820.5,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 844.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_up",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 883.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lift_stairs5",
+      1.0
+     ],
+     [
+      "disabled_toilet",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 908.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt2b",
+      0.599
+     ],
+     [
+      "exit5_door",
+      0.401
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 910.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt2b",
+      0.8
+     ],
+     [
+      "esca_up",
+      0.2
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 925.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 939.0,
+    "floor": 5,
+    "top3": [
+     [
+      "exit5_door",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 944.0,
+    "floor": 5,
+    "top3": [
+     [
+      "exit5_door",
+      0.961
+     ],
+     [
+      "male_toilet",
+      0.039
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 965.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 984.0,
+    "floor": 5,
+    "top3": [
+     [
+      "lift_stairs5",
+      0.539
+     ],
+     [
+      "male_disabled_toilet",
+      0.461
+     ],
+     [
+      "canteen",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 993.5,
+    "floor": 5,
+    "top3": [
+     [
+      "lift_stairs5",
+      0.605
+     ],
+     [
+      "male_disabled_toilet",
+      0.395
+     ],
+     [
+      "canteen",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1005.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5202",
+      0.598
+     ],
+     [
+      "exit10_door",
+      0.402
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1016.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5202",
+      0.603
+     ],
+     [
+      "exit10_door",
+      0.397
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1021.0,
+    "floor": 5,
+    "top3": [
+     [
+      "y5202",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1026.5,
+    "floor": 5,
+    "top3": [
+     [
+      "exit10_door",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1030.0,
+    "floor": 5,
+    "top3": [
+     [
+      "exit10_door",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1035.5,
+    "floor": 5,
+    "top3": [
+     [
+      "exit10_door",
+      0.902
+     ],
+     [
+      "canteen",
+      0.098
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1040.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1043.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      0.833
+     ],
+     [
+      "exit10_door",
+      0.167
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1046.5,
+    "floor": 5,
+    "top3": [
+     [
+      "exit10_door",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1060.0,
+    "floor": 5,
+    "top3": [
+     [
+      "y5302",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1070.0,
+    "floor": 5,
+    "top3": [
+     [
+      "y5302",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1080.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5302",
+      1.0
+     ],
+     [
+      "canteen",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1096.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1100.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   },
+   {
+    "t": 1133.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ],
+     [
+      "esca_down",
+      0.0
+     ],
+     [
+      "esca_up",
+      0.0
+     ]
+    ]
+   }
+  ]
+ },
+ "after": {
+  "source": "full_1830",
+  "baro_lag_s": 3.2,
+  "floor_changes": [
+   {
+    "t": 719.0,
+    "to": 4,
+    "mode": "stop",
+    "note": "pressure rose 0.42 hPa: moved down to 4F"
+   },
+   {
+    "t": 834.5,
+    "to": 5,
+    "mode": "walking",
+    "note": "pressure fell 0.40 hPa: moved up to 5F"
+   },
+   {
+    "t": 1000.0,
+    "to": 4,
+    "mode": "stop",
+    "note": "pressure rose 0.41 hPa: moved down to 4F"
+   },
+   {
+    "t": 1115.0,
+    "to": 5,
+    "mode": "walking",
+    "note": "pressure fell 0.41 hPa: moved up to 5F"
+   }
+  ],
+  "rides": [
+   {
+    "start": 703.9,
+    "end": 717.8,
+    "seconds": 13.9,
+    "hpa": 0.55,
+    "direction": "5F->4F (pressure rose)",
+    "still_share": 0.86,
+    "floor_change": {
+     "t": 719.0,
+     "to": 4,
+     "mode": "stop",
+     "note": "pressure rose 0.42 hPa: moved down to 4F"
+    },
+    "latency_after_ride_end_s": 1.2
+   },
+   {
+    "start": 818.2,
+    "end": 831.0,
+    "seconds": 12.8,
+    "hpa": -0.5,
+    "direction": "4F->5F (pressure fell)",
+    "still_share": 0.77,
+    "floor_change": {
+     "t": 834.5,
+     "to": 5,
+     "mode": "walking",
+     "note": "pressure fell 0.40 hPa: moved up to 5F"
+    },
+    "latency_after_ride_end_s": 3.5
+   },
+   {
+    "start": 985.8,
+    "end": 998.6,
+    "seconds": 12.8,
+    "hpa": 0.51,
+    "direction": "5F->4F (pressure rose)",
+    "still_share": 0.62,
+    "floor_change": {
+     "t": 1000.0,
+     "to": 4,
+     "mode": "stop",
+     "note": "pressure rose 0.41 hPa: moved down to 4F"
+    },
+    "latency_after_ride_end_s": 1.4
+   },
+   {
+    "start": 1094.7,
+    "end": 1109.7,
+    "seconds": 14.9,
+    "hpa": -0.56,
+    "direction": "4F->5F (pressure fell)",
+    "still_share": 0.6,
+    "floor_change": {
+     "t": 1115.0,
+     "to": 5,
+     "mode": "walking",
+     "note": "pressure fell 0.41 hPa: moved up to 5F"
+    },
+    "latency_after_ride_end_s": 5.3
+   }
+  ],
+  "stops": [
+   {
+    "t": 399.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 411.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      0.83
+     ],
+     [
+      "exit10_door",
+      0.17
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 442.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5202",
+      0.699
+     ],
+     [
+      "lift_stairs5",
+      0.301
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 466.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 495.0,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      0.886
+     ],
+     [
+      "esca_down",
+      0.114
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 505.5,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 511.0,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 535.0,
+    "floor": 5,
+    "top3": [
+     [
+      "exit10_door",
+      0.936
+     ],
+     [
+      "y5302_point2",
+      0.064
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 556.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 578.5,
+    "floor": 5,
+    "top3": [
+     [
+      "esca_down",
+      0.5
+     ],
+     [
+      "sr9",
+      0.5
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 589.5,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 605.0,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      0.88
+     ],
+     [
+      "male_disabled_toilet",
+      0.12
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 630.0,
+    "floor": 5,
+    "top3": [
+     [
+      "y5401",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 650.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 656.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 677.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      0.603
+     ],
+     [
+      "exit5_door",
+      0.292
+     ],
+     [
+      "y5302_point2",
+      0.105
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 701.0,
+    "floor": 5,
+    "top3": [
+     [
+      "male_disabled_toilet",
+      0.798
+     ],
+     [
+      "sr9",
+      0.202
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 705.0,
+    "floor": 4,
+    "top3": [
+     [
+      "disabled_toilet",
+      1.0
+     ]
+    ],
+    "floor_note": "pressure rose 0.42 hPa: moved down to 4F",
+    "first_floor": 5
+   },
+   {
+    "t": 738.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 748.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      0.602
+     ],
+     [
+      "lt1a",
+      0.398
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 753.5,
+    "floor": 4,
+    "top3": [
+     [
+      "exit10_door",
+      0.658
+     ],
+     [
+      "lt1a",
+      0.342
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 777.5,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 783.0,
+    "floor": 4,
+    "top3": [
+     [
+      "lt1b",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 815.0,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      0.5
+     ],
+     [
+      "lt1b",
+      0.5
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 820.5,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 844.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5302",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 883.5,
+    "floor": 5,
+    "top3": [
+     [
+      "sr9",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 908.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5302",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 910.5,
+    "floor": 5,
+    "top3": [
+     [
+      "y5302",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 925.0,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 939.0,
+    "floor": 5,
+    "top3": [
+     [
+      "exit5_door",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   },
+   {
+    "t": 944.0,
+    "floor": 5,
+    "top3": [
+     [
+      "exit5_door",
+      0.961
+     ],
+     [
+      "male_toilet",
+      0.039
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 965.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 984.0,
+    "floor": 5,
+    "top3": [
+     [
+      "lift_stairs5",
+      0.539
+     ],
+     [
+      "male_disabled_toilet",
+      0.461
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 5
+   },
+   {
+    "t": 993.5,
+    "floor": 4,
+    "top3": [
+     [
+      "disabled_toilet",
+      1.0
+     ]
+    ],
+    "floor_note": "pressure rose 0.41 hPa: moved down to 4F",
+    "first_floor": 5
+   },
+   {
+    "t": 1005.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 1016.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1021.0,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 1026.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1030.0,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1035.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1040.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1043.0,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1046.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_down",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1060.0,
+    "floor": 4,
+    "top3": [
+     [
+      "lt2b",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 1070.0,
+    "floor": 4,
+    "top3": [
+     [
+      "lt2b",
+      0.899
+     ],
+     [
+      "esca_up",
+      0.101
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 1080.5,
+    "floor": 4,
+    "top3": [
+     [
+      "esca_up",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1096.5,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 4
+   },
+   {
+    "t": 1100.0,
+    "floor": 4,
+    "top3": [
+     [
+      "gate",
+      1.0
+     ]
+    ],
+    "floor_note": "",
+    "first_floor": 4
+   },
+   {
+    "t": 1133.5,
+    "floor": 5,
+    "top3": [
+     [
+      "canteen",
+      1.0
+     ]
+    ],
+    "floor_note": "stop too short to read its own pressure",
+    "first_floor": 5
+   }
+  ]
+ }
+}

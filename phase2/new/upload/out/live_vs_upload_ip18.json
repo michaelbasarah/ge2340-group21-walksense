@@ -1,0 +1,1025 @@
+{
+ "what": "Live path vs upload path on Dicta's iPhone 18 sessions, each held out (model = the other ip18 sessions, as\nthe demo phone's model is trained, entry 89). Live = the session streamed through LiveTracker with the pressure\narriving at once (lag 0, what `check` does) and with the lag the real phone shows.",
+ "device": "iPhone19,2",
+ "sessions": {
+  "sesi1": {
+   "trained_on": [
+    "25nov",
+    "25night"
+   ],
+   "upload": {
+    "n_stops": 27,
+    "found": 27,
+    "floor": 27,
+    "floor_at_first_answer": 27,
+    "top1": 21,
+    "top3": 23,
+    "lit": 23,
+    "lit_right": 18,
+    "top1_p_1.0": 19
+   },
+   "live_baro_lag_0s": {
+    "n_stops": 27,
+    "found": 27,
+    "floor": 27,
+    "floor_at_first_answer": 27,
+    "top1": 21,
+    "top3": 21,
+    "lit": 23,
+    "lit_right": 19,
+    "top1_p_1.0": 18,
+    "same_top1_as_upload": "27/27",
+    "same_floor_as_upload": "27/27",
+    "floor_notes": {
+     "(no note: pressure used, floor kept)": 26,
+     "long gap": 1
+    },
+    "stops": [
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F exit5_door",
+      "upload": "5F exit5_door",
+      "live": "5F exit5_door"
+     },
+     {
+      "truth": "5F male_toilet",
+      "upload": "5F male_toilet",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "5F y5302",
+      "upload": "5F y5302",
+      "live": "5F y5302"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F esca_down",
+      "live": "5F esca_down"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F female_toilet",
+      "upload": "5F female_toilet",
+      "live": "5F female_toilet"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F esca_down",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F esca_up",
+      "upload": "5F esca_up",
+      "live": "5F esca_up"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F lift_stairs5",
+      "live": "5F lift_stairs5"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F y5401",
+      "live": "5F y5401"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5302_point2",
+      "live": "5F y5302_point2"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F disabled_toilet",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F exit5_door",
+      "upload": "4F lt2b",
+      "live": "4F lt2b"
+     },
+     {
+      "truth": "4F lt2a",
+      "upload": "4F lt2a",
+      "live": "4F lt2a"
+     },
+     {
+      "truth": "4F lt2b",
+      "upload": "4F lt2b",
+      "live": "4F lt2b"
+     },
+     {
+      "truth": "4F esca_down",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F y4502",
+      "upload": "4F y4502",
+      "live": "4F y4502"
+     },
+     {
+      "truth": "4F esca_up",
+      "upload": "4F esca_up",
+      "live": "4F esca_up"
+     },
+     {
+      "truth": "4F lt1b",
+      "upload": "4F lt1b",
+      "live": "4F lt1b"
+     },
+     {
+      "truth": "4F lt1a",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F exit10_door",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F gate",
+      "upload": "4F gate",
+      "live": "4F gate"
+     }
+    ]
+   },
+   "live_baro_lag_3.2s": {
+    "n_stops": 27,
+    "found": 27,
+    "floor": 27,
+    "floor_at_first_answer": 26,
+    "top1": 21,
+    "top3": 21,
+    "lit": 23,
+    "lit_right": 19,
+    "top1_p_1.0": 18,
+    "same_top1_as_upload": "27/27",
+    "same_floor_as_upload": "27/27",
+    "floor_notes": {
+     "magnetic floor vote": 1,
+     "(no note: pressure used, floor kept)": 24,
+     "no barometer data": 1,
+     "long gap": 1
+    },
+    "stops": [
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F exit5_door",
+      "upload": "5F exit5_door",
+      "live": "5F exit5_door"
+     },
+     {
+      "truth": "5F male_toilet",
+      "upload": "5F male_toilet",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "5F y5302",
+      "upload": "5F y5302",
+      "live": "5F y5302"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F esca_down",
+      "live": "5F esca_down"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F female_toilet",
+      "upload": "5F female_toilet",
+      "live": "5F female_toilet"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F esca_down",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F esca_up",
+      "upload": "5F esca_up",
+      "live": "5F esca_up"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F lift_stairs5",
+      "live": "5F lift_stairs5"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F y5401",
+      "live": "5F y5401"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5302_point2",
+      "live": "5F y5302_point2"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F disabled_toilet",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F exit5_door",
+      "upload": "4F lt2b",
+      "live": "4F lt2b"
+     },
+     {
+      "truth": "4F lt2a",
+      "upload": "4F lt2a",
+      "live": "4F lt2a"
+     },
+     {
+      "truth": "4F lt2b",
+      "upload": "4F lt2b",
+      "live": "4F lt2b"
+     },
+     {
+      "truth": "4F esca_down",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F y4502",
+      "upload": "4F y4502",
+      "live": "4F y4502"
+     },
+     {
+      "truth": "4F esca_up",
+      "upload": "4F esca_up",
+      "live": "4F esca_up"
+     },
+     {
+      "truth": "4F lt1b",
+      "upload": "4F lt1b",
+      "live": "4F lt1b"
+     },
+     {
+      "truth": "4F lt1a",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F exit10_door",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F gate",
+      "upload": "4F gate",
+      "live": "4F gate"
+     }
+    ]
+   }
+  },
+  "25nov": {
+   "trained_on": [
+    "sesi1",
+    "25night"
+   ],
+   "upload": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "floor_at_first_answer": 26,
+    "top1": 20,
+    "top3": 21,
+    "lit": 26,
+    "lit_right": 20,
+    "top1_p_1.0": 21
+   },
+   "live_baro_lag_0s": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "floor_at_first_answer": 26,
+    "top1": 20,
+    "top3": 20,
+    "lit": 26,
+    "lit_right": 20,
+    "top1_p_1.0": 20,
+    "same_top1_as_upload": "26/26",
+    "same_floor_as_upload": "26/26",
+    "floor_notes": {
+     "(no note: pressure used, floor kept)": 26
+    },
+    "stops": [
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F exit5_door",
+      "upload": "5F exit5_door",
+      "live": "5F exit5_door"
+     },
+     {
+      "truth": "5F male_toilet",
+      "upload": "5F male_toilet",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "5F y5302",
+      "upload": "5F y5302",
+      "live": "5F y5302"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F female_toilet",
+      "live": "5F female_toilet"
+     },
+     {
+      "truth": "5F female_toilet",
+      "upload": "5F female_toilet",
+      "live": "5F female_toilet"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F esca_up",
+      "upload": "5F esca_up",
+      "live": "5F esca_up"
+     },
+     {
+      "truth": "5F esca_down",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F lift_stairs5",
+      "live": "5F lift_stairs5"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F esca_up",
+      "live": "5F esca_up"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5302_point2",
+      "live": "5F y5302_point2"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F disabled_toilet",
+      "upload": "4F y4502",
+      "live": "4F y4502"
+     },
+     {
+      "truth": "4F exit5_door",
+      "upload": "4F exit5_door",
+      "live": "4F exit5_door"
+     },
+     {
+      "truth": "4F lt2a",
+      "upload": "4F lt2a",
+      "live": "4F lt2a"
+     },
+     {
+      "truth": "4F lt2b",
+      "upload": "4F exit5_door",
+      "live": "4F exit5_door"
+     },
+     {
+      "truth": "4F esca_down",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F y4502",
+      "upload": "4F y4502",
+      "live": "4F y4502"
+     },
+     {
+      "truth": "4F esca_up",
+      "upload": "4F esca_up",
+      "live": "4F esca_up"
+     },
+     {
+      "truth": "4F lt1b",
+      "upload": "4F lt1b",
+      "live": "4F lt1b"
+     },
+     {
+      "truth": "4F lt1a",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F exit10_door",
+      "upload": "4F exit10_door",
+      "live": "4F exit10_door"
+     },
+     {
+      "truth": "4F gate",
+      "upload": "4F gate",
+      "live": "4F gate"
+     }
+    ]
+   },
+   "live_baro_lag_3.2s": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "floor_at_first_answer": 25,
+    "top1": 20,
+    "top3": 20,
+    "lit": 26,
+    "lit_right": 20,
+    "top1_p_1.0": 20,
+    "same_top1_as_upload": "26/26",
+    "same_floor_as_upload": "26/26",
+    "floor_notes": {
+     "no barometer data": 2,
+     "(no note: pressure used, floor kept)": 24
+    },
+    "stops": [
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F exit5_door",
+      "upload": "5F exit5_door",
+      "live": "5F exit5_door"
+     },
+     {
+      "truth": "5F male_toilet",
+      "upload": "5F male_toilet",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "5F y5302",
+      "upload": "5F y5302",
+      "live": "5F y5302"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F female_toilet",
+      "live": "5F female_toilet"
+     },
+     {
+      "truth": "5F female_toilet",
+      "upload": "5F female_toilet",
+      "live": "5F female_toilet"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F esca_up",
+      "upload": "5F esca_up",
+      "live": "5F esca_up"
+     },
+     {
+      "truth": "5F esca_down",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F lift_stairs5",
+      "live": "5F lift_stairs5"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F esca_up",
+      "live": "5F esca_up"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5302_point2",
+      "live": "5F y5302_point2"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F disabled_toilet",
+      "upload": "4F y4502",
+      "live": "4F y4502"
+     },
+     {
+      "truth": "4F exit5_door",
+      "upload": "4F exit5_door",
+      "live": "4F exit5_door"
+     },
+     {
+      "truth": "4F lt2a",
+      "upload": "4F lt2a",
+      "live": "4F lt2a"
+     },
+     {
+      "truth": "4F lt2b",
+      "upload": "4F exit5_door",
+      "live": "4F exit5_door"
+     },
+     {
+      "truth": "4F esca_down",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F y4502",
+      "upload": "4F y4502",
+      "live": "4F y4502"
+     },
+     {
+      "truth": "4F esca_up",
+      "upload": "4F esca_up",
+      "live": "4F esca_up"
+     },
+     {
+      "truth": "4F lt1b",
+      "upload": "4F lt1b",
+      "live": "4F lt1b"
+     },
+     {
+      "truth": "4F lt1a",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F exit10_door",
+      "upload": "4F exit10_door",
+      "live": "4F exit10_door"
+     },
+     {
+      "truth": "4F gate",
+      "upload": "4F gate",
+      "live": "4F gate"
+     }
+    ]
+   }
+  },
+  "25night": {
+   "trained_on": [
+    "sesi1",
+    "25nov"
+   ],
+   "upload": {
+    "n_stops": 32,
+    "found": 32,
+    "floor": 30,
+    "floor_at_first_answer": 30,
+    "top1": 22,
+    "top3": 27,
+    "lit": 24,
+    "lit_right": 19,
+    "top1_p_1.0": 21
+   },
+   "live_baro_lag_0s": {
+    "n_stops": 32,
+    "found": 31,
+    "floor": 27,
+    "floor_at_first_answer": 28,
+    "top1": 18,
+    "top3": 23,
+    "lit": 24,
+    "lit_right": 16,
+    "top1_p_1.0": 21,
+    "same_top1_as_upload": "26/31",
+    "same_floor_as_upload": "29/31",
+    "floor_notes": {
+     "(no note: pressure used, floor kept)": 17,
+     "no barometer data": 11,
+     "magnetic floor vote": 2,
+     "pressure rose": 1
+    },
+    "stops": [
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F exit5_door",
+      "upload": "5F exit5_door",
+      "live": "5F exit5_door"
+     },
+     {
+      "truth": "5F male_toilet",
+      "upload": "5F male_toilet",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "5F y5302",
+      "upload": "5F y5302",
+      "live": "5F y5302"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F female_toilet",
+      "upload": "5F y5302_point2",
+      "live": "5F y5302_point2"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F y5401",
+      "live": "5F y5401"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "4F disabled_toilet",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "4F exit5_door",
+      "upload": "4F exit5_door",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "4F lt2a",
+      "upload": "4F lt2a",
+      "live": "4F lt2a"
+     },
+     {
+      "truth": "4F lt2b",
+      "upload": "4F exit5_door",
+      "live": "4F exit5_door"
+     },
+     {
+      "truth": "4F esca_down",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F y4502",
+      "upload": "4F disabled_toilet",
+      "live": "4F disabled_toilet"
+     },
+     {
+      "truth": "4F esca_up",
+      "upload": "4F esca_up",
+      "live": "4F esca_up"
+     },
+     {
+      "truth": "4F lt1b",
+      "upload": "4F lt1b",
+      "live": "4F lt1b"
+     },
+     {
+      "truth": "4F lt1a",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F exit10_door",
+      "upload": "4F lift_stairs5",
+      "live": "4F exit10_door"
+     },
+     {
+      "truth": "4F gate",
+      "upload": "4F gate",
+      "live": "4F gate"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F y5202",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "not found"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F lift_stairs5",
+      "live": "5F lift_stairs5"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5302_point2",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F y5401",
+      "live": "4F lift_stairs5"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     }
+    ]
+   },
+   "live_baro_lag_3.2s": {
+    "n_stops": 32,
+    "found": 32,
+    "floor": 29,
+    "floor_at_first_answer": 27,
+    "top1": 21,
+    "top3": 26,
+    "lit": 25,
+    "lit_right": 19,
+    "top1_p_1.0": 22,
+    "same_top1_as_upload": "29/32",
+    "same_floor_as_upload": "31/32",
+    "floor_notes": {
+     "no barometer data": 14,
+     "magnetic floor vote": 4,
+     "(no note: pressure used, floor kept)": 14
+    },
+    "stops": [
+     {
+      "truth": "5F canteen",
+      "upload": "5F canteen",
+      "live": "5F canteen"
+     },
+     {
+      "truth": "5F exit5_door",
+      "upload": "5F exit5_door",
+      "live": "5F exit5_door"
+     },
+     {
+      "truth": "5F male_toilet",
+      "upload": "5F male_toilet",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "5F y5302",
+      "upload": "5F y5302",
+      "live": "5F y5302"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F female_toilet",
+      "upload": "5F y5302_point2",
+      "live": "5F y5302_point2"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F y5401",
+      "live": "5F y5401"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "4F disabled_toilet",
+      "upload": "5F sr9",
+      "live": "5F sr9"
+     },
+     {
+      "truth": "4F exit5_door",
+      "upload": "4F exit5_door",
+      "live": "5F male_toilet"
+     },
+     {
+      "truth": "4F lt2a",
+      "upload": "4F lt2a",
+      "live": "4F lt2a"
+     },
+     {
+      "truth": "4F lt2b",
+      "upload": "4F exit5_door",
+      "live": "4F exit5_door"
+     },
+     {
+      "truth": "4F esca_down",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F y4502",
+      "upload": "4F disabled_toilet",
+      "live": "4F disabled_toilet"
+     },
+     {
+      "truth": "4F esca_up",
+      "upload": "4F esca_up",
+      "live": "4F esca_up"
+     },
+     {
+      "truth": "4F lt1b",
+      "upload": "4F lt1b",
+      "live": "4F lt1b"
+     },
+     {
+      "truth": "4F lt1a",
+      "upload": "4F lt1a",
+      "live": "4F lt1a"
+     },
+     {
+      "truth": "4F exit10_door",
+      "upload": "4F lift_stairs5",
+      "live": "4F exit10_door"
+     },
+     {
+      "truth": "4F gate",
+      "upload": "4F gate",
+      "live": "4F gate"
+     },
+     {
+      "truth": "5F sr9",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F y5202",
+      "upload": "5F y5202",
+      "live": "5F y5202"
+     },
+     {
+      "truth": "5F exit10_door",
+      "upload": "5F exit10_door",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F male_disabled_toilet",
+      "upload": "5F male_disabled_toilet",
+      "live": "5F male_disabled_toilet"
+     },
+     {
+      "truth": "5F lift_stairs5",
+      "upload": "5F lift_stairs5",
+      "live": "5F lift_stairs5"
+     },
+     {
+      "truth": "5F y5302_point2",
+      "upload": "5F y5302_point2",
+      "live": "5F exit10_door"
+     },
+     {
+      "truth": "5F y5401",
+      "upload": "5F y5401",
+      "live": "5F y5401"
+     },
+     {
+      "truth": "4F lift_stairs5",
+      "upload": "4F lift_stairs5",
+      "live": "4F lift_stairs5"
+     }
+    ]
+   }
+  }
+ }
+}
