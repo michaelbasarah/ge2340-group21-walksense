@@ -1989,7 +1989,7 @@
    "lift": 336
   }
  },
- "toilet_policy": "Standard: ordinary toilets first, a disabled toilet only when no ordinary one fits the filters (PROCESS-LOG entry 90); Step-free or \"disabled\" words: disabled toilets only",
+ "toilet_policy": "Standard: ordinary toilets first, a disabled toilet only when no ordinary one fits the filters (PROCESS-LOG entry 90); Disabled mode (internal \"accessible\", the old \"Step-free\") or \"disabled\" words: disabled toilets only",
  "toilets_floor_filter": [
   {
    "from": "canteen",
@@ -2854,6 +2854,368 @@
    "toilet": "disabled_toilet_4F",
    "policy": "disabled_only",
    "message": "Nearest disabled female toilet: Mixed disabled toilet (4F), about 18 m walking, 14 s."
+  }
+ ],
+ "exits": [
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_5",
+   "metres": 11.1,
+   "seconds": 8.5,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (emergency exit), about 11 m walking, 8 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 11.1,
+   "seconds": 8.5,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 11 m walking, 8 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_5",
+   "metres": 11.1,
+   "seconds": 8.5,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (emergency exit), about 11 m walking, 8 s."
+  },
+  {
+   "from": "canteen",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 11.1,
+   "seconds": 8.5,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 11 m walking, 8 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_10",
+   "metres": 15.1,
+   "seconds": 11.6,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (by the toilets), about 15 m walking, 12 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 37.8,
+   "seconds": 29.1,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 38 m walking, 29 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_10",
+   "metres": 15.1,
+   "seconds": 11.6,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (by the toilets), about 15 m walking, 12 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 37.8,
+   "seconds": 29.1,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 38 m walking, 29 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_5",
+   "metres": 21.6,
+   "seconds": 16.6,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (emergency exit), about 22 m walking, 17 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 21.6,
+   "seconds": 16.6,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 22 m walking, 17 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_5",
+   "metres": 21.6,
+   "seconds": 16.6,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (emergency exit), about 22 m walking, 17 s."
+  },
+  {
+   "from": "y5401",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 21.6,
+   "seconds": 16.6,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 22 m walking, 17 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_10",
+   "metres": 0,
+   "seconds": 0.0,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (by the toilets), about 0 m walking, 0 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 22.7,
+   "seconds": 17.5,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 23 m walking, 18 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_10",
+   "metres": 0,
+   "seconds": 0.0,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (by the toilets), about 0 m walking, 0 s."
+  },
+  {
+   "from": "exit_10",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 22.7,
+   "seconds": 17.5,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 23 m walking, 18 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_10_4F",
+   "metres": 5.9,
+   "seconds": 4.5,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (4F), about 6 m walking, 4 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 31.3,
+   "seconds": 24.1,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 31 m walking, 24 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_10_4F",
+   "metres": 5.9,
+   "seconds": 4.5,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (4F), about 6 m walking, 4 s."
+  },
+  {
+   "from": "lt1a",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 31.3,
+   "seconds": 24.1,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 31 m walking, 24 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_5_4F",
+   "metres": 35.1,
+   "seconds": 27.0,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (4F), about 35 m walking, 27 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 35.1,
+   "seconds": 27.0,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 35 m walking, 27 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_5_4F",
+   "metres": 35.1,
+   "seconds": 27.0,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (4F), about 35 m walking, 27 s."
+  },
+  {
+   "from": "y4502",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 35.1,
+   "seconds": 27.0,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 35 m walking, 27 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_5_4F",
+   "metres": 20.0,
+   "seconds": 15.4,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (4F), about 20 m walking, 15 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 20.0,
+   "seconds": 15.4,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 20 m walking, 15 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_5_4F",
+   "metres": 20.0,
+   "seconds": 15.4,
+   "connectors": [],
+   "message": "Nearest exit: Exit 5 (4F), about 20 m walking, 15 s."
+  },
+  {
+   "from": "lt2b",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 20.0,
+   "seconds": 15.4,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 20 m walking, 15 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "entrance_exit",
+   "metres": 0,
+   "seconds": 0.0,
+   "connectors": [],
+   "message": "Nearest exit: Entrance gate (4F), about 0 m walking, 0 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 14.6,
+   "seconds": 11.2,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 15 m walking, 11 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "entrance_exit",
+   "metres": 0,
+   "seconds": 0.0,
+   "connectors": [],
+   "message": "Nearest exit: Entrance gate (4F), about 0 m walking, 0 s."
+  },
+  {
+   "from": "entrance_exit",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5_4F",
+   "metres": 14.6,
+   "seconds": 11.2,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (4F), about 15 m walking, 11 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "emergency": false,
+   "exit": "exit_10",
+   "metres": 15.1,
+   "seconds": 11.6,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (by the toilets), about 15 m walking, 12 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "standard",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 37.8,
+   "seconds": 29.1,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 38 m walking, 29 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "emergency": false,
+   "exit": "exit_10",
+   "metres": 15.1,
+   "seconds": 11.6,
+   "connectors": [],
+   "message": "Nearest exit: Exit 10 (by the toilets), about 15 m walking, 12 s."
+  },
+  {
+   "from": "y5202",
+   "mode": "accessible",
+   "emergency": true,
+   "exit": "exit_5",
+   "metres": 37.8,
+   "seconds": 29.1,
+   "connectors": [],
+   "message": "Nearest emergency exit: Exit 5 (emergency exit), about 38 m walking, 29 s."
   }
  ],
  "no_option_example": {

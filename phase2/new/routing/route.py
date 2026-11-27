@@ -1,12 +1,13 @@
 """Routing on graph.json: A*, Dijkstra, turn-by-turn instructions and the `route()` entry point.
 
-    from route import route, plan, nearest_toilet
+    from route import route, plan, nearest_toilet, nearest_exit
     path, metres, seconds, instructions = route('canteen', 'lt1a')      # graph.json as it is (research checks)
     p = plan('canteen', 'lt1a', mode='accessible')                       # route planner: lifts only
     t = nearest_toilet('lt1a', mode='standard', gender='female')         # nearest toilet for a filter
+    x = nearest_exit('y5202', mode='standard', emergency=False)          # nearest exit (or emergency exit only)
 
 `route()` / `plan()` take graph ids (see graph.json). Only the standard library is used. The upload app
-(phase2/new/upload/search.py) uses plan() and nearest_toilet().
+(phase2/new/upload/search.py) uses plan(), nearest_toilet() and nearest_exit().
 
 Cost = seconds. Same-floor edges: metres / speed; escalator and stairs rides have their own times (graph.json).
 Escalators are one way (5F down escalator -> 4F down escalator, 4F up escalator -> 5F up escalator).
@@ -274,10 +275,11 @@ def toilet_allowed(toilet_id, mode='standard', gender='any', toilets=TOILETS):
 # the floor filter and can be reached; a disabled toilet is used only when no ordinary one is left (in our data: a
 # "4F" request, since 4F has only the mixed disabled toilet, or a filter no ordinary toilet fits). Distance does not
 # override this: from 4F a Standard "male toilet" goes up to the 5F male toilet, not to the nearer 4F disabled one.
-# Step-free mode and words like "disabled" / "accessible" / "wheelchair" (accessible_only) -> disabled toilets only.
+# Disabled mode (internal name 'accessible'; the app called it "Step-free" before entry 93) and words like
+# "disabled" / "accessible" / "wheelchair" (accessible_only) -> disabled toilets only.
 POLICY_NOTE = {
     'ordinary': 'Standard mode: ordinary toilets first, so disabled toilets stay free for people who need them '
-                '(choose Step-free or ask for a "disabled toilet" to get one).',
+                '(choose Disabled mode or ask for a "disabled toilet" to get one).',
     'disabled_fallback': 'No %s fits here, so this is a disabled toilet (Standard mode uses one only then).',
     'disabled_only': ''}
 
@@ -303,7 +305,7 @@ def nearest_toilet(start_id, mode='standard', gender='any', floor=None, accessib
             try:
                 p = plan(start_id, tid, mode)
             except ValueError:
-                why = 'no %s route' % ('step-free' if mode == 'accessible' else '')
+                why = 'no route%s' % (' in Disabled mode' if mode == 'accessible' else '')
         if why:
             excluded.append({'id': tid, 'name': g.nodes[tid]['name'], 'floor': g.nodes[tid]['floor'], 'reason': why.replace('  ', ' ')})
         else:
@@ -338,6 +340,51 @@ def nearest_toilet(start_id, mode='standard', gender='any', floor=None, accessib
         note = ''
     return {'choice': best['plan'], 'toilet': best['id'], 'options': options, 'excluded': excluded, 'message': msg,
             'policy': policy, 'policy_note': note}
+
+
+# Exits in graph.json (kind = exit). emergency = tagged "emergency" in request-matching/destinations.csv (Exit 5 on both
+# floors; graph.json names the 5F one "Exit 5 (emergency exit)"). Whether Exit 10 and the entrance gate also count as
+# emergency exits is not in our data. Used by search.py for "nearest exit" / "emergency exit" requests (entry 93).
+EXITS = {
+    'exit_5': {'emergency': True},
+    'exit_10': {'emergency': False},
+    'exit_5_4F': {'emergency': True},
+    'exit_10_4F': {'emergency': False},
+    'entrance_exit': {'emergency': False},
+}
+
+
+def nearest_exit(start_id, mode='standard', emergency=False, floor=None, exits=EXITS):
+    """Nearest exit by route cost (seconds), like nearest_toilet. emergency=True: only exits tagged emergency;
+    floor: only exits on that floor.
+    -> {'choice': Plan or None, 'exit': id or None, 'options': [...], 'excluded': [...], 'message': str}"""
+    if mode not in PROFILES:
+        raise KeyError('unknown mode %r' % mode)
+    g = graph(mode)
+    options, excluded = [], []
+    for eid, e in exits.items():
+        why = 'not an emergency exit in our data' if emergency and not e['emergency'] else ''
+        if not why and floor is not None and g.nodes[eid]['floor'] != floor:
+            why = 'not on %dF' % floor
+        if not why:
+            try:
+                p = plan(start_id, eid, mode)
+            except ValueError:
+                why = 'no route%s' % (' in Disabled mode' if mode == 'accessible' else '')
+        if why:
+            excluded.append({'id': eid, 'name': g.nodes[eid]['name'], 'floor': g.nodes[eid]['floor'], 'reason': why})
+        else:
+            options.append({'id': eid, 'name': g.nodes[eid]['name'], 'floor': g.nodes[eid]['floor'], 'metres': p.metres,
+                            'seconds': p.seconds, 'plan': p})
+    options.sort(key=lambda o: (o['seconds'], o['metres'], o['id']))
+    want = 'emergency exit' if emergency else 'exit'
+    if not options:
+        return {'choice': None, 'exit': None, 'options': [], 'excluded': excluded,
+                'message': 'No %s%s reachable from here in the area WalkSense covers.' % (
+                    want, (' on %dF' % floor) if floor is not None else '')}
+    best = options[0]
+    return {'choice': best['plan'], 'exit': best['id'], 'options': options, 'excluded': excluded,
+            'message': 'Nearest %s: %s, about %.0f m walking, %.0f s.' % (want, best['name'], best['metres'], best['seconds'])}
 
 
 SAMPLE_ROUTES = [('y5302', 'female_toilet'), ('canteen', 'lt1a'), ('y5302', 'lt2b'), ('lt1a', 'canteen'),
@@ -385,7 +432,8 @@ def samples(path=HERE / 'out' / 'planner_samples.json'):
         use[m] = cnt
     out['cross_floor_pairs_by_connector'] = use
     out['toilet_policy'] = ('Standard: ordinary toilets first, a disabled toilet only when no ordinary one fits the filters '
-                            '(PROCESS-LOG entry 90); Step-free or "disabled" words: disabled toilets only')
+                            '(PROCESS-LOG entry 90); Disabled mode (internal "accessible", the old "Step-free") or "disabled" words: '
+                            'disabled toilets only')
     out['toilets_floor_filter'] = []                     # "4F toilet" / "5F toilet": the case where Standard falls back
     for st in SAMPLE_STARTS:
         for m in PROFILES:
@@ -394,6 +442,16 @@ def samples(path=HERE / 'out' / 'planner_samples.json'):
                     t = nearest_toilet(st, m, gd, floor=fl)
                     out['toilets_floor_filter'].append({'from': st, 'mode': m, 'gender': gd, 'floor': fl, 'toilet': t['toilet'],
                                                         'policy': t['policy'], 'message': t['message']})
+    out['exits'] = []                                    # nearest exit / emergency exit (entry 93)
+    for st in SAMPLE_STARTS + ['y5202']:
+        for m in PROFILES:
+            for em in (False, True):
+                t = nearest_exit(st, m, em)
+                out['exits'].append({'from': st, 'mode': m, 'emergency': em, 'exit': t['exit'],
+                                     'metres': t['choice'].metres if t['choice'] else None,
+                                     'seconds': t['choice'].seconds if t['choice'] else None,
+                                     'connectors': [c['kind'] for c in t['choice'].connectors] if t['choice'] else [],
+                                     'message': t['message']})
     t = nearest_toilet('canteen', 'accessible', 'female', floor=5)
     out['no_option_example'] = {'from': 'canteen', 'mode': 'accessible', 'gender': 'female', 'floor': 5, 'message': t['message']}
     path.parent.mkdir(exist_ok=True)

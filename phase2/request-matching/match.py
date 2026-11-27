@@ -377,28 +377,45 @@ def hybrid_gemini_match(query, places, allow_call=False):
     return pid, (1.0 if pid else 0.0), 'llm', r
 
 
-# The app's free-question variant: the same grounding (only the listed places, NONE otherwise) plus one short sentence.
+# The app's search prompt (phase2/new/upload/search.py). Not used by evaluate.py (the 128-query scores use LLM_SYSTEM).
+# v1 (entry 71): {"place_id", "answer"}, one friendly sentence that the app showed on screen.
+# v2 (entry 93; user, 27 Nov: do not show the LLM's reply text, and find FROM as well as TO): {"from_id", "place_id"}.
+# No sentence is asked for any more (the app writes its own route card). Same grounding: only listed IDs or NONE.
+ASK_PROMPT_VERSION = 'v2'
 ASK_SYSTEM = (
-    "You help a student find a place in one university building (CityU AC1, floors 5 and 4). WalkSense covers ONLY "
+    "You help a student find their way in one university building (CityU AC1, floors 5 and 4). WalkSense covers ONLY "
     "the places in the fixed list. Reply with a JSON object and nothing else: "
-    '{"place_id": "<one place ID copied exactly from the list, or NONE>", "answer": "<one short friendly sentence>"}. '
-    "Use NONE when no place in the list fits the request, when the request names a place that is not in the list "
-    "(for example a lab or a room number that is not listed), or when it is not about finding a place; then say "
-    "politely in the answer that it is not in the area WalkSense covers (AC1 floors 5 and 4). "
-    "The answer is one sentence of at most 25 words, in English, and uses only facts from the list (name, floor, "
-    "tags, also called): never invent rooms, opening hours, directions or facilities. A route is drawn separately. "
-    "The request may contain typos, Indonesian, Cantonese or a mix of languages. When several places fit equally "
-    "(for example toilets on different floors) and the request does not say which floor, pick one and say its floor. "
+    '{"from_id": "<place ID or NONE>", "place_id": "<place ID or NONE>"}. '
+    "place_id = where the student wants to go: one place ID copied exactly from the list, or NONE when no place in the "
+    "list fits, when the request names a place that is not in the list (for example a lab or a room number that is not "
+    "listed), when it is not about finding a place, or when it only says where the student is. "
+    "from_id = where the student says they are now or want to start from (for example \"I'm in Y5-202\", \"from the "
+    "canteen\", \"aku di kantin\"): one place ID copied exactly from the list, or NONE when the request does not say "
+    "or the start is not in the list. Never guess a start. "
+    "When the request asks for the nearest place of a kind, or any place of a kind (toilet, exit, lift, escalator, "
+    "lecture theatre), without naming one, pick any one of that kind: the app then chooses the nearest one by route. "
+    "The request may contain typos, Indonesian, Cantonese or a mix of languages. "
     "Floor 5 is the upper floor (atas), floor 4 the lower floor (bawah).")
 
 
 def ask_prompt(query, places):
     return ("Place list (ID | name | floor | tags | also called):\n" + llm_places_block(places) +
-            "\n\nRequest: " + json.dumps(query, ensure_ascii=False) + '\nJSON answer {"place_id": ..., "answer": ...}:')
+            "\n\nRequest: " + json.dumps(query, ensure_ascii=False) + '\nJSON answer {"from_id": ..., "place_id": ...}:')
 
 
-def parse_ask(raw, valid_ids):
-    """-> (place_id | None, answer) from the JSON reply, or raise ValueError if it is not usable."""
+def _ask_id(j, field, valid_ids):
+    v = j.get(field)
+    v = '' if v is None else str(v).strip().strip('`"\'').strip()
+    if v.upper() in ('NONE', 'NULL', ''):
+        return None
+    if v not in valid_ids:
+        raise ValueError('%s not in the list: %s' % (field, v[:40]))
+    return v
+
+
+def parse_ask_route(raw, valid_ids):
+    """v2 reply -> (from_id | None, place_id | None, answer). place_id is required; a missing from_id = NONE; an
+    "answer" sentence (v1 replies) is accepted but not required. ValueError if the reply is not usable."""
     t = raw.strip()
     if t.startswith('```'):
         t = t.strip('`').strip()
@@ -407,13 +424,18 @@ def parse_ask(raw, valid_ids):
     j = json.loads(t)
     if not isinstance(j, dict):
         raise ValueError('not a JSON object')
-    pid = str(j.get('place_id', '')).strip().strip('`"\'').strip()
-    if pid.upper() == 'NONE':
-        pid = None
-    elif pid not in valid_ids:
-        raise ValueError('place_id not in the list: ' + pid[:40])
+    if not str(j.get('place_id') or '').strip():
+        raise ValueError('no place_id in the reply')
+    pid = _ask_id(j, 'place_id', valid_ids)
+    fid = _ask_id(j, 'from_id', valid_ids)
     ans = j.get('answer')
     ans = ' '.join(ans.split())[:300] if isinstance(ans, str) else ''
+    return fid, pid, ans
+
+
+def parse_ask(raw, valid_ids):
+    """-> (place_id | None, answer) from the JSON reply, or raise ValueError if it is not usable (v1 interface)."""
+    _, pid, ans = parse_ask_route(raw, valid_ids)
     return pid, ans
 
 

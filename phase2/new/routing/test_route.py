@@ -203,5 +203,35 @@ class PlannerTests(unittest.TestCase):
             R.nearest_toilet('lt1a', 'standard', 'other')
 
 
+class ExitTests(unittest.TestCase):
+    """Entry 93: nearest exit by route; emergency = destinations.csv tag; floor filter."""
+    def test_exit_table_matches_graph_and_tags(self):
+        import csv
+        from pathlib import Path
+        g = R.graph()
+        self.assertEqual(set(R.EXITS), {n for n in g.nodes if g.nodes[n]['kind'] == 'exit'})
+        dest = {d['place_id']: d for d in csv.DictReader((Path(R.HERE).parents[1] / 'request-matching' / 'destinations.csv').open(encoding='utf-8'))}
+        for eid, e in R.EXITS.items():
+            self.assertEqual(e['emergency'], 'emergency' in dest[eid]['tags'].split(';'), eid)
+
+    def test_nearest_exit_every_start(self):
+        g = R.graph()
+        for st in g.nodes:
+            for mode in R.PROFILES:
+                for em in (False, True):
+                    for fl in (None, 5, 4):
+                        t = R.nearest_exit(st, mode, em, fl)
+                        ok = [e for e in R.EXITS if (not em or R.EXITS[e]['emergency']) and (fl is None or g.nodes[e]['floor'] == fl)]
+                        best = min(ok, key=lambda e: (R.plan(st, e, mode).seconds, R.plan(st, e, mode).metres, e))
+                        self.assertEqual(t['exit'], best, (st, mode, em, fl))
+                        self.assertEqual(len(t['options']) + len(t['excluded']), len(R.EXITS))
+        t = R.nearest_exit('y5202', 'standard')
+        self.assertEqual((t['exit'], t['choice'].metres), ('exit_10', 15.1))
+        self.assertEqual(R.nearest_exit('y5202', 'standard', emergency=True)['exit'], 'exit_5')
+        self.assertIsNone(R.nearest_exit('y5202', 'standard', emergency=True, exits={'exit_10': {'emergency': False}})['exit'])
+        with self.assertRaises(KeyError):
+            R.nearest_exit('lt1a', 'fly')
+
+
 if __name__ == '__main__':
     unittest.main()

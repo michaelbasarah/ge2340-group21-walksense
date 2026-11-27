@@ -74,13 +74,14 @@ The page and the commands below are on the laptop. `curl` and `python3 -m json.t
    ```sh
    curl -s http://127.0.0.1:8000/api/live | python3 -m json.tool | head -40
    ```
-   Want: `"enabled": true`, `"device": "iPhone19,2"`, `"connected": true`, `"measuring": true`, `"error": ""`, `model_note` = `trained on this phone model (iPhone19,2), all sessions`, and `buffers` listing acc, gyr, mag, baro. The page's status line says "Waiting for data" / "Standing" / "Stopped", never "Not connected to the phone". (15 s)
-3. **One stop**: stand still, phone flat facing the door, for 10 s at any place. At 3 s the page says `Stopped ...`, the top-3 appears, the floor note appears once. Lit circle if sure (at least 80%), dashed "maybe" ring if not. Then walk 10 steps: the blue dot moves. (35 s)
-4. **Search** "where can I study": expect the Study rooms (5F), method `keyword` offline or `gemini` with a key. (10 s)
-5. **One route**: To = LT1a, From = Canteen entrance. Standard: 36.6 m, 48.2 s, escalator down 20 s (checked offline 27 Nov with `search.plan_route`). (10 s)
-6. **Toilet chip**: chip Female, "Nearest toilet" from the Canteen: Female toilet (5F), about 16 m (checked offline). (10 s)
-7. **Step-free route**: chip Step-free, same Canteen -> LT1a: lift, 65.0 m, 92 s, the card names the lift (checked offline). Step-free + Female toilet from the Canteen goes to the Mixed disabled toilet (4F) via the lift, about 30 m / 66 s (offline check). **After entry 90 lands** the Standard toilet answers may change; the Step-free ones should not. (15 s)
-8. Back to Standard. Pause phyphox (saves a recording) and press play again before the real run.
+   Want: `"enabled": true`, `"device": "iPhone19,2"`, `"connected": true`, `"measuring": true`, `"error": ""`, `model_note` = `trained on this phone model (iPhone19,2), all sessions`, and `buffers` listing acc, gyr, mag, baro. On the page, open **Live sensor data ▸** (closed by default since entry 93): it says "Waiting for data" / "Standing" / "Stopped", never "Not connected to the phone". (15 s)
+3. **One stop**: stand still, phone flat facing the door, for 10 s at any place. At 3 s Live sensor data says `Stopped ...`; the chip at the bottom right of the map shows the place and %; lit circle if sure (at least 80%), dashed "maybe" ring if not. The From list now reads "Current location (<that place>)". Then walk 10 steps: the blue dot moves. (35 s)
+4. **Search** "where can I study": To = Study rooms (5F) and the route from Current location is drawn; no answer sentence (entry 93). Steps ▸ says `Search: offline keyword match` or `Search: Gemini`. Before any place has lit, the card says **Waiting for location** and draws nothing: that is expected. (10 s)
+5. **One route**: To = LT1a, From = Canteen entrance. Standard: 37 m · 48 s, "Floor change: Escalator 5F → 4F" (36.6 m, 48.2 s, escalator down 20 s; checked offline 27 Nov with `search.plan_route`, rechecked for entry 93). (10 s)
+6. **Toilet**: WC **Female**, From = Canteen, To = **Nearest toilet** (or search "toilet"): Female toilet (5F), 16 m · 12 s (checked offline). The old "Nearest toilet" button and "Any WC" chip are gone (entry 93); tap Female again for "any". (10 s)
+7. **Disabled route**: chip **Disabled** (called Step-free before entry 93), same Canteen -> LT1a: 65 m · 1 min 32 s, "Floor change: Lift 5F → 4F" and a "Disabled: lifts only" tag (checked offline). Disabled + WC Female + To = Nearest toilet from the Canteen: Mixed disabled toilet (4F) via the lift, 30.5 m / 65.5 s (offline check, entry 93). (15 s)
+8. **Start in the query** (entry 93): search "im in y5202, find me the nearest exit": From becomes Room Y5-202, To = Exit 10 (by the toilets), 15 m · 12 s (offline and with Gemini on 27 Nov). Set From back to **Current location** afterwards. (10 s)
+9. Back to Standard. Pause phyphox (saves a recording) and press play again before the real run.
 
 If any step fails, go to the table.
 
@@ -92,7 +93,7 @@ If any step fails, go to the table.
 | Same error, address has no port | Remote access is off, phone slept, different network, or VPN on | Turn on Allow remote access, wake the phone, rejoin the laptop's hotspot, VPN off on both. |
 | Page does not load on the phone | Server in WSL (printed IP is unreachable), hotspot off, firewall | Open `http://127.0.0.1:8000` on the laptop instead (section b). Allow Python in the Windows firewall. Same hotspot for both. |
 | Page loads, status "Not connected to the phone" | `--live` address wrong, phyphox closed | Read the error text on the page; re-run `live.py probe` with the exact address; restart `server.py`. |
-| Search says "answers offline" / no Gemini | No `.env`, no internet on the hotspot, timeout, quota (entry 71, 84) | **Expected and fine**: keyword then fuzzy still answers, the page says which method. Run `check_gemini.py` to see why. After no internet/timeout Gemini is skipped for 60 s; after a rejected key until restart. Raise `GEMINI_TIMEOUT_S` in `.env` if it is slow. |
+| Search says "answers offline" / no Gemini | No `.env`, no internet on the hotspot, timeout, quota (entry 71, 84) | **Expected and fine**: keyword then fuzzy still answers; the card's Steps ▸ says which method. Run `check_gemini.py` to see why. After no internet/timeout Gemini is skipped for 60 s; after a rejected key until restart. Raise `GEMINI_TIMEOUT_S` in `.env` if it is slow. |
 | `KeyError: 'mag'` at start-up | Gitignored clean data not built (entry 81) | The two `build_night.py` / `build_tian26.py` commands in section a, then restart. |
 | Floor wrong after a stop | Barometer missing or off in the phyphox experiment (floor note says `no barometer data: floor kept`), or you changed floor without a stop | Check the experiment has pressure; tap "I'm on 5F" / "I'm on 4F" once; stand still 10 s again. |
 | Floor right, lit place wrong | Weak place (section e), phone not flat or not facing the door, 3 s window too short | Stand still **60 s** (the model was trained on 60 s stops), phone flat facing the door; the lit place can change as the stop gets longer. Only trust a lit circle that stays. |
@@ -125,7 +126,7 @@ If any step fails, go to the table.
 
 Walking between them: gate to LT2a passes Exit 5 (4F); LT2a to the up escalator passes LT2b and the down escalator (4F). **Walk past, do not stop** at those (a stop of 3 s or more is read as a place). Stop 3 to 4 includes the escalator ride: do not stand still on the escalator, and stand still only after stepping off.
 
-**Demo the planner on the strong places too:** search/route between them (Canteen -> LT1a Standard vs Step-free is the best story: escalator 36.6 m vs lift 65.0 m, both checked offline), then the toilet chips. **Avoid** as a live-lit moment: the two escalator-down stops, LT1a, and the 5F lift/stairs. The route planner does not use the place guess for a typed From/To, so weak places are safe there: only the lit circle and the From = "where I am" default depend on the guess.
+**Demo the planner on the strong places too:** search/route between them (Canteen -> LT1a Standard vs Disabled is the best story: escalator 36.6 m vs lift 65.0 m, both checked offline), then the WC toggle with To = Nearest toilet. **Avoid** as a live-lit moment: the two escalator-down stops, LT1a, and the 5F lift/stairs. The route planner does not use the place guess for a typed From/To, so weak places are safe there: only the lit circle and the From = "Current location" default depend on the guess.
 
 If a weak place must be shown, say it is the weak one before the lit circle appears, and have the retake ready (section f).
 
