@@ -397,6 +397,11 @@ Per phone, leave one session out (`fused_sample_predictions.csv`; macro over the
 
 Deployable model (`out/fused_model.json`): weights B 0, xyz 0.4, tilt 0.1, Wi-Fi 0, baro 0.5, k 25.
 
+Supporting comparison with the fixed code (`out-a56/comparison.csv`; A = the 26-Nov config via `out-a56/config_A.json`, B = the
+official config, C1 = label-free offset fit on the a56 night only; leave one session out, all samples / without the a56 night / a56 night):
+default A 179/411, 177/379, 2/32; B 191/379 (= `out/`), excluded; C1 192/411, 181/379, 11/32. Split20 A 557/1183, 545/1092, 12/91;
+B 527/1092 (= `out-split20/`); C1 610/1183, 579/1092, 31/91. C, C2 and C21 were not rerun (26-Nov numbers in `comparison_2026-11-26.csv`).
+
 ## Data issues found
 
 - Very strong fields (place median \|B\| above 100 uT, `results.json` `magnetic_check`): 24 s2 iPhone at escalator_down_4F 147.9 and escalator_up_4F 142.5 uT, 24 s2 S24 at escalator_down_4F 127.7, 24 s1 S24 at disabled_toilet 121.6 and escalator_down 101.3. The iPhone on 23 Nov ranges 32.9 to 58.9 uT. Both phones see the 4F down-escalator in session 2, so it is more likely something physical there that night (running escalator machinery?) than one sensor. Worth asking the collector; see `fig_per_place_B_pressure.png`.
