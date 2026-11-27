@@ -91,11 +91,11 @@ What this does and does not say: given a correct text plan of this small graph (
 
 Between two nodes only the cheapest edge the mode allows is searched (Dijkstra on a multigraph = Dijkstra on its cheapest parallel edges); the instructions still know the other one ("Take the stairs down to 4F (about 30 s); the lift is next to them."). With these numbers Standard never picks the lift (stairs 30 s < lift 42 s at the same landing); the lift would win in Standard only if the wait were under 18 s. Over all 336 ordered cross-floor pairs (`out/planner_samples.json`): Standard uses the escalator for 251 and the stairs for 85; Step-free uses the lift for all 336. Standard costs equal the old `route()` costs for every pair (test).
 
-**Modes.** `standard` = walk + stairs + lift + escalator; `accessible` (Step-free in the app) = walk + lift. Wheelchair speed is not modelled (same 1.3 m/s); we do not know whether any corridor has a step.
+**Modes.** `standard` = walk + stairs + lift + escalator; `accessible` ("Disabled" in the app since entry 93, "Step-free" before) = walk + lift. Wheelchair speed is not modelled (same 1.3 m/s); we do not know whether any corridor has a step.
 
 **Examples** (`out/planner_samples.json`):
 
-| from -> to | Standard | Step-free |
+| from -> to | Standard | Disabled (`accessible`) |
 |---|---|---|
 | Y5-302 -> Female toilet (5F, "B -> C -> D -> E") | 35.2 m, 27.1 s: Y5-302 -> study rooms 13.9 m -> Y5-202 10.6 m -> Female toilet 10.7 m (all measured) | same |
 | Canteen -> LT1a | 36.6 m, 48.2 s, down escalator | 65.0 m, 92.0 s, lift |
@@ -105,6 +105,8 @@ Between two nodes only the cheapest edge the mode allows is searched (Dijkstra o
 | 5F up escalator -> 4F down escalator | 10.3 m, 27.9 s (walk to the down escalator first) | 65.9 m, 92.7 s, lift |
 
 **Toilets.** `TOILETS` in `route.py`: `male_toilet` (5F, male), `female_toilet` (5F, female), `disabled_toilet` (5F, male, disabled: "Male disabled toilet (5F)"), `disabled_toilet_4F` (4F, mixed, disabled: "Mixed disabled toilet (4F)"); names from `day3/config.json` `place_display` (user, 26 Nov). 4F has no ordinary toilet in our data. Male -> male + mixed; Female -> female + mixed; Step-free -> disabled only. Nearest = lowest route cost; ties by metres. A filter with no toilet returns `choice = None` and a message that lists every toilet with its reason (e.g. Step-free + Female + 5F only: the 5F disabled toilet is male only). Standard + Any or Male can pick a disabled toilet when it is the nearest (from the canteen: male disabled toilet 14.3 m / 11.0 s, male toilet 14.7 m / 11.3 s); the app lists the other fitting toilets under the route.
+
+**Exits (entry 93).** `EXITS` in `route.py`: the 5 exit nodes of graph.json; `emergency` = tagged emergency in `request-matching/destinations.csv` (Exit 5 on 5F and 4F). `nearest_exit(start, mode, emergency=False, floor=None)` ranks them by route cost like `nearest_toilet`. From Y5-202: Exit 10 (by the toilets) 15.1 m / 11.6 s; emergency only: Exit 5 37.8 m / 29.1 s. `route.py samples` writes `exits` (9 starts x 2 modes x emergency yes/no). Whether Exit 10 and the gate count as emergency exits is not in our data.
 
 **To confirm on site:** the lift position (one lift next to the stairs on each floor, as `lift_stairs` assumes), whether stairs exist at that core on both floors and whether there are other lifts; a timed lift wait and ride; a timed escalator ride; 4F -> 5F on the stairs; whether 4F really has no ordinary toilets; whether the 5F disabled toilet is male only and the 4F one mixed (from the user, 26 Nov); step-free access along every corridor (thresholds, doors).
 

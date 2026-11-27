@@ -221,6 +221,21 @@ class TestAskParse(unittest.TestCase):
             with self.assertRaises(ValueError):
                 M.parse_ask(bad, self.ids)
 
+    def test_parse_route_v2(self):
+        """Entry 93: the app's v2 reply {"from_id", "place_id"}; no sentence needed; from_id optional."""
+        p = M.parse_ask_route
+        self.assertEqual(p('{"from_id": "canteen", "place_id": "sr9"}', self.ids), ('canteen', 'sr9', ''))
+        self.assertEqual(p('{"from_id": "NONE", "place_id": "sr9"}', self.ids), (None, 'sr9', ''))
+        self.assertEqual(p('{"place_id": "sr9"}', self.ids), (None, 'sr9', ''))
+        self.assertEqual(p('{"from_id": null, "place_id": "NONE"}', self.ids), (None, None, ''))
+        self.assertEqual(p('```json\n{"from_id": "sr9", "place_id": "NONE"}\n```', self.ids), ('sr9', None, ''))
+        for bad in ('{"from_id": "chem_lab", "place_id": "sr9"}', '{"from_id": "sr9"}', '{"place_id": ""}'):
+            with self.assertRaises(ValueError):
+                p(bad, self.ids)
+        self.assertIn('from_id', M.ask_prompt('x', [{'place_id': 'sr9', 'name': 'SR9', 'floor': '5', 'tag_set': set(),
+                                                     'alias_list': []}]))
+        self.assertEqual(M.ASK_PROMPT_VERSION, 'v2')
+
 
 if __name__ == '__main__':
     unittest.main()

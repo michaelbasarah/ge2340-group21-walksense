@@ -70,36 +70,74 @@ def gemini_status():
 
 
 def ask_gemini(query):
-    """(place_id | None, answer, error | None). error set = Gemini not usable now (fall back)."""
+    """(from_id | None, place_id | None, answer, error | None). error set = Gemini not usable now (fall back).
+    Prompt v2 (match.ASK_SYSTEM, entry 93): one call returns the start the query names (or NONE) and the destination.
+    Only real, usable replies are cached (in memory, keyed by prompt version + query); errors are never cached."""
     key, _ = gemini.settings()
     if not key:
-        return None, '', 'no Gemini key in .env'
+        return None, None, '', 'no Gemini key in .env'
     if _state['disabled']:
-        return None, '', _state['disabled']
+        return None, None, '', _state['disabled']
     if time.time() < _state['paused_until']:
-        return None, '', _state['last_error'] or 'Gemini paused'
-    q = ' '.join(query.lower().split())
+        return None, None, '', _state['last_error'] or 'Gemini paused'
+    q = (M.ASK_PROMPT_VERSION, ' '.join(query.lower().split()))
     with _lock:
         if q in _cache:
             return (*_cache[q], None)
     try:
         raw, _ = gemini.generate(M.ASK_SYSTEM, M.ask_prompt(query, PLACES), json_mode=True)
-        pid, ans = M.parse_ask(raw, set(BY_ID))
+        fid, pid, ans = M.parse_ask_route(raw, set(BY_ID))
     except gemini.GeminiError as e:
         _state['last_error'] = str(e)
         if e.kind in ('bad_key', 'bad_model'):
             _state['disabled'] = str(e)              # will not fix itself: needs a new .env and a restart
         elif e.kind in ('network', 'timeout', 'quota', 'server'):
             _state['paused_until'] = time.time() + PAUSE_S
-        return None, '', str(e)
+        return None, None, '', str(e)
     except (ValueError, TypeError) as e:
         _state['last_error'] = f'Gemini reply not usable ({e})'
-        return None, '', _state['last_error']
+        return None, None, '', _state['last_error']
     _state['last_error'] = ''
     with _lock:
         if len(_cache) < 2000:
-            _cache[q] = (pid, ans)
-    return pid, ans, None
+            _cache[q] = (fid, pid, ans)
+    return fid, pid, ans, None
+
+
+# ---------------------------------------------------------------- the start a query names (entry 93), offline
+# "im in y5202, find me the nearest exit", "from the canteen to LT1a", "toilet from y5401", "aku di kantin, toilet dimana".
+# The start text must resolve by the whole-word keyword match (not fuzzy: "I'm in a hurry" must not become "hungry" =
+# canteen); if it does not ("I'm on 4F", "from here", "from the lower floor"), the whole query is matched as before.
+_STOPW = (r"(?:and|where|wheres|where's|find|how|take|show|what|which|get|go|need|want|can|could|please|i|mau|cari|"
+          r"dimana|di mana|ke|nearest|closest|is there|any)")
+_END = r"(?=\s*[,.;!?]|\s+" + _STOPW + r"\b|$)"
+SPLITS = (
+    re.compile(r"\b(?:from|dari)\s+(?P<f>.+?)\s+(?:to|ke|towards)\s+(?P<t>.+)$"),
+    re.compile(r"\b(?:i'?m|i am|im|we'?re|we are|aku|saya|gue|gw)\s+(?:now\s+|currently\s+|right now\s+|sekarang\s+|"
+               r"lagi\s+|lg\s+)?(?:in|at|near|by|inside|outside|on|di|dekat|deket)\s+(?P<f>.+?)" + _END),
+    re.compile(r"\b(?:starting|start|leaving)\s+(?:at|from|in)\s+(?P<f>.+?)" + _END),
+    re.compile(r"^(?P<t>.+?)\s+(?:from|dari)\s+(?P<f>.+)$"),
+)
+
+
+def split_query(query):
+    """-> (start text, destination text) if the query names a start in words, else None. The destination text is the
+    query without the start part (empty if the query only says where you are)."""
+    t = ' '.join((query or '').lower().replace('’', "'").split())
+    for rx in SPLITS:
+        m = rx.search(t)
+        if not m:
+            continue
+        f = m.group('f').strip(' ,.;!?')
+        rest = m.group('t') if 't' in rx.groupindex else (t[:m.start()] + ' ' + t[m.end():])
+        return f, ' '.join(rest.strip(' ,.;!?').split()).strip(' ,.;!?')
+    return None
+
+
+def start_from_text(text):
+    """The place a start phrase names (whole-word keyword match only), or None."""
+    pid, _ = M.keyword_match(text, PLACES)
+    return pid
 
 
 def place_line(pid):
@@ -114,6 +152,13 @@ TOILET_WORDS = re.compile(r'\b(toilets?|restrooms?|washrooms?|bathrooms?|wc|lava
 MALE_WORDS = re.compile(r'\b(male|men|mens|man|gents|gentlemen|boys?|cowo|cowok|laki|pria)\b')
 FEMALE_WORDS = re.compile(r'\b(female|women|womens|woman|ladies|lady|girls?|cewe|cewek|perempuan|wanita)\b')
 ACCESS_WORDS = re.compile(r'\b(disabled|disability|accessible|wheelchair|handicap|handicapped|disabilitas|difabel)\b')
+# exits (entry 93): a request for "an exit" goes to the nearest exit by route; "emergency" / "fire" words -> only the
+# exits tagged emergency (Exit 5 on both floors); a named exit (Exit 5, Exit 10, the gate / entrance) stays that exit.
+EXIT_WORDS = re.compile(r'\b(exits?|exti|way out|get out|keluar|emergency|emrgency|emergancy|evacuate|evacuation)\b')
+EMERGENCY_WORDS = re.compile(r'\b(emergency|emrgency|emergancy|fire|evacuate|evacuation|alarm|darurat)\b')
+NAMED_EXIT = re.compile(r'\b(exit ?(5|10)|gate|entrance|main|turnstile|masuk)\b')
+HERE_FROM = 'here'                   # From = "Current location" (the page default): the tracked place, never a default
+WAITING = ('Waiting for location: start live tracking (phyphox) or send a stop, or pick a From place.')
 
 
 def check_mode(mode, gender='any'):
@@ -151,14 +196,30 @@ def route_steps(start, goal, mode='standard'):
 
 
 def resolve_start(from_id=None, tracked=None):
-    """-> {id, name, floor, source}: the chosen place, else the tracked (lit) place, else the 4F entrance gate."""
+    """-> {id, name, floor, source}: the chosen place, else the tracked (lit) place, else the 4F entrance gate.
+    from_id 'here' (= "Current location", the page default since entry 93): the tracked place, or no start at all
+    ({id: None, source: 'waiting'}): the page then says "Waiting for location" and draws no route."""
     if from_id in GRAPH_TO_MAP:
         start, how = from_id, 'chosen'
     elif tracked and tuple(tracked) in MAP_TO_GRAPH:
         start, how = MAP_TO_GRAPH[tuple(tracked)], 'tracked'
+    elif from_id == HERE_FROM:
+        return {'id': None, 'name': None, 'floor': None, 'source': 'waiting'}
     else:
         start, how = DEFAULT_FROM, 'default'
     return {'id': start, 'name': astar.graph().nodes[start]['name'], 'floor': GRAPH_TO_MAP[start][0], 'source': how}
+
+
+def check_from(from_id):
+    if from_id and from_id != HERE_FROM and from_id not in GRAPH_TO_MAP:
+        raise KeyError('unknown start %r' % from_id)
+
+
+def place_ref(pid):
+    return {'id': pid, 'name': astar.graph().nodes[pid]['name'], 'floor': GRAPH_TO_MAP[pid][0]}
+
+
+EMPTY_ROUTE = {'route': [], 'legs': [], 'connectors': [], 'instructions': [], 'distance_m': None, 'seconds': None}
 
 
 def plan_route(from_id, to_id, mode='standard', tracked=None):
@@ -166,11 +227,12 @@ def plan_route(from_id, to_id, mode='standard', tracked=None):
     mode, _ = check_mode(mode)
     if to_id not in GRAPH_TO_MAP:
         raise KeyError('unknown destination %r' % to_id)
-    if from_id and from_id not in GRAPH_TO_MAP:
-        raise KeyError('unknown start %r' % from_id)
+    check_from(from_id)
     start = resolve_start(from_id, tracked)
-    out = {'from': start, 'to': {'id': to_id, 'name': astar.graph().nodes[to_id]['name'], 'floor': GRAPH_TO_MAP[to_id][0]},
-           'mode': mode, 'speed_mps': astar.graph().speed}
+    out = {'from': start, 'to': place_ref(to_id), 'mode': mode, 'speed_mps': astar.graph().speed}
+    if start['id'] is None:
+        out.update(EMPTY_ROUTE, waiting=True, answer=WAITING)
+        return out
     try:
         out.update(route_payload(astar.plan(start['id'], to_id, mode)))
     except ValueError as e:
@@ -193,15 +255,17 @@ def nearest(kind, from_id=None, mode='standard', gender='any', tracked=None, flo
     mode, gender = check_mode(mode, gender)
     if kind != 'toilet':
         raise KeyError('type must be toilet')
-    if from_id and from_id not in GRAPH_TO_MAP:
-        raise KeyError('unknown start %r' % from_id)
+    check_from(from_id)
     start = resolve_start(from_id, tracked)
+    base = {'type': kind, 'mode': mode, 'gender': gender, 'floor_filter': floor,
+            'accessible_only': accessible_only or mode == 'accessible', 'from': start, **EMPTY_ROUTE}
+    if start['id'] is None:                  # "Current location" without a fix: nearest cannot be known yet
+        return dict(base, place_id=None, name=None, floor=None, answer=WAITING, options=[], excluded=[], policy='',
+                    policy_note='', waiting=True)
     t = astar.nearest_toilet(start['id'], mode, gender, floor=floor, accessible_only=accessible_only)
-    out = {'type': kind, 'mode': mode, 'gender': gender, 'floor_filter': floor, 'accessible_only': accessible_only or mode == 'accessible',
-           'from': start, 'place_id': t['toilet'], 'answer': t['message'],
-           'options': [{k: v for k, v in o.items() if k != 'plan'} for o in t['options']], 'excluded': t['excluded'],
-           'policy': t['policy'], 'policy_note': t['policy_note'],
-           'route': [], 'legs': [], 'connectors': [], 'instructions': [], 'distance_m': None, 'seconds': None}
+    out = dict(base, place_id=t['toilet'], answer=t['message'],
+               options=[{k: v for k, v in o.items() if k != 'plan'} for o in t['options']], excluded=t['excluded'],
+               policy=t['policy'], policy_note=t['policy_note'])
     if t['choice'] is not None:
         pid = t['toilet']
         out.update(name=BY_ID[pid]['name'], floor=int(BY_ID[pid]['floor']), map_key=GRAPH_TO_MAP[pid][1])
@@ -218,44 +282,85 @@ def place_options():
                     'kind': g.nodes[n]['kind']} for n in g.nodes), key=lambda o: -o['floor'])
 
 
-def search(query, from_id=None, tracked=None, mode='standard', gender='any'):
+def exit_query(text, pid=None):
+    """-> None unless the text asks for an exit in general (not a named one), else {emergency, floor}."""
+    q = ' '.join(M.norm(text))
+    if pid is not None and BY_ID[pid]['kind'] != 'exit':
+        return None
+    if NAMED_EXIT.search(q) or not (EXIT_WORDS.search(q) or '出口' in text):
+        return None
+    return {'emergency': bool(EMERGENCY_WORDS.search(q)), 'floor': M.floor_hint(q)}
+
+
+def search(query, from_id=None, tracked=None, mode='standard', gender='any', use_query_from=True):
     """The /api/search reply. tracked = (floor, map key) of the live / last lit place, or None.
+    from_id: the page's From ('here' = Current location, a place id, or empty = old default start).
     mode / gender: the viewer's settings (standard | accessible, any | male | female); a toilet request is answered
-    with the nearest toilet that fits them (words in the query, e.g. "ladies", "disabled", "4F", win over the filter)."""
+    with the nearest toilet that fits them (words in the query, e.g. "ladies", "disabled", "4F", win over the filter).
+    Entry 93: the query may also name the start ("im in y5202, find me the nearest exit"): then that start wins over
+    from_id (reply 'from_query'); a request for an exit in general goes to the nearest exit by route.
+    use_query_from=False (the page's rerun after the user changed From): the From list wins, the query's start is ignored."""
     mode, gender = check_mode(mode, gender)
+    check_from(from_id)
     query = ' '.join((query or '').split())[:MAX_QUERY]
     out = {'query': query, 'place_id': None, 'name': None, 'floor': None, 'method': 'none', 'answer': '',
-           'route': [], 'legs': [], 'connectors': [], 'instructions': [], 'distance_m': None, 'seconds': None, 'from': None,
-           'gemini': None, 'mode': mode, 'gender': gender}
+           **EMPTY_ROUTE, 'from': None, 'to': None, 'from_query': None, 'gemini': None, 'mode': mode, 'gender': gender}
     if not query:
         out['answer'] = 'Type a place or a question, for example "toilet", "Y5-302" or "where can I study".'
         out['gemini'] = gemini_status()
         return out
-    pid, ans, err = ask_gemini(query)
+    split = split_query(query)
+    q_from, to_text = None, query
+    g_from, pid, ans, err = ask_gemini(query)
     if err is None:
         out['method'] = 'gemini'
+        q_from = g_from
+        if q_from and split:
+            to_text = split[1]                        # word rules (toilet, exit) read the destination part only
     else:
         out['fallback_reason'] = err
-        pid, _, stage = M.fuzzy_keyword_match(query, PLACES)
-        out['method'] = stage                         # keyword / fuzzy / none
+        if split:
+            q_from = start_from_text(split[0])
+            if q_from:
+                to_text = split[1]
+        pid, _, stage = M.fuzzy_keyword_match(to_text, PLACES) if to_text else (None, 0.0, 'none')
+        out['method'] = stage if pid is not None or not q_from else 'keyword'     # keyword / fuzzy / none
         ans = ''
     out['gemini'] = gemini_status()
-    tq = toilet_query(query)
+    if q_from and not use_query_from:
+        to_text = split[1] if split else query        # still match the destination part only
+        q_from = None
+    if q_from:
+        out['from_query'] = place_ref(q_from)
+        from_id = q_from                              # the start the query names wins over the From list
+    tq = toilet_query(to_text) if to_text else None
     if tq is None and pid is not None and BY_ID[pid]['kind'] == 'toilet':
         tq = {'gender': None, 'accessible': False, 'floor': None}     # resolved to a toilet without a toilet word
-    if pid is None and tq is None:
-        out['answer'] = ans or ('Sorry, I could not find that in the area WalkSense covers (AC1 floors 5 and 4). '
-                                'Try a room like Y5-302, or "toilet", "canteen", "exit", "lift".')
-        return out
+    xq = exit_query(to_text, pid) if tq is None and to_text else None
     out['from'] = resolve_start(from_id, tracked)
+    if pid is None and tq is None and xq is None:
+        if q_from:
+            out['answer'] = f'Start set to {place_line(q_from)}. Where to?'
+        else:
+            out['answer'] = ans or ('Sorry, I could not find that in the area WalkSense covers (AC1 floors 5 and 4). '
+                                    'Try a room like Y5-302, or "toilet", "canteen", "exit", "lift".')
+        return out
+    waiting = out['from']['id'] is None
+    if tq is not None or xq is not None:              # nearest toilet / exit: needs a start
+        kind = 'toilet' if tq is not None else 'exit'
+        if waiting:
+            out.update(waiting=True, answer=WAITING, to={'nearest': kind, 'name': 'Nearest ' + kind})
+            if pid is not None:
+                out['matched_place'] = pid
+            return out
     if tq is not None:                                # toilet: nearest one that fits the mode and the filter
         g_use = tq['gender'] or gender
         t = nearest('toilet', out['from']['id'], mode, g_use, floor=tq['floor'], accessible_only=tq['accessible'])
         out['toilet'] = {k: t[k] for k in ('gender', 'floor_filter', 'accessible_only', 'options', 'excluded', 'policy', 'policy_note')}
-        if tq['gender'] and tq['gender'] != gender:
+        if tq['gender'] and tq['gender'] != gender and gender != 'any':
             out['toilet']['note'] = f'Your words asked for a {tq["gender"]} toilet, so the {gender} filter was not used.'
         if t['place_id'] is None:
-            out.update(place_id=None, answer=t['answer'])
+            out.update(place_id=None, answer=t['answer'], to={'nearest': 'toilet', 'name': 'Nearest toilet'})
             if pid is not None:
                 out['matched_place'] = pid
             return out
@@ -264,11 +369,25 @@ def search(query, from_id=None, tracked=None, mode='standard', gender='any'):
             ans = ''
         pid = t['place_id']
         ans = ans or t['answer']
+    elif xq is not None:                              # exit: nearest one by route (emergency words: Exit 5 only)
+        x = astar.nearest_exit(out['from']['id'], mode, emergency=xq['emergency'], floor=xq['floor'])
+        out['exit'] = {'emergency': xq['emergency'], 'floor_filter': xq['floor'],
+                       'options': [{k: v for k, v in o.items() if k != 'plan'} for o in x['options']],
+                       'excluded': x['excluded']}
+        if x['exit'] is None:
+            out.update(place_id=None, answer=x['message'], to={'nearest': 'exit', 'name': 'Nearest exit'})
+            return out
+        if pid is not None and pid != x['exit']:
+            out['matched_place'] = pid
+        pid, ans = x['exit'], x['message']
     d = BY_ID[pid]
-    out.update(place_id=pid, name=d['name'], floor=int(d['floor']), map_key=GRAPH_TO_MAP[pid][1],
+    out.update(place_id=pid, name=d['name'], floor=int(d['floor']), map_key=GRAPH_TO_MAP[pid][1], to=place_ref(pid),
                answer=ans or f'{place_line(pid)}: the route is below.')
+    if waiting:
+        out.update(waiting=True, answer=WAITING)
+        return out
     if mode == 'accessible' and d['kind'] == 'escalator':
-        out['answer'] += ' Step-free mode: the route avoids escalators and stairs; take the lift to change floor.'
+        out['answer'] += ' Disabled mode: the route avoids escalators and stairs; take the lift to change floor.'
     try:
         out.update(route_payload(astar.plan(out['from']['id'], pid, mode)))
     except (KeyError, ValueError) as e:

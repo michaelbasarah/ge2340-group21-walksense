@@ -314,6 +314,134 @@ class TestServer(Base):
         r = self.get_json('/api/search?' + urllib.parse.urlencode({'q': 'toilet', 'from': 'canteen', 'mode': 'accessible', 'gender': 'female'}))
         self.assertEqual((r['method'], r['matched_place'], r['place_id']), ('gemini', 'male_toilet', 'disabled_toilet_4F'))
 
+    def test_current_location_waiting_and_fix(self):
+        """Entry 93: from=here (Current location) with no fix -> waiting, no route; with a live fix -> from the fix,
+        and while walking the last lit place stays the fix."""
+        server.STATE['session'] = server.ws.Session(5)
+        server.LIVE.update(tracker=None, fix=None)
+        for path in ('/api/route?from=here&to=lt1a', '/api/nearest?type=toilet&from=here',
+                     '/api/search?' + urllib.parse.urlencode({'q': 'y5401', 'from': 'here'})):
+            self.answers(http_error(429, 'quota'))
+            search._state.update(paused_until=0.0, disabled='', last_error='')
+            r = self.get_json(path)
+            self.assertTrue(r['waiting'], path)
+            self.assertEqual((r['route'], r['from']['source'], r['from']['id']), ([], 'waiting', None), path)
+        self.assertEqual(self.get_json('/api/route?from=here&to=lt1a')['to']['id'], 'lt1a')
+        self.assertIsNone(server.fix_info(server.tracked_place()))          # /api/state 'fix' (needs trained models here)
+
+        class T:
+            device, model_note, lock = 'iPhone19,2', 'fake', threading.Lock()
+            state = {'mode': 'stop', 'lit': 'canteen', 'floor': 5}
+        server.LIVE.update(tracker=T(), fix=None, status={})
+        try:
+            r = self.get_json('/api/route?from=here&to=lt1a')
+            self.assertEqual((r['from']['id'], r['from']['source'], r['route'][0]['id']), ('canteen', 'tracked', 'canteen'))
+            self.assertEqual(self.get_json('/api/live')['fix']['id'], 'canteen')
+            T.state = {'mode': 'walking', 'lit': None, 'floor': 5}                    # walking: keep the last fix
+            self.assertEqual(self.get_json('/api/route?from=here&to=lt1a')['from']['id'], 'canteen')
+            self.assertEqual(self.get_json('/api/route?from=y5302&to=lt1a')['from']['id'], 'y5302')   # a chosen From wins
+            self.assertIn('error', self.get_json('/api/route?from=nowhere&to=lt1a', 400))
+        finally:
+            server.LIVE.update(tracker=None, fix=None, status={})
+
+    def test_page_wording(self):
+        """Entry 93 (user, 27 Nov): Google-Maps-like page; Disabled not Step-free; WC Male | Female, no Any WC; no Nearest
+        toilet button or badge; no tap / legend hint lines; live data in a closed dropdown; From defaults to Current location."""
+        page = self.get('/')[1]
+        for gone in ('Step-free', 'Any WC', 'nearestwc', 'Nearest toilet</button>', 'Tap a place to set', 'id="tapto"',
+                     'id="legend"', 'id="mapnote"', 'Answered by Gemini', "'answer'"):
+            self.assertNotIn(gone, page, gone)
+        self.assertIn('>Disabled</button>', page)
+        self.assertIn('WC: <span class="seg"', page)
+        self.assertIn('<details id="live" hidden><summary>Live sensor data</summary>', page)
+        self.assertIn('<select id="from"><option value="here">Current location</option>', page)
+        self.assertIn('<option value="nearest:toilet">Nearest toilet</option>', page)
+
+
+class TestFromTo(Base):
+    """Entry 93: the query may name the start (From) as well as the destination (To); offline and with Gemini."""
+    def offline(self):
+        search._state.update(disabled='offline test')
+
+    def test_from_and_to_offline(self):
+        self.offline()
+        r = search.search('how do I get from the canteen to lt1a', from_id='here')
+        self.assertEqual((r['from_query']['id'], r['from']['source'], r['place_id']), ('canteen', 'chosen', 'lt1a'))
+        self.assertEqual((r['route'][0]['id'], r['route'][-1]['id']), ('canteen', 'lt1a'))
+        r = search.search('aku di kantin, toilet cewek dimana', from_id='here', gender='male')
+        self.assertEqual((r['from']['id'], r['place_id']), ('canteen', 'female_toilet'))     # words win over the filter
+        r = search.search('im in y5202')                                                     # only a start
+        self.assertEqual((r['from_query']['id'], r['place_id'], r['route']), ('y5202', None, []))
+        self.assertIn('Start set to', r['answer'])
+        for q in ("I'm on 4F, where is the toilet", "I'm in a hurry, where is the toilet", 'escalator going up from the lower floor',
+                  'nearest toilet from here'):
+            r = search.search(q, from_id='canteen')
+            self.assertIsNone(r['from_query'], q)                                             # not a place: From stays
+            self.assertEqual(r['from']['id'], 'canteen', q)
+        self.assertEqual(search.search("I'm on 4F, where is the toilet", from_id='canteen')['place_id'], 'disabled_toilet_4F')
+
+    def test_to_only_keeps_from(self):
+        self.offline()
+        r = search.search('where is y5401', from_id='here', tracked=(5, 'canteen'))
+        self.assertEqual((r['from_query'], r['from']['source'], r['from']['id'], r['place_id']), (None, 'tracked', 'canteen', 'y5401'))
+        r = search.search('where is y5401', from_id='here')
+        self.assertEqual((r['waiting'], r['to']['id'], r['route']), (True, 'y5401', []))
+        r = search.search('where is y5401', from_id='lt1a')
+        self.assertEqual((r['from']['id'], r['route'][-1]['id']), ('lt1a', 'y5401'))
+        r = search.search('where is y5401')                                                  # API without From: old default
+        self.assertEqual(r['from']['source'], 'default')
+
+    def test_nearest_exit(self):
+        self.offline()
+        r = search.search('im in y5202, find me the nearest exit', from_id='here')
+        self.assertEqual((r['from']['id'], r['place_id'], r['distance_m']), ('y5202', 'exit_10', 15.1))
+        self.assertEqual(r['route'][-1]['id'], 'exit_10')
+        r = search.search('im in y5202, where is the nearest emergency exit')
+        self.assertEqual(r['place_id'], 'exit_5')
+        self.assertTrue(r['exit']['emergency'])
+        self.assertEqual(search.search('nearest exit', from_id='lt1a')['place_id'], 'exit_10_4F')
+        self.assertEqual(search.search('exit 10 on the 5th floor', from_id='lt1a')['place_id'], 'exit_10')   # named: kept
+        self.assertEqual(search.search('the exit gate', from_id='canteen')['place_id'], 'entrance_exit')
+        r = search.search('nearest exit', from_id='here')
+        self.assertEqual((r['waiting'], r['to']['nearest'], r['route']), (True, 'exit', []))
+        # every start x mode: the answer is the cheapest exit by route
+        for st in search.GRAPH_TO_MAP:
+            for mode in search.MODES:
+                best = min(search.astar.EXITS, key=lambda e: (search.astar.plan(st, e, mode).seconds, search.astar.plan(st, e, mode).metres, e))
+                self.assertEqual(search.search('nearest exit', from_id=st, mode=mode)['place_id'], best, (st, mode))
+
+    def test_nearest_toilet_with_start_and_gender(self):
+        self.offline()
+        self.assertEqual(search.search('nearest toilet from y5401', gender='female')['place_id'], 'female_toilet')
+        r = search.search('nearest toilet from y5401', gender='male')
+        self.assertEqual((r['from']['id'], r['place_id']), ('y5401', 'male_toilet'))
+        r = search.search("I'm at LT1a, find a toilet", mode='accessible')
+        self.assertEqual((r['from']['id'], r['place_id']), ('lt1a', 'disabled_toilet_4F'))
+        r = search.search('toilet', from_id='here')
+        self.assertEqual((r['waiting'], r['to']['nearest']), (True, 'toilet'))
+
+    def test_gemini_v2_from_and_to(self):
+        self.answers('{"from_id": "y5202", "place_id": "exit_5"}')
+        r = search.search('im in y5202, find me the nearest exit', from_id='here')
+        self.assertEqual((r['method'], r['from_query']['id'], r['matched_place'], r['place_id']), ('gemini', 'y5202', 'exit_5', 'exit_10'))
+        r = search.search('IM IN Y5202,  find me the nearest exit', from_id='here')         # cached (v2 key): no new call
+        self.assertEqual(self.fake.calls, 1)
+        self.assertIn(('v2', 'im in y5202, find me the nearest exit'), search._cache)
+        self.answers('{"from_id": "NONE", "place_id": "lt1a"}')                              # to-only: From stays
+        r = search.search('where is lecture theatre 1a', from_id='canteen')
+        self.assertEqual((r['from_query'], r['from']['id'], r['place_id']), (None, 'canteen', 'lt1a'))
+        self.answers('{"place_id": "sr9", "answer": "x"}')                                   # v1-style reply still usable
+        self.assertEqual(search.search('where can I study', from_id='canteen')['place_id'], 'sr9')
+        self.answers('{"from_id": "chem_lab", "place_id": "sr9"}')                           # bad start id: fall back offline
+        r = search.search('from the chem lab to y5401', from_id='canteen')
+        self.assertEqual((r['method'], r['place_id']), ('keyword', 'y5401'))
+        self.answers('{"from_id": "canteen", "place_id": "lt1a"}')
+        r = search.search('from the canteen to lt1a', from_id='y5302', use_query_from=False)   # page rerun after a From change
+        self.assertEqual((r['from_query'], r['from']['id'], r['place_id']), (None, 'y5302', 'lt1a'))
+        search._state.update(disabled='offline test')
+        r = search.search('from the canteen to lt1a', from_id='y5302', use_query_from=False)
+        self.assertEqual((r['from']['id'], r['place_id']), ('y5302', 'lt1a'))
+
 
 if __name__ == '__main__':
     unittest.main()

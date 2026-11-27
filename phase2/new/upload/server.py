@@ -28,7 +28,7 @@ UPLOADS = HERE / 'uploads'
 MAX_UPLOAD = 40_000_000          # a 60 s iPhone stop is ~1 MB, a 4-phone S24 stop ~4 MB
 LOCK = threading.Lock()
 LABELS = {}
-LIVE = {'tracker': None, 'status': {}}   # set by --live
+LIVE = {'tracker': None, 'status': {}, 'fix': None}   # set by --live; fix = last place the live model lit (entry 93)
 STATE = {'session': ws.Session(5), 'models': None}
 NAME_OK = re.compile(r'^[a-z0-9_]{0,40}$')
 STATIC = {'/map/floor5.png': 'image/png', '/map/floor4.png': 'image/png', '/map/places.json': 'application/json',
@@ -53,7 +53,7 @@ class Handler(BaseHTTPRequestHandler):
     def _state(self):
         s = STATE['session']
         return {'floor': s.floor, 'tally': dict(s.tally), 'places': places(), 'labels': LABELS, 'history': s.history[-20:],
-                'eval': _eval_summary()}
+                'eval': _eval_summary(), 'fix': fix_info(tracked_place())}
 
     def do_GET(self):
         path = urlparse(self.path).path
@@ -65,7 +65,10 @@ class Handler(BaseHTTPRequestHandler):
             t = LIVE['tracker']
             if t is None:
                 return self._send(200, {'enabled': False})
-            return self._send(200, {'enabled': True, 'device': t.device, 'model_note': t.model_note, **LIVE['status']})
+            with LOCK:
+                fix = tracked_place()
+            return self._send(200, {'enabled': True, 'device': t.device, 'model_note': t.model_note, **LIVE['status'],
+                                    'fix': fix_info(fix)})
         if path == '/api/state':
             with LOCK:
                 return self._send(200, self._state())
@@ -82,7 +85,7 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send(200, search.nearest(q.get('type', 'toilet'), q.get('from') or None, q.get('mode'),
                                                           q.get('gender'), here))
                 return self._send(200, search.search(q.get('q', ''), q.get('from') or None, here,       # may call Gemini: outside LOCK
-                                                     q.get('mode'), q.get('gender')))
+                                                     q.get('mode'), q.get('gender'), q.get('qfrom') != '0'))
             except KeyError as e:
                 return self._send(400, {'error': str(e.args[0]) if e.args else 'bad request'})
         self._send(404, {'error': 'not found'})
@@ -96,6 +99,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(400, {'error': 'floor must be 4 or 5'})
             with LOCK:
                 STATE['session'] = ws.Session(int(floor))
+                LIVE['fix'] = None
                 return self._send(200, self._state())
         if u.path == '/api/floor':
             if q.get('floor') not in ('4', '5'):
@@ -137,17 +141,27 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def tracked_place():
-    """(floor, map key) of the place that is lit right now: live tracker first, else the last uploaded stop."""
+    """(floor, map key) of "Current location": the place the live model lights now; while walking, the last place it
+    lit (entry 93: a route from Current location should not vanish at the first step); else the last uploaded stop."""
     t = LIVE['tracker']
     if t is not None:
         with t.lock:
             st = dict(t.state)
         if st.get('mode') == 'stop' and st.get('lit'):
-            return st['floor'], st['lit']
+            LIVE['fix'] = (st['floor'], st['lit'])
+            return LIVE['fix']
+        if LIVE['fix'] is not None:
+            return LIVE['fix']
     for r in reversed(STATE['session'].history):
         if r.get('kind') == 'stop':
             return (r['floor'], r['lit']) if r.get('lit') else None
     return None
+
+
+def fix_info(fix):
+    """(floor, map key) -> {id, name, floor} for the page's "Current location" label, or None."""
+    pid = search.MAP_TO_GRAPH.get(tuple(fix)) if fix else None
+    return search.place_ref(pid) if pid else None
 
 
 def _eval_summary():
