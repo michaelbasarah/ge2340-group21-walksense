@@ -1,10 +1,10 @@
 # Demo runbook (live WalkSense on Dicta's iPhone 18)
 
-*Internal team notes, not report text (course rule: an LLM may only polish our own writing). Written 27 Nov 2026 from the repo state at `38082d0` (PROCESS-LOG entry 92). Every command below was run or `--help`-checked on 27 Nov unless it says "not tested".*
+*Internal team notes, not report text (course rule: an LLM may only polish our own writing). Written 27 Nov 2026 from the repo state at `38082d0` (PROCESS-LOG entry 92); the per-place numbers in sections e and f were refreshed on 27 Nov to the entry-91 official run (entry 94). Every command below was run or `--help`-checked on 27 Nov unless it says "not tested".*
 
 Demo set-up: **Dicta's iPhone 18 (`iPhone19,2`) only**, model trained on iPhone 18 data only (PROCESS-LOG 89; `walksense.pick_model` does this by itself when the device is `iPhone19,2`). The app is `phase2/new/upload/` (`server.py`, `live.py`, `index.html`; set-up background in its `README.md`).
 
-**Two changes land after entries 90 and 91 (other workers).** Entry 90: floor rule (d) wired into the app, the a56 night excluded from the app's a56 model, Standard mode prefers ordinary toilets. Entry 91: the final day-3 headline excludes the a56 night. Nothing below depends on them, but after they land: `git pull`, rerun the self-test (section c), and the toilet answers in section c may change (Standard prefers an ordinary toilet over the disabled one). Re-check the numbers in section e against the new `day3/out/`.
+**Entries 90 and 91 have landed (main `a9326d3`).** Entry 90: floor rule (d) wired into the app, the a56 night excluded from the app's a56 model, Standard mode prefers ordinary toilets. Entry 91: the final day-3 headline excludes the a56 night. Do `git pull` and rerun the self-test (section c) as before; the toilet answers in section c were rechecked for entry 93, and the per-place numbers in section e were recomputed from the new `day3/out/` in entry 94.
 
 ## a) Night before checklist
 
@@ -80,7 +80,7 @@ The page and the commands below are on the laptop. `curl` and `python3 -m json.t
 5. **One route**: To = LT1a, From = Canteen entrance. Standard: 37 m · 48 s, "Floor change: Escalator 5F → 4F" (36.6 m, 48.2 s, escalator down 20 s; checked offline 27 Nov with `search.plan_route`, rechecked for entry 93). (10 s)
 6. **Toilet**: WC **Female**, From = Canteen, To = **Nearest toilet** (or search "toilet"): Female toilet (5F), 16 m · 12 s (checked offline). The old "Nearest toilet" button and "Any WC" chip are gone (entry 93); tap Female again for "any". (10 s)
 7. **Disabled route**: chip **Disabled** (called Step-free before entry 93), same Canteen -> LT1a: 65 m · 1 min 32 s, "Floor change: Lift 5F → 4F" and a "Disabled: lifts only" tag (checked offline). Disabled + WC Female + To = Nearest toilet from the Canteen: Mixed disabled toilet (4F) via the lift, 30.5 m / 65.5 s (offline check, entry 93). (15 s)
-8. **Start in the query** (entry 93): search "im in y5202, find me the nearest exit": From becomes Room Y5-202, To = Exit 10 (by the toilets), 15 m · 12 s (offline and with Gemini on 27 Nov). Set From back to **Current location** afterwards. (10 s)
+8. **Start in the query** (entry 93): search "im in y5202, find me the nearest exit": From becomes Room Y5-202, To = Exit 10 (by the toilets), 15 m · 12 s (offline and with Gemini on 27 Nov). Since entry 94 every exit counts as an emergency exit, so "nearest emergency exit" gives the same answer (it was Exit 5, 38 m, before). Set From back to **Current location** afterwards. (10 s)
 9. Back to Standard. Pause phyphox (saves a recording) and press play again before the real run.
 
 If any step fails, go to the table.
@@ -105,11 +105,11 @@ If any step fails, go to the table.
 
 ## e) Suggested demo route and what to avoid
 
-**Evidence, with its limits.** The per-place numbers are from the day-3 fused kNN, leave-one-session-out, iPhone 18 stops only (`phase2/new/day3/out/fused_sample_predictions.csv`, scheme `leave_one_session_out`, phone `ip18`; 85 stops over 24s1, 25nov, 25night; chance about 1 in 26). The app's own model is a different kNN (entry 89: 65/85 top-1, 73/85 top-3 against 59/85 for the fused one), so these per-place counts only show **which places tend to be weak**, they do not predict this demo. Counts of 3 or 4 stops per place are tiny. Rerun after entries 90/91: the a56 night is not iPhone data, so ip18 counts should not change, but check.
+**Evidence, with its limits.** The per-place numbers are from the day-3 fused kNN, leave-one-session-out, iPhone 18 stops only (`phase2/new/day3/out/fused_sample_predictions.csv`, final entry-91 run, scheme `leave_one_session_out`, phone `ip18`; 85 stops over 24s1, 25nov, 25night; chance about 1 in 26). **ip18 headline in this file: 60/85 = 70.6% top-1, 73/85 top-3** (entry 91). The app's own model is a different kNN (entry 89, its own pooling test: 65/85 top-1, 73/85 top-3 for the app's model against 59/85 top-1 for the fused one), so these per-place counts only show **which places tend to be weak**, they do not predict this demo. Counts of 3 or 4 stops per place are tiny. Compared with the 26-Nov file that entry 92 used, three places moved (entry 91: the a56-night exclusion changes the tuned weights and k, the ip18 takes themselves are the same): y5202 2/4 to 3/4, escalator_down_4F 0/3 to 1/3, lt1a 1/3 to 2/3; all other ip18 places are unchanged. The 20 s-piece split (`out-split20`, ip18 175/253 = 69.2%) agrees on the weakest: escalator_down 0/6 and escalator_down_4F 0/9.
 
-**Weak ip18 places (top-1 correct / stops):** escalator_down_4F 0/3, escalator_down 0/2, lt1a 1/3, sr9 2/4, y5202 2/4, disabled_toilet 2/4, lift_stairs 2/4, y5401 2/4. Next weakest, 2 of 3 (also avoid for a "must work" moment): disabled_toilet_4F, exit_5_4F, lt2b, y4502, lt1b, exit_10_4F, y5302, female_toilet.
+**Weak ip18 places (top-1 correct / stops):** escalator_down 0/2 (the only place still at 0), escalator_down_4F 1/3, then 2/4: sr9, disabled_toilet, lift_stairs, y5401. Next weakest, 2 of 3 (also avoid for a "must work" moment): disabled_toilet_4F, exit_5_4F, lt2b, y4502, lt1b, exit_10_4F, y5302, female_toilet, lt1a (lt1a moved up from 1/3).
 
-**Stronger places (all stops right):** canteen 4/4, exit_5 3/3, male_toilet 3/3, escalator_up 2/2, lt2a 3/3, escalator_up_4F 3/3, entrance_exit 3/3. Next: exit_10 3/4, y5302_back 3/4, lift_stairs_4F 3/4.
+**Stronger places (all stops right):** canteen 4/4, exit_5 3/3, male_toilet 3/3, escalator_up 2/2, lt2a 3/3, escalator_up_4F 3/3, entrance_exit 3/3. Next: exit_10 3/4, y5302_back 3/4, lift_stairs_4F 3/4, y5202 3/4 (moved up from 2/4).
 
 **Suggested route: 7 stops, 4F then 5F** (same route as the scored walk in `live-walk/PROTOCOL.md`; start `--floor 4`):
 
@@ -126,21 +126,19 @@ If any step fails, go to the table.
 
 Walking between them: gate to LT2a passes Exit 5 (4F); LT2a to the up escalator passes LT2b and the down escalator (4F). **Walk past, do not stop** at those (a stop of 3 s or more is read as a place). Stop 3 to 4 includes the escalator ride: do not stand still on the escalator, and stand still only after stepping off.
 
-**Demo the planner on the strong places too:** search/route between them (Canteen -> LT1a Standard vs Disabled is the best story: escalator 36.6 m vs lift 65.0 m, both checked offline), then the WC toggle with To = Nearest toilet. **Avoid** as a live-lit moment: the two escalator-down stops, LT1a, and the 5F lift/stairs. The route planner does not use the place guess for a typed From/To, so weak places are safe there: only the lit circle and the From = "Current location" default depend on the guess.
+**Demo the planner on the strong places too:** search/route between them (Canteen -> LT1a Standard vs Disabled is the best story: escalator 36.6 m vs lift 65.0 m, both checked offline), then the WC toggle with To = Nearest toilet. **Avoid** as a live-lit moment: the two escalator-down stops, the 5F lift/stairs, and LT1a (now 2/3, no longer a 0 or 1). The route planner does not use the place guess for a typed From/To, so weak places are safe there: only the lit circle and the From = "Current location" default depend on the guess.
 
 If a weak place must be shown, say it is the weak one before the lit circle appears, and have the retake ready (section f).
 
 ## f) Retake list for Dicta's iPhone 18
 
-Why: these are the 8 weakest places in the iPhone 18 leave-one-session-out numbers above; more iPhone 18 stops at them is the only data that can change the demo (entry 89: other phones do not help). Each retake must be a **new session** (a different day or visit), not extra takes next to old ones, or the numbers become leaky again (CLAUDE.md, "same-recording splits give fake accuracy").
+Why: these are the 6 weakest places (2/4 or worse) in the iPhone 18 leave-one-session-out numbers above (entry-91 official run; lt1a 2/3 and y5202 3/4 dropped off the earlier list of 8, lt1a is still worth one more take if there is time); more iPhone 18 stops at them is the only data that can change the demo (entry 89: other phones do not help). Each retake must be a **new session** (a different day or visit), not extra takes next to old ones, or the numbers become leaky again (CLAUDE.md, "same-recording splits give fake accuracy").
 
 | Place id | Page name | Floor | Now |
 |---|---|---|---|
-| `escalator_down_4F` | Down escalator (4F) | 4 | 0/3 |
 | `escalator_down` | Down escalator (5F) | 5 | 0/2 |
-| `lt1a` | LT1a | 4 | 1/3 |
+| `escalator_down_4F` | Down escalator (4F) | 4 | 1/3 |
 | `sr9` | Study rooms (SR8 to SR11 merged) | 5 | 2/4 |
-| `y5202` | Room Y5-202 | 5 | 2/4 |
 | `disabled_toilet` | Male disabled toilet (5F) | 5 | 2/4 |
 | `lift_stairs` | Lift and stairs (5F) | 5 | 2/4 |
 | `y5401` | Room Y5-401 | 5 | 2/4 |

@@ -342,15 +342,16 @@ def nearest_toilet(start_id, mode='standard', gender='any', floor=None, accessib
             'policy': policy, 'policy_note': note}
 
 
-# Exits in graph.json (kind = exit). emergency = tagged "emergency" in request-matching/destinations.csv (Exit 5 on both
-# floors; graph.json names the 5F one "Exit 5 (emergency exit)"). Whether Exit 10 and the entrance gate also count as
-# emergency exits is not in our data. Used by search.py for "nearest exit" / "emergency exit" requests (entry 93).
+# Exits in graph.json (kind = exit). emergency = tagged "emergency" in request-matching/destinations.csv. User decision
+# 27 Nov (entry 94): ALL exits are emergency exits (Exit 5 and Exit 10 on both floors, the 4F entrance gate); until entry 93
+# only Exit 5 was tagged. graph.json still names the 5F one "Exit 5 (emergency exit)" (that is the map's own label).
+# Used by search.py for "nearest exit" / "emergency exit" requests (entry 93).
 EXITS = {
     'exit_5': {'emergency': True},
-    'exit_10': {'emergency': False},
+    'exit_10': {'emergency': True},
     'exit_5_4F': {'emergency': True},
-    'exit_10_4F': {'emergency': False},
-    'entrance_exit': {'emergency': False},
+    'exit_10_4F': {'emergency': True},
+    'entrance_exit': {'emergency': True},
 }
 
 
