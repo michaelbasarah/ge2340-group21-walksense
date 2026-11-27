@@ -1,0 +1,25 @@
+id,query,from_list,tracked,mode,gender,expected_from,expected_to,note
+ft01,"im in y5202, find me the nearest exit",here,,standard,any,y5202,exit_10,user's example (27 Nov); nearest of all 5 exits by route
+ft02,"im in y5202, where is the nearest emergency exit",here,,standard,any,y5202,exit_5,emergency words: only exits tagged emergency (Exit 5)
+ft03,I am at the canteen and need a toilet,here,,standard,any,canteen,male_toilet,WC filter off: nearest ordinary toilet
+ft04,I am at the canteen and need a toilet,here,,standard,female,canteen,female_toilet,WC filter Female
+ft05,how do I get from the canteen to lt1a,here,,standard,any,canteen,lt1a,from ... to ...
+ft06,nearest toilet from y5401,here,,standard,female,y5401,female_toilet,... from <place>
+ft07,"aku di kantin, toilet cewek dimana",here,,standard,male,canteen,female_toilet,Indonesian; words (cewek = female) win over the Male filter
+ft08,from lt1a to the female toilet,here,,standard,any,lt1a,female_toilet,named toilet
+ft09,"starting at sr9, take me to lt2b",here,,standard,any,sr9,lt2b,starting at
+ft10,"I'm at LT1a, find a toilet",here,,accessible,any,lt1a,disabled_toilet_4F,Disabled mode: disabled toilets only
+ft11,im in y5202,here,,standard,any,y5202,,only a start: From is set, no destination
+ft12,where is y5401,here,canteen,standard,any,canteen,y5401,to-only; From = Current location (live fix at the canteen)
+ft13,where is y5401,here,,standard,any,waiting,y5401,to-only; Current location without a fix: waiting
+ft14,toilet,here,,standard,any,waiting,nearest:toilet,nearest needs a start: waiting
+ft15,toilet,lt1a,,standard,male,lt1a,male_toilet,From list = LT1a; Standard prefers the ordinary 5F male toilet (entry 90)
+ft16,nearest exit,lt1a,,standard,any,lt1a,exit_10_4F,to-only nearest exit from a chosen start
+ft17,exit 10 on the 5th floor,lt1a,,standard,any,lt1a,exit_10,named exit stays that exit
+ft18,the exit gate,canteen,,standard,any,canteen,entrance_exit,named exit (gate) stays that exit
+ft19,"I'm on 4F, where is the toilet",canteen,,standard,any,canteen,disabled_toilet_4F,"""on 4F"" is not a place: From stays; 4F floor filter -> the 4F disabled toilet (entry 90 fallback)"
+ft20,"I'm in a hurry, where is the toilet",canteen,,standard,any,canteen,male_toilet,"""a hurry"" is not a place (no fuzzy start match)"
+ft21,escalator going up from the lower floor,canteen,,standard,any,canteen,escalator_up_4F,test-set q118: the from-phrase is a floor, not a place
+ft22,nearest toilet from here,y5302,,standard,female,y5302,female_toilet,"""from here"": From stays"
+ft23,"I'm at exit 10, where is y5401",here,,standard,any,exit_10,y5401,a named exit as the start
+ft24,dari lt2a ke kantin,here,,standard,any,lt2a,canteen,Indonesian dari ... ke ...
