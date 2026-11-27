@@ -354,6 +354,49 @@ The a56 night offset is not constant (`night_drift.json`, `fig_a56_night_offset.
 take offset is -29.8 / -107.4 / 1.6 uT (x/y/z) before 22:59 and -41.6 / -68.8 / -4.4 uT from 23:00. At 22:59 (y5302_back) both
 phones saw a strong field (ip18 take |B| 284.3 uT) and within that walk + stop the a56 y field went from about -115 to +78 uT (`night_trace_1s.csv`); after it the offset sits in a second regime. So it is not one constant magnet stuck to the phone.
 
+### p. Final configuration, 27 Nov (PROCESS-LOG entry 91)
+
+**Headline data.** The user decided on 27 Nov that the official headline leaves out Chris's a56 (SM-A566B) recordings of the
+25-Nov night run (entry 77 option B). `config.json` session `25night` has `exclude_sources: exclude_a56_night.csv` (32 stops +
+26 walks, each with its reason) and a `_comment_exclude`. Reason: a hard-iron magnetometer offset found by a label-free field check
+(`clean-data/2026-11-25-night/field_check.csv`: a56 median |B| 110.9 uT that night against 40.6 and 45.2 uT on 24s1 and 25nov).
+The raw ZIPs and clean files stay in the repo. Delete the two keys to put the takes back. The night Wi-Fi log is a separate file and
+is not excluded (the fused kNN uses only the S24 scanner anyway). `phone_map.csv` now lists only the recordings in use, so the
+58 a56 night rows are gone from it. The offset-corrected option C1 in `out-a56/` is supporting evidence, not the headline.
+
+**Determinism.** `gknn.py` used to draw the random pairs for each group's distance scale from ONE module-level generator, so a
+scale depended on how many `dists()` calls the process had made before. `run_all.sh` runs each script in its own process, so the
+committed outputs were reproducible. But `a56_offset.py run` calls `evaluate.py` before `fused_knn.py` in one process, and that gave
+179/411 instead of 178/411 (`out-determinism/before_fix.json`). Fix: every `dists()` call starts its own generator (`MEDIAN_SEED`
+21). The kNN breaks distance ties by training-row index (stable re-selection when the k-th distance is shared).
+`fused_knn.best()` breaks weight-grid ties by smaller k, then the lexicographically smallest weight vector. `run_all.sh` sets one
+BLAS/OpenMP thread unless the caller overrides it. Proof: `out-determinism/after_fix.json`.
+
+**Rerun.** `sh phase2/new/day3/run_all.sh` and `--split20` (exit 0 both; dated copies of the previous playgrounds and sample
+predictions: `out*/..._2026-11-27a.*`). `playground_check.py` passes in both variants. Sheets: `perf_sheet.py` tabs `2026-11-27 final
+default` / `2026-11-27 final split20`, `gaps_sheet.py --perf-tab "2026-11-27 gaps final"`, `hard_places.py --label final_2026-11-27`.
+
+Learned-weight fused kNN (`out/fused_knn.json`, `out-split20/fused_knn.json`; chance 1/26 = 3.8%):
+
+| split | default (takes) | split20 (20 s pieces) |
+|---|---|---|
+| random windows (LEAKY) | 1762/1778 = 99.1% | 3182/3227 = 98.6% |
+| by recording (partly leaky) | 190/379 = 50.1% | 601/1092 = 55.0% |
+| grouped by stop (honest) | 172/379 = 45.4% | 464/1092 = 42.5% |
+| **leave one session out (honest)** | **191/379 = 50.4% [45.4, 55.4]** | **527/1092 = 48.3% [45.3, 51.2]** |
+
+Per phone, leave one session out (`fused_sample_predictions.csv`; macro over the 26 places as `perf_sheet.py`):
+
+| phone | default acc | macro P | macro R | split20 acc | macro P | macro R |
+|---|---|---|---|---|---|---|
+| ip18 | 60/85 = 70.6% | 0.723 | 0.705 | 175/253 = 69.2% | 0.696 | 0.691 |
+| ip16 | 63/122 = 51.6% | 0.526 | 0.528 | 183/340 = 53.8% | 0.546 | 0.537 |
+| a56 | 30/53 = 56.6% | 0.585 | 0.564 | 86/155 = 55.5% | 0.561 | 0.551 |
+| a55 | 21/53 = 39.6% | 0.397 | 0.397 | 36/146 = 24.7% | 0.178 | 0.250 |
+| s24 | 17/66 = 25.8% | 0.224 | 0.266 | 47/198 = 23.7% | 0.222 | 0.247 |
+
+Deployable model (`out/fused_model.json`): weights B 0, xyz 0.4, tilt 0.1, Wi-Fi 0, baro 0.5, k 25.
+
 ## Data issues found
 
 - Very strong fields (place median \|B\| above 100 uT, `results.json` `magnetic_check`): 24 s2 iPhone at escalator_down_4F 147.9 and escalator_up_4F 142.5 uT, 24 s2 S24 at escalator_down_4F 127.7, 24 s1 S24 at disabled_toilet 121.6 and escalator_down 101.3. The iPhone on 23 Nov ranges 32.9 to 58.9 uT. Both phones see the 4F down-escalator in session 2, so it is more likely something physical there that night (running escalator machinery?) than one sensor. Worth asking the collector; see `fig_per_place_B_pressure.png`.
