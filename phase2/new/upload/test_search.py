@@ -396,9 +396,11 @@ class TestFromTo(Base):
         r = search.search('im in y5202, find me the nearest exit', from_id='here')
         self.assertEqual((r['from']['id'], r['place_id'], r['distance_m']), ('y5202', 'exit_10', 15.1))
         self.assertEqual(r['route'][-1]['id'], 'exit_10')
-        r = search.search('im in y5202, where is the nearest emergency exit')
-        self.assertEqual(r['place_id'], 'exit_5')
+        r = search.search('im in y5202, where is the nearest emergency exit')     # entry 94: all exits are emergency exits
+        self.assertEqual((r['place_id'], r['distance_m']), ('exit_10', 15.1))
         self.assertTrue(r['exit']['emergency'])
+        self.assertEqual(search.search('nearest emergency exit', from_id='lt1a')['place_id'], 'exit_10_4F')
+        self.assertEqual(search.search('fire exit', from_id='canteen')['place_id'], search.search('nearest exit', from_id='canteen')['place_id'])
         self.assertEqual(search.search('nearest exit', from_id='lt1a')['place_id'], 'exit_10_4F')
         self.assertEqual(search.search('exit 10 on the 5th floor', from_id='lt1a')['place_id'], 'exit_10')   # named: kept
         self.assertEqual(search.search('the exit gate', from_id='canteen')['place_id'], 'entrance_exit')

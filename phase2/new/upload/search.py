@@ -153,7 +153,7 @@ MALE_WORDS = re.compile(r'\b(male|men|mens|man|gents|gentlemen|boys?|cowo|cowok|
 FEMALE_WORDS = re.compile(r'\b(female|women|womens|woman|ladies|lady|girls?|cewe|cewek|perempuan|wanita)\b')
 ACCESS_WORDS = re.compile(r'\b(disabled|disability|accessible|wheelchair|handicap|handicapped|disabilitas|difabel)\b')
 # exits (entry 93): a request for "an exit" goes to the nearest exit by route; "emergency" / "fire" words -> only the
-# exits tagged emergency (Exit 5 on both floors); a named exit (Exit 5, Exit 10, the gate / entrance) stays that exit.
+# exits tagged emergency (since entry 94 every exit is tagged: user decision 27 Nov); a named exit (Exit 5, Exit 10, the gate / entrance) stays that exit.
 EXIT_WORDS = re.compile(r'\b(exits?|exti|way out|get out|keluar|emergency|emrgency|emergancy|evacuate|evacuation)\b')
 EMERGENCY_WORDS = re.compile(r'\b(emergency|emrgency|emergancy|fire|evacuate|evacuation|alarm|darurat)\b')
 NAMED_EXIT = re.compile(r'\b(exit ?(5|10)|gate|entrance|main|turnstile|masuk)\b')
@@ -369,7 +369,7 @@ def search(query, from_id=None, tracked=None, mode='standard', gender='any', use
             ans = ''
         pid = t['place_id']
         ans = ans or t['answer']
-    elif xq is not None:                              # exit: nearest one by route (emergency words: Exit 5 only)
+    elif xq is not None:                              # exit: nearest one by route (emergency words: the emergency-tagged exits = all exits since entry 94)
         x = astar.nearest_exit(out['from']['id'], mode, emergency=xq['emergency'], floor=xq['floor'])
         out['exit'] = {'emergency': xq['emergency'], 'floor_filter': xq['floor'],
                        'options': [{k: v for k, v in o.items() if k != 'plan'} for o in x['options']],

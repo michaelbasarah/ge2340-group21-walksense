@@ -259,7 +259,25 @@ eR0/eR0n/ed with the true gate, 20 min for eR1-true; 20 / 20 / 30 / 30 min for e
   passes (no stop lost on 25night_tian, 26tian, 25spots ip16; +10 on 25night ip18, 20 -> 30/32); 25spots ip16 is 4/6
   with app features (5/6 with day-3 features, R0 4/6). The no-barometer rule still does not pass (held-out a56 19 vs 19),
   so the app keeps R0 for a55, a56 and the S24 unless `WALKSENSE_FLOOR_VOTE_NO_BARO=1`.
-- `baseline.py` compares R0 with `upload/out/eval.json` `floor_tracking`, which now holds the app default (d) for the
-  iPhone: R0 is in `floor_tracking_by_rule` (`R0`); a rerun of `baseline.py` would report 25night as not matching
-  (20/32 vs 30/32) until it reads that key. `landing.py` (`pred_app`) still trains on the a56 night (it calls
+- `baseline.py` compares R0 with `upload/out/eval.json` `floor_tracking_by_rule[key]['R0']['stops']` (entry 94; it used
+  to read `floor_tracking`, which since entry 90 holds the app default (d) for the iPhone and made a rerun report 25night
+  as not matching, 20/32 vs 30/32; it still falls back to `floor_tracking` when `floor_tracking_by_rule` is absent). All
+  17 comparisons match on 27 Nov. `landing.py` (`pred_app`) still trains on the a56 night (it calls
   `training_stops` without the new `exclude`).
+
+**Rerunning this study after entry 91 (note added in entry 94; the study itself was not rerun).** Since entry 91 the
+day-3 loader (`day3/config.json`) drops Chris's a56 night takes from session `25night` (`exclude_sources` =
+`exclude_a56_night.csv`). The numbers in sections 3 to 7 (entries 74 and 76, e.g. 25night a56 19/32) were made with the a56
+night **kept**. To reproduce them, point the day-3 loader at the 26-Nov configuration, which is the current config without
+that exclusion (`day3/out-a56/config_A.json`), through the environment variable `DAY3_CONFIG` (read in
+`day3/data.py` `config()`; a relative value is resolved against the `day3/` folder, so use that form or an absolute path;
+`phase2/new/day3/out-a56/...` written from the repo root would not be found):
+
+```sh
+DAY3_CONFIG=out-a56/config_A.json python phase2/new/floor/baseline.py     # and candidates.py, from the repo root
+```
+
+The day-3 feature cache is keyed by the config content, so this builds its own cache on first use. Without the variable,
+`floorlib` reads the official config and the a56 night rows are missing (25night a56 has no stops). `baseline.py` itself
+(R0 and R1 on the iPhone) writes a byte-identical `out/baseline.json` either way (checked 27 Nov: 17 of 17 comparisons
+match with and without `DAY3_CONFIG`).

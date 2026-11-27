@@ -227,7 +227,12 @@ class ExitTests(unittest.TestCase):
                         self.assertEqual(len(t['options']) + len(t['excluded']), len(R.EXITS))
         t = R.nearest_exit('y5202', 'standard')
         self.assertEqual((t['exit'], t['choice'].metres), ('exit_10', 15.1))
-        self.assertEqual(R.nearest_exit('y5202', 'standard', emergency=True)['exit'], 'exit_5')
+        # entry 94 (user decision 27 Nov): every exit is an emergency exit, so emergency = the same answer as the plain nearest exit
+        self.assertTrue(all(e['emergency'] for e in R.EXITS.values()))
+        te = R.nearest_exit('y5202', 'standard', emergency=True)
+        self.assertEqual((te['exit'], te['choice'].metres, te['excluded']), ('exit_10', 15.1, []))
+        self.assertEqual(len(te['options']), len(R.EXITS))
+        # a table with no emergency exit still gives no answer (the filter itself is kept)
         self.assertIsNone(R.nearest_exit('y5202', 'standard', emergency=True, exits={'exit_10': {'emergency': False}})['exit'])
         with self.assertRaises(KeyError):
             R.nearest_exit('lt1a', 'fly')
