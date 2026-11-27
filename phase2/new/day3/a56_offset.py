@@ -7,8 +7,8 @@ Chris's a56 (SM-A566B) read a median |B| of 110.9 uT on the 25-Nov night run aga
 (clean-data/2026-11-25-night/field_check.csv). Options, each run through the unchanged day-3 pipeline (evaluate.py +
 fused_knn.py, default and split20):
 
-  A    keep as now (must reproduce out/ and out-split20/)
-  B    exclude the a56 night takes (config `exclude_sources` on session 25night, a derived config in out-a56/)
+  A    keep as on 26 Nov (config.json minus the 27-Nov a56 night exclusion, out-a56/config_A.json)
+  B    exclude the a56 night takes (= config.json since 27 Nov, PROCESS-LOG 91; must reproduce out/ and out-split20/)
   C    hard-iron correction, SAME rule for every phone and session: offset = centre of a robust circle fitted to the
        take-mean x/y of all stop takes of that phone in that session (`fit_session`); z is not corrected
   C1   rule C applied only to the a56 night takes (C' in the log)
@@ -65,6 +65,26 @@ OPTIONS = {'A': 'keep as now', 'B': 'exclude the a56 night takes',
 N_MIN, R_LO, R_HI, GAP_MAX = 10, 20.0, 60.0, 180.0
 LOCAL_MIN, N_MIN_LOCAL = 30.0, 8
 NIGHT, A56 = '25night', 'a56'
+NIGHT_EXCLUSION = 'exclude_a56_night.csv'     # config.json default since 27 Nov (PROCESS-LOG 91, = option B)
+
+
+def _base_config():
+    """Since 27 Nov config.json itself leaves out the a56 night takes (option B is the default). Every option here starts
+    from config.json WITHOUT that exclusion (out-a56/config_A.json), so A still means 'keep as now (26 Nov)' and the
+    comparison of entry 77 reruns unchanged."""
+    if os.environ.get('DAY3_CONFIG'):
+        return
+    cfg = json.loads((HERE / 'config.json').read_text())
+    for s in cfg['sessions']:
+        if s['id'] == NIGHT and s.get('exclude_sources') == NIGHT_EXCLUSION:
+            del s['exclude_sources']
+            s.pop('_comment_exclude', None)
+    OUTA.mkdir(exist_ok=True)
+    (OUTA / 'config_A.json').write_text(json.dumps(cfg, indent=1))
+    os.environ['DAY3_CONFIG'] = 'out-a56/config_A.json'
+
+
+_base_config()
 PHONES = ['ip18', 'ip16', 'a56', 's24', 'a55']
 
 
@@ -181,7 +201,7 @@ def option_offsets(opt, O):
 def install(opt):
     """Make data.load() return option `opt` and data.OUT point at out-a56/<opt>[-split20]/."""
     if opt == 'B':
-        cfg = json.loads((HERE / 'config.json').read_text())
+        cfg = data.config()              # = out-a56/config_A.json (see _base_config)
         cfg['_comment_a56'] = 'Derived by a56_offset.py for option B only (offline analysis): session 25night leaves out every a56 recording.'
         for s in cfg['sessions']:
             if s['id'] == NIGHT:
@@ -240,8 +260,13 @@ def run(opt):
     install(opt)
     import evaluate
     import fused_knn
+    import gknn
     evaluate.main()
     fused_knn.main()
+    # which code produced this run (report column run_code): runs from before the 27-Nov determinism fix have no file
+    head = os.popen(f'git -C "{HERE}" rev-parse --short HEAD').read().strip()
+    (data.OUT / 'run_info.json').write_text(json.dumps({'option': opt, 'variant': data.VARIANT or 'default', 'git_head': head,
+                                                         'deterministic_median_seed': getattr(gknn, 'MEDIAN_SEED', None)}, indent=1))
 
 
 # ----------------------------------------------------------------------------- fields: offsets, |B| before/after, time series
@@ -421,6 +446,9 @@ def report():
             d = OUTA / (opt + var)
             if not (d / 'fused_knn.json').exists():
                 continue
+            if not (d / 'results.json').exists():     # gitignored; options not rerun on 27 Nov (C, C2, C21) are in comparison_2026-11-26.csv
+                print(f'{opt}{var}: no results.json here (not rerun), skipped; see out-a56/comparison_2026-11-26.csv', flush=True)
+                continue
             F = json.loads((d / 'fused_knn.json').read_text())
             R = json.loads((d / 'results.json').read_text())
             S = pd.read_csv(d / 'fused_sample_predictions.csv')
@@ -452,12 +480,13 @@ def report():
             r['stops_over_100uT'] = len(R['magnetic_check']['stops_with_median_B_above_100uT'])
             m = F['deployable_model']
             r['deployable'] = ' '.join(f'{k} {v:g}' for k, v in m['weights'].items()) + f" k {m['k']}"
-            if opt == 'A':
+            ri = d / 'run_info.json'
+            r['run_code'] = (f"deterministic kNN (branch HEAD {json.loads(ri.read_text())['git_head']} when the run finished)" if ri.exists()
+                             else '26 Nov, before the determinism fix (not comparable 1:1)')
+            if opt == 'B':          # since 27 Nov option B IS the official config (PROCESS-LOG 91)
                 rep = repro(d, official[var])
-                r['reproduces_official'] = all(v for k, v in rep.items() if k != 'official_dir')
-                js[f'A{var}_reproduces'] = rep
-                if (OUTA / f'A_mt{var}' / 'fused_knn.json').exists():
-                    js[f'A_mt{var}_reproduces'] = repro(OUTA / f'A_mt{var}', official[var])
+                r['reproduces_official'] = all(v for v in rep.values() if isinstance(v, bool))   # the boolean checks only (0.0 difference is not a failure)
+                js[f'B{var}_reproduces'] = rep
             rows.append(r)
             q = L[(L['session'] == NIGHT) & (L['phone'] == A56)]
             for p, g in q.groupby('true'):

@@ -1,0 +1,36 @@
+{
+ "what": "PROCESS-LOG 91, part 2: reruns of the final configuration after the fix must give identical fused kNN outputs (fold timings ignored).",
+ "official": "out/ from run_all.sh (each script in its own process, one BLAS thread)",
+ "checks": {
+  "B default via a56_offset.py run B (evaluate.py then fused_knn.py in ONE process, derived config out-a56/config_B.json, one BLAS thread)": {
+   "folds_same_weights_and_k": "23/23",
+   "max_inner_acc_difference": 0.0,
+   "fused_sample_predictions.csv": true,
+   "fused_knn.json schemes+model (timings ignored)": true,
+   "results.json stop_results": true,
+   "loso": "191/379",
+   "loso_official": "191/379",
+   "official_dir": "out",
+   "fused_sample_predictions.csv byte-identical": true,
+   "fused_window_predictions.csv byte-identical": true
+  },
+  "default, fused_knn.py alone with default multi-threading (OMP/OPENBLAS/MKL unset) and PYTHONHASHSEED=7 (driver writing to a scratch folder)": {
+   "fused_knn.json schemes+model (timings ignored)": true,
+   "loso": "191/379",
+   "fused_sample_predictions.csv byte-identical": true,
+   "fused_window_predictions.csv byte-identical": true
+  },
+  "split20 via a56_offset.py run B --split20 (evaluate.py then fused_knn.py in ONE process, derived config, one BLAS thread) vs out-split20/": {
+   "folds_same_weights_and_k": "23/23",
+   "max_inner_acc_difference": 0.0,
+   "fused_sample_predictions.csv": true,
+   "fused_knn.json schemes+model (timings ignored)": true,
+   "results.json stop_results": true,
+   "loso": "527/1092",
+   "loso_official": "527/1092",
+   "official_dir": "out-split20",
+   "fused_sample_predictions.csv byte-identical": true,
+   "fused_window_predictions.csv byte-identical": true
+  }
+ }
+}

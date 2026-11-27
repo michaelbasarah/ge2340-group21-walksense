@@ -88,6 +88,10 @@ The demo phone is Dicta's iPhone 18 only [89]. `phase2/new/DEMO-RUNBOOK.md` coll
 ### 3.15 The page becomes map-first and search learns where you start (27 Nov) [93]
 The user asked for a page like Google Maps: the floor plan across the whole width, the search on top, a small route card under the map, and no chatbot text: a search should just set From and To and draw the route. Search now also reads where you are ("im in y5202, find me the nearest exit" -> From Y5-202, To Exit 10, 15 m), both with Gemini (one call returns the start and the destination) and offline. From defaults to "Current location", the place the live model lights; with no fix yet the card says "Waiting for location" and draws nothing. "Step-free" is now called "Disabled". Exits, like toilets, go to the nearest one by route unless one is named. The user removed the Nearest-toilet button and the Any WC chip (WC: Male | Female, neither = any) and the help lines under the map; the live phyphox status moved into a closed dropdown. On the 128 old test queries the offline answers changed only for exit questions (96 -> 99 of 128 from the 4F gate); 24 new from + to queries got the start right 24 times and the destination 23 times [93].
 
+
+### 3.16 The final headline: the a56 night out, and a rerun that gives the same numbers every time (27 Nov) [91]
+The user chose option B of entry 77: the official numbers leave out Chris's a56 night recordings (32 stops + 26 walks), because the label-free field check showed a hard-iron offset (median |B| 110.9 uT against 40 to 45 uT on other days). The data stay in the repo; `day3/config.json` lists them in `exclude_a56_night.csv`. Before the official rerun the 178 vs 179 puzzle of entry 77 was solved: the kNN's distance scale used random pairs from one shared generator, so a script that ran earlier in the same process (evaluate.py) shifted it. Each call now seeds its own generator, ties are broken explicitly, and three reruns (in-process, multi-threaded, another hash seed) gave identical outputs. Final, leave one session out: **191/379 = 50.4%** on takes, **527/1092 = 48.3%** on 20 s pieces (chance 3.8%); the demo phone ip18 **60/85 = 70.6%** (macro precision 0.723, recall 0.705); the leaky random split still says 99.1%. The offset-corrected option C1 stays as evidence: the a56 night takes go from 2/32 to 11/32 with a fit that uses no labels.
+
 ---
 
 ## 4. Milestone numbers
@@ -113,6 +117,7 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 | 26 Nov | + Tian's morning, LOSO default / split20 | 178/411 = 43.3% / 553/1183 = 46.7% | [73] |
 | 26 Nov | Floor rule (d) on the night dropout (app: 20/32) | 30/32 | [74] |
 | 26 Nov | Gemini request matching, all 128 / hybrid | 124/128 / 115/128 | [75] |
+| 27 Nov | **Final headline** (a56 night excluded, deterministic kNN), LOSO default / split20; ip18 | 191/379 = 50.4% / 527/1092 = 48.3%; 60/85 = 70.6% | [91] |
 
 ---
 
@@ -145,6 +150,7 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 
 ## 6. Decisions and who made them
 
+- **User (Michael), 27 Nov:** the official headline excludes Chris's a56 night takes (entry 77 option B) [91].
 - **User (Michael):** split20 notes [40]; no production app, max 5 agents, no user tests [83, 85]; LLM search, Gemini free tier, offline fallback, no RAG [84]; plain Excel with append-only progress [45, 85]; push everything to GitHub [85]; trust the collectors' own names [69]; delete duplicates only after a byte check [68]; route planner, step-free mode, toilet gender filter, landing-gated floor change [76, 88]; save the story, not just the code [88]; floor rule (d) in the app, the a56 night out of the app's training, ordinary toilets first in Standard mode [90]; a Google-Maps-like page with no LLM text, From = Current location, "Disabled" instead of "Step-free", no Nearest-toilet button (toilets automatic-nearest), WC: Male | Female, hint lines removed, live data collapsed [93].
 - **Team / collectors:** the route list that fixed the 23-Nov labels [9]; Dicta's complete 25-Nov push [28]; the name mappings confirmed on 26 Nov [69]. Still waiting: Tian's LT1/LT2 confirmation [73], Chris's phone set-up on the night run [72, 87], Dicta's phyphox barometer setting [72, 87].
 - **Pre-registered before results (so nobody could tune to a wanted answer):** graph areas [18], never-correct places [41], data-gaps thresholds [51], smoothing selection rule [60], request-matching dev/test split [57], floor rules [74, 76].
@@ -154,7 +160,7 @@ Chance is 3.8% (26 places) unless noted. "LOSO" = leave one whole session out (h
 ## 7. What is still open (short list; the full list is at the end of `PROCESS-LOG.md`)
 
 1. **Which numbers the report quotes:** take level or split20 [40]; which chance level and place list [62].
-2. **A56 night takes:** keep, exclude or recalibrate. Entry 77: recommended exclude (B) for the headline numbers and the one-offset correction (C1: default **194/411**, split20 **614/1183**) as the evidence that the fault is a drifting hard-iron offset; do not correct phones without a fault. A full A56 redo only after a side-by-side |B| check against the ip18; no ip18 floor-5 redo needed for the fingerprints. `config.json` still keeps the takes until the team decides [72, 77, 87].
+2. **A56 night takes: DECIDED 27 Nov (user): excluded from the headline (option B)** [77, 91]. The data stay in the repo; C1 (label-free offset fit on the a56 night only: default 192/411, a56 night 11/32; split20 610/1183) is the supporting evidence. A full A56 redo only after a side-by-side |B| check against the ip18.
 3. **Floor rule (d):** adopted in the app for iPhones (25 night 20/32 -> 30/32); still off for phones without a barometer, which need a held-out session with a healthy Android magnetometer [74, 90].
 4. **Tian's night LT stops:** relabel to LT1B/LT1A? [73]
 5. **Team review** of the 105 agent-drafted search queries and the guessed routing edges [57, 52-55].

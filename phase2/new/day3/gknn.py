@@ -23,7 +23,11 @@ import data
 
 NUMERIC = {'B': data.MAG_B, 'xyz': data.MAG_XYZ, 'tilt': data.TILT}
 ALL_GROUPS = ['B', 'xyz', 'tilt', 'wifi', 'baro']
-RNG = np.random.default_rng(21)
+MEDIAN_SEED = 21
+# Determinism (PROCESS-LOG 91): the group scale (median distance over 3000 random training pairs) used to draw from ONE
+# module-level generator, so its value depended on how many dists() calls the process had made before (evaluate.py
+# before fused_knn.py in one process gave 179/411 instead of 178/411). Every dists() call now starts its own generator
+# from MEDIAN_SEED, so the scale depends only on the training rows of that call.
 
 
 class Bank:
@@ -102,7 +106,8 @@ class Bank:
                 Za, Zb = np.nan_to_num((A - mu) / sd), np.nan_to_num((B - mu) / sd)
                 d = cdist(Zb, Za, 'sqeuclidean').astype(np.float32) / len(cols)
                 ia = np.where(at)[0]
-                p, q = RNG.choice(ia, 3000), RNG.choice(ia, 3000)
+                rng = np.random.default_rng(MEDIAN_SEED)       # fresh per call: same rows -> same pairs
+                p, q = rng.choice(ia, 3000), rng.choice(ia, 3000)
                 med = np.median(((Za[p] - Za[q]) ** 2).mean(1)[p != q])
                 out[g] = (d / max(med, 1e-9), ae, at)
             elif g == 'wifi':
@@ -145,7 +150,16 @@ def knn_scores(D, ytr, classes, ks, gate=None):
     kmax = min(max(ks), D.shape[1])
     idx = np.argpartition(D, kmax - 1, axis=1)[:, :kmax]
     dsel = np.take_along_axis(D, idx, 1)
-    order = np.argsort(dsel, 1)
+    # Explicit tie-break (PROCESS-LOG 91): equal distances are ordered by training-row index. Rows where the kmax-th
+    # distance is shared with an unselected training row are re-selected with a stable full sort (lowest index wins),
+    # so the neighbour set never depends on the selection algorithm's internal order.
+    kth = dsel.max(1)
+    tied = (D <= kth[:, None]).sum(1) > kmax
+    if tied.any():
+        r = np.where(tied)[0]
+        idx[r] = np.argsort(D[r], axis=1, kind='stable')[:, :kmax]
+        dsel[r] = np.take_along_axis(D[r], idx[r], 1)
+    order = np.lexsort((idx, dsel), axis=1)
     idx, dsel = np.take_along_axis(idx, order, 1), np.take_along_axis(dsel, order, 1)
     ci = {c: i for i, c in enumerate(classes)}
     lab = np.vectorize(ci.get)(ytr[idx])

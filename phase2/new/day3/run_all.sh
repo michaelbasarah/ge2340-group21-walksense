@@ -7,6 +7,9 @@
 set -e
 cd "$(dirname "$0")/../../.."
 PY=${PYTHON:-python3}
+# One BLAS/OpenMP thread unless the caller sets otherwise: rules out thread-count rounding in the float32 Wi-Fi matrix
+# products (PROCESS-LOG 91: reruns must give identical fused_knn.json; the kNN itself is single-threaded numpy/scipy).
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1} OPENBLAS_NUM_THREADS=${OPENBLAS_NUM_THREADS:-1} MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
 if [ "$1" = "--split20" ]; then export DAY3_VARIANT=split20; fi
 if [ "$1" = "--variant" ]; then export DAY3_VARIANT="$2"; fi      # e.g. --variant split20_only (control: pieces only)
 if [ -f phase2/clean-data/2026-11-25-night/scripts/build_night.py ]; then
@@ -22,7 +25,7 @@ fi
 "$PY" phase2/new/day3/data.py            # parse every session into window/visit tables (cached in day3/cache/)
 "$PY" phase2/new/day3/wifi_check.py      # out/wifi_diagnosis.json
 "$PY" phase2/new/day3/evaluate.py        # out/results.json, out/summary_table.csv
-"$PY" phase2/new/day3/fused_knn.py       # out/fused_knn.json, out/fused_model.json (about 10 min)
+"$PY" phase2/new/day3/fused_knn.py       # out/fused_knn.json, out/fused_model.json (about 40 min since 26 Nov)
 "$PY" phase2/new/day3/track24.py         # out/track24_results.json, out/replay_24nov_s2.json
 "$PY" phase2/new/day3/visualise.py       # out/*.png, out/explore.html
 "$PY" phase2/new/day3/playground.py      # out/knn_playground.html (interactive kNN playground, internal)

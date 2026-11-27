@@ -10,11 +10,11 @@
   "outlier_angle_deg": 20.0,
   "walk_endpoints_dropped": 8
  },
- "takes": 411,
- "pieces_total": 1235,
+ "takes": 379,
+ "pieces_total": 1139,
  "pieces_by_status": {
-  "kept": 1183,
-  "outlier": 32,
+  "kept": 1092,
+  "outlier": 27,
   "excluded": 18,
   "incomplete": 2
  },
@@ -36,9 +36,9 @@
    "kept": 156
   },
   "25night": {
-   "takes": 64,
-   "kept": 185,
-   "outlier": 7
+   "takes": 32,
+   "kept": 94,
+   "outlier": 2
   },
   "25night_tian": {
    "takes": 23,
@@ -94,11 +94,6 @@
    "takes": 26,
    "kept": 78
   },
-  "25night/a56": {
-   "takes": 32,
-   "kept": 91,
-   "outlier": 5
-  },
   "25night/ip18": {
    "takes": 32,
    "kept": 94,
@@ -152,7 +147,7 @@
   ],
   "25night": [
    59.98,
-   60.02
+   60.0
   ],
   "25night_tian": [
    59.97,
@@ -172,9 +167,9 @@
   ]
  },
  "kept_pieces_per_take": {
-  "1": 9,
-  "2": 11,
-  "3": 384
+  "1": 8,
+  "2": 8,
+  "3": 356
  },
  "takes_with_no_kept_piece": [
   "23nov:BM05:iphone",
@@ -185,23 +180,23 @@
   "23nov:BM26:iphone",
   "23nov:BM27:iphone"
  ],
- "windows_kept": 4732,
+ "windows_kept": 4368,
  "places_kept": 26,
  "within_take_spread": {
-  "n_pieces": 1215,
-  "dev_B_uT_mad": 0.362,
+  "n_pieces": 1119,
+  "dev_B_uT_mad": 0.336,
   "abs_dev_B_uT_quantiles": {
-   "0.5": 0.361,
-   "0.9": 1.53,
-   "0.95": 2.851,
-   "0.99": 16.455,
+   "0.5": 0.336,
+   "0.9": 1.332,
+   "0.95": 2.574,
+   "0.99": 16.233,
    "max": 179.668
   },
   "angle_deg_quantiles": {
-   "0.5": 0.978,
-   "0.9": 3.729,
-   "0.95": 5.12,
-   "0.99": 15.756,
+   "0.5": 1.044,
+   "0.9": 3.828,
+   "0.95": 5.371,
+   "0.99": 15.731,
    "max": 124.457
   }
  }
