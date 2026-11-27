@@ -446,6 +446,9 @@ def report():
             d = OUTA / (opt + var)
             if not (d / 'fused_knn.json').exists():
                 continue
+            if not (d / 'results.json').exists():     # gitignored; options not rerun on 27 Nov (C, C2, C21) are in comparison_2026-11-26.csv
+                print(f'{opt}{var}: no results.json here (not rerun), skipped; see out-a56/comparison_2026-11-26.csv', flush=True)
+                continue
             F = json.loads((d / 'fused_knn.json').read_text())
             R = json.loads((d / 'results.json').read_text())
             S = pd.read_csv(d / 'fused_sample_predictions.csv')
@@ -478,11 +481,11 @@ def report():
             m = F['deployable_model']
             r['deployable'] = ' '.join(f'{k} {v:g}' for k, v in m['weights'].items()) + f" k {m['k']}"
             ri = d / 'run_info.json'
-            r['run_code'] = (f"deterministic ({json.loads(ri.read_text())['git_head']})" if ri.exists()
+            r['run_code'] = (f"deterministic kNN (branch HEAD {json.loads(ri.read_text())['git_head']} when the run finished)" if ri.exists()
                              else '26 Nov, before the determinism fix (not comparable 1:1)')
             if opt == 'B':          # since 27 Nov option B IS the official config (PROCESS-LOG 91)
                 rep = repro(d, official[var])
-                r['reproduces_official'] = all(v for k, v in rep.items() if k != 'official_dir')
+                r['reproduces_official'] = all(v for v in rep.values() if isinstance(v, bool))   # the boolean checks only (0.0 difference is not a failure)
                 js[f'B{var}_reproduces'] = rep
             rows.append(r)
             q = L[(L['session'] == NIGHT) & (L['phone'] == A56)]

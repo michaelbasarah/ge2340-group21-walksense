@@ -2469,7 +2469,7 @@ random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:a55#p2,25nov,a55
 random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:a56#p0,25nov,a56,5,female_toilet,female_toilet,female_toilet|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:a56#p1,25nov,a56,5,female_toilet,female_toilet,female_toilet|canteen|disabled_toilet,True,2,26
 random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:a56#p2,25nov,a56,5,female_toilet,female_toilet,female_toilet|canteen|disabled_toilet,True,1,26
-random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:iphone#p0,25nov,ip18,5,female_toilet,female_toilet,female_toilet|canteen|disabled_toilet,True,1,26
+random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:iphone#p0,25nov,ip18,5,female_toilet,y5202,y5202|canteen|disabled_toilet,False,1,26
 random_LEAKY,random fold 4,25nov:floor5/stops/s07_female_toilet:iphone#p2,25nov,ip18,5,female_toilet,female_toilet,female_toilet|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 4,25nov:floor5/stops/s08_exit10_door:a55#p0,25nov,a55,5,exit_10,exit_10,exit_10|canteen|disabled_toilet,True,2,26
 random_LEAKY,random fold 4,25nov:floor5/stops/s08_exit10_door:a55#p2,25nov,a55,5,exit_10,exit_10,exit_10|canteen|disabled_toilet,True,2,26
@@ -2674,7 +2674,7 @@ random_LEAKY,random fold 5,24s1:floor4/stops/s03_exit5_door:iphone#p2,24s1,ip18,
 random_LEAKY,random fold 5,24s1:floor4/stops/s03_exit5_door:s24#p0,24s1,s24,4,exit_5_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,True,3,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s04_lt2a:iphone#p1,24s1,ip18,4,lt2a,lt2a,lt2a|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s04_lt2a:iphone#p2,24s1,ip18,4,lt2a,lt2a,lt2a|canteen|disabled_toilet,True,2,26
-random_LEAKY,random fold 5,24s1:floor4/stops/s04_lt2a:s24#p0,24s1,s24,4,lt2a,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,2,26
+random_LEAKY,random fold 5,24s1:floor4/stops/s04_lt2a:s24#p0,24s1,s24,4,lt2a,exit_5_4F,exit_5_4F|lt2a|canteen,True,2,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s05_lt2b:a55#p1,24s1,a55,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,2,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s05_lt2b:a55#p2,24s1,a55,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s05_lt2b:a56#p1,24s1,a56,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,1,26
@@ -2721,7 +2721,7 @@ random_LEAKY,random fold 5,24s1:floor4/stops/s11_exit10_door:a55#p2,24s1,a55,4,e
 random_LEAKY,random fold 5,24s1:floor4/stops/s11_exit10_door:a56#p2,24s1,a56,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s11_exit10_door:iphone#p1,24s1,ip18,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s11_exit10_door:iphone#p2,24s1,ip18,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,3,26
-random_LEAKY,random fold 5,24s1:floor4/stops/s11_exit10_door:s24#p2,24s1,s24,4,exit_10_4F,disabled_toilet,disabled_toilet|canteen|disabled_toilet_4F,False,1,26
+random_LEAKY,random fold 5,24s1:floor4/stops/s11_exit10_door:s24#p2,24s1,s24,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s12_gate:a55#p0,24s1,a55,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s12_gate:a55#p1,24s1,a55,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s1:floor4/stops/s12_gate:a55#p2,24s1,a55,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,2,26
@@ -2893,7 +2893,7 @@ random_LEAKY,random fold 5,24s2:floor5/stops/s05_sr9:iphone#p1,24s2,ip16,5,sr9,s
 random_LEAKY,random fold 5,24s2:floor5/stops/s05_sr9:iphone#p2,24s2,ip16,5,sr9,sr9,sr9|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s2:floor5/stops/s05_sr9:s24#p1,24s2,s24,5,sr9,sr9,sr9|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s2:floor5/stops/s06_y5202:iphone#p2,24s2,ip16,5,y5202,y5202,y5202|canteen|disabled_toilet,True,1,26
-random_LEAKY,random fold 5,24s2:floor5/stops/s06_y5202:s24#p0,24s2,s24,5,y5202,y5202,y5202|canteen|disabled_toilet,True,1,26
+random_LEAKY,random fold 5,24s2:floor5/stops/s06_y5202:s24#p0,24s2,s24,5,y5202,lift_stairs,lift_stairs|canteen|disabled_toilet,False,1,26
 random_LEAKY,random fold 5,24s2:floor5/stops/s06_y5202:s24#p1,24s2,s24,5,y5202,y5202,y5202|canteen|disabled_toilet,True,2,26
 random_LEAKY,random fold 5,24s2:floor5/stops/s07_female_toilet:iphone#p1,24s2,ip16,5,female_toilet,female_toilet,female_toilet|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,24s2:floor5/stops/s08_exit10_door:iphone#p0,24s2,ip16,5,exit_10,exit_10,exit_10|canteen|disabled_toilet,True,1,26
@@ -2958,7 +2958,7 @@ random_LEAKY,random fold 5,25night:floor5/stops/s08_exit10_door:iphone#p1,25nigh
 random_LEAKY,random fold 5,25night:floor5/stops/s09_male_disabled_toilet:iphone#p0,25night,ip18,5,disabled_toilet,disabled_toilet,disabled_toilet|canteen|disabled_toilet_4F,True,2,26
 random_LEAKY,random fold 5,25night:floor5/stops/s09_male_disabled_toilet:iphone#p1,25night,ip18,5,disabled_toilet,disabled_toilet,disabled_toilet|canteen|disabled_toilet_4F,True,2,26
 random_LEAKY,random fold 5,25night:floor5/stops/s10_lift_stairs5:iphone#p0,25night,ip18,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,1,26
-random_LEAKY,random fold 5,25night:floor5/stops/s10_lift_stairs5:iphone#p1,25night,ip18,5,lift_stairs,disabled_toilet,disabled_toilet|canteen|disabled_toilet_4F,False,1,26
+random_LEAKY,random fold 5,25night:floor5/stops/s10_lift_stairs5:iphone#p1,25night,ip18,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25night:floor5/stops/s10_lift_stairs5:iphone#p2,25night,ip18,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25night:floor5/stops/s11_y5401:iphone#p0,25night,ip18,5,y5401,y5401,y5401|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25night:floor5/stops/s11_y5401:iphone#p1,25night,ip18,5,y5401,y5401,y5401|canteen|disabled_toilet,True,1,26
@@ -3063,7 +3063,7 @@ random_LEAKY,random fold 5,25nov:floor4/stops/s09_lt1b:a55#p1,25nov,a55,4,lt1b,l
 random_LEAKY,random fold 5,25nov:floor4/stops/s09_lt1b:a56#p2,25nov,a56,4,lt1b,lt1b,lt1b|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25nov:floor4/stops/s09_lt1b:iphone#p0,25nov,ip18,4,lt1b,lt1b,lt1b|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25nov:floor4/stops/s10_lt1a:a55#p0,25nov,a55,4,lt1a,lt1a,lt1a|canteen|disabled_toilet,True,2,26
-random_LEAKY,random fold 5,25nov:floor4/stops/s10_lt1a:a56#p0,25nov,a56,4,lt1a,lift_stairs_4F,lift_stairs_4F|canteen|disabled_toilet,False,1,26
+random_LEAKY,random fold 5,25nov:floor4/stops/s10_lt1a:a56#p0,25nov,a56,4,lt1a,lt1a,lt1a|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25nov:floor4/stops/s10_lt1a:a56#p2,25nov,a56,4,lt1a,lt1a,lt1a|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25nov:floor4/stops/s10_lt1a:iphone#p1,25nov,ip18,4,lt1a,lt1a,lt1a|canteen|disabled_toilet,True,1,26
 random_LEAKY,random fold 5,25nov:floor4/stops/s11_exit10_door:a55#p1,25nov,a55,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,2,26
@@ -3473,10 +3473,10 @@ by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s02_disabled_toilet
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s03_exit5_door:iphone#p0,24s1,ip18,4,exit_5_4F,lt2b,lt2b|canteen|disabled_toilet,False,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s03_exit5_door:iphone#p1,24s1,ip18,4,exit_5_4F,lt2b,lt2b|canteen|disabled_toilet,False,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s03_exit5_door:iphone#p2,24s1,ip18,4,exit_5_4F,lt2b,lt2b|canteen|disabled_toilet,False,4,26
-by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s05_lt2b:a55#p0,24s1,a55,4,lt2b,male_toilet,male_toilet|exit_5_4F|lt2a,False,4,26
+by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s05_lt2b:a55#p0,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|male_toilet|lt2a,False,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s05_lt2b:a55#p1,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|male_toilet|lt2a,False,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s05_lt2b:a55#p2,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|male_toilet|lt2b,True,4,26
-by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s06_esca_down:a56#p0,24s1,a56,4,escalator_down_4F,escalator_down_4F,escalator_down_4F|lt1a|canteen,True,4,26
+by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s06_esca_down:a56#p0,24s1,a56,4,escalator_down_4F,lt1a,lt1a|escalator_down_4F|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s06_esca_down:a56#p1,24s1,a56,4,escalator_down_4F,escalator_down_4F,escalator_down_4F|lt1a|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s06_esca_down:a56#p2,24s1,a56,4,escalator_down_4F,escalator_down_4F,escalator_down_4F|lt1a|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor4/stops/s07_y4502:iphone#p0,24s1,ip18,4,y4502,y4502,y4502|disabled_toilet_4F|escalator_up_4F,True,4,26
@@ -3522,8 +3522,8 @@ by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s12_male_disabled_t
 by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s12_male_disabled_toilet:iphone#p1,24s1,ip18,5,disabled_toilet,disabled_toilet,disabled_toilet|lift_stairs|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s12_male_disabled_toilet:iphone#p2,24s1,ip18,5,disabled_toilet,disabled_toilet,disabled_toilet|lift_stairs|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s13_lift_stairs5:s24#p0,24s1,s24,5,lift_stairs,lt1a,lt1a|lift_stairs|escalator_down_4F,True,4,26
-by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s13_lift_stairs5:s24#p1,24s1,s24,5,lift_stairs,lift_stairs,lift_stairs|lt1a|disabled_toilet,True,4,26
-by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s13_lift_stairs5:s24#p2,24s1,s24,5,lift_stairs,lift_stairs,lift_stairs|lt1a|exit_10_4F,True,4,26
+by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s13_lift_stairs5:s24#p1,24s1,s24,5,lift_stairs,lift_stairs,lift_stairs|lt1a|exit_10_4F,True,4,26
+by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s13_lift_stairs5:s24#p2,24s1,s24,5,lift_stairs,lift_stairs,lift_stairs|lt1a|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s15_y5302_point2:a55#p0,24s1,a55,5,y5302_back,exit_10_4F,exit_10_4F|entrance_exit|lt1b,False,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s15_y5302_point2:a55#p1,24s1,a55,5,y5302_back,exit_10_4F,exit_10_4F|entrance_exit|lt1b,False,4,26
 by_recording_partly_leaky,recording fold 2,24s1:floor5/stops/s15_y5302_point2:a55#p2,24s1,a55,5,y5302_back,exit_10_4F,exit_10_4F|entrance_exit|lt1b,False,4,26
@@ -3540,7 +3540,7 @@ by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s09_lt1b:iphone#p0,
 by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s09_lt1b:iphone#p1,24s2,ip16,4,lt1b,lt1b,lt1b|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s09_lt1b:iphone#p2,24s2,ip16,4,lt1b,lt1b,lt1b|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s11_exit10_door:s24#p0,24s2,s24,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,4,26
-by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s11_exit10_door:s24#p1,24s2,s24,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,4,26
+by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s11_exit10_door:s24#p1,24s2,s24,4,exit_10_4F,exit_10_4F,exit_10_4F|lift_stairs|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor4/stops/s11_exit10_door:s24#p2,24s2,s24,4,exit_10_4F,exit_10_4F,exit_10_4F|lift_stairs|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s02_exit5_door:iphone#p0,24s2,ip16,5,exit_5,exit_5,exit_5|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s02_exit5_door:iphone#p1,24s2,ip16,5,exit_5,exit_5,exit_5|canteen|disabled_toilet,True,4,26
@@ -3552,11 +3552,11 @@ by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s07_female_toilet:i
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s07_female_toilet:iphone#p1,24s2,ip16,5,female_toilet,y5302_back,y5302_back|female_toilet|y5202,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s07_female_toilet:iphone#p2,24s2,ip16,5,female_toilet,y5302_back,y5302_back|female_toilet|y5202,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s09_esca_up:s24#p0,24s2,s24,5,escalator_up,escalator_up,escalator_up|y5401|disabled_toilet,True,4,26
-by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s09_esca_up:s24#p1,24s2,s24,5,escalator_up,escalator_up,escalator_up|y5401|disabled_toilet,True,4,26
+by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s09_esca_up:s24#p1,24s2,s24,5,escalator_up,escalator_up,escalator_up|disabled_toilet|y5401,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s09_esca_up:s24#p2,24s2,s24,5,escalator_up,escalator_up,escalator_up|disabled_toilet|y5401,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s12_lift_stairs5:iphone#p0,24s2,ip16,5,lift_stairs,lift_stairs,lift_stairs|exit_10|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s12_lift_stairs5:iphone#p1,24s2,ip16,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,4,26
-by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s12_lift_stairs5:iphone#p2,24s2,ip16,5,lift_stairs,lift_stairs,lift_stairs|exit_10|canteen,True,4,26
+by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s12_lift_stairs5:iphone#p2,24s2,ip16,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s14_y5302_point2:s24#p0,24s2,s24,5,y5302_back,exit_10,exit_10|lift_stairs|y5202,False,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s14_y5302_point2:s24#p1,24s2,s24,5,y5302_back,exit_10,exit_10|lift_stairs|y5202,False,4,26
 by_recording_partly_leaky,recording fold 2,24s2:floor5/stops/s14_y5302_point2:s24#p2,24s2,s24,5,y5302_back,exit_10,exit_10|lift_stairs|y5202,False,4,26
@@ -3572,15 +3572,15 @@ by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s02_exit5_door:i
 by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s07_female_toilet:iphone#p0,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|y5302_back|female_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s07_female_toilet:iphone#p1,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|female_toilet|y5302_back,True,4,26
 by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s07_female_toilet:iphone#p2,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|female_toilet|y5302_back,True,4,26
-by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s13_sr9:iphone#p0,25night,ip18,5,sr9,sr9,sr9|escalator_down|y5202,True,4,26
-by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s13_sr9:iphone#p1,25night,ip18,5,sr9,sr9,sr9|escalator_down|female_toilet,True,4,26
+by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s13_sr9:iphone#p0,25night,ip18,5,sr9,sr9,sr9|escalator_down|female_toilet,True,4,26
+by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s13_sr9:iphone#p1,25night,ip18,5,sr9,sr9,sr9|escalator_down|y5202,True,4,26
 by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s13_sr9:iphone#p2,25night,ip18,5,sr9,sr9,sr9|escalator_down|female_toilet,True,4,26
-by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s18_y5302_point2:iphone#p0,25night,ip18,5,y5302_back,y5302_back,y5302_back|female_toilet|exit_10,True,4,26
+by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s18_y5302_point2:iphone#p0,25night,ip18,5,y5302_back,y5302_back,y5302_back|exit_10|female_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s18_y5302_point2:iphone#p1,25night,ip18,5,y5302_back,y5302_back,y5302_back|female_toilet|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,25night:floor5/stops/s18_y5302_point2:iphone#p2,25night,ip18,5,y5302_back,y5302_back,y5302_back|female_toilet|canteen,True,4,26
 by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s04_lt2b:iphone#p0,25night_tian,ip16,4,lt2b,lt2b,lt2b|exit_5_4F|canteen,True,4,26
-by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s04_lt2b:iphone#p1,25night_tian,ip16,4,lt2b,lt2b,lt2b|exit_5_4F|canteen,True,4,26
-by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s04_lt2b:iphone#p2,25night_tian,ip16,4,lt2b,lt2b,lt2b|exit_5_4F|canteen,True,4,26
+by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s04_lt2b:iphone#p1,25night_tian,ip16,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,4,26
+by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s04_lt2b:iphone#p2,25night_tian,ip16,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s09_gate:iphone#p0,25night_tian,ip16,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s09_gate:iphone#p1,25night_tian,ip16,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
 by_recording_partly_leaky,recording fold 2,25night_tian:floor4/stops/s09_gate:iphone#p2,25night_tian,ip16,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
@@ -3596,7 +3596,7 @@ by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s01_lift_stairs5:a
 by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s03_exit5_door:a55#p0,25nov,a55,4,exit_5_4F,exit_5_4F,exit_5_4F|escalator_down_4F|lt2a,True,4,26
 by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s03_exit5_door:a55#p1,25nov,a55,4,exit_5_4F,exit_5_4F,exit_5_4F|escalator_down_4F|lt2b,True,4,26
 by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s03_exit5_door:a55#p2,25nov,a55,4,exit_5_4F,exit_5_4F,exit_5_4F|escalator_down_4F|canteen,True,4,26
-by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s04_lt2a:a55#p1,25nov,a55,4,lt2a,y4502,y4502|disabled_toilet_4F|sr9,False,4,26
+by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s04_lt2a:a55#p1,25nov,a55,4,lt2a,y4502,y4502|disabled_toilet_4F|lt2a,True,4,26
 by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s04_lt2a:a55#p2,25nov,a55,4,lt2a,y4502,y4502|disabled_toilet_4F|sr9,False,4,26
 by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s05_lt2b:a56#p0,25nov,a56,4,lt2b,lt2b,lt2b|entrance_exit|escalator_up_4F,True,4,26
 by_recording_partly_leaky,recording fold 2,25nov:floor4/stops/s05_lt2b:a56#p1,25nov,a56,4,lt2b,lt2b,lt2b|entrance_exit|escalator_up_4F,True,4,26
@@ -3638,7 +3638,7 @@ by_recording_partly_leaky,recording fold 2,25nov:floor5/stops/s13_y5401:a56#p2,2
 by_recording_partly_leaky,recording fold 2,25spots:floor4/stops/spots_s08_escalator_up_4F:iphone#p0,25spots,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|exit_5_4F,True,4,26
 by_recording_partly_leaky,recording fold 2,25spots:floor4/stops/spots_s08_escalator_up_4F:iphone#p1,25spots,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|exit_5_4F,True,4,26
 by_recording_partly_leaky,recording fold 2,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p0,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|canteen,True,4,26
-by_recording_partly_leaky,recording fold 2,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p1,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|female_toilet,True,4,26
+by_recording_partly_leaky,recording fold 2,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p1,25spots,s24,4,escalator_down_4F,lt1b,lt1b|female_toilet|escalator_down_4F,True,4,26
 by_recording_partly_leaky,recording fold 2,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p2,25spots,s24,4,escalator_down_4F,lt1b,lt1b|female_toilet|canteen,False,4,26
 by_recording_partly_leaky,recording fold 2,25spots:floor5/stops/spots_s01_escalator_down:s24#p0,25spots,s24,5,escalator_down,escalator_down,escalator_down|canteen|lift_stairs,True,4,26
 by_recording_partly_leaky,recording fold 2,25spots:floor5/stops/spots_s01_escalator_down:s24#p1,25spots,s24,5,escalator_down,escalator_down,escalator_down|canteen|lift_stairs,True,4,26
@@ -4391,7 +4391,7 @@ grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a55#p0,24s1,a55,5
 grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a55#p1,24s1,a55,5,y5302_back,lt1a,lt1a|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a55#p2,24s1,a55,5,y5302_back,lift_stairs_4F,lift_stairs_4F|lt1a|canteen,False,4,26
 grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a56#p0,24s1,a56,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|canteen,True,4,26
-grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a56#p1,24s1,a56,5,y5302_back,y5302_back,y5302_back|canteen|disabled_toilet,True,4,26
+grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a56#p1,24s1,a56,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|canteen,True,4,26
 grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:a56#p2,24s1,a56,5,y5302_back,y5302_back,y5302_back|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:iphone#p0,24s1,ip18,5,y5302_back,y5302_back,y5302_back|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,24s1:floor5/stops/s15_y5302_point2:iphone#p1,24s1,ip18,5,y5302_back,y5302_back,y5302_back|canteen|disabled_toilet,True,4,26
@@ -4467,11 +4467,11 @@ grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:a55#p1,25nov,a55,4,es
 grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:a55#p2,25nov,a55,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:a56#p0,25nov,a56,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:a56#p1,25nov,a56,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
-grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:a56#p2,25nov,a56,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
+grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:a56#p2,25nov,a56,4,escalator_up_4F,y5401,y5401|escalator_up_4F|canteen,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:iphone#p0,25nov,ip18,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:iphone#p1,25nov,ip18,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor4/stops/s08_esca_up:iphone#p2,25nov,ip18,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
-grouped_by_stop,stop fold 1,25nov:floor5/stops/s01_canteen:a55#p2,25nov,a55,5,canteen,escalator_down,escalator_down|sr9|canteen,True,4,26
+grouped_by_stop,stop fold 1,25nov:floor5/stops/s01_canteen:a55#p2,25nov,a55,5,canteen,escalator_down,escalator_down|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor5/stops/s01_canteen:a56#p0,25nov,a56,5,canteen,y5202,y5202|exit_10|canteen,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor5/stops/s01_canteen:a56#p1,25nov,a56,5,canteen,exit_10,exit_10|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,25nov:floor5/stops/s01_canteen:a56#p2,25nov,a56,5,canteen,exit_10,exit_10|canteen|disabled_toilet,True,4,26
@@ -4525,7 +4525,7 @@ grouped_by_stop,stop fold 1,25spots:floor5/stops/spots_s16_male_toilet:s24#p2,25
 grouped_by_stop,stop fold 1,26tian:floor4/stops/s03_exit5_door:iphone#p0,26tian,ip16,4,exit_5_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,26tian:floor4/stops/s03_exit5_door:iphone#p1,26tian,ip16,4,exit_5_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 1,26tian:floor4/stops/s03_exit5_door:iphone#p2,26tian,ip16,4,exit_5_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,True,4,26
-grouped_by_stop,stop fold 1,26tian:floor4/stops/s08_esca_up:iphone#p0,26tian,ip16,4,escalator_up_4F,exit_5_4F,exit_5_4F|escalator_down_4F|canteen,False,4,26
+grouped_by_stop,stop fold 1,26tian:floor4/stops/s08_esca_up:iphone#p0,26tian,ip16,4,escalator_up_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 1,26tian:floor4/stops/s08_esca_up:iphone#p1,26tian,ip16,4,escalator_up_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 1,26tian:floor4/stops/s08_esca_up:iphone#p2,26tian,ip16,4,escalator_up_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 1,26tian:floor5/stops/s01_exit5_door:iphone#p0,26tian,ip16,5,exit_5,exit_5,exit_5|canteen|disabled_toilet,True,4,26
@@ -4562,7 +4562,7 @@ grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:a55#p2,24s1,a5
 grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:a56#p0,24s1,a56,4,disabled_toilet_4F,y4502,y4502|disabled_toilet_4F|canteen,True,4,26
 grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:a56#p1,24s1,a56,4,disabled_toilet_4F,disabled_toilet_4F,disabled_toilet_4F|y4502|canteen,True,4,26
 grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:a56#p2,24s1,a56,4,disabled_toilet_4F,disabled_toilet_4F,disabled_toilet_4F|y4502|canteen,True,4,26
-grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:iphone#p0,24s1,ip18,4,disabled_toilet_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|lift_stairs_4F,False,4,26
+grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:iphone#p0,24s1,ip18,4,disabled_toilet_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|canteen,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:iphone#p1,24s1,ip18,4,disabled_toilet_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|lift_stairs_4F,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:iphone#p2,24s1,ip18,4,disabled_toilet_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|lift_stairs_4F,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor4/stops/s02_disabled_toilet:s24#p0,24s1,s24,4,disabled_toilet_4F,y4502,y4502|disabled_toilet_4F|canteen,True,4,26
@@ -4602,18 +4602,18 @@ grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:iphone#p0,24s1,ip1
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:iphone#p1,24s1,ip18,5,exit_10,exit_10,exit_10|y5302_back|canteen,True,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:iphone#p2,24s1,ip18,5,exit_10,y5302_back,y5302_back|exit_10|canteen,True,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:s24#p0,24s1,s24,5,exit_10,lift_stairs,lift_stairs|y5302_back|female_toilet,False,4,26
-grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:s24#p1,24s1,s24,5,exit_10,lift_stairs,lift_stairs|y5302_back|exit_10,True,4,26
+grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:s24#p1,24s1,s24,5,exit_10,lift_stairs,lift_stairs|y5302_back|female_toilet,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s08_exit10_door:s24#p2,24s1,s24,5,exit_10,lift_stairs,lift_stairs|y5302_back|female_toilet,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a55#p0,24s1,a55,5,y5401,exit_5,exit_5|entrance_exit|y5302_back,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a55#p1,24s1,a55,5,y5401,exit_5,exit_5|entrance_exit|y5302_back,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a55#p2,24s1,a55,5,y5401,exit_5,exit_5|entrance_exit|y5302_back,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a56#p0,24s1,a56,5,y5401,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a56#p1,24s1,a56,5,y5401,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,False,4,26
-grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a56#p2,24s1,a56,5,y5401,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
+grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:a56#p2,24s1,a56,5,y5401,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:iphone#p0,24s1,ip18,5,y5401,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:iphone#p1,24s1,ip18,5,y5401,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:iphone#p2,24s1,ip18,5,y5401,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
-grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:s24#p0,24s1,s24,5,y5401,exit_5_4F,exit_5_4F|lt2b|lt2a,False,4,26
+grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:s24#p0,24s1,s24,5,y5401,exit_5_4F,exit_5_4F|lt2b|escalator_down_4F,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:s24#p1,24s1,s24,5,y5401,exit_5_4F,exit_5_4F|lt2b|lt2a,False,4,26
 grouped_by_stop,stop fold 2,24s1:floor5/stops/s14_y5401:s24#p2,24s1,s24,5,y5401,exit_5_4F,exit_5_4F|lt2b|lt2a,False,4,26
 grouped_by_stop,stop fold 2,24s2:floor4/stops/s02_disabled_toilet:iphone#p0,24s2,ip16,4,disabled_toilet_4F,disabled_toilet_4F,disabled_toilet_4F|y4502|canteen,True,4,26
@@ -4651,8 +4651,8 @@ grouped_by_stop,stop fold 2,25night:floor4/stops/s01_lift_stairs5:iphone#p1,25ni
 grouped_by_stop,stop fold 2,25night:floor4/stops/s01_lift_stairs5:iphone#p2,25night,ip18,4,lift_stairs_4F,sr9,sr9|lift_stairs_4F|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 2,25night:floor4/stops/s06_esca_down:iphone#p0,25night,ip18,4,escalator_down_4F,lt1a,lt1a|escalator_down_4F|lift_stairs_4F,True,4,26
 grouped_by_stop,stop fold 2,25night:floor4/stops/s06_esca_down:iphone#p1,25night,ip18,4,escalator_down_4F,lt1a,lt1a|escalator_down_4F|canteen,True,4,26
-grouped_by_stop,stop fold 2,25night:floor4/stops/s06_esca_down:iphone#p2,25night,ip18,4,escalator_down_4F,lt1a,lt1a|canteen|disabled_toilet,False,4,26
-grouped_by_stop,stop fold 2,25night:floor4/stops/s11_exit10_door:iphone#p0,25night,ip18,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,4,26
+grouped_by_stop,stop fold 2,25night:floor4/stops/s06_esca_down:iphone#p2,25night,ip18,4,escalator_down_4F,lt1a,lt1a|escalator_down_4F|canteen,True,4,26
+grouped_by_stop,stop fold 2,25night:floor4/stops/s11_exit10_door:iphone#p0,25night,ip18,4,exit_10_4F,exit_10_4F,exit_10_4F|lift_stairs_4F|canteen,True,4,26
 grouped_by_stop,stop fold 2,25night:floor4/stops/s11_exit10_door:iphone#p1,25night,ip18,4,exit_10_4F,exit_10_4F,exit_10_4F|lift_stairs_4F|canteen,True,4,26
 grouped_by_stop,stop fold 2,25night:floor4/stops/s11_exit10_door:iphone#p2,25night,ip18,4,exit_10_4F,exit_10_4F,exit_10_4F|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 2,25night:floor5/stops/s03_male_toilet:iphone#p0,25night,ip18,5,male_toilet,male_toilet,male_toilet|y5302|canteen,True,4,26
@@ -4735,7 +4735,7 @@ grouped_by_stop,stop fold 2,25spots:floor4/stops/spots_s08_escalator_up_4F:iphon
 grouped_by_stop,stop fold 2,25spots:floor4/stops/spots_s11_escalator_up_4F:s24#p0,25spots,s24,4,escalator_up_4F,y4502,y4502|exit_5_4F|lt2a,False,4,26
 grouped_by_stop,stop fold 2,25spots:floor4/stops/spots_s11_escalator_up_4F:s24#p1,25spots,s24,4,escalator_up_4F,exit_5_4F,exit_5_4F|y4502|lt2a,False,4,26
 grouped_by_stop,stop fold 2,25spots:floor4/stops/spots_s11_escalator_up_4F:s24#p2,25spots,s24,4,escalator_up_4F,exit_5_4F,exit_5_4F|y4502|canteen,False,4,26
-grouped_by_stop,stop fold 2,25spots:floor5/stops/spots_s02_escalator_down:iphone#p0,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|canteen,True,4,26
+grouped_by_stop,stop fold 2,25spots:floor5/stops/spots_s02_escalator_down:iphone#p0,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|lift_stairs_4F,True,4,26
 grouped_by_stop,stop fold 2,25spots:floor5/stops/spots_s02_escalator_down:iphone#p1,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|canteen,True,4,26
 grouped_by_stop,stop fold 2,25spots:floor5/stops/spots_s02_escalator_down:iphone#p2,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|canteen,True,4,26
 grouped_by_stop,stop fold 2,25spots:floor5/stops/spots_s15_y5401:iphone#p0,25spots,ip16,5,y5401,y5302,y5302|escalator_up_4F|canteen,False,4,26
@@ -4777,7 +4777,7 @@ grouped_by_stop,stop fold 3,23nov:BM37:iphone#p2,23nov,ip16,4,lt1a,lt1a,lt1a|esc
 grouped_by_stop,stop fold 3,23nov:BM42:iphone#p0,23nov,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|exit_5_4F|canteen,True,4,26
 grouped_by_stop,stop fold 3,23nov:BM42:iphone#p1,23nov,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|exit_5_4F|canteen,True,4,26
 grouped_by_stop,stop fold 3,23nov:BM42:iphone#p2,23nov,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|exit_5_4F|canteen,True,4,26
-grouped_by_stop,stop fold 3,24s1:floor4/stops/s01_lift_stairs5:a55#p0,24s1,a55,4,lift_stairs_4F,lt1b,lt1b|entrance_exit|y5302_back,False,4,26
+grouped_by_stop,stop fold 3,24s1:floor4/stops/s01_lift_stairs5:a55#p0,24s1,a55,4,lift_stairs_4F,lt1b,lt1b|entrance_exit|escalator_down_4F,False,4,26
 grouped_by_stop,stop fold 3,24s1:floor4/stops/s01_lift_stairs5:a55#p1,24s1,a55,4,lift_stairs_4F,lt1b,lt1b|escalator_down_4F|entrance_exit,False,4,26
 grouped_by_stop,stop fold 3,24s1:floor4/stops/s01_lift_stairs5:a55#p2,24s1,a55,4,lift_stairs_4F,lt1b,lt1b|escalator_down_4F|entrance_exit,False,4,26
 grouped_by_stop,stop fold 3,24s1:floor4/stops/s01_lift_stairs5:a56#p0,24s1,a56,4,lift_stairs_4F,exit_10_4F,exit_10_4F|lt1a|canteen,False,4,26
@@ -4876,7 +4876,7 @@ grouped_by_stop,stop fold 3,25night:floor4/stops/s10_lt1a:iphone#p2,25night,ip18
 grouped_by_stop,stop fold 3,25night:floor5/stops/s02_exit5_door:iphone#p0,25night,ip18,5,exit_5,y5302,y5302|exit_5|canteen,True,4,26
 grouped_by_stop,stop fold 3,25night:floor5/stops/s02_exit5_door:iphone#p1,25night,ip18,5,exit_5,exit_5,exit_5|y5302|canteen,True,4,26
 grouped_by_stop,stop fold 3,25night:floor5/stops/s02_exit5_door:iphone#p2,25night,ip18,5,exit_5,exit_5,exit_5|y5302|canteen,True,4,26
-grouped_by_stop,stop fold 3,25night:floor5/stops/s07_female_toilet:iphone#p0,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|y5302_back|female_toilet,True,4,26
+grouped_by_stop,stop fold 3,25night:floor5/stops/s07_female_toilet:iphone#p0,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|female_toilet|y5302_back,True,4,26
 grouped_by_stop,stop fold 3,25night:floor5/stops/s07_female_toilet:iphone#p1,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|female_toilet|y5302_back,True,4,26
 grouped_by_stop,stop fold 3,25night:floor5/stops/s07_female_toilet:iphone#p2,25night,ip18,5,female_toilet,lift_stairs_4F,lift_stairs_4F|female_toilet|y5302_back,True,4,26
 grouped_by_stop,stop fold 3,25night:floor5/stops/s12_y5302_point2:iphone#p1,25night,ip18,5,y5302_back,lt1b,lt1b|escalator_down_4F|escalator_up_4F,False,4,26
@@ -4970,7 +4970,7 @@ grouped_by_stop,stop fold 3,26tian:floor4/stops/s11_exit10_door:iphone#p1,26tian
 grouped_by_stop,stop fold 3,26tian:floor4/stops/s11_exit10_door:iphone#p2,26tian,ip16,4,exit_10_4F,exit_10_4F,exit_10_4F|lt1b|lift_stairs_4F,True,4,26
 grouped_by_stop,stop fold 3,26tian:floor5/stops/s04_sr9:iphone#p0,26tian,ip16,5,sr9,sr9,sr9|escalator_down|canteen,True,4,26
 grouped_by_stop,stop fold 3,26tian:floor5/stops/s04_sr9:iphone#p1,26tian,ip16,5,sr9,sr9,sr9|escalator_down|female_toilet,True,4,26
-grouped_by_stop,stop fold 3,26tian:floor5/stops/s04_sr9:iphone#p2,26tian,ip16,5,sr9,sr9,sr9|female_toilet|escalator_down,True,4,26
+grouped_by_stop,stop fold 3,26tian:floor5/stops/s04_sr9:iphone#p2,26tian,ip16,5,sr9,sr9,sr9|female_toilet|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 3,26tian:floor5/stops/s09_esca_up:iphone#p0,26tian,ip16,5,escalator_up,disabled_toilet,disabled_toilet|escalator_up|escalator_down,True,4,26
 grouped_by_stop,stop fold 3,26tian:floor5/stops/s09_esca_up:iphone#p1,26tian,ip16,5,escalator_up,disabled_toilet,disabled_toilet|escalator_up|escalator_down,True,4,26
 grouped_by_stop,stop fold 3,26tian:floor5/stops/s09_esca_up:iphone#p2,26tian,ip16,5,escalator_up,disabled_toilet,disabled_toilet|escalator_down|escalator_up,True,4,26
@@ -5050,7 +5050,7 @@ grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:iphone#p0,24s1,ip18,5,
 grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:iphone#p1,24s1,ip18,5,escalator_up,escalator_up,escalator_up|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:iphone#p2,24s1,ip18,5,escalator_up,escalator_up,escalator_up|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:s24#p0,24s1,s24,5,escalator_up,exit_5,exit_5|y5401|canteen,False,4,26
-grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:s24#p1,24s1,s24,5,escalator_up,y5401,y5401|exit_5|canteen,False,4,26
+grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:s24#p1,24s1,s24,5,escalator_up,exit_5,exit_5|y5401|canteen,False,4,26
 grouped_by_stop,stop fold 4,24s1:floor5/stops/s11_esca_up:s24#p2,24s1,s24,5,escalator_up,exit_5,exit_5|y5401|canteen,False,4,26
 grouped_by_stop,stop fold 4,24s1:floor5/stops/s12_male_disabled_toilet:a55#p0,24s1,a55,5,disabled_toilet,escalator_up,escalator_up|lift_stairs|canteen,False,4,26
 grouped_by_stop,stop fold 4,24s1:floor5/stops/s12_male_disabled_toilet:a55#p1,24s1,a55,5,disabled_toilet,escalator_up,escalator_up|lift_stairs|canteen,False,4,26
@@ -5112,7 +5112,7 @@ grouped_by_stop,stop fold 4,25night:floor5/stops/s11_y5401:iphone#p2,25night,ip1
 grouped_by_stop,stop fold 4,25night:floor5/stops/s17_lift_stairs5:iphone#p0,25night,ip18,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,25night:floor5/stops/s17_lift_stairs5:iphone#p1,25night,ip18,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,25night:floor5/stops/s17_lift_stairs5:iphone#p2,25night,ip18,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,4,26
-grouped_by_stop,stop fold 4,25night_tian:floor4/stops/s03_lt2a:iphone#p0,25night_tian,ip16,4,lt2a,lt2a,lt2a|disabled_toilet_4F|canteen,True,4,26
+grouped_by_stop,stop fold 4,25night_tian:floor4/stops/s03_lt2a:iphone#p0,25night_tian,ip16,4,lt2a,lt2a,lt2a|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,25night_tian:floor4/stops/s03_lt2a:iphone#p1,25night_tian,ip16,4,lt2a,lt2a,lt2a|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,25night_tian:floor4/stops/s03_lt2a:iphone#p2,25night_tian,ip16,4,lt2a,lt2a,lt2a|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 4,25night_tian:floor4/stops/s08_exit10_door:iphone#p0,25night_tian,ip16,4,exit_10_4F,exit_10_4F,exit_10_4F|lift_stairs_4F|canteen,True,4,26
@@ -5214,14 +5214,14 @@ grouped_by_stop,stop fold 5,23nov:BM40:iphone#p0,23nov,ip16,4,exit_5_4F,lt2a,lt2
 grouped_by_stop,stop fold 5,23nov:BM40:iphone#p1,23nov,ip16,4,exit_5_4F,lt2a,lt2a|exit_5_4F|canteen,True,4,26
 grouped_by_stop,stop fold 5,23nov:BM40:iphone#p2,23nov,ip16,4,exit_5_4F,escalator_down_4F,escalator_down_4F|lt2a|canteen,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:a55#p2,24s1,a55,4,lt2a,y4502,y4502|escalator_down|canteen,False,4,26
-grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:a56#p0,24s1,a56,4,lt2a,y4502,y4502|disabled_toilet_4F|canteen,False,4,26
-grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:a56#p1,24s1,a56,4,lt2a,y4502,y4502|disabled_toilet_4F|canteen,False,4,26
+grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:a56#p0,24s1,a56,4,lt2a,disabled_toilet_4F,disabled_toilet_4F|y4502|canteen,False,4,26
+grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:a56#p1,24s1,a56,4,lt2a,disabled_toilet_4F,disabled_toilet_4F|y4502|canteen,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:a56#p2,24s1,a56,4,lt2a,y4502,y4502|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:iphone#p0,24s1,ip18,4,lt2a,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:iphone#p1,24s1,ip18,4,lt2a,lt2a,lt2a|exit_5_4F|canteen,True,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:iphone#p2,24s1,ip18,4,lt2a,exit_5_4F,exit_5_4F|lt2a|canteen,True,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:s24#p0,24s1,s24,4,lt2a,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
-grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:s24#p1,24s1,s24,4,lt2a,lt2a,lt2a|escalator_down_4F|exit_5_4F,True,4,26
+grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:s24#p1,24s1,s24,4,lt2a,lt2a,lt2a|exit_5_4F|canteen,True,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s04_lt2a:s24#p2,24s1,s24,4,lt2a,exit_5_4F,exit_5_4F|lt2a|canteen,True,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s05_lt2b:a55#p0,24s1,a55,4,lt2b,male_toilet,male_toilet|escalator_down|canteen,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor4/stops/s05_lt2b:a55#p1,24s1,a55,4,lt2b,male_toilet,male_toilet|canteen|disabled_toilet,False,4,26
@@ -5261,7 +5261,7 @@ grouped_by_stop,stop fold 5,24s1:floor5/stops/s03_male_toilet:s24#p2,24s1,s24,5,
 grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a55#p0,24s1,a55,5,y5302,exit_5,exit_5|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a55#p1,24s1,a55,5,y5302,exit_5,exit_5|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a55#p2,24s1,a55,5,y5302,exit_5,exit_5|canteen|disabled_toilet,False,4,26
-grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a56#p0,24s1,a56,5,y5302,y5401,y5401|disabled_toilet|male_toilet,False,4,26
+grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a56#p0,24s1,a56,5,y5302,y5401,y5401|disabled_toilet|canteen,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a56#p1,24s1,a56,5,y5302,y5401,y5401|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:a56#p2,24s1,a56,5,y5302,y5401,y5401|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s1:floor5/stops/s04_y5302:iphone#p0,24s1,ip18,5,y5302,y5302,y5302|canteen|disabled_toilet,True,4,26
@@ -5311,7 +5311,7 @@ grouped_by_stop,stop fold 5,24s2:floor5/stops/s12_lift_stairs5:iphone#p1,24s2,ip
 grouped_by_stop,stop fold 5,24s2:floor5/stops/s12_lift_stairs5:iphone#p2,24s2,ip16,5,lift_stairs,lift_stairs,lift_stairs|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 5,24s2:floor5/stops/s12_lift_stairs5:s24#p0,24s2,s24,5,lift_stairs,exit_10_4F,exit_10_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s2:floor5/stops/s12_lift_stairs5:s24#p1,24s2,s24,5,lift_stairs,exit_10_4F,exit_10_4F|lift_stairs|canteen,True,4,26
-grouped_by_stop,stop fold 5,24s2:floor5/stops/s12_lift_stairs5:s24#p2,24s2,s24,5,lift_stairs,exit_10_4F,exit_10_4F|lift_stairs|canteen,True,4,26
+grouped_by_stop,stop fold 5,24s2:floor5/stops/s12_lift_stairs5:s24#p2,24s2,s24,5,lift_stairs,exit_10_4F,exit_10_4F|canteen|disabled_toilet,False,4,26
 grouped_by_stop,stop fold 5,24s2:floor5/stops/s14_y5302_point2:iphone#p0,24s2,ip16,5,y5302_back,y5202,y5202|y5302_back|canteen,True,4,26
 grouped_by_stop,stop fold 5,24s2:floor5/stops/s14_y5302_point2:iphone#p1,24s2,ip16,5,y5302_back,y5302_back,y5302_back|canteen|disabled_toilet,True,4,26
 grouped_by_stop,stop fold 5,24s2:floor5/stops/s14_y5302_point2:iphone#p2,24s2,ip16,5,y5302_back,y5302_back,y5302_back|canteen|disabled_toilet,True,4,26
@@ -5560,8 +5560,8 @@ leave_one_session_out,test 24s1,24s1:floor4/stops/s04_lt2a:s24#p0,24s1,s24,4,lt2
 leave_one_session_out,test 24s1,24s1:floor4/stops/s04_lt2a:s24#p1,24s1,s24,4,lt2a,exit_5_4F,exit_5_4F|lt2a|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s04_lt2a:s24#p2,24s1,s24,4,lt2a,exit_5_4F,exit_5_4F|lt2a|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a55#p0,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|lt2a|male_toilet,False,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a55#p1,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|male_toilet|lt2a,False,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a55#p2,24s1,a55,4,lt2b,male_toilet,male_toilet|exit_5_4F|lt2b,True,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a55#p1,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|lt2a|male_toilet,False,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a55#p2,24s1,a55,4,lt2b,exit_5_4F,exit_5_4F|male_toilet|lt2b,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a56#p0,24s1,a56,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a56#p1,24s1,a56,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s05_lt2b:a56#p2,24s1,a56,4,lt2b,lt2b,lt2b|canteen|disabled_toilet,True,4,26
@@ -5579,8 +5579,8 @@ leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:a56#p1,24s1,a56,
 leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:a56#p2,24s1,a56,4,escalator_down_4F,escalator_down_4F,escalator_down_4F|lt1a|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:iphone#p0,24s1,ip18,4,escalator_down_4F,y5302_back,y5302_back|escalator_down_4F|lt1a,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:iphone#p1,24s1,ip18,4,escalator_down_4F,y5302_back,y5302_back|lt1a|escalator_down_4F,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:iphone#p2,24s1,ip18,4,escalator_down_4F,lt1a,lt1a|y5302_back|escalator_down_4F,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:s24#p0,24s1,s24,4,escalator_down_4F,exit_5_4F,exit_5_4F|escalator_up_4F|canteen,False,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:iphone#p2,24s1,ip18,4,escalator_down_4F,lt1a,lt1a|escalator_down_4F|y5302_back,True,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:s24#p0,24s1,s24,4,escalator_down_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:s24#p1,24s1,s24,4,escalator_down_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s06_esca_down:s24#p2,24s1,s24,4,escalator_down_4F,exit_5_4F,exit_5_4F|canteen|disabled_toilet,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s07_y4502:a55#p0,24s1,a55,4,y4502,lt2b,lt2b|exit_5_4F|escalator_up_4F,False,4,26
@@ -5604,7 +5604,7 @@ leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:a56#p2,24s1,a56,4,
 leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:iphone#p0,24s1,ip18,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:iphone#p1,24s1,ip18,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:iphone#p2,24s1,ip18,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|canteen,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:s24#p0,24s1,s24,4,escalator_up_4F,lt2b,lt2b|exit_5_4F|escalator_up_4F,True,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:s24#p0,24s1,s24,4,escalator_up_4F,lt2b,lt2b|escalator_up_4F|exit_5_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:s24#p1,24s1,s24,4,escalator_up_4F,lt2b,lt2b|escalator_up_4F|exit_5_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s08_esca_up:s24#p2,24s1,s24,4,escalator_up_4F,lt2b,lt2b|escalator_up_4F|exit_5_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s09_lt1b:a55#p0,24s1,a55,4,lt1b,lt1b,lt1b|escalator_down_4F|entrance_exit,True,4,26
@@ -5619,11 +5619,11 @@ leave_one_session_out,test 24s1,24s1:floor4/stops/s09_lt1b:iphone#p2,24s1,ip18,4
 leave_one_session_out,test 24s1,24s1:floor4/stops/s09_lt1b:s24#p0,24s1,s24,4,lt1b,escalator_down_4F,escalator_down_4F|canteen|disabled_toilet,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s09_lt1b:s24#p1,24s1,s24,4,lt1b,escalator_down_4F,escalator_down_4F|canteen|disabled_toilet,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s09_lt1b:s24#p2,24s1,s24,4,lt1b,escalator_down_4F,escalator_down_4F|canteen|disabled_toilet,False,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a55#p0,24s1,a55,4,lt1a,entrance_exit,entrance_exit|escalator_down_4F|lt1b,False,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a55#p1,24s1,a55,4,lt1a,entrance_exit,entrance_exit|escalator_down_4F|lt1b,False,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a55#p2,24s1,a55,4,lt1a,entrance_exit,entrance_exit|escalator_down_4F|lt1b,False,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a55#p0,24s1,a55,4,lt1a,entrance_exit,entrance_exit|lt1b|escalator_down_4F,False,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a55#p1,24s1,a55,4,lt1a,entrance_exit,entrance_exit|lt1b|escalator_down_4F,False,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a55#p2,24s1,a55,4,lt1a,entrance_exit,entrance_exit|lt1b|escalator_down_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a56#p0,24s1,a56,4,lt1a,lift_stairs_4F,lift_stairs_4F|lt1a|canteen,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a56#p1,24s1,a56,4,lt1a,lift_stairs_4F,lift_stairs_4F|female_toilet|canteen,False,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a56#p1,24s1,a56,4,lt1a,lift_stairs_4F,lift_stairs_4F|canteen|disabled_toilet,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:a56#p2,24s1,a56,4,lt1a,lift_stairs_4F,lift_stairs_4F|female_toilet|canteen,False,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:iphone#p0,24s1,ip18,4,lt1a,lt1a,lt1a|escalator_down_4F|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s10_lt1a:iphone#p1,24s1,ip18,4,lt1a,lt1a,lt1a|canteen|disabled_toilet,True,4,26
@@ -5652,12 +5652,12 @@ leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:a56#p2,24s1,a56,4,ent
 leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:iphone#p0,24s1,ip18,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:iphone#p1,24s1,ip18,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:iphone#p2,24s1,ip18,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:s24#p0,24s1,s24,4,entrance_exit,escalator_up_4F,escalator_up_4F|escalator_down_4F|entrance_exit,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:s24#p1,24s1,s24,4,entrance_exit,escalator_up_4F,escalator_up_4F|escalator_down_4F|entrance_exit,True,4,26
-leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:s24#p2,24s1,s24,4,entrance_exit,escalator_up_4F,escalator_up_4F|entrance_exit|escalator_down_4F,True,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:s24#p0,24s1,s24,4,entrance_exit,escalator_up_4F,escalator_up_4F|entrance_exit|escalator_down_4F,True,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:s24#p1,24s1,s24,4,entrance_exit,escalator_up_4F,escalator_up_4F|entrance_exit|escalator_down_4F,True,4,26
+leave_one_session_out,test 24s1,24s1:floor4/stops/s12_gate:s24#p2,24s1,s24,4,entrance_exit,escalator_up_4F,escalator_up_4F|entrance_exit|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a55#p0,24s1,a55,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a55#p1,24s1,a55,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a55#p2,24s1,a55,5,canteen,canteen,canteen|y5302_back|disabled_toilet,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a55#p2,24s1,a55,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a56#p0,24s1,a56,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a56#p1,24s1,a56,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:a56#p2,24s1,a56,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
@@ -5668,9 +5668,9 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:s24#p0,24s1,s24,5,
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:s24#p1,24s1,s24,5,canteen,canteen,canteen|y5302|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s01_canteen:s24#p2,24s1,s24,5,canteen,canteen,canteen|y5302|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a55#p0,24s1,a55,5,exit_5,escalator_down,escalator_down|disabled_toilet|y5302,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a55#p1,24s1,a55,5,exit_5,escalator_down,escalator_down|sr9|disabled_toilet,False,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a55#p1,24s1,a55,5,exit_5,escalator_down,escalator_down|disabled_toilet|sr9,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a55#p2,24s1,a55,5,exit_5,sr9,sr9|escalator_down|disabled_toilet,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a56#p0,24s1,a56,5,exit_5,y5401,y5401|exit_5|y5302,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a56#p0,24s1,a56,5,exit_5,y5401,y5401|exit_5|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a56#p1,24s1,a56,5,exit_5,y5401,y5401|exit_5|y5302,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:a56#p2,24s1,a56,5,exit_5,y5401,y5401|exit_5|y5302,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:iphone#p0,24s1,ip18,5,exit_5,exit_5,exit_5|canteen|disabled_toilet,True,4,26
@@ -5679,7 +5679,7 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:iphone#p2,24s1,
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:s24#p0,24s1,s24,5,exit_5,male_toilet,male_toilet|exit_5|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:s24#p1,24s1,s24,5,exit_5,male_toilet,male_toilet|exit_5|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s02_exit5_door:s24#p2,24s1,s24,5,exit_5,male_toilet,male_toilet|exit_5|canteen,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s03_male_toilet:a55#p1,24s1,a55,5,male_toilet,male_toilet,male_toilet|exit_5_4F|y5302,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s03_male_toilet:a55#p1,24s1,a55,5,male_toilet,male_toilet,male_toilet|y5302|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s03_male_toilet:a55#p2,24s1,a55,5,male_toilet,male_toilet,male_toilet|exit_5|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s03_male_toilet:a56#p0,24s1,a56,5,male_toilet,male_toilet,male_toilet|y5401|y5302,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s03_male_toilet:a56#p1,24s1,a56,5,male_toilet,male_toilet,male_toilet|y5401|y5302,True,4,26
@@ -5714,9 +5714,9 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s05_sr9:iphone#p2,24s1,ip18,5,
 leave_one_session_out,test 24s1,24s1:floor5/stops/s05_sr9:s24#p0,24s1,s24,5,sr9,y5302,y5302|sr9|male_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s05_sr9:s24#p1,24s1,s24,5,sr9,y5302,y5302|sr9|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s05_sr9:s24#p2,24s1,s24,5,sr9,y5302,y5302|sr9|canteen,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a55#p1,24s1,a55,5,y5202,escalator_down,escalator_down|y5202|sr9,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a56#p0,24s1,a56,5,y5202,lift_stairs,lift_stairs|y5202|canteen,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a56#p1,24s1,a56,5,y5202,lift_stairs,lift_stairs|y5202|canteen,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a55#p1,24s1,a55,5,y5202,escalator_down,escalator_down|sr9|y5202,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a56#p0,24s1,a56,5,y5202,lift_stairs,lift_stairs|y5202|female_toilet,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a56#p1,24s1,a56,5,y5202,lift_stairs,lift_stairs|y5202|female_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:a56#p2,24s1,a56,5,y5202,lift_stairs,lift_stairs|y5202|female_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:iphone#p0,24s1,ip18,5,y5202,y5202,y5202|y5302_back|female_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s06_y5202:iphone#p1,24s1,ip18,5,y5202,y5202,y5202|y5302_back|female_toilet,True,4,26
@@ -5749,8 +5749,8 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s08_exit10_door:s24#p0,24s1,s2
 leave_one_session_out,test 24s1,24s1:floor5/stops/s08_exit10_door:s24#p1,24s1,s24,5,exit_10,lift_stairs,lift_stairs|exit_10|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s08_exit10_door:s24#p2,24s1,s24,5,exit_10,lift_stairs,lift_stairs|exit_10|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a55#p0,24s1,a55,5,canteen,exit_10,exit_10|escalator_up|escalator_down,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a55#p1,24s1,a55,5,canteen,exit_10,exit_10|escalator_up|canteen,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a55#p2,24s1,a55,5,canteen,exit_10,exit_10|escalator_up|canteen,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a55#p1,24s1,a55,5,canteen,escalator_up,escalator_up|exit_10|canteen,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a55#p2,24s1,a55,5,canteen,escalator_up,escalator_up|exit_10|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a56#p0,24s1,a56,5,canteen,canteen,canteen|exit_10|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a56#p1,24s1,a56,5,canteen,canteen,canteen|exit_10|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s09_canteen_revisit:a56#p2,24s1,a56,5,canteen,canteen,canteen|exit_10|disabled_toilet,True,4,26
@@ -5769,16 +5769,16 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:a56#p2,24s1,a56,
 leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:iphone#p0,24s1,ip18,5,escalator_down,exit_10,exit_10|lift_stairs|canteen,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:iphone#p1,24s1,ip18,5,escalator_down,exit_10,exit_10|lift_stairs|canteen,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:iphone#p2,24s1,ip18,5,escalator_down,exit_10,exit_10|lift_stairs|canteen,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:s24#p0,24s1,s24,5,escalator_down,y5302_back,y5302_back|escalator_down_4F|y5202,False,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:s24#p0,24s1,s24,5,escalator_down,y5302_back,y5302_back|y5202|escalator_down_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:s24#p1,24s1,s24,5,escalator_down,y5302_back,y5302_back|y5202|escalator_down_4F,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:s24#p2,24s1,s24,5,escalator_down,y5302_back,y5302_back|escalator_down_4F|y5202,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:a55#p0,24s1,a55,5,escalator_up,y5401,y5401|escalator_up|disabled_toilet,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s10_esca_down:s24#p2,24s1,s24,5,escalator_down,y5302_back,y5302_back|y5202|exit_10,False,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:a55#p0,24s1,a55,5,escalator_up,y5401,y5401|escalator_up|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:a55#p1,24s1,a55,5,escalator_up,y5401,y5401|escalator_up|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:a55#p2,24s1,a55,5,escalator_up,y5401,y5401|escalator_up|disabled_toilet,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:a56#p0,24s1,a56,5,escalator_up,escalator_up,escalator_up|disabled_toilet|escalator_down,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:a56#p1,24s1,a56,5,escalator_up,escalator_up,escalator_up|disabled_toilet|escalator_down,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:iphone#p0,24s1,ip18,5,escalator_up,escalator_up,escalator_up|y5401|escalator_down,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:iphone#p1,24s1,ip18,5,escalator_up,escalator_up,escalator_up|y5401|escalator_down,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:iphone#p0,24s1,ip18,5,escalator_up,escalator_up,escalator_up|y5401|canteen,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:iphone#p1,24s1,ip18,5,escalator_up,escalator_up,escalator_up|y5401|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:iphone#p2,24s1,ip18,5,escalator_up,escalator_up,escalator_up|y5401|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:s24#p0,24s1,s24,5,escalator_up,exit_5,exit_5|y5401|canteen,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s11_esca_up:s24#p1,24s1,s24,5,escalator_up,exit_5,exit_5|y5401|canteen,False,4,26
@@ -5795,7 +5795,7 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s12_male_disabled_toilet:iphon
 leave_one_session_out,test 24s1,24s1:floor5/stops/s12_male_disabled_toilet:s24#p0,24s1,s24,5,disabled_toilet,exit_10_4F,exit_10_4F|y5202|disabled_toilet_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s12_male_disabled_toilet:s24#p1,24s1,s24,5,disabled_toilet,exit_10_4F,exit_10_4F|y5202|disabled_toilet_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s12_male_disabled_toilet:s24#p2,24s1,s24,5,disabled_toilet,exit_10_4F,exit_10_4F|y5202|disabled_toilet_4F,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:a55#p0,24s1,a55,5,lift_stairs,escalator_up,escalator_up|lt1a|lift_stairs_4F,False,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:a55#p0,24s1,a55,5,lift_stairs,lt1a,lt1a|escalator_up|lift_stairs_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:a55#p1,24s1,a55,5,lift_stairs,escalator_up,escalator_up|lt1a|lift_stairs_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:a55#p2,24s1,a55,5,lift_stairs,lift_stairs_4F,lift_stairs_4F|escalator_down_4F|lt1a,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:a56#p0,24s1,a56,5,lift_stairs,exit_10_4F,exit_10_4F|lift_stairs_4F|lt1a,False,4,26
@@ -5804,7 +5804,7 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:a56#p2,24s1,a
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:iphone#p0,24s1,ip18,5,lift_stairs,exit_10_4F,exit_10_4F|lift_stairs_4F|canteen,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:iphone#p1,24s1,ip18,5,lift_stairs,exit_10_4F,exit_10_4F|lift_stairs_4F|canteen,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:iphone#p2,24s1,ip18,5,lift_stairs,exit_10_4F,exit_10_4F|lift_stairs_4F|canteen,False,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:s24#p0,24s1,s24,5,lift_stairs,escalator_down_4F,escalator_down_4F|lt1a|lift_stairs_4F,False,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:s24#p0,24s1,s24,5,lift_stairs,lt1a,lt1a|escalator_down_4F|lift_stairs_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:s24#p1,24s1,s24,5,lift_stairs,lt1a,lt1a|lift_stairs_4F|escalator_down_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s13_lift_stairs5:s24#p2,24s1,s24,5,lift_stairs,lt1a,lt1a|lift_stairs_4F|escalator_down_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s14_y5401:a55#p0,24s1,a55,5,y5401,lt2b,lt2b|exit_5_4F|entrance_exit,False,4,26
@@ -5824,7 +5824,7 @@ leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:a55#p1,24s1,a
 leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:a55#p2,24s1,a55,5,y5302_back,entrance_exit,entrance_exit|lt1b|escalator_down_4F,False,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:a56#p0,24s1,a56,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|escalator_down_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:a56#p1,24s1,a56,5,y5302_back,lift_stairs_4F,lift_stairs_4F|y5302_back|escalator_down_4F,True,4,26
-leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:a56#p2,24s1,a56,5,y5302_back,lift_stairs_4F,lift_stairs_4F|y5302_back|escalator_down_4F,True,4,26
+leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:a56#p2,24s1,a56,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|escalator_down_4F,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:iphone#p0,24s1,ip18,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:iphone#p1,24s1,ip18,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|canteen,True,4,26
 leave_one_session_out,test 24s1,24s1:floor5/stops/s15_y5302_point2:iphone#p2,24s1,ip18,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|canteen,True,4,26
@@ -6093,9 +6093,9 @@ leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s03_lt2a:iphon
 leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s04_lt2b:iphone#p0,25night_tian,ip16,4,lt2b,lt2b,lt2b|exit_5_4F|canteen,True,4,26
 leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s04_lt2b:iphone#p1,25night_tian,ip16,4,lt2b,lt2b,lt2b|exit_5_4F|canteen,True,4,26
 leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s04_lt2b:iphone#p2,25night_tian,ip16,4,lt2b,lt2b,lt2b|exit_5_4F|canteen,True,4,26
-leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s05_esca_down:iphone#p0,25night_tian,ip16,4,escalator_down_4F,disabled_toilet,disabled_toilet|escalator_up_4F|canteen,False,4,26
-leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s05_esca_down:iphone#p1,25night_tian,ip16,4,escalator_down_4F,disabled_toilet,disabled_toilet|escalator_up_4F|canteen,False,4,26
-leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s05_esca_down:iphone#p2,25night_tian,ip16,4,escalator_down_4F,disabled_toilet,disabled_toilet|escalator_up_4F|canteen,False,4,26
+leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s05_esca_down:iphone#p0,25night_tian,ip16,4,escalator_down_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|canteen,False,4,26
+leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s05_esca_down:iphone#p1,25night_tian,ip16,4,escalator_down_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|canteen,False,4,26
+leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s05_esca_down:iphone#p2,25night_tian,ip16,4,escalator_down_4F,escalator_up_4F,escalator_up_4F|disabled_toilet|canteen,False,4,26
 leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s06_y4502:iphone#p0,25night_tian,ip16,4,y4502,y4502,y4502|disabled_toilet_4F|canteen,True,4,26
 leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s06_y4502:iphone#p1,25night_tian,ip16,4,y4502,y4502,y4502|disabled_toilet_4F|canteen,True,4,26
 leave_one_session_out,test 25night_tian,25night_tian:floor4/stops/s06_y4502:iphone#p2,25night_tian,ip16,4,y4502,y4502,y4502|disabled_toilet_4F|canteen,True,4,26
@@ -6254,7 +6254,7 @@ leave_one_session_out,test 25nov,25nov:floor4/stops/s12_gate:iphone#p1,25nov,ip1
 leave_one_session_out,test 25nov,25nov:floor4/stops/s12_gate:iphone#p2,25nov,ip18,4,entrance_exit,entrance_exit,entrance_exit|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:a55#p2,25nov,a55,5,canteen,escalator_down,escalator_down|exit_5|lift_stairs,False,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:a56#p0,25nov,a56,5,canteen,exit_10,exit_10|y5302_back|female_toilet,False,4,26
-leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:a56#p1,25nov,a56,5,canteen,exit_10,exit_10|canteen|female_toilet,True,4,26
+leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:a56#p1,25nov,a56,5,canteen,exit_10,exit_10|canteen|y5302_back,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:a56#p2,25nov,a56,5,canteen,exit_10,exit_10|canteen|female_toilet,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:iphone#p0,25nov,ip18,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s01_canteen:iphone#p1,25nov,ip18,5,canteen,canteen,canteen|disabled_toilet|disabled_toilet_4F,True,4,26
@@ -6269,7 +6269,7 @@ leave_one_session_out,test 25nov,25nov:floor5/stops/s02_exit5_door:iphone#p0,25n
 leave_one_session_out,test 25nov,25nov:floor5/stops/s02_exit5_door:iphone#p1,25nov,ip18,5,exit_5,exit_5,exit_5|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s02_exit5_door:iphone#p2,25nov,ip18,5,exit_5,exit_5,exit_5|canteen|disabled_toilet,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s03_male_toilet:a55#p0,25nov,a55,5,male_toilet,male_toilet,male_toilet|exit_5|y5302,True,4,26
-leave_one_session_out,test 25nov,25nov:floor5/stops/s03_male_toilet:a55#p1,25nov,a55,5,male_toilet,male_toilet,male_toilet|y5302|exit_5,True,4,26
+leave_one_session_out,test 25nov,25nov:floor5/stops/s03_male_toilet:a55#p1,25nov,a55,5,male_toilet,male_toilet,male_toilet|y5302|y5401,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s03_male_toilet:a55#p2,25nov,a55,5,male_toilet,male_toilet,male_toilet|exit_5|y5302,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s03_male_toilet:a56#p0,25nov,a56,5,male_toilet,male_toilet,male_toilet|sr9|y5302,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s03_male_toilet:a56#p1,25nov,a56,5,male_toilet,male_toilet,male_toilet|y5302|sr9,True,4,26
@@ -6348,7 +6348,7 @@ leave_one_session_out,test 25nov,25nov:floor5/stops/s11_male_disabled_toilet:iph
 leave_one_session_out,test 25nov,25nov:floor5/stops/s11_male_disabled_toilet:iphone#p2,25nov,ip18,5,disabled_toilet,escalator_up,escalator_up|disabled_toilet|escalator_down,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a55#p0,25nov,a55,5,lift_stairs,female_toilet,female_toilet|exit_10|y5302_back,False,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a55#p1,25nov,a55,5,lift_stairs,female_toilet,female_toilet|y5302_back|y5202,False,4,26
-leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a55#p2,25nov,a55,5,lift_stairs,female_toilet,female_toilet|y5202|exit_10,False,4,26
+leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a55#p2,25nov,a55,5,lift_stairs,female_toilet,female_toilet|y5202|y5302_back,False,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a56#p0,25nov,a56,5,lift_stairs,female_toilet,female_toilet|lift_stairs|y5202,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a56#p1,25nov,a56,5,lift_stairs,exit_10,exit_10|lift_stairs|y5202,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s12_lift_stairs5:a56#p2,25nov,a56,5,lift_stairs,lift_stairs,lift_stairs|exit_10|y5202,True,4,26
@@ -6373,27 +6373,27 @@ leave_one_session_out,test 25nov,25nov:floor5/stops/s14_y5302_point2:a56#p2,25no
 leave_one_session_out,test 25nov,25nov:floor5/stops/s14_y5302_point2:iphone#p0,25nov,ip18,5,y5302_back,exit_10,exit_10|y5302_back|canteen,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s14_y5302_point2:iphone#p1,25nov,ip18,5,y5302_back,y5302_back,y5302_back|exit_10|canteen,True,4,26
 leave_one_session_out,test 25nov,25nov:floor5/stops/s14_y5302_point2:iphone#p2,25nov,ip18,5,y5302_back,y5302_back,y5302_back|exit_10|canteen,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s06_escalator_down_4F:iphone#p1,25spots,ip16,4,escalator_down_4F,escalator_up,escalator_up|lt2a|y5202,False,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s06_escalator_down_4F:iphone#p1,25spots,ip16,4,escalator_down_4F,lt2a,lt2a|escalator_up|y5202,False,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s08_escalator_up_4F:iphone#p0,25spots,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|lt2b,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s08_escalator_up_4F:iphone#p1,25spots,ip16,4,escalator_up_4F,escalator_up_4F,escalator_up_4F|y5401|lt2b,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p0,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|canteen,True,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p0,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|y4502,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p1,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|y4502,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p2,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|canteen,True,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s10_escalator_down_4F:s24#p2,25spots,s24,4,escalator_down_4F,lt1b,lt1b|escalator_down_4F|y4502,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s11_escalator_up_4F:s24#p0,25spots,s24,4,escalator_up_4F,exit_5_4F,exit_5_4F|lt2a|y4502,False,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s11_escalator_up_4F:s24#p1,25spots,s24,4,escalator_up_4F,exit_5_4F,exit_5_4F|lt2a|y4502,False,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s11_escalator_up_4F:s24#p2,25spots,s24,4,escalator_up_4F,exit_5_4F,exit_5_4F|lt2a|y4502,False,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s12_exit_10_4F:s24#p0,25spots,s24,4,exit_10_4F,lift_stairs,lift_stairs|exit_10_4F|canteen,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s12_exit_10_4F:s24#p1,25spots,s24,4,exit_10_4F,lift_stairs,lift_stairs|exit_10_4F|canteen,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s12_exit_10_4F:s24#p2,25spots,s24,4,exit_10_4F,lift_stairs,lift_stairs|exit_10_4F|canteen,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s13_exit_5_4F:s24#p0,25spots,s24,4,exit_5_4F,escalator_up_4F,escalator_up_4F|exit_5_4F|escalator_down_4F,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s13_exit_5_4F:s24#p1,25spots,s24,4,exit_5_4F,escalator_up_4F,escalator_up_4F|exit_5_4F|y5401,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s13_exit_5_4F:s24#p2,25spots,s24,4,exit_5_4F,escalator_up_4F,escalator_up_4F|exit_5_4F|y5401,True,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s13_exit_5_4F:s24#p0,25spots,s24,4,exit_5_4F,escalator_up_4F,escalator_up_4F|escalator_down_4F|exit_5_4F,True,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s13_exit_5_4F:s24#p1,25spots,s24,4,exit_5_4F,escalator_up_4F,escalator_up_4F|y5302|exit_5_4F,True,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s13_exit_5_4F:s24#p2,25spots,s24,4,exit_5_4F,escalator_up_4F,escalator_up_4F|y5302|exit_5_4F,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s14_lift_stairs_4F:s24#p0,25spots,s24,4,lift_stairs_4F,lift_stairs_4F,lift_stairs_4F|lt1a|escalator_down,True,4,26
-leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s14_lift_stairs_4F:s24#p1,25spots,s24,4,lift_stairs_4F,lift_stairs_4F,lift_stairs_4F|escalator_down|lift_stairs,True,4,26
+leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s14_lift_stairs_4F:s24#p1,25spots,s24,4,lift_stairs_4F,lift_stairs_4F,lift_stairs_4F|escalator_down|exit_10_4F,True,4,26
 leave_one_session_out,test 25spots,25spots:floor4/stops/spots_s14_lift_stairs_4F:s24#p2,25spots,s24,4,lift_stairs_4F,lift_stairs_4F,lift_stairs_4F|escalator_down|lt1a,True,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s01_escalator_down:s24#p0,25spots,s24,5,escalator_down,lift_stairs,lift_stairs|escalator_down|canteen,True,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s01_escalator_down:s24#p1,25spots,s24,5,escalator_down,lift_stairs,lift_stairs|escalator_down|canteen,True,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s01_escalator_down:s24#p2,25spots,s24,5,escalator_down,lift_stairs,lift_stairs|escalator_down|canteen,True,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s01_escalator_down:s24#p0,25spots,s24,5,escalator_down,lift_stairs,lift_stairs|escalator_down|exit_10_4F,True,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s01_escalator_down:s24#p1,25spots,s24,5,escalator_down,lift_stairs,lift_stairs|escalator_down|exit_10_4F,True,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s01_escalator_down:s24#p2,25spots,s24,5,escalator_down,lift_stairs,lift_stairs|escalator_down|exit_10_4F,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s02_escalator_down:iphone#p0,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|exit_5,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s02_escalator_down:iphone#p1,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|canteen,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s02_escalator_down:iphone#p2,25spots,ip16,5,escalator_down,escalator_down,escalator_down|escalator_up|canteen,True,4,26
@@ -6405,16 +6405,16 @@ leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s04_female_toilet:
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s04_female_toilet:s24#p2,25spots,s24,5,female_toilet,lt1b,lt1b|escalator_down_4F|canteen,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:iphone#p0,25spots,ip16,5,sr9,escalator_down,escalator_down|y5202|exit_5,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:iphone#p1,25spots,ip16,5,sr9,escalator_down,escalator_down|y5202|exit_5,False,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:iphone#p2,25spots,ip16,5,sr9,escalator_down,escalator_down|y5202|sr9,True,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:s24#p0,25spots,s24,5,sr9,sr9,sr9|exit_10|female_toilet,True,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:iphone#p2,25spots,ip16,5,sr9,escalator_down,escalator_down|y5202|exit_5,False,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:s24#p0,25spots,s24,5,sr9,sr9,sr9|exit_10|y5302,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:s24#p1,25spots,s24,5,sr9,sr9,sr9|exit_10|female_toilet,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s05_sr9:s24#p2,25spots,s24,5,sr9,sr9,sr9|exit_10|canteen,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s07_disabled_toilet:s24#p0,25spots,s24,5,disabled_toilet,escalator_up_4F,escalator_up_4F|exit_5_4F|lift_stairs,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s07_disabled_toilet:s24#p1,25spots,s24,5,disabled_toilet,lift_stairs,lift_stairs|escalator_up_4F|exit_5_4F,False,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s07_disabled_toilet:s24#p2,25spots,s24,5,disabled_toilet,exit_5_4F,exit_5_4F|escalator_up_4F|lift_stairs,False,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s07_disabled_toilet:s24#p2,25spots,s24,5,disabled_toilet,escalator_up_4F,escalator_up_4F|exit_5_4F|lift_stairs,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s09_lift_stairs:s24#p0,25spots,s24,5,lift_stairs,lt1b,lt1b|y5202|female_toilet,False,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s09_lift_stairs:s24#p1,25spots,s24,5,lift_stairs,lt1b,lt1b|y5202|y5302_back,False,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s09_lift_stairs:s24#p2,25spots,s24,5,lift_stairs,lt1b,lt1b|y5202|y5302_back,False,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s09_lift_stairs:s24#p1,25spots,s24,5,lift_stairs,lt1b,lt1b|y5202|female_toilet,False,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s09_lift_stairs:s24#p2,25spots,s24,5,lift_stairs,lt1b,lt1b|y5202|escalator_down_4F,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s15_y5401:iphone#p0,25spots,ip16,5,y5401,escalator_up_4F,escalator_up_4F|y5302|canteen,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s15_y5401:iphone#p1,25spots,ip16,5,y5401,escalator_up_4F,escalator_up_4F|y5302|canteen,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s15_y5401:iphone#p2,25spots,ip16,5,y5401,escalator_up_4F,escalator_up_4F|y5302|canteen,False,4,26
@@ -6422,7 +6422,7 @@ leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s16_male_toilet:s2
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s16_male_toilet:s24#p1,25spots,s24,5,male_toilet,lt2b,lt2b|escalator_up|y5401,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s16_male_toilet:s24#p2,25spots,s24,5,male_toilet,lt2b,lt2b|escalator_up|y5401,False,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s17_y5302_back:iphone#p0,25spots,ip16,5,y5302_back,y5302_back,y5302_back|lift_stairs_4F|lt1a,True,4,26
-leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s17_y5302_back:iphone#p1,25spots,ip16,5,y5302_back,lift_stairs_4F,lift_stairs_4F|y5302_back|exit_10_4F,True,4,26
+leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s17_y5302_back:iphone#p1,25spots,ip16,5,y5302_back,lift_stairs_4F,lift_stairs_4F|y5302_back|lt1a,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s17_y5302_back:iphone#p2,25spots,ip16,5,y5302_back,lift_stairs_4F,lift_stairs_4F|lt1a|y5302_back,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s18_escalator_down:s24#p0,25spots,s24,5,escalator_down,escalator_down,escalator_down|exit_5|lt2a,True,4,26
 leave_one_session_out,test 25spots,25spots:floor5/stops/spots_s18_escalator_down:s24#p1,25spots,s24,5,escalator_down,escalator_down,escalator_down|exit_5|lt2a,True,4,26
