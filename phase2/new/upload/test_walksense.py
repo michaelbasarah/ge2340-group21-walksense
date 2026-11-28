@@ -55,7 +55,7 @@ class UploadTest(unittest.TestCase):
 
     @unittest.skipUnless('25nov' in ws.SESSIONS, 'WALKSENSE_SESSIONS limits the sessions')
     def test_session_list_and_25nov_upload(self):
-        self.assertEqual(ws.SESSIONS, ('sesi1', 'sesi2', '25nov', '25night', '25night_tian', '26tian'))   # night run: entry 72; 26tian: entry 74
+        self.assertEqual(ws.SESSIONS, ('sesi1', 'sesi2', '25nov', '25night', '25night_tian', '26tian', '27nov'))   # night run: entry 72; 26tian: entry 74; 27nov: entry 95
         for x in ws.SESSION_LIST:
             self.assertTrue((x['path'] / 'clean' / 'manifest.csv').exists(), x)
         self.assertIn('iPhone19,2', server.STATE['models'])

@@ -1,0 +1,12 @@
+floor,type,node,from_node,to_node,place,phone,device,start_hk,start_iso,duration_s,n_accel,n_gyro,n_mag,n_baro,pressure_hpa,folder,source_zip,label_raw,confidence
+5,stop,sr9,,,SR9 (study rooms),iphone,"iPhone19,2",17:13:53,2026-11-27 17:13:52,60.0,5970,5970,5970,55,1014.28,floor5/stops/s01_sr9,Sr9 2026-11-27 17-15-04.zip,Sr9,high
+5,stop,male_toilet,,,Male toilet,iphone,"iPhone19,2",17:16:15,2026-11-27 17:16:15,60.0,5972,5971,5971,55,1014.31,floor5/stops/s02_male_toilet,Male tolet 2026-11-27 17-17-31.zip,Male tolet,high
+5,stop,esca_up,,,Escalator up,iphone,"iPhone19,2",17:18:54,2026-11-27 17:18:54,60.0,5971,5970,5970,55,1014.31,floor5/stops/s03_esca_up,Esca up 2026-11-27 17-20-04.zip,Esca up,medium
+5,stop,esca_down,,,Escalator down,iphone,"iPhone19,2",17:20:48,2026-11-27 17:20:47,60.0,5971,5970,5970,55,1014.31,floor5/stops/s04_esca_down,Esca down 2026-11-27 17-22-06.zip,Esca down,medium
+5,stop,y5302,,,Y5302,iphone,"iPhone19,2",17:22:57,2026-11-27 17:22:57,60.0,5971,5970,5970,55,1014.3,floor5/stops/s05_y5302,Y5302 2026-11-27 17-24-06.zip,Y5302,high
+5,stop,female_toilet,,,Female toilet,iphone,"iPhone19,2",17:25:14,2026-11-27 17:25:14,60.0,5971,5971,5971,55,1014.3,floor5/stops/s06_female_toilet,Tolet cewe 2026-11-27 17-26-22.zip,Tolet cewe,high
+5,stop,male_disabled_toilet,,,Male disabled toilet,iphone,"iPhone19,2",17:27:55,2026-11-27 17:27:55,60.0,5971,5970,5970,55,1014.28,floor5/stops/s07_male_disabled_toilet,Disable tolet 2026-11-27 17-29-02.zip,Disable tolet,medium
+5,stop,lift_stairs5,,,Lift / stairs 5,iphone,"iPhone19,2",17:30:27,2026-11-27 17:30:27,60.0,5971,5970,5970,55,1014.3,floor5/stops/s08_lift_stairs5,Lift stair 5 2026-11-27 17-31-33.zip,Lift stair 5,high
+4,stop,disabled_toilet,,,Disabled toilet,iphone,"iPhone19,2",17:33:55,2026-11-27 17:33:55,60.0,5971,5970,5970,55,1014.94,floor4/stops/s09_disabled_toilet,Disabil tolet umum 2026-11-27 17-35-02.zip,Disabil tolet umum,medium
+4,stop,lt1a,,,LT1A,iphone,"iPhone19,2",17:39:02,2026-11-27 17:39:02,60.0,5971,5970,5970,55,1015.11,floor4/stops/s10_lt1a,Lt1a 2026-11-27 17-40-09.zip,Lt1a,high
+4,stop,lt2b,,,LT2B,iphone,"iPhone19,2",17:41:02,2026-11-27 17:41:01,60.0,5971,5970,5970,55,1015.12,floor4/stops/s11_lt2b,Lt2b 2026-11-27 17-42-29.zip,Lt2b,high

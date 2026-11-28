@@ -103,6 +103,8 @@ Contents:
 92. 27 Nov: demo runbook and live-walk protocol
 93. 27 Nov: upload app map-first like Google Maps; search finds From as well as To, no LLM text; From = Current location; Step-free renamed Disabled; nearest exit; Nearest-toilet button, Any WC and hint lines removed
 94. 27 Nov: demo runbook numbers from the final entry-91 run, floor baseline.py fixed, all exits are emergency exits (user decision)
+95. 28 Nov: 27-Nov iPhone 18 Pro stops added (session 27nov); held-out test 5/11 whole stop, floor 11/11
+96. 28 Nov: live mode: guess after 1 s still, floor waits for late pressure (replay floor 143 -> 167/170), floor switch while walking
 - Lessons learned
 - Open questions / next steps
 - See also `PROJECT-STORY.md` (repo root): the whole project as a readable narrative, with links to these entries
@@ -1693,6 +1695,46 @@ Contents:
 - **What changed because of it:** the runbook's weak places and retake list; the emergency-exit tag in the data and the app's answers; `baseline.py` runs clean. LT1a and Y5-202 are off the retake list. The circle-UI mock (`circle-ui/places_data.js`, built by `make_mock.py` from `destinations.csv` aliases) was not regenerated: it is not part of the app.
 - **Links:** branch `docs/runbook-final-numbers`; `phase2/new/DEMO-RUNBOOK.md`, `phase2/new/floor/baseline.py`, `phase2/new/floor/README.md`, `phase2/new/routing/route.py`, `test_route.py`, `README.md`, `out/planner_samples.json`, `phase2/new/upload/search.py`, `test_search.py`, `README.md`, `phase2/request-matching/destinations.csv`, `build_destinations.py`; entries 90, 91, 92, 93.
 
+## 95. 28 Nov: 27-Nov iPhone 18 Pro stops added (11 stops, session `27nov`); held-out test first: whole stop 5/11, floor 11/11
+
+- **What we tried:** the user downloaded 11 new phyphox recordings on 28 Nov at 04:20 (`~/Downloads/* 2026-11-27 *.zip`) and asked to train the app with them and to test on any iPhone 18 Pro recordings. Added them as a session, tested the existing iPhone 18 model on them **before** training on them, then reran the app's leave-one-session-out evaluation with them in.
+- **Why:** all 11 are deviceModel **iPhone19,2** (iPhone 18 Pro, the demo phone; same model as Dicta's sesi1, 25nov, 25night), so they are a new held-out session for that phone. Testing first keeps the number honest.
+- **How:**
+  - `phase2/clean-data/2026-11-27/`: `raw/` = the 11 ZIPs byte-identical (`raw_sha256.txt`, hashes compared with the Downloads copies); `scripts/build_27nov.py` (stdlib, layout as `2026-11-26-tian/`) writes `labels_27nov.csv` and `clean/` (manifest, summary.json; sensor folders gitignored). Labels from the file names; the build stops if a name's floor disagrees with pressure (0.40 hPa above the first stop = 4F). Medium confidence: `Esca up`, `Esca down`, `Disable tolet` (5F, = male disabled toilet), `Disabil tolet umum` (4F, = disabled toilet). README there.
+  - `upload/walksense.py` `ALL_SESSIONS` + `{'name': '27nov'}`; `test_walksense.py` session list updated.
+  - `upload/eval_27nov.py` -> `out/ip18_27nov_test.json`: iPhone19,2 model trained on sesi1 + 25nov + 25night only (85 stops, TRAIN_EXCLUDE kept), tested on the 11 stops; floor through `ws.analyse` (rule d) in time order from 5F; a 1 s answer = mean magnetic x/y/z of 1 still second fed to the same kNN (entry 61), for the first still second after the 5 s trim and for every still second.
+  - `python walksense.py evaluate` rerun (7 sessions); the old files kept as `out/eval_2026-11-27_before-entry95.json`, `out/live_checks_2026-11-27_before-entry95.json`.
+- **Result:**
+  - **Build:** 11 written, 8 on 5F (1014.28 to 1014.31 hPa), 3 on 4F (1014.94 to 1015.12 hPa), `labels_not_built` empty (`clean/summary.json`).
+  - **Held-out iPhone 18 test (`out/ip18_27nov_test.json`):** whole stop top-1 **5/11**, top-3 9/11; lit 9, of which 3 right; first still second top-1 5/11; every still second 195/539 (0.362); **floor 11/11** (rule d). Right: male_toilet, y5302, male_disabled_toilet, lift_stairs5 (p 0.433, not lit), lt1a (p 0.5, not lit). Wrong with high confidence: sr9 -> esca_down (1.0), esca_up -> lift_stairs5 (0.975), esca_down -> lift_stairs5 (1.0), female_toilet -> y5202 (0.91), disabled_toilet (4F) -> y4502 (0.873), lt2b -> gate (0.992).
+  - **Leave one session out, iPhone19,2, xyz (`out/eval.json` vs the before file):** sesi1 21/27 -> 20/27, 25nov 20/26 -> 21/26, 25night 24/32 -> 23/32, 27nov (new fold) 5/11. Total over the old three sessions 65/85 before, 64/85 after (69/96 with 27nov). iPhone17,4 folds unchanged (sesi2 14/26, 26tian 13/25, 25night_tian 12/23).
+- **Outcome:** data added, success. The test result is weak: 5 of 11 at whole-stop level, below the 65/85 the model gets on Dicta's older sessions, and 6 wrong answers at p >= 0.87, 6 of the 9 lit circles wrong. Adding 27nov to training did not raise the other ip18 folds (-1, +1, -1). Possible reasons, not tested: a different holder or way of holding the phone (who recorded it was not stated), one evening only, or a changed field near the escalators and lifts.
+- **What changed because of it:** the app trains its iPhone19,2 model on 4 sessions (96 stops). Floor by pressure held on the new data.
+- **Links:** `phase2/clean-data/2026-11-27/`, `phase2/new/upload/eval_27nov.py`, `out/ip18_27nov_test.json`, `out/eval.json`; entries 61, 90, 91.
+
+## 96. 28 Nov: live mode: place guess after 1 s still, floor waits for the iPhone's late pressure (floor at stops 143 -> 167 of 170 in replay), floor switch while walking
+
+- **What we tried:** the user asked for (1) the app to detect and show 4F / 5F and (2) an accurate live reading: stand only 1 s to get a position, and follow while walking. User choices: show a guess at 1 s and light the circle only when sure; the demo phone is the iPhone 18 Pro (`--device iPhone19,2`).
+- **Why:** main still checked the floor at the first moment of a stop, before the iPhone's pressure (a few seconds late, entry 28) had arrived; that fix existed only on the local branch `live-fixes-local`. The live code needed 3 s still before any place.
+- **How (`phase2/new/upload/live.py`):**
+  - `MOTION_S` 3 -> 1 s (still test window), `NAME_AFTER_S` 3 -> 1 s: a guess (dashed "maybe" ring) after 1 s still. Under 2 s of data the guess is the mean magnetic x/y/z of the stand fed to the same kNN (entry 61's 1 s estimate); from 2 s it is the app's usual visit answer. It updates every poll while you stand.
+  - `LIT_AFTER_S` 3: the red circle may light only from 3 s still and p >= 0.8 (entry 61: the 1 s confidence is overconfident).
+  - `WALK_CONFIRM_S` 1: at a stop, motion must last 1 s before it counts as walking.
+  - Floor at a stop waits until the stop has pressure (`stop['floor_done']`); after `BARO_WAIT_S` 8 s without any, the no-pressure path of rule (d) runs as before. Ported from `live-fixes-local` `829f6f6` onto the rule (d) code.
+  - `WALK_FLOOR`: while walking, a 5 s pressure median 0.40 hPa off the floor reference for 5 s calls the floor tracker's own step; the dot then waits for the next stand. Decision rule written before scoring: keep it only if floor-at-stops is >= without it on every session.
+  - The walking dot starts from the latest guess (as before: the anchor is the last top-1). Stops kept in `state` stay 50 for the page; the replay keeps all (`keep_stops`).
+  - `index.html`: live line says "place at 1 s" and appends the floor note (e.g. "pressure rose ... moved down to 4F").
+  - `replay()` takes `baro_lag` (pressure sent late) and scores `first_top1` (the first guess of each stop). New `upload/replay_1s.py` -> `out/live_1s_replay.json`: every iPhone session streamed in 0.5 s steps, pressure 4 s late, place model of the same phone model trained on its other sessions only, three rule sets: old (3 s, floor at first look, no walking floor), 1s, 1s+walk.
+  - `test_live.py`: the fake phone sends pressure 4 s late (`BARO_LAG`), and a guess must show within 2 s of standing.
+- **Result (`out/live_1s_replay.json`, 170 iPhone stops, 7 sessions):**
+  - old -> 1s: stops found 170 -> 170; **floor right 143 -> 167**; first guess top-1 91 -> 104; end-of-stop top-1 93 -> 103; top-3 118 -> 135; lit 135 -> 132, lit right 82 -> 88; extra stops (stands outside a recorded stop) 79 -> 98.
+  - Per session, floor old -> 1s: sesi1 22 -> 27/27, sesi2 18 -> 26/26, 25nov 24 -> 26/26, 25night 26 -> 29/32, 25night_tian 20 -> 23/23, 26tian 23 -> 25/25, 27nov 10 -> 11/11.
+  - 1s+walk gave exactly the same numbers as 1s on every session (`walking_floor_kept` true by the rule, but no gain shown: in these replays each recording is a separate take, so the floor change falls between takes, not inside a walk).
+  - Tests: `test_live.py` OK (110.7 s); `test_walksense.py` + `test_search.py` 39 tests, 1 failure (the session list, expected after entry 95), fixed and that test rerun OK.
+- **Outcome:** success for the floor and the 1 s guess on recorded data. Failures and dead ends: (1) the first replay run showed 156 of 170 stops found with the 1 s rules: the tracker keeps only the last 50 stops and the 1 s rule names more short stands, so the first stops of sesi1 / 25nov fell out of the list before scoring (found by printing the missed stops of 25nov); fixed with `keep_stops` for the replay and rerun (above). (2) The 1 s rule names more short stands during walks (extra stops 79 -> 98). (3) Not done: a full `python live.py check` rerun (31 min since entry 90; memory was low, and the background server was stopped by Claude Code for low memory), a screenshot, and a check that the new `test_live` fails on the old floor code. The walking-floor switch is untested on a real escalator ride. Not tested on a real walk at all.
+- **What changed because of it:** live mode guesses after 1 s still, lights from 3 s, shows the floor after the late pressure, and switches floor while walking. README live section and `DEMO-RUNBOOK.md` updated (1 s, not 3 s).
+- **Links:** `phase2/new/upload/live.py`, `index.html`, `replay_1s.py`, `test_live.py`, `out/live_1s_replay.json`, `README.md`, `phase2/new/DEMO-RUNBOOK.md`; branch `live-fixes-local` `829f6f6`; entries 28, 61, 90, 95.
+
 ## Lessons learned
 
 - **Same-recording splits give fake accuracy.** 94% (pilot) became 78% on later revisits and 18 to 24% on another day, for the same kind of features. Always report the honest split and label the leaky one as leaky.
@@ -1771,9 +1813,11 @@ Contents:
 - **A shared random generator makes a result depend on what ran before it in the same process.** The day-3 distance scale drew its random pairs from one module-level generator, so running `evaluate.py` before `fused_knn.py` in one process changed 5 of 23 folds and the headline by 1 take (178 vs 179). Seed every random draw at the point of use, break ties explicitly, and prove determinism with reruns in a different process state, thread count and hash seed (entry 91).
 - **Keep a dropped recording visible.** The a56 night takes were left out with an exclusion list that names every file and its reason, not by deleting or moving them, so the decision can be undone by deleting two config keys (entry 91).
 - **A loader that skips missing data silently gives a plausible wrong file.** In a fresh worktree the day-3 loader took session 25spots as empty (its gitignored sensor folders were absent), `baseline.py` still said all rows match and wrote different thresholds; only the `git diff` of `out/baseline.json` showed it (entry 94). After any rerun in a new tree, diff the committed outputs and expect them to be identical before trusting them.
+- **A capped list can look like a missed detection.** The live replay first scored 156 of 170 stops found with the 1 s rules; the tracker keeps only its last 50 stops and the shorter rule produced more, so early stops were dropped before scoring (entry 96). Score from a full history, not from what the page keeps.
 
 ## Open questions / next steps
 
+- **iPhone 18 Pro, 27 Nov (entries 95, 96):** the held-out 27-Nov stops score 5/11 (6 confident wrong answers); who recorded them and how the phone was held is not written down. The 1 s live rules and the walking floor switch need a real walk with the iPhone 18 Pro (`--device iPhone19,2`), scored from `recordings/`; the walking floor switch has no evidence for or against yet.
 - **Floor rule (d) in the app (entry 90):** on for iPhones; for a55 / a56 / S24 it stays off (`WALKSENSE_FLOOR_VOTE_NO_BARO=1` turns it on) until a held-out session with a healthy Android magnetometer shows a gain over "start floor kept". The live version asks the vote after 10 s of a stop: scored only on a replay, not on a real walk. `floor/baseline.py` and `results-pack/build.py` read `eval.json` `floor_tracking` (now the (d) default; R0 is in `floor_tracking_by_rule`) and the renamed a56 keys: update them when the results pack is rebuilt.
 - **Phone opening the app page when the server runs in WSL (entry 90 README):** Windows port forwarding or mirrored networking are documented but untried.
 

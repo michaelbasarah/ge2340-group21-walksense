@@ -1,0 +1,352 @@
+{
+ "what": "Live replay of every iPhone session, old live rules vs the 1 s rules (PROCESS-LOG entry 96).",
+ "baro_lag_s": 4.0,
+ "rules": {
+  "old": {
+   "MOTION_S": 3.0,
+   "NAME_AFTER_S": 3.0,
+   "LIT_AFTER_S": 0.0,
+   "WALK_CONFIRM_S": 0.0,
+   "BARO_WAIT_S": 0.0,
+   "WALK_FLOOR": false
+  },
+  "1s": {
+   "MOTION_S": 1.0,
+   "NAME_AFTER_S": 1.0,
+   "LIT_AFTER_S": 3.0,
+   "WALK_CONFIRM_S": 1.0,
+   "BARO_WAIT_S": 8.0,
+   "WALK_FLOOR": false
+  },
+  "1s+walk": {
+   "MOTION_S": 1.0,
+   "NAME_AFTER_S": 1.0,
+   "LIT_AFTER_S": 3.0,
+   "WALK_CONFIRM_S": 1.0,
+   "BARO_WAIT_S": 8.0,
+   "WALK_FLOOR": true
+  }
+ },
+ "sessions": {
+  "sesi2": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "25night_tian",
+    "26tian"
+   ],
+   "old": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 18,
+    "top1": 10,
+    "first_top1": 10,
+    "top3": 17,
+    "lit": 19,
+    "lit_right": 9,
+    "extra_stops": 1
+   },
+   "1s": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "top1": 14,
+    "first_top1": 15,
+    "top3": 22,
+    "lit": 21,
+    "lit_right": 13,
+    "extra_stops": 1
+   },
+   "1s+walk": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "top1": 14,
+    "first_top1": 15,
+    "top3": 22,
+    "lit": 21,
+    "lit_right": 13,
+    "extra_stops": 1
+   }
+  },
+  "25night_tian": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "sesi2",
+    "26tian"
+   ],
+   "old": {
+    "n_stops": 23,
+    "found": 23,
+    "floor": 20,
+    "top1": 12,
+    "first_top1": 11,
+    "top3": 16,
+    "lit": 19,
+    "lit_right": 10,
+    "extra_stops": 10
+   },
+   "1s": {
+    "n_stops": 23,
+    "found": 23,
+    "floor": 23,
+    "top1": 12,
+    "first_top1": 12,
+    "top3": 17,
+    "lit": 18,
+    "lit_right": 10,
+    "extra_stops": 10
+   },
+   "1s+walk": {
+    "n_stops": 23,
+    "found": 23,
+    "floor": 23,
+    "top1": 12,
+    "first_top1": 12,
+    "top3": 17,
+    "lit": 18,
+    "lit_right": 10,
+    "extra_stops": 10
+   }
+  },
+  "26tian": {
+   "device": "iPhone17,4",
+   "trained_on": [
+    "sesi2",
+    "25night_tian"
+   ],
+   "old": {
+    "n_stops": 25,
+    "found": 25,
+    "floor": 23,
+    "top1": 12,
+    "first_top1": 9,
+    "top3": 15,
+    "lit": 20,
+    "lit_right": 10,
+    "extra_stops": 5
+   },
+   "1s": {
+    "n_stops": 25,
+    "found": 25,
+    "floor": 25,
+    "top1": 13,
+    "first_top1": 10,
+    "top3": 17,
+    "lit": 19,
+    "lit_right": 10,
+    "extra_stops": 5
+   },
+   "1s+walk": {
+    "n_stops": 25,
+    "found": 25,
+    "floor": 25,
+    "top1": 13,
+    "first_top1": 10,
+    "top3": 17,
+    "lit": 19,
+    "lit_right": 10,
+    "extra_stops": 5
+   }
+  },
+  "sesi1": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "25nov",
+    "25night",
+    "27nov"
+   ],
+   "old": {
+    "n_stops": 27,
+    "found": 27,
+    "floor": 22,
+    "top1": 18,
+    "first_top1": 15,
+    "top3": 19,
+    "lit": 21,
+    "lit_right": 15,
+    "extra_stops": 22
+   },
+   "1s": {
+    "n_stops": 27,
+    "found": 27,
+    "floor": 27,
+    "top1": 20,
+    "first_top1": 17,
+    "top3": 22,
+    "lit": 22,
+    "lit_right": 17,
+    "extra_stops": 27
+   },
+   "1s+walk": {
+    "n_stops": 27,
+    "found": 27,
+    "floor": 27,
+    "top1": 20,
+    "first_top1": 17,
+    "top3": 22,
+    "lit": 22,
+    "lit_right": 17,
+    "extra_stops": 27
+   }
+  },
+  "25nov": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "sesi1",
+    "25night",
+    "27nov"
+   ],
+   "old": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 24,
+    "top1": 19,
+    "first_top1": 21,
+    "top3": 20,
+    "lit": 25,
+    "lit_right": 18,
+    "extra_stops": 23
+   },
+   "1s": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "top1": 21,
+    "first_top1": 23,
+    "top3": 21,
+    "lit": 24,
+    "lit_right": 19,
+    "extra_stops": 31
+   },
+   "1s+walk": {
+    "n_stops": 26,
+    "found": 26,
+    "floor": 26,
+    "top1": 21,
+    "first_top1": 23,
+    "top3": 21,
+    "lit": 24,
+    "lit_right": 19,
+    "extra_stops": 31
+   }
+  },
+  "25night": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "sesi1",
+    "25nov",
+    "27nov"
+   ],
+   "old": {
+    "n_stops": 32,
+    "found": 32,
+    "floor": 26,
+    "top1": 18,
+    "first_top1": 21,
+    "top3": 24,
+    "lit": 23,
+    "lit_right": 17,
+    "extra_stops": 18
+   },
+   "1s": {
+    "n_stops": 32,
+    "found": 32,
+    "floor": 29,
+    "top1": 19,
+    "first_top1": 23,
+    "top3": 27,
+    "lit": 20,
+    "lit_right": 16,
+    "extra_stops": 24
+   },
+   "1s+walk": {
+    "n_stops": 32,
+    "found": 32,
+    "floor": 29,
+    "top1": 19,
+    "first_top1": 23,
+    "top3": 27,
+    "lit": 20,
+    "lit_right": 16,
+    "extra_stops": 24
+   }
+  },
+  "27nov": {
+   "device": "iPhone19,2",
+   "trained_on": [
+    "sesi1",
+    "25nov",
+    "25night"
+   ],
+   "old": {
+    "n_stops": 11,
+    "found": 11,
+    "floor": 10,
+    "top1": 4,
+    "first_top1": 4,
+    "top3": 7,
+    "lit": 8,
+    "lit_right": 3,
+    "extra_stops": 0
+   },
+   "1s": {
+    "n_stops": 11,
+    "found": 11,
+    "floor": 11,
+    "top1": 4,
+    "first_top1": 4,
+    "top3": 9,
+    "lit": 8,
+    "lit_right": 3,
+    "extra_stops": 0
+   },
+   "1s+walk": {
+    "n_stops": 11,
+    "found": 11,
+    "floor": 11,
+    "top1": 4,
+    "first_top1": 4,
+    "top3": 9,
+    "lit": 8,
+    "lit_right": 3,
+    "extra_stops": 0
+   }
+  }
+ },
+ "walking_floor_kept": true,
+ "totals": {
+  "old": {
+   "n_stops": 170,
+   "found": 170,
+   "floor": 143,
+   "first_top1": 91,
+   "top1": 93,
+   "top3": 118,
+   "lit": 135,
+   "lit_right": 82,
+   "extra_stops": 79
+  },
+  "1s": {
+   "n_stops": 170,
+   "found": 170,
+   "floor": 167,
+   "first_top1": 104,
+   "top1": 103,
+   "top3": 135,
+   "lit": 132,
+   "lit_right": 88,
+   "extra_stops": 98
+  },
+  "1s+walk": {
+   "n_stops": 170,
+   "found": 170,
+   "floor": 167,
+   "first_top1": 104,
+   "top1": 103,
+   "top3": 135,
+   "lit": 132,
+   "lit_right": 88,
+   "extra_stops": 98
+  }
+ }
+}

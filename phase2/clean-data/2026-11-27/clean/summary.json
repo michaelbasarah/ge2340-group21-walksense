@@ -1,0 +1,27 @@
+{
+ "dataset": "2026-11-27 evening, iPhone19,2 (iPhone 18 Pro), stops only",
+ "recordings_written": 11,
+ "stops_floor5": 8,
+ "stops_floor4": 3,
+ "walks": 0,
+ "medium_confidence": [
+  "floor5/stops/s03_esca_up ('Esca up')",
+  "floor5/stops/s04_esca_down ('Esca down')",
+  "floor5/stops/s07_male_disabled_toilet ('Disable tolet')",
+  "floor4/stops/s09_disabled_toilet ('Disabil tolet umum')"
+ ],
+ "pressure_hpa": {
+  "floor5/stops/s01_sr9": 1014.28,
+  "floor5/stops/s02_male_toilet": 1014.31,
+  "floor5/stops/s03_esca_up": 1014.31,
+  "floor5/stops/s04_esca_down": 1014.31,
+  "floor5/stops/s05_y5302": 1014.3,
+  "floor5/stops/s06_female_toilet": 1014.3,
+  "floor5/stops/s07_male_disabled_toilet": 1014.28,
+  "floor5/stops/s08_lift_stairs5": 1014.3,
+  "floor4/stops/s09_disabled_toilet": 1014.94,
+  "floor4/stops/s10_lt1a": 1015.11,
+  "floor4/stops/s11_lt2b": 1015.12
+ },
+ "labels_not_built": []
+}

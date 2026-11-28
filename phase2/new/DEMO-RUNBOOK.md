@@ -75,7 +75,7 @@ The page and the commands below are on the laptop. `curl` and `python3 -m json.t
    curl -s http://127.0.0.1:8000/api/live | python3 -m json.tool | head -40
    ```
    Want: `"enabled": true`, `"device": "iPhone19,2"`, `"connected": true`, `"measuring": true`, `"error": ""`, `model_note` = `trained on this phone model (iPhone19,2), all sessions`, and `buffers` listing acc, gyr, mag, baro. On the page, open **Live sensor data ▸** (closed by default since entry 93): it says "Waiting for data" / "Standing" / "Stopped", never "Not connected to the phone". (15 s)
-3. **One stop**: stand still, phone flat facing the door, for 10 s at any place. At 3 s Live sensor data says `Stopped ...`; the chip at the bottom right of the map shows the place and %; lit circle if sure (at least 80%), dashed "maybe" ring if not. The From list now reads "Current location (<that place>)". Then walk 10 steps: the blue dot moves. (35 s)
+3. **One stop**: stand still, phone flat facing the door, for 10 s at any place. From 1 s Live sensor data says `Stopped ...` and the dashed "maybe" ring shows the best guess; from 3 s the circle lights if sure (at least 80%). The chip at the bottom right of the map shows the place and % (entry 96). The From list now reads "Current location (<that place>)". Then walk 10 steps: the blue dot moves. (35 s)
 4. **Search** "where can I study": To = Study rooms (5F) and the route from Current location is drawn; no answer sentence (entry 93). Steps ▸ says `Search: offline keyword match` or `Search: Gemini`. Before any place has lit, the card says **Waiting for location** and draws nothing: that is expected. (10 s)
 5. **One route**: To = LT1a, From = Canteen entrance. Standard: 37 m · 48 s, "Floor change: Escalator 5F → 4F" (36.6 m, 48.2 s, escalator down 20 s; checked offline 27 Nov with `search.plan_route`, rechecked for entry 93). (10 s)
 6. **Toilet**: WC **Female**, From = Canteen, To = **Nearest toilet** (or search "toilet"): Female toilet (5F), 16 m · 12 s (checked offline). The old "Nearest toilet" button and "Any WC" chip are gone (entry 93); tap Female again for "any". (10 s)
@@ -124,7 +124,7 @@ If any step fails, go to the table.
 | 6 | `exit_5` | Exit 5 (emergency exit) | 5 | 3/3 |
 | 7 | `male_toilet` | Male toilet | 5 | 3/3 |
 
-Walking between them: gate to LT2a passes Exit 5 (4F); LT2a to the up escalator passes LT2b and the down escalator (4F). **Walk past, do not stop** at those (a stop of 3 s or more is read as a place). Stop 3 to 4 includes the escalator ride: do not stand still on the escalator, and stand still only after stepping off.
+Walking between them: gate to LT2a passes Exit 5 (4F); LT2a to the up escalator passes LT2b and the down escalator (4F). **Walk past, do not stop** at those (since entry 96 a stand of 1 s or more is read as a place). Stop 3 to 4 includes the escalator ride: do not stand still on the escalator, and stand still only after stepping off.
 
 **Demo the planner on the strong places too:** search/route between them (Canteen -> LT1a Standard vs Disabled is the best story: escalator 36.6 m vs lift 65.0 m, both checked offline), then the WC toggle with To = Nearest toilet. **Avoid** as a live-lit moment: the two escalator-down stops, the 5F lift/stairs, and LT1a (now 2/3, no longer a 0 or 1). The route planner does not use the place guess for a typed From/To, so weak places are safe there: only the lit circle and the From = "Current location" default depend on the guess.
 

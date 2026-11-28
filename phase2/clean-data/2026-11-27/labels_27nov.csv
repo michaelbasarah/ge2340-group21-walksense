@@ -1,0 +1,12 @@
+source_zip,sha256,caption,device,start_hk,duration_s,kind,floor,no,node,confidence,pressure_hpa
+Sr9 2026-11-27 17-15-04.zip,e90b771a8ef76282050fc9df293d3f006f5387627509e3c56881ae447b86fbef,Sr9,"iPhone19,2",17:13:53,60.0,stop,5,s01,sr9,high,1014.28
+Male tolet 2026-11-27 17-17-31.zip,b91862744f56db8a21cf4a31d0f6a1bffb6591cdb0eb259a01b9840fb2f409dd,Male tolet,"iPhone19,2",17:16:15,60.0,stop,5,s02,male_toilet,high,1014.31
+Esca up 2026-11-27 17-20-04.zip,b271f2ebd17494292c34f7eb974f4ade9de1ff13807a07f26f0b8848c65bac22,Esca up,"iPhone19,2",17:18:54,60.0,stop,5,s03,esca_up,medium,1014.31
+Esca down 2026-11-27 17-22-06.zip,1bad5a9cc09d347518a501b5aa18ea647e4f95364267f68bb6eb4ad6bab8a982,Esca down,"iPhone19,2",17:20:48,60.0,stop,5,s04,esca_down,medium,1014.31
+Y5302 2026-11-27 17-24-06.zip,8d186e9ee777b3b598c41c55e919e7c1c06a8b416b53a70539b662262cc3ece4,Y5302,"iPhone19,2",17:22:57,60.0,stop,5,s05,y5302,high,1014.3
+Tolet cewe 2026-11-27 17-26-22.zip,6a1d4025286d68ca8d59e52890497b19c8b68048d7b9cd50c12f1180510b93e9,Tolet cewe,"iPhone19,2",17:25:14,60.0,stop,5,s06,female_toilet,high,1014.3
+Disable tolet 2026-11-27 17-29-02.zip,473fa2e92b55cb1c2a29a52b22cf6e3be8c8cc23f4c758e529abe1cac5d3af01,Disable tolet,"iPhone19,2",17:27:55,60.0,stop,5,s07,male_disabled_toilet,medium,1014.28
+Lift stair 5 2026-11-27 17-31-33.zip,6fb06c0f9cc351c7658a1ad601056015534f75e687c2e5ce40a0c60466c9d41d,Lift stair 5,"iPhone19,2",17:30:27,60.0,stop,5,s08,lift_stairs5,high,1014.3
+Disabil tolet umum 2026-11-27 17-35-02.zip,6da908121e918a8c0ce9fa06d4d17d63be4ddc85ba4d729d3fb82965c27c5c34,Disabil tolet umum,"iPhone19,2",17:33:55,60.0,stop,4,s09,disabled_toilet,medium,1014.94
+Lt1a 2026-11-27 17-40-09.zip,7b9f60188cae874b1a4fc849cd8500261ec4adf2655df0e2c4c61c02148eb377,Lt1a,"iPhone19,2",17:39:02,60.0,stop,4,s10,lt1a,high,1015.11
+Lt2b 2026-11-27 17-42-29.zip,5c067cc7175c2df3fb5d59d810fc3bbbfeeb9e6c57f7ad65cf38d4e9e733e42a,Lt2b,"iPhone19,2",17:41:02,60.0,stop,4,s11,lt2b,high,1015.12

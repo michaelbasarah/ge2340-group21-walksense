@@ -39,8 +39,13 @@ import walksense as ws
 from pdr import count_steps
 
 STILL_STD = 0.4        # m/s^2
-MOTION_S = 3.0         # window for the still/moving test
-NAME_AFTER_S = 3.0     # seconds of stillness before the first place guess (counted from the start of the still 3 s)
+MOTION_S = 1.0         # window for the still/moving test (entry 96; was 3 s). 1 s still: 98.6% / 99.8% of stop seconds, 0% of walk seconds (entry 61)
+NAME_AFTER_S = 1.0     # seconds of stillness before the first place guess = a guess as soon as 1 s is still (entry 96; was 3 s)
+LIT_AFTER_S = 3.0      # the red circle may light only after 3 s still (the tested 3 s rule); before that the guess shows unlit
+WALK_CONFIRM_S = 1.0   # at a stop, motion must last 1 s before it counts as walking (one shuffle does not end the stop)
+BARO_WAIT_S = 8.0      # a stop waits this long for the iPhone's late pressure (entry 28) before the no-pressure path
+WALK_FLOOR = True      # floor change while walking: 5 s median pressure 0.40 hPa off the floor reference for 5 s (entry 96)
+WALK_FLOOR_S = 5.0
 MAX_STOP_S = 60.0      # use at most the last 60 s of a stop (what the model was trained on)
 VOTE_AFTER_S = 10.0    # floor rule (d): ask the magnetic floor vote once a stop has lasted 10 s (several 2 s windows)
 POLL_S = 0.5
@@ -150,7 +155,10 @@ class LiveTracker:
         self.dot = None
         self.still_since = None       # phone time the current stand started
         self.walk_since = None
-        self.stop = None              # current stop: {'start', 'floor_done', 'top3', 'lit'}
+        self.stop = None              # current stop: {'start', 'floor_done'}
+        self.moving_since = None      # phone time the motion at a stop began (WALK_CONFIRM_S)
+        self.jump_since = None        # phone time the walking pressure first sat a floor away (WALK_FLOOR)
+        self.keep_stops = 50          # stops kept in state (the page); replay keeps all to score them
         self.state = {'mode': 'waiting', 'steps': 0, 'still_s': 0.0, 'top3': [], 'lit': None,
                       'floor': floor, 'floor_note': '', 'stops': [], 'now': None}
         self.lock = threading.Lock()
@@ -174,6 +182,42 @@ class LiveTracker:
     def _window(self, t0, t1):
         return {s: self.data[s][(self.data[s][:, 0] >= t0) & (self.data[s][:, 0] <= t1)] for s in SENSORS}
 
+    def _guess(self, win, floor):
+        """Place top-3 of the stand so far: the app's visit answer (mean over 2 s windows) once 2 s exist, before that
+        the mean magnetic x/y/z of the stand fed to the same kNN (the 1 s estimate of entry 61)."""
+        if self.model is None or floor not in self.model.models or len(win['mag']) < 5:
+            return []
+        if win['mag'][-1, 0] - win['mag'][0, 0] >= ws.WINDOW_S:
+            t3 = self.model.top3(win, floor, trim=0.0)
+            if t3:
+                return t3
+        m = self.model.models[floor]
+        p = m.predict_proba(win['mag'][:, 1:4].mean(0)[None, :])[0]
+        return [(str(m.classes_[i]), round(float(p[i]), 3)) for i in np.argsort(-p)[:3]]
+
+    def _walk_floor(self):
+        """While walking: the last WALK_FLOOR_S of pressure sat FLOOR_JUMP_HPA off this floor's reference for
+        WALK_FLOOR_S -> the floor tracker's own step (R0 / d) with that pressure. Returns its note, '' otherwise."""
+        s, b = self.session, self.data['baro']
+        if not s.recent or not len(b) or (s.rule == 'd' and self.device in ws.BARO_IGNORED):
+            self.jump_since = None
+            return ''
+        t_b = float(b[-1, 0])
+        w = b[b[:, 0] > t_b - WALK_FLOOR_S, 1]
+        if len(w) < 3:
+            return ''
+        p = float(np.median(w))
+        d = p - float(np.median(s.recent))
+        if not ((d > ws.FLOOR_JUMP_HPA and s.floor == 5) or (d < -ws.FLOOR_JUMP_HPA and s.floor == 4)):
+            self.jump_since = None
+            return ''
+        if self.jump_since is None:
+            self.jump_since = t_b
+        if t_b - self.jump_since < WALK_FLOOR_S:
+            return ''
+        self.jump_since = None
+        return s.pressure_step(p, p, t_b, 0.0, is_stop=False)
+
     def update(self):
         with self.lock:
             acc = self.data['acc']
@@ -181,9 +225,12 @@ class LiveTracker:
                 return dict(self.state)
             now = float(acc[-1, 0])
             recent = acc[acc[:, 0] >= now - MOTION_S]
-            moving = np.linalg.norm(recent[:, 1:4], axis=1).std() >= STILL_STD
+            moving = bool(np.linalg.norm(recent[:, 1:4], axis=1).std() >= STILL_STD)
             st = self.state
             st['now'] = round(now, 1)
+            self.moving_since = (self.moving_since if self.moving_since is not None else now) if moving else None
+            if moving and self.stop is not None and now - self.moving_since < WALK_CONFIRM_S:
+                moving = False                                  # one shuffle at a stop: still the same stop
             if moving:
                 if self.stop is not None or self.walk_since is None:
                     self.walk_since, self.stop = now, None
@@ -198,41 +245,55 @@ class LiveTracker:
                     xy = self.dot.xy(pos) if pos else None
                     if xy:
                         dot = {'x': round(xy[0], 1), 'y': round(xy[1], 1), 'floor': self.dot.floor, 'from': pos[0], 'to': pos[1]}
+                note = self._walk_floor() if WALK_FLOOR else ''
+                if note:                                        # escalator / stairs: show the new floor at once
+                    self.dot = dot = None                       # the dot waits for the next stand on the new floor
+                    st.update(floor=self.session.floor, floor_note=note)
                 st.update(mode='walking', still_s=0.0, steps=steps, dot=dot)
                 return dict(st)
+            self.jump_since = None
             if self.still_since is None:
-                self.still_since = now - MOTION_S               # the whole last 3 s were already still
+                self.still_since = now - MOTION_S               # the whole last MOTION_S were already still
             st['still_s'] = round(now - self.still_since, 1)
             if now - self.still_since < NAME_AFTER_S:
                 st['mode'] = 'standing'
                 return dict(st)
             win = self._window(max(self.still_since, now - MAX_STOP_S), now)
-            if self.stop is None:                               # first look at this stop: floor, once
+            if self.stop is None:
+                self.stop = {'start': self.still_since, 'floor_done': False}
+            if not self.stop['floor_done']:                     # floor once per stop, once its pressure has arrived
                 p = win['baro'][:, 1] if len(win['baro']) else None
                 ignored = self.session.rule == 'd' and self.device in ws.BARO_IGNORED
+                waited = now - self.still_since >= BARO_WAIT_S or self.device in ws.NO_BAROMETER
                 if p is not None and len(p) and not ignored:
                     note = self.session.pressure_step(float(np.median(p)), float(np.median(p)), now, 0.0, is_stop=True)
-                else:
+                elif ignored or waited:
                     self.session.pressure_step(None, None, now, 0.0, is_stop=True)    # (d): this stop may ask the vote
                     note = ws.BARO_IGNORED[self.device] if ignored else 'no barometer data: floor kept'
-                self.stop = {'start': self.still_since}
-                st.update(floor=self.session.floor, floor_note=note)
+                else:
+                    note = None
+                    st['floor_note'] = 'checking the floor (waiting for pressure)'
+                if note is not None:
+                    self.stop['floor_done'] = True
+                    st.update(floor=self.session.floor, floor_note=note)
             if self.session.vote_pending and now - self.still_since >= VOTE_AFTER_S and len(win['mag']) >= 20:
                 v = self.model.vote_floor(win, trim=0.0) if self.model else None      # once per stop
                 note = self.session.apply_vote(*v) if v else ''
                 self.session.vote_pending = False
                 if note:
                     st.update(floor=self.session.floor, floor_note=note)
-            top3 = self.model.top3(win, self.session.floor, trim=0.0) if len(win['mag']) >= 20 and len(win['acc']) >= 20 else []
+            top3 = self._guess(win, self.session.floor)
             if top3:
-                lit = top3[0][0] if top3 and top3[0][1] >= ws.LIGHT_P else None
+                lit = top3[0][0] if top3[0][1] >= ws.LIGHT_P and now - self.still_since >= LIT_AFTER_S else None
                 st.update(mode='stop', top3=top3, lit=lit, dot=None)
                 self.anchor = (self.session.floor, top3[0][0])
                 rec = {'t': round(self.still_since, 1), 'floor': self.session.floor, 'top3': top3, 'lit': lit}
                 if st['stops'] and st['stops'][-1]['t'] == rec['t']:
+                    rec['first'] = st['stops'][-1].get('first', top3)
                     st['stops'][-1] = rec
                 else:
-                    st['stops'] = (st['stops'] + [rec])[-50:]
+                    rec['first'] = top3                         # the 1 s guess, kept for scoring
+                    st['stops'] = (st['stops'] + [rec])[-self.keep_stops:]
             return dict(st)
 
 
@@ -325,23 +386,31 @@ def _stream(session):
     return {s: np.vstack(parts[s]) for s in SENSORS if parts[s]}, truth, int(rows[0]['floor'])
 
 
-def replay(session, device, models, rule=None):
-    """Stream a recorded session through LiveTracker in 0.5 s steps and score every recorded stop."""
+def replay(session, device, models, rule=None, baro_lag=0.0):
+    """Stream a recorded session through LiveTracker in 0.5 s steps and score every recorded stop.
+    baro_lag: pressure reaches the tracker this many seconds after acc/mag (the real iPhone does, entry 28)."""
     stream, truth, floor = _stream(session)
     tr = LiveTracker(models, device, floor, graph={})
+    tr.keep_stops = 10 ** 6                  # entry 96: with 1 s stands a session can pass 50 stops
     if rule:
         tr.session.rule = rule
     end = max(a[-1, 0] for a in stream.values())
-    for t in np.arange(0, end + 1, POLL_S):
-        tr.add({s: a[(a[:, 0] > t - POLL_S) & (a[:, 0] <= t)] for s, a in stream.items()
-                if ((a[:, 0] > t - POLL_S) & (a[:, 0] <= t)).any()})
+    for t in np.arange(0, end + baro_lag + 1, POLL_S):
+        ch = {}
+        for s, a in stream.items():
+            lag = baro_lag if s == 'baro' else 0.0
+            m = (a[:, 0] > t - POLL_S - lag) & (a[:, 0] <= t - lag)
+            if m.any():
+                ch[s] = a[m]
+        tr.add(ch)
         tr.update()
-    stops, res = tr.state['stops'], dict(found=0, floor=0, top1=0, top3=0, lit=0, lit_right=0)
+    stops, res = tr.state['stops'], dict(found=0, floor=0, top1=0, first_top1=0, top3=0, lit=0, lit_right=0)
     for f, node, ts in truth:
         d = next((s for s in stops if ts - 5 <= s['t'] <= ts + 50), None)
         if d is None:
             continue
         res['found'] += 1; res['floor'] += d['floor'] == f; res['top1'] += d['top3'][0][0] == node
+        res['first_top1'] += bool(d.get('first')) and d['first'][0][0] == node
         res['top3'] += node in [p for p, _ in d['top3']]
         if d['lit']:
             res['lit'] += 1; res['lit_right'] += d['lit'] == node

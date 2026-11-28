@@ -45,3 +45,6 @@ phase2/clean-data/2026-11-25-night/*/clean/wifi/observations.csv
 # 26-Nov morning (Tian) regenerable sensor CSVs (rebuild: python -I phase2/clean-data/2026-11-26-tian/scripts/build_tian26.py)
 phase2/clean-data/2026-11-26-tian/clean/floor4/
 phase2/clean-data/2026-11-26-tian/clean/floor5/
+# 27-Nov evening (iPhone19,2) regenerable sensor CSVs (rebuild: python -I phase2/clean-data/2026-11-27/scripts/build_27nov.py)
+phase2/clean-data/2026-11-27/clean/floor4/
+phase2/clean-data/2026-11-27/clean/floor5/
