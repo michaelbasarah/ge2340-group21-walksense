@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WalkSense</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { --bg:#f4f5f7; --card:#fff; --ink:#111; --ink2:#555; --line:#dde0e4; --accent:#1f6fd1; --ok:#1d7a3a; --bad:#b3261e; --on-accent:#fff; --shadow:0 1px 6px rgba(0,0,0,.12); }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --card:#1b1e24; --ink:#eee; --ink2:#a9adb5; --line:#2e333b; --accent:#6aa8ff; --ok:#5cc47e; --bad:#ff8a80; --on-accent:#0b1a2e; --shadow:0 1px 8px rgba(0,0,0,.5); } }
+  * { box-sizing: border-box; }
+  html, body { margin:0; }
+  body { font:16px/1.45 system-ui, sans-serif; background:var(--bg); color:var(--ink); overflow-x:hidden; }
+  /* layout: phone = search bar, map, route card, then the rest; laptop (>= 900 px) = left panel + full-height map */
+  .app { display:grid; grid-template-columns:minmax(0, 1fr); grid-template-areas:"panel" "map" "sheet" "more"; }
+  .panel { grid-area:panel; position:sticky; top:0; z-index:5; background:var(--card); box-shadow:var(--shadow); padding:8px 12px; display:flex; flex-direction:column; gap:6px; }
+  .mapbox { grid-area:map; position:relative; height:54svh; min-height:300px; background:var(--fp-out); overflow:hidden; }
+  .sheet { grid-area:sheet; position:relative; z-index:2; margin-top:-14px; background:var(--card); border-radius:16px 16px 0 0; box-shadow:var(--shadow); padding:10px 16px 14px; }
+  .sheet::before { content:""; display:block; width:36px; height:4px; border-radius:2px; background:var(--line); margin:0 auto 8px; }
+  .more { grid-area:more; padding:12px; }
+  @media (min-width: 900px) {
+    .app { grid-template-columns:400px minmax(0, 1fr); grid-template-rows:auto auto 1fr; grid-template-areas:"panel map" "sheet map" "more map"; }
+    .panel { position:static; box-shadow:none; border-bottom:1px solid var(--line); padding:12px 16px; }
+    .mapbox { position:sticky; top:0; height:100vh; grid-row:1 / span 3; }
+    .sheet { margin:0; border-radius:0; box-shadow:none; border-bottom:1px solid var(--line); }
+    .sheet::before { display:none; }
+  }
+  /* search + From / To + chips */
+  .search { display:flex; gap:6px; margin:0; }
+  .search input { flex:1; min-width:0; font:inherit; padding:9px 14px; border-radius:22px; border:1px solid var(--line); background:var(--bg); color:var(--ink); }
+  button { font:inherit; cursor:pointer; }
+  .btn { border:none; border-radius:22px; background:var(--accent); color:var(--on-accent); font-weight:600; min-height:40px; padding:0 16px; }
+  .fromto { display:grid; grid-template-columns:42px minmax(0, 1fr) auto; gap:4px 6px; align-items:center; font-size:14px; color:var(--ink2); }
+  .fromto label { margin:0; }
+  .fromto select { width:100%; min-width:0; font:inherit; font-size:15px; padding:6px 8px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); }
+  .fromto .x { grid-row:1 / span 2; grid-column:3; width:34px; height:34px; border-radius:17px; border:1px solid var(--line); background:transparent; color:var(--ink2); font-size:16px; }
+  .fromto .x[hidden] { display:block; visibility:hidden; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px 8px; align-items:center; font-size:13.5px; color:var(--ink2); }
+  .seg { display:inline-flex; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .seg button { min-height:30px; padding:0 10px; font-size:13.5px; font-weight:600; background:transparent; color:var(--ink); border:none; }
+  .seg button + button { border-left:1px solid var(--line); }
+  .seg button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); }
+  .wc { display:inline-flex; gap:6px; align-items:center; }
+  /* map */
+  #map { width:100%; height:100%; display:block; touch-action:pan-y pinch-zoom; }
+  #map.png { background:#fff; }
+  .fab { position:absolute; display:flex; gap:6px; } .fab[hidden] { display:none; }
+  .fab button { width:38px; height:38px; padding:0; border-radius:19px; background:var(--card); color:var(--ink); border:1px solid var(--line); box-shadow:var(--shadow); font-size:17px; font-weight:700; }
+  .zoom { top:10px; left:10px; }
+  .levels { top:10px; right:10px; flex-direction:column; }
+  .levels button { font-size:14px; }
+  .levels button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+  .levels button.has-route:not([aria-pressed=true]) { border:2px solid var(--route); }
+  .levels #mapmode { font-size:11px; font-weight:600; }
+  .where { position:absolute; right:10px; bottom:24px; max-width:calc(100% - 20px); background:var(--card); color:var(--ink); border-radius:16px; box-shadow:var(--shadow); padding:5px 12px; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .where b { font-size:15px; margin-right:6px; }
+  @media (min-width: 900px) { .where { bottom:12px; } }
+  /* route card */
+  .title { font-size:17px; font-weight:700; margin:0; overflow-wrap:anywhere; }
+  .sum { font-size:22px; font-weight:700; margin:2px 0; } .sum small { font-size:15px; font-weight:600; color:var(--ink2); }
+  .line { font-size:14.5px; color:var(--ink2); margin:2px 0; }
+  .wait { font-weight:700; color:var(--accent); }
+  .tag { display:inline-block; font-size:12.5px; font-weight:600; padding:1px 8px; border-radius:10px; border:1px solid var(--line); color:var(--ink2); margin-right:4px; }
+  .muted { color:var(--ink2); font-size:14px; }
+  .ok { color:var(--ok); font-weight:600; } .bad { color:var(--bad); font-weight:600; }
+  details { margin-top:8px; } summary { cursor:pointer; color:var(--accent); font-weight:600; font-size:14.5px; min-height:32px; display:flex; align-items:center; }
+  summary::-webkit-details-marker { display:none; } summary::after { content:"\25B8"; margin-left:6px; } details[open] > summary::after { content:"\25BE"; }
+  .sheet ol { margin:6px 0 0; padding-left:22px; font-size:14.5px; } .sheet li { margin:2px 0; }
+  /* the rest (upload, live sensor data, floor fix, tested accuracy) */
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; }
+  .card h2 { font-size:16px; margin:0 0 4px; }
+  .card label { display:block; font-size:14px; color:var(--ink2); margin:10px 0 4px; }
+  .card select, .card input[type=file], .card button { width:100%; font:inherit; padding:10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); }
+  .card button { background:var(--accent); color:var(--on-accent); border:none; font-weight:600; margin-top:14px; min-height:44px; }
+  .card button.secondary { background:transparent; color:var(--accent); border:1px solid var(--line); }
+  .card button:disabled { opacity:.5; }
+  .row { display:flex; gap:8px; } .row > * { flex:1; }
+  .big { font-size:24px; font-weight:700; }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  td { padding:6px 0; border-bottom:1px solid var(--line); } td:last-child { text-align:right; }
+  .bar { height:6px; background:var(--line); border-radius:3px; margin-top:3px; }
+  .bar > div { height:100%; background:var(--accent); border-radius:3px; }
+  #err { color:var(--bad); font-weight:600; }
+  #live { margin:0 0 12px; } #live[hidden] { display:none; } #live > summary { padding:0 4px; }
+  #live .card { margin-top:6px; }
+  /* floor plan colours (map/floorplan.js) */
+  :root { --fp-out:#e9e7e3; --fp-walk:#ffffff; --fp-ctx:#f5f0e6; --fp-ctx-edge:#e2dbcc; --fp-room:#f4e2bf; --fp-room-edge:#c4ab7c; --fp-toilet:#dde3fb; --fp-toilet-edge:#93a2dc;
+          --fp-esc:#dde2e8; --fp-esc-edge:#9ba6b3; --fp-lift:#e4ddf0; --fp-lift-edge:#a397c4; --fp-core:#e4e6e9; --fp-edge:#7d8794; --fp-text:#1d232b; --fp-halo:#ffffff; --fp-len:#4f5966; --fp-link:#1f6fd1; }
+  @media (prefers-color-scheme: dark) { :root { --fp-out:#121418; --fp-walk:#2b3038; --fp-ctx:#1d2026; --fp-ctx-edge:#2c3139; --fp-room:#3b3426; --fp-room-edge:#7d6c4c; --fp-toilet:#272e48; --fp-toilet-edge:#5d6aa6;
+          --fp-esc:#2c323b; --fp-esc-edge:#6b7684; --fp-lift:#322c42; --fp-lift-edge:#7c6fa3; --fp-core:#23272e; --fp-edge:#8f9aa8; --fp-text:#e8ebf0; --fp-halo:#121418; --fp-len:#b4bcc7; --fp-link:#6aa8ff; } }
+  #map .lit { fill:#ff2020; stroke:#ffd400; stroke-width:5; }
+  #map .halo { fill:none; stroke:#ff2020; stroke-width:4; transform-box:fill-box; transform-origin:center; animation:pulse 1.4s ease-out infinite; }
+  #map .dot { fill:#0a84ff; stroke:#fff; stroke-width:4; }
+  #map .maybe { fill:none; stroke:#555; stroke-width:3; stroke-dasharray:6 5; }
+  #map text { font:700 22px system-ui, sans-serif; fill:#111; paint-order:stroke; stroke:#fff; stroke-width:6px; stroke-linejoin:round; }
+  #map.plan .lit { stroke-width:calc(var(--u) * .3px); } #map.plan .halo { stroke-width:calc(var(--u) * .25px); } #map.plan .dot { stroke-width:calc(var(--u) * .25px); }
+  #map.plan .maybe { stroke:var(--fp-text); stroke-width:calc(var(--u) * .2px); stroke-dasharray:calc(var(--u) * .45px) calc(var(--u) * .35px); }
+  #map.plan text { font-family:system-ui, sans-serif; font-weight:600; fill:var(--fp-text); stroke:var(--fp-halo); stroke-width:calc(var(--u) * .3px); }
+  #map.plan text.ovl { font-weight:800; stroke-width:calc(var(--u) * .4px); }
+  #map .fp-out { fill:var(--fp-out); } #map .fp-walk { fill:var(--fp-walk); }
+  #map .fp-corridor { fill:none; stroke:var(--fp-walk); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  #map .fp-ctx { fill:var(--fp-ctx); stroke:var(--fp-ctx-edge); stroke-width:.08; } #map .fp-ctx.fp-toilet { fill:var(--fp-toilet); } #map .fp-ctx.fp-core, #map .fp-ctx.fp-service { fill:var(--fp-core); }
+  #map .fp-room { fill:var(--fp-room); stroke:var(--fp-room-edge); stroke-width:.12; } #map .fp-room.fp-k-toilet { fill:var(--fp-toilet); stroke:var(--fp-toilet-edge); }
+  #map .fp-room.fp-k-escalator { fill:var(--fp-esc); stroke:var(--fp-esc-edge); } #map .fp-room.fp-k-lift_stairs { fill:var(--fp-lift); stroke:var(--fp-lift-edge); }
+  #map .fp-edge { fill:none; stroke:var(--fp-edge); stroke-width:calc(var(--u) * .12px); stroke-linecap:round; stroke-linejoin:round; }
+  #map .fp-edge.fp-src-steps { stroke-dasharray:calc(var(--u) * .5px) calc(var(--u) * .35px); } #map .fp-edge.fp-src-guess { stroke-dasharray:calc(var(--u) * .1px) calc(var(--u) * .35px); }
+  #map.plan text.fp-len { font-weight:500; fill:var(--fp-len); stroke:var(--fp-walk); stroke-width:calc(var(--u) * .45px); } #map.plan text.fp-blocklabel { font-weight:500; font-style:italic; fill:var(--fp-len); }
+  #map .fp-place { fill:var(--fp-walk); stroke:var(--fp-text); stroke-width:calc(var(--u) * .14px); } #map .fp-place.fp-k-exit { fill:#2e9d55; } #map .fp-place.fp-k-toilet { fill:#5b74d6; }
+  #map .fp-place.fp-k-escalator { fill:#8a95a3; } #map .fp-place.fp-k-lift_stairs { fill:#8b74c4; } #map .fp-place.fp-inferred { stroke-dasharray:calc(var(--u) * .2px) calc(var(--u) * .15px); }
+  #map .fp-link { cursor:pointer; } #map .fp-linkbg { fill:var(--fp-link); } #map.plan text.fp-linktext { fill:#fff; stroke:none; font-weight:700; }
+  #map .fp-link:focus { outline:none; } #map .fp-link:focus .fp-linkbg, #map .fp-link:hover .fp-linkbg { stroke:var(--fp-text); stroke-width:calc(var(--u) * .15px); }
+  #map .fp-scaleline { fill:none; stroke:var(--fp-text); stroke-width:calc(var(--u) * .15px); } #map .fp-north path { fill:var(--fp-text); }
+  @keyframes pulse { from { transform:scale(1); opacity:.9; } to { transform:scale(3.2); opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { #map .halo { animation:none; opacity:.5; transform:scale(1.8); } }
+  :root { --route:#e8590c; --on-route:#fff; } @media (prefers-color-scheme: dark) { :root { --route:#ff922b; --on-route:#1a0d00; } }
+  #map .route { fill:none; stroke:var(--route); stroke-width:6; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
+  #map.plan .route { stroke-width:calc(var(--u) * .35px); }
+  #map .route-end { fill:var(--route); stroke:#fff; stroke-width:4; } #map.plan .route-end { stroke-width:calc(var(--u) * .2px); }
+  #map .route-start { fill:#fff; stroke:var(--route); stroke-width:5; } #map.plan .route-start { stroke-width:calc(var(--u) * .25px); }
+  #map text.route-len { font-weight:800; fill:var(--route); stroke:var(--fp-halo); paint-order:stroke; }
+  #map text.route-conn { font-weight:800; fill:var(--on-route); stroke:none; } #map .route-connbg { fill:var(--route); }
+  #map .fp-hit { fill:transparent; } #map .fp-tap { cursor:pointer; } #map .fp-hit:focus { outline:none; stroke:var(--route); stroke-width:calc(var(--u) * .12px); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="panel">
+    <form id="searchform" class="search" role="search" autocomplete="off">
+      <input id="q" type="search" placeholder="Search a room, a place or a question" aria-label="Search for a place" maxlength="200" enterkeyhint="search">
+      <button id="go" class="btn" type="submit">Go</button>
+    </form>
+    <div class="fromto">
+      <label for="from">From</label><select id="from"><option value="here">Current location</option></select>
+      <button type="button" class="x" id="clearroute" aria-label="Clear the route" hidden>&#x2715;</button>
+      <label for="to">To</label><select id="to"><option value="">Choose a place</option><option value="nearest:toilet">Nearest toilet</option></select>
+    </div>
+    <div class="chips">
+      <span class="seg" role="group" aria-label="Route mode"><button type="button" data-mode="standard" aria-pressed="true">Standard</button><button type="button" data-mode="accessible" aria-pressed="false" title="Wheelchair: lifts only, no stairs or escalators; disabled toilets only">Disabled</button></span>
+      <span class="wc">WC: <span class="seg" role="group" aria-label="Toilet filter (neither = any toilet)"><button type="button" data-gender="male" aria-pressed="false">Male</button><button type="button" data-gender="female" aria-pressed="false">Female</button></span></span>
+    </div>
+  </header>
+
+  <section class="mapbox" aria-label="Map">
+    <svg id="map" role="img" aria-label="Floor map"></svg>
+    <div class="fab zoom" id="zoom" hidden><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zfit" aria-label="Show the whole floor">&#x2922;</button></div>
+    <div class="fab levels" role="group" aria-label="Show floor"><button data-show="5">5F</button><button data-show="4">4F</button><button id="mapmode" aria-pressed="false" title="Switch between the vector floor plan and the original sketch picture">Pic</button></div>
+    <div class="where" id="where" aria-live="polite"><b id="floor">-</b><span id="wherenote"></span></div>
+  </section>
+
+  <section class="sheet" id="card" hidden aria-live="polite"></section>
+
+  <div class="more">
+    <details id="live" hidden><summary>Live sensor data</summary>
+      <div class="card"><div class="big" id="livemode"></div><div class="muted" id="livestatus"></div><div class="muted" id="livesaved"></div></div>
+    </details>
+
+    <div class="card">
+      <h2>Upload a recording</h2>
+      <label for="file">phyphox export (CSV, ZIP)</label>
+      <input id="file" type="file" accept=".zip,application/zip">
+      <label for="kind">This recording is</label>
+      <select id="kind"><option value="auto">detect automatically</option><option value="stop">a stop (60 s standing, phone flat, facing the door)</option><option value="walk">a walk</option></select>
+      <label for="truth">Where you really are (optional, for scoring)</label>
+      <select id="truth"><option value="">don't know / skip</option></select>
+      <button id="send">Send</button>
+      <div id="err" role="alert"></div>
+    </div>
+
+    <div class="card" id="result" hidden aria-live="polite"></div>
+
+    <div class="card">
+      <div class="muted">Floor wrong? Set it (the next uploads track from here)</div>
+      <div class="row"><button class="secondary" data-floor="5">I'm on 5F</button><button class="secondary" data-floor="4">I'm on 4F</button></div>
+      <button class="secondary" id="reset">New session (clear the score)</button>
+    </div>
+
+    <div class="card"><div class="muted" id="tally"></div><div class="muted" id="eval"></div></div>
+  </div>
+</div>
+<script src="/map/floorplan.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+const nice = (s, f) => (f && window.FloorPlan && FloorPlan.name(f, s)) || (state && state.labels && state.labels[s]) || (s || '').replace(/_/g, ' ');
+let state = null, maps = null, shown = 5, last = null, found = null;   // found = last reply with a route
+let mapMode = 'plan';                         // 'plan' = vector floor plan (map/floorplan.json), 'picture' = the sketch PNG
+try { if (localStorage.getItem('walksense-map') === 'picture') mapMode = 'picture'; } catch (e) {}
+const SVGNS = 'http://www.w3.org/2000/svg';
+const sv = (tag, attrs) => { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); return e; };
+
+function drawMap() {
+  const plan = mapMode === 'plan' && window.FloorPlan && FloorPlan.plan && FloorPlan.plan.floors[shown];
+  if (!plan && !maps) return;
+  const svg = $('map');
+  const routeFloors = new Set(found && found.route ? found.route.map(st => st.floor) : []);
+  document.querySelectorAll('[data-show]').forEach(b => { b.setAttribute('aria-pressed', String(+b.dataset.show === shown)); b.classList.toggle('has-route', routeFloors.has(+b.dataset.show)); });
+  $('mapmode').setAttribute('aria-pressed', String(!plan));
+  $('mapmode').textContent = plan ? 'Pic' : 'Plan';
+  $('zoom').hidden = !plan;
+  svg.style.touchAction = plan && FloorPlan.zoomed(shown) ? 'none' : '';   // zoomed in: a drag pans the plan
+  // where things go: plan = metres (y flipped for SVG), picture = places.json pixels
+  const r = last && last.kind === 'stop' && last.floor === shown ? last : null;
+  let dotAt = null;
+  if (!r && last && last.kind === 'walk' && last.dot && last.dot.floor === shown) {
+    if (plan) { const d = FloorPlan.dotXY(shown, last.dot, maps); if (d) { FloorPlan.center(shown, d[0], d[1]); dotAt = { x: d[0], y: -d[1] }; } }
+    else dotAt = { x: last.dot.x, y: last.dot.y };
+  }
+  let pos, k;
+  if (plan) {
+    FloorPlan.draw(svg, shown, { onFloor: f => { shown = f; drawMap(); }, onPlace: key => tapPlace(shown, key) });
+    const u = FloorPlan.unit(shown);
+    svg.style.setProperty('--u', u);
+    pos = id => { const p = FloorPlan.xy(shown, id); return p && { x: p[0], y: -p[1] }; };
+    k = u / 15;                                  // the picture map's pixel sizes below, in metres
+  } else {
+    const m = maps[shown];
+    svg.setAttribute('class', 'png');
+    svg.setAttribute('viewBox', `0 0 ${m.width} ${m.height}`);
+    svg.replaceChildren(sv('image', { href: '/map/' + m.image, x: 0, y: 0, width: m.width, height: m.height }));
+    for (const [id, p] of Object.entries(m.places)) if (p.inferred) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 9, fill: '#ff3b30', opacity: .55 }));
+    pos = id => m.places[id];
+    k = 1;
+  }
+  drawRoute(svg, pos, k, plan);
+  const label = (p, text) => {
+    const t = sv('text', { x: p.x, y: p.y - 26 * k, 'text-anchor': 'middle', class: 'ovl' }); if (plan) t.style.fontSize = (1.5 * FloorPlan.unit(shown)) + 'px'; t.textContent = text; svg.append(t);
+    if (plan) {                                  // keep the big label inside the view
+      const vb = svg.viewBox.baseVal, half = t.getComputedTextLength() / 2 + 0.3 * FloorPlan.unit(shown);
+      t.setAttribute('x', Math.min(Math.max(p.x, vb.x + half), vb.x + vb.width - half));
+    }
+  };
+  let note = '';                                 // short status in the chip on the map (no help text)
+  if (r && r.top3.length) {
+    const id = r.lit || r.top3[0][0], p = pos(id);
+    if (p) {
+      if (r.lit) {
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 15 * k, class: 'halo' }), sv('circle', { cx: p.x, cy: p.y, r: 15 * k, class: 'lit' }));
+        note = `${nice(id, shown)} (${Math.round(r.top3[0][1] * 100)}%)`;
+      } else {
+        svg.append(sv('circle', { cx: p.x, cy: p.y, r: 22 * k, class: 'maybe' }));
+        note = `Not sure: maybe ${nice(id, shown)} (${Math.round(r.top3[0][1] * 100)}%)`;
+      }
+      if (plan) svg.querySelectorAll('text.fp-label').forEach(t => { if (t.dataset.place === id) t.remove(); });   // the big label replaces it
+      label(p, nice(id, shown));
+    }
+  } else if (dotAt) {
+    svg.append(sv('circle', { cx: dotAt.x, cy: dotAt.y, r: 13 * k, class: 'dot' }));
+    note = `Walking toward ${nice(last.dot.to, shown)}`;
+  } else if (last && last.kind === 'walk') note = 'Walking';
+  else if (last && last.floor !== shown) note = `last seen on ${last.floor}F`;
+  $('wherenote').textContent = note;
+  $('where').hidden = !state && !note;
+  svg.setAttribute('aria-label', `${shown}F ${plan ? 'floor plan' : 'floor map'}. ${note}`);
+}
+
+function render(s) {
+  state = s;
+  $('floor').textContent = s.floor + 'F';
+  if (!last) shown = s.floor;
+  drawMap();                                   // redraw: labels may have just arrived
+  setFix(s.fix);
+  const t = s.tally || {};
+  $('tally').textContent = t.stops ? `Score this session: ${t.correct || 0}/${t.stops} right, ${t.top3 || 0}/${t.stops} in top 3` : 'No scored stops yet';
+  const sel = $('truth'), keep = sel.value;
+  sel.replaceChildren(el('option', "don't know / skip"));
+  sel.firstChild.value = '';
+  for (const p of (s.places[s.floor] || [])) { const o = el('option', nice(p, s.floor)); o.value = p; sel.append(o); }
+  sel.value = [...sel.options].some(o => o.value === keep) ? keep : '';
+  const ev = s.eval, box = $('eval');
+  box.replaceChildren(el('div', ev ? 'Tested before the demo (train on one 24-Nov session, test the other):' : 'Run "python walksense.py evaluate" to show the tested accuracy here.'));
+  for (const v of Object.values(ev || {})) box.append(el('div', `${v.devices}: ${v.top1} right, ${v.top3} in top 3`));
+}
+
+function showResult(r) {
+  last = r; shown = r.floor; drawMap();
+  const box = $('result'); box.hidden = false; box.replaceChildren();
+  box.append(el('div', r.kind === 'stop' ? 'Stop' : 'Walk', 'muted'));
+  const tb = el('table');
+  const row = (a, b, cls) => { const tr = el('tr'); tr.append(el('td', a), el('td', b, cls)); tb.append(tr); };
+  row('Floor', r.floor + 'F' + (r.floor !== r.floor_before ? ` (was ${r.floor_before}F)` : ''));
+  if (r.floor_note) row('', r.floor_note, 'muted');
+  row('Steps', `${r.steps} in ${r.duration_s} s` + (r.kind === 'walk' ? ` (about ${r.distance_m} m)` : ''));
+  if (r.kind === 'walk' && r.net_turn_deg != null) row('Turns', r.turns.length ? r.turns.map(x => `${x.side} ${Math.abs(x.deg)}°`).join(', ') : 'straight');
+  box.append(tb);
+  if (r.kind === 'stop') {
+    box.append(el('label', 'Where you probably are'));
+    r.top3.forEach(([p, prob], i) => {
+      const d = el('div'); d.append(el('div', `${i + 1}. ${nice(p, r.floor)}  ${Math.round(prob * 100)}%`));
+      const bar = el('div', null, 'bar'), fill = el('div'); fill.style.width = Math.round(prob * 100) + '%'; bar.append(fill); d.append(bar); box.append(d);
+    });
+    if (!r.top3.length) box.append(el('div', 'No place guess (no training data for this floor)', 'muted'));
+    if (r.correct != null) box.append(el('p', r.correct ? `✓ Right (${nice(r.truth, r.floor)})` : `✗ Wrong, you were at ${nice(r.truth, r.floor)}`, r.correct ? 'ok' : 'bad'));
+    if (r.model_note) box.append(el('p', r.model_note, 'muted'));
+  }
+  if (r.device) box.append(el('p', 'Phone: ' + r.device, 'muted'));
+}
+
+async function call(url, opts) {
+  const res = await fetch(url, opts);
+  const body = await res.json().catch(() => ({ error: 'server error' }));
+  if (!res.ok) throw new Error(body.error || res.statusText);
+  return body;
+}
+
+$('send').onclick = async () => {
+  $('err').textContent = '';
+  const f = $('file').files[0];
+  if (!f) { $('err').textContent = 'Pick the phyphox ZIP first.'; return; }
+  $('send').disabled = true; $('send').textContent = 'Sending…';
+  try {
+    const q = new URLSearchParams({ kind: $('kind').value, truth: $('truth').value });
+    const body = await call('/api/upload?' + q, { method: 'POST', body: f, headers: { 'Content-Type': 'application/zip' } });
+    render(body); showResult(body.result);
+    $('file').value = ''; $('truth').value = '';
+    if (lastReq && $('from').value === 'here') rerun();           // a new fix for "Current location"
+  } catch (e) { $('err').textContent = e.message; }
+  $('send').disabled = false; $('send').textContent = 'Send';
+};
+document.querySelectorAll('[data-show]').forEach(b => b.onclick = () => { shown = +b.dataset.show; drawMap(); });
+fetch('/map/places.json').then(r => r.json()).then(j => { maps = j; drawMap(); }).catch(() => { if (!(window.FloorPlan && FloorPlan.plan)) $('wherenote').textContent = 'Map not available.'; });
+if (window.FloorPlan) FloorPlan.load('/map/floorplan.json').then(() => { if (state) render(state); else drawMap(); }).catch(() => { mapMode = 'picture'; drawMap(); });
+$('mapmode').onclick = () => {
+  mapMode = mapMode === 'plan' ? 'picture' : 'plan';
+  try { localStorage.setItem('walksense-map', mapMode); } catch (e) {}
+  drawMap();
+};
+$('zin').onclick = () => { FloorPlan.zoom(shown, 1 / 1.6); drawMap(); };
+$('zout').onclick = () => { FloorPlan.zoom(shown, 1.6); drawMap(); };
+$('zfit').onclick = () => { FloorPlan.reset(shown); drawMap(); };
+{ // drag to pan the floor plan once zoomed in
+  let drag = null;
+  $('map').addEventListener('pointerdown', e => { if (mapMode === 'plan' && window.FloorPlan && FloorPlan.zoomed(shown)) drag = { x: e.clientX, y: e.clientY, moved: false }; });
+  $('map').addEventListener('pointermove', e => {
+    if (!drag) return;
+    const svg = $('map'), vb = svg.viewBox.baseVal, f = Math.max(vb.width / svg.clientWidth, vb.height / svg.clientHeight), dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) < 4) return;
+    if (!drag.moved) { drag.moved = true; window.__dragMoved = true; try { svg.setPointerCapture(e.pointerId); } catch (err) {} }
+    FloorPlan.pan(shown, dx * f, dy * f); drag.x = e.clientX; drag.y = e.clientY; drawMap(); e.preventDefault();
+  });
+  const end = () => { drag = null; };
+  $('map').addEventListener('pointerup', end); $('map').addEventListener('pointercancel', end);
+}
+document.querySelectorAll('[data-floor]').forEach(b => b.onclick = async () => render(await call('/api/floor?floor=' + b.dataset.floor, { method: 'POST' })));
+$('reset').onclick = async () => { render(await call('/api/reset?floor=' + state.floor, { method: 'POST' })); $('result').hidden = true; last = null; drawMap(); };
+// Live mode (server started with --live): poll once a second and drive the same map. The raw sensor status sits in
+// the collapsed "Live sensor data" section (closed by default).
+let liveKey = '';
+async function pollLive() {
+  let L;
+  try { L = await call('/api/live'); } catch (e) { $('livestatus').textContent = 'Server not reachable'; return setTimeout(pollLive, 2000); }
+  if (!L.enabled) return;                       // upload-only mode: nothing to do
+  $('live').hidden = false;
+  const st = L.state || {};
+  $('livestatus').textContent = !L.connected ? `Not connected to the phone. ${L.error || ''}` :
+    !L.measuring ? 'Connected. Press ▶ in phyphox to start measuring.' : `Connected · ${L.device} · recording · phone time ${st.now ?? '-'} s`;
+  $('livesaved').textContent = L.last_recording ? `Last recording saved: ${L.last_recording.file} (${L.last_recording.seconds} s)` : 'Pause phyphox to save the recording.';
+  const mode = st.mode || 'waiting';
+  $('livemode').textContent = mode === 'walking' ? `Walking · ${st.steps} steps` :
+    mode === 'standing' ? `Standing ${st.still_s} s… (place at 1 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
+  if (st.floor_note) $('livemode').textContent += ` · Floor: ${st.floor_note}`;   // e.g. "pressure rose 0.62 hPa: moved down to 4F" 
+  if (st.floor) $('floor').textContent = st.floor + 'F';
+  const hadFix = fix && fix.id;
+  setFix(L.fix);
+  const r = mode === 'stop' ? { kind: 'stop', floor: st.floor, top3: st.top3, lit: st.lit, live: true }
+          : mode === 'walking' ? { kind: 'walk', floor: st.floor, dot: st.dot, live: true } : null;
+  const key = JSON.stringify(r);
+  if (r && key !== liveKey) {
+    const relit = r.kind === 'stop' && r.lit && !(last && last.kind === 'stop' && last.lit === r.lit);
+    liveKey = key; last = r; if (shown !== r.floor && !(found && found.route.length)) shown = r.floor; drawMap();
+    if (relit && lastReq && $('from').value === 'here') rerun();   // From = Current location: follow the newly lit place
+  } else if (!hadFix && fix && fix.id && lastReq && $('from').value === 'here') rerun();
+  setTimeout(pollLive, 1000);
+}
+// ---------------------------------------------------------------- search + route planner (GET /api/search, /api/route, /api/nearest; Gemini key stays on the server)
+// From: "Current location" (value 'here', the default) = the place the live model lights (or the last uploaded stop);
+// without a fix the card says "Waiting for location" and no route is drawn. A query that names a start
+// ("im in y5202, ...") sets From. Search never shows the LLM's text: it sets From / To and draws the route.
+let mode = 'standard', gender = 'any', lastReq = null, places = [], suppressTap = 0, fix = null;
+try { const m = localStorage.getItem('walksense-route-mode'); if (m === 'standard' || m === 'accessible') mode = m; } catch (e) {}
+try { const g = localStorage.getItem('walksense-toilet-gender'); if (['any', 'male', 'female'].includes(g)) gender = g; } catch (e) {}
+const KIND = { lift: 'Lift', stairs: 'Stairs', escalator: 'Escalator' };
+const fmtTime = s => { s = Math.round(s); return s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${s % 60} s`; };
+function setFix(f) {
+  fix = f || null;
+  const o = $('from').options[0];
+  o.textContent = fix && fix.id ? `Current location (${fix.name})` : 'Current location (waiting)';
+}
+function drawRoute(svg, pos, k, plan) {
+  if (!found || !found.route.length) return;
+  const R = found.route, u = plan ? FloorPlan.unit(shown) : 15;
+  let d = '';
+  const labels = [];
+  for (let i = 1; i < R.length; i++) {
+    const a = R[i - 1], b = R[i];
+    if (a.floor !== shown || b.floor !== shown) continue;          // lift / stairs / escalator hops: tags below
+    let pts;
+    if (plan) pts = FloorPlan.corridor(shown, a.map_key, b.map_key) || [];
+    else { const pa = pos(a.map_key), pb = pos(b.map_key); pts = pa && pb ? [[pa.x, -pa.y], [pb.x, -pb.y]] : []; }
+    if (!pts.length) continue;
+    d += 'M' + pts.map(([x, y]) => `${Math.round(x * 100) / 100},${Math.round(-y * 100) / 100}`).join('L');
+    svg.querySelectorAll('text.fp-len').forEach(t => { if (t.dataset.edge === a.map_key + '|' + b.map_key || t.dataset.edge === b.map_key + '|' + a.map_key) t.remove(); });   // the orange label replaces it
+    if (b.metres != null) {                                       // the edge length, at the middle of the walked leg
+      const L = plan ? FloorPlan.lengthOf(pts) : Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]);
+      const m = plan ? FloorPlan.along(pts, L / 2) : { x: (pts[0][0] + pts[1][0]) / 2, y: (pts[0][1] + pts[1][1]) / 2 };
+      labels.push([m.x, -m.y, b.metres.toFixed(1) + ' m']);
+    }
+  }
+  if (d) svg.append(sv('path', { d, class: 'route' }));
+  for (const [x, y, txt] of labels) {
+    const t = sv('text', { x, y: y - 0.9 * u, 'text-anchor': 'middle', class: 'route-len' });
+    t.style.fontSize = (1.05 * u) + 'px'; t.style.strokeWidth = (0.4 * u) + 'px'; t.textContent = txt; svg.append(t);
+  }
+  for (let i = 1; i < R.length; i++) {                             // floor change: a tag at the place where you leave and arrive
+    const a = R[i - 1], b = R[i];
+    if (a.floor === b.floor) continue;
+    const down = b.floor < a.floor ? '▼' : '▲';
+    for (const [st, txt] of [[a, `${KIND[b.mode] || b.mode} ${down} ${b.floor}F`], [b, `${KIND[b.mode] || b.mode} from ${a.floor}F`]]) {
+      if (st.floor !== shown) continue;
+      const p = pos(st.map_key); if (!p) continue;
+      const fs = 1.0 * u, w = 0.58 * fs * txt.length + 0.8 * u, h = 1.5 * u, y = p.y + 1.6 * u;
+      svg.append(sv('rect', { x: p.x - w / 2, y: y - h / 2, width: w, height: h, rx: h / 2, class: 'route-connbg' }));
+      const t = sv('text', { x: p.x, y: y + 0.36 * fs, 'text-anchor': 'middle', class: 'route-conn' }); t.style.fontSize = fs + 'px'; t.textContent = txt; svg.append(t);
+    }
+  }
+  const s0 = R[0], s1 = R[R.length - 1];
+  if (s0.floor === shown) { const p = pos(s0.map_key); if (p) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 11 * k, class: 'route-start' })); }
+  if (s1.floor === shown) { const p = pos(s1.map_key); if (p) svg.append(sv('circle', { cx: p.x, cy: p.y, r: 13 * k, class: 'route-end' })); }
+}
+const METHOD = { gemini: 'Gemini', keyword: 'offline keyword match', fuzzy: 'offline typo-tolerant (fuzzy) match', none: 'no match' };
+// The route card (bottom sheet): from -> to, distance, time, floor change. No chat-style answer text.
+function showCard(r, how) {
+  const method = how || r.method;
+  found = r.route && r.route.length ? r : null;
+  if (r.from_query && r.from_query.id && [...$('from').options].some(o => o.value === r.from_query.id)) $('from').value = r.from_query.id;
+  const box = $('card'); box.hidden = false; box.replaceChildren();
+  const fromName = r.from && r.from.id ? r.from.name : 'Current location';
+  const toName = r.to ? r.to.name : r.name;
+  if (toName) box.append(el('div', `${fromName} → ${toName}`, 'title'));
+  else if (r.from_query && r.from_query.id) box.append(el('div', `From ${r.from_query.name}`, 'title'));
+  if (r.waiting) box.append(el('div', 'Waiting for location', 'line wait'), el('div', 'No live fix yet: start live tracking or pick a From place.', 'line'));
+  else if (r.distance_m != null) {
+    const s = el('div', null, 'sum'); s.append(`${Math.round(r.distance_m)} m `, el('small', `· ${fmtTime(r.seconds)}`)); box.append(s);
+    const fl = [...new Set(r.route.map(st => st.floor))];
+    const conn = r.connectors.map(c => `${KIND[c.kind] || c.kind} ${c.from_floor}F → ${c.to_floor}F`).join(', ');
+    const ln = el('div', null, 'line');
+    if (r.mode === 'accessible') ln.append(el('span', 'Disabled: lifts only', 'tag'));
+    ln.append(conn ? `Floor change: ${conn}` : `${fl[0]}F, no floor change`);
+    box.append(ln);
+  } else if (r.route_error) box.append(el('div', 'No route: ' + r.route_error, 'line bad'));
+  else if (r.from_query && r.from_query.id && !toName) box.append(el('div', 'Choose To or search for a place.', 'line'));
+  else if (r.place_id == null) box.append(el('div', r.toilet || r.type === 'toilet' || r.exit ? r.answer : 'Not in the area WalkSense covers (AC1 5F and 4F).', 'line bad'));
+  // details, closed: steps, connector costs, toilet options, which search method answered
+  const det = el('details'), extra = [];
+  if (r.instructions && r.instructions.length) { const ol = el('ol'); r.instructions.forEach(t => ol.append(el('li', t))); extra.push(ol); }
+  for (const c of r.connectors || []) extra.push(el('div', `${KIND[c.kind] || c.kind} ${c.from_floor}F → ${c.to_floor}F about ${Math.round(c.seconds)} s` +
+    (c.kind === 'lift' ? ' (includes the wait; a guess)' : c.kind === 'escalator' ? ' (ride time is a guess)' : ' (timed once going down)'), 'muted'));
+  if (r.toilet && r.toilet.note) extra.push(el('div', r.toilet.note, 'muted'));
+  const pnote = r.toilet ? r.toilet.policy_note : r.policy_note;
+  if (pnote && r.place_id != null) extra.push(el('div', pnote, 'muted'));
+  const opts = r.toilet ? r.toilet.options : r.exit ? r.exit.options : r.options;
+  if (opts && opts.length > 1 && r.place_id != null) extra.push(el('div', 'Others that fit: ' + opts.slice(1).map(o => `${o.name} ${Math.round(o.metres)} m`).join(' · '), 'muted'));
+  if (method in METHOD) {
+    const g = r.gemini || {};
+    extra.push(el('div', `Search: ${METHOD[method]}` + (method === 'gemini' && g.model ? ` (${g.model})` : '') +
+      (method !== 'gemini' ? (g.configured ? ` (Gemini not used: ${r.fallback_reason || g.error || ''})` : ' (Gemini off: no key in .env)') : ''), 'muted'));
+  }
+  if (extra.length) { det.append(el('summary', r.instructions && r.instructions.length ? 'Steps' : 'Details'), ...extra); box.append(det); }
+  if (found) {
+    shown = found.route[0].floor;
+    const end = found.route[found.route.length - 1];
+    if ($('to').value !== 'nearest:toilet' && [...$('to').options].some(o => o.value === end.id)) $('to').value = end.id;
+  } else if (r.to && r.to.id && [...$('to').options].some(o => o.value === r.to.id)) $('to').value = r.to.id;
+  else if (r.to && r.to.nearest === 'toilet') $('to').value = 'nearest:toilet';
+  $('clearroute').hidden = false;
+  drawMap();
+}
+function failed(err) { const box = $('card'); box.hidden = false; box.replaceChildren(el('div', 'Failed: ' + err.message, 'line bad')); }
+async function run(req) {
+  lastReq = req;
+  const from = $('from').value || 'here';
+  try {
+    if (req.kind === 'search') {
+      $('go').disabled = true; $('go').textContent = '…';
+      const p = { q: req.q, from, mode, gender };
+      if (req.ran) p.qfrom = '0';                                  // rerun: From already holds the query's start
+      const r = await call('/api/search?' + new URLSearchParams(p));
+      req.ran = true;
+      showCard(r);
+    } else if (req.kind === 'route') {
+      showCard(await call('/api/route?' + new URLSearchParams({ to: req.to, from, mode })), 'route');
+    } else if (req.kind === 'nearest') {
+      showCard(await call('/api/nearest?' + new URLSearchParams({ type: 'toilet', from, mode, gender })), 'nearest');
+    }
+  } catch (err) { failed(err); }
+  $('go').disabled = false; $('go').textContent = 'Go';
+}
+const rerun = () => { if (lastReq) run(lastReq); };
+function setChips() {
+  document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  document.querySelectorAll('[data-gender]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.gender === gender)));
+}
+document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => {
+  mode = b.dataset.mode; try { localStorage.setItem('walksense-route-mode', mode); } catch (e) {}
+  setChips(); rerun();
+});
+// WC: Male | Female. Tap the pressed one again = neither = any toilet that fits the mode (as the old Any button, still the default).
+document.querySelectorAll('[data-gender]').forEach(b => b.onclick = () => {
+  gender = gender === b.dataset.gender ? 'any' : b.dataset.gender; try { localStorage.setItem('walksense-toilet-gender', gender); } catch (e) {}
+  setChips(); if (lastReq && (lastReq.kind === 'nearest' || (lastReq.kind === 'search' && found && found.toilet))) rerun();
+});
+$('searchform').onsubmit = e => { e.preventDefault(); const q = $('q').value.trim(); if (q) { $('q').blur(); run({ kind: 'search', q }); } };
+$('to').onchange = () => {
+  const v = $('to').value;
+  if (v === 'nearest:toilet') run({ kind: 'nearest' }); else if (v) run({ kind: 'route', to: v });
+};
+$('from').onchange = rerun;
+function tapPlace(floor, key) {                                   // tapping a place on the plan sets To
+  if (Date.now() < suppressTap) return;                         // the end of a drag, not a tap
+  const p = places.find(o => o.floor === floor && o.map_key === key); if (!p) return;
+  $('to').value = p.id; run({ kind: 'route', to: p.id });
+}
+$('map').addEventListener('pointerup', () => { if (window.__dragMoved) suppressTap = Date.now() + 350; window.__dragMoved = false; });
+$('clearroute').onclick = () => { found = null; lastReq = null; $('to').value = ''; $('card').hidden = true; $('clearroute').hidden = true; drawMap(); };
+setChips();
+call('/api/search/places').then(list => {
+  places = list;
+  for (const f of [5, 4]) for (const sel of [$('from'), $('to')]) {
+    const grp = document.createElement('optgroup'); grp.label = f + 'F';
+    list.filter(p => p.floor === f).forEach(p => { const o = el('option', p.name); o.value = p.id; grp.append(o); });
+    sel.append(grp);
+  }
+}).catch(() => {});
+setFix(null);
+pollLive();
+call('/api/state').then(s => { render(s); if (s.history.length) showResult(s.history[s.history.length - 1]); }).catch(e => $('err').textContent = 'Cannot reach the server: ' + e.message);
+</script>
+</body>
+</html>

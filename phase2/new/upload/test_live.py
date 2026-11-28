@@ -17,7 +17,6 @@ import live
 import walksense as ws
 
 SPEED = 20.0
-BARO_LAG = 4.0   # s; the real iPhone sends pressure late (PROCESS-LOG entry 28)
 NAMES = {'acc': ('a_t', 'a_x', 'a_y', 'a_z'), 'gyr': ('g_t', 'g_x', 'g_y', 'g_z'),
          'mag': ('m_t', 'm_x', 'm_y', 'm_z'), 'baro': ('p_t', 'p')}     # not the guessed names: forces /config
 SETS = {'acc': 'Accelerometer', 'gyr': 'Gyroscope', 'mag': 'Magnetometer', 'baro': 'Barometer'}
@@ -54,7 +53,7 @@ class FakePhone(BaseHTTPRequestHandler):
             out = {}
             for name, value in parse_qsl(u.query):
                 s, col = next((s, ns.index(name)) for s, ns in NAMES.items() if name in ns)
-                a = FakePhone.stream[s]; a = a[a[:, 0] <= now - (BARO_LAG if s == 'baro' else 0)]
+                a = FakePhone.stream[s]; a = a[a[:, 0] <= now]
                 if value != 'full':
                     thr = float(value.split('|')[0])
                     a = a[a[:, 0] > thr]
@@ -82,12 +81,10 @@ class LiveTest(unittest.TestCase):
             th = threading.Thread(target=live.run, args=(live.Phyphox(f'http://127.0.0.1:{srv.server_address[1]}'), tracker, status, stop, Path(tmp)))
             FakePhone.t_start = time.time()
             th.start()
-            modes, steps, dots, first_guess = set(), 0, [], []
+            modes, steps, dots = set(), 0, []
             while (time.time() - FakePhone.t_start) * SPEED < end + 4:
                 st = status.get('state') or {}
                 if st.get('dot'): dots.append(st['dot'])
-                if st.get('mode') == 'stop' and len(first_guess) < len(st.get('stops', [])):
-                    first_guess.append(st['still_s'])                                 # still seconds when the stop first showed a guess
                 modes.add(st.get('mode')); steps = max(steps, st.get('steps', 0) if st.get('mode') == 'walking' else 0)
                 time.sleep(0.1)
             stop.set(); th.join(); srv.shutdown()
@@ -98,8 +95,7 @@ class LiveTest(unittest.TestCase):
             for got, (floor, node, _) in zip(stops, truth):
                 self.assertEqual(got['floor'], floor, (got, node))                 # 5F, 5F, then 4F after the stairs
                 self.assertEqual(got['top3'][0][0], node)                           # trained on this data, so must be right
-            self.assertTrue({'walking', 'stop'} <= modes, modes)
-            self.assertTrue(first_guess and max(first_guess) <= 2.0, first_guess)    # a guess within 2 s of standing (entry 96)
+            self.assertTrue({'walking', 'stop'} <= modes, modes)                 # 3 s still = named at once
             self.assertGreater(steps, 5)
             self.assertTrue(dots and dots[0]['from'] == 'canteen', dots[:1])        # walking dot starts at the named stop
             self.assertEqual(status['last_recording']['file'].split('/')[0], 'recordings')

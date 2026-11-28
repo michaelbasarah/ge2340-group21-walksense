@@ -356,8 +356,7 @@ async function pollLive() {
   $('livesaved').textContent = L.last_recording ? `Last recording saved: ${L.last_recording.file} (${L.last_recording.seconds} s)` : 'Pause phyphox to save the recording.';
   const mode = st.mode || 'waiting';
   $('livemode').textContent = mode === 'walking' ? `Walking · ${st.steps} steps` :
-    mode === 'standing' ? `Standing ${st.still_s} s… (place at 1 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
-  if (st.floor_note) $('livemode').textContent += ` · Floor: ${st.floor_note}`;   // e.g. "pressure rose 0.62 hPa: moved down to 4F" 
+    mode === 'standing' ? `Standing ${st.still_s} s… (place at 3 s)` : mode === 'stop' ? `Stopped ${st.still_s} s` : 'Waiting for data';
   if (st.floor) $('floor').textContent = st.floor + 'F';
   const hadFix = fix && fix.id;
   setFix(L.fix);

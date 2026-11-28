@@ -18,7 +18,7 @@ import numpy as np
 
 import walksense as ws
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'smoothing'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'new' / 'smoothing'))
 import smooth  # noqa: E402   (window_feature, still_flat: the entry-61 1 s estimate)
 
 DEVICE, TRAIN, TEST = 'iPhone19,2', ('sesi1', '25nov', '25night'), '27nov'

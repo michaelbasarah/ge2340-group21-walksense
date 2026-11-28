@@ -54,6 +54,7 @@ Good output: four lines `acc`, `gyr`, `mag`, `baro`, each with a buffer name (no
 ```sh
 cd phase2/new/upload
 ../../../.venv/bin/python server.py --port 8000 --live http://192.168.137.xx --device iPhone19,2 --floor 4
+# v2 (1 s stand, entry 97): run the same command from phase2/v2/upload instead
 ```
 - `--device iPhone19,2` is needed: the default is `iPhone17,4`, which would load the iPhone 16 model. The start-up line must say `trained on this phone model (iPhone19,2)`.
 - `--floor` is the floor where you start (4 or 5). The suggested route in section e starts at the 4F gate, so `--floor 4`.

@@ -105,6 +105,7 @@ Contents:
 94. 27 Nov: demo runbook numbers from the final entry-91 run, floor baseline.py fixed, all exits are emergency exits (user decision)
 95. 28 Nov: 27-Nov iPhone 18 Pro stops added (session 27nov); held-out test 5/11 whole stop, floor 11/11
 96. 28 Nov: live mode: guess after 1 s still, floor waits for late pressure (replay floor 143 -> 167/170), floor switch while walking
+97. 28 Nov: the new app moved to phase2/v2/upload; phase2/new/upload back to main e642d0b
 - Lessons learned
 - Open questions / next steps
 - See also `PROJECT-STORY.md` (repo root): the whole project as a readable narrative, with links to these entries
@@ -1734,6 +1735,16 @@ Contents:
 - **Outcome:** success for the floor and the 1 s guess on recorded data. Failures and dead ends: (1) the first replay run showed 156 of 170 stops found with the 1 s rules: the tracker keeps only the last 50 stops and the 1 s rule names more short stands, so the first stops of sesi1 / 25nov fell out of the list before scoring (found by printing the missed stops of 25nov); fixed with `keep_stops` for the replay and rerun (above). (2) The 1 s rule names more short stands during walks (extra stops 79 -> 98). (3) Not done: a full `python live.py check` rerun (31 min since entry 90; memory was low, and the background server was stopped by Claude Code for low memory), a screenshot, and a check that the new `test_live` fails on the old floor code. The walking-floor switch is untested on a real escalator ride. Not tested on a real walk at all.
 - **What changed because of it:** live mode guesses after 1 s still, lights from 3 s, shows the floor after the late pressure, and switches floor while walking. README live section and `DEMO-RUNBOOK.md` updated (1 s, not 3 s).
 - **Links:** `phase2/new/upload/live.py`, `index.html`, `replay_1s.py`, `test_live.py`, `out/live_1s_replay.json`, `README.md`, `phase2/new/DEMO-RUNBOOK.md`; branch `live-fixes-local` `829f6f6`; entries 28, 61, 90, 95.
+
+## 97. 28 Nov: the entry 95 and 96 app moved to its own folder `phase2/v2/upload/`; `phase2/new/upload/` back to main `e642d0b`
+
+- **What we tried:** the user asked to push everything to GitHub with the new version in a new folder `v2` inside `phase2`.
+- **Why:** keeps the team's `phase2/new/upload/` (main `e642d0b`) unchanged next to the new version.
+- **How:** copied every tracked file of `phase2/new/upload/` at commit `5627217` (entries 95, 96) to `phase2/v2/upload/`, then restored `phase2/new/upload/` from `e642d0b` (the new scripts and out files of entries 95 and 96 now exist only in v2). Paths in v2 that pointed at the folder above now point at `phase2/new/` (shared code: `walksense.py` `NEW`, `search.py` `ROUTING`, `eval_27nov.py` smoothing, `floor_rule_check.py` floor); data still comes from `phase2/clean-data/` (the 27-Nov session stays there with the other sessions). v2 README header, commands and build list updated; `.gitignore` ignores v2's `uploads/`, `out/test_uploads/`, `recordings/`; one pointer line in `DEMO-RUNBOOK.md`. The paths in entries 95 and 96 under `phase2/new/upload/` now mean `phase2/v2/upload/`.
+- **Result:** from `phase2/v2/upload/`: `ws.NEW` = `phase2/new`, last session `27nov`, the routing and request-matching folders found, `build_models()` builds 6 models. `test_search.py` + `test_live.py`: 25 tests, 1 failure in `test_live`: the "guess within 2 s" check read `still_s` from the test's 0.1 s polls, which at 20x speed are 2 s of phone time apart, so one stop was seen at 3.5 s (`[1.0, 1.0, 1.0, 3.5]`); the earlier pass in entry 96 was luck. The tracker now stores `first_s` (still seconds when a stop's first guess was made) and the test checks that: `test_live.py` OK (114.8 s).
+- **Outcome:** success; one test flaw found and fixed (above).
+- **What changed because of it:** run the new version from `phase2/v2/upload/` (`python server.py --live http://<phone> --device iPhone19,2 --floor 5`).
+- **Links:** `phase2/v2/upload/`, `phase2/v2/upload/README.md`, `.gitignore`, `phase2/new/DEMO-RUNBOOK.md`; commits `5627217`, `e642d0b`; entries 95, 96.
 
 ## Lessons learned
 
