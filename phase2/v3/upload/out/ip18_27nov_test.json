@@ -1,0 +1,287 @@
+{
+ "what": "Held-out test on the iPhone 18 Pro's new 27-Nov stops, BEFORE the app trains on them (PROCESS-LOG entry 95).",
+ "train_sessions": [
+  "sesi1",
+  "25nov",
+  "25night"
+ ],
+ "test_session": "27nov",
+ "device": "iPhone19,2",
+ "n_train_stops": 85,
+ "n_test_stops": 11,
+ "whole_stop_top1": "5/11",
+ "whole_stop_top3": "9/11",
+ "lit": 9,
+ "lit_right": 3,
+ "first_1s_top1": "5/11",
+ "per_second_top1": "195/539",
+ "per_second_top1_acc": 0.362,
+ "floor_right": "11/11",
+ "floor_rule": "d",
+ "stops": [
+  {
+   "place": "sr9",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "esca_down",
+     1.0
+    ],
+    [
+     "canteen",
+     0.0
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "esca_down",
+   "right": false,
+   "first_1s": "esca_down",
+   "per_second": "0/49"
+  },
+  {
+   "place": "male_toilet",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "male_toilet",
+     0.975
+    ],
+    [
+     "y5302",
+     0.025
+    ],
+    [
+     "canteen",
+     0.0
+    ]
+   ],
+   "lit": "male_toilet",
+   "right": true,
+   "first_1s": "male_toilet",
+   "per_second": "47/49"
+  },
+  {
+   "place": "esca_up",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "lift_stairs5",
+     0.975
+    ],
+    [
+     "y5401",
+     0.025
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "lift_stairs5",
+   "right": false,
+   "first_1s": "lift_stairs5",
+   "per_second": "0/49"
+  },
+  {
+   "place": "esca_down",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "lift_stairs5",
+     1.0
+    ],
+    [
+     "canteen",
+     0.0
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "lift_stairs5",
+   "right": false,
+   "first_1s": "lift_stairs5",
+   "per_second": "0/49"
+  },
+  {
+   "place": "y5302",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "y5302",
+     1.0
+    ],
+    [
+     "canteen",
+     0.0
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "y5302",
+   "right": true,
+   "first_1s": "y5302",
+   "per_second": "49/49"
+  },
+  {
+   "place": "female_toilet",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "y5202",
+     0.91
+    ],
+    [
+     "female_toilet",
+     0.09
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "y5202",
+   "right": false,
+   "first_1s": "y5202",
+   "per_second": "3/49"
+  },
+  {
+   "place": "male_disabled_toilet",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "male_disabled_toilet",
+     1.0
+    ],
+    [
+     "canteen",
+     0.0
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "male_disabled_toilet",
+   "right": true,
+   "first_1s": "male_disabled_toilet",
+   "per_second": "49/49"
+  },
+  {
+   "place": "lift_stairs5",
+   "true_floor": 5,
+   "floor": 5,
+   "floor_note": "",
+   "top3": [
+    [
+     "lift_stairs5",
+     0.433
+    ],
+    [
+     "female_toilet",
+     0.333
+    ],
+    [
+     "y5302_point2",
+     0.192
+    ]
+   ],
+   "lit": null,
+   "right": true,
+   "first_1s": "lift_stairs5",
+   "per_second": "20/49"
+  },
+  {
+   "place": "disabled_toilet",
+   "true_floor": 4,
+   "floor": 4,
+   "floor_note": "pressure rose 0.63 hPa: moved down to 4F",
+   "top3": [
+    [
+     "y4502",
+     0.873
+    ],
+    [
+     "disabled_toilet",
+     0.127
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "y4502",
+   "right": false,
+   "first_1s": "y4502",
+   "per_second": "3/49"
+  },
+  {
+   "place": "lt1a",
+   "true_floor": 4,
+   "floor": 4,
+   "floor_note": "",
+   "top3": [
+    [
+     "lt1a",
+     0.5
+    ],
+    [
+     "lift_stairs5",
+     0.367
+    ],
+    [
+     "esca_down",
+     0.133
+    ]
+   ],
+   "lit": null,
+   "right": true,
+   "first_1s": "lt1a",
+   "per_second": "24/49"
+  },
+  {
+   "place": "lt2b",
+   "true_floor": 4,
+   "floor": 4,
+   "floor_note": "",
+   "top3": [
+    [
+     "gate",
+     0.992
+    ],
+    [
+     "lt2b",
+     0.008
+    ],
+    [
+     "esca_up",
+     0.0
+    ]
+   ],
+   "lit": "gate",
+   "right": false,
+   "first_1s": "gate",
+   "per_second": "0/49"
+  }
+ ]
+}

@@ -388,6 +388,42 @@ def nearest_exit(start_id, mode='standard', emergency=False, floor=None, exits=E
             'message': 'Nearest %s: %s, about %.0f m walking, %.0f s.' % (want, best['name'], best['metres'], best['seconds'])}
 
 
+# Lecture theatres (4F): LT1 and LT2 are each ONE room with TWO doors (A near the gate/Exit 10 side, B near the
+# escalators). lt1a/lt1b/lt2a/lt2b in graph.json are the DOORS, not separate rooms. A request for "LT1" / "classroom 1"
+# routes to whichever door is nearest from the start (like nearest_toilet picks the nearest toilet). Used by search.py.
+LECTURES = {
+    'lt1': {'name': 'Lecture Theatre 1 (LT1)', 'floor': 4, 'doors': ['lt1a', 'lt1b']},
+    'lt2': {'name': 'Lecture Theatre 2 (LT2)', 'floor': 4, 'doors': ['lt2a', 'lt2b']},
+}
+
+
+def nearest_door(start_id, group, mode='standard', lectures=LECTURES):
+    """Nearest door of a lecture theatre (group 'lt1' / 'lt2') by route cost, like nearest_exit.
+    -> {'choice': Plan or None, 'door': id or None, 'group': group, 'options': [...], 'excluded': [...], 'message': str}"""
+    if mode not in PROFILES:
+        raise KeyError('unknown mode %r' % mode)
+    if group not in lectures:
+        raise KeyError('unknown lecture theatre %r (use %s)' % (group, ', '.join(lectures)))
+    g = graph(mode)
+    options, excluded = [], []
+    for did in lectures[group]['doors']:
+        try:
+            p = plan(start_id, did, mode)
+            options.append({'id': did, 'name': g.nodes[did]['name'], 'floor': g.nodes[did]['floor'],
+                            'metres': p.metres, 'seconds': p.seconds, 'plan': p})
+        except ValueError:
+            excluded.append({'id': did, 'name': g.nodes[did]['name'], 'floor': g.nodes[did]['floor'],
+                             'reason': 'no route%s' % (' in Disabled mode' if mode == 'accessible' else '')})
+    options.sort(key=lambda o: (o['seconds'], o['metres'], o['id']))
+    if not options:
+        return {'choice': None, 'door': None, 'group': group, 'options': [], 'excluded': excluded,
+                'message': 'No door of %s reachable from here.' % lectures[group]['name']}
+    best = options[0]
+    return {'choice': best['plan'], 'door': best['id'], 'group': group, 'options': options, 'excluded': excluded,
+            'message': 'Nearest door of %s: door %s, about %.0f m walking, %.0f s.' % (
+                lectures[group]['name'], best['id'][-1].upper(), best['metres'], best['seconds'])}
+
+
 SAMPLE_ROUTES = [('y5302', 'female_toilet'), ('canteen', 'lt1a'), ('y5302', 'lt2b'), ('lt1a', 'canteen'),
                  ('lift_stairs', 'lift_stairs_4F'), ('lift_stairs_4F', 'lift_stairs'), ('escalator_up', 'escalator_down_4F')]
 SAMPLE_STARTS = ['canteen', 'y5202', 'y5401', 'exit_10', 'lt1a', 'y4502', 'lt2b', 'entrance_exit']

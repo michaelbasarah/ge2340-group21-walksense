@@ -1,0 +1,83 @@
+{
+ "about": "two live Gemini calls, app prompt v2 (PROCESS-LOG entry 93)",
+ "time_local": "2026-11-27 15:05:40",
+ "rows": [
+  {
+   "query": "im in y5202, find me the nearest exit",
+   "from_list": "here",
+   "raw_reply": "{\"from_id\": \"y5202\", \"place_id\": \"exit_10\"}",
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "latency_s": 2.427,
+   "gemini_from_id": "y5202",
+   "gemini_place_id": "exit_10",
+   "app": {
+    "method": "gemini",
+    "from": {
+     "id": "y5202",
+     "name": "Room Y5-202",
+     "floor": 5,
+     "source": "chosen"
+    },
+    "from_query": {
+     "id": "y5202",
+     "name": "Room Y5-202",
+     "floor": 5
+    },
+    "to": {
+     "id": "exit_10",
+     "name": "Exit 10 (by the toilets)",
+     "floor": 5
+    },
+    "place_id": "exit_10",
+    "matched_place": null,
+    "distance_m": 15.1,
+    "seconds": 11.6,
+    "path": [
+     "y5202",
+     "female_toilet",
+     "exit_10"
+    ],
+    "waiting": false
+   }
+  },
+  {
+   "query": "where is lecture theatre 1a",
+   "from_list": "canteen",
+   "raw_reply": "{\"from_id\": \"NONE\", \"place_id\": \"lt1a\"}",
+   "model": "gemini-3.5-flash-lite",
+   "model_version": "gemini-3.5-flash-lite",
+   "latency_s": 2.468,
+   "gemini_from_id": null,
+   "gemini_place_id": "lt1a",
+   "app": {
+    "method": "gemini",
+    "from": {
+     "id": "canteen",
+     "name": "Canteen entrance",
+     "floor": 5,
+     "source": "chosen"
+    },
+    "from_query": null,
+    "to": {
+     "id": "lt1a",
+     "name": "LT1a",
+     "floor": 4
+    },
+    "place_id": "lt1a",
+    "matched_place": null,
+    "distance_m": 36.6,
+    "seconds": 48.2,
+    "path": [
+     "canteen",
+     "escalator_down",
+     "escalator_down_4F",
+     "escalator_up_4F",
+     "lt1b",
+     "lt1a"
+    ],
+    "waiting": false
+   }
+  }
+ ]
+}
